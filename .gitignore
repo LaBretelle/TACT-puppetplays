@@ -1,0 +1,26 @@
+###> symfony/framework-bundle ###
+/application/.env
+/application/public/bundles/
+/application/var/
+/application/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-pack ###
+/application/node_modules/
+/application/public/build/
+/application/npm-debug.log
+/application/yarn-error.log
+###< symfony/webpack-encore-pack ###
+
+###> symfony/phpunit-bridge ###
+/application/.phpunit
+/application/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/web-server-bundle ###
+/application/.web-server-pid
+###< symfony/web-server-bundle ###
+
+
+###> docker mysql folder ###
+/.db/

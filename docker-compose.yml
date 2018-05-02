@@ -1,0 +1,33 @@
+version: "2"
+
+services:
+   apache:
+     build: docker-files
+     ports:
+       - "8082:80"
+     expose:
+         - "80"
+     restart: always
+     volumes:
+         - ./application:/var/www
+         - ./docker-files/override.ini:/etc/php/7.2/apache2/conf.d/php.ini
+     links:
+       - db:db
+   db:
+     image: mariadb:10.3
+     restart: always
+     volumes:
+       - ./.db:/var/lib/mysql
+     environment:
+       - MYSQL_ROOT_PASSWORD=root
+       - MYSQL_DATABASE=phun2db
+       - MYSQL_USER=isitfun
+       - MYSQL_PASSWORD=yesitis
+     ports:
+       - "3390:3306"
+   adminer:
+     image: adminer
+     ports:
+       - "8080:8080"
+     links:
+       - db:db
