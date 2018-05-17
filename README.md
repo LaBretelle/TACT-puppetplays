@@ -29,7 +29,7 @@ docker ps
 docker-compose up -d
 
 # execute makefile:install in apache container service
-docker-compose exec apache make install
+docker-compose exec apache make init
 
 ```
 
