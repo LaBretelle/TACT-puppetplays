@@ -28,10 +28,24 @@ class UserController extends Controller
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $form->get('image')->getData();
+
+            if ($file) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+                // moves the file to the directory where brochures are stored
+                $file->move(
+                  $this->getParameter('user_files_directory'),
+                  $fileName
+                );
+                $user->setImage($fileName);
+            }
+
             $this->userManager->createUserFromForm($user);
             $this->addFlash(
               'notice',
-              'Your account was created but not activated. Youu\'ll receive an email to activate your account.'
+              'Your account was created but not activated. You\'ll receive an email to activate your account.'
             );
             return $this->redirectToRoute('home');
         }
