@@ -3,6 +3,7 @@
 /application/public/bundles/
 /application/var/
 /application/vendor/
+/application/.composer
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-pack ###
