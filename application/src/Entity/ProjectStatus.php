@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Project;
+namespace App\Entity;
 
 use App\Entity\Project;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,9 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="app_project_status")
- * @ORM\Entity(repositoryClass="App\Repository\Project\StatusRepository")
+ * @ORM\Entity()
  */
-class Status
+class ProjectStatus
 {
     /**
      * @ORM\Id()
@@ -40,7 +40,7 @@ class Status
         $this->projects = new ArrayCollection();
     }
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }

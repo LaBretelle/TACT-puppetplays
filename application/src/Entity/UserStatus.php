@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Entity\User;
+namespace App\Entity;
 
-use App\Entity\Project\RegisteredUser;
+use App\Entity\RegisteredUser;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="app_user_status")
- * @ORM\Entity(repositoryClass="App\Repository\User\StatusRepository")
+ * @ORM\Entity()
  */
-class Status
+class UserStatus
 {
     /**
      * @ORM\Id()
@@ -30,7 +30,7 @@ class Status
      */
     private $description;
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }

@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TranscriptionRepository")
+ * @ORM\Entity()
  */
 class Transcription
 {
@@ -32,7 +32,7 @@ class Transcription
      */
     private $media;
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }

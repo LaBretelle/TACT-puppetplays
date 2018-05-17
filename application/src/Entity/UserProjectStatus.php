@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Entity\Project;
+namespace App\Entity;
 
 use App\Entity\Project;
 use App\Entity\User;
-use App\Entity\User\Status;
+use App\Entity\UserStatus;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="app_project_registered")
- * @ORM\Entity(repositoryClass="App\Repository\Project\RegisteredUserRepository")
+ * @ORM\Table(name="app_project_useer_status")
+ * @ORM\Entity()
  */
-class RegisteredUser
+class UserProjectStatus
 {
     /**
      * @ORM\Id()
@@ -21,25 +21,24 @@ class RegisteredUser
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="registeredProjects")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="projectStatus")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="registeredUsers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="userStatus")
      * @ORM\JoinColumn(nullable=false)
      */
     private $project;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User\Status")
+     * @ORM\ManyToOne(targetEntity="App\Entity\UserStatus")
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
 
-
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -68,12 +67,12 @@ class RegisteredUser
         return $this;
     }
 
-    public function getStatus(): ?Status
+    public function getStatus(): ?UserStatus
     {
         return $this->status;
     }
 
-    public function setStatus(?Status $status): self
+    public function setStatus(?UserStatus $status): self
     {
         $this->status = $status;
 

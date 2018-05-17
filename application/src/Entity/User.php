@@ -3,7 +3,7 @@
 
 namespace App\Entity;
 
-use App\Entity\Project\RegisteredUser;
+use App\Entity\UserProjectStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -68,9 +68,9 @@ class User implements AdvancedUserInterface, \Serializable
     private $publicMail;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Project\RegisteredUser", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\UserProjectStatus", mappedBy="user")
      */
-    private $registeredProjects;
+    private $projectStatus;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Transcription", mappedBy="user")
@@ -100,8 +100,9 @@ class User implements AdvancedUserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = false;
-        $this->registeredProjects = new ArrayCollection();
+        $this->$projectStatus = new ArrayCollection();
         $this->transcriptions = new ArrayCollection();
+        $this->projectStatus = new ArrayCollection();
     }
 
     public function getFirstname(): ?string
@@ -325,34 +326,6 @@ class User implements AdvancedUserInterface, \Serializable
     {
     }
 
-    public function getRegisteredProjects(): Collection
-    {
-        return $this->registeredProjects;
-    }
-
-    public function addRegisteredProject(RegisteredUser $registeredProject): self
-    {
-        if (!$this->registeredProjects->contains($registeredProject)) {
-            $this->registeredProjects[] = $registeredProject;
-            $registeredProject->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRegisteredProject(RegisteredUser $registeredProject): self
-    {
-        if ($this->registeredProjects->contains($registeredProject)) {
-            $this->registeredProjects->removeElement($registeredProject);
-            // set the owning side to null (unless already changed)
-            if ($registeredProject->getUser() === $this) {
-                $registeredProject->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|Transcription[]
      */
@@ -384,4 +357,39 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return Collection|UserProjectStatus[]
+     */
+    public function getProjectStatus(): Collection
+    {
+        return $this->projectStatus;
+    }
+
+    public function addProjectStatus(UserProjectStatus $projectStatus): self
+    {
+        if (!$this->projectStatus->contains($projectStatus)) {
+            $this->projectStatus[] = $projectStatus;
+            $projectStatus->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectStatus(UserProjectStatus $projectStatus): self
+    {
+        if ($this->projectStatus->contains($projectStatus)) {
+            $this->projectStatus->removeElement($projectStatus);
+            // set the owning side to null (unless already changed)
+            if ($projectStatus->getUser() === $this) {
+                $projectStatus->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use App\Entity\Project\Financer;
-use App\Entity\Project\RegisteredUser;
-use App\Entity\Project\Status;
+use App\Entity\Financer;
+use App\Entity\UserProjectStatus;
+use App\Entity\ProjectStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -48,19 +48,19 @@ class Project
     private $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project\Status", inversedBy="projects")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProjectStatus", inversedBy="projects")
      */
     private $status;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Project\Financer", inversedBy="projects")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Financer", inversedBy="projects")
      */
     private $financers;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Project\RegisteredUser", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\UserProjectStatus", mappedBy="project")
      */
-    private $registeredUsers;
+    private $userStatus;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="project")
@@ -70,8 +70,25 @@ class Project
     public function __construct()
     {
         $this->financers = new ArrayCollection();
-        $this->registeredUsers = new ArrayCollection();
+        $this->userStatus = new ArrayCollection();
         $this->medias = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     public function getDescription(): ?string
@@ -122,29 +139,12 @@ class Project
         return $this;
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getStatus(): ?Status
+    public function getStatus(): ?ProjectStatus
     {
         return $this->status;
     }
 
-    public function setStatus(?Status $status): self
+    public function setStatus(?ProjectStatus $status): self
     {
         $this->status = $status;
 
@@ -178,30 +178,30 @@ class Project
     }
 
     /**
-     * @return Collection|RegisteredUser[]
+     * @return Collection|UserProjectStatus[]
      */
-    public function getRegisteredUsers(): Collection
+    public function getUserStatus(): Collection
     {
-        return $this->registeredUsers;
+        return $this->userStatus;
     }
 
-    public function addRegisteredUser(RegisteredUser $registeredUser): self
+    public function addUserStatus(UserProjectStatus $userStatus): self
     {
-        if (!$this->registeredUsers->contains($registeredUser)) {
-            $this->registeredUsers[] = $registeredUser;
-            $registeredUser->setProject($this);
+        if (!$this->userStatus->contains($userStatus)) {
+            $this->userStatus[] = $userStatus;
+            $userStatus->setProject($this);
         }
 
         return $this;
     }
 
-    public function removeRegisteredUser(RegisteredUser $registeredUser): self
+    public function removeUserStatus(UserProjectStatus $userStatus): self
     {
-        if ($this->registeredUsers->contains($registeredUser)) {
-            $this->registeredUsers->removeElement($registeredUser);
+        if ($this->userStatus->contains($userStatus)) {
+            $this->userStatus->removeElement($userStatus);
             // set the owning side to null (unless already changed)
-            if ($registeredUser->getProject() === $this) {
-                $registeredUser->setProject(null);
+            if ($userStatus->getProject() === $this) {
+                $userStatus->setProject(null);
             }
         }
 
