@@ -1,4 +1,5 @@
 ###> symfony/framework-bundle ###
+/application/.bash_history
 /application/.env
 /application/public/bundles/
 /application/var/

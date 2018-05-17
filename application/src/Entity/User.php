@@ -1,7 +1,11 @@
 <?php
 
+
 namespace App\Entity;
 
+use App\Entity\Project\RegisteredUser;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
@@ -39,7 +43,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $plainPassword;
 
@@ -64,6 +68,16 @@ class User implements AdvancedUserInterface, \Serializable
     private $publicMail;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Project\RegisteredUser", mappedBy="user")
+     */
+    private $registeredProjects;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Transcription", mappedBy="user")
+     */
+    private $transcriptions;
+
+    /**
      * @ORM\Column(type="json_array")
      */
     private $roles;
@@ -83,9 +97,11 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $updatedAt;
 
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
+        $this->isActive = false;
+        $this->registeredProjects = new ArrayCollection();
+        $this->transcriptions = new ArrayCollection();
     }
 
     public function getFirstname(): ?string
@@ -308,4 +324,64 @@ class User implements AdvancedUserInterface, \Serializable
     public function eraseCredentials()
     {
     }
+
+    public function getRegisteredProjects(): Collection
+    {
+        return $this->registeredProjects;
+    }
+
+    public function addRegisteredProject(RegisteredUser $registeredProject): self
+    {
+        if (!$this->registeredProjects->contains($registeredProject)) {
+            $this->registeredProjects[] = $registeredProject;
+            $registeredProject->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegisteredProject(RegisteredUser $registeredProject): self
+    {
+        if ($this->registeredProjects->contains($registeredProject)) {
+            $this->registeredProjects->removeElement($registeredProject);
+            // set the owning side to null (unless already changed)
+            if ($registeredProject->getUser() === $this) {
+                $registeredProject->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Transcription[]
+     */
+    public function getTranscriptions(): Collection
+    {
+        return $this->transcriptions;
+    }
+
+    public function addTranscription(Transcription $transcription): self
+    {
+        if (!$this->transcriptions->contains($transcription)) {
+            $this->transcriptions[] = $transcription;
+            $transcription->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTranscription(Transcription $transcription): self
+    {
+        if ($this->transcriptions->contains($transcription)) {
+            $this->transcriptions->removeElement($transcription);
+            // set the owning side to null (unless already changed)
+            if ($transcription->getUser() === $this) {
+                $transcription->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
