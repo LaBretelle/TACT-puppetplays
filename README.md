@@ -28,19 +28,9 @@ docker ps
 # build / start the containers and detach the process
 docker-compose up -d
 
-# execute bash in apache container service
-docker exec -it phun2_apache_1 /bin/bash
+# execute makefile:install in apache container service
+docker-compose exec apache make install
 
-# you should be in /var/www folder where symfony code lives
-# install php dependencies
-composer install --prefer-source
-# install node dependencies
-npm install
-# build css and js
-npm run dev
-
-# test your mysql connection
-php bin/console doc:sch:create
 ```
 
 - symfony app should be available @ http://localhost:8082/
