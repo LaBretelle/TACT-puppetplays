@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
+ */
+class Media
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="medias")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $project;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Transcription", inversedBy="media", cascade={"persist", "remove"})
+     */
+    private $transcription;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
+    public function getTranscription(): ?Transcription
+    {
+        return $this->transcription;
+    }
+
+    public function setTranscription(?Transcription $transcription): self
+    {
+        $this->transcription = $transcription;
+
+        return $this;
+    }
+}
