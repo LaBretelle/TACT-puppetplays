@@ -10,3 +10,95 @@ $fa-font-path: "~font-awesome/fonts";
 body > .container {
   padding-top: 70px;
 }
+
+.home-message-container {
+  background-color: #e0b98a;
+  text-align: justify;
+  padding: $jumbotron-padding;
+  border-radius: $border-radius;
+  border: $border-width $border-color solid;
+}
+
+.flex-tiles-container{
+  display: flex;
+  align-items: stretch;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.tile {
+  background-color: #afae3e;
+  border-radius: $border-radius;
+  border: $border-width $border-color solid;
+  width: 200px;
+  height: 150px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px;
+  margin-top: 10px;
+  line-height: 150px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+
+  .tile-title {
+    width: inherit;
+    height: inherit - 10px;
+    transition: opacity .5s ease-in-out;
+    position: absolute;
+    top: 0px - $border-width;
+    left: 0px - $border-width;
+  }
+  /* this transition has to be set on tile element or it wont work */
+  &:hover > .tile-title {
+    filter: alpha(opacity=50);
+    opacity: 0;
+  }
+
+  .tile-description{
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.6);
+    width: inherit;
+    height: inherit - 10px;
+    transition: opacity .5s ease-in-out, transform 1s linear;
+    position: absolute;
+    top: 0px - $border-width;
+    left: 0px - $border-width;
+    &:hover{
+      filter: alpha(opacity=50);
+      opacity: 1;
+      transform: scale(2);
+      z-index: 99999;
+    }
+  }
+}
+
+
+
+/*
+.tile-title, .tile-description{
+  width: inherit;
+  height: inherit - 10px;
+  transition: opacity .5s ease-in-out;
+  position: absolute;
+	top: 0px - $border-width;
+	left: 0px - $border-width;
+  border-radius: $border-radius;
+}
+
+.tile-description{
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.6);
+  &:hover{
+    filter: alpha(opacity=50);
+    opacity: 1;
+    border-radius: 0px;
+  }
+}*/
+/*
+.tile:hover > .tile-title {
+  filter: alpha(opacity=50);
+  opacity: 0;
+}*/

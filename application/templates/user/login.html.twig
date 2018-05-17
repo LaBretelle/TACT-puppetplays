@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+  {% if auth_error %}
+    <div class="alert alert-danger">{{ auth_error.messageKey|trans(auth_error.messageData, 'security') }}</div>
+  {% endif %}
+
+  <form action="{{ path('login') }}" method="post">
+    <input type="hidden" name="_target_path" value="/" />
+    <div class="form-group">
+      <label class="form-control-label required" for="username">{{ 'username' | trans({}, 'messages')}}</label>
+      <input class="form-control" required="required" type="text" id="username" name="_username" value="{{ last_username }}"/>
+    </div>
+    <div class="form-group">
+      <label class="form-control-label required" for="password">{{ 'password' | trans({}, 'messages')}}</label>
+      <input class="form-control" type="password" id="password" name="_password"/>
+    </div>
+
+    <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
+  </form>
+{% endblock %}

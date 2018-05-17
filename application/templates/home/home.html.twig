@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 home-message-container">
+      <h4>{{'home_title' | trans({}, 'messages')}}</h4>
+      <hr/>
+      <p>
+        {{home_text | raw}}
+      </p>
+    </div>
+  </div>
+  <hr/>
+  <div class="flex-tiles-container">
+    {% for project in projects %}
+      <div class="tile">
+          <div class="tile-title">
+            {{project.title}}
+          </div>
+          <div class="tile-description">
+            {{project.description}}
+          </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

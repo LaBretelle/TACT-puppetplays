@@ -1,0 +1,11 @@
+email: Mail
+home: accueil
+login: connection
+logout: déconnection
+password: Mot de passe
+register: s'enregistrer
+repeat_password: Répéter le mot de passe
+submit: valider
+username: Identifiant
+connected: Connecté en tant que %username%
+home_title: PATACS - Platforme pour l'Annotation la Transcription l'Analyse de Corpus Scientifiques
