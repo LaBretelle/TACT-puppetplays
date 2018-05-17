@@ -6,6 +6,10 @@ password: Mot de passe
 register: s'enregistrer
 repeat_password: Répéter le mot de passe
 submit: valider
-username: Identifiant
+username: Login
 connected: Connecté en tant que %username%
 home_title: PATACS - Platforme pour l'Annotation la Transcription l'Analyse de Corpus Scientifiques
+firstname: Prénom
+lastname: Nom
+public_mail: Email visible par tous
+description: Description

@@ -67,6 +67,13 @@
     </div>
   </nav>
   <div class="container">
+    {% for label, messages in app.flashes %}
+      {% for message in messages %}
+        <div class="flash-{{ label }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endfor %}
     {% block body %}{% endblock %}
   </div>
   <nav class="navbar fixed-bottom navbar-light bg-light">
