@@ -25,6 +25,8 @@ class UserManager
         $password = $this->passwordEncoder->encodePassword($user, $plainPassword);
         $user->setPassword($password);
         $user->setRoles($roles);
+        // when created via CLI the account is activated
+        $user->setActive(true);
 
         $this->em->persist($user);
         $this->em->flush();

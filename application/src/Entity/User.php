@@ -100,7 +100,7 @@ class User implements AdvancedUserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = false;
-        $this->$projectStatus = new ArrayCollection();
+        $this->projectStatus = new ArrayCollection();
         $this->transcriptions = new ArrayCollection();
         $this->projectStatus = new ArrayCollection();
     }

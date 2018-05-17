@@ -49,11 +49,35 @@ class CreateUserCommand extends Command
 
 
         $helper = $this->getHelper('question');
-        // username
-        $question = new Question('Enter the name of the user: ');
+        // firstname
+        $question = new Question('User firstname: ');
         $question->setValidator(function ($answer) {
             if (!is_string($answer) || trim($answer) === '') {
-                throw new \Exception('The name of the user is required');
+                throw new \Exception('The firstname of the user is required');
+            }
+
+            return $answer;
+        });
+        $question->setMaxAttempts(2);
+        $firstname = $helper->ask($input, $output, $question);
+
+        // firstname
+        $question = new Question('User lastname: ');
+        $question->setValidator(function ($answer) {
+            if (!is_string($answer) || trim($answer) === '') {
+                throw new \Exception('The lastname of the user is required');
+            }
+
+            return $answer;
+        });
+        $question->setMaxAttempts(2);
+        $lastname = $helper->ask($input, $output, $question);
+
+        // username
+        $question = new Question('User login: ');
+        $question->setValidator(function ($answer) {
+            if (!is_string($answer) || trim($answer) === '') {
+                throw new \Exception('The login of the user is required');
             }
 
             return $answer;
@@ -62,7 +86,7 @@ class CreateUserCommand extends Command
         $username = $helper->ask($input, $output, $question);
 
         // mail
-        $question = new Question('Enter the mail of the user: ');
+        $question = new Question('User email: ');
         $question->setValidator(function ($answer) {
             if (!is_string($answer) || trim($answer) === '') {
                 throw new \Exception('The mail of the user is required');
@@ -74,7 +98,7 @@ class CreateUserCommand extends Command
         $email = $helper->ask($input, $output, $question);
 
         // password
-        $question = new Question('Enter user password: ');
+        $question = new Question('User password: ');
         $question->setValidator(function ($value) {
             if (trim($value) === '') {
                 throw new \Exception('The password cannot be empty');
@@ -92,8 +116,8 @@ class CreateUserCommand extends Command
             $roles[] = 'ROLE_ADMIN';
         }
 
-        $this->userManager->createUser($username, $email, $password, $roles);
+        $this->userManager->createUser($lastname, $firstname, $username, $email, $password, $roles);
 
-        $output->writeln('User ' . $username . ' created \o/');
+        $output->writeln('User ' . $firstname . ' ' . $lastname . ' created \o/');
     }
 }

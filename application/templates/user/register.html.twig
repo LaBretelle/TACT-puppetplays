@@ -1,15 +1,18 @@
 {% extends "base.html.twig" %}
 {% block body %}
-{{ form_start(form) }}
-    {{ form_row(form.firstname) }}
+  <div class="alert alert-info" role="alert">
+    Un email va vous être envoyé, pour activer votre compte vous devez y répondre
+  </div>
+  {{ form_start(form) }}
     {{ form_row(form.lastname) }}
+    {{ form_row(form.firstname) }}
     {{ form_row(form.username) }}
     {{ form_row(form.email) }}
     {{ form_row(form.publicMail) }}
     {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}    
+    {{ form_row(form.plainPassword.second) }}
     {{ form_row(form.description) }}
 
     <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
-{{ form_end(form) }}
+  {{ form_end(form) }}
 {% endblock %}

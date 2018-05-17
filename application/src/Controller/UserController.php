@@ -29,6 +29,10 @@ class UserController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->userManager->createUserFromForm($user);
+            $this->addFlash(
+              'notice',
+              'Your account was created but not activated. Youu\'ll receive an email to activate your account.'
+            );
             return $this->redirectToRoute('home');
         }
 
