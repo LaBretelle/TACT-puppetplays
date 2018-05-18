@@ -7,11 +7,14 @@ use App\Entity\UserProjectStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * @ORM\Table(name="app_user")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity("email")
+ * @UniqueEntity("username")
  */
 class User implements AdvancedUserInterface, \Serializable
 {
@@ -33,7 +36,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=25, unique=true)
      */
     private $username;
 
@@ -48,7 +51,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $plainPassword;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;
 
@@ -86,6 +89,20 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(type="boolean")
      */
     private $active;
+
+    /**
+     * Random string sent to the user email address in order to verify it.
+     *
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $confirmationToken;
+
+    /**
+     * @var \DateTime|null
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $passwordRequestedAt;
 
     /**
      * @ORM\Column(type="datetime")
@@ -240,6 +257,30 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken(?string $confirmationToken): self
+    {
+        $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    public function getPasswordRequestedAt(): ?\DateTimeInterface
+    {
+        return $this->passwordRequestedAt;
+    }
+
+    public function setPasswordRequestedAt(\DateTimeInterface $passwordRequestedAt): self
+    {
+        $this->passwordRequestedAt = $passwordRequestedAt;
+
+        return $this;
+    }
+
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -286,9 +327,9 @@ class User implements AdvancedUserInterface, \Serializable
     {
         list(
           $this->id,
-          $this->username,
           $this->firstname,
           $this->lastname,
+          $this->username,
           $this->password,
           $this->email,
           $this->publicMail,
@@ -358,11 +399,6 @@ class User implements AdvancedUserInterface, \Serializable
         }
 
         return $this;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     /**

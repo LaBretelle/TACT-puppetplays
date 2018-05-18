@@ -4,7 +4,7 @@ description: Description
 email: Mail
 firstname: Prénom
 home_title: PATACS - Platforme pour l'Annotation la Transcription l'Analyse de Corpus Scientifiques
-home: accueil
+home: Accueil
 image: Image
 lastname: Nom
 login: connection
@@ -15,3 +15,4 @@ repeat_password: Répéter le mot de passe
 submit: valider
 username: Identifiant
 public_mail: Email visible par tous
+email_registration_confirm_subject: PATACS - Confirmation d'inscritpion

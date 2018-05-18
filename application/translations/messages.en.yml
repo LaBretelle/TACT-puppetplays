@@ -14,3 +14,4 @@ firstname: Firstname
 lastname: Lastname
 description: Description
 public_mail: Email visible to all
+email_registration_confirm_subject: PATACS - Registration validation

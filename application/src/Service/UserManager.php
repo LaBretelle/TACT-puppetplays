@@ -6,6 +6,8 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UserManager
 {
@@ -35,12 +37,26 @@ class UserManager
         $this->em->flush();
     }
 
-    public function createUserFromForm(User $user)
+    public function createUserFromForm(User $user, UploadedFile $file = null)
     {
         $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($password);
         // all users have the ROLE_USER
         $user->setRoles(['ROLE_USER']);
+
+        $token = base64_encode(random_bytes(10));
+        $user->setConfirmationToken($token);
+
+        if ($file) {
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // moves the file to the directory where brochures are stored
+            $file->move(
+                $this->params->get('user_files_directory'),
+                $fileName
+            );
+            $user->setImage($fileName);
+        }
 
         $this->em->persist($user);
         $this->em->flush();

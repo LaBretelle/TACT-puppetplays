@@ -28,6 +28,11 @@
         <a href="{{ path("project_create") }}">Ajouter</a>
       </div>
     </div>
-    
+
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('build/js/home.js') }}"></script>
 {% endblock %}

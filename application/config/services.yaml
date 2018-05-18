@@ -3,6 +3,7 @@
 parameters:
     locale: 'fr'
     user_files_directory: '%kernel.project_dir%/public/user_images'
+    platform_email: patacs@mail.fr
 
 services:
     # default configuration for services in *this* file
@@ -12,6 +13,9 @@ services:
         public: false       # Allows optimizing the container by removing unused services; this also means
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
+        #bind:
+            #$projectDir: '%kernel.project_dir%' #http://symfony.com/doc/current/service_container.html#binding-arguments-by-name-or-type
+                                                #https://symfony.com/blog/new-in-symfony-4-1-getting-container-parameters-as-a-service
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

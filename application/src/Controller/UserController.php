@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Service\MailManager;
 use App\Service\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,10 +14,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class UserController extends Controller
 {
     private $userManager;
+    private $mailManager;
 
-    public function __construct(UserManager $userManager)
+    public function __construct(UserManager $userManager, MailManager $mailManager)
     {
         $this->userManager = $userManager;
+        $this->mailManager = $mailManager;
     }
 
     /**
@@ -29,20 +32,9 @@ class UserController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $file = $form->get('image')->getData();
-
-            if ($file) {
-                $fileName = md5(uniqid()).'.'.$file->guessExtension();
-
-                // moves the file to the directory where brochures are stored
-                $file->move(
-                  $this->getParameter('user_files_directory'),
-                  $fileName
-                );
-                $user->setImage($fileName);
-            }
-
-            $this->userManager->createUserFromForm($user);
+            $image = $form->get('image')->getData();
+            $this->userManager->createUserFromForm($user, $image);
+            $this->mailManager->sendConfirmationMail($user);
             $this->addFlash(
               'notice',
               'Your account was created but not activated. You\'ll receive an email to activate your account.'
@@ -67,10 +59,10 @@ class UserController extends Controller
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('user/login.html.twig', array(
+        return $this->render('user/login.html.twig', [
          'last_username' => $lastUsername,
          'auth_error'    => $error,
-        ));
+        ]);
     }
 
     /**
@@ -79,5 +71,33 @@ class UserController extends Controller
      */
     public function recoverPassword()
     {
+    }
+
+    /**
+     * [confirmRegistration description]
+     * @Route("/confirm/{token}", name="user_register_confirm", requirements={"token"=".+"})
+     */
+    public function confirmRegistration(string $token)
+    {
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $em = $this->getDoctrine()->getManager();
+        $user = $repository->findOneBy(['confirmationToken' => $token]);
+        if ($user) {
+            $user->setActive(true);
+            $user->setConfirmationToken(null);
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash(
+            'notice',
+            'Your account is activated.'
+          );
+            return $this->redirectToRoute('home');
+        }
+
+        $this->addFlash(
+          'danger',
+          'A problem occured while trying to activate your account.'
+        );
+        return $this->redirectToRoute('home');
     }
 }
