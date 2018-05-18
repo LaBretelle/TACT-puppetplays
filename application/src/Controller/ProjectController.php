@@ -42,7 +42,7 @@ class ProjectController extends Controller
 
 
     /**
-     * @Route("/project/{id}", name="project_display", methods={"GET"})
+     * @Route("/project/{id}", name="project_display")
      */
     public function display(Project $project)
     {

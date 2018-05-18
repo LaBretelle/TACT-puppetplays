@@ -20,11 +20,11 @@ class ProjectType extends AbstractType
             'translation_domain' => 'messages'
           ])
           ->add('description', TextareaType::class, [
-            'label' => 'lastname',
+            'label' => 'project_description',
             'translation_domain' => 'messages'
           ])
           ->add('shortDescription', TextareaType::class, [
-            'label' => 'short_description',
+            'label' => 'project_short_description',
             'translation_domain' => 'messages'
           ])
           ->add('save', SubmitType::class, array(

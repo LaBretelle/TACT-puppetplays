@@ -15,12 +15,19 @@
     {% for project in projects %}
       <div class="tile">
           <div class="tile-title">
-            {{project.title}}
+            {{ project.name }}
           </div>
           <div class="tile-description">
-            {{project.description}}
+            <a href="{{ path("project_display", {'id': project.id} )}}">Voir</a>
+            {{ project.shortDescription }}
           </div>
       </div>
     {% endfor %}
+    <div class="tile">
+      <div class="tile-title">
+        <a href="{{ path("project_create") }}">Ajouter</a>
+      </div>
+    </div>
+    
   </div>
 {% endblock %}
