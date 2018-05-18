@@ -125,6 +125,11 @@ class User implements AdvancedUserInterface, \Serializable
         $this->updatedAt = new \DateTime();
     }
 
+    public function getId() :int
+    {
+        return $this->id;
+    }
+
     public function getFirstname(): ?string
     {
         return $this->firstname;
@@ -147,6 +152,11 @@ class User implements AdvancedUserInterface, \Serializable
         $this->lastname = $lastname;
 
         return $this;
+    }
+
+    public function getFullname(): string
+    {
+        return $this->lastname . ' ' . $this->firstname;
     }
 
     public function getUsername(): ?string

@@ -22,10 +22,12 @@ class UserManager
         $this->params = $params;
     }
 
-    public function createUser(string $name, string $email, string $plainPassword, array $roles)
+    public function createUser(string $lastname, string $firstname, string $username, string $email, string $plainPassword, array $roles)
     {
         $user = new User();
-        $user->setUsername($name);
+        $user->setLastname($lastname);
+        $user->setFirstname($firstname);
+        $user->setUsername($username);
         $user->setEmail($email);
         $password = $this->passwordEncoder->encodePassword($user, $plainPassword);
         $user->setPassword($password);
@@ -37,7 +39,7 @@ class UserManager
         $this->em->flush();
     }
 
-    public function createUserFromForm(User $user, UploadedFile $file = null)
+    public function createUserFromForm(User $user)
     {
         $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($password);
@@ -46,16 +48,33 @@ class UserManager
 
         $token = base64_encode(random_bytes(10));
         $user->setConfirmationToken($token);
+        $this->em->persist($user);
+        $this->em->flush();
+    }
 
+    /**
+     * Apply changes on all user fields except for password
+     * @param  User   $user
+     * @param  UploadedFile $file
+     */
+    public function updateUser(User $user, UploadedFile $file = null, string $previous_image = null)
+    {
         if ($file) {
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
-
+            $filePath = $this->params->get('user_files_directory');
             // moves the file to the directory where brochures are stored
             $file->move(
-                $this->params->get('user_files_directory'),
+                $filePath,
                 $fileName
             );
             $user->setImage($fileName);
+
+            if ($previous_image && file_exists($filePath.DIRECTORY_SEPARATOR.$previous_image)) {
+                unlink($filePath.DIRECTORY_SEPARATOR.$previous_image);
+            }
+        } elseif ($previous_image) {
+            // explicitly re set the value, but no need to upload image... it's already there
+            $user->setImage($previous_image);
         }
 
         $this->em->persist($user);

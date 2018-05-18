@@ -6,7 +6,7 @@
     <div class="alert alert-danger">{{ auth_error.messageKey|trans(auth_error.messageData, 'security') }}</div>
   {% endif %}
 
-  <form action="{{ path('login') }}" method="post">
+  <form action="{{ path('user_login') }}" method="post">
     <input type="hidden" name="_target_path" value="/" />
     <div class="form-group">
       <label class="form-control-label required" for="username">{{ 'username' | trans({}, 'messages')}}</label>

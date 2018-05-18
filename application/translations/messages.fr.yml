@@ -1,6 +1,7 @@
-
-connected: Connecté en tant que %username%
+access_denied: Vous n'êtes pas autorisé à accéder à cette page.
+cancel: Annuler
 description: Description
+email_registration_confirm_subject: PATACS - Confirmation d'inscritpion
 email: Mail
 firstname: Prénom
 home_title: PATACS - Platforme pour l'Annotation la Transcription l'Analyse de Corpus Scientifiques
@@ -10,9 +11,13 @@ lastname: Nom
 login: connection
 logout: déconnection
 password: Mot de passe
+public_mail: Email visible par tous
 register: s'enregistrer
 repeat_password: Répéter le mot de passe
 submit: valider
+user_account_activated_error: Un problème est survenu lors de l'activation de votre compte.
+user_account_activated: Votre compte est actif.
+user_account_created: Votre compte et créé mais n'est pas encore activé. Vous devriez recevoir un email qui vous permettra de l'activer.
+user_account_updated: Votre compte à été mis à jour.
+user_edit: Éditer votre profil
 username: Identifiant
-public_mail: Email visible par tous
-email_registration_confirm_subject: PATACS - Confirmation d'inscritpion

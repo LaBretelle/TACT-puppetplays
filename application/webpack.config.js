@@ -17,10 +17,11 @@ Encore
         _: 'underscore',
     })*/
 
-    // uncomment to define the assets of the project
+    // define the assets of the project
     .addEntry('js/app', './assets/js/app.js')
     .addEntry('js/home', './assets/js/home.js')
     .addStyleEntry('css/app', './assets/css/global.scss')
+    .addStyleEntry('css/account', './assets/css/account.scss')
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader(function(sassOptions) {}, {

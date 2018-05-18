@@ -27,7 +27,7 @@ class MailManager
     public function sendConfirmationMail(User $user)
     {
         $confiramtionUrl = $this->router->generate(
-          'user_register_confirm',
+          'user_activate_account',
           ['token' => $user->getConfirmationToken()],
           UrlGeneratorInterface::ABSOLUTE_URL
         );
