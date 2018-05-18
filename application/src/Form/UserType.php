@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,8 +23,9 @@ class UserType extends AbstractType
             ->add('lastname', TextType::class, ['label' => 'lastname', 'translation_domain' => 'messages'])
             ->add('email', EmailType::class, ['label' => 'email', 'translation_domain' => 'messages'])
             ->add('username', TextType::class, ['label' => 'username', 'translation_domain' => 'messages'])
-            ->add('description', TextareaType::class, ['label' => 'description', 'translation_domain' => 'messages'])
-            ->add('publicMail', CheckboxType::class, ['label' => 'public_mail', 'translation_domain' => 'messages'])
+            ->add('description', TextareaType::class, ['label' => 'description', 'translation_domain' => 'messages', 'required' => false])
+            ->add('publicMail', CheckboxType::class, ['label' => 'public_mail', 'translation_domain' => 'messages', 'required' => false])
+            ->add('image', FileType::class, ['label' => 'image', 'translation_domain' => 'messages', 'required' => false])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'options' => ['attr' => ['class' => 'password-field']],

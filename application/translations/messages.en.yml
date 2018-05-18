@@ -2,6 +2,7 @@ connected: Connected as %username%
 email: Mail
 home_title: PATACS - Platform for Annotation, Transcription, Analysis of Scientific Corpus
 home: Home
+image: Image
 login: login
 logout: logout
 password: Password
@@ -11,5 +12,5 @@ submit: Submit
 username: Login
 firstname: Firstname
 lastname: Lastname
-public_mail: Email visible to all
 description: Description
+public_mail: Email visible to all

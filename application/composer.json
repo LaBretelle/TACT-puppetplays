@@ -78,5 +78,6 @@
             "id": "01CA5YPD6M94HKWYC00MEWR3G7",
             "allow-contrib": false
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

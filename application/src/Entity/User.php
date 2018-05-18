@@ -99,10 +99,13 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function __construct()
     {
-        $this->isActive = false;
+        $this->active = false;
+        $this->publicMail = true;
         $this->projectStatus = new ArrayCollection();
         $this->transcriptions = new ArrayCollection();
         $this->projectStatus = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getFirstname(): ?string
@@ -272,7 +275,7 @@ class User implements AdvancedUserInterface, \Serializable
           $this->password,
           $this->email,
           $this->publicMail,
-          $this->isActive,
+          $this->active,
           $this->createdAt,
           $this->updatedAt,
       ));
@@ -289,7 +292,7 @@ class User implements AdvancedUserInterface, \Serializable
           $this->password,
           $this->email,
           $this->publicMail,
-          $this->isActive,
+          $this->active,
           $this->createdAt,
           $this->updatedAt,
       ) = unserialize($serialized, ['allowed_classes' => false]);
@@ -297,7 +300,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function isEnabled()
     {
-        return $this->isActive;
+        return $this->active;
     }
 
     public function isAccountNonExpired()
