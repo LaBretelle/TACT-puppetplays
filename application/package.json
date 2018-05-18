@@ -19,5 +19,8 @@
         "watch": "encore dev --watch",
         "build": "encore production"
     },
-    "dependencies": {}
+    "dependencies": {
+        "copy-webpack-plugin": "^4.5.1",
+        "tinymce": "^4.7.13"
+    }
 }

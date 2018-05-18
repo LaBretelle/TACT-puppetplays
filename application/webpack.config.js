@@ -1,4 +1,6 @@
 var Encore = require('@symfony/webpack-encore');
+// enable tinymce skins
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 Encore
     // the project directory where compiled assets will be stored
@@ -20,6 +22,12 @@ Encore
     // define the assets of the project
     .addEntry('js/app', './assets/js/app.js')
     .addEntry('js/home', './assets/js/home.js')
+
+
+    .addPlugin(new CopyWebpackPlugin([
+        // Copy the skins from tinymce to the build/js/skins directory
+        { from: 'node_modules/tinymce/skins', to: 'js/skins' },
+    ]))
     .addStyleEntry('css/app', './assets/css/global.scss')
     .addStyleEntry('css/account', './assets/css/account.scss')
 
