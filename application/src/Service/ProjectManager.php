@@ -23,4 +23,21 @@ class ProjectManager
 
         return $project;
     }
+
+    public function editFromForm($project, $originalStatuses)
+    {
+        $project->setUpdatedAt(new \DateTime);
+
+        foreach ($originalStatuses as $status) {
+            if (!$project->getUserStatuses()->contains($status)) {
+                $project->removeUserStatus($status);
+                $this->em->remove($status);
+            }
+        }
+
+        $this->em->persist($project);
+        $this->em->flush();
+
+        return $project;
+    }
 }

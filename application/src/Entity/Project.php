@@ -30,7 +30,7 @@ class Project
     private $name;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
@@ -43,6 +43,11 @@ class Project
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -60,9 +65,9 @@ class Project
     private $financers;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserProjectStatus", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\UserProjectStatus", mappedBy="project", cascade={"persist"})
      */
-    private $userStatus;
+    private $userStatuses;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="project")
@@ -72,7 +77,7 @@ class Project
     public function __construct()
     {
         $this->financers = new ArrayCollection();
-        $this->userStatus = new ArrayCollection();
+        $this->userStatuses = new ArrayCollection();
         $this->medias = new ArrayCollection();
     }
 
@@ -182,15 +187,15 @@ class Project
     /**
      * @return Collection|UserProjectStatus[]
      */
-    public function getUserStatus(): Collection
+    public function getUserStatuses(): Collection
     {
-        return $this->userStatus;
+        return $this->userStatuses;
     }
 
     public function addUserStatus(UserProjectStatus $userStatus): self
     {
-        if (!$this->userStatus->contains($userStatus)) {
-            $this->userStatus[] = $userStatus;
+        if (!$this->userStatuses->contains($userStatus)) {
+            $this->userStatuses[] = $userStatus;
             $userStatus->setProject($this);
         }
 
@@ -199,8 +204,8 @@ class Project
 
     public function removeUserStatus(UserProjectStatus $userStatus): self
     {
-        if ($this->userStatus->contains($userStatus)) {
-            $this->userStatus->removeElement($userStatus);
+        if ($this->userStatuses->contains($userStatus)) {
+            $this->userStatuses->removeElement($userStatus);
             // set the owning side to null (unless already changed)
             if ($userStatus->getProject() === $this) {
                 $userStatus->setProject(null);
@@ -237,6 +242,18 @@ class Project
                 $media->setProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

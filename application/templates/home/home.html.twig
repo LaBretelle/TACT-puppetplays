@@ -19,14 +19,12 @@
           </div>
           <div class="tile-description">
             <a href="{{ path("project_display", {'id': project.id} )}}">Voir</a>
-            {{ project.shortDescription }}
+            <p>{{ project.shortDescription }}</p>
           </div>
       </div>
     {% endfor %}
     <div class="tile">
-      <div class="tile-title">
-        <a href="{{ path("project_create") }}">Ajouter</a>
-      </div>
+      <a href="{{ path("project_create") }}">Ajouter</a>
     </div>
 
   </div>

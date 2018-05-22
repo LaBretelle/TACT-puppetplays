@@ -1,11 +1,25 @@
 {% extends "base.html.twig" %}
 {% block body %}
 
+  <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-secondary">
+    <i class="fa fa-pencil" aria-hidden="true"></i> Editer
+  </a>
+
+  <hr/>
+
   <ul class="list-group">
-    <li class="list-group-item">{{ project.id }}</li>
-    <li class="list-group-item">{{ project.name }}</li>
+    <li class="list-group-item list-group-item-secondary">#{{project.id}} {{ project.name }}</li>
     <li class="list-group-item">{{ project.description }}</li>
     <li class="list-group-item">{{ project.shortDescription }}</li>
-  <ul>
+  </ul>
+
+  <hr/>
+
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-secondary">Project user status</li>
+  {% for userStatus in project.userStatuses %}
+    <li class="list-group-item">{{ userStatus.user.username }} - {{ userStatus.status.name }}</li>
+  {% endfor %}
+  </ul>
 
 {% endblock %}

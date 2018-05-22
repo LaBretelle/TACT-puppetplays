@@ -8,7 +8,7 @@ use App\Entity\UserStatus;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="app_project_useer_status")
+ * @ORM\Table(name="app_project_user_status")
  * @ORM\Entity()
  */
 class UserProjectStatus
@@ -27,7 +27,7 @@ class UserProjectStatus
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="userStatus")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="userStatuses")
      * @ORM\JoinColumn(nullable=false)
      */
     private $project;

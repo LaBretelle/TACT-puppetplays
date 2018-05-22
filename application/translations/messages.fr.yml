@@ -1,4 +1,5 @@
 access_denied: Vous n'êtes pas autorisé à accéder à cette page.
+add_user-status: Ajouter un statut pour un utilisateur
 cancel: Annuler
 description: Description
 email_registration_confirm_subject: PATACS - Confirmation d'inscritpion
@@ -11,13 +12,19 @@ lastname: Nom
 login: connection
 logout: déconnection
 password: Mot de passe
+project_name: Nom du projet
+project_short_description: Description courte
+project_user_status: Statut des utilisateurs
 public_mail: Email visible par tous
 register: s'enregistrer
 repeat_password: Répéter le mot de passe
+save: Sauvegarder
+status: Statut
 submit: valider
 user_account_activated_error: Un problème est survenu lors de l'activation de votre compte.
 user_account_activated: Votre compte est actif.
 user_account_created: Votre compte et créé mais n'est pas encore activé. Vous devriez recevoir un email qui vous permettra de l'activer.
 user_account_updated: Votre compte à été mis à jour.
 user_edit: Éditer votre profil
+user: Utilisateur
 username: Identifiant

@@ -1,4 +1,41 @@
 {% extends "base.html.twig" %}
+
+{% import _self as formMacros %}
+
 {% block body %}
-  {{ form(form) }}
+
+{{ form_start(form) }}
+  {{ form_row(form.name) }}
+  {{ form_row(form.shortDescription) }}
+
+  {{ form_label(form.userStatuses) }}
+  <a id="add-user-status" class="btn btn-sm btn-info" href="#">
+    <i class="fa fa-plus" aria-hidden="true"></i> {{"add_user-status"|trans}}
+  </a>
+
+  <div class="userstatuses row" data-prototype="{{ formMacros.userStatusesRow(form.userStatuses.vars.prototype)|e('html_attr') }}">
+    {% for userStatus in form.userStatuses %}
+      {{ formMacros.userStatusesRow(userStatus) }}
+    {% endfor %}
+  </div>
+
+  {{ form_widget(form._token) }}
+
+  {{ form_row(form.save) }}
+{% endblock %}
+
+{% macro userStatusesRow(form) %}
+  <div class="userstatus-container" style="border:1px solid lightgrey; padding:5px; border-radius:5px">
+    <span class="btn btn-sm btn-danger pull-right remove-userstatus">
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    </span>
+    <br/>
+    {{ form_row(form.status) }}
+    {{ form_row(form.user) }}
+  </div>
+{% endmacro %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('build/js/create-project.js') }}"></script>
 {% endblock %}

@@ -19,14 +19,12 @@ import 'tinymce/plugins/paste';
 import 'tinymce/plugins/link';
 
 
-
-
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
     $('[data-toggle="tooltip"]').tooltip();
     // Initialize the app
     tinymce.init({
-        selector: 'textarea',
+        selector: 'textarea.tinymce-enabled',
         plugins: ['paste', 'link']
     });
 });
