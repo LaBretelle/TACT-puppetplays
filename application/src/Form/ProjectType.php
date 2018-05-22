@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Project;
+use App\Entity\ProjectStatus;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -10,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Form\UserProjectStatusType;
 
 class ProjectType extends AbstractType
@@ -25,6 +27,12 @@ class ProjectType extends AbstractType
             'label' => 'project_short_description',
             'translation_domain' => 'messages'
           ])
+          ->add('status', EntityType::class, [
+            'class' => ProjectStatus::class,
+            'label' => 'project_status',
+            'translation_domain' => 'messages',
+            'choice_label' => 'name'
+          ])
 
           ->add('userStatuses', CollectionType::class, [
             'label' => 'project_user_status',
@@ -37,7 +45,7 @@ class ProjectType extends AbstractType
           ])
 
           ->add('save', SubmitType::class, array(
-              'attr' => array('class' => 'save'),
+              'attr' => array('class' => 'save pull-right'),
               'label' => 'save',
           ));
         ;

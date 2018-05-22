@@ -14,6 +14,7 @@ logout: logout
 password: Password
 project_name: Project name
 project_short_description: Short description
+project_status: Project status
 project_user_status: User statuses
 public_mail: Email visible to all
 register: register

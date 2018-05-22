@@ -14,6 +14,7 @@ logout: déconnection
 password: Mot de passe
 project_name: Nom du projet
 project_short_description: Description courte
+project_status: Statut du projet
 project_user_status: Statut des utilisateurs
 public_mail: Email visible par tous
 register: s'enregistrer

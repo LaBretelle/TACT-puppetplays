@@ -8,9 +8,10 @@
   <hr/>
 
   <ul class="list-group">
-    <li class="list-group-item list-group-item-secondary">#{{project.id}} {{ project.name }}</li>
-    <li class="list-group-item">{{ project.description }}</li>
-    <li class="list-group-item">{{ project.shortDescription }}</li>
+    <li class="list-group-item list-group-item-secondary">{{ project.name }}</li>
+    <li class="list-group-item">{{ project.description ? project.description | raw : "-"}}</li>
+    <li class="list-group-item">{{ project.shortDescription | raw }}</li>
+    <li class="list-group-item">{{ project.status ? project.status.name : "-"}}</li>
   </ul>
 
   <hr/>
