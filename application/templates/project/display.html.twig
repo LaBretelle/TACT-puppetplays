@@ -1,25 +1,21 @@
 {% extends "base.html.twig" %}
 {% block body %}
+  <h3>{{ project.name }}</h3>
 
   <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-secondary">
     <i class="fa fa-pencil" aria-hidden="true"></i> Editer
   </a>
 
-  <hr/>
-
-  <ul class="list-group">
-    <li class="list-group-item list-group-item-secondary">#{{project.id}} {{ project.name }}</li>
-    <li class="list-group-item">{{ project.description }}</li>
-    <li class="list-group-item">{{ project.shortDescription }}</li>
-  </ul>
+  <a href="{{ path("status_project", {id: project.id})}}" type="button" class="btn btn-secondary">
+    <i class="fa fa-users" aria-hidden="true"></i> {{ "project_handle_user_statuses" | trans}}
+  </a>
 
   <hr/>
 
   <ul class="list-group">
-    <li class="list-group-item list-group-item-secondary">Project user status</li>
-  {% for userStatus in project.userStatuses %}
-    <li class="list-group-item">{{ userStatus.user.username }} - {{ userStatus.status.name }}</li>
-  {% endfor %}
+    <li class="list-group-item">{{ project.description ? project.description | raw : "-"}}</li>
+    <li class="list-group-item">{{ project.shortDescription | raw }}</li>
+    <li class="list-group-item">{{ project.status ? project.status.name : "-"}}</li>
+    <li class="list-group-item">{{ project.public ? "public" : "privé"}}</li>
   </ul>
-
 {% endblock %}

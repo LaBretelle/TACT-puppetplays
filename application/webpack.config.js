@@ -31,6 +31,7 @@ Encore
     ]))
     .addStyleEntry('css/app', './assets/css/global.scss')
     .addStyleEntry('css/account', './assets/css/account.scss')
+    .addStyleEntry('css/create-project', './assets/css/create-project.scss')
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader(function(sassOptions) {}, {

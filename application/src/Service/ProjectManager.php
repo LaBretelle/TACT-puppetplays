@@ -4,14 +4,17 @@ namespace App\Service;
 
 use App\Entity\Project;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProjectManager
 {
-    private $em;
+    protected $em;
+    protected $authChecker;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, AuthorizationCheckerInterface $authChecker)
     {
         $this->em = $em;
+        $this->authChecker = $authChecker;
     }
 
     public function createFromForm($project)
@@ -28,10 +31,12 @@ class ProjectManager
     {
         $project->setUpdatedAt(new \DateTime);
 
-        foreach ($originalStatuses as $status) {
-            if (!$project->getUserStatuses()->contains($status)) {
-                $project->removeUserStatus($status);
-                $this->em->remove($status);
+        if ($this->authChecker->isGranted('ROLE_ADMIN')) {
+            foreach ($originalStatuses as $status) {
+                if (!$project->getUserStatuses()->contains($status)) {
+                    $project->removeUserStatus($status);
+                    $this->em->remove($status);
+                }
             }
         }
 

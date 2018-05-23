@@ -3,24 +3,31 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\User;
 use App\Form\ProjectType;
 use App\Service\ProjectManager;
+use App\Service\UserProjectStatusManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
 
+/**
+ * @Route("/project", name="project_")
+ */
 class ProjectController extends Controller
 {
     private $projectManager;
+    private $statusManager;
 
-    public function __construct(ProjectManager $projectManager)
+    public function __construct(ProjectManager $projectManager, UserProjectStatusManager $statusManager)
     {
         $this->projectManager = $projectManager;
+        $this->statusManager = $statusManager;
     }
 
     /**
-     * @Route("/project/create", name="project_create")
+     * @Route("/create", name="create")
      */
     public function create(Request $request)
     {
@@ -37,12 +44,15 @@ class ProjectController extends Controller
 
         return $this->render(
             'project/create.html.twig',
-            array('form' => $form->createView())
+            [
+              'form' => $form->createView(),
+              'project' => $project
+            ]
         );
     }
 
     /**
-     * @Route("/project/edit/{id}", name="project_edit")
+     * @Route("/{id}/edit", name="edit")
      */
     public function edit(Project $project, Request $request)
     {
@@ -63,13 +73,15 @@ class ProjectController extends Controller
 
         return $this->render(
           'project/create.html.twig',
-          array('form' => $form->createView())
+          [
+            'form' => $form->createView(),
+            'project' => $project
+          ]
       );
     }
 
-
     /**
-     * @Route("/project/{id}", name="project_display")
+     * @Route("/{id}", name="display")
      */
     public function display(Project $project)
     {

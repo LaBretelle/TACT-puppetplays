@@ -74,6 +74,11 @@ class Project
      */
     private $medias;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $public = 1;
+
     public function __construct()
     {
         $this->financers = new ArrayCollection();
@@ -254,6 +259,18 @@ class Project
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getPublic(): ?bool
+    {
+        return $this->public;
+    }
+
+    public function setPublic(bool $public): self
+    {
+        $this->public = $public;
 
         return $this;
     }
