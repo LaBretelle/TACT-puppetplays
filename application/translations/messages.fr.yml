@@ -25,6 +25,9 @@ public_mail: Email visible par tous
 register: s'enregistrer
 repeat_password: Répéter le mot de passe
 save: Sauvegarder
+status_remove: Supprimer
+status_toggle_off: Invalider
+status_toggle_on: Valider
 status: Statut
 submit: valider
 user_account_activated_error: Un problème est survenu lors de l'activation de votre compte.

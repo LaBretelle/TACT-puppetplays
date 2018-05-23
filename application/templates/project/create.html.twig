@@ -12,7 +12,7 @@
 <h3>
   {% if  project.id %}
     <a href="{{ path("project_display", {'id': project.id} )}}">{{ project.name }}</a>
-    {{ "project_edit"|trans }}
+    - {{ "project_edit"|trans }}
   {% else %}
     {{ "project_create"|trans }}
   {% endif %}

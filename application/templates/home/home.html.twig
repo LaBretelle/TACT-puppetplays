@@ -23,9 +23,11 @@
           </div>
       </div>
     {% endfor %}
+    {% if is_granted('ROLE_ADMIN') %}
     <div class="tile">
       <a href="{{ path("project_create") }}">Ajouter</a>
     </div>
+    {% endif %}
 
   </div>
 {% endblock %}

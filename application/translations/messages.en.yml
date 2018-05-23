@@ -25,6 +25,9 @@ public_mail: Email visible to all
 register: register
 repeat_password: Repeat password
 save: Save
+status_remove: Remove
+status_toggle_off: Unvalidate
+status_toggle_on: Validate
 status: Status
 submit: Submit
 user_account_activated_error: An error occured while activating your account.
