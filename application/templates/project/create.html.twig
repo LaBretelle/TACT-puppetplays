@@ -9,23 +9,34 @@
 
 {% block body %}
 
+<h3>
+  {% if  project.id %}
+    <a href="{{ path("project_display", {'id': project.id} )}}">{{ project.name }}</a>
+    {{ "project_edit"|trans }}
+  {% else %}
+    {{ "project_create"|trans }}
+  {% endif %}
+</h3>
+
+
 {{ form_start(form) }}
   {{ form_row(form.name) }}
   {{ form_row(form.shortDescription) }}
   {{ form_row(form.status) }}
-  {{ form_label(form.userStatuses) }}
-  <a id="add-user-status" class="btn btn-sm btn-info" href="#">
-    <i class="fa fa-plus" aria-hidden="true"></i> {{"add_user-status"|trans}}
-  </a>
-
-  <div class="form-group">
-    <div class="userstatuses row" data-prototype="{{ formMacros.userStatusesRow(form.userStatuses.vars.prototype)|e('html_attr') }}">
-      {% for userStatus in form.userStatuses %}
-        {{ formMacros.userStatusesRow(userStatus) }}
-      {% endfor %}
+  {{ form_row(form.public) }}
+  {% if is_granted('ROLE_ADMIN') %}
+    {{ form_label(form.userStatuses) }}
+    <a id="add-user-status" class="btn btn-sm btn-info" href="#">
+      <i class="fa fa-plus" aria-hidden="true"></i> {{"add_user-status"|trans}}
+    </a>
+    <div class="form-group">
+      <div class="userstatuses row" data-prototype="{{ formMacros.userStatusesRow(form.userStatuses.vars.prototype)|e('html_attr') }}">
+        {% for userStatus in form.userStatuses %}
+          {{ formMacros.userStatusesRow(userStatus) }}
+        {% endfor %}
+      </div>
     </div>
-  </div>
-
+  {% endif %}
   {{ form_widget(form._token) }}
 
   {{ form_row(form.save) }}

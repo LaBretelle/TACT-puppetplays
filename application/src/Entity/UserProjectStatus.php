@@ -38,6 +38,11 @@ class UserProjectStatus
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $enabled = 1;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +80,18 @@ class UserProjectStatus
     public function setStatus(?UserStatus $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }

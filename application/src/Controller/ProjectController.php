@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
 
+/**
+ * @Route("/project", name="project_")
+ */
 class ProjectController extends Controller
 {
     private $projectManager;
@@ -20,7 +23,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/project/create", name="project_create")
+     * @Route("/create", name="create")
      */
     public function create(Request $request)
     {
@@ -37,12 +40,15 @@ class ProjectController extends Controller
 
         return $this->render(
             'project/create.html.twig',
-            array('form' => $form->createView())
+            [
+              'form' => $form->createView(),
+              'project' => $project
+            ]
         );
     }
 
     /**
-     * @Route("/project/edit/{id}", name="project_edit")
+     * @Route("/{id}/edit", name="edit")
      */
     public function edit(Project $project, Request $request)
     {
@@ -63,13 +69,26 @@ class ProjectController extends Controller
 
         return $this->render(
           'project/create.html.twig',
-          array('form' => $form->createView())
+          [
+            'form' => $form->createView(),
+            'project' => $project
+          ]
       );
     }
 
+    /**
+     * @Route("/{id}/users", name="users")
+     */
+    public function handleUserStatuses(Project $project)
+    {
+        return $this->render(
+          'project/user-statuses.html.twig',
+          ['project' => $project]
+      );
+    }
 
     /**
-     * @Route("/project/{id}", name="project_display")
+     * @Route("/{id}", name="display")
      */
     public function display(Project $project)
     {

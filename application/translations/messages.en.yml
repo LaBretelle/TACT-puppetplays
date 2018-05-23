@@ -8,10 +8,15 @@ firstname: Firstname
 home_title: PATACS - Platform for Annotation, Transcription, Analysis of Scientific Corpus
 home: Home
 image: Image
+is_public: Public project
 lastname: Lastname
 login: login
 logout: logout
 password: Password
+project_create: Project creation
+project_edit: Project edition
+project_enabled: Enabled
+project_handle_user_statuses: Users management
 project_name: Project name
 project_short_description: Short description
 project_status: Project status

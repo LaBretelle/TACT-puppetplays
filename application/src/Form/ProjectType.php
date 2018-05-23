@@ -10,12 +10,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Form\UserProjectStatusType;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProjectType extends AbstractType
 {
+    protected $authChecker;
+
+    public function __construct(AuthorizationCheckerInterface $authChecker)
+    {
+        $this->authChecker = $authChecker;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -33,8 +42,18 @@ class ProjectType extends AbstractType
             'translation_domain' => 'messages',
             'choice_label' => 'name'
           ])
+          ->add('public', CheckboxType::class, array(
+              'label'    => 'is_public',
+              'required' => false
+          ))
 
-          ->add('userStatuses', CollectionType::class, [
+          ->add('save', SubmitType::class, array(
+              'attr' => array('class' => 'save pull-right'),
+              'label' => 'save',
+          ));
+
+        if ($this->authChecker->isGranted('ROLE_ADMIN')) {
+            $builder->add('userStatuses', CollectionType::class, [
             'label' => 'project_user_status',
             'entry_type' => UserProjectStatusType::class,
             'prototype' => true,
@@ -42,13 +61,8 @@ class ProjectType extends AbstractType
             'allow_delete' => true,
             'mapped' => true,
             'by_reference' => false,
-          ])
-
-          ->add('save', SubmitType::class, array(
-              'attr' => array('class' => 'save pull-right'),
-              'label' => 'save',
-          ));
-        ;
+          ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
