@@ -13,8 +13,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Table(name="app_user")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity("email")
- * @UniqueEntity("username")
+ * @UniqueEntity("email", message="user_unique_email")
+ * @UniqueEntity("username", message="user_unique_username")
  */
 class User implements UserInterface, \Serializable
 {
