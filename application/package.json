@@ -20,6 +20,7 @@
         "build": "encore production"
     },
     "dependencies": {
+        "babel-preset-es2017": "^6.24.1",
         "copy-webpack-plugin": "^4.5.1",
         "tinymce": "^4.7.13"
     }

@@ -10,6 +10,8 @@ use App\Service\MailManager;
 use App\Service\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+// Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -30,6 +32,31 @@ class UserController extends Controller
         $this->userManager = $userManager;
         $this->mailManager = $mailManager;
         $this->translator = $translator;
+    }
+
+    /**
+     * @Route("/user", name="list")
+     * @Method("GET")
+     */
+    public function listUsers(Request $request)
+    {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->userManager->createUserFromForm($user);
+            $this->mailManager->sendConfirmationMail($user);
+            $this->addFlash(
+              'notice',
+              $this->translator->trans('user_account_created', [], 'messages')
+            );
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render(
+            'user/register.html.twig',
+            array('form' => $form->createView())
+        );
     }
 
     /**

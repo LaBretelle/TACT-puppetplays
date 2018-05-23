@@ -30,7 +30,7 @@ class UserTypeFull extends AbstractType
             ->add('lastname', TextType::class, ['label' => 'lastname', 'translation_domain' => 'messages'])
             ->add('email', EmailType::class, ['label' => 'email', 'translation_domain' => 'messages'])
             ->add('username', TextType::class, ['label' => 'username', 'translation_domain' => 'messages'])
-            ->add('description', TextareaType::class, ['label' => 'description', 'translation_domain' => 'messages', 'required' => false])
+            ->add('description', TextareaType::class, ['label' => 'description', 'translation_domain' => 'messages', 'required' => false, 'attr' => ['class' => 'tinymce-enabled']])
             ->add('publicMail', CheckboxType::class, ['label' => 'public_mail', 'translation_domain' => 'messages', 'required' => false])
             ->add('image', FileType::class, ['label' => 'image', 'translation_domain' => 'messages', 'required' => false, 'data_class' => null])
         ;
