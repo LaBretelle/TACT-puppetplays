@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -14,12 +15,14 @@ class UserManager
     private $passwordEncoder;
     private $em;
     private $params;
+    private $repository;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, ParameterBagInterface $params)
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, ParameterBagInterface $params, UserRepository $repository)
     {
         $this->passwordEncoder = $passwordEncoder;
         $this->em = $em;
         $this->params = $params;
+        $this->repository = $repository;
     }
 
     public function createUser(string $lastname, string $firstname, string $username, string $email, string $plainPassword, array $roles)
@@ -79,5 +82,37 @@ class UserManager
 
         $this->em->persist($user);
         $this->em->flush();
+    }
+
+    public function userCanRenewPassword(string $data)
+    {
+        // search by email
+        $user = $this->repository->findOneBy(['email' => $data]);
+        if (!$user) {
+            $user = $this->repository->findOneBy(['username' => $data]);
+        }
+        if ($user && null === $user->getPasswordRequestedAt()) {
+            return $user;
+        } elseif ($user && null !== $user->getPasswordRequestedAt()) {
+            $now = new \DateTime('now');
+            $requestedAt = $user->getPasswordRequestedAt();
+            $t1 = \StrToTime($now->format('Y-m-d H:i:s'));
+            $t2 = \StrToTime($requestedAt->format('Y-m-d H:i:s'));
+            $diff = $t1 - $t2;
+            $hours = $diff / (60 * 60);
+            return $hours > 2;
+        }
+        return false;
+    }
+
+    public function resetPassword(User $user)
+    {
+        $user->setConfirmationToken(null);
+        $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
+        $user->setPassword($password);
+        $user->setUpdatedAt(new \DateTime('now'));
+        $this->em->persist($user);
+        $this->em->flush();
+        return true;
     }
 }

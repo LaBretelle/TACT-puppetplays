@@ -2,6 +2,8 @@ access_denied: You are not allowed to access this page.
 add_user-status: Add status for an user
 cancel: Cancel
 description: Description
+email_or_login_placeholder: Login / email
+email_or_login: Please enter your login or email
 email_registration_confirm_subject: PATACS - Registration validation
 email: Mail
 firstname: Firstname
@@ -11,6 +13,7 @@ image: Image
 lastname: Lastname
 login: login
 logout: logout
+lost_password_link: I forgot my password
 password: Password
 project_name: Project name
 project_short_description: Short description
@@ -22,9 +25,14 @@ save: Save
 status: Status
 submit: Submit
 user_account_activated_error: An error occured while activating your account.
-user_account_activated: Your account has been activated.
+user_account_activated: Your account is now activated.
 user_account_created: Your account was created but is not yet activated. You should receive an email to activate your account.
 user_account_updated: Your account has been updated.
 user_edit: Edit your profile
+user_is_active: Enable / disable the account
 user: User
 username: Login
+user_renew_password_mail_sent: An email has ben sent at the following address %usermail%
+user_renew_password_error: An error occured while requesting a new password.
+user_renew_password_success: Your password was updated.
+email_renew_password_subject: PATCS - Reset password request.

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\UserTypeFull;
+use App\Form\UserResetPasswordType;
 use App\Service\MailManager;
 use App\Service\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -111,16 +112,95 @@ class UserController extends Controller
     }
 
     /**
-     * [recoverPassword description]
-     * @return [type] [description]
+     *
+     * @Route("/password-lost", name="lost_password_form")
      */
-    public function recoverPassword()
+    public function lostPassword(Request $request)
     {
+        if ($request->get('user_data')) {
+            // check if user exist and that he has not requested a password less than two hours ago
+            if ($user = $this->userManager->userCanRenewPassword($request->get('user_data'))) {
+                $token = base64_encode(random_bytes(10));
+                $user->setConfirmationToken($token);
+                $user->setPasswordRequestedAt(new \DateTime('now'));
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+                $this->mailManager->sendRecoverPasswordMail($user);
+                $mailparts = explode('@', $user->getEmail());
+                $obfuscatedMail = substr_replace($mailparts[0], '*', 3).'@'.$mailparts[1];
+                $this->addFlash(
+                  'success',
+                  $this->translator->trans('user_renew_password_mail_sent', ['%usermail%' => $obfuscatedMail], 'messages')
+                );
+            } else {
+                $this->addFlash(
+                'danger',
+                $this->translator->trans('user_renew_password_error', [], 'messages')
+              );
+            }
+
+            return $this->redirectToRoute('home');
+        }
+        return $this->render(
+          'user/recover.html.twig'
+        );
     }
 
     /**
-     * [confirmRegistration description]
-     * @Route("/confirm/{token}", name="activate_account", requirements={"token"=".+"})
+     *
+     * @Route("/reset/{token?}", name="reset_password", requirements={"token"=".+"})
+     */
+    public function resetPassword(Request $request, string $token = null)
+    {
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        if (null === $token) {
+            $token = $request->get('token');
+            if (!$token) {
+                $this->addFlash(
+                  'danger',
+                  $this->translator->trans('user_renew_password_error', [], 'messages')
+                );
+                return $this->redirectToRoute('home');
+            }
+        }
+
+        $user = $repository->findOneBy(['confirmationToken' => $token]);
+
+        if (!$user) {
+            $this->addFlash(
+              'danger',
+              $this->translator->trans('user_renew_password_error', [], 'messages')
+            );
+            return $this->redirectToRoute('home');
+        }
+        $form = $this->createForm(UserResetPasswordType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($this->userManager->resetPassword($user)) {
+                $this->addFlash(
+                'success',
+                $this->translator->trans('user_renew_password_success', [], 'messages')
+              );
+            } else {
+                $this->addFlash(
+                'danger',
+                $this->translator->trans('user_renew_password_error', [], 'messages')
+              );
+            }
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render(
+            'user/reset.password.html.twig',
+            array('form' => $form->createView(), 'token' => $token)
+        );
+    }
+
+    /**
+     *
+     * @Route("/activate/{token}", name="activate_account", requirements={"token"=".+"})
      */
     public function activateAccount(string $token)
     {

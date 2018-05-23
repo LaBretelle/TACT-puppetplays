@@ -35,8 +35,7 @@ class MailManager
         $subject = $this->translator->trans(
             'email_registration_confirm_subject',
             [],
-            'messages',
-            'fr_FR'
+            'messages'
         );
 
         $message = (new \Swift_Message($subject))
@@ -46,6 +45,32 @@ class MailManager
               $this->templating->render(
                   'emails/registration.html.twig',
                   ['user' => $user, 'url' => $confiramtionUrl]
+              )
+          );
+        $this->mailer->send($message);
+    }
+
+    public function sendRecoverPasswordMail(User $user)
+    {
+        $url = $this->router->generate(
+          'user_reset_password',
+          ['token' => $user->getConfirmationToken()],
+          UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $subject = $this->translator->trans(
+            'email_renew_password_subject',
+            [],
+            'messages'
+        );
+
+        $message = (new \Swift_Message($subject))
+          ->setFrom($this->params->get('platform_email'))
+          ->setTo($user->getEmail())
+          ->setBody(
+              $this->templating->render(
+                  'emails/reset.html.twig',
+                  ['user' => $user, 'url' => $url]
               )
           );
         $this->mailer->send($message);

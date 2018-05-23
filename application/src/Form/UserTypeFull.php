@@ -13,9 +13,16 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UserTypeFull extends AbstractType
 {
+    private $authChecker;
+    public function __construct(AuthorizationCheckerInterface $authChecker)
+    {
+        $this->authChecker = $authChecker;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -27,6 +34,10 @@ class UserTypeFull extends AbstractType
             ->add('publicMail', CheckboxType::class, ['label' => 'public_mail', 'translation_domain' => 'messages', 'required' => false])
             ->add('image', FileType::class, ['label' => 'image', 'translation_domain' => 'messages', 'required' => false, 'data_class' => null])
         ;
+
+        if ($this->authChecker->isGranted('ROLE_ADMIN')) {
+            $builder->add('active', CheckboxType::class, ['label' => 'user_is_active', 'translation_domain' => 'messages', 'required' => false]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

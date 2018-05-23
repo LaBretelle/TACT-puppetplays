@@ -7,6 +7,10 @@
 
 {% block body %}
   {{ form_start(form) }}
+
+    {% if is_granted('ROLE_ADMIN', app.user) %}
+      {{ form_row(form.active) }}
+    {% endif %}
     {{ form_row(form.lastname) }}
     {{ form_row(form.firstname) }}
     {{ form_row(form.username) }}
