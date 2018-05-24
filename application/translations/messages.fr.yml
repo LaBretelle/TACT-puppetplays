@@ -39,7 +39,8 @@ user_account_activated: Votre compte est maintenant actif.
 user_account_created: Votre compte et créé mais n'est pas encore activé. Vous devriez recevoir un email qui vous permettra de l'activer.
 user_account_updated: Votre compte à été mis à jour.
 user_edit: Éditer votre profil
-user_is_active: Activer / désactiver le compte.
+user_is_active: Compte activé
+user_activate_action: Activer / désactiver le compte.
 user_renew_password_error: Une erreur s'est produite lors de la demande de renouvellement de mot de passe.
 user_renew_password_mail_sent: Un email vous a été envoyé à l'adresse %usermail%
 user_renew_password_success: Votre mot de passe a été mis à jour.

@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -43,7 +44,7 @@ class UserAdminController extends Controller
 
     /**
      *
-     * @Route("/activate/{id}", name="activate_account")
+     * @Route("/activate/{id}", options={"expose"=true}, name="activate_account")
      * @Method("POST")
      * @ParamConverter("user", class="App:User")
      */

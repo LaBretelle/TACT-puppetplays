@@ -36,7 +36,7 @@ class UserTypeFull extends AbstractType
         ;
 
         if ($this->authChecker->isGranted('ROLE_ADMIN')) {
-            $builder->add('active', CheckboxType::class, ['label' => 'user_is_active', 'translation_domain' => 'messages', 'required' => false]);
+            $builder->add('active', CheckboxType::class, ['label' => 'user_activate_action', 'translation_domain' => 'messages', 'required' => false]);
         }
     }
 
