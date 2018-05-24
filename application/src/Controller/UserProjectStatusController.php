@@ -7,7 +7,6 @@ use App\Entity\UserProjectStatus;
 use App\Form\UserStatusType;
 use App\Service\UserProjectStatusManager;
 use Doctrine\Common\Collections\ArrayCollection;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -54,10 +53,8 @@ class UserProjectStatusController extends Controller
         return $this->redirectToRoute('status_project', ["id" => $status->getProject()->getId()]);
     }
 
-
     /**
-     * @Route("/{id}/form", name="form_get", options={"expose"=true})
-     * @Method("GET")
+     * @Route("/{id}/form", name="form_get", options={"expose"=true}, methods="GET")
      */
     public function getForm(UserProjectStatus $status)
     {
@@ -72,10 +69,8 @@ class UserProjectStatusController extends Controller
       );
     }
 
-
     /**
-     * @Route("/{id}/form", name="form_post")
-     * @Method("POST")
+     * @Route("/{id}/form", name="form_post", methods="POST")
      */
     public function postForm(UserProjectStatus $status, Request $request)
     {
@@ -87,7 +82,6 @@ class UserProjectStatusController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($status);
             $em->flush();
-            //$this->projectManager->createFromForm($project);
         }
 
         return $this->redirectToRoute('status_project', ["id" => $status->getProject()->getId()]);
