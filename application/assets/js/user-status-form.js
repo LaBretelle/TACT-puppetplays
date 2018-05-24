@@ -1,11 +1,15 @@
+import AppRouting from './modules/app-routing.js';
+
+const routing = new AppRouting();
+
 $(document).ready(function() {
   $(document).on('click', '.edit-status', function(event) {
     event.preventDefault();
     var id = $(this).data("status-id");
+    var url = routing.generateRoute('status_form_get', {id: id});
     $.ajax({
-          url:'/index.php/status/'+id+'/form',
+          url: url,
           type: "GET",
-          //dataType: "json",
           async: true,
           success: function (data)
           {
