@@ -20,6 +20,7 @@ login: login
 logout: logout
 lost_password_link: I forgot my password
 manager: Manager
+need_to_be_logged: You have to be logged in to contribute to the project.
 no: No
 not_enabled_yet: (Not enabled yet)
 not_registered: Not registered
