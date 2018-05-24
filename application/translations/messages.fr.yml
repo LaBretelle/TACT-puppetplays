@@ -19,7 +19,7 @@ lost_password_link: J'ai oublié mon mot de passe
 password: Mot de passe
 project_create: Création d'un projet
 project_edit: Edition d'un projet
-project_enabled: Validé
+project_enabled: Validé ?
 project_handle_user_statuses: Gestion des utilisateurs
 project_name: Nom du projet
 project_short_description: Description courte
@@ -49,3 +49,15 @@ username: Identifiant
 userfullname: Nom - Prénom
 administrate_users_title: Administration des utilisateurs de la plateforme
 administrate_users_menu: Utilisateurs
+
+
+
+status_edit: Editer le statut
+manager: Gestionnaire
+transcriber: Transcripteur
+validator: Validateur
+no: Non
+yes: Oui
+not_enabled_yet: (Pas encore activé)
+project_description: Description du projet
+actions: Actions

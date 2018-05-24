@@ -24,7 +24,7 @@
   {{ form_row(form.public) }}
   {% if is_granted('ROLE_ADMIN') %}
     {{ form_label(form.userStatuses) }}
-    <a id="add-user-status" class="btn btn-sm btn-info" href="#">
+    <a id="add-user-status" class="btn btn-sm btn-secondary" href="#">
       <i class="fa fa-plus" aria-hidden="true"></i> {{"add_user-status"|trans}}
     </a>
     <div class="form-group">
