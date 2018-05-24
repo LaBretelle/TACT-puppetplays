@@ -1,5 +1,7 @@
 access_denied: You are not allowed to access this page.
 add_user-status: Add status for an user
+administrate_users_menu: Users
+administrate_users_title: Platform users administration
 cancel: Cancel
 description: Description
 email_or_login_placeholder: Login / email
@@ -16,13 +18,8 @@ lastname: Lastname
 login: login
 logout: logout
 lost_password_link: I forgot my password
-manager: Manager
-no: No
-not_enabled_yet: (Not enabled yet)
-not_registered: Unregistered
 password: Password
 project_create: Project creation
-project_description: Project description
 project_edit: Project edition
 project_enabled: Enabled
 project_handle_user_statuses: Users management
@@ -34,13 +31,11 @@ public_mail: Email visible to all
 register: register
 repeat_password: Repeat password
 save: Save
-status_edit: Edit status
 status_remove: Remove
 status_toggle_off: Unvalidate
 status_toggle_on: Validate
 status: Status
 submit: Submit
-transcriber: Transcriber
 user_account_activated_error: An error occured while activating your account.
 user_account_activated: Your account is now activated.
 user_account_created: Your account was created but is not yet activated. You should receive an email to activate your account.
@@ -51,6 +46,5 @@ user_renew_password_error: An error occured while requesting a new password.
 user_renew_password_mail_sent: An email has ben sent at the following address %usermail%
 user_renew_password_success: Your password was updated.
 user: User
+userfullname: Lastname - Firstname
 username: Login
-validator: Validator
-yes: Yes

@@ -3,22 +3,21 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserResetPasswordType;
 use App\Form\UserType;
 use App\Form\UserTypeFull;
-use App\Form\UserResetPasswordType;
 use App\Service\MailManager;
 use App\Service\UserManager;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-// Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /** @Route("/user", name="user_") */
 class UserController extends Controller
@@ -35,24 +34,13 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/user", name="list")
+     * @Route("/", name="list")
      * @Method("GET")
      */
     public function listUsers(Request $request)
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->userManager->createUserFromForm($user);
-            $this->mailManager->sendConfirmationMail($user);
-            $this->addFlash(
-              'notice',
-              $this->translator->trans('user_account_created', [], 'messages')
-            );
-            return $this->redirectToRoute('home');
-        }
-
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $users = $repository->findAll();
         return $this->render(
             'user/register.html.twig',
             array('form' => $form->createView())
