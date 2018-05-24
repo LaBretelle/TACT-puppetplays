@@ -16,11 +16,11 @@ export default class AppRouting {
     this.routing = Routing;
   }
 
-  generateRoute(name, params = {}) {
+  generateRoute(name, params = {}, absolute = false) {
     // Generate a route with absolute url
     // Routing.generate('route_name', /* your params */, true)
     // Routing.generate('my_route_to_expose', { id: 10, foo: "bar" });
-    return this.routing.generate(name, params);
+    return this.routing.generate(name, params, absolute);
   }
 
 

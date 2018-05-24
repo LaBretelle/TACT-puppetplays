@@ -33,12 +33,24 @@ class UserAdminController extends Controller
      */
     public function listUsers()
     {
-        $repository = $this->getDoctrine()->getRepository(User::class);
-        $users = $repository->findAll();
+        //$repository = $this->getDoctrine()->getRepository(User::class);
+        //$users = $repository->findAll();
         return $this->render(
             'admin/user/list.html.twig',
-            ['users' => $users]
+            []
         );
+    }
+
+    /**
+     *
+     * @Route("/fetch", options={"expose"=true}, name="fetch")
+     * @Method("POST")
+     */
+    public function fetchUsers(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $users = $repository->findAll();
+        return new JsonResponse(['status' => 200, 'message' => 'success', 'data' => $users]);
     }
 
 

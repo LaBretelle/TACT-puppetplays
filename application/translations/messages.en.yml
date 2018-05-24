@@ -40,7 +40,9 @@ user_account_activated_error: An error occured while activating your account.
 user_account_activated: Your account is now activated.
 user_account_created: Your account was created but is not yet activated. You should receive an email to activate your account.
 user_account_updated: Your account has been updated.
-user_edit: Edit your profile
+user_self_edit: Edit your profile
+user_edit: Edit profile
+user_delete: Delete user
 user_is_active: Account activated
 user_activate_action: Enable / disable account.
 user_renew_password_error: An error occured while requesting a new password.

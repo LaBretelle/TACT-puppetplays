@@ -28,6 +28,7 @@ Encore
   .addStyleEntry('css/app', './assets/css/global.scss')
   .addStyleEntry('css/account', './assets/css/account.scss')
   .addStyleEntry('css/create-project', './assets/css/create-project.scss')
+  .addStyleEntry('css/user', './assets/css/admin/user.scss')
 
   .enableSassLoader(function(sassOptions) {}, {
     resolveUrlLoader: false
