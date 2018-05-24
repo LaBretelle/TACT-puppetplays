@@ -1,21 +1,34 @@
 {% extends "base.html.twig" %}
 {% block body %}
+  {% set userStatus = app.user|status(project) %}
+
   <h3>{{ project.name }}</h3>
+  {% if userStatus %}
+    <p>{{ userStatus.status.name|trans }} {{ not userStatus.enabled ? "not_enabled_yet"|trans}}</p>
+    {% if userStatus.enabled or is_granted('ROLE_ADMIN') %}
+      {% if userStatus.status.name == "manager" or is_granted('ROLE_ADMIN') %}
+      <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-secondary">
+        <i class="fa fa-pencil" aria-hidden="true"></i> Editer
+      </a>
 
-  <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-secondary">
-    <i class="fa fa-pencil" aria-hidden="true"></i> Editer
-  </a>
-
-  <a href="{{ path("status_project", {id: project.id})}}" type="button" class="btn btn-secondary">
-    <i class="fa fa-users" aria-hidden="true"></i> {{ "project_handle_user_statuses" | trans}}
-  </a>
+      <a href="{{ path("status_project", {id: project.id})}}" type="button" class="btn btn-secondary">
+        <i class="fa fa-users" aria-hidden="true"></i> {{ "project_handle_user_statuses" | trans}}
+      </a>
+      {% endif %}
+    {% endif %}
+  {% elseif app.user %}
+    {{"not_registered"|trans}}
+    <a href="{{ path("status_request", {id: project.id})}}" type="button" class="btn btn-secondary">
+      S'inscrire
+    </a>
+  {% endif %}
 
   <hr/>
 
   <ul class="list-group">
-    <li class="list-group-item">{{ project.description ? project.description | raw : "-"}}</li>
-    <li class="list-group-item">{{ project.shortDescription | raw }}</li>
-    <li class="list-group-item">{{ project.status ? project.status.name : "-"}}</li>
-    <li class="list-group-item">{{ project.public ? "public" : "privé"}}</li>
+    <li class="list-group-item">{{"project_description"|trans}}: {{ project.description ? project.description | raw : "-"}}</li>
+    <li class="list-group-item">{{"project_short_description"|trans}}: {{ project.shortDescription | raw }}</li>
+    <li class="list-group-item">{{"project_status"|trans}}: {{ project.status ? project.status.name : "-"}}</li>
+    <li class="list-group-item">{{"is_public"|trans}}: {{ project.public ? "yes"|trans : "no"|trans }}</li>
   </ul>
 {% endblock %}

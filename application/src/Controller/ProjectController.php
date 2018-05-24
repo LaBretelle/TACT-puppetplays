@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Project;
-use App\Entity\User;
 use App\Form\ProjectType;
 use App\Service\ProjectManager;
-use App\Service\UserProjectStatusManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,12 +16,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 class ProjectController extends Controller
 {
     private $projectManager;
-    private $statusManager;
 
-    public function __construct(ProjectManager $projectManager, UserProjectStatusManager $statusManager)
+    public function __construct(ProjectManager $projectManager)
     {
         $this->projectManager = $projectManager;
-        $this->statusManager = $statusManager;
     }
 
     /**

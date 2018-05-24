@@ -11,16 +11,19 @@
       <th scope="col">{{ "username"| trans }}</th>
       <th scope="col">{{ "status"| trans }}</th>
       <th scope="col">{{ "project_enabled"| trans }}</th>
-      <th scope="col">{{ "action"| trans }}</th>
+      <th scope="col">{{ "actions"| trans }}</th>
     </tr>
   </thead>
   <tbody>
     {% for userStatus in project.userStatuses %}
     <tr>
       <td>{{ userStatus.user.username }}</td>
-      <td>{{ userStatus.status.name }}</td>
-      <td>{{ userStatus.enabled ? "oui"|trans : "non"|trans }}</td>
+      <td>{{ userStatus.status.name | trans }}</td>
+      <td>{{ userStatus.enabled ? "yes"|trans : "no"|trans }}</td>
       <td>
+        <a href="#" type="button" class="btn btn-secondary edit-status" data-status-id="{{ userStatus.id}}">
+          {{ "status_edit" | trans}}
+        </a>
         <a href="{{ path("status_remove", {id: userStatus.id})}}" type="button" class="btn btn-secondary">
           <i class="fa fa-times" aria-hidden="true"></i>
           {{ "status_remove" | trans}}
@@ -38,4 +41,24 @@
   </tbody>
 </table>
 
+<div id="status-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ "status_edit" | trans}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="status-modal-body" class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('build/js/user-status-form.js') }}"></script>
 {% endblock %}

@@ -40,7 +40,8 @@ class ProjectType extends AbstractType
             'class' => ProjectStatus::class,
             'label' => 'project_status',
             'translation_domain' => 'messages',
-            'choice_label' => 'name'
+            'choice_label' => 'name',
+            'choice_translation_domain' => 'messages'
           ])
           ->add('public', CheckboxType::class, array(
               'label'    => 'is_public',

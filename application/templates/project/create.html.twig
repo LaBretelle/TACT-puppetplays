@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block body %}
-
 <h3>
   {% if  project.id %}
     <a href="{{ path("project_display", {'id': project.id} )}}">{{ project.name }}</a>
@@ -17,7 +16,6 @@
     {{ "project_create"|trans }}
   {% endif %}
 </h3>
-
 
 {{ form_start(form) }}
   {{ form_row(form.name) }}
