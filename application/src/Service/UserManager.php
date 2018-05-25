@@ -116,4 +116,10 @@ class UserManager
         $this->em->persist($user);
         $this->em->flush();
     }
+
+    public function delete(User $user)
+    {
+        $this->em->remove($product);
+        $this->em->flush();
+    }
 }

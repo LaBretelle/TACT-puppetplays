@@ -60,4 +60,15 @@ class UserAdminController extends Controller
         $this->userManager->saveUser($user);
         return $this->json([], $status = 200);
     }
+
+    /**
+     *
+     * @Route("/delete/{id}", options={"expose"=true}, name="admin_user_delete", methods="POST")
+     * @ParamConverter("user", class="App:User")
+     */
+    public function deleteUserAccount(User $user)
+    {
+        $this->userManager->delete($user);
+        return $this->json([], $status = 200);
+    }
 }

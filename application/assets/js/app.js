@@ -8,7 +8,6 @@ import 'tinymce/themes/modern/theme';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/link';
 
-
 $(document).ready(() => {
 
   $('[data-toggle="popover"]').popover();

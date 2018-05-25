@@ -25,7 +25,7 @@
   {% if is_granted('ROLE_ADMIN') %}
     {{ form_label(form.userStatuses) }}
     <a id="add-user-status" class="btn btn-sm btn-secondary" href="#">
-      <i class="fa fa-plus" aria-hidden="true"></i> {{"add_user-status"|trans}}
+      <i class="fas fa-plus" aria-hidden="true"></i> {{"add_user-status"|trans}}
     </a>
     <div class="form-group">
       <div class="userstatuses row" data-prototype="{{ formMacros.userStatusesRow(form.userStatuses.vars.prototype)|e('html_attr') }}">
@@ -43,7 +43,7 @@
 {% macro userStatusesRow(form) %}
   <div class="col-3 userstatus-container">
     <span class="btn btn-sm btn-danger pull-right remove-userstatus">
-      <i class="fa fa-trash" aria-hidden="true"></i>
+      <i class="fas fa-trash" aria-hidden="true"></i>
     </span>
     <br/>
     {{ form_row(form.status) }}

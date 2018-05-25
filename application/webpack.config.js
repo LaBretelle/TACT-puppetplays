@@ -44,8 +44,13 @@ Encore
 
   .createSharedEntry('vendor', [
         'jquery',
-        'bootstrap'
+        'bootstrap',
+        '@fortawesome/fontawesome',
+        '@fortawesome/fontawesome-free-solid',
+        '@fortawesome/fontawesome-free-brands',
+        '@fortawesome/fontawesome-free-webfonts'
   ])
+
 
   // for legacy applications that require $/jQuery as a global variable
   .autoProvidejQuery()

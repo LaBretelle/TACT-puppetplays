@@ -22,11 +22,11 @@
       <td>{{ userStatus.enabled ? "yes"|trans : "no"|trans }}</td>
       <td>
         <a href="#" type="button" class="btn btn-link edit-status" data-status-id="{{ userStatus.id}}">
-          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <i class="fas fa-pencil-alt" aria-hidden="true"></i>
           {{ "status_edit" | trans}}
         </a>
         <a href="{{ path("status_remove", {id: userStatus.id})}}" type="button" class="btn btn-link">
-          <i class="fa fa-times" aria-hidden="true"></i>
+          <i class="fas fa-times" aria-hidden="true"></i>
           {{ "status_remove" | trans}}
         </a>
         <a href="{{ path("status_toggle", {id: userStatus.id})}}" type="button" class="btn btn-link">

@@ -43,23 +43,23 @@
 
               <li class="nav-item">
                 <a class="nav-link" href="{{ path('user_edit', {'id': app.user.id}) }}" data-placement="bottom" data-toggle="tooltip" title="{{ 'user_self_edit' | trans({}, 'messages')}}">
-                  <i class="fa fa-user fa-fw"></i>{{app.user.fullname}}
+                  <i class="fas fa-user fa-fw"></i>{{app.user.fullname}}
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ path('logout') }}" data-placement="bottom" data-toggle="tooltip" title="{{ 'logout' | trans({}, 'messages')}}">
-                  <i class="fa fa-sign-out fa-fw"></i>
+                  <i class="fas fa-sign-out-alt fa-fw"></i>
                 </a>
               </li>
             {% else %}
               <li class="nav-item">
                 <a class="nav-link" href="{{ path('user_login') }}" data-placement="bottom" data-toggle="tooltip" title="{{ 'login' | trans({}, 'messages')}}">
-                  <i class="fa fa-sign-in fa-fw"></i>
+                  <i class="fas fa-sign-out-alt fa-fw"></i>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ path('user_register') }}" data-placement="bottom" data-toggle="tooltip" title="{{ 'register' | trans({}, 'messages')}}">
-                  <i class="fa fa-address-card fa-fw"></i>
+                  <i class="fas fa-id-card fa-fw"></i>
                 </a>
               </li>
             {% endif %}

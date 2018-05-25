@@ -1,11 +1,10 @@
 // customize some Bootstrap variables
-$brand-primary: darken(#428bca, 20%);
+// $brand-primary: darken(#428bca, 20%);
 
-$fa-font-path: "~font-awesome/fonts";
+// $fa-font-path: "~font-awesome/fonts";
 
 // the ~ allows you to reference things in node_modules
 @import '~bootstrap/scss/bootstrap';
-@import '~font-awesome/scss/font-awesome';
 
 body > .container {
   padding-top: 70px;

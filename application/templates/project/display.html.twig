@@ -20,10 +20,10 @@
   {% if userStatus %}
     {% if (userStatus.enabled and userStatus.status.name == "manager") or is_granted('ROLE_ADMIN') %}
       <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-secondary">
-        <i class="fa fa-pencil" aria-hidden="true"></i> Editer
+        <i class="fas fa-pencil-alt" aria-hidden="true"></i> Editer
       </a>
       <a href="{{ path("status_project", {id: project.id})}}" type="button" class="btn btn-secondary">
-        <i class="fa fa-users" aria-hidden="true"></i> {{ "project_handle_user_statuses" | trans}}
+        <i class="fas fa-users" aria-hidden="true"></i> {{ "project_handle_user_statuses" | trans}}
       </a>
     {% endif %}
   {% elseif app.user %}
