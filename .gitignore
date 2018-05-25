@@ -29,3 +29,5 @@
 
 ###> docker mysql folder ###
 /.db/
+
+npm-debug.log

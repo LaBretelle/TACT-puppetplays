@@ -56,7 +56,7 @@ class UserProjectStatusController extends Controller
 
 
     /**
-     * @Route("/{id}/form", name="form_get")
+     * @Route("/{id}/form", name="form_get", options={"expose"=true})
      * @Method("GET")
      */
     public function getForm(UserProjectStatus $status)

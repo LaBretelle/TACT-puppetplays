@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Service\MailManager;
 use App\Service\UserManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,36 +27,39 @@ class UserAdminController extends Controller
     }
 
     /**
-     * @Route("/", name="list")
-     * @Method("GET")
+     * @Route("/", name="list", methods="GET")
      */
     public function listUsers()
     {
-        //$repository = $this->getDoctrine()->getRepository(User::class);
-        //$users = $repository->findAll();
         return $this->render(
-            'admin/user/list.html.twig',
+            'admin/user/users-list.html.twig',
             []
         );
     }
 
     /**
      *
-     * @Route("/fetch", options={"expose"=true}, name="fetch")
-     * @Method("POST")
+     * @Route("/fetch", options={"expose"=true}, name="fetch", methods="POST")
      */
     public function fetchUsers(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(User::class);
-        $users = $repository->findAll();
-        return new JsonResponse(['status' => 200, 'message' => 'success', 'data' => $users]);
+        $queryString = $request->get('query');
+        $users = $repository->findByQueryString($queryString);
+
+        return $this->render(
+            'admin/user/users-partial.html.twig',
+            ['users' => $users]
+        );
+        //return new JsonResponse(['status' => 200, 'message' => 'success', 'data' => json_encode($users)]);
+        //return $this->json($users, $status = 200, $headers = array(), $context = array());
+        // return $this->json($data, $status = 200, $headers = array(), $context = array());
     }
 
 
     /**
      *
-     * @Route("/activate/{id}", options={"expose"=true}, name="activate_account")
-     * @Method("POST")
+     * @Route("/activate/{id}", options={"expose"=true}, name="activate_account", methods="POST")
      * @ParamConverter("user", class="App:User")
      */
     public function activateAccount(Request $request, User $user)

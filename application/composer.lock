@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5068a940f9fc516c0c4530c7d77f34cf",
+    "content-hash": "2babe6078504701190da054116f1c9f6",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1192,6 +1192,28 @@
             "time": "2018-04-20T06:13:15+00:00"
         },
         {
+            "name": "symfony/apache-pack",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/apache-pack.git",
+                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/apache-pack/zipball/3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+                "shasum": ""
+            },
+            "type": "symfony-pack",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A pack for Apache support in Symfony",
+            "time": "2017-12-12T01:46:35+00:00"
+        },
+        {
             "name": "symfony/asset",
             "version": "4.1.x-dev",
             "source": {
@@ -1839,12 +1861,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/form.git",
-                "reference": "2be7899c36885187eaa005f769f73de420b3794a"
+                "reference": "4db3310b3e7c773cb9e2a94aede1100d4fb291c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/2be7899c36885187eaa005f769f73de420b3794a",
-                "reference": "2be7899c36885187eaa005f769f73de420b3794a",
+                "url": "https://api.github.com/repos/symfony/form/zipball/4db3310b3e7c773cb9e2a94aede1100d4fb291c8",
+                "reference": "4db3310b3e7c773cb9e2a94aede1100d4fb291c8",
                 "shasum": ""
             },
             "require": {
@@ -1912,7 +1934,7 @@
             ],
             "description": "Symfony Form Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-21T10:10:11+00:00"
+            "time": "2018-05-23T13:33:23+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -1920,12 +1942,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
-                "reference": "7927aa74f193def5b998954c7bd431f0eced3567"
+                "reference": "5ead8988e4fdf2a7cb0bc223ac17b8a3436c4ff0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/7927aa74f193def5b998954c7bd431f0eced3567",
-                "reference": "7927aa74f193def5b998954c7bd431f0eced3567",
+                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/5ead8988e4fdf2a7cb0bc223ac17b8a3436c4ff0",
+                "reference": "5ead8988e4fdf2a7cb0bc223ac17b8a3436c4ff0",
                 "shasum": ""
             },
             "require": {
@@ -2027,7 +2049,7 @@
             ],
             "description": "Symfony FrameworkBundle",
             "homepage": "https://symfony.com",
-            "time": "2018-05-21T10:59:05+00:00"
+            "time": "2018-05-23T13:33:23+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -2035,12 +2057,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "7e7b3c05ff74dff2f049dc71e74b7f0c7ee1daf6"
+                "reference": "8127d6987f197cd00bde6b54097ddd1488a6eab5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/7e7b3c05ff74dff2f049dc71e74b7f0c7ee1daf6",
-                "reference": "7e7b3c05ff74dff2f049dc71e74b7f0c7ee1daf6",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/8127d6987f197cd00bde6b54097ddd1488a6eab5",
+                "reference": "8127d6987f197cd00bde6b54097ddd1488a6eab5",
                 "shasum": ""
             },
             "require": {
@@ -2081,7 +2103,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-16T14:33:22+00:00"
+            "time": "2018-05-23T15:06:59+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -3030,12 +3052,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security.git",
-                "reference": "1f01fa96586b651f59a21ac16665e324bc292df9"
+                "reference": "44d97f3222bc202af68d311deef0057892382b21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security/zipball/1f01fa96586b651f59a21ac16665e324bc292df9",
-                "reference": "1f01fa96586b651f59a21ac16665e324bc292df9",
+                "url": "https://api.github.com/repos/symfony/security/zipball/44d97f3222bc202af68d311deef0057892382b21",
+                "reference": "44d97f3222bc202af68d311deef0057892382b21",
                 "shasum": ""
             },
             "require": {
@@ -3099,7 +3121,7 @@
             ],
             "description": "Symfony Security Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-21T10:10:11+00:00"
+            "time": "2018-05-23T13:57:18+00:00"
         },
         {
             "name": "symfony/security-bundle",
@@ -4057,12 +4079,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "8847fd6cb2e5794ff35397eaaf47e95ec7d38337"
+                "reference": "997b1938cf3ba35c5e25545b8ae433484100302c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/8847fd6cb2e5794ff35397eaaf47e95ec7d38337",
-                "reference": "8847fd6cb2e5794ff35397eaaf47e95ec7d38337",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/997b1938cf3ba35c5e25545b8ae433484100302c",
+                "reference": "997b1938cf3ba35c5e25545b8ae433484100302c",
                 "shasum": ""
             },
             "require": {
@@ -4124,7 +4146,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2018-05-21T23:28:52+00:00"
+            "time": "2018-05-23T17:43:30+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -5678,12 +5700,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/web-profiler-bundle.git",
-                "reference": "3f4941fb297e45d0cf962f2e3667702ced30d493"
+                "reference": "8b3914ac388b2c560d4dc162c8136d136245718b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/3f4941fb297e45d0cf962f2e3667702ced30d493",
-                "reference": "3f4941fb297e45d0cf962f2e3667702ced30d493",
+                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/8b3914ac388b2c560d4dc162c8136d136245718b",
+                "reference": "8b3914ac388b2c560d4dc162c8136d136245718b",
                 "shasum": ""
             },
             "require": {
@@ -5736,7 +5758,7 @@
             ],
             "description": "Symfony WebProfilerBundle",
             "homepage": "https://symfony.com",
-            "time": "2018-05-16T14:33:22+00:00"
+            "time": "2018-05-23T13:33:23+00:00"
         },
         {
             "name": "symfony/web-server-bundle",
@@ -5854,6 +5876,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "friendsofsymfony/jsrouting-bundle": 20,
+        "symfony/apache-pack": 20,
         "symfony/lts": 20
     },
     "prefer-stable": false,

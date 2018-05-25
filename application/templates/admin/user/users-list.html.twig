@@ -1,7 +1,5 @@
 {% extends "base.html.twig" %}
 
-
-
 {% block stylesheets %}
   {{parent()}}
   <link rel="stylesheet" href="{{ asset('build/css/user.css') }}">
@@ -13,8 +11,15 @@
   <div class="col-md-12">
     <h4>{{'administrate_users_title' | trans}}</h4>
   </div>
-
 </div>
+<hr/>
+
+<div class="row">
+  <div class="col-md-12">
+    <input type="text" class="form-control search-input" name="" value=""></input>
+  </div>
+</div>
+<hr/>
 
 <table class="table table-striped user-table">
   <thead class="thead-dark">
@@ -28,15 +33,12 @@
     </tr>
   </thead>
   <tbody>
-    
+
   </tbody>
 </table>
-
-
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
   <script src="{{ asset('build/js/user-list.js') }}"></script>
-
 {% endblock %}

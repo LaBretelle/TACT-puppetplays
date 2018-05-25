@@ -8,7 +8,6 @@ use App\Form\UserType;
 use App\Form\UserTypeFull;
 use App\Service\MailManager;
 use App\Service\UserManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
@@ -34,8 +33,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/", name="list")
-     * @Method("GET")
+     * @Route("/", name="list", methods="GET")
      */
     public function listUsers(Request $request)
     {

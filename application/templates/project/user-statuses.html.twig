@@ -6,7 +6,7 @@
   - {{ "project_handle_user_statuses"|trans }}
 </h3>
 <table class="table  table-striped">
-  <thead>
+  <thead class="thead-dark">
     <tr>
       <th scope="col">{{ "username"| trans }}</th>
       <th scope="col">{{ "status"| trans }}</th>
@@ -21,14 +21,14 @@
       <td>{{ userStatus.status.name | trans }}</td>
       <td>{{ userStatus.enabled ? "yes"|trans : "no"|trans }}</td>
       <td>
-        <a href="#" type="button" class="btn btn-secondary edit-status" data-status-id="{{ userStatus.id}}">
+        <a href="#" type="button" class="btn btn-link edit-status" data-status-id="{{ userStatus.id}}">
           {{ "status_edit" | trans}}
         </a>
-        <a href="{{ path("status_remove", {id: userStatus.id})}}" type="button" class="btn btn-secondary">
+        <a href="{{ path("status_remove", {id: userStatus.id})}}" type="button" class="btn btn-link">
           <i class="fa fa-times" aria-hidden="true"></i>
           {{ "status_remove" | trans}}
         </a>
-        <a href="{{ path("status_toggle", {id: userStatus.id})}}" type="button" class="btn btn-secondary">
+        <a href="{{ path("status_toggle", {id: userStatus.id})}}" type="button" class="btn btn-link">
           {% if userStatus.enabled %}
           <i class="fa fa-toggle-on" aria-hidden="true"></i> {{ "status_toggle_off" | trans}}
           {% else %}
