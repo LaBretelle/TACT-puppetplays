@@ -3,27 +3,21 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Service\MailManager;
 use App\Service\UserManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /** @Route("/admin/user", name="admin_user_") */
 class UserAdminController extends Controller
 {
     private $userManager;
-    private $mailManager;
-    private $translator;
 
-    public function __construct(UserManager $userManager, MailManager $mailManager, TranslatorInterface $translator)
+    public function __construct(UserManager $userManager)
     {
         $this->userManager = $userManager;
-        $this->mailManager = $mailManager;
-        $this->translator = $translator;
     }
 
     /**
@@ -51,9 +45,6 @@ class UserAdminController extends Controller
             'admin/user/users-partial.html.twig',
             ['users' => $users]
         );
-        //return new JsonResponse(['status' => 200, 'message' => 'success', 'data' => json_encode($users)]);
-        //return $this->json($users, $status = 200, $headers = array(), $context = array());
-        // return $this->json($data, $status = 200, $headers = array(), $context = array());
     }
 
 
@@ -64,7 +55,9 @@ class UserAdminController extends Controller
      */
     public function activateAccount(Request $request, User $user)
     {
-        $user->setActive(true);
-        return new JsonResponse(['status' => 200, 'message' => 'success']);
+        $isActive = $request->get('active') === 'true';
+        $user->setActive($isActive);
+        $this->userManager->saveUser($user);
+        return $this->json([], $status = 200);
     }
 }

@@ -37,9 +37,7 @@ class UserManager
         $user->setRoles($roles);
         // when created via CLI the account is activated
         $user->setActive(true);
-
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->saveUser($user);
     }
 
     public function createUserFromForm(User $user)
@@ -51,8 +49,7 @@ class UserManager
 
         $token = base64_encode(random_bytes(10));
         $user->setConfirmationToken($token);
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->saveUser($user);
     }
 
     /**
@@ -80,8 +77,7 @@ class UserManager
             $user->setImage($previous_image);
         }
 
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->saveUser($user);
     }
 
     public function userCanRenewPassword(string $data)
@@ -111,8 +107,13 @@ class UserManager
         $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($password);
         $user->setUpdatedAt(new \DateTime('now'));
+        $this->saveUser($user);
+        return true;
+    }
+
+    public function saveUser(User $user)
+    {
         $this->em->persist($user);
         $this->em->flush();
-        return true;
     }
 }

@@ -5,7 +5,7 @@
   <td>{{user.username}}</td>
   <td>{{user.email}}</td>
   <td>
-    <input type="checkbox" data-toggle="tooltip" title="{{'user_activate_action' | trans}}" class="user-active-chk" name="user_active" {% if user.active is same as(true) %}checked{% endif %}> </input>
+    <input type="checkbox" data-id="{{user.id}}" data-toggle="tooltip" title="{{'user_activate_action' | trans}}" class="user-active-chk" name="user_active" {% if user.active is same as(true) %}checked{% endif %}> </input>
   </td>
   <td>
     <div class="btn-group">

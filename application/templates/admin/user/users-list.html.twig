@@ -6,35 +6,37 @@
 {% endblock %}
 
 {% block body %}
-
-<div class="row">
-  <div class="col-md-12">
-    <h4>{{'administrate_users_title' | trans}}</h4>
+  <div class="row">
+    <div class="col-md-12">
+      <h4>{{'administrate_users_title' | trans}}</h4>
+    </div>
   </div>
-</div>
-<hr/>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="search-icon-addon"><i class="fa fa-search"></i></span>
+  <hr/>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="search-icon-addon"><i class="fa fa-search"></i></span>
+    </div>
+    <input type="text" class="form-control search-input" placeholder="{{'filter_users_by' | trans}}" aria-label="Search user" aria-describedby="search-icon-addon"></input>
   </div>
-  <input type="text" class="form-control search-input" placeholder="{{'filter_users_by' | trans}}" aria-label="Search user" aria-describedby="search-icon-addon"></input>
-</div>
-<hr/>
-<table class="table table-striped user-table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">{{'userfullname' | trans}}</th>
-      <th scope="col">{{'username' | trans}}</th>
-      <th scope="col">{{'email' | trans}}</th>
-      <th scope="col">{{'user_is_active' | trans}}</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    {# partial will be append dynamicaly #}
-  </tbody>
-</table>
+  <hr/>
+  <table class="table table-striped user-table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">{{'userfullname' | trans}}</th>
+        <th scope="col">{{'username' | trans}}</th>
+        <th scope="col">{{'email' | trans}}</th>
+        <th scope="col">{{'user_is_active' | trans}}</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="ajax-row">
+        <td colspan="6"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span></td>
+      </tr>
+      {# partial with data will be append dynamicaly #}
+    </tbody>
+  </table>
 {% endblock %}
 
 {% block javascripts %}
