@@ -13,3 +13,6 @@ cache:
 	php bin/console cache:clear --env=prod
 	php bin/console cache:warmup
 	php bin/console cache:warmup --env=prod
+
+routes:
+	php bin/console fos:js-routing:dump --format=json --target=public/routes/fos_js_routes.json

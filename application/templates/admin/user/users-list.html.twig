@@ -13,14 +13,13 @@
   </div>
 </div>
 <hr/>
-
-<div class="row">
-  <div class="col-md-12">
-    <input type="text" class="form-control search-input" name="" value=""></input>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="search-icon-addon"><i class="fa fa-search"></i></span>
   </div>
+  <input type="text" class="form-control search-input" placeholder="{{'filter_users_by' | trans}}" aria-label="Search user" aria-describedby="search-icon-addon"></input>
 </div>
 <hr/>
-
 <table class="table table-striped user-table">
   <thead class="thead-dark">
     <tr>
@@ -33,7 +32,7 @@
     </tr>
   </thead>
   <tbody>
-
+    {# partial will be append dynamicaly #}
   </tbody>
 </table>
 {% endblock %}

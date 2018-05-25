@@ -38,6 +38,7 @@ public_mail: Email visible to all
 register: register
 repeat_password: Repeat password
 save: Save
+filter_users_by: Filter by lastname / firstname / mail / login
 status_edit: Edit status
 status_remove: Remove
 status_toggle_off: Unvalidate
@@ -49,14 +50,14 @@ user_account_activated_error: An error occured while activating your account.
 user_account_activated: Your account is now activated.
 user_account_created: Your account was created but is not yet activated. You should receive an email to activate your account.
 user_account_updated: Your account has been updated.
-user_self_edit: Edit your profile
-user_edit: Edit profile
-user_delete: Delete user
-user_is_active: Account activated
 user_activate_action: Enable / disable account.
+user_delete: Delete user
+user_edit: Edit profile
+user_is_active: Account activated
 user_renew_password_error: An error occured while requesting a new password.
 user_renew_password_mail_sent: An email has ben sent at the following address %usermail%
 user_renew_password_success: Your password was updated.
+user_self_edit: Edit your profile
 user: User
 userfullname: Lastname - Firstname
 username: Login
