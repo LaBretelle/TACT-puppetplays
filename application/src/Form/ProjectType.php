@@ -49,7 +49,7 @@ class ProjectType extends AbstractType
           ))
 
           ->add('save', SubmitType::class, array(
-              'attr' => array('class' => 'save pull-right'),
+              'attr' => array('class' => 'save btn btn-primary pull-right'),
               'label' => 'save',
           ));
 

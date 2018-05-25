@@ -49,11 +49,15 @@ user_account_activated_error: Un problème est survenu lors de l'activation de v
 user_account_activated: Votre compte est maintenant actif.
 user_account_created: Votre compte et créé mais n'est pas encore activé. Vous devriez recevoir un email qui vous permettra de l'activer.
 user_account_updated: Votre compte à été mis à jour.
+<<<<<<< HEAD
 user_self_edit: Éditer votre profil
 user_delete: Supprimer l'utilisateur
 user_edit: Éditer le profil
-user_is_active: Compte activé
+=======
 user_activate_action: Activer / désactiver le compte.
+user_edit: Éditer votre profil
+>>>>>>> d1814824580203e2d69b7b4e00f300ce300805e4
+user_is_active: Compte activé
 user_renew_password_error: Une erreur s'est produite lors de la demande de renouvellement de mot de passe.
 user_renew_password_mail_sent: Un email vous a été envoyé à l'adresse %usermail%
 user_renew_password_success: Votre mot de passe a été mis à jour.
@@ -62,6 +66,3 @@ userfullname: Nom - Prénom
 username: Identifiant
 validator: Validateur
 yes: Oui
-userfullname: Nom - Prénom
-administrate_users_title: Administration des utilisateurs de la plateforme
-administrate_users_menu: Utilisateurs
