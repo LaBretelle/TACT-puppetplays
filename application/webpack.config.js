@@ -17,6 +17,7 @@ Encore
   .addEntry('js/user-status-form', './assets/js/user-status-form.js' )
   .addEntry('js/user-list', './assets/js/admin/user-list.js' )
   .addEntry('js/app-routing', './assets/js/modules/app-routing.js' )
+  .addEntry('js/account', './assets/js/account.js' )
 
   .addPlugin(new CopyWebpackPlugin([
     // Copy the skins from tinymce to the build/js/skins directory

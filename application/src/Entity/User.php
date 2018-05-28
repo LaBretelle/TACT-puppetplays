@@ -281,6 +281,7 @@ class User implements UserInterface, \Serializable
     public function setAnonymous(bool $anonymous): self
     {
         $this->anonymous = $anonymous;
+        $this->eraseCredentials();
 
         return $this;
     }
@@ -384,6 +385,7 @@ class User implements UserInterface, \Serializable
     // only to satisfy interface
     public function eraseCredentials()
     {
+        $this->roles = [];
     }
 
     /**

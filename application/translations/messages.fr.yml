@@ -59,6 +59,7 @@ user_add: Ajouter un utilisateur
 user_admin_account: Compte admin
 user_anonymize_fully: Anonymiser complètement le compte de l'utilisateur
 user_anonymize_partially: Anonymiser partiellement le compte de l'utilisateur (le nom et le prénom seront préservés)
+user_delete_account_image: Supprimer l'image associée à ce compte
 user_edit: Éditer le profil
 user_is_active: Compte activé
 user_is_anonymized: Compte anonymisé
