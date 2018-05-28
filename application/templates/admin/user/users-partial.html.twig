@@ -1,17 +1,36 @@
 {% for user in users %}
-  <tr>
-    <th data-placement="bottom"  scope="row">{{user.id}}</th>
+  {% set admin =  'ROLE_ADMIN' in user.roles %}
+  <tr {% if user.anonymous %} class="table-danger" {% endif %}>
+    <th data-placement="bottom" scope="row">{{user.id}}</th>
     <td>{{user.fullname}}</td>
     <td>{{user.username}}</td>
     <td>{{user.email}}</td>
+    {% if not user.anonymous %}
     <td>
       <input type="checkbox" data-id="{{user.id}}" data-toggle="tooltip" title="{{'user_activate_action' | trans}}" class="user-active-chk" name="user_active" {% if user.active is same as(true) %}checked{% endif %}> </input>
     </td>
     <td>
       <div class="btn-group">
         <a href="{{path('user_edit', {'id': user.id})}}" data-toggle="tooltip" title="{{'user_edit' | trans}}" class="btn btn-link"><i class="fas fa-user-edit"></i></a>
-        <button data-id="{{user.id}}" data-toggle="tooltip" title="{{'user_delete' | trans}}" class="btn btn-link user-delete"><i class="fas fa-trash"></i></button>
+        {% if not admin %}
+        <form id="partially-anonymize-user-form" action="{{path('admin_user_anonymize_account', {'id':user.id})}}" method="post">
+          <input type="hidden" name="type" value="partial">
+          <button type="submit" data-toggle="tooltip" title="{{'user_anonymize_partially' | trans}}" class="btn btn-link">
+            <i class="fas fa-user-ninja"></i>
+          </button>
+        </form>
+        <form id="fully-anonymize-user-form" action="{{path('admin_user_anonymize_account', {'id':user.id})}}" method="post">
+          <input type="hidden" name="type" value="full">
+            <button data-toggle="tooltip" title="{{'user_anonymize_fully' | trans}}" class="btn btn-link anonymize-user">
+              <i class="fas fa-user-secret"></i>
+            </button>
+        </form>
+        {% endif %}
       </div>
     </td>
+    {% else %}
+        <td>{{'user_is_anonymized' | trans}}</td>
+        <td>{{'user_is_anonymized' | trans}}</td>
+    {% endif %}
   </tr>
 {% endfor %}

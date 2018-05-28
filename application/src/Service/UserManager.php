@@ -40,13 +40,17 @@ class UserManager
         $this->saveUser($user);
     }
 
-    public function createUserFromForm(User $user)
+    public function createUserFromForm(User $user, bool $isAdmin = false)
     {
         $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($password);
         // all users have the ROLE_USER
-        $user->setRoles(['ROLE_USER']);
+        $roles = ['ROLE_USER'];
 
+        if ($isAdmin) {
+            $roles[] = 'ROLE_ADMIN';
+        }
+        $user->setRoles($roles);
         $token = base64_encode(random_bytes(10));
         $user->setConfirmationToken($token);
         $this->saveUser($user);
@@ -111,8 +115,47 @@ class UserManager
         return true;
     }
 
+    public function anonymizeUserAccount(User $user, string $type)
+    {
+        $types = ['full', 'partial'];
+        if (!in_array($type, $types)) {
+            return false;
+        }
+        $user->setUsername('anonymous-user-'.$user->getId());
+        $user->setEmail('anonymous-email-'.$user->getId().'@anonymous.fr');
+        $user->setActive(false);
+        $user->setPublicMail(false);
+        $user->setAnonymous(true);
+        $user->setDescription(null);
+        $user->setConfirmationToken(null);
+        $user->setPasswordRequestedAt(null);
+        if (null !== $user->getImage()) {
+            $user = $this->deleteUserImage($user);
+        }
+
+        if ($type === 'full') {
+            $user->setFirstname('anonymized-user');
+            $user->setLastname('anonymized-user');
+        }
+
+        $this->saveUser($user);
+        return true;
+    }
+
+    public function deleteUserImage(User $user)
+    {
+        $basePath = $this->params->get('user_files_directory');
+        $fullPath = $basePath.DIRECTORY_SEPARATOR.$user->getImage();
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
+        $user->setImage(null);
+        return $user;
+    }
+
     public function saveUser(User $user)
     {
+        $user->setUpdatedAt(new \DateTime());
         $this->em->persist($user);
         $this->em->flush();
     }

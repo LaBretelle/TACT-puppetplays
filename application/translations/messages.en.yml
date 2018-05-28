@@ -1,15 +1,20 @@
+
 access_denied: You are not allowed to access this page.
 actions: Actions
 add_user-status: Add status for an user
 administrate_users_menu: Users
 administrate_users_title: Platform users administration
 cancel: Cancel
+confirm_account_anonymization: If you continue the account informations will be anonimized. This action is irreversible.
+confirm_title: Please confirm!
+confirm: I confirm!
 description: Description
 email_or_login_placeholder: Login / email
 email_or_login: Please enter your login or email
 email_registration_confirm_subject: PATACS - Registration validation
 email_renew_password_subject: PATCS - Reset password request.
 email: Mail
+filter_users_by: Filter by lastname / firstname / mail / login
 firstname: Firstname
 home_title: PATACS - Platform for Annotation, Transcription, Analysis of Scientific Corpus
 home: Home
@@ -38,7 +43,6 @@ public_mail: Email visible to all
 register: register
 repeat_password: Repeat password
 save: Save
-filter_users_by: Filter by lastname / firstname / mail / login
 status_edit: Edit status
 status_remove: Remove
 status_toggle_off: Unvalidate
@@ -50,10 +54,14 @@ user_account_activated_error: An error occured while activating your account.
 user_account_activated: Your account is now activated.
 user_account_created: Your account was created but is not yet activated. You should receive an email to activate your account.
 user_account_updated: Your account has been updated.
-user_activate_action: Enable / disable account.
-user_delete: Delete user
+user_activate_action: Enable / disable account
+user_add: Add user
+user_admin_account: Admin account
+user_anonymize_fully: Fully anonymize user account
+user_anonymize_partially: Partially anonymize user account (firstname and lastname will be preserved)
 user_edit: Edit profile
 user_is_active: Account activated
+user_is_anonymized: Account anonymized
 user_renew_password_error: An error occured while requesting a new password.
 user_renew_password_mail_sent: An email has ben sent at the following address %usermail%
 user_renew_password_success: Your password was updated.

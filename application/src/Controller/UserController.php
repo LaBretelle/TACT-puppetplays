@@ -33,19 +33,6 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/", name="list", methods="GET")
-     */
-    public function listUsers(Request $request)
-    {
-        $repository = $this->getDoctrine()->getRepository(User::class);
-        $users = $repository->findAll();
-        return $this->render(
-            'user/register.html.twig',
-            array('form' => $form->createView())
-        );
-    }
-
-    /**
      * @Route("/register", name="register")
      */
     public function register(Request $request)
@@ -71,8 +58,7 @@ class UserController extends Controller
 
     /**
      * Edit a user account. Should be reachable by admin or owner of the account.
-     * @param  Request $request [description]
-     * @param  User    $user    [description]
+     *
      * @Route("/edit/{id}", name="edit")
      * @ParamConverter("user", class="App:User")
      */

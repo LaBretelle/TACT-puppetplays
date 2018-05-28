@@ -91,6 +91,11 @@ class User implements UserInterface, \Serializable
     private $active;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $anonymous;
+
+    /**
      * Random string sent to the user email address in order to verify it.
      *
      * @var string|null
@@ -118,6 +123,7 @@ class User implements UserInterface, \Serializable
     {
         $this->active = false;
         $this->publicMail = true;
+        $this->anonymous = false;
         $this->projectStatus = new ArrayCollection();
         $this->transcriptions = new ArrayCollection();
         $this->projectStatus = new ArrayCollection();
@@ -267,6 +273,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    public function isAnonymous(): ?bool
+    {
+        return $this->anonymous;
+    }
+
+    public function setAnonymous(bool $anonymous): self
+    {
+        $this->anonymous = $anonymous;
+
+        return $this;
+    }
+
     public function getConfirmationToken(): ?string
     {
         return $this->confirmationToken;
@@ -284,7 +302,7 @@ class User implements UserInterface, \Serializable
         return $this->passwordRequestedAt;
     }
 
-    public function setPasswordRequestedAt(\DateTimeInterface $passwordRequestedAt): self
+    public function setPasswordRequestedAt(\DateTimeInterface $passwordRequestedAt = null): self
     {
         $this->passwordRequestedAt = $passwordRequestedAt;
 
@@ -327,6 +345,7 @@ class User implements UserInterface, \Serializable
           $this->email,
           $this->publicMail,
           $this->active,
+          $this->anonymous,
           $this->createdAt,
           $this->updatedAt,
       ));
@@ -344,6 +363,7 @@ class User implements UserInterface, \Serializable
           $this->email,
           $this->publicMail,
           $this->active,
+          $this->anonymous,
           $this->createdAt,
           $this->updatedAt,
       ) = unserialize($serialized, ['allowed_classes' => false]);

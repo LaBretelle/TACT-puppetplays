@@ -1,15 +1,20 @@
+
 access_denied: Vous n'êtes pas autorisé à accéder à cette page.
 actions: Actions
 add_user-status: Ajouter un statut pour un utilisateur
 administrate_users_menu: Utilisateurs
 administrate_users_title: Administration des utilisateurs de la plateforme
 cancel: Annuler
+confirm_account_anonymization: Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
+confirm_title: Veuillez confirmer!
+confirm: Je confirme!
 description: Description
 email_or_login_placeholder: Login / email
 email_or_login: Veuillez renseigner votre login ou email
 email_registration_confirm_subject: PATACS - Confirmation d'inscritpion
 email_renew_password_subject: PATCS - Demande de renouvellement de mot de passe.
 email: Mail
+filter_users_by: Filtrer par nom / prénom / mail / login
 firstname: Prénom
 home_title: PATACS - Platforme pour l'Annotation la Transcription l'Analyse de Corpus Scientifiques
 home: Accueil
@@ -38,7 +43,6 @@ public_mail: Email visible par tous
 register: s'enregistrer
 repeat_password: Répéter le mot de passe
 save: Sauvegarder
-filter_users_by: Filtrer par nom / prénom / mail / login
 status_edit: Editer le statut
 status_remove: Supprimer
 status_toggle_off: Invalider
@@ -50,10 +54,14 @@ user_account_activated_error: Un problème est survenu lors de l'activation de v
 user_account_activated: Votre compte est maintenant actif.
 user_account_created: Votre compte et créé mais n'est pas encore activé. Vous devriez recevoir un email qui vous permettra de l'activer.
 user_account_updated: Votre compte à été mis à jour.
-user_activate_action: Activer / désactiver le compte.
-user_delete: Supprimer l'utilisateur
+user_activate_action: Activer / désactiver le compte
+user_add: Ajouter un utilisateur
+user_admin_account: Compte admin
+user_anonymize_fully: Anonymiser complètement le compte de l'utilisateur
+user_anonymize_partially: Anonymiser partiellement le compte de l'utilisateur (le nom et le prénom seront préservés)
 user_edit: Éditer le profil
 user_is_active: Compte activé
+user_is_anonymized: Compte anonymisé
 user_renew_password_error: Une erreur s'est produite lors de la demande de renouvellement de mot de passe.
 user_renew_password_mail_sent: Un email vous a été envoyé à l'adresse %usermail%
 user_renew_password_success: Votre mot de passe a été mis à jour.

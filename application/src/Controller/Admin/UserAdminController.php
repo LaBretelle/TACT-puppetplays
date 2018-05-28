@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Form\UserAdminType;
 use App\Service\UserManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,12 +24,31 @@ class UserAdminController extends Controller
     /**
      * @Route("/", name="list", methods="GET")
      */
-    public function listUsers()
+    public function listUsers(Request $request)
     {
+        $user = new User();
+        $form = $this->createForm(UserAdminType::class, $user);
+        $form->handleRequest($request);
         return $this->render(
             'admin/user/users-list.html.twig',
-            []
+            ['form' => $form->createView()]
         );
+    }
+
+    /**
+     * @Route("/create", name="create", methods="POST")
+     */
+    public function createUser(Request $request)
+    {
+        $user = new User();
+        $form = $this->createForm(UserAdminType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formdata = $request->get('user_admin');
+            $isAdmin = isset($formdata['isAdmin']);
+            $this->userManager->createUserFromForm($user, $isAdmin);
+        }
+        return $this->redirectToRoute('admin_user_list');
     }
 
     /**
@@ -63,12 +83,13 @@ class UserAdminController extends Controller
 
     /**
      *
-     * @Route("/delete/{id}", options={"expose"=true}, name="admin_user_delete", methods="POST")
+     * @Route("/delete/{id}", name="anonymize_account", methods="POST")
      * @ParamConverter("user", class="App:User")
      */
-    public function deleteUserAccount(User $user)
+    public function anonymizeUserAccount(Request $request, User $user)
     {
-        $this->userManager->delete($user);
-        return $this->json([], $status = 200);
+        $success = $this->userManager->anonymizeUserAccount($user, $request->get('type'));
+
+        return $this->redirectToRoute('admin_user_list');
     }
 }
