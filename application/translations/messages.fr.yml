@@ -35,6 +35,7 @@ project_description: Description du projet
 project_edit: Edition d'un projet
 project_enabled: Validé ?
 project_handle_user_statuses: Gestion des utilisateurs
+project_manage_media: Gestion des média
 project_name: Nom du projet
 project_short_description: Description courte
 project_status: Statut du projet

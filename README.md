@@ -1,5 +1,5 @@
-Phun 2 project
-==============
+PATACS - AKA PHUN2 - project
+============================
 
 
 ### Install
@@ -35,3 +35,23 @@ docker-compose exec apache make init
 
 - symfony app should be available @ http://localhost:8082/
 - adminer should be available @ http://localhost:8080/
+
+
+### Usefull commands
+
+> all this commands should be run inside docker container
+
+- create a new user (use `-a` if you want to create an admin user)
+`bin/console app:create-user [-a]`
+
+- create a new project status (public / private are created via data fixtures)
+`bin/console app:create-project-status`
+
+- create a new user status (manager / transcriber / validator are created via data fixtures)
+`bin/console app:create-user-status`
+
+- update exposed routes
+`make routes`
+
+- load fixtures
+`make fixtures`

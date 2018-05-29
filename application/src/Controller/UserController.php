@@ -8,7 +8,6 @@ use App\Form\UserType;
 use App\Form\UserTypeFull;
 use App\Service\MailManager;
 use App\Service\UserManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,9 +59,8 @@ class UserController extends Controller
      * Edit a user account. Should be reachable by admin or owner of the account.
      *
      * @Route("/edit/{id}", name="edit")
-     * @ParamConverter("user", class="App:User")
      */
-    public function edit(Request $request, User $user, AuthorizationCheckerInterface $authChecker)
+    public function edit(User $user, Request $request, AuthorizationCheckerInterface $authChecker)
     {
         // if not authenticated redirect to login page
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, $this->translator->trans('access_denied', [], 'messages'));

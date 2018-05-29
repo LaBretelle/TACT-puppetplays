@@ -9,7 +9,7 @@
   <p>
     <span class="badge badge-info">
       {% if userStatus %}
-        {{ userStatus.status.name|trans }} {{ not userStatus.enabled ? "not_enabled_yet"|trans}}
+        {{ userStatus.status.name }} {{ not userStatus.enabled ? "not_enabled_yet"|trans}}
       {% else %}
         {{"not_registered"|trans}}
       {% endif %}
@@ -18,9 +18,12 @@
 
 
   {% if userStatus %}
-    {% if (userStatus.enabled and userStatus.status.name == "manager") or is_granted('ROLE_ADMIN') %}
+    {% if (userStatus.enabled and userStatus.status.name == 'user_status_manager_name' | trans({}, 'fixtures')) or is_granted('ROLE_ADMIN') %}
       <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-secondary">
         <i class="fas fa-pencil-alt" aria-hidden="true"></i> Editer
+      </a>
+      <a href="{{ path("project_media", {id: project.id})}}" type="button" class="btn btn-secondary">
+        <i class="fas fa-image" aria-hidden="true"></i> {{ "project_manage_media" | trans}}
       </a>
       <a href="{{ path("status_project", {id: project.id})}}" type="button" class="btn btn-secondary">
         <i class="fas fa-users" aria-hidden="true"></i> {{ "project_handle_user_statuses" | trans}}

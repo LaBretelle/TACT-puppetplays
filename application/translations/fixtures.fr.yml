@@ -1,0 +1,11 @@
+
+project_status_private_desc: out le monde peut s'isncrire sur le projet, mais l'inscription doit être validée par le gestionnaire du projet.
+project_status_private_name: Privé
+project_status_public_desc: Tout le monde peut s'isncrire sur le projet, transcrire les média et / ou relire les transcriptions.
+project_status_public_name: Public
+user_status_manager_desc: Le gestionnaire de projet peut transcrire, relire, valider les transriptions et gérer touts les aspects du projet.
+user_status_manager_name: Gestionnaire
+user_status_transcriber_desc: Le transcripteur peut transcrire les media et relire les transcriptions.
+user_status_transcriber_name: Transcripteur
+user_status_validator_desc: Le validateur peut transcrire, relire et valider les transriptions.
+user_status_validator_name: Validateur

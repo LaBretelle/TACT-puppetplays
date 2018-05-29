@@ -7,6 +7,7 @@ install:
 	php bin/console doctrine:database:create --if-not-exists
 	php bin/console doctrine:schema:update --force
 	php bin/console fos:js-routing:dump --format=json --target=public/routes/fos_js_routes.json
+	php bin/console doctrine:fixtures:load
 
 cache:
 	php bin/console cache:clear
@@ -16,3 +17,6 @@ cache:
 
 routes:
 	php bin/console fos:js-routing:dump --format=json --target=public/routes/fos_js_routes.json
+
+fixtures:
+	php bin/console doctrine:fixtures:load

@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\Media;
 use App\Form\ProjectType;
+use App\Form\ProjectMediaType;
 use App\Service\ProjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,6 +76,36 @@ class ProjectController extends Controller
             'project' => $project
           ]
       );
+    }
+
+    /**
+     * @Route("/{id}/media", name="media")
+     */
+    public function addProjectMedia(Request $request, Project $project)
+    {
+        $form = $this->createForm(ProjectMediaType::class, $project);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $media = $form->get('files')->getData();
+            $this->projectManager->addProjectMedia($project, $media);
+        }
+        return $this->render(
+          'project/project-media.html.twig',
+          [
+            'form' => $form->createView(),
+            'project' => $project
+          ]
+        );
+    }
+
+    /**
+     * @Route("/media/{id}", name="media_delete", options={"expose"=true}, methods="DELETE")
+     */
+    public function removeProjectMedia(Media $media)
+    {
+        $this->projectManager->removeProjectMedia($media);
+        return $this->json([], $status = 200);
     }
 
     /**

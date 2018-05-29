@@ -18,6 +18,7 @@ Encore
   .addEntry('js/user-list', './assets/js/admin/user-list.js' )
   .addEntry('js/app-routing', './assets/js/modules/app-routing.js' )
   .addEntry('js/account', './assets/js/account.js' )
+  .addEntry('js/project-media', './assets/js/project-media.js' )
 
   .addPlugin(new CopyWebpackPlugin([
     // Copy the skins from tinymce to the build/js/skins directory
@@ -30,6 +31,7 @@ Encore
   .addStyleEntry('css/app', './assets/css/global.scss')
   .addStyleEntry('css/account', './assets/css/account.scss')
   .addStyleEntry('css/create-project', './assets/css/create-project.scss')
+  .addStyleEntry('css/project-media', './assets/css/project-media.scss')
   .addStyleEntry('css/user', './assets/css/admin/user.scss')
 
   .enableSassLoader(function(sassOptions) {}, {

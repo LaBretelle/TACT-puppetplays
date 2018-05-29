@@ -1,0 +1,11 @@
+
+project_status_private_desc: Anyone can subscribe to the project but the subsbscription must be validated by the project manager.
+project_status_private_name: Private
+project_status_public_desc: Anyone can subscribe to the project and transcribe media and /or reread transcriptions.
+project_status_public_name: Public
+user_status_manager_desc: The project manager can transcribe, reread, validate transriptions and manage all aspects of the project.
+user_status_manager_name: Gestionnaire
+user_status_transcriber_desc: The transcriber can transcribe the media and reread the transcripts.
+user_status_transcriber_name: Transcriber
+user_status_validator_desc: The validator can transcribe, read and validate the transcripts.
+user_status_validator_name: Validator

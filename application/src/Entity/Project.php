@@ -35,7 +35,7 @@ class Project
     private $description;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", length=150)
      */
     private $shortDescription;
 

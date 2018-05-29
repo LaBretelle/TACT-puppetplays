@@ -162,7 +162,7 @@ class UserManager
 
     public function delete(User $user)
     {
-        $this->em->remove($product);
+        $this->em->remove($user);
         $this->em->flush();
     }
 }

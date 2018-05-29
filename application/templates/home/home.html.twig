@@ -19,7 +19,7 @@
           </div>
           <div class="tile-description">
             <a href="{{ path("project_display", {'id': project.id} )}}">Voir</a>
-            <p>{{ project.shortDescription }}</p>
+            <p>{{ project.shortDescription | raw }}</p>
           </div>
       </div>
     {% endfor %}

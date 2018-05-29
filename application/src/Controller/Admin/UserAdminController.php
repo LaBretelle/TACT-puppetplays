@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Form\UserAdminType;
 use App\Service\UserManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,7 +70,6 @@ class UserAdminController extends Controller
     /**
      *
      * @Route("/activate/{id}", options={"expose"=true}, name="activate_account", methods="POST")
-     * @ParamConverter("user", class="App:User")
      */
     public function activateAccount(Request $request, User $user)
     {
@@ -84,7 +82,6 @@ class UserAdminController extends Controller
     /**
      *
      * @Route("/delete/{id}", name="anonymize_account", methods="POST")
-     * @ParamConverter("user", class="App:User")
      */
     public function anonymizeUserAccount(Request $request, User $user)
     {

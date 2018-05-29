@@ -34,14 +34,16 @@ class ProjectType extends AbstractType
           ])
           ->add('shortDescription', TextareaType::class, [
             'label' => 'project_short_description',
-            'translation_domain' => 'messages'
+            'translation_domain' => 'messages',
+            'attr' => [
+              'class' => 'tinymce-enabled'
+            ]
           ])
           ->add('status', EntityType::class, [
             'class' => ProjectStatus::class,
             'label' => 'project_status',
             'translation_domain' => 'messages',
             'choice_label' => 'name',
-            'choice_translation_domain' => 'messages'
           ])
           ->add('public', CheckboxType::class, array(
               'label'    => 'is_public',

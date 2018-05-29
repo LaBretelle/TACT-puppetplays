@@ -35,6 +35,7 @@ project_description: project description
 project_edit: Project edition
 project_enabled: Enabled
 project_handle_user_statuses: Users management
+project_manage_media: Manage media
 project_name: Project name
 project_short_description: Short description
 project_status: Project status

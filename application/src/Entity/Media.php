@@ -23,6 +23,11 @@ class Media
     private $project;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $url;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Transcription", inversedBy="media", cascade={"persist", "remove"})
      */
     private $transcription;
@@ -54,5 +59,16 @@ class Media
         $this->transcription = $transcription;
 
         return $this;
+    }
+
+    public function setUrl(string $url) : self
+    {
+        $this->url = $url;
+        return $this;
+    }
+
+    public function getUrl() : string
+    {
+        return $this->url;
     }
 }

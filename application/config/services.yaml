@@ -3,6 +3,7 @@
 parameters:
     locale: 'fr'
     user_files_directory: '%kernel.project_dir%/public/user_images'
+    project_file_dir: '%kernel.project_dir%/public/project_files'
     platform_email: patacs@mail.fr
 
 services:
