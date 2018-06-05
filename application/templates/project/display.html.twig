@@ -9,7 +9,7 @@
   <p>
     <span class="badge badge-info">
       {% if userStatus %}
-        {{ userStatus.status.name }} {{ not userStatus.enabled ? "not_enabled_yet"|trans}}
+        {{ userStatus.status.name | trans({}, 'fixtures') }} {{ not userStatus.enabled ? "not_enabled_yet"|trans}}
       {% else %}
         {{"not_registered"|trans}}
       {% endif %}
@@ -18,7 +18,7 @@
 
 
   {% if userStatus %}
-    {% if (userStatus.enabled and userStatus.status.name == 'user_status_manager_name' | trans({}, 'fixtures')) or is_granted('ROLE_ADMIN') %}
+    {% if (userStatus.enabled and userStatus.status.name == constant('App\\Service\\AppEnums::TRANSKEY_USER_STATUS_MANAGER_NAME')) or is_granted('ROLE_ADMIN') %}
       <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-secondary">
         <i class="fas fa-pencil-alt" aria-hidden="true"></i> Editer
       </a>
@@ -42,7 +42,7 @@
   <ul class="list-group">
     <li class="list-group-item">{{"project_description"|trans}}: {{ project.description ? project.description | raw : "-"}}</li>
     <li class="list-group-item">{{"project_short_description"|trans}}: {{ project.shortDescription | raw }}</li>
-    <li class="list-group-item">{{"project_status"|trans}}: {{ project.status ? project.status.name : "-"}}</li>
+    <li class="list-group-item">{{"project_status"|trans}}: {{ project.status ? project.status.name | trans({}, 'fixtures') : "-"}}</li>
     <li class="list-group-item">{{"is_public"|trans}}: {{ project.public ? "yes"|trans : "no"|trans }}</li>
   </ul>
 {% endblock %}

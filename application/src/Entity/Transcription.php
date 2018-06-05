@@ -32,6 +32,12 @@ class Transcription
      */
     private $media;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\TranscriptionStatus", inversedBy="transcriptions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +81,18 @@ class Transcription
         if ($newTranscription !== $media->getTranscription()) {
             $media->setTranscription($newTranscription);
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?TranscriptionStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?TranscriptionStatus $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

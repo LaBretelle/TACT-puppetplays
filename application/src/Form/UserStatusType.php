@@ -20,7 +20,7 @@ class UserStatusType extends AbstractType
             'label' => 'status',
             'translation_domain' => 'messages',
             'choice_label' => 'name',
-            'choice_translation_domain' => 'messages'
+            'choice_translation_domain' => 'fixtures'
           ])
           ->add('save', SubmitType::class, array(
               'attr' => array('class' => 'save pull-right'),

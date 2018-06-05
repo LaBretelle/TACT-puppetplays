@@ -24,6 +24,8 @@ class ProjectMediaType extends AbstractType
         $builder
           ->add('files', FileType::class, [
               'multiple' => true,
+              'label' => 'project_media_add_file_placeholder',
+              'translation_domain' => 'messages',
               'attr' => [
                     'accept' => 'image/*',
                     'multiple' => 'multiple'

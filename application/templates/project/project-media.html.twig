@@ -15,6 +15,7 @@
     <div class="col-lg-12 col-sm-12">
         {{ form_start(form) }}
           {{ form_row(form.files) }}
+          <label class="alert alert-infos">maximum file to upload : {{fileLimit}}</label>
           {{ form_row(form.save) }}
         {{ form_end(form) }}
       <hr/>
@@ -24,7 +25,7 @@
     {% for media in project.medias %}
       <div class="p2 d-flex flex-column align-self-center image-container">
         <div class="p2">
-          <span class="badge badge-info">Status : nouveau</span>
+          <span class="badge badge-info">{{media.transcription and media.transcription.status ? media.transcription.status.name | trans({}, 'fixtures') : 'transcription_status_none' | trans({}, 'fixtures')}}</span>
           <hr/>
         </div>
         <div class="p2 d-flex align-self-center">

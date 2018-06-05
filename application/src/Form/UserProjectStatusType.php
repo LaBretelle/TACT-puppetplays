@@ -28,6 +28,7 @@ class UserProjectStatusType extends AbstractType
             'label' => 'status',
             'translation_domain' => 'messages',
             'choice_label' => 'name',
+            'choice_translation_domain' => 'fixtures'
           ]);
     }
 

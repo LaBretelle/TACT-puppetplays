@@ -1,8 +1,14 @@
-
-project_status_private_desc: Anyone can subscribe to the project but the subsbscription must be validated by the project manager.
-project_status_private_name: Private
-project_status_public_desc: Anyone can subscribe to the project and transcribe media and /or reread transcriptions.
-project_status_public_name: Public
+project_status_new_desc: The project is totally new.
+project_status_new_name: New
+project_status_finished_desc: The project is finished and ready for world wide diffusion.
+project_status_finished_name: Finished
+project_status_in_progress_desc: The project is in progress and therefore not ready for world wide diffusion.
+project_status_in_progress_name: In progress
+transcription_status_none: None
+transcrition_status_in_progress: In progress
+transcrition_status_in_reread: Reread
+transcrition_status_no_transcription: None
+transcrition_status_validated: Validated
 user_status_manager_desc: The project manager can transcribe, reread, validate transriptions and manage all aspects of the project.
 user_status_manager_name: Gestionnaire
 user_status_transcriber_desc: The transcriber can transcribe the media and reread the transcripts.

@@ -90,11 +90,15 @@ class ProjectController extends Controller
             $media = $form->get('files')->getData();
             $this->projectManager->addProjectMedia($project, $media);
         }
+
+        $file_limit = ini_get('max_file_uploads');
+
         return $this->render(
           'project/project-media.html.twig',
           [
             'form' => $form->createView(),
-            'project' => $project
+            'project' => $project,
+            'fileLimit' => ini_get('max_file_uploads')
           ]
         );
     }

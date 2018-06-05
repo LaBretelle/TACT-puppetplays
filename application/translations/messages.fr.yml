@@ -1,4 +1,6 @@
 
+
+
 access_denied: Vous n'êtes pas autorisé à accéder à cette page.
 actions: Actions
 add_user-status: Ajouter un statut pour un utilisateur
@@ -6,6 +8,7 @@ administrate_users_menu: Utilisateurs
 administrate_users_title: Administration des utilisateurs de la plateforme
 cancel: Annuler
 confirm_account_anonymization: Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
+confirm_delete_project_media: Êtes vous sur de vouloir supprimer ce media ?
 confirm_title: Veuillez confirmer!
 confirm: Je confirme!
 description: Description
@@ -36,6 +39,9 @@ project_edit: Edition d'un projet
 project_enabled: Validé ?
 project_handle_user_statuses: Gestion des utilisateurs
 project_manage_media: Gestion des média
+project_media_add_file_placeholder: Ajouter des images au projet
+project_media_no_media: Aucun média associé au projet
+project_media_title: Gérer les media du projet
 project_name: Nom du projet
 project_short_description: Description courte
 project_status: Statut du projet

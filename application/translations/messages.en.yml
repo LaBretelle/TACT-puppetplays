@@ -1,4 +1,6 @@
 
+
+
 access_denied: You are not allowed to access this page.
 actions: Actions
 add_user-status: Add status for an user
@@ -6,6 +8,7 @@ administrate_users_menu: Users
 administrate_users_title: Platform users administration
 cancel: Cancel
 confirm_account_anonymization: If you continue the account informations will be anonimized. This action is irreversible.
+confirm_delete_project_media: Are you sure you want to delete this media ?
 confirm_title: Please confirm!
 confirm: I confirm!
 description: Description
@@ -36,6 +39,9 @@ project_edit: Project edition
 project_enabled: Enabled
 project_handle_user_statuses: Users management
 project_manage_media: Manage media
+project_media_add_file_placeholder: Add images to project
+project_media_no_media: No media for this project
+project_media_title: Manage project media
 project_name: Project name
 project_short_description: Short description
 project_status: Project status

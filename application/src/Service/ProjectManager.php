@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Project;
 use App\Entity\Media;
+use App\Service\AppEnums;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -24,7 +25,6 @@ class ProjectManager
     public function createFromForm($project)
     {
         $project->setCreatedAt(new \DateTime);
-
         $this->em->persist($project);
         $this->em->flush();
 
