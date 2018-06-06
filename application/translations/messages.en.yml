@@ -1,6 +1,3 @@
-
-
-
 access_denied: You are not allowed to access this page.
 actions: Actions
 add_user-status: Add status for an user
@@ -28,6 +25,7 @@ login: login
 logout: logout
 lost_password_link: I forgot my password
 manager: Manager
+max_file_uploads_message: Maximum number of simultaneous files allowed for upload
 need_to_be_logged: You have to be logged in to contribute to the project.
 no: No
 not_enabled_yet: (Not enabled yet)

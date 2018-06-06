@@ -2,8 +2,9 @@
 
 namespace App\Service;
 
-use App\Entity\Project;
 use App\Entity\Media;
+use App\Entity\Project;
+use App\Entity\User;
 use App\Service\AppEnums;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -50,6 +51,20 @@ class ProjectManager
         return $project;
     }
 
+    public function canHandleProjectMedia(Project $project, User $user)
+    {
+        if ($this->authChecker->isGranted('ROLE_ADMIN')) {
+            return true;
+        } else {
+            $userStatuses = $project->getUserStatuses();
+            $upsRepository = $this->em->getRepository('App:UserProjectStatus');
+            $usRepository = $this->em->getRepository('App:UserStatus');
+            $managerStatus = $usRepository->findOneByName(AppEnums::TRANSKEY_USER_STATUS_MANAGER_NAME);
+            $userPojectStatus = $upsRepository->findOneBy(['user' => $user, 'status' => $managerStatus]);
+            return null !== $userPojectStatus;
+        }
+    }
+
     public function addProjectMedia(Project $project, array $files)
     {
         $basePath = $this->params->get('project_file_dir');
@@ -70,7 +85,7 @@ class ProjectManager
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file->move($uploadPath, $media->getUrl());
             $project->addMedia($media);
-            $this->em->persist($media);
+            $this->em->persist($project);
         }
         $this->em->flush();
         return $project;

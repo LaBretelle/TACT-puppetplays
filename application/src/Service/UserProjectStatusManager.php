@@ -6,6 +6,7 @@ use App\Entity\UserProjectStatus;
 use App\Entity\User;
 use App\Entity\Project;
 use App\Entity\UserProject;
+use App\Service\AppEnums;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -25,7 +26,7 @@ class UserProjectStatusManager
 
     public function create(Project $project)
     {
-        $status = $this->em->getRepository("App:UserStatus")->findOneByName("transcriber");
+        $status = $this->em->getRepository("App:UserStatus")->findOneByName(AppEnums::TRANSKEY_USER_STATUS_MANAGER_NAME);
 
         $userProjectStatus = new UserProjectStatus();
         $userProjectStatus->setUser($this->user);

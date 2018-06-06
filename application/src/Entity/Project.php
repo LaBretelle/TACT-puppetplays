@@ -70,7 +70,7 @@ class Project
     private $userStatuses;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="project", cascade={"persist", "remove"})
      */
     private $medias;
 

@@ -19,6 +19,7 @@ Encore
   .addEntry('js/app-routing', './assets/js/modules/app-routing.js' )
   .addEntry('js/account', './assets/js/account.js' )
   .addEntry('js/project-media', './assets/js/project-media.js' )
+  .addEntry('js/transcription', './assets/js/transcription.js' )
 
   .addPlugin(new CopyWebpackPlugin([
     // Copy the skins from tinymce to the build/js/skins directory
@@ -48,6 +49,8 @@ Encore
   .createSharedEntry('vendor', [
         'jquery',
         'bootstrap',
+        //'tinymce/tinymce',
+        //'tinymce/themes/modern/theme',
         '@fortawesome/fontawesome',
         '@fortawesome/fontawesome-free-solid',
         '@fortawesome/fontawesome-free-brands',

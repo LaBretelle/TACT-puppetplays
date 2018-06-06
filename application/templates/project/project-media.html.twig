@@ -7,15 +7,15 @@
 {% block body %}
   <div class="row">
     <div class="col-lg-12 col-sm-12">
-      <h4>{{project.name}} - {{'project_media_title' | trans}}</h4>
+      <h4><a href="{{ path("project_display", {'id': project.id} )}}">{{project.name}}</a> - {{'project_media_title' | trans}}</h4>
       <hr/>
     </div>
   </div>
   <div class="row">
     <div class="col-lg-12 col-sm-12">
+        <div class="alert alert-info">{{'max_file_uploads_message' | trans}} - {{fileLimit}}</div>
         {{ form_start(form) }}
           {{ form_row(form.files) }}
-          <label class="alert alert-infos">maximum file to upload : {{fileLimit}}</label>
           {{ form_row(form.save) }}
         {{ form_end(form) }}
       <hr/>
@@ -31,8 +31,11 @@
         <div class="p2 d-flex align-self-center">
             <img class="project-image" src="{{asset('project_files/' ~ project.name ~ '/' ~ media.url)}}" alt=""></img>
             <div class="p2 d-flex flex-column">
-              <a href="#" class="btn btn-link"><i class="fas fa-pencil-alt"></i></a>
-              <a href="#" class="btn btn-link"><i class="fas fa-edit"></i></a>
+              {% if not media.transcription or media.transcription.status.name == constant('App\\Service\\AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_NONE') or  media.transcription.status.name == constant('App\\Service\\AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_PROGRESS') %}
+                <a href="{{path('media_transcription_display', {'id': media.id})}}" class="btn btn-link"><i class="fas fa-pencil-alt"></i></a>
+              {% elseif media.transcription and media.transcription.status.name == constant('App\\Service\\AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_REREAD') %}
+                <a href="#" class="btn btn-link"><i class="fas fa-edit"></i></a>
+              {% endif %}
               <button type="button" data-id="{{media.id}}" role="button" class="btn btn-link delete-image"><i class="fas fa-trash"></i></button>
             </div>
 

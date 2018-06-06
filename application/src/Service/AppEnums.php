@@ -13,10 +13,10 @@ class AppEnums
     public const TRANSKEY_PROJECT_STATUS_NEW_NAME = 'project_status_new_name';
 
     // TranscriptionStatuses
-    public const TRANSKEY_TRANSCRIPTION_STATUS_IN_PROGRESS = 'transcrition_status_in_progress';
-    public const TRANSKEY_TRANSCRIPTION_STATUS_IN_REREAD = 'transcrition_status_in_reread';
-    public const TRANSKEY_TRANSCRIPTION_STATUS_NONE = 'transcrition_status_none';
-    public const TRANSKEY_TRANSCRIPTION_STATUS_VALIDATED = 'transcrition_status_validated';
+    public const TRANSKEY_TRANSCRIPTION_STATUS_IN_PROGRESS = 'transcription_status_in_progress';
+    public const TRANSKEY_TRANSCRIPTION_STATUS_IN_REREAD = 'transcription_status_in_reread';
+    public const TRANSKEY_TRANSCRIPTION_STATUS_NONE = 'transcription_status_none';
+    public const TRANSKEY_TRANSCRIPTION_STATUS_VALIDATED = 'transcription_status_validated';
 
     // ProjectUserStatuses
     public const TRANSKEY_USER_STATUS_MANAGER_DESC = 'user_status_manager_desc';

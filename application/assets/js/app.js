@@ -17,4 +17,6 @@ $(document).ready(() => {
       selector: 'textarea.tinymce-enabled',
       plugins: ['paste', 'link']
   });
+
+
 });

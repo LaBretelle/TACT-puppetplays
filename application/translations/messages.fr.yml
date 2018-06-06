@@ -28,6 +28,7 @@ login: connection
 logout: déconnection
 lost_password_link: J'ai oublié mon mot de passe
 manager: Gestionnaire
+max_file_uploads_message: Nombre maximum de fichiers téléversables simultanément
 need_to_be_logged: Vous devez être connecté pour participer au projet.
 no: Non
 not_enabled_yet: (Pas encore activé)

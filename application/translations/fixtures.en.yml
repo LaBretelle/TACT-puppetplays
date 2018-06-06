@@ -5,10 +5,10 @@ project_status_finished_name: Finished
 project_status_in_progress_desc: The project is in progress and therefore not ready for world wide diffusion.
 project_status_in_progress_name: In progress
 transcription_status_none: None
-transcrition_status_in_progress: In progress
-transcrition_status_in_reread: Reread
-transcrition_status_no_transcription: None
-transcrition_status_validated: Validated
+transcription_status_in_progress: In progress
+transcription_status_in_reread: Reread
+transcription_status_no_transcription: None
+transcription_status_validated: Validated
 user_status_manager_desc: The project manager can transcribe, reread, validate transriptions and manage all aspects of the project.
 user_status_manager_name: Gestionnaire
 user_status_transcriber_desc: The transcriber can transcribe the media and reread the transcripts.
