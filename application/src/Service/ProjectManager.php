@@ -73,16 +73,19 @@ class ProjectManager
             mkdir($basePath);
         }
 
-
         if (!is_dir($uploadPath)) {
             mkdir($uploadPath);
         }
-        foreach ($files as $file) {
-            $media = new Media();
-            $media->setUrl(md5(uniqid()).'.'.$file->guessExtension());
 
-            // project dir
+        foreach ($files as $file) {
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $media = new Media();
+            // given a jpg guessExtension will result in a jpeg...
+            $extension = $file->guessExtension();
+            $name = explode('.', $file->getClientOriginalName())[0];
+            $media->setUrl(md5(uniqid()).'.'.$extension);
+            $media->setName($name);
+
             $file->move($uploadPath, $media->getUrl());
             $project->addMedia($media);
             $this->em->persist($project);
