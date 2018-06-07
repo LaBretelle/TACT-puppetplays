@@ -3,6 +3,7 @@ actions: Actions
 add_user-status: Add status for an user
 administrate_users_menu: Users
 administrate_users_title: Platform users administration
+app_admin: Site administrator
 cancel: Cancel
 confirm_account_anonymization: If you continue the account informations will be anonimized. This action is irreversible.
 confirm_delete_project_media: Are you sure you want to delete this media ?

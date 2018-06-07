@@ -14,10 +14,14 @@
     </div>
     <div class="col-2 text-right">
       {% if userStatus %}
-        <span class="badge badge-info">
-          {{ userStatus.status.name | trans({}, 'fixtures') }} {{ not userStatus.enabled ? 'not_enabled_yet' | trans}}
-
-        </span>
+      <span class="badge badge-info">
+        {{ userStatus.status.name | trans({}, 'fixtures') }} {{ not userStatus.enabled ? 'not_enabled_yet' | trans}}
+      </span>
+      {% endif %}
+      {% if is_granted('ROLE_ADMIN') %}
+      <span class="badge badge-success">
+        {{"app_admin"|trans}}
+      </span>
       {% endif %}
     </div>
   </div>

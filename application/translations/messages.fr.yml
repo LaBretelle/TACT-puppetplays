@@ -3,6 +3,7 @@ actions: Actions
 add_user-status: Ajouter un statut pour un utilisateur
 administrate_users_menu: Utilisateurs
 administrate_users_title: Administration des utilisateurs de la plateforme
+app_admin: Administrateur du site
 cancel: Annuler
 confirm_account_anonymization: Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
 confirm_delete_project_media: Êtes vous sur de vouloir supprimer ce media ?
