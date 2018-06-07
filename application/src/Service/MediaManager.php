@@ -29,7 +29,7 @@ class MediaManager
     {
         $transcription = new Transcription();
         $transcription->setUser($this->security->getUser());
-        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_NONE);
+        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_NONE);
         $transcription->setStatus($transcriptionStatus);
         $transcription->setContent('');
         $media->setTranscription($transcription);
@@ -42,7 +42,7 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         $transcription->setContent($content);
-        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_PROGRESS);
+        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS);
         $transcription->setStatus($transcriptionStatus);
         $this->em->persist($transcription);
         $this->em->flush();
@@ -52,7 +52,7 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         $transcription->setContent($content);
-        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_REREAD);
+        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_IN_REREAD);
         $transcription->setStatus($transcriptionStatus);
         $this->em->persist($transcription);
         $this->em->flush();
@@ -65,7 +65,7 @@ class MediaManager
             return true;
         } else {
             $statusName = $transcription->getStatus()->getName();
-            return $statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_NONE || $statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_PROGRESS;
+            return $statusName === AppEnums::TRANSCRIPTION_STATUS_NONE || $statusName === AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS;
         }
         return false;
     }
@@ -77,7 +77,7 @@ class MediaManager
             return false;
         } else {
             $statusName = $transcription->getStatus()->getName();
-            return $statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_NONE || $statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_PROGRESS;
+            return $statusName === AppEnums::TRANSCRIPTION_STATUS_NONE || $statusName === AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS;
         }
         return false;
     }
@@ -89,7 +89,7 @@ class MediaManager
             return false;
         } else {
             $statusName = $transcription->getStatus()->getName();
-            return $statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_REREAD;
+            return $statusName === AppEnums::TRANSCRIPTION_STATUS_IN_REREAD;
         }
         return false;
     }
@@ -99,11 +99,11 @@ class MediaManager
         $transcription = $media->getTranscription();
         if ($transcription) {
             $statusName = $transcription->getStatus()->getName();
-            if ($statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_PROGRESS) {
+            if ($statusName === AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS) {
                 return 'alert alert-warning';
-            } elseif ($statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_REREAD) {
+            } elseif ($statusName === AppEnums::TRANSCRIPTION_STATUS_IN_REREAD) {
                 return 'alert alert-info';
-            } elseif ($statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_NONE) {
+            } elseif ($statusName === AppEnums::TRANSCRIPTION_STATUS_NONE) {
                 return 'alert alert-danger';
             }
         }

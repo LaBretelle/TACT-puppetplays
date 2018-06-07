@@ -34,25 +34,25 @@ class PermissionManager
 
         switch ($action) {
           case "manageMedia":
-              if ($isAdmin || $statusName === AppEnums::TRANSKEY_USER_STATUS_MANAGER_NAME) {
+              if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
                   return true;
               }
               break;
 
           case "manageUser":
-            if ($isAdmin || $statusName === AppEnums::TRANSKEY_USER_STATUS_MANAGER_NAME) {
+            if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
                 return true;
             }
             break;
 
           case "editProject":
-            if ($isAdmin || $statusName === AppEnums::TRANSKEY_USER_STATUS_MANAGER_NAME) {
+            if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
                 return true;
             }
             break;
 
           case "transcribe":
-            if ($isAdmin || $statusName === AppEnums::TRANSKEY_USER_STATUS_MANAGER_NAME || $statusName === AppEnums::TRANSKEY_USER_STATUS_TRANSCRIBER_NAME) {
+            if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME || $statusName === AppEnums::USER_STATUS_TRANSCRIBER_NAME) {
                 return true;
             }
             break;

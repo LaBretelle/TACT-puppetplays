@@ -83,10 +83,6 @@ class ProjectController extends Controller
      */
     public function addProjectMedia(Request $request, Project $project)
     {
-        if (!$this->projectManager->canHandleProjectMedia($project, $this->getUser())) {
-            return false;
-        }
-
         $form = $this->createForm(ProjectMediaType::class, $project);
         $form->handleRequest($request);
 
