@@ -4,10 +4,10 @@
 
 {% block body %}
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-10">
       <h4><a href="{{ path("project_display", {'id': media.project.id} )}}">{{media.project.name}}</a> - Transcription du média : {{media.url}}</h4>
     </div>
-    <div class="col-md-2 text-md-right">
+    <div class="col-2 text-right">
       {% if edit %}
         <div class="btn-group">
           <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}"><i class="fas fa-save"></i></button>
@@ -18,10 +18,10 @@
   </div>
   <hr/>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-6">
       <img class="img-fluid" src="{{asset('project_files/' ~ media.project.name ~ '/' ~ media.url)}}" alt="">
     </div>
-    <div class="col-md-6">
+    <div class="col-6">
       {% if edit %}
         <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="8" cols="80">
           {{media.transcription.content | raw}}

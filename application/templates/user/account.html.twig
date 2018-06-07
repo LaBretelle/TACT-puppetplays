@@ -19,11 +19,11 @@
     {{ form_row(form.image) }}
     {% if app.user.image %}
     <div class="row user-account-image-row">
-      <div class="col-lg-8 col-md-8 col-xs-8">
+      <div class="col-8">
         <img class="user-account-image-md" src="{{asset('user_images/' ~ app.user.image)}}" alt="{{app.user.lastname}} {{app.user.firstname}}">
         <input type="hidden" name="previous_image" value="{{app.user.image}}" />
       </div>
-      <div class="col-lg-4 col-md-4 col-xs-4">
+      <div class="col-4">
         <button type="button" data-id="{{ form.vars.data.id }}" data-toggle="tooltip" data-placement="right" role="button" class="btn btn-danger btn-delete-account-image" title="{{'user_delete_account_image' | trans}}"><i class="fas fa-trash"></i></button>
       </div>
     </div>
