@@ -31,9 +31,9 @@
         <div class="p2 d-flex align-self-center">
             <img class="project-image" src="{{asset('project_files/' ~ project.name ~ '/' ~ media.url)}}" alt=""></img>
             <div class="p2 d-flex flex-column">
-              {% if not media.transcription or media.transcription.status.name == constant('App\\Service\\AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_NONE') or  media.transcription.status.name == constant('App\\Service\\AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_PROGRESS') %}
+              {% if not media.transcription or media.transcription.status.name == constant('App\\Service\\AppEnums::TRANSCRIPTION_STATUS_NONE') or  media.transcription.status.name == constant('App\\Service\\AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS') %}
                 <a href="{{path('media_transcription_display', {'id': media.id})}}" class="btn btn-link"><i class="fas fa-pencil-alt"></i></a>
-              {% elseif media.transcription and media.transcription.status.name == constant('App\\Service\\AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_REREAD') %}
+              {% elseif media.transcription and media.transcription.status.name == constant('App\\Service\\AppEnums::TRANSCRIPTION_STATUS_IN_REREAD') %}
                 <a href="#" class="btn btn-link"><i class="fas fa-edit"></i></a>
               {% endif %}
               <button type="button" data-id="{{media.id}}" role="button" class="btn btn-link delete-image"><i class="fas fa-trash"></i></button>

@@ -26,7 +26,7 @@ class UserProjectStatusManager
 
     public function create(Project $project)
     {
-        $status = $this->em->getRepository("App:UserStatus")->findOneByName(AppEnums::TRANSKEY_USER_STATUS_MANAGER_NAME);
+        $status = $this->em->getRepository("App:UserStatus")->findOneByName(AppEnums::USER_STATUS_MANAGER_NAME);
 
         $userProjectStatus = new UserProjectStatus();
         $userProjectStatus->setUser($this->user);

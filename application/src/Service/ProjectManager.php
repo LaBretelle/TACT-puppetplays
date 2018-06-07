@@ -59,7 +59,7 @@ class ProjectManager
             $userStatuses = $project->getUserStatuses();
             $upsRepository = $this->em->getRepository('App:UserProjectStatus');
             $usRepository = $this->em->getRepository('App:UserStatus');
-            $managerStatus = $usRepository->findOneByName(AppEnums::TRANSKEY_USER_STATUS_MANAGER_NAME);
+            $managerStatus = $usRepository->findOneByName(AppEnums::USER_STATUS_MANAGER_NAME);
             $userPojectStatus = $upsRepository->findOneBy(['user' => $user, 'status' => $managerStatus]);
             return null !== $userPojectStatus;
         }

@@ -29,7 +29,7 @@ class MediaManager
     {
         $transcription = new Transcription();
         $transcription->setUser($this->security->getUser());
-        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_NONE);
+        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_NONE);
         $transcription->setStatus($transcriptionStatus);
         $transcription->setContent('');
         $media->setTranscription($transcription);
@@ -42,7 +42,7 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         $transcription->setContent($content);
-        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_PROGRESS);
+        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS);
         $transcription->setStatus($transcriptionStatus);
         $this->em->persist($transcription);
         $this->em->flush();
@@ -52,7 +52,7 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         $transcription->setContent($content);
-        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_REREAD);
+        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_IN_REREAD);
         $transcription->setStatus($transcriptionStatus);
         $this->em->persist($transcription);
         $this->em->flush();

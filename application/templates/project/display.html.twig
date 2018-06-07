@@ -21,7 +21,7 @@
 
 <!--
   {% if userStatus or is_granted('ROLE_ADMIN') %}
-    {% if (userStatus and userStatus.enabled and userStatus.status.name == constant('App\\Service\\AppEnums::TRANSKEY_USER_STATUS_MANAGER_NAME')) or is_granted('ROLE_ADMIN') %}
+    {% if (userStatus and userStatus.enabled and userStatus.status.name == constant('App\\Service\\AppEnums::USER_STATUS_MANAGER_NAME')) or is_granted('ROLE_ADMIN') %}
       <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-secondary">
         <i class="fas fa-pencil-alt" aria-hidden="true"></i> Editer
       </a>
