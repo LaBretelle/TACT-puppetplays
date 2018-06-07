@@ -1,5 +1,8 @@
 {% extends "base.html.twig" %}
-
+{% block stylesheets %}
+{{parent()}}
+<link rel="stylesheet" href="{{ asset('build/css/project-media.css') }}">
+{% endblock %}
 {% import _self as macros %}
 
 {% block body %}
@@ -16,7 +19,7 @@
     </span>
   </p>
 
-
+<!--
   {% if userStatus or is_granted('ROLE_ADMIN') %}
     {% if (userStatus and userStatus.enabled and userStatus.status.name == constant('App\\Service\\AppEnums::TRANSKEY_USER_STATUS_MANAGER_NAME')) or is_granted('ROLE_ADMIN') %}
       <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-secondary">
@@ -36,7 +39,17 @@
   {% else %}
     {{ "need_to_be_logged" | trans }}
   {% endif %}
+-->
 
+  <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-secondary">
+    <i class="fas fa-pencil-alt" aria-hidden="true"></i> Editer
+  </a>
+  <a href="{{ path("project_media", {id: project.id})}}" type="button" class="btn btn-secondary">
+    <i class="fas fa-image" aria-hidden="true"></i> {{ "project_manage_media" | trans}}
+  </a>
+  <a href="{{ path("status_project", {id: project.id})}}" type="button" class="btn btn-secondary">
+    <i class="fas fa-users" aria-hidden="true"></i> {{ "project_handle_user_statuses" | trans}}
+  </a>
   <hr/>
 
   <ul class="list-group">
@@ -45,4 +58,8 @@
     <li class="list-group-item">{{"project_status"|trans}}: {{ project.status ? project.status.name | trans({}, 'fixtures') : "-"}}</li>
     <li class="list-group-item">{{"is_public"|trans}}: {{ project.public ? "yes"|trans : "no"|trans }}</li>
   </ul>
+
+  <hr/>
+
+  {{ include('media/media-list-partial.html.twig', { 'project': project }) }}
 {% endblock %}

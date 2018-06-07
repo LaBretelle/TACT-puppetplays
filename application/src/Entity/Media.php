@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity()
+ * @UniqueEntity("name")
  */
 class Media
 {
@@ -31,6 +33,11 @@ class Media
      * @ORM\OneToOne(targetEntity="App\Entity\Transcription", inversedBy="media", cascade={"persist", "remove"})
      */
     private $transcription;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $name;
 
     public function getId(): ?int
     {
@@ -70,5 +77,17 @@ class Media
     public function getUrl() : string
     {
         return $this->url;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }
