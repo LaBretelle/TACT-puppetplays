@@ -68,7 +68,7 @@ class ProjectManager
     public function addProjectMedia(Project $project, array $files)
     {
         $basePath = $this->params->get('project_file_dir');
-        $uploadPath = $basePath.DIRECTORY_SEPARATOR.$project->getName();
+        $uploadPath = $basePath.DIRECTORY_SEPARATOR.$project->getId();
         if (!is_dir($basePath)) {
             mkdir($basePath);
         }
