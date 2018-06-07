@@ -100,14 +100,14 @@ class MediaManager
         if ($transcription) {
             $statusName = $transcription->getStatus()->getName();
             if ($statusName === AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS) {
-                return 'alert alert-warning';
+                return 'status in-progress';
             } elseif ($statusName === AppEnums::TRANSCRIPTION_STATUS_IN_REREAD) {
-                return 'alert alert-info';
+                return 'status in-reread';
             } elseif ($statusName === AppEnums::TRANSCRIPTION_STATUS_NONE) {
-                return 'alert alert-danger';
+                return 'status none';
             }
         }
 
-        return 'alert alert-danger';
+        return 'status none';
     }
 }
