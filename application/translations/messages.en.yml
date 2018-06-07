@@ -45,6 +45,7 @@ project_media_add_file_placeholder: Add images to project
 project_media_no_media: No media for this project
 project_media_title: Manage project media
 project_name: Project name
+project_register: Register to project
 project_short_description: Short description
 project_status: Project status
 project_user_status: User statuses

@@ -28,8 +28,8 @@ class PermissionManager
         $currentUser = $this->security->getUser();
 
         $userProjectStatus = $this->em->getRepository("App:UserProjectStatus")->findOneBy(["user"=> $currentUser, "project" =>$project]);
-        $userProjectStatus = ($userProjectStatus && $userProjectStatus->getEnabled()) ? $userProjectStatus : null;
-        $statusName = ($userProjectStatus) ? $userProjectStatus->getStatus()->getName() : null;
+        $status = ($userProjectStatus && $userProjectStatus->getEnabled()) ? $userProjectStatus : null;
+        $statusName = ($status) ? $status->getStatus()->getName() : null;
         $isAdmin =  ($this->authChecker->isGranted('ROLE_ADMIN')) ? true : false;
 
         switch ($action) {
@@ -53,6 +53,12 @@ class PermissionManager
 
           case "transcribe":
             if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME || $statusName === AppEnums::USER_STATUS_TRANSCRIBER_NAME) {
+                return true;
+            }
+            break;
+
+          case "register":
+            if (!$userProjectStatus && $currentUser != null) {
                 return true;
             }
             break;

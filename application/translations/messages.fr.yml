@@ -45,6 +45,7 @@ project_media_add_file_placeholder: Ajouter des images au projet
 project_media_no_media: Aucun média associé au projet
 project_media_title: Gérer les media du projet
 project_name: Nom du projet
+project_register: S'inscrire au projet
 project_short_description: Description courte
 project_status: Statut du projet
 project_user_status: Statut des utilisateurs

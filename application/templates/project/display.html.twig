@@ -22,8 +22,6 @@
     </div>
   </div>
 
-
-
   <div class="btn group">
     {% if project | isAuthorizedOnProject('editProject') %}
     <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-link">
@@ -38,6 +36,11 @@
     {% if project | isAuthorizedOnProject('manageUser') %}
     <a href="{{ path('status_project', {id: project.id})}}" type="button" class="btn btn-link">
       <i class="fas fa-users" aria-hidden="true"></i> {{ 'project_handle_user_statuses' | trans}}
+    </a>
+    {% endif %}
+    {% if project | isAuthorizedOnProject('register') %}
+    <a href="{{ path('status_request', {id: project.id})}}" type="button" class="btn btn-link">
+      <i class="fas fa-hand-holding-heart"></i> {{ 'project_register' | trans}}
     </a>
     {% endif %}
   </div>
