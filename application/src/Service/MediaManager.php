@@ -57,4 +57,57 @@ class MediaManager
         $this->em->persist($transcription);
         $this->em->flush();
     }
+
+    public function isTranscribable(Media $media)
+    {
+        $transcription = $media->getTranscription();
+        if (null === $transcription) {
+            return true;
+        } else {
+            $statusName = $transcription->getStatus()->getName();
+            return $statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_NONE || $statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_PROGRESS;
+        }
+        return false;
+    }
+
+    public function shouldBeValidated(Media $media)
+    {
+        $transcription = $media->getTranscription();
+        if (null === $transcription) {
+            return false;
+        } else {
+            $statusName = $transcription->getStatus()->getName();
+            return $statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_NONE || $statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_PROGRESS;
+        }
+        return false;
+    }
+
+    public function isInReread(Media $media)
+    {
+        $transcription = $media->getTranscription();
+        if (null === $transcription) {
+            return false;
+        } else {
+            $statusName = $transcription->getStatus()->getName();
+            return $statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_REREAD;
+        }
+        return false;
+    }
+
+    public function transcriptionStatusClass(Media $media)
+    {
+        $transcription = $media->getTranscription();
+        if ($transcription) {
+            $statusName = $transcription->getStatus()->getName();
+            if ($statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_PROGRESS) {
+                return 'alert alert-warning';
+            } elseif ($statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_IN_REREAD) {
+                return 'alert alert-info';
+            } elseif ($statusName === AppEnums::TRANSKEY_TRANSCRIPTION_STATUS_NONE) {
+                return 'alert alert-danger';
+            }
+        }
+
+        return 'alert alert-danger';
+    }
 }

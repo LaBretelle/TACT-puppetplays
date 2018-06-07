@@ -8,76 +8,29 @@
       <h4><a href="{{ path("project_display", {'id': media.project.id} )}}">{{media.project.name}}</a> - Transcription du média : {{media.url}}</h4>
     </div>
     <div class="col-md-2 text-md-right">
-      <div class="btn-group">
-        <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}"><i class="fas fa-save"></i></button>
-        <button class="btn btn-link btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'finish' | trans}}" type="button" name="button"><i class="fas fa-check-circle"></i></button>
-      </div>
+      {% if edit %}
+        <div class="btn-group">
+          <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}"><i class="fas fa-save"></i></button>
+          <button class="btn btn-link btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'finish' | trans}}" type="button" name="button"><i class="fas fa-check-circle"></i></button>
+        </div>
+      {% endif %}
     </div>
   </div>
   <hr/>
   <div class="row">
     <div class="col-md-6">
       <img class="img-fluid" src="{{asset('project_files/' ~ media.project.name ~ '/' ~ media.url)}}" alt="">
-      <!--
-      <ul class="nav nav-tabs" id="transcription-tab-left" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="image-tab-left" data-toggle="tab" href="#image-left" role="tab" aria-controls="image" aria-selected="true">Image</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="tiny-tab-left" data-toggle="tab" href="#tiny-left" role="tab" aria-controls="tiny" aria-selected="false">Tiny</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="text-tab-left" data-toggle="tab" href="#text-left" role="tab" aria-controls="text" aria-selected="false">Text</a>
-        </li>
-      </ul>
-      <div class="tab-content" id="transcription-tab-left-content">
-        <div class="tab-pane fade show active" id="image-left" role="tabpanel" aria-labelledby="image-tab-left">
-          <img class="img-fluid" src="{{asset('project_files/' ~ media.project.name ~ '/' ~ media.url)}}" alt="">
-        </div>
-        <div class="tab-pane fade" id="tiny-left" role="tabpanel" aria-labelledby="tiny-tab-left">
-          <textarea class="tinymce-transcription" name="transcription-content" rows="8" cols="80">
-            {{media.transcription.content | raw}}
-          </textarea>
-        </div>
-        <div class="tab-pane fade" id="text-left" role="tabpanel" aria-labelledby="text-tab-left">
-          <div class="">
-            {{media.transcription.content | raw}}
-          </div>
-        </div>
-      </div>
-    -->
     </div>
     <div class="col-md-6">
-      <ul class="nav nav-tabs" id="transcription-tab-right" role="tablist">
-        <!--
-        <li class="nav-item">
-          <a class="nav-link" id="image-tab-right" data-toggle="tab" href="#image-right" role="tab" aria-controls="image" aria-selected="true">Image</a>
-        </li>
-      -->
-        <li class="nav-item">
-          <a class="nav-link active" id="tiny-tab-right" data-toggle="tab" href="#tiny-right" role="tab" aria-controls="tiny" aria-selected="false">Tiny</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="text-tab-right" data-toggle="tab" href="#text-right" role="tab" aria-controls="text" aria-selected="false">Text</a>
-        </li>
-      </ul>
-      <div class="tab-content" id="transcription-tab-right-content">
-        <!--
-        <div class="tab-pane fade" id="image-right" role="tabpanel" aria-labelledby="image-tab-right">
-          <img class="img-fluid" src="{{asset('project_files/' ~ media.project.name ~ '/' ~ media.url)}}" alt="">
+      {% if edit %}
+        <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="8" cols="80">
+          {{media.transcription.content | raw}}
+        </textarea>
+      {% else %}
+        <div class="">
+          {{media.transcription.content | raw}}
         </div>
-      -->
-        <div class="tab-pane fade show active" id="tiny-right" role="tabpanel" aria-labelledby="tiny-tab-right">
-          <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="8" cols="80">
-            {{media.transcription.content | raw}}
-          </textarea>
-        </div>
-        <div class="tab-pane fade" id="text-right" role="tabpanel" aria-labelledby="text-tab-right">
-          <div class="">
-            {{media.transcription.content | raw}}
-          </div>
-        </div>
-      </div>
+      {% endif %}
     </div>
   </div>
 {% endblock %}

@@ -22,7 +22,7 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/{id}/transcription", name="transcription_display")
+     * @Route("/{id}/transcription/view", name="transcription_display")
      */
     public function displayTranscription(Media $media)
     {
@@ -32,7 +32,23 @@ class MediaController extends Controller
 
         return $this->render(
             'media/transcription.html.twig',
-            ['media' => $media]
+            ['media' => $media, 'edit' => false]
+        );
+    }
+
+
+    /**
+     * @Route("/{id}/transcription/edit", name="transcription_edit")
+     */
+    public function editTranscription(Media $media)
+    {
+        if (null === $media->getTranscription()) {
+            $media = $this->mediaManager->initMediaTranscription($media);
+        }
+
+        return $this->render(
+            'media/transcription.html.twig',
+            ['media' => $media, 'edit' => true]
         );
     }
 

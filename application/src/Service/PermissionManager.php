@@ -51,6 +51,12 @@ class PermissionManager
             }
             break;
 
+          case "transcribe":
+            if ($isAdmin || $statusName === AppEnums::TRANSKEY_USER_STATUS_MANAGER_NAME || $statusName === AppEnums::TRANSKEY_USER_STATUS_TRANSCRIBER_NAME) {
+                return true;
+            }
+            break;
+
         return false;
       }
     }
