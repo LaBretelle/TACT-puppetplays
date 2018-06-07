@@ -98,7 +98,7 @@ class ProjectManager
     {
         $project = $media->getProject();
         $basePath = $this->params->get('project_file_dir');
-        $filePath = $basePath.DIRECTORY_SEPARATOR.$project->getName().DIRECTORY_SEPARATOR.$media->getUrl();
+        $filePath = $basePath.DIRECTORY_SEPARATOR.$project->getId().DIRECTORY_SEPARATOR.$media->getUrl();
         if (file_exists($filePath)) {
             unlink($filePath);
             $this->em->remove($media);

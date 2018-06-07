@@ -16,7 +16,6 @@
       {% if userStatus %}
         <span class="badge badge-info">
           {{ userStatus.status.name | trans({}, 'fixtures') }} {{ not userStatus.enabled ? 'not_enabled_yet' | trans}}
-
         </span>
       {% endif %}
     </div>
