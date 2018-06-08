@@ -6,45 +6,48 @@
 {% endblock %}
 
 {% block body %}
-  <div class="row">
-    <div class="col-10">
-      <h4>{{'administrate_users_title' | trans}}</h4>
+  <div class="page-content-container">
+    <div class="row">
+      <div class="col-10">
+        <h4>{{'administrate_users_title' | trans}}</h4>
+      </div>
+      <div class="col-2 text-right">
+        <button type="button" name="button" class="btn btn-link add-user"><i class="fas fa-user-plus"></i></button>
+      </div>
     </div>
-    <div class="col-2 text-right">
-      <button type="button" name="button" class="btn btn-link add-user"><i class="fas fa-user-plus"></i></button>
+    <hr/>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="search-icon-addon">
+          <i class="fa fa-search"></i>
+        </span>
+      </div>
+      <input type="text" class="form-control search-input" placeholder="{{'filter_users_by' | trans}}" aria-label="Search user" aria-describedby="search-icon-addon"></input>
     </div>
+    <hr/>
+    <table class="table table-striped user-table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'userfullname' | trans}}</th>
+          <th scope="col">{{'username' | trans}}</th>
+          <th scope="col">{{'email' | trans}}</th>
+          <th scope="col">{{'user_is_active' | trans}}</th>
+          <th scope="col">{{'actions' | trans}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="ajax-row">
+          <td colspan="6">
+            <i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+          </td>
+        </tr>
+        {# partial with data will be append dynamicaly #}
+      </tbody>
+    </table>
   </div>
-  <hr/>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="search-icon-addon">
-        <i class="fa fa-search"></i>
-      </span>
-    </div>
-    <input type="text" class="form-control search-input" placeholder="{{'filter_users_by' | trans}}" aria-label="Search user" aria-describedby="search-icon-addon"></input>
-  </div>
-  <hr/>
-  <table class="table table-striped user-table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">{{'userfullname' | trans}}</th>
-        <th scope="col">{{'username' | trans}}</th>
-        <th scope="col">{{'email' | trans}}</th>
-        <th scope="col">{{'user_is_active' | trans}}</th>
-        <th scope="col">{{'actions' | trans}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="ajax-row">
-        <td colspan="6">
-          <i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i>
-          <span class="sr-only">Loading...</span>
-        </td>
-      </tr>
-      {# partial with data will be append dynamicaly #}
-    </tbody>
-  </table>
+
   {# anonymize user confirm modal #}
   <div class="modal fade anonymize-user-confirm-modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

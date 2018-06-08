@@ -104,6 +104,17 @@ class ProjectController extends Controller
     }
 
     /**
+     * @Route("/{id}/transcription", name="transcriptions")
+     */
+    public function displayTranscriptions(Project $project)
+    {
+        return $this->render(
+            'media/transcriptions.html.twig',
+            ['project' => $project]
+        );
+    }
+
+    /**
      * @Route("/media/{id}", name="media_delete", options={"expose"=true}, methods="DELETE")
      */
     public function removeProjectMedia(Media $media)

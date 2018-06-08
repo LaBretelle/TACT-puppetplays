@@ -8,22 +8,10 @@
 <div class="page-content-container">
   <div class="row">
     <div class="col-12">
-      <h4><a href="{{ path("project_display", {'id': project.id} )}}">{{project.name}}</a> - {{'project_media_title' | trans}}</h4>
+      <h4><a href="{{ path("project_display", {'id': project.id} )}}">{{project.name}}</a> - {{'transcription_title' | trans}}</h4>
       <hr/>
     </div>
   </div>
-  {% if project | isAuthorizedOnProject('manageMedia') %}
-  <div class="row">
-    <div class="col-12">
-        <div class="alert alert-info">{{'max_file_uploads_message' | trans}} - {{fileLimit}}</div>
-        {{ form_start(form) }}
-          {{ form_row(form.files) }}
-          {{ form_row(form.save) }}
-        {{ form_end(form) }}
-      <hr/>
-    </div>
-  </div>
-  {% endif %}
   {{ include('media/media-list-partial.html.twig', { 'project': project }) }}
 </div>
 {% endblock %}

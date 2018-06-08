@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block body %}
+<div class="page-content-container">
   {{ form_start(form) }}
 
     {% if is_granted('ROLE_ADMIN', app.user) %}
@@ -33,6 +34,7 @@
     <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
     <a href="#" class="btn btn-default">{{ 'cancel' | trans({}, 'messages')}}</a>
   {{ form_end(form) }}
+</div>
 {% endblock %}
 
 {% block javascripts %}

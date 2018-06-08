@@ -1,72 +1,50 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-  <div class="row">
-    <div class="col-12 home-message-container">
-      <h4>{{'home_title' | trans({}, 'messages')}}</h4>
-      <hr/>
-      <p>
-        {{home_text | raw}}
-      </p>
-    </div>
-  </div>
-  <hr/>
-  <div class="flex-tiles-container">
-    {% for project in projects %}
 
-      <div class="tile">
-          <div class="tile-title">
-            {{ project.name }}
-          </div>
-          <div class="tile-description">
-            <a href="{{ path("project_display", {'id': project.id} )}}">Voir</a>
-            <p>{{ project.shortDescription | raw }}</p>
+  <div class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="container">
+          <div class="carousel-caption text-left">
+            <h4>{{'home_title' | trans({}, 'messages')}}</h4>
+            <hr/>
+            <p>
+              {{home_text | raw}}
+            </p>
           </div>
       </div>
-    {% endfor %}
-    {% if is_granted('ROLE_ADMIN') %}
-    <div class="tile">
-      <a href="{{ path("project_create") }}">Ajouter</a>
+      </div>
     </div>
-    {% endif %}
   </div>
-
-  <hr/>
-  <div class="row">
-    {% for project in projects %}
-      <div class="col-4">
-        <div class="project-hover">
-          <!--
-          <img src="http://placehold.it/360x360" class="img-responsive transition">
-        -->
-          <div class="tile-title img-responsive transition">
-            {{ project.name }}
+  <div class="page-content-container">
+    <div class="row">
+      {% for project in projects %}
+        <div class="col-2">
+          <div class="project hover">
+            <div class="project-tile-title transition">
+              {{ project.name }}
+            </div>
+            <div class="project-tile-desc transition">
+              <p>{{ project.description | truncate(20) | raw}}</p>
+            </div>
+            <div class="project-tile-action transition">
+              <a href="{{ path("project_display", {'id': project.id} )}}" data-toggle="tooltip" title="{{'view_project' | trans}}"> <i class="fas fa-arrow-alt-circle-right "></i></a>
+            </div>
           </div>
-          <div class="text-view transition text-center">
-            <p>{{ project.shortDescription | striptags | slice(0, 40) | raw}}</p>
-
-          </div>
-          <div class="btn-view transition text-center">
-            <a href="{{ path("project_display", {'id': project.id} )}}" data-toggle="tooltip" title="{{'view_project' | trans}}"> <i class="fas fa-arrow-alt-circle-right "></i></a>
+        </div>
+      {% endfor %}
+      {% if is_granted('ROLE_ADMIN') %}
+      <div class="col-2">
+        <div class="project">
+          <div class="project-tile-title">
+            <a data-toggle="tooltip" title="{{'add_project' | trans}}" href="{{ path("project_create") }}"> <i class="fas fa-plus"></i></a>
           </div>
         </div>
       </div>
-
-    {% endfor %}
-    {% if is_granted('ROLE_ADMIN') %}
-    <div class="col-4">
-      <div class="project-hover">
-        <div class="tile-title">
-          <a href="{{ path("project_create") }}">{{'add_project' | trans}}</a>
-        </div>
-      </div>
+      {% endif %}
     </div>
-    {% endif %}
   </div>
-
-
-
-
 {% endblock %}
 
 {% block javascripts %}

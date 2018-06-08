@@ -32,8 +32,8 @@ class ProjectType extends AbstractType
             'label' => 'project_name',
             'translation_domain' => 'messages'
           ])
-          ->add('shortDescription', TextareaType::class, [
-            'label' => 'project_short_description',
+          ->add('description', TextareaType::class, [
+            'label' => 'project_description',
             'translation_domain' => 'messages',
             'attr' => [
               'class' => 'tinymce-enabled'

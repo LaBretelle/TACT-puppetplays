@@ -15,10 +15,14 @@ $(document).ready(() => {
   // Initialize the app
   tinymce.init({
       selector: 'textarea.tinymce-enabled',
-      plugins: ['paste', 'link']
+      plugins: ['paste', 'link'],
+      setup: (editor) => {
+          editor.on('change', function () {
+          // https://github.com/guillaumepotier/Garlic.js/issues/87
+          // https://exceptionshub.com/jquery-and-tinymce-textarea-value-doesnt-submit.html
+          editor.save()
+        });
+      }
   });
-
-  tinymce.triggerSave(); 
-
 
 });

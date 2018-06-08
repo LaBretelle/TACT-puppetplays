@@ -27,10 +27,10 @@ $(document).ready(() => {
 const deleteImage = (element) => {
   const url = routing.generateRoute('project_media_delete', {id: element.dataset.id});
   $.ajax({
-    method: "DELETE",
+    method: 'DELETE',
     url: url
   }).done(function(response) {
-      element.closest('.image-container').remove();
+      element.closest('.col-2').remove();
       currentDeleteAction = null;
   });
 }

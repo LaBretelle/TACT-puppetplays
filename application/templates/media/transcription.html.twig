@@ -1,36 +1,41 @@
 {% extends "base.html.twig" %}
 
+{% import "media/macros.html.twig" as macros %}
+
 {% block body %}
-  <div class="row">
-    <div class="col-10">
-      <h4><a href="{{ path("project_display", {'id': media.project.id} )}}">{{media.project.name}}</a> - Transcription du média : {{media.name}}</h4>
+  <div class="page-content-container">
+    <div class="row">
+      <div class="col-10">
+        <h4><a href="{{ path("project_display", {'id': media.project.id} )}}">{{media.project.name}}</a> - Transcription du média : {{media.name}}</h4>
+      </div>
+      <div class="col-2 text-right">
+        {% if edit %}
+          <div class="btn-group">
+            <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}"><i class="fas fa-save"></i></button>
+            <button class="btn btn-link btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'finish' | trans}}" type="button" name="button"><i class="fas fa-check-circle"></i></button>
+          </div>
+        {% endif %}
+      </div>
     </div>
-    <div class="col-2 text-right">
-      {% if edit %}
-        <div class="btn-group">
-          <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}"><i class="fas fa-save"></i></button>
-          <button class="btn btn-link btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'finish' | trans}}" type="button" name="button"><i class="fas fa-check-circle"></i></button>
-        </div>
-      {% endif %}
+    <hr/>
+    <div class="row">
+      <div class="col-6">
+        <img class="img-fluid" src="{{ macros.mediaURL(media) }}" alt="">
+      </div>
+      <div class="col-6">
+        {% if edit %}
+          <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="8" cols="80">
+            {{media.transcription.content | raw}}
+          </textarea>
+        {% else %}
+          <div class="">
+            {{media.transcription.content | raw}}
+          </div>
+        {% endif %}
+      </div>
     </div>
   </div>
-  <hr/>
-  <div class="row">
-    <div class="col-6">
-      <img class="img-fluid" src="{{asset('project_files/' ~ media.project.id ~ '/' ~ media.url)}}" alt="">
-    </div>
-    <div class="col-6">
-      {% if edit %}
-        <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="8" cols="80">
-          {{media.transcription.content | raw}}
-        </textarea>
-      {% else %}
-        <div class="">
-          {{media.transcription.content | raw}}
-        </div>
-      {% endif %}
-    </div>
-  </div>
+
 
   {# media modal #}
   <div class="modal fade project-media-modal" id="project-media-modal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" aria-hidden="true">
