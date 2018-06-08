@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 
+{% import "media/macros.html.twig" as macros %}
+
 {% block body %}
   <div class="row">
     <div class="col-10">
@@ -17,7 +19,7 @@
   <hr/>
   <div class="row">
     <div class="col-6">
-      <img class="img-fluid" src="{{asset('project_files/' ~ media.project.id ~ '/' ~ media.url)}}" alt="">
+      <img class="img-fluid" src="{{ macros.mediaURL(media) }}" alt="">
     </div>
     <div class="col-6">
       {% if edit %}

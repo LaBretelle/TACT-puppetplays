@@ -1,0 +1,3 @@
+{% macro mediaURL(media) %}
+    {{ asset('project_files/' ~ media.project.id ~ '/' ~ media.url) }}
+{% endmacro %}

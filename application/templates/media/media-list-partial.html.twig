@@ -1,3 +1,5 @@
+{% import "media/macros.html.twig" as macros %}
+
 <div class="d-flex align-content-stretch justify-content-between flex-wrap">
   {% for media in project.medias %}
     <div class="p2 d-flex flex-column align-self-center image-container {{media | transcriptionStatusClass}}">
@@ -5,11 +7,11 @@
         <div>
           {{media.name}}
         </div>
-        
+
       </div>
       <div class="p2 d-flex align-self-center">
           <a href="{{path('media_transcription_display', {'id': media.id})}}">
-          <img class="project-image" src="{{asset('project_files/' ~ project.id ~ '/' ~ media.url)}}" alt=""></img>
+          <img class="project-image" src="{{ macros.mediaURL(media) }}" alt=""></img>
           </a>
           <div class="p2 d-flex flex-column">
             {% if project | isAuthorizedOnProject('transcribe') %}
