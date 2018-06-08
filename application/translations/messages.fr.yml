@@ -38,17 +38,22 @@ not_registered: Non inscrit
 password: Mot de passe
 project_create: Création d'un projet
 project_description: Description du projet
-project_edit: Edition d'un projet
+project_edit: Editer le projet
+project_edition: Edition du projet
 project_enabled: Validé ?
-project_handle_user_statuses: Gestion des utilisateurs
-project_manage_media: Gestion des média
+project_manage_media: Gérer les médias
+project_manage_user_statuses: Gérer les utilisateurs
+project_management_media: Gestion les médias
+project_management_user_statuses: Gestion des utilisateurs
 project_media_add_file_placeholder: Ajouter des images au projet
 project_media_no_media: Aucun média associé au projet
 project_media_title: Gérer les media du projet
 project_name: Nom du projet
 project_register: S'inscrire au projet
-project_short_description: Description courte
+project_registration: Inscription au projet
 project_status: Statut du projet
+project_transcript: Transcrire
+project_transcription: Transcription
 project_user_status: Statut des utilisateurs
 public_mail: Email visible par tous
 register: s'enregistrer

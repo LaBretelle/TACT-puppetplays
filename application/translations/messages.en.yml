@@ -38,17 +38,24 @@ not_registered: Not registered
 password: Password
 project_create: Project creation
 project_description: project description
-project_edit: Project edition
+project_edit: Edit project
+project_edition: Project edition
 project_enabled: Enabled
 project_handle_user_statuses: Users management
 project_manage_media: Manage media
+project_manage_user_statuses: Manage users
+project_management_media: Media management
+project_management_user_statuses: Users management
 project_media_add_file_placeholder: Add images to project
 project_media_no_media: No media for this project
 project_media_title: Manage project media
 project_name: Project name
 project_register: Register to project
-project_short_description: Short description
+project_register: Register to the project
+project_registration: Project registration
 project_status: Project status
+project_transcript: Transcribe
+project_transcription: Transcription
 project_user_status: User statuses
 public_mail: Email visible to all
 register: register

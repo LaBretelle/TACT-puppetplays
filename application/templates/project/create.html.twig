@@ -20,7 +20,7 @@
 
 {{ form_start(form) }}
   {{ form_row(form.name) }}
-  {{ form_row(form.shortDescription) }}
+  {{ form_row(form.description) }}
   {{ form_row(form.status) }}
   {{ form_row(form.public) }}
   {% if is_granted('ROLE_ADMIN') %}

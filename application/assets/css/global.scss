@@ -6,8 +6,12 @@
 // the ~ allows you to reference things in node_modules
 @import '~bootstrap/scss/bootstrap';
 
-body > .container {
-  padding-top: 70px;
+body {
+  padding-bottom: 70px;
+}
+
+body > .container-fluid{
+  padding-top: 40px;
 }
 
 .home-message-container {

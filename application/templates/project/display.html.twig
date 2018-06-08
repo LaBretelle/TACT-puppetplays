@@ -1,66 +1,116 @@
 {% extends "base.html.twig" %}
+
 {% block stylesheets %}
 {{parent()}}
-<link rel="stylesheet" href="{{ asset('build/css/project-media.css') }}">
+<link rel="stylesheet" href="{{ asset('build/css/display-project.css') }}">
 {% endblock %}
-{% import _self as macros %}
 
 {% block body %}
   {% set userStatus = app.user|status(project) %}
 
-  <div class="row">
-    <div class="col-10">
-      <h3>{{ project.name }}</h3>
-    </div>
-    <div class="col-2 text-right">
-      {% if userStatus %}
-      <span class="badge badge-info">
-        {{ userStatus.status.name | trans({}, 'fixtures') }} {{ not userStatus.enabled ? 'not_enabled_yet' | trans}}
-      </span>
-      {% endif %}
-      {% if is_granted('ROLE_ADMIN') %}
-      <span class="badge badge-success">
-        {{"app_admin"|trans}}
-      </span>
-      {% endif %}
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="container">
+          <div class="carousel-caption text-left">
+            <h1>{{ project.name }}</h1>
+            <p>{{ project.description | raw }}</p>
+            <p>
+              {% if userStatus %}
+              <span class="badge badge-info">
+                {{ userStatus.status.name | trans({}, 'fixtures') }} {{ not userStatus.enabled ? 'not_enabled_yet' | trans}}
+              </span>
+              {% endif %}
+              {% if is_granted('ROLE_ADMIN') %}
+              <span class="badge badge-success">
+                {{"app_admin"|trans}}
+              </span>
+              {% endif %}
+            </p>
+          </div>
+      </div>
+      </div>
     </div>
   </div>
+  <div class="container">
 
-  <div class="btn group">
-    {% if project | isAuthorizedOnProject('editProject') %}
-    <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-link">
-      <i class="fas fa-pencil-alt" aria-hidden="true"></i> {{'edit' | trans}}
-    </a>
-    {% endif %}
-    {% if project | isAuthorizedOnProject('manageMedia') %}
-    <a href="{{ path("project_media", {id: project.id})}}" type="button" class="btn btn-link">
-      <i class="fas fa-image" aria-hidden="true"></i> {{ 'project_manage_media' | trans}}
-    </a>
-    {% endif %}
-    {% if project | isAuthorizedOnProject('manageUser') %}
-    <a href="{{ path('status_project', {id: project.id})}}" type="button" class="btn btn-link">
-      <i class="fas fa-users" aria-hidden="true"></i> {{ 'project_handle_user_statuses' | trans}}
-    </a>
-    {% endif %}
-    {% if project | isAuthorizedOnProject('register') %}
-    <a href="{{ path('status_request', {id: project.id})}}" type="button" class="btn btn-link">
-      <i class="fas fa-hand-holding-heart"></i> {{ 'project_register' | trans}}
-    </a>
-    {% endif %}
+
+  <div class='row'>
+    <div class='col-12'>
+      <div class="card-deck">
+
+          {% if project | isAuthorizedOnProject('transcribe') %}
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-image" aria-hidden="true"></i> {{'project_transcription' | trans}}</h5>
+                <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+              <div class="card-footer text-right">
+                <a href="{{ path("project_media", {id: project.id})}}" class="card-link">
+                  {{'project_transcript' | trans}}
+                </a>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if project | isAuthorizedOnProject('editProject') %}
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-pencil-alt" aria-hidden="true"></i> {{'project_edition' | trans}}</h5>
+              <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <div class="card-footer text-right">
+              <a href="{{ path("project_edit", {id: project.id})}}" class="card-link">
+                {{'project_edit' | trans}}
+              </a>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if project | isAuthorizedOnProject('manageMedia') %}
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-image" aria-hidden="true"></i>  {{'project_management_media' | trans}}</h5>
+              <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <div class="card-footer text-right">
+              <a href="{{ path("project_media", {id: project.id})}}" class="card-link">
+                {{'project_manage_media' | trans}}
+              </a>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if project | isAuthorizedOnProject('manageUser') %}
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-users" aria-hidden="true"></i> {{'project_management_user_statuses' | trans}}</h5>
+              <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <div class="card-footer text-right">
+              <a href="{{ path("status_project", {id: project.id})}}" class="card-link">
+                {{'project_manage_user_statuses' | trans}}
+              </a>
+            </div>
+          </div>
+          {% endif %}
+
+        {% if project | isAuthorizedOnProject('register') %}
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{'project_registration' | trans}}</h5>
+            <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer text-right">
+            <a href="{{ path("status_request", {id: project.id})}}" class="card-link">
+              <i class="fas fa-hand-holding-heart" aria-hidden="true"></i> {{'project_register' | trans}}
+            </a>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
   </div>
+</div>
 
-  <ul class="list-group">
-    <li class="list-group-item">{{"project_description"|trans}}: {{ project.description ? project.description | raw : "-"}}</li>
-    <li class="list-group-item">{{"project_short_description"|trans}}: {{ project.shortDescription | raw }}</li>
-    <li class="list-group-item">{{"project_status"|trans}}: {{ project.status ? project.status.name | trans({}, 'fixtures') : "-"}}</li>
-    <li class="list-group-item">{{"is_public"|trans}}: {{ project.public ? 'yes' | trans : 'no' | trans }}</li>
-  </ul>
-
-  <hr/>
-
-  {{ include('media/media-list-partial.html.twig', { 'project': project }) }}
-{% endblock %}
-{% block javascripts %}
-  {{ parent() }}
-  <script src="{{ asset('build/js/project-media.js') }}"></script>
 {% endblock %}

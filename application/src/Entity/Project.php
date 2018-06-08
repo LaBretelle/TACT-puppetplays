@@ -35,11 +35,6 @@ class Project
     private $description;
 
     /**
-     * @ORM\Column(type="text", length=150)
-     */
-    private $shortDescription;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -111,18 +106,6 @@ class Project
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getShortDescription(): ?string
-    {
-        return $this->shortDescription;
-    }
-
-    public function setShortDescription(string $shortDescription): self
-    {
-        $this->shortDescription = $shortDescription;
 
         return $this;
     }

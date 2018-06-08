@@ -34,6 +34,7 @@ Encore
   .addStyleEntry('css/create-project', './assets/css/create-project.scss')
   .addStyleEntry('css/project-media', './assets/css/project-media.scss')
   .addStyleEntry('css/user', './assets/css/admin/user.scss')
+  .addStyleEntry('css/display-project', './assets/css/display-project.css')
 
   .enableSassLoader(function(sassOptions) {}, {
     resolveUrlLoader: false
