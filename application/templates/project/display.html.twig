@@ -31,7 +31,7 @@
     <a href="{{ path("project_edit", {id: project.id})}}" type="button" class="btn btn-link">
       <i class="fas fa-pencil-alt" aria-hidden="true"></i> {{'edit' | trans}}
     </a>
-      {% endif %}
+    {% endif %}
     {% if project | isAuthorizedOnProject('manageMedia') %}
     <a href="{{ path("project_media", {id: project.id})}}" type="button" class="btn btn-link">
       <i class="fas fa-image" aria-hidden="true"></i> {{ 'project_manage_media' | trans}}
