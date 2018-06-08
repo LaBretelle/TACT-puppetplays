@@ -79,28 +79,66 @@ body > .container {
 
 
 
-/*
-.tile-title, .tile-description{
-  width: inherit;
-  height: inherit - 10px;
-  transition: opacity .5s ease-in-out;
-  position: absolute;
-	top: 0px - $border-width;
-	left: 0px - $border-width;
-  border-radius: $border-radius;
+.transition {
+  transition: all .5s;
 }
 
-.tile-description{
-  opacity: 0;
-  background: rgba(0, 0, 0, 0.6);
-  &:hover{
-    filter: alpha(opacity=50);
-    opacity: 1;
-    border-radius: 0px;
-  }
-}*/
 /*
-.tile:hover > .tile-title {
-  filter: alpha(opacity=50);
+.btn {
+  padding: 8px 40px;
+  border-radius: 2px;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  background-color: #dd003b;
+  color: #fff;
+}
+.btn:hover {
+  background-color: #aa002d;
+  color: #fff;
+}
+*/
+
+/* project hover*/
+.project-hover {
+  position: relative;
+  overflow: hidden;
+  border: $border-width $border-color solid;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  line-height: 150px;
+}
+.project-hover:hover .text-view {
+  top: 40%;
+  opacity: 1;
+}
+.project-hover:hover .btn-view {
+  top: 70%;
+  opacity: 1;
+}
+.project-hover:hover .tile-title {
   opacity: 0;
-}*/
+}
+.project-hover .text-view {
+  width: 95%;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  font-weight: 600;
+}
+.project-hover .text-view h3 {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.project-hover .btn-view {
+  width: 100%;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}

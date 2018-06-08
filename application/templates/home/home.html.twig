@@ -13,6 +13,7 @@
   <hr/>
   <div class="flex-tiles-container">
     {% for project in projects %}
+
       <div class="tile">
           <div class="tile-title">
             {{ project.name }}
@@ -28,8 +29,42 @@
       <a href="{{ path("project_create") }}">Ajouter</a>
     </div>
     {% endif %}
-
   </div>
+
+  <hr/>
+  <div class="row">
+    {% for project in projects %}
+      <div class="col-4">
+        <div class="project-hover">
+          <!--
+          <img src="http://placehold.it/360x360" class="img-responsive transition">
+        -->
+          <div class="tile-title img-responsive transition">
+            {{ project.name }}
+          </div>
+          <div class="text-view transition text-center">
+            <p>{{ project.shortDescription | striptags | slice(0, 40) | raw}}</p>
+
+          </div>
+          <div class="btn-view transition text-center">
+            <a href="{{ path("project_display", {'id': project.id} )}}" data-toggle="tooltip" title="{{'view_project' | trans}}"> <i class="fas fa-arrow-alt-circle-right "></i></a>
+          </div>
+        </div>
+      </div>
+
+    {% endfor %}
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="col-4">
+      <div class="project-hover">
+        <div class="tile-title">
+          <a href="{{ path("project_create") }}">{{'add_project' | trans}}</a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+
 
 
 {% endblock %}

@@ -17,7 +17,7 @@ $(document).ready(() => {
     editors.forEach(editor => {
       editor.load();
     })
-  });
+  })
 
   $('.btn-save-transcription').on('click', (e) => {
     saveTranscription(e.target.dataset.id)
@@ -25,6 +25,16 @@ $(document).ready(() => {
 
   $('.btn-finish-transcription').on('click', (e) => {
     finishTranscription(e.target.dataset.id, e.target.dataset.pid)
+  })
+
+  $('.img-fluid').on('click', (e) => {
+      const image = e.target.cloneNode()
+      image.classList.remove('project-image')
+      image.setAttribute('style', 'width:100%;')
+      const modalBody = $('.project-media-modal').find('.modal-body')
+      modalBody.empty()
+      modalBody.append(image)
+      $('.project-media-modal').modal('show')
   })
 
 })

@@ -31,6 +31,7 @@ max_file_uploads_message: Maximum number of simultaneous files allowed for uploa
 media_delete_button_title: Delete media
 media_reread_button_title: Reread transcription
 media_transcribe_button_title: Transcribe
+media_view_transcription_button_title: View transcription
 need_to_be_logged: You have to be logged in to contribute to the project.
 no: No
 not_enabled_yet: (Not enabled yet)
@@ -82,4 +83,5 @@ user: User
 userfullname: Lastname - Firstname
 username: Login
 validator: Validator
+view_project: View details
 yes: Yes

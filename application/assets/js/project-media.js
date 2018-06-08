@@ -12,6 +12,16 @@ $(document).ready(() => {
     $('.delete-media-confirm-button').on('click', (e) => {
         deleteImage(currentDeleteAction);
     });
+
+    $('.project-image').on('click', (e) => {
+        const image = e.target.cloneNode()
+        image.classList.remove('project-image')
+        image.setAttribute('style', 'width:100%;')
+        const modalBody = $('.project-media-modal').find('.modal-body')
+        modalBody.empty()
+        modalBody.append(image)
+        $('.project-media-modal').modal('show')
+    })
 });
 
 const deleteImage = (element) => {

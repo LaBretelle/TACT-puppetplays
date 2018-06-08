@@ -18,5 +18,7 @@ $(document).ready(() => {
       plugins: ['paste', 'link']
   });
 
+  tinymce.triggerSave(); 
+
 
 });

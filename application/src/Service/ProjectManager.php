@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Media;
 use App\Entity\Project;
+use App\Service\MediaManager;
 use App\Entity\User;
 use App\Service\AppEnums;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,12 +16,14 @@ class ProjectManager
     protected $em;
     protected $authChecker;
     protected $params;
+    protected $mediaManager;
 
-    public function __construct(EntityManagerInterface $em, AuthorizationCheckerInterface $authChecker, ParameterBagInterface $params)
+    public function __construct(EntityManagerInterface $em, MediaManager $mediaManager, AuthorizationCheckerInterface $authChecker, ParameterBagInterface $params)
     {
         $this->em = $em;
         $this->authChecker = $authChecker;
         $this->params = $params;
+        $this->mediaManager = $mediaManager;
     }
 
     public function createFromForm($project)
@@ -51,20 +54,6 @@ class ProjectManager
         return $project;
     }
 
-    public function canHandleProjectMedia(Project $project, User $user)
-    {
-        if ($this->authChecker->isGranted('ROLE_ADMIN')) {
-            return true;
-        } else {
-            $userStatuses = $project->getUserStatuses();
-            $upsRepository = $this->em->getRepository('App:UserProjectStatus');
-            $usRepository = $this->em->getRepository('App:UserStatus');
-            $managerStatus = $usRepository->findOneByName(AppEnums::USER_STATUS_MANAGER_NAME);
-            $userPojectStatus = $upsRepository->findOneBy(['user' => $user, 'status' => $managerStatus]);
-            return null !== $userPojectStatus;
-        }
-    }
-
     public function addProjectMedia(Project $project, array $files)
     {
         $basePath = $this->params->get('project_file_dir');
@@ -85,8 +74,9 @@ class ProjectManager
             $name = explode('.', $file->getClientOriginalName())[0];
             $media->setUrl(md5(uniqid()).'.'.$extension);
             $media->setName($name);
-
             $file->move($uploadPath, $media->getUrl());
+
+            $media = $this->mediaManager->initMediaTranscription($media);
             $project->addMedia($media);
             $this->em->persist($project);
         }

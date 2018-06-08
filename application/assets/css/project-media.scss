@@ -1,5 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
-
+/*
 .image-container {
   margin: 5px;
   //line-height: 160px;
@@ -9,30 +9,36 @@
     max-height: 150px;
   }
 }
+*/
+.project-image {
+  //height: 225px;
+  width: 100%;
+  display: block;
+}
 
 .status {
   &.none {
-    border-left: 5px solid theme-color("danger");
+    border-left: 1px solid theme-color("danger");
     border-right: 1px solid #eee;
     border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-bottom: 5px solid theme-color("danger");
   }
   &.in-progress {
-    border-left: 5px solid theme-color("warning");
+    border-left: 1px solid theme-color("warning");
     border-right: 1px solid #eee;
     border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-bottom: 5px solid theme-color("warning");
   }
   &.in-reread {
-    border-left: 5px solid theme-color("info");
+    border-left: 1px solid theme-color("info");
     border-right: 1px solid #eee;
     border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-bottom: 5px solid theme-color("info");
   }
   &.validated {
-    border-left: 5px solid theme-color("success");
+    border-left: 1px solid theme-color("success");
     border-right: 1px solid #eee;
     border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-bottom: 5px solid theme-color("success");
   }
 }

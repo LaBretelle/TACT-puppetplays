@@ -33,8 +33,6 @@ class MediaManager
         $transcription->setStatus($transcriptionStatus);
         $transcription->setContent('');
         $media->setTranscription($transcription);
-        $this->em->persist($media);
-        $this->em->flush();
         return $media;
     }
 
@@ -42,6 +40,7 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         $transcription->setContent($content);
+        $transcription->setUser($this->security->getUser());
         $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS);
         $transcription->setStatus($transcriptionStatus);
         $this->em->persist($transcription);
@@ -52,6 +51,7 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         $transcription->setContent($content);
+        $transcription->setUser($this->security->getUser());
         $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_IN_REREAD);
         $transcription->setStatus($transcriptionStatus);
         $this->em->persist($transcription);
