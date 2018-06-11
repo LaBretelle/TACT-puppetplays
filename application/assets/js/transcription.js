@@ -1,12 +1,10 @@
-import AppRouting from './modules/app-routing.js';
-import tinymce from 'tinymce/tinymce';
-// A theme is also required
-import 'tinymce/themes/modern/theme';
-// Any plugins you want to use has to be imported
-import 'tinymce/plugins/paste';
-import 'tinymce/plugins/link';
+import AppRouting from './modules/app-routing.js'
+import tinymce from 'tinymce/tinymce'
+import 'tinymce/themes/modern/theme'
+import 'tinymce/plugins/paste'
+import 'tinymce/plugins/link'
 
-const routing = new AppRouting();
+const routing = new AppRouting()
 
 $(document).ready(() => {
   tinymce.init({
@@ -15,7 +13,7 @@ $(document).ready(() => {
   }).then((editors) => {
     // load content into tinyMCE
     editors.forEach(editor => {
-      editor.load();
+      editor.load()
     })
   })
 
@@ -48,9 +46,7 @@ const saveTranscription = (id) => {
       url: url,
       data: {'transcription': tinyContent}
     }).done(function(response) {
-        //console.log('transcription saved', response)
-    });
-
+    })
 }
 
 const finishTranscription = (id, pid) => {
@@ -62,8 +58,7 @@ const finishTranscription = (id, pid) => {
       url: url,
       data: {'transcription': tinyContent}
     }).done(function(response) {
-        //console.log('transcription saved', response)
         window.location = projectHome
-    });
+    })
 
 }

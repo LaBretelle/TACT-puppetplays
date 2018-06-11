@@ -1,17 +1,17 @@
-import AppRouting from './modules/app-routing.js';
+import AppRouting from './modules/app-routing.js'
 
-const routing = new AppRouting();
-let currentDeleteAction = null;
+const routing = new AppRouting()
+let currentDeleteAction = null
 
 $(document).ready(() => {
     $('.delete-image').on('click', (e) => {
-        currentDeleteAction = e.target;
-        $('.delete-project-media-confirm-modal').modal('show');
-    });
+        currentDeleteAction = e.target
+        $('.delete-project-media-confirm-modal').modal('show')
+    })
 
     $('.delete-media-confirm-button').on('click', (e) => {
-        deleteImage(currentDeleteAction);
-    });
+        deleteImage(currentDeleteAction)
+    })
 
     $('.project-image').on('click', (e) => {
         const image = e.target.cloneNode()
@@ -22,15 +22,15 @@ $(document).ready(() => {
         modalBody.append(image)
         $('.project-media-modal').modal('show')
     })
-});
+})
 
 const deleteImage = (element) => {
-  const url = routing.generateRoute('project_media_delete', {id: element.dataset.id});
+  const url = routing.generateRoute('project_media_delete', {id: element.dataset.id})
   $.ajax({
     method: 'DELETE',
     url: url
   }).done(function(response) {
       element.closest('.col-2').remove();
       currentDeleteAction = null;
-  });
+  })
 }
