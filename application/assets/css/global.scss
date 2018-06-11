@@ -4,6 +4,8 @@
 // the ~ allows you to reference things in node_modules
 @import '~bootstrap/scss/bootstrap';
 
+/* BOOTSTRAP OVERRIDE
+--------------------------- */
 body {
   padding-bottom: 70px;
 }
@@ -62,9 +64,25 @@ body > .container-fluid{
   }
 }
 
+/* COMMON
+----------------- */
 .page-content-container {
     margin: 4rem;
 }
+
+.user-profile-image {
+  width: 150px;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+
+.user-profile-description * {
+  font-size: 15px;
+}
+/* HOME
+------------------ */
 
 .transition {
   transition: all .5s;

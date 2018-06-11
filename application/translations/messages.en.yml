@@ -44,6 +44,7 @@ project_edit: Edit project
 project_edition: Project edition
 project_enabled: Enabled
 project_handle_user_statuses: Users management
+project_is_private: Project is private
 project_manage_media: Manage media
 project_manage_user_statuses: Manage users
 project_management_media: Media management
@@ -70,8 +71,8 @@ status_toggle_on: Validate
 status: Status
 submit: Submit
 transcriber: Transcriber
-transcriptions_page_title: Project media
 transcript_media: Transcription of media
+transcriptions_page_title: Project media
 user_account_activated_error: An error occured while activating your account.
 user_account_activated: Your account is now activated.
 user_account_created: Your account was created but is not yet activated. You should receive an email to activate your account.
