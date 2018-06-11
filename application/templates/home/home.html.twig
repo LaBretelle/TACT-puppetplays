@@ -21,15 +21,15 @@
     <div class="row">
       {% for project in projects %}
         <div class="col-2">
-          <div class="project hover">
+          <div class="project hover transition">
             <div class="project-tile-title transition">
               {{ project.name }}
             </div>
             <div class="project-tile-desc transition">
-              <p>{{ project.description | truncate(20) | raw}}</p>
+              <p>{{ project.description | truncate(100) | raw}}</p>
             </div>
             <div class="project-tile-action transition">
-              <a href="{{ path("project_display", {'id': project.id} )}}" data-toggle="tooltip" title="{{'view_project' | trans}}"> <i class="fas fa-arrow-alt-circle-right "></i></a>
+              <a class="btn btn-link" href="{{ path("project_display", {'id': project.id} )}}" data-toggle="tooltip" title="{{'view_project' | trans}}"> <i class="fas fa-arrow-alt-circle-right "></i></a>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
       <div class="col-2">
         <div class="project">
           <div class="project-tile-title">
-            <a data-toggle="tooltip" title="{{'add_project' | trans}}" href="{{ path("project_create") }}"> <i class="fas fa-plus"></i></a>
+            <a class="btn btn-link" data-toggle="tooltip" title="{{'add_project' | trans}}" href="{{ path("project_create") }}"> <i class="fas fa-plus"></i></a>
           </div>
         </div>
       </div>
