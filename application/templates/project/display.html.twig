@@ -32,6 +32,7 @@
       <div class="col-12">
       <div class="card-deck">
           {% if project | isAuthorizedOnProject('transcribe') %}
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-image fa-fw" aria-hidden="true"></i> {{'project_transcription' | trans}}</h5>
@@ -39,68 +40,94 @@
               </div>
               <div class="card-footer text-right">
                 <a href="{{ path('project_transcriptions', {id: project.id})}}" class="card-link">
-                  {{'project_transcript' | trans}}
+                  {{'project_transcript'|trans }}
                 </a>
               </div>
             </div>
+          </div>
+          {% endif %}
+
+          {% if project | isAuthorizedOnProject('view_transcriptions') %}
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-image fa-fw" aria-hidden="true"></i> {{'project_transcription' | trans}}</h5>
+                <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+              <div class="card-footer text-right">
+                <a href="{{ path('project_transcriptions', {id: project.id})}}" class="card-link">
+                  {{'project_view_transciptions'|trans }}
+                </a>
+              </div>
+            </div>
+          </div>
           {% endif %}
 
           {% if project | isAuthorizedOnProject('editProject') %}
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>{{'project_edition' | trans}}</h5>
-              <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <div class="card-footer text-right">
-              <a href="{{ path('project_edit', {id: project.id})}}" class="card-link">
-                {{'project_edit' | trans}}
-              </a>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>{{'project_edition' | trans}}</h5>
+                <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+              <div class="card-footer text-right">
+                <a href="{{ path('project_edit', {id: project.id})}}" class="card-link">
+                  {{'project_edit' | trans}}
+                </a>
+              </div>
             </div>
           </div>
           {% endif %}
 
           {% if project | isAuthorizedOnProject('manageMedia') %}
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><i class="fas fa-image fa-fw" aria-hidden="true"></i>{{'project_management_media' | trans}}</h5>
-              <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <div class="card-footer text-right">
-              <a href="{{ path('project_media', {id: project.id})}}" class="card-link">
-                {{'project_manage_media' | trans}}
-              </a>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-image fa-fw" aria-hidden="true"></i>{{'project_management_media' | trans}}</h5>
+                <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+              <div class="card-footer text-right">
+                <a href="{{ path('project_media', {id: project.id})}}" class="card-link">
+                  {{'project_manage_media' | trans}}
+                </a>
+              </div>
             </div>
           </div>
           {% endif %}
 
           {% if project | isAuthorizedOnProject('manageUser') %}
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><i class="fas fa-users fa-fw" aria-hidden="true"></i>{{'project_management_user_statuses' | trans}}</h5>
-              <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <div class="card-footer text-right">
-              <a href="{{ path('status_project', {id: project.id})}}" class="card-link">
-                {{'project_manage_user_statuses' | trans}}
-              </a>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-users fa-fw" aria-hidden="true"></i>{{'project_management_user_statuses' | trans}}</h5>
+                <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+              <div class="card-footer text-right">
+                <a href="{{ path('status_project', {id: project.id})}}" class="card-link">
+                  {{'project_manage_user_statuses' | trans}}
+                </a>
+              </div>
             </div>
           </div>
           {% endif %}
 
         {% if project | isAuthorizedOnProject('register') %}
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title"><i class="fas fa-hand-holding-heart fa-fw" aria-hidden="true"></i>{{'project_registration' | trans}}</h5>
-            <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <div class="card-footer text-right">
-            <a href="{{ path('status_request', {id: project.id})}}" class="card-link">
-              {{'project_register' | trans}}
-            </a>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-hand-holding-heart fa-fw" aria-hidden="true"></i>{{'project_registration' | trans}}</h5>
+              <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <div class="card-footer text-right">
+              <a href="{{ path('status_request', {id: project.id})}}" class="card-link">
+                {{'project_register' | trans}}
+              </a>
+            </div>
           </div>
         </div>
         {% endif %}
       </div>
+
     </div>
     </div>
   </div>

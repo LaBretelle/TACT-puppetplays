@@ -97,3 +97,4 @@ validate_transcription: Validate transcription
 validator: Validator
 view_project: View details
 yes: Yes
+project_view_transciptions: View transcriptions
