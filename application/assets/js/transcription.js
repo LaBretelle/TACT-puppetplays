@@ -25,6 +25,10 @@ $(document).ready(() => {
     finishTranscription(e.target.dataset.id, e.target.dataset.pid)
   })
 
+  $('.btn-validate-transcription').on('click', (e) => {
+    validateTranscription(e.target.dataset.id, e.target.dataset.pid)
+  })
+
   $('.img-fluid').on('click', (e) => {
       const image = e.target.cloneNode()
       image.classList.remove('project-image')
@@ -52,7 +56,7 @@ const saveTranscription = (id) => {
 const finishTranscription = (id, pid) => {
     const tinyContent = tinymce.get('tiny-content').getContent();
     const url = routing.generateRoute('media_transcription_finish', {id: id})
-    const projectHome = routing.generateRoute('project_display', {id: pid})
+    const projectHome = routing.generateRoute('project_transcriptions', {id: pid})
     $.ajax({
       method: 'POST',
       url: url,
@@ -60,5 +64,17 @@ const finishTranscription = (id, pid) => {
     }).done(function(response) {
         window.location = projectHome
     })
+}
 
+const validateTranscription = (id, pid) => {
+    const tinyContent = tinymce.get('tiny-content').getContent();
+    const url = routing.generateRoute('media_transcription_validate', {id: id})
+    const projectHome = routing.generateRoute('project_transcriptions', {id: pid})
+    $.ajax({
+      method: 'POST',
+      url: url,
+      data: {'transcription': tinyContent}
+    }).done(function(response) {
+        window.location = projectHome
+    })
 }

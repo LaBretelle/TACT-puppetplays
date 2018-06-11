@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% import "media/macros.html.twig" as macros %}
+
+{% block body %}
+  <div class="page-content-container">
+    <div class="row">
+      <div class="col-10">
+        <h4><a href="{{ path("project_display", {'id': media.project.id} )}}">{{media.project.name}}</a> - {{'reread_transcription' | trans}} : {{media.name}}</h4>
+      </div>
+      <div class="col-2 text-right">
+        <div class="btn-group">
+          <button class="btn btn-link btn-validate-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'validate_transcription' | trans}}" type="button" name="button"><i class="fas fa-check-circle"></i></button>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <div class="row">
+      <div class="col-6">
+        <img class="img-fluid" src="{{ macros.mediaURL(media) }}" alt="">
+      </div>
+      <div class="col-6">
+        <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="8" cols="80">
+          {{media.transcription.content | raw}}
+        </textarea>
+      </div>
+    </div>
+  </div>
+
+
+  {# media modal #}
+  <div class="modal fade project-media-modal" id="project-media-modal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body"></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('build/js/transcription.js') }}"></script>
+{% endblock %}

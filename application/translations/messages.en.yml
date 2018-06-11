@@ -61,6 +61,7 @@ project_user_status: User statuses
 public_mail: Email visible to all
 register: register
 repeat_password: Repeat password
+reread_transcription: Reread transcription
 save: Save
 status_edit: Edit status
 status_remove: Remove
@@ -69,6 +70,8 @@ status_toggle_on: Validate
 status: Status
 submit: Submit
 transcriber: Transcriber
+transcriptions_page_title: Project media
+transcript_media: Transcription of media
 user_account_activated_error: An error occured while activating your account.
 user_account_activated: Your account is now activated.
 user_account_created: Your account was created but is not yet activated. You should receive an email to activate your account.
@@ -89,6 +92,7 @@ user_self_edit: Edit your profile
 user: User
 userfullname: Lastname - Firstname
 username: Login
+validate_transcription: Validate transcription
 validator: Validator
 view_project: View details
 yes: Yes

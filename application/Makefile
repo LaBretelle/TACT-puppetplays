@@ -31,3 +31,7 @@ routes:
 
 fixtures:
 	php bin/console doctrine:fixtures:load
+
+entity:
+	php bin/console make:entity
+	php bin/console doctrine:schema:update --force

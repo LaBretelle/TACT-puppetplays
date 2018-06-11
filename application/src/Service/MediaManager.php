@@ -32,6 +32,7 @@ class MediaManager
         $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_NONE);
         $transcription->setStatus($transcriptionStatus);
         $transcription->setContent('');
+        $transcription->setNbValidation(0);
         $media->setTranscription($transcription);
         return $media;
     }
@@ -54,6 +55,22 @@ class MediaManager
         $transcription->setUser($this->security->getUser());
         $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_IN_REREAD);
         $transcription->setStatus($transcriptionStatus);
+        $this->em->persist($transcription);
+        $this->em->flush();
+    }
+
+    public function validateTranscription(Media $media, string $content)
+    {
+        $transcription = $media->getTranscription();
+        $transcription->setContent($content);
+        $transcription->setUser($this->security->getUser());
+        $nbValidation = $transcription->getNbValidation();
+        $nbValidation++;
+        $transcription->setNbValidation($nbValidation);
+        if ($nbValidation > 1) {
+            $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_VALIDATED);
+            $transcription->setStatus($transcriptionStatus);
+        }
         $this->em->persist($transcription);
         $this->em->flush();
     }
@@ -105,6 +122,8 @@ class MediaManager
                 return 'status in-reread';
             } elseif ($statusName === AppEnums::TRANSCRIPTION_STATUS_NONE) {
                 return 'status none';
+            } elseif ($statusName === AppEnums::TRANSCRIPTION_STATUS_VALIDATED) {
+                return 'status validated';
             }
         }
 
