@@ -39,14 +39,6 @@ class ProjectType extends AbstractType
               'class' => 'tinymce-enabled'
             ]
           ])
-          ->add('status', EntityType::class, [
-            'class' => ProjectStatus::class,
-            'label' => 'project_status',
-            'translation_domain' => 'messages',
-            'choice_label' => 'name',
-            'choice_translation_domain' => 'fixtures'
-
-          ])
           ->add('public', CheckboxType::class, array(
               'label'    => 'is_public',
               'required' => false

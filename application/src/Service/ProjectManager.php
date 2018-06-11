@@ -29,6 +29,9 @@ class ProjectManager
     public function createFromForm($project)
     {
         $project->setCreatedAt(new \DateTime);
+        $repository = $this->em->getRepository('App:ProjectStatus');
+        $pStatus = $repository->findOneByName(AppEnums::PROJECT_STATUS_NEW_NAME);
+        $project->setStatus($pStatus);
         $this->em->persist($project);
         $this->em->flush();
 
