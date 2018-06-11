@@ -45,9 +45,7 @@
               </div>
             </div>
           </div>
-          {% endif %}
-
-          {% if project | isAuthorizedOnProject('view_transcriptions') %}
+          {% elseif project | isAuthorizedOnProject('view_transcriptions') %}
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
             <div class="card">
               <div class="card-body">
