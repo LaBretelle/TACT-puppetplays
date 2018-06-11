@@ -21,7 +21,7 @@ class MediaController extends Controller
         $this->mediaManager = $mediaManager;
     }
 
-  
+
 
     /**
      * @Route("/{id}/transcription/view", name="transcription_display")
@@ -47,6 +47,17 @@ class MediaController extends Controller
     }
 
     /**
+     * @Route("/{id}/transcription/reread", name="transcription_reread")
+     */
+    public function validateTranscription(Media $media)
+    {
+        return $this->render(
+            'media/reread.html.twig',
+            ['media' => $media]
+        );
+    }
+
+    /**
      * @Route("/{id}/transcription/save", name="transcription_save",options={"expose"=true}, methods="POST")
      */
     public function mediaTranscriptionSave(Media $media, Request $request)
@@ -63,6 +74,16 @@ class MediaController extends Controller
     {
         $content = $request->get('transcription');
         $this->mediaManager->finishTranscription($media, $content);
+        return $this->json([], $status = 200);
+    }
+
+    /**
+     * @Route("/{id}/transcription/validate", name="transcription_validate",options={"expose"=true}, methods="POST")
+     */
+    public function mediaTranscriptionValidate(Media $media, Request $request)
+    {
+        $content = $request->get('transcription');
+        $this->mediaManager->validateTranscription($media, $content);
         return $this->json([], $status = 200);
     }
 }

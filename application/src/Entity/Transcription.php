@@ -38,6 +38,11 @@ class Transcription
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbValidation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -93,6 +98,18 @@ class Transcription
     public function setStatus(?TranscriptionStatus $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getNbValidation(): ?int
+    {
+        return $this->nbValidation;
+    }
+
+    public function setNbValidation(?int $nbValidation): self
+    {
+        $this->nbValidation = $nbValidation;
 
         return $this;
     }

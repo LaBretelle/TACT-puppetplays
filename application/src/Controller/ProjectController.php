@@ -104,7 +104,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/{id}/transcription", name="transcriptions")
+     * @Route("/{id}/transcription", name="transcriptions", options={"expose"=true})
      */
     public function displayTranscriptions(Project $project)
     {

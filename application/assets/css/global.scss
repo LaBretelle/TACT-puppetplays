@@ -13,6 +13,15 @@ body > .container-fluid{
   margin:0 !important;
   padding:0 !important;
 }
+
+
+.btn-link {
+  color: #888;
+  &:hover {
+    color: #aaa;
+  }
+}
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
@@ -22,8 +31,9 @@ body > .container-fluid{
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
-  bottom: 3rem;
+  //bottom: 3rem;
   z-index: 10;
+  padding-bottom: 0;
 }
 
 /* Declare heights because of positioning of img element */
@@ -78,11 +88,13 @@ body > .container-fluid{
   .project-tile-desc {
     width: 95%;
     position: absolute;
+    word-wrap: break-word;
     top: 0;
     left: 50%;
     transform: translate(-50%, -20%);
     opacity: 0;
-    font-weight: 600;
+    font-weight: 300;
+    line-height: 50px;
   }
   .project-tile-action {
     width: 100%;
@@ -94,15 +106,17 @@ body > .container-fluid{
   }
   &.hover:hover {
     .project-tile-desc {
-      top: 20%;
+      top: 10%;
       opacity: 1;
+      line-height: 25px;
     }
     .project-tile-action {
-      top: 50%;
+      top: 60%;
       opacity: 1;
     }
     .project-tile-title {
       opacity: 0;
     }
+    background: rgba(0, 0, 0, 0.2);
   }
 }
