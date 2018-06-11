@@ -43,6 +43,8 @@ project_description: Description du projet
 project_edit: Editer le projet
 project_edition: Edition du projet
 project_enabled: Validé ?
+project_handle_user_statuses: Gérer les utilisateurs
+project_is_not_public: Projet privé
 project_manage_media: Gérer les médias
 project_manage_user_statuses: Gérer les utilisateurs
 project_management_media: Gestion les médias

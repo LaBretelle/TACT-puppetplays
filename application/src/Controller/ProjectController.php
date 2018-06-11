@@ -128,9 +128,10 @@ class ProjectController extends Controller
      */
     public function display(Project $project)
     {
+        $projectManagerUser = $this->projectManager->getProjectManagerUser($project);
         return $this->render(
             'project/display.html.twig',
-            ['project' => $project]
+            ['project' => $project, 'manager' => $projectManagerUser]
         );
     }
 }

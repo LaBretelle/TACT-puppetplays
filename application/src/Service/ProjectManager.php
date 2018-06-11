@@ -4,8 +4,8 @@ namespace App\Service;
 
 use App\Entity\Media;
 use App\Entity\Project;
-use App\Service\MediaManager;
 use App\Entity\User;
+use App\Service\MediaManager;
 use App\Service\AppEnums;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -94,5 +94,16 @@ class ProjectManager
             $this->em->remove($media);
         }
         $this->em->flush();
+    }
+
+    public function getProjectManagerUser(Project $project)
+    {
+        $statuses = $project->getUserStatuses();
+        foreach ($statuses as $userProjectStatus) {
+            /* @var UserProjectStatus $userProjectStatus */
+            if ($userProjectStatus->getStatus()->getName() === AppEnums::USER_STATUS_MANAGER_NAME) {
+                return $userProjectStatus->getUser();
+            }
+        }
     }
 }

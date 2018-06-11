@@ -10,6 +10,26 @@
           <div class="carousel-caption text-left">
             <h1>{{ project.name }}</h1>
             <p>{{ project.description | raw }}</p>
+            <hr/>
+            <div class="row">
+              <div class="col-4">
+                {% if manager.image %}
+                  <img class="user-profile-image" src="" alt="">
+                {% else %}
+                  <div class="user-profile-image">
+                    <div class="fas fa-user"></div>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="col-8">
+                <h5>{{manager.fullname}}</h5>
+                {% if manager.publicmail %}
+                  <h6>{{manager.email}}</h6>
+                {% endif %}
+              </div>
+            </div>
+
+            <hr/>
             <p>
               {% if userStatus %}
               <span class="badge badge-info">
@@ -20,6 +40,12 @@
               <span class="badge badge-success">
                 {{"app_admin"|trans}}
               </span>
+              {% endif %}
+
+              {% if not project.public %}
+                <span class="badge badge-danger">
+                  {{'project_is_not_public' | trans}}
+                </span>
               {% endif %}
             </p>
           </div>
