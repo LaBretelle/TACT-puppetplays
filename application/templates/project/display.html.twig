@@ -40,7 +40,23 @@
               </div>
               <div class="card-footer text-right">
                 <a href="{{ path('project_transcriptions', {id: project.id})}}" class="card-link">
-                  {{'project_transcript' | trans}}
+                  {{'project_transcript'|trans }}
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if project | isAuthorizedOnProject('view_transcriptions') %}
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-image fa-fw" aria-hidden="true"></i> {{'project_transcription' | trans}}</h5>
+                <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+              <div class="card-footer text-right">
+                <a href="{{ path('project_transcriptions', {id: project.id})}}" class="card-link">
+                  {{'project_view_transciptions'|trans }}
                 </a>
               </div>
             </div>
@@ -111,6 +127,7 @@
         </div>
         {% endif %}
       </div>
+
     </div>
     </div>
   </div>
