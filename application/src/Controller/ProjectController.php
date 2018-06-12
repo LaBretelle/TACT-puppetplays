@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Project;
 use App\Entity\Media;
-use App\Form\ProjectType;
+use App\Entity\Project;
+use App\Entity\UserProjectStatus;
 use App\Form\ProjectMediaType;
+use App\Form\ProjectType;
+use App\Service\AppEnums;
 use App\Service\ProjectManager;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Route("/project", name="project_")
@@ -30,7 +32,13 @@ class ProjectController extends Controller
     public function create(Request $request)
     {
         $project = new Project();
+        // add a default manager to the project
+        $userStatus = new UserProjectStatus();
+        $userStatus->setStatus($this->getDoctrine()->getRepository('App:UserStatus')->findOneByName(AppEnums::USER_STATUS_MANAGER_NAME));
+        $userStatus->setUser($this->getUser());
+        $project->addUserStatus($userStatus);
         $form = $this->createForm(ProjectType::class, $project);
+
 
         $form->handleRequest($request);
 
