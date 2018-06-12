@@ -13,6 +13,15 @@ $(document).ready(() => {
         deleteImage(currentDeleteAction)
     })
 
+    // handle file selection... if file input exists
+    const fileInput = document.getElementById('project_media_files')
+    if(fileInput) {
+      fileInput.onchange = (e) => {
+        const span = document.getElementById('nb-media-selected')
+        span.textContent = e.target.files.length
+      }
+    }
+
     $('.project-image').on('click', (e) => {
         const image = e.target.cloneNode()
         image.classList.remove('project-image')
