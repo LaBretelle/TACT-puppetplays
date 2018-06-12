@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 
+{% import "user/macros.html.twig" as macros %}
+
 {% block body %}
   {% set userStatus = app.user|status(project) %}
 
@@ -9,27 +11,14 @@
         <div class="container">
           <div class="carousel-caption text-left">
             <h1>{{ project.name }}</h1>
-            <p>{{ project.description | raw }}</p>
-            <hr/>
-            <div class="row">
-              <div class="col-4">
-                {% if manager.image %}
-                  <img class="user-profile-image" src="" alt="">
-                {% else %}
-                  <div class="user-profile-image">
-                    <div class="fas fa-user"></div>
-                  </div>
-                {% endif %}
+            <div class='row'>
+              <div class='col-8'>
+                <p>{{ project.description | raw }}</p>
               </div>
-              <div class="col-8">
-                <h5>{{manager.fullname}}</h5>
-                {% if manager.publicmail %}
-                  <h6>{{manager.email}}</h6>
-                {% endif %}
+              <div class='col-4'>
+                {{ macros.userSummary(manager) }}
               </div>
             </div>
-
-            <hr/>
             <p>
               {% if userStatus %}
               <span class="badge badge-info">

@@ -1,0 +1,18 @@
+{% macro userSummary(user) %}
+{% if user %}
+<div class='row'>
+  <div class="col-12">
+    <div class="avatar-container">
+      <div class="avatar-flip">
+        {% set imgUrl = user.image ? 'user_images/' ~ user.image : 'img/avatar-placeholder_640.png'  %}
+        <img src="{{asset(imgUrl)}}" height="150" width="150">
+      </div>
+      <div class="avatar-name">{{user.fullname}}</div>
+      {% if user.publicmail %}
+      <div class="avatar-email">{{ user.email }}</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endmacro %}
