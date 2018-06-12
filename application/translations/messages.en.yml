@@ -62,6 +62,7 @@ project_status: Project status
 project_transcript: Transcribe
 project_transcription: Transcription
 project_user_status: User statuses
+project_view_transciptions: View transcriptions
 public_mail: Email visible to all
 register: register
 repeat_password: Repeat password
@@ -98,6 +99,6 @@ userfullname: Lastname - Firstname
 username: Login
 validate_transcription: Validate transcription
 validator: Validator
+view_profile: View profile
 view_project: View details
 yes: Yes
-project_view_transciptions: View transcriptions

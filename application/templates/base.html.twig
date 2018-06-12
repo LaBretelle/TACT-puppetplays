@@ -42,7 +42,7 @@
             {% if app.user %}
 
               <li class="nav-item">
-                <a class="nav-link" href="{{ path('user_edit', {'id': app.user.id}) }}" data-placement="bottom" data-toggle="tooltip" title="{{ 'user_self_edit' | trans({}, 'messages')}}">
+                <a class="nav-link" href="{{ path('user_profile', {'id': app.user.id}) }}" data-placement="bottom" data-toggle="tooltip" title="{{ 'view_profile' | trans}}">
                   <i class="fas fa-user fa-fw"></i>{{app.user.fullname}}
                 </a>
               </li>

@@ -1,4 +1,4 @@
-{% macro userSummary(user) %}
+{% macro userSummary(user, full) %}
 {% if user %}
 <div class='row'>
   <div class="col-12">
@@ -10,6 +10,17 @@
       <div class="avatar-name">{{user.fullname}}</div>
       {% if user.publicmail %}
       <div class="avatar-email">{{ user.email }}</div>
+      {% endif %}
+      {% if full %}
+        <div class="avatar-description">{{ user.description | raw }}</div>
+      {% else %}
+        <div class="text-right">
+          <a data-placement="bottom" data-toggle="tooltip" title="{{ 'view_profile' | trans}}" href="{{ path("user_profile", {id: user.id})}}">
+            <button type="button" class="btn btn-light">
+              <i class="fas fa-eye"></i> 
+            </button>
+          </a>
+        </div>
       {% endif %}
     </div>
   </div>

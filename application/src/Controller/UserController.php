@@ -109,6 +109,16 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/profile/{id}", name="profile")
+     */
+    public function display(User $user)
+    {
+        return $this->render('user/display.html.twig', [
+         'user' => $user,
+        ]);
+    }
+
+    /**
      *
      * @Route("/password-lost", name="lost_password_form")
      */
