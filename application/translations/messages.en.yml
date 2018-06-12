@@ -100,5 +100,6 @@ userfullname: Lastname - Firstname
 username: Login
 validate_transcription: Validate transcription
 validator: Validator
+view_profile: View profile
 view_project: View details
 yes: Yes
