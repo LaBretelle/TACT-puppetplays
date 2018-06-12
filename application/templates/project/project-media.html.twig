@@ -15,7 +15,9 @@
   {% if project | isAuthorizedOnProject('manageMedia') %}
   <div class="row">
     <div class="col-12">
-        <div class="alert alert-info">{{'max_file_uploads_message' | trans}} - {{fileLimit}}</div>
+        <div class="alert alert-info">
+          <h6>{{'max_file_uploads_message' | trans({'%nb_max%': fileLimit})}} - <span id="nb-media-selected">0</span> {{'selected_media' | trans}} </h6>      
+        </div>
         {{ form_start(form) }}
           {{ form_row(form.files) }}
           {{ form_row(form.save) }}

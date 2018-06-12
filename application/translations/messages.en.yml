@@ -29,7 +29,7 @@ login: login
 logout: logout
 lost_password_link: I forgot my password
 manager: Manager
-max_file_uploads_message: Maximum number of simultaneous files allowed for upload
+max_file_uploads_message: You can simultaneously upload %nb_max% files
 media_delete_button_title: Delete media
 media_reread_button_title: Reread transcription
 media_transcribe_button_title: Transcribe
@@ -68,6 +68,7 @@ register: register
 repeat_password: Repeat password
 reread_transcription: Reread transcription
 save: Save
+selected_media: selected media
 status_edit: Edit status
 status_remove: Remove
 status_toggle_off: Unvalidate
