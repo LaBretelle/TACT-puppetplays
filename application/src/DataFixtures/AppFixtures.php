@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 use App\Entity\UserStatus;
 use App\Entity\ProjectStatus;
 use App\Entity\TranscriptionStatus;
+use App\Entity\Website;
 use App\Service\AppEnums;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -53,6 +54,12 @@ class AppFixtures extends Fixture
         $transcriptionStatusValidated = new TranscriptionStatus();
         $transcriptionStatusValidated->setName(AppEnums::TRANSCRIPTION_STATUS_VALIDATED);
         $om->persist($transcriptionStatusValidated);
+
+        // webiste properties
+        $website = new Website();
+        $website->setName('Please change me');
+        $website->setHomeText('This is the default home text...');
+        $om->persist($website);
 
         $om->flush();
     }

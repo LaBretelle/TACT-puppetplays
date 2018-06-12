@@ -1,5 +1,6 @@
 access_denied: Vous n'êtes pas autorisé à accéder à cette page.
 actions: Actions
+administrate_website_menu: Administrer les propriétés du site
 add_project: Créer un nouveau projet
 add_user-status: Ajouter un statut pour un utilisateur
 administrate_users_menu: Utilisateurs
@@ -20,7 +21,6 @@ email_renew_password_subject: PATCS - Demande de renouvellement de mot de passe.
 email: Mail
 filter_users_by: Filtrer par nom / prénom / mail / login
 firstname: Prénom
-home_title: PATACS - Platforme pour l'Annotation la Transcription l'Analyse de Corpus Scientifiques
 home: Accueil
 image: Image
 is_public: Projet public

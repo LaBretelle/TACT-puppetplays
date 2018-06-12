@@ -1,9 +1,14 @@
 <!DOCTYPE html>
+
+{% set website = '' | getWebsiteParams %}
+
 <html>
   <head>
     <meta charset="UTF-8">
     <title>
-      {% block title %}PATACS{% endblock %}
+      {% block title %}
+        {{ website.name  }}
+      {% endblock %}
     </title>
     {% block stylesheets %}
       <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
@@ -11,7 +16,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="{{ path('home') }}">PATACS</a>
+      <a class="navbar-brand" href="{{ path('home') }}">{{ website.name  }}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -24,6 +29,9 @@
           {% if is_granted('ROLE_ADMIN', app.user) %}
             <li class="nav-item">
               <a class="nav-link" href="{{ path('admin_user_list') }}">{{ 'administrate_users_menu' | trans}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('admin_website_properties')}}">{{ 'administrate_website_menu' | trans}}</a>
             </li>
           {% endif %}
           <li class="nav-item dropdown">
