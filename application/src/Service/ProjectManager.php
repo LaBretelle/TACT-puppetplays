@@ -57,6 +57,16 @@ class ProjectManager
         return $project;
     }
 
+    public function delete($project)
+    {
+        $project->setUpdatedAt(new \DateTime);
+        $project->setDeleted(true);
+        $this->em->persist($project);
+        $this->em->flush();
+
+        return $project;
+    }
+
     public function addProjectMedia(Project $project, array $files)
     {
         $basePath = $this->params->get('project_file_dir');

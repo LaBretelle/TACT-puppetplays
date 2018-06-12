@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="app_project")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
  * @UniqueEntity("name")
  */
 class Project
@@ -74,11 +74,17 @@ class Project
      */
     private $public = 1;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $deleted;
+
     public function __construct()
     {
         $this->financers = new ArrayCollection();
         $this->userStatuses = new ArrayCollection();
         $this->medias = new ArrayCollection();
+        $this->deleted = false;
     }
 
     public function getId(): ?int
@@ -254,6 +260,18 @@ class Project
     public function setPublic(bool $public): self
     {
         $this->public = $public;
+
+        return $this;
+    }
+
+    public function getDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
+
+    public function setDeleted(bool $deleted): self
+    {
+        $this->deleted = $deleted;
 
         return $this;
     }

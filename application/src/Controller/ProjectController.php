@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @Route("/project", name="project_")
@@ -20,10 +21,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjectController extends Controller
 {
     private $projectManager;
+    private $translator;
 
-    public function __construct(ProjectManager $projectManager)
+    public function __construct(ProjectManager $projectManager, TranslatorInterface $translator)
     {
         $this->projectManager = $projectManager;
+        $this->translator = $translator;
     }
 
     /**
@@ -34,7 +37,7 @@ class ProjectController extends Controller
         $project = new Project();
         // add a default manager to the project
         $userStatus = new UserProjectStatus();
-        $userStatus->setStatus($this->getDoctrine()->getRepository('App:UserStatus')->findOneByName(AppEnums::USER_STATUS_MANAGER_NAME));
+        $userStatus->setStatus($this->getDoctrine()->getRepository(UserStatus::class)->findOneByName(AppEnums::USER_STATUS_MANAGER_NAME));
         $userStatus->setUser($this->getUser());
         $project->addUserStatus($userStatus);
         $form = $this->createForm(ProjectType::class, $project);
@@ -84,6 +87,19 @@ class ProjectController extends Controller
             'project' => $project
           ]
       );
+    }
+
+    /**
+     * @Route("/{id}/delete", name="delete", methods="POST")
+     */
+    public function delete(Project $project)
+    {
+        $this->projectManager->delete($project);
+        $this->addFlash(
+          'info',
+          $this->translator->trans('project_deleted', [], 'messages')
+        );
+        return $this->redirectToRoute('home');
     }
 
     /**

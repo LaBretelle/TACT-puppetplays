@@ -1,12 +1,29 @@
 $(document).ready(function() {
+
   $(document).on('click', '#add-user-status', function(event) {
     event.preventDefault()
     formHandler.addUserStatus($collectionHolder)
   })
+
   $(document).on('click', '.remove-userstatus', function(event) {
     event.preventDefault()
     $(this).closest('.userstatus-container').remove()
   })
+
+  const deleteProjectForm = document.forms.deleteProject
+
+  deleteProjectForm.onsubmit = (e) => {
+    e.preventDefault()
+    console.log('form submitted')
+    $('.delete-project-confirm-modal').modal('show')
+    return false
+  }
+
+  $('.delete-project-confirm-button').on('click', (e) => {
+      if(e.target.dataset.action === 'confirm'){
+        deleteProjectForm.submit()
+      }
+  });
 
   let $collectionHolder
   $collectionHolder = $('div.userstatuses')

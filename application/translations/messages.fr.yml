@@ -8,6 +8,7 @@ app_admin: Administrateur du site
 cancel: Annuler
 confirm_account_anonymization: Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
 confirm_delete_project_media: Êtes vous sur de vouloir supprimer ce media ?
+confirm_project_deletion: Êtes vous sur de vouloir supprimer ce projet ?
 confirm_title: Veuillez confirmer!
 confirm: Je confirme!
 description: Description
@@ -39,6 +40,8 @@ not_enabled_yet: (Pas encore activé)
 not_registered: Non inscrit
 password: Mot de passe
 project_create: Création d'un projet
+project_delete: Supprimer le projet
+project_deleted: Le projet a été supprimé.
 project_description: Description du projet
 project_edit: Editer le projet
 project_edition: Edition du projet
