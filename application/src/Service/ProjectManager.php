@@ -10,6 +10,7 @@ use App\Service\AppEnums;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ProjectManager
 {
@@ -55,6 +56,25 @@ class ProjectManager
         $this->em->flush();
 
         return $project;
+    }
+
+    public function handleImage(Project $project, UploadedFile $file = null, string $previous_image = null)
+    {
+        if ($file) {
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $filePath = $this->params->get('project_file_dir').DIRECTORY_SEPARATOR.$project->getId();
+            $file->move($filePath, $fileName);
+            $project->setImage($fileName);
+
+            if ($previous_image && file_exists($filePath.DIRECTORY_SEPARATOR.$previous_image)) {
+                unlink($filePath.DIRECTORY_SEPARATOR.$previous_image);
+            }
+        } elseif ($previous_image) {
+            $project->setImage($previous_image);
+        }
+
+        $this->em->persist($project);
+        $this->em->flush();
     }
 
     public function delete($project)

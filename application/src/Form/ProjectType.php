@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Form\UserProjectStatusType;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -28,10 +29,12 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
           ->add('name', TextType::class, [
             'label' => 'project_name',
             'translation_domain' => 'messages'
           ])
+
           ->add('description', TextareaType::class, [
             'label' => 'project_description',
             'translation_domain' => 'messages',
@@ -39,10 +42,17 @@ class ProjectType extends AbstractType
               'class' => 'tinymce-enabled'
             ]
           ])
-          ->add('public', CheckboxType::class, array(
+          ->add('public', CheckboxType::class, [
               'label'    => 'is_public',
               'required' => false
-          ))
+          ])
+
+          ->add('image', FileType::class, [
+              'label' => 'image',
+              'translation_domain' => 'messages',
+              'required' => false,
+              'data_class' => null
+          ])
 
           ->add('save', SubmitType::class, array(
               'attr' => array('class' => 'save btn btn-primary pull-right'),

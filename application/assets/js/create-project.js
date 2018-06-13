@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+  $(document).on('click', '#delete-image', function(event) {
+      $('.project-image-row').empty()
+  })
+
   $(document).on('click', '#add-user-status', function(event) {
     event.preventDefault()
     formHandler.addUserStatus($collectionHolder)

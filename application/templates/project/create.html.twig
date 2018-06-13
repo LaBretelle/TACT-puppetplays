@@ -11,6 +11,7 @@
 <div class="page-content-container">
   <div class="row">
     <div class="col-10">
+
       <h3>
         {% if  project.id %}
           <a href="{{ path("project_display", {'id': project.id} )}}">{{ project.name }}</a>
@@ -35,6 +36,22 @@
     {{ form_row(form.name) }}
     {{ form_row(form.description) }}
     {{ form_row(form.public) }}
+    {{ form_row(form.image) }}
+
+    {% if project.image %}
+    <div class="row project-image-row">
+      <div class="col">
+        <img width=100% class="project-image-md" src="{{ asset('project_files/'~project.id~'/'~project.image) }}">
+        <input type="hidden" name="previous_image" value="{{ project.image }}" />
+      </div>
+      <div class="col">
+        <button id="delete-image" type="button" data-toggle="tooltip" data-placement="right" role="button" class="btn btn-danger" title="{{'uproject_delete_image' | trans}}">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+    {% endif %}
+
     {% if is_granted('ROLE_ADMIN') %}
       {{ form_label(form.userStatuses) }}
       <a id="add-user-status" class="btn btn-sm btn-secondary" href="#">

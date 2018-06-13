@@ -47,7 +47,11 @@ class ProjectController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            $previous_image = $request->get('previous_image');
+            
             $this->projectManager->createFromForm($project);
+            $this->projectManager->handleImage($project, $image, $previous_image);
 
             return $this->redirectToRoute('project_display', ['id' => $project->getId()]);
         }
@@ -76,7 +80,11 @@ class ProjectController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            $previous_image = $request->get('previous_image');
+
             $this->projectManager->editFromForm($project, $originalStatuses);
+            $this->projectManager->handleImage($project, $image, $previous_image);
 
             return $this->redirectToRoute('project_display', ['id' => $project->getId()]);
         }
