@@ -1,7 +1,11 @@
-$(document).ready(function() {
+import AppRouting from './modules/app-routing.js'
 
+const deleteProjectForm = document.forms.deleteProject
+const routing = new AppRouting()
+
+$(document).ready(function() {
   $(document).on('click', '#delete-image', function(event) {
-      $('.project-image-row').empty()
+    formHandler.deleteImage($(this).data("project-id"));
   })
 
   $(document).on('click', '#add-user-status', function(event) {
@@ -13,8 +17,6 @@ $(document).ready(function() {
     event.preventDefault()
     $(this).closest('.userstatus-container').remove()
   })
-
-  const deleteProjectForm = document.forms.deleteProject
 
   deleteProjectForm.onsubmit = (e) => {
     e.preventDefault()
@@ -35,6 +37,7 @@ $(document).ready(function() {
 })
 
 const formHandler = {
+
   addUserStatus: function(collectionHolder) {
     let prototype = collectionHolder.data('prototype')
     let index = collectionHolder.data('index')
@@ -42,5 +45,19 @@ const formHandler = {
     newForm = newForm.replace(/__name__/g, index)
     collectionHolder.data('index', index + 1)
     collectionHolder.append(newForm)
+  },
+
+  deleteImage: function(projectId) {
+    var url = routing.generateRoute('project_delete_image', {id: projectId})
+    $.ajax({
+          url: url,
+          type: 'DELETE',
+          async: true,
+          success: function () {
+              $('.project-image-row').empty()
+          }
+      })
+      
+      return false
   }
 }
