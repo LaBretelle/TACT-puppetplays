@@ -13,6 +13,7 @@
 /application/public/build/
 /application/public/user_images/*
 /application/public/project_files/*
+/application/public/platform/*
 !/application/public/user_images/.gitkeep
 /application/npm-debug.log
 /application/yarn-error.log
