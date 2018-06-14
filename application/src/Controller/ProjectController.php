@@ -11,11 +11,11 @@ use App\Form\ProjectType;
 use App\Service\AppEnums;
 use App\Service\FileManager;
 use App\Service\ProjectManager;
+use App\Service\FlashManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @Route("/project", name="project_")
@@ -23,14 +23,14 @@ use Symfony\Component\Translation\TranslatorInterface;
 class ProjectController extends Controller
 {
     private $projectManager;
-    private $translator;
     private $fileManager;
+    private $flashManager;
 
-    public function __construct(ProjectManager $projectManager, TranslatorInterface $translator, FileManager $fileManager)
+    public function __construct(ProjectManager $projectManager, FileManager $fileManager, FlashManager $flashManager)
     {
         $this->projectManager = $projectManager;
-        $this->translator = $translator;
         $this->fileManager = $fileManager;
+        $this->flashManager = $flashManager;
     }
 
     /**
@@ -55,6 +55,8 @@ class ProjectController extends Controller
 
             $this->projectManager->createFromForm($project);
             $this->projectManager->handleImage($project, $image, $previous_image);
+
+            $this->flashManager->add('notice', 'project_created');
 
             return $this->redirectToRoute('project_display', ['id' => $project->getId()]);
         }
@@ -89,6 +91,8 @@ class ProjectController extends Controller
             $this->projectManager->editFromForm($project, $originalStatuses);
             $this->projectManager->handleImage($project, $image, $previous_image);
 
+            $this->flashManager->add('notice', 'project_edited');
+
             return $this->redirectToRoute('project_display', ['id' => $project->getId()]);
         }
 
@@ -107,10 +111,8 @@ class ProjectController extends Controller
     public function delete(Project $project)
     {
         $this->projectManager->delete($project);
-        $this->addFlash(
-          'info',
-          $this->translator->trans('project_deleted', [], 'messages')
-        );
+        $this->flashManager->add('info', 'project_deleted');
+
         return $this->redirectToRoute('home');
     }
 
@@ -156,6 +158,7 @@ class ProjectController extends Controller
     public function removeProjectMedia(Media $media)
     {
         $this->projectManager->removeProjectMedia($media);
+
         return $this->json([], $status = 200);
     }
 
@@ -177,6 +180,7 @@ class ProjectController extends Controller
     public function display(Project $project)
     {
         $projectManagerUser = $this->projectManager->getProjectManagerUser($project);
+
         return $this->render(
             'project/display.html.twig',
             ['project' => $project, 'manager' => $projectManagerUser]

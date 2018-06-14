@@ -34,6 +34,7 @@ Encore
   .addStyleEntry('css/create-project', './assets/css/create-project.scss')
   .addStyleEntry('css/project-media', './assets/css/project-media.scss')
   .addStyleEntry('css/user', './assets/css/admin/user.scss')
+  .addStyleEntry('css/toastr', './node_modules/toastr/build/toastr.min.css')
 
   .enableSassLoader(function(sassOptions) {}, {
     resolveUrlLoader: false
@@ -49,6 +50,7 @@ Encore
   .createSharedEntry('vendor', [
         'jquery',
         'bootstrap',
+        'toastr',
         //'tinymce/tinymce',
         //'tinymce/themes/modern/theme',
         '@fortawesome/fontawesome',

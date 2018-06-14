@@ -12,6 +12,7 @@
     </title>
     {% block stylesheets %}
       <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+      <link rel="stylesheet" href="{{ asset('build/css/toastr.css') }}">
     {% endblock %}
   </head>
   <body>
@@ -76,16 +77,15 @@
     </div>
   </nav>
   <div class="container-fluid">
-    {% for label, messages in app.flashes %}
-      {% for message in messages %}
-        <div class="alert alert-{{ label }}">
-          {{ message }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      {% endfor %}
+
+  {% for label, messages in app.flashes %}
+    {% for message in messages %}
+      <div class="invisible" id="flashes">
+        <div class="flash" data-label="{{ label }}" data-message="{{ message|e('html_attr') }}"></div>
+      </div>
     {% endfor %}
+  {% endfor %}
+
     {% block body %}{% endblock %}
   </div>
   <nav class="navbar fixed-bottom navbar-light bg-light">

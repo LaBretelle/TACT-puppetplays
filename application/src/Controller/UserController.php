@@ -8,6 +8,7 @@ use App\Form\UserType;
 use App\Form\UserTypeFull;
 use App\Service\MailManager;
 use App\Service\UserManager;
+use App\Service\FlashManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,12 +24,18 @@ class UserController extends Controller
     private $userManager;
     private $mailManager;
     private $translator;
+    private $flashManager;
 
-    public function __construct(UserManager $userManager, MailManager $mailManager, TranslatorInterface $translator)
-    {
+    public function __construct(
+      UserManager $userManager,
+      MailManager $mailManager,
+      TranslatorInterface $translator,
+      FlashManager $flashManager
+      ) {
         $this->userManager = $userManager;
         $this->mailManager = $mailManager;
         $this->translator = $translator;
+        $this->flashManager = $flashManager;
     }
 
     /**
@@ -42,10 +49,8 @@ class UserController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->userManager->createUserFromForm($user);
             $this->mailManager->sendConfirmationMail($user);
-            $this->addFlash(
-              'notice',
-              $this->translator->trans('user_account_created', [], 'messages')
-            );
+            $this->flashManager->add('notice', 'user_account_created');
+
             return $this->redirectToRoute('home');
         }
 
@@ -78,10 +83,8 @@ class UserController extends Controller
             $previous_image = $request->get('previous_image');
 
             $this->userManager->updateUser($user, $image, $previous_image);
-            $this->addFlash(
-              'success',
-              $this->translator->trans('user_account_updated', [], 'messages')
-            );
+            $this->flashManager->add('success', 'user_account_updated');
+
             return $this->redirectToRoute('home');
         }
 
@@ -98,7 +101,6 @@ class UserController extends Controller
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
@@ -136,22 +138,15 @@ class UserController extends Controller
                 $this->mailManager->sendRecoverPasswordMail($user);
                 $mailparts = explode('@', $user->getEmail());
                 $obfuscatedMail = substr_replace($mailparts[0], '*', 3).'@'.$mailparts[1];
-                $this->addFlash(
-                  'success',
-                  $this->translator->trans('user_renew_password_mail_sent', ['%usermail%' => $obfuscatedMail], 'messages')
-                );
+                $this->flashManager->add('success', 'user_renew_password_mail_sent', ['%usermail%' => $obfuscatedMail]);
             } else {
-                $this->addFlash(
-                'danger',
-                $this->translator->trans('user_renew_password_error', [], 'messages')
-              );
+                $this->flashManager->add('danger', 'user_renew_password_error');
             }
 
             return $this->redirectToRoute('home');
         }
-        return $this->render(
-          'user/recover.html.twig'
-        );
+
+        return $this->render('user/recover.html.twig');
     }
 
     /**
@@ -164,10 +159,8 @@ class UserController extends Controller
         if (null === $token) {
             $token = $request->get('token');
             if (!$token) {
-                $this->addFlash(
-                  'danger',
-                  $this->translator->trans('user_renew_password_error', [], 'messages')
-                );
+                $this->flashManager->add('danger', 'user_renew_password_error');
+
                 return $this->redirectToRoute('home');
             }
         }
@@ -175,25 +168,17 @@ class UserController extends Controller
         $user = $repository->findOneBy(['confirmationToken' => $token]);
 
         if (!$user) {
-            $this->addFlash(
-              'danger',
-              $this->translator->trans('user_renew_password_error', [], 'messages')
-            );
+            $this->flashManager->add('danger', 'user_renew_password_error');
+
             return $this->redirectToRoute('home');
         }
         $form = $this->createForm(UserResetPasswordType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($this->userManager->resetPassword($user)) {
-                $this->addFlash(
-                'success',
-                $this->translator->trans('user_renew_password_success', [], 'messages')
-              );
+                $this->flashManager->add('success', 'user_renew_password_success');
             } else {
-                $this->addFlash(
-                'danger',
-                $this->translator->trans('user_renew_password_error', [], 'messages')
-              );
+                $this->flashManager->add('danger', 'user_renew_password_error');
             }
 
             return $this->redirectToRoute('home');
@@ -219,17 +204,13 @@ class UserController extends Controller
             $user->setConfirmationToken(null);
             $em->persist($user);
             $em->flush();
-            $this->addFlash(
-              'success',
-              $this->translator->trans('user_account_activated', [], 'messages')
-            );
+            $this->flashManager->add('success', 'user_account_activated');
+
             return $this->redirectToRoute('home');
         }
 
-        $this->addFlash(
-          'danger',
-          $this->translator->trans('user_account_activated_error', [], 'messages')
-        );
+        $this->flashManager->add('danger', 'user_account_activated_error');
+
         return $this->redirectToRoute('home');
     }
 }

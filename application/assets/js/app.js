@@ -1,5 +1,6 @@
 // Import TinyMCE
 import tinymce from 'tinymce/tinymce'
+var toastr = require('toastr');
 
 // A theme is also required
 import 'tinymce/themes/modern/theme'
@@ -12,7 +13,35 @@ $(document).ready(() => {
 
   $('[data-toggle="popover"]').popover()
   $('[data-toggle="tooltip"]').tooltip()
-  // Initialize the app
+
+  /*******************
+    TOASTER
+  *******************/
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+
+  $("#flashes .flash").each(function(  ) {
+    toastr.info($(this).data("message"))
+  });
+
+  /*******************
+    TINYMCE
+  *******************/
   tinymce.init({
       selector: 'textarea.tinymce-enabled',
       plugins: ['paste', 'link'],
@@ -22,4 +51,5 @@ $(document).ready(() => {
         })
       }
   })
+
 })
