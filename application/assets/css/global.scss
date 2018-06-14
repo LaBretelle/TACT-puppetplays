@@ -38,6 +38,11 @@ body > .container-fluid{
   padding-bottom: 0;
 }
 
+.carousel-custom {
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+
 .project-description {
     max-height:300px;
     overflow:auto;
