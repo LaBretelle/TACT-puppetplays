@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
-{% set website = '' | getWebsiteParams %}
+{% set platform = '' | getPlatformParams %}
 
 <html>
   <head>
     <meta charset="UTF-8">
     <title>
       {% block title %}
-        {{ website.name  }}
+        {{ platform.name  }}
       {% endblock %}
     </title>
     {% block stylesheets %}
@@ -17,7 +17,12 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="{{ path('home') }}">{{ website.name  }}</a>
+      <a class="navbar-brand" data-toggle="tooltip" title="{{'home' | trans}}" href="{{ path('home') }}">
+        {% if platform.logo %}
+          <img class="platform-logo" src="{{ asset('platform/'~ platform.logo) }}">
+        {% endif %}
+        {{ platform.name  }}
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -32,7 +37,7 @@
               <a class="nav-link" href="{{ path('admin_user_list') }}">{{ 'administrate_users_menu' | trans}}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ path('admin_website_properties')}}">{{ 'administrate_website_menu' | trans}}</a>
+              <a class="nav-link" href="{{ path('admin_platform_properties')}}">{{ 'administrate_platform_menu' | trans}}</a>
             </li>
           {% endif %}
           <li class="nav-item dropdown">

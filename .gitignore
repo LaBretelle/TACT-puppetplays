@@ -2,7 +2,7 @@
 /application/.bash_history
 /application/.env
 /application/public/bundles/
-/application/public/routes/
+/application/public/routes/*
 /application/var/
 /application/vendor/
 /application/.composer

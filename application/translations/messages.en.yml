@@ -2,9 +2,9 @@ access_denied: You are not allowed to access this page.
 actions: Actions
 add_project: Create new project
 add_user-status: Add status for an user
+administrate_platform_menu: Administrate platform
 administrate_users_menu: Users
 administrate_users_title: Platform users administration
-administrate_website_menu: Administrate site properties
 app_admin: Site administrator
 cancel: Cancel
 confirm_account_anonymization: If you continue the account informations will be anonimized. This action is irreversible.
@@ -42,6 +42,10 @@ no: No
 not_enabled_yet: (Not enabled yet)
 not_registered: Not registered
 password: Password
+platform_page_title: Platform administration
+platform_home_text: Platform home text
+platform_logo: Platform logo
+platform_name: Platform name
 project_create: Project creation
 project_delete: Delete project
 project_deleted: Project was deleted.

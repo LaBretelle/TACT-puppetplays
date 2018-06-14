@@ -1,6 +1,7 @@
 import AppRouting from './modules/app-routing.js'
 
 const deleteProjectForm = document.forms.deleteProject
+
 const routing = new AppRouting()
 
 $(document).ready(function() {
@@ -18,11 +19,13 @@ $(document).ready(function() {
     $(this).closest('.userstatus-container').remove()
   })
 
-  deleteProjectForm.onsubmit = (e) => {
-    e.preventDefault()
-    console.log('form submitted')
-    $('.delete-project-confirm-modal').modal('show')
-    return false
+  if(deleteProjectForm) {
+    deleteProjectForm.onsubmit = (e) => {
+      e.preventDefault()
+      console.log('form submitted')
+      $('.delete-project-confirm-modal').modal('show')
+      return false
+    }
   }
 
   $('.delete-project-confirm-button').on('click', (e) => {
@@ -57,7 +60,7 @@ const formHandler = {
               $('.project-image-row').empty()
           }
       })
-      
+
       return false
   }
 }
