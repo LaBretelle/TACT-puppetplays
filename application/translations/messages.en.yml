@@ -107,5 +107,5 @@ validate_transcription: Validate transcription
 validator: Validator
 view_profile: View profile
 view_project: View details
-view_transcriptions_long: Vous permet de voir les médias et transcriptions associées. Pour participer, vous devez préalablement vous inscrire.
+view_transcriptions_long: Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
 yes: Yes
