@@ -9,6 +9,7 @@ use App\Entity\UserStatus;
 use App\Form\ProjectMediaType;
 use App\Form\ProjectType;
 use App\Service\AppEnums;
+use App\Service\FileManager;
 use App\Service\ProjectManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,11 +24,13 @@ class ProjectController extends Controller
 {
     private $projectManager;
     private $translator;
+    private $fileManager;
 
-    public function __construct(ProjectManager $projectManager, TranslatorInterface $translator)
+    public function __construct(ProjectManager $projectManager, TranslatorInterface $translator, FileManager $fileManager)
     {
         $this->projectManager = $projectManager;
         $this->translator = $translator;
+        $this->fileManager = $fileManager;
     }
 
     /**
@@ -49,7 +52,7 @@ class ProjectController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('image')->getData();
             $previous_image = $request->get('previous_image');
-            
+
             $this->projectManager->createFromForm($project);
             $this->projectManager->handleImage($project, $image, $previous_image);
 
@@ -155,6 +158,18 @@ class ProjectController extends Controller
         $this->projectManager->removeProjectMedia($media);
         return $this->json([], $status = 200);
     }
+
+    /**
+     * @Route("/{id}/remove-image", name="delete_image", options={"expose"=true}, methods="DELETE")
+     */
+    public function removeProjectImage(Project $project)
+    {
+        $this->projectManager->removeImage($project);
+
+        return $this->json([], $status = 200);
+    }
+
+
 
     /**
      * @Route("/{id}", name="display", options={"expose"=true})

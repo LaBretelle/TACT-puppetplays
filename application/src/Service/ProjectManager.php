@@ -5,26 +5,30 @@ namespace App\Service;
 use App\Entity\Media;
 use App\Entity\Project;
 use App\Entity\User;
-use App\Service\MediaManager;
 use App\Service\AppEnums;
+use App\Service\FileManager;
+use App\Service\MediaManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProjectManager
 {
     protected $em;
     protected $authChecker;
-    protected $params;
     protected $mediaManager;
+    protected $fileManager;
 
-    public function __construct(EntityManagerInterface $em, MediaManager $mediaManager, AuthorizationCheckerInterface $authChecker, ParameterBagInterface $params)
-    {
+    public function __construct(
+      EntityManagerInterface $em,
+      MediaManager $mediaManager,
+      AuthorizationCheckerInterface $authChecker,
+      FileManager $fileManager
+    ) {
         $this->em = $em;
         $this->authChecker = $authChecker;
-        $this->params = $params;
         $this->mediaManager = $mediaManager;
+        $this->fileManager = $fileManager;
     }
 
     public function createFromForm($project)
@@ -61,14 +65,10 @@ class ProjectManager
     public function handleImage(Project $project, UploadedFile $file = null, string $previous_image = null)
     {
         if ($file) {
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $filePath = $this->params->get('project_file_dir').DIRECTORY_SEPARATOR.$project->getId();
+            $fileName = '__background.'.$file->guessExtension();
+            $filePath = $this->fileManager->getProjectPath($project);
             $file->move($filePath, $fileName);
             $project->setImage($fileName);
-
-            if ($previous_image && file_exists($filePath.DIRECTORY_SEPARATOR.$previous_image)) {
-                unlink($filePath.DIRECTORY_SEPARATOR.$previous_image);
-            }
         } elseif ($previous_image) {
             $project->setImage($previous_image);
         }
@@ -87,10 +87,24 @@ class ProjectManager
         return $project;
     }
 
+    public function removeImage(Project $project)
+    {
+        $image = $project->getImage();
+        $path = $this->fileManager->getProjectPath($project).$image;
+        $this->fileManager->delete($path);
+        $project->setImage(null);
+
+        $this->em->persist($project);
+        $this->em->flush();
+
+        return;
+    }
+
     public function addProjectMedia(Project $project, array $files)
     {
-        $basePath = $this->params->get('project_file_dir');
-        $uploadPath = $basePath.DIRECTORY_SEPARATOR.$project->getId();
+        $basePath = $this->fileManager->getBaseProjectPath();
+        $uploadPath = $this->fileManager->getProjectPath($project);
+
         if (!is_dir($basePath)) {
             mkdir($basePath);
         }
@@ -114,19 +128,21 @@ class ProjectManager
             $this->em->persist($project);
         }
         $this->em->flush();
+
         return $project;
     }
 
     public function removeProjectMedia(Media $media)
     {
         $project = $media->getProject();
-        $basePath = $this->params->get('project_file_dir');
-        $filePath = $basePath.DIRECTORY_SEPARATOR.$project->getId().DIRECTORY_SEPARATOR.$media->getUrl();
-        if (file_exists($filePath)) {
-            unlink($filePath);
-            $this->em->remove($media);
-        }
+
+        $filePath = $this->fileManager->getProjectPath($project).$media->getUrl();
+        $this->fileManager->delete($filePath);
+
+        $this->em->remove($media);
         $this->em->flush();
+
+        return;
     }
 
     public function getProjectManagerUser(Project $project)

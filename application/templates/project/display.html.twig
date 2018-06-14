@@ -7,7 +7,7 @@
 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active" style="{{ project.image ? 'background-size:cover;background-repeat:no-repeat;background-image: url(' ~ asset('project_files/'~project.id~'/'~project.image) ~ ')' }}">
+      <div class="carousel-item active {{ project.image ? "carousel-custom" }}" style="{{ project.image ? 'background-image: url(' ~ asset('project_files/'~project.id~'/'~project.image) ~ ')' }}">
         <div class="container">
           <div class="carousel-caption text-left">
             <h1>{{ project.name }}</h1>

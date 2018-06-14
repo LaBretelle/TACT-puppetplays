@@ -4,25 +4,29 @@ namespace App\Service;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Service\FileManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserManager
 {
     private $passwordEncoder;
     private $em;
-    private $params;
     private $repository;
+    private $fileManager;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, ParameterBagInterface $params, UserRepository $repository)
-    {
+    public function __construct(
+      UserPasswordEncoderInterface $passwordEncoder,
+      EntityManagerInterface $em,
+      UserRepository $repository,
+      FileManager $fileManager
+      ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->em = $em;
-        $this->params = $params;
         $this->repository = $repository;
+        $this->fileManager = $fileManager;
     }
 
     public function createUser(string $lastname, string $firstname, string $username, string $email, string $plainPassword, array $roles)
@@ -65,16 +69,13 @@ class UserManager
     {
         if ($file) {
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $filePath = $this->params->get('user_files_directory');
+            $filePath = $this->fileManager->getUserPath();
             // moves the file to the directory where brochures are stored
-            $file->move(
-                $filePath,
-                $fileName
-            );
+            $file->move($filePath, $fileName);
             $user->setImage($fileName);
 
-            if ($previous_image && file_exists($filePath.DIRECTORY_SEPARATOR.$previous_image)) {
-                unlink($filePath.DIRECTORY_SEPARATOR.$previous_image);
+            if ($previous_image) {
+                $this->fileManager->delete($filePath.$previous_image);
             }
         } elseif ($previous_image) {
             // explicitly re set the value, but no need to upload image... it's already there
@@ -82,6 +83,8 @@ class UserManager
         }
 
         $this->saveUser($user);
+
+        return;
     }
 
     public function userCanRenewPassword(string $data)
@@ -144,12 +147,10 @@ class UserManager
 
     public function deleteUserImage(User $user)
     {
-        $basePath = $this->params->get('user_files_directory');
-        $fullPath = $basePath.DIRECTORY_SEPARATOR.$user->getImage();
-        if (file_exists($fullPath)) {
-            unlink($fullPath);
-        }
+        $path = $this->fileManager->getUserPath().$user->getImage();
+        $this->fileManager->delete($fullPath);
         $user->setImage(null);
+
         return $user;
     }
 
