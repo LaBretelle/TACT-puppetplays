@@ -53,19 +53,19 @@ class PermissionManager
             break;
 
           case "transcribe":
-          if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME || $statusName === AppEnums::USER_STATUS_TRANSCRIBER_NAME) {
-              return true;
-          }
-          break;
+            if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME || $statusName === AppEnums::USER_STATUS_TRANSCRIBER_NAME) {
+                return true;
+            }
+            break;
 
           case 'view_transcriptions':
-          if ($isPublic && !$currentUser) {
-              return true;
-          } elseif ($isPublic && $status === null) {
-              return true;
-          }
+            if ($isPublic && !$currentUser) {
+                return true;
+            } elseif ($isPublic && $status === null) {
+                return true;
+            }
+            break;
 
-          // no break
           case "register":
             if (!$userProjectStatus && $currentUser != null) {
                 return true;

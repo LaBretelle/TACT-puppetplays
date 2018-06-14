@@ -1,10 +1,10 @@
 access_denied: You are not allowed to access this page.
 actions: Actions
-administrate_website_menu: Administrate site properties
 add_project: Create new project
 add_user-status: Add status for an user
 administrate_users_menu: Users
 administrate_users_title: Platform users administration
+administrate_website_menu: Administrate site properties
 app_admin: Site administrator
 cancel: Cancel
 confirm_account_anonymization: If you continue the account informations will be anonimized. This action is irreversible.
@@ -13,6 +13,7 @@ confirm_project_deletion: Are you sure you want to delete this project ?
 confirm_title: Please confirm!
 confirm: I confirm!
 description: Description
+edit_project_long: Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit: Edit
 email_or_login_placeholder: Login / email
 email_or_login: Please enter your login or email
@@ -28,6 +29,8 @@ lastname: Lastname
 login: login
 logout: logout
 lost_password_link: I forgot my password
+manage_media_long: Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
+manage_user_statuses_long: Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.
 manager: Manager
 max_file_uploads_message: You can simultaneously upload %nb_max% files
 media_delete_button_title: Delete media
@@ -75,6 +78,8 @@ status_toggle_off: Unvalidate
 status_toggle_on: Validate
 status: Status
 submit: Submit
+subscribe_long: L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
+transcribe_long: Vous permet d'accéder au média et de proposer des transcriptions.
 transcriber: Transcriber
 transcript_media: Transcription of media
 transcriptions_page_title: Project media
@@ -102,4 +107,5 @@ validate_transcription: Validate transcription
 validator: Validator
 view_profile: View profile
 view_project: View details
+view_transcriptions_long: Vous permet de voir les médias et transcriptions associées. Pour participer, vous devez préalablement vous inscrire.
 yes: Yes
