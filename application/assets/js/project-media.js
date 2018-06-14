@@ -39,7 +39,7 @@ const deleteImage = (element) => {
     method: 'DELETE',
     url: url
   }).done(function(response) {
-      element.closest('.col-2').remove();
+      element.closest('.col-2').remove()
       currentDeleteAction = null;
   })
 }
