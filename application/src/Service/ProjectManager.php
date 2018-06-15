@@ -6,6 +6,7 @@ use App\Entity\Media;
 use App\Entity\Project;
 use App\Entity\User;
 use App\Service\AppEnums;
+use App\Service\DirectoryManager;
 use App\Service\FileManager;
 use App\Service\MediaManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,17 +19,20 @@ class ProjectManager
     protected $authChecker;
     protected $mediaManager;
     protected $fileManager;
+    protected $dirManager;
 
     public function __construct(
       EntityManagerInterface $em,
       MediaManager $mediaManager,
       AuthorizationCheckerInterface $authChecker,
-      FileManager $fileManager
+      FileManager $fileManager,
+      DirectoryManager $dirManager
     ) {
         $this->em = $em;
         $this->authChecker = $authChecker;
         $this->mediaManager = $mediaManager;
         $this->fileManager = $fileManager;
+        $this->dirManager = $dirManager;
     }
 
     public function createFromForm($project)
@@ -98,6 +102,37 @@ class ProjectManager
         $this->em->flush();
 
         return;
+    }
+
+    public function unzip($zipFile)
+    {
+        $projectPath = $this->fileManager->getProjectPath($project);
+
+        // unzip
+      // récursivement copier les images dans le dossier du projet,, à plat
+      // créer un objet Directory par répertoire et s'en servir comme parent des images et des autres sous-répartoires directs.
+      // à la racine, l'attribut parent des dossiers et fichiers est NULL
+    }
+
+    public function recursiveBrowse($dir, $parent)
+    {
+        $result = array();
+
+        $cdir = scandir($dir);
+        foreach ($cdir as $key => $value) {
+            if (!in_array($value, array(".",".."))) {
+                $path = $dir . DIRECTORY_SEPARATOR . $value;
+                if (is_dir($path)) {
+                    $newDirectory = $this->dirManager->create($value, $parent);
+                    recursiveBrowse($path, $newDirectory);
+                } else {
+                    // createMedia with current parent
+                    // copier le fichier dans le project path dir
+                }
+            }
+        }
+
+        return $result;
     }
 
     public function addProjectMedia(Project $project, array $files)
