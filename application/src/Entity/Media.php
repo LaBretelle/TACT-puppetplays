@@ -37,9 +37,27 @@ class Media
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Directory", inversedBy="medias")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $parent;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getParent(): ?Directory
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?Directory $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
     }
 
     public function getProject(): ?Project
