@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,26 +24,19 @@ class Transcription
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="transcriptions")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Media", mappedBy="transcription", cascade={"persist", "remove"})
      */
     private $media;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TranscriptionStatus", inversedBy="transcriptions")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\TranscriptionLog", mappedBy="transcription", cascade={"persist", "remove"})
      */
-    private $status;
+    private $transcriptionLogs;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $nbValidation;
+    public function __construct()
+    {
+        $this->transcriptionLogs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -56,18 +51,6 @@ class Transcription
     public function setContent(?string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }
@@ -90,26 +73,33 @@ class Transcription
         return $this;
     }
 
-    public function getStatus(): ?TranscriptionStatus
+    /**
+     * @return Collection|TranscriptionLog[]
+     */
+    public function getTranscriptionLogs(): Collection
     {
-        return $this->status;
+        return $this->transcriptionLogs;
     }
 
-    public function setStatus(?TranscriptionStatus $status): self
+    public function addTranscriptionLog(TranscriptionLog $transcriptionLog): self
     {
-        $this->status = $status;
+        if (!$this->transcriptionLogs->contains($transcriptionLog)) {
+            $this->transcriptionLogs[] = $transcriptionLog;
+            $transcriptionLog->setTranscription($this);
+        }
 
         return $this;
     }
 
-    public function getNbValidation(): ?int
+    public function removeTranscriptionLog(TranscriptionLog $transcriptionLog): self
     {
-        return $this->nbValidation;
-    }
-
-    public function setNbValidation(?int $nbValidation): self
-    {
-        $this->nbValidation = $nbValidation;
+        if ($this->transcriptionLogs->contains($transcriptionLog)) {
+            $this->transcriptionLogs->removeElement($transcriptionLog);
+            // set the owning side to null (unless already changed)
+            if ($transcriptionLog->getTranscription() === $this) {
+                $transcriptionLog->setTranscription(null);
+            }
+        }
 
         return $this;
     }

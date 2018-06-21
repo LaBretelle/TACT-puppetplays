@@ -3,7 +3,6 @@ namespace App\DataFixtures;
 
 use App\Entity\UserStatus;
 use App\Entity\ProjectStatus;
-use App\Entity\TranscriptionStatus;
 use App\Entity\Platform;
 use App\Service\AppEnums;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -40,20 +39,6 @@ class AppFixtures extends Fixture
         $projectStatusFinished->setName(AppEnums::PROJECT_STATUS_FINISHED_NAME);
         $projectStatusFinished->setDescription(AppEnums::PROJECT_STATUS_FINISHED_DESC);
         $om->persist($projectStatusFinished);
-
-        // transcription statuses
-        $transcriptionStatusNew = new TranscriptionStatus();
-        $transcriptionStatusNew->setName(AppEnums::TRANSCRIPTION_STATUS_NONE);
-        $om->persist($transcriptionStatusNew);
-        $transcriptionStatusInProgress = new TranscriptionStatus();
-        $transcriptionStatusInProgress->setName(AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS);
-        $om->persist($transcriptionStatusInProgress);
-        $transcriptionStatusInReread = new TranscriptionStatus();
-        $transcriptionStatusInReread->setName(AppEnums::TRANSCRIPTION_STATUS_IN_REREAD);
-        $om->persist($transcriptionStatusInReread);
-        $transcriptionStatusValidated = new TranscriptionStatus();
-        $transcriptionStatusValidated->setName(AppEnums::TRANSCRIPTION_STATUS_VALIDATED);
-        $om->persist($transcriptionStatusValidated);
 
         // platform properties
         $platform = new Platform();

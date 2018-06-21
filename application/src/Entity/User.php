@@ -76,11 +76,6 @@ class User implements UserInterface, \Serializable
     private $projectStatus;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Transcription", mappedBy="user")
-     */
-    private $transcriptions;
-
-    /**
      * @ORM\Column(type="json_array")
      */
     private $roles;
@@ -119,16 +114,20 @@ class User implements UserInterface, \Serializable
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TranscriptionLog", mappedBy="user")
+     */
+    private $transcriptionLogs;
+
     public function __construct()
     {
         $this->active = false;
         $this->publicMail = true;
         $this->anonymous = false;
         $this->projectStatus = new ArrayCollection();
-        $this->transcriptions = new ArrayCollection();
-        $this->projectStatus = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+        $this->transcriptionLogs = new ArrayCollection();
     }
 
     public function getId() :int
@@ -389,37 +388,6 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return Collection|Transcription[]
-     */
-    public function getTranscriptions(): Collection
-    {
-        return $this->transcriptions;
-    }
-
-    public function addTranscription(Transcription $transcription): self
-    {
-        if (!$this->transcriptions->contains($transcription)) {
-            $this->transcriptions[] = $transcription;
-            $transcription->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTranscription(Transcription $transcription): self
-    {
-        if ($this->transcriptions->contains($transcription)) {
-            $this->transcriptions->removeElement($transcription);
-            // set the owning side to null (unless already changed)
-            if ($transcription->getUser() === $this) {
-                $transcription->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|UserProjectStatus[]
      */
     public function getProjectStatus(): Collection
@@ -444,6 +412,37 @@ class User implements UserInterface, \Serializable
             // set the owning side to null (unless already changed)
             if ($projectStatus->getUser() === $this) {
                 $projectStatus->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TranscriptionLog[]
+     */
+    public function getTranscriptionLogs(): Collection
+    {
+        return $this->transcriptionLogs;
+    }
+
+    public function addTranscriptionLog(TranscriptionLog $transcriptionLog): self
+    {
+        if (!$this->transcriptionLogs->contains($transcriptionLog)) {
+            $this->transcriptionLogs[] = $transcriptionLog;
+            $transcriptionLog->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTranscriptionLog(TranscriptionLog $transcriptionLog): self
+    {
+        if ($this->transcriptionLogs->contains($transcriptionLog)) {
+            $this->transcriptionLogs->removeElement($transcriptionLog);
+            // set the owning side to null (unless already changed)
+            if ($transcriptionLog->getUser() === $this) {
+                $transcriptionLog->setUser(null);
             }
         }
 

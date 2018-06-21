@@ -21,8 +21,6 @@ class MediaController extends Controller
         $this->mediaManager = $mediaManager;
     }
 
-
-
     /**
      * @Route("/{id}/transcription/view", name="transcription_display")
      */

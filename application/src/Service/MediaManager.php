@@ -5,26 +5,26 @@ namespace App\Service;
 use App\Entity\Media;
 use App\Entity\Project;
 use App\Entity\Transcription;
+use App\Entity\TranscriptionLog;
 use App\Service\AppEnums;
+use App\Service\TranscriptionManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Security;
 
 class MediaManager
 {
     protected $em;
-    protected $authChecker;
-    protected $params;
     protected $security;
+    protected $tlRepository;
+    protected $transcriptionManager;
 
-    public function __construct(EntityManagerInterface $em, AuthorizationCheckerInterface $authChecker, ParameterBagInterface $params, Security $security)
+    public function __construct(EntityManagerInterface $em, Security $security, TranscriptionManager $transcriptionManager)
     {
         $this->em = $em;
-        $this->authChecker = $authChecker;
-        $this->params = $params;
         $this->security = $security;
+        $this->tlRepository = $this->em->getRepository(TranscriptionLog::class);
+        $this->transcriptionManager = $transcriptionManager;
     }
 
     public function createFromFile(File $file, $fullPath, $parent, Project $project)
@@ -49,12 +49,10 @@ class MediaManager
     public function initMediaTranscription(Media $media)
     {
         $transcription = new Transcription();
-        $transcription->setUser($this->security->getUser());
-        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_NONE);
-        $transcription->setStatus($transcriptionStatus);
         $transcription->setContent('');
-        $transcription->setNbValidation(0);
+        $transcription = $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_CREATED);
         $media->setTranscription($transcription);
+
         return $media;
     }
 
@@ -62,9 +60,7 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         $transcription->setContent($content);
-        $transcription->setUser($this->security->getUser());
-        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS);
-        $transcription->setStatus($transcriptionStatus);
+        $transcription = $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_UPDATED);
         $this->em->persist($transcription);
         $this->em->flush();
     }
@@ -73,9 +69,7 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         $transcription->setContent($content);
-        $transcription->setUser($this->security->getUser());
-        $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_IN_REREAD);
-        $transcription->setStatus($transcriptionStatus);
+        $transcription = $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
         $this->em->persist($transcription);
         $this->em->flush();
     }
@@ -84,14 +78,13 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         $transcription->setContent($content);
-        $transcription->setUser($this->security->getUser());
-        $nbValidation = $transcription->getNbValidation();
-        $nbValidation++;
-        $transcription->setNbValidation($nbValidation);
-        if ($nbValidation > 1) {
-            $transcriptionStatus = $this->em->getRepository("App:TranscriptionStatus")->findOneByName(AppEnums::TRANSCRIPTION_STATUS_VALIDATED);
-            $transcription->setStatus($transcriptionStatus);
+
+        $logName = AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING;
+        // find validation number
+        if ($this->tlManager->countValidationLog($transcription) > 1) {
+            $logName = AppEnums::TRANSCRIPTION_LOG_VALIDATED;
         }
+        $transcription = $this->transcriptionManager->addLog($transcription, $logName);
         $this->em->persist($transcription);
         $this->em->flush();
     }
@@ -102,8 +95,9 @@ class MediaManager
         if (null === $transcription) {
             return true;
         } else {
-            $statusName = $transcription->getStatus()->getName();
-            return $statusName === AppEnums::TRANSCRIPTION_STATUS_NONE || $statusName === AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS;
+            $lastLog = $this->tlRepository->getLastLog($transcription);
+            $status = $lastLog->getName();
+            return $status === AppEnums::TRANSCRIPTION_LOG_CREATED || $status === AppEnums::TRANSCRIPTION_LOG_UPDATED;
         }
         return false;
     }
@@ -114,8 +108,9 @@ class MediaManager
         if (null === $transcription) {
             return false;
         } else {
-            $statusName = $transcription->getStatus()->getName();
-            return $statusName === AppEnums::TRANSCRIPTION_STATUS_NONE || $statusName === AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS;
+            $lastLog = $this->tlRepository->getLastLog($transcription);
+            $status = $lastLog->getName();
+            return $status === AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION;
         }
         return false;
     }
@@ -123,11 +118,13 @@ class MediaManager
     public function isInReread(Media $media)
     {
         $transcription = $media->getTranscription();
+
         if (null === $transcription) {
             return false;
         } else {
-            $statusName = $transcription->getStatus()->getName();
-            return $statusName === AppEnums::TRANSCRIPTION_STATUS_IN_REREAD;
+            $lastLog = $this->tlRepository->getLastLog($transcription);
+            $status = $lastLog->getName();
+            return $status === AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING;
         }
         return false;
     }
@@ -136,18 +133,19 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         if ($transcription) {
-            $statusName = $transcription->getStatus()->getName();
-            if ($statusName === AppEnums::TRANSCRIPTION_STATUS_IN_PROGRESS) {
-                return 'status in-progress';
-            } elseif ($statusName === AppEnums::TRANSCRIPTION_STATUS_IN_REREAD) {
-                return 'status in-reread';
-            } elseif ($statusName === AppEnums::TRANSCRIPTION_STATUS_NONE) {
+            $lastLog = $this->tlRepository->getLastLog($transcription);
+            $status = $lastLog->getName();
+            if ($status === AppEnums::TRANSCRIPTION_LOG_CREATED) {
                 return 'status none';
-            } elseif ($statusName === AppEnums::TRANSCRIPTION_STATUS_VALIDATED) {
+            } elseif ($status === AppEnums::TRANSCRIPTION_LOG_UPDATED) {
+                return 'status in-progress';
+            } elseif ($status === AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING) {
+                return 'status in-reread';
+            } elseif ($status === AppEnums::TRANSCRIPTION_LOG_VALIDATED) {
                 return 'status validated';
             }
         }
-
+        
         return 'status none';
     }
 }
