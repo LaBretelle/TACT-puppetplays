@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Directory;
+use App\Entity\Project;
 use Doctrine\ORM\EntityManagerInterface;
 
 class DirectoryManager
@@ -14,15 +15,16 @@ class DirectoryManager
         $this->em = $em;
     }
 
-    public function create($name, $parent)
+    public function create(Project $project, $name, $parent)
     {
         $dir = new Directory;
-        
+
         $dir->setName($name);
         $dir->setParent($parent);
+        $dir->setProject($project);
 
-        $em->persist($dir);
-        $em->flush();
+        $this->em->persist($dir);
+        $this->em->flush();
 
         return $dir;
     }

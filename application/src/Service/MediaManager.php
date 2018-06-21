@@ -3,10 +3,12 @@
 namespace App\Service;
 
 use App\Entity\Media;
+use App\Entity\Project;
 use App\Entity\Transcription;
 use App\Service\AppEnums;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Security;
 
@@ -23,6 +25,25 @@ class MediaManager
         $this->authChecker = $authChecker;
         $this->params = $params;
         $this->security = $security;
+    }
+
+    public function createFromFile(File $file, $fullPath, $parent, Project $project)
+    {
+        $extension = $file->guessExtension();
+
+        $media = new Media();
+        $media->setUrl($fullPath);
+        $media->setName($fullPath);
+        $media->setParent($parent);
+        $media->setProject($project);
+        $project->addMedia($media);
+        $media = $this->initMediaTranscription($media);
+
+        $this->em->persist($project);
+        $this->em->persist($media);
+        $this->em->flush();
+
+        return $media;
     }
 
     public function initMediaTranscription(Media $media)

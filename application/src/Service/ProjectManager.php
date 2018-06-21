@@ -12,6 +12,9 @@ use App\Service\MediaManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class ProjectManager
 {
@@ -104,35 +107,40 @@ class ProjectManager
         return;
     }
 
-    public function unzip($zipFile)
+    public function initMediaProcessing(Project $project)
     {
+        $fileSystem = new Filesystem();
+
         $projectPath = $this->fileManager->getProjectPath($project);
+        $uploadPath = $this->fileManager->getUploadPath($project);
+        $relativePath = "";
+
+        $this->recursiveBrowse($project, $projectPath, $uploadPath, null, $relativePath);
+        $fileSystem->mirror($uploadPath, $projectPath);
 
         // unzip
-      // récursivement copier les images dans le dossier du projet,, à plat
-      // créer un objet Directory par répertoire et s'en servir comme parent des images et des autres sous-répartoires directs.
-      // à la racine, l'attribut parent des dossiers et fichiers est NULL
     }
 
-    public function recursiveBrowse($dir, $parent)
+    public function recursiveBrowse(Project $project, $projectPath, $dir, $parent, $relativePath)
     {
         $result = array();
 
         $cdir = scandir($dir);
         foreach ($cdir as $key => $value) {
             if (!in_array($value, array(".",".."))) {
-                $path = $dir . DIRECTORY_SEPARATOR . $value;
-                if (is_dir($path)) {
-                    $newDirectory = $this->dirManager->create($value, $parent);
-                    recursiveBrowse($path, $newDirectory);
+                $absolutePath = $dir . DIRECTORY_SEPARATOR . $value;
+
+                if (is_dir($absolutePath)) {
+                    $relativePath = $relativePath . DIRECTORY_SEPARATOR . $value;
+                    $newDirectory = $this->dirManager->create($project, $value, $parent);
+                    $this->recursiveBrowse($project, $projectPath, $absolutePath, $newDirectory, $relativePath);
                 } else {
-                    // createMedia with current parent
-                    // copier le fichier dans le project path dir
+                    $file = new File($absolutePath);
+                    $fileRelativePath =  $relativePath.DIRECTORY_SEPARATOR.$value;
+                    $media = $this->mediaManager->createFromFile($file, $fileRelativePath, $parent, $project);
                 }
             }
         }
-
-        return $result;
     }
 
     public function addProjectMedia(Project $project, array $files)

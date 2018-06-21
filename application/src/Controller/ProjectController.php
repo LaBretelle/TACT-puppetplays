@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Directory;
 use App\Entity\Media;
 use App\Entity\Project;
 use App\Entity\UserProjectStatus;
@@ -10,8 +11,8 @@ use App\Form\ProjectMediaType;
 use App\Form\ProjectType;
 use App\Service\AppEnums;
 use App\Service\FileManager;
-use App\Service\ProjectManager;
 use App\Service\FlashManager;
+use App\Service\ProjectManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -117,9 +118,9 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/{id}/media", name="media")
+     * @Route("/{id}/media/{parent}", name="media", defaults={"parent"=null})
      */
-    public function addProjectMedia(Request $request, Project $project)
+    public function addProjectMedia(Request $request, Project $project, Directory $parent = null)
     {
         $form = $this->createForm(ProjectMediaType::class, $project);
         $form->handleRequest($request);
@@ -136,7 +137,8 @@ class ProjectController extends Controller
           [
             'form' => $form->createView(),
             'project' => $project,
-            'fileLimit' => ini_get('max_file_uploads')
+            'fileLimit' => ini_get('max_file_uploads'),
+            'parent' => $parent
           ]
         );
     }
@@ -180,6 +182,19 @@ class ProjectController extends Controller
     public function display(Project $project)
     {
         $projectManagerUser = $this->projectManager->getProjectManagerUser($project);
+
+        return $this->render(
+            'project/display.html.twig',
+            ['project' => $project, 'manager' => $projectManagerUser]
+        );
+    }
+
+    /**
+     * @Route("/{id}/process-media", name="process", options={"expose"=true})
+     */
+    public function process(Project $project)
+    {
+        $projectManagerUser = $this->projectManager->initMediaProcessing($project);
 
         return $this->render(
             'project/display.html.twig',

@@ -12,6 +12,7 @@
 /application/node_modules/
 /application/public/build/
 /application/public/user_images/*
+/application/public/upload/*
 /application/public/project_files/*
 /application/public/platform/*
 !/application/public/user_images/.gitkeep

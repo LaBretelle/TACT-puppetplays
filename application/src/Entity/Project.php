@@ -75,6 +75,11 @@ class Project
     private $medias;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Directory", mappedBy="project", cascade={"persist", "remove"})
+     */
+    private $dirs;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $public = 1;
@@ -89,6 +94,7 @@ class Project
         $this->financers = new ArrayCollection();
         $this->userStatuses = new ArrayCollection();
         $this->medias = new ArrayCollection();
+        $this->dirs = new ArrayCollection();
         $this->deleted = false;
     }
 
@@ -239,6 +245,38 @@ class Project
             // set the owning side to null (unless already changed)
             if ($media->getProject() === $this) {
                 $media->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection|Directory[]
+     */
+    public function getDirs(): Collection
+    {
+        return $this->dirs;
+    }
+
+    public function addDir(Directory $directory): self
+    {
+        if (!$this->dirs->contains($directory)) {
+            $this->dirs[] = $directory;
+            $directory->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDir(Directory $media): self
+    {
+        if ($this->dirs->contains($directory)) {
+            $this->dirs->removeElement($directory);
+            // set the owning side to null (unless already changed)
+            if ($directory->getProject() === $this) {
+                $directory->setProject(null);
             }
         }
 

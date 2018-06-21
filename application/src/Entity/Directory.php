@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\DirectoryRepository")
+ * @ORM\Entity()
  */
 class Directory
 {
@@ -17,6 +17,12 @@ class Directory
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="dirs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $project;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -58,6 +64,18 @@ class Directory
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
 
         return $this;
     }
