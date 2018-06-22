@@ -17,7 +17,8 @@
       </div>
       {% endfor %}
 
-      {% for media in project.medias if media.parent == parent %}
+      {# for media in project.medias if media.parent and media.parent == parent #}
+      {% for media in project.medias %}
         <div class="col-2">
           <div class="card mb-2 box-shadow {{media | transcriptionStatusClass}}">
             <img data-toggle="tooltip" title="{{media.name}}" class="card-img-top project-image" src="{{ macros.mediaURL(media) }}" alt=""></img>

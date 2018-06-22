@@ -16,14 +16,12 @@ class MediaManager
 {
     protected $em;
     protected $security;
-    protected $tlRepository;
     protected $transcriptionManager;
 
     public function __construct(EntityManagerInterface $em, Security $security, TranscriptionManager $transcriptionManager)
     {
         $this->em = $em;
         $this->security = $security;
-        $this->tlRepository = $this->em->getRepository(TranscriptionLog::class);
         $this->transcriptionManager = $transcriptionManager;
     }
 
@@ -60,7 +58,7 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         $transcription->setContent($content);
-        $transcription = $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_UPDATED);
+        $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_UPDATED);
         $this->em->persist($transcription);
         $this->em->flush();
     }
@@ -69,7 +67,7 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         $transcription->setContent($content);
-        $transcription = $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
+        $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
         $this->em->persist($transcription);
         $this->em->flush();
     }
@@ -81,10 +79,10 @@ class MediaManager
 
         $logName = AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING;
         // find validation number
-        if ($this->tlManager->countValidationLog($transcription) > 1) {
+        if ($this->transcriptionManager->countValidationLog($transcription) > 1) {
             $logName = AppEnums::TRANSCRIPTION_LOG_VALIDATED;
         }
-        $transcription = $this->transcriptionManager->addLog($transcription, $logName);
+        $this->transcriptionManager->addLog($transcription, $logName);
         $this->em->persist($transcription);
         $this->em->flush();
     }
@@ -95,9 +93,9 @@ class MediaManager
         if (null === $transcription) {
             return true;
         } else {
-            $lastLog = $this->tlRepository->getLastLog($transcription);
+            $lastLog = $this->transcriptionManager->getLastLog($transcription);
             $status = $lastLog->getName();
-            return $status === AppEnums::TRANSCRIPTION_LOG_CREATED || $status === AppEnums::TRANSCRIPTION_LOG_UPDATED;
+            return $status === AppEnums::TRANSCRIPTION_LOG_CREATED || $status === AppEnums::TRANSCRIPTION_LOG_UPDATED || $status === AppEnums::TRANSCRIPTION_LOG_LOCKED;
         }
         return false;
     }
@@ -108,7 +106,7 @@ class MediaManager
         if (null === $transcription) {
             return false;
         } else {
-            $lastLog = $this->tlRepository->getLastLog($transcription);
+            $lastLog = $this->transcriptionManager->getLastLog($transcription);
             $status = $lastLog->getName();
             return $status === AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION;
         }
@@ -122,7 +120,7 @@ class MediaManager
         if (null === $transcription) {
             return false;
         } else {
-            $lastLog = $this->tlRepository->getLastLog($transcription);
+            $lastLog = $this->transcriptionManager->getLastLog($transcription);
             $status = $lastLog->getName();
             return $status === AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING;
         }
@@ -133,11 +131,12 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         if ($transcription) {
-            $lastLog = $this->tlRepository->getLastLog($transcription);
+            $lastLog = $this->transcriptionManager->getLastLog($transcription);
             $status = $lastLog->getName();
+
             if ($status === AppEnums::TRANSCRIPTION_LOG_CREATED) {
                 return 'status none';
-            } elseif ($status === AppEnums::TRANSCRIPTION_LOG_UPDATED) {
+            } elseif ($status === AppEnums::TRANSCRIPTION_LOG_UPDATED || $status === AppEnums::TRANSCRIPTION_LOG_LOCKED) {
                 return 'status in-progress';
             } elseif ($status === AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING) {
                 return 'status in-reread';
@@ -145,7 +144,7 @@ class MediaManager
                 return 'status validated';
             }
         }
-        
+
         return 'status none';
     }
 }

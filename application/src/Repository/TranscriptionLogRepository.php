@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Transcription;
 use App\Entity\TranscriptionLog;
 use App\Entity\User;
+use App\Service\AppEnums;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -26,7 +27,20 @@ class TranscriptionLogRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('tl')
             ->andWhere('tl.transcription = :t')
             ->setParameter('t', $transcription)
-            ->orderBy('tl.createdAt', 'ASC')
+            ->orderBy('tl.createdAt', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function getLastLockLog(Transcription $transcription)
+    {
+        return $this->createQueryBuilder('tl')
+            ->andWhere('tl.transcription = :t')
+            ->andWhere('tl.name = :name')
+            ->setParameter('t', $transcription)
+            ->setParameter('name', AppEnums::TRANSCRIPTION_LOG_LOCKED)
+            ->orderBy('tl.createdAt', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();

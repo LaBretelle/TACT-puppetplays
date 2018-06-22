@@ -29,9 +29,40 @@ class TranscriptionManager
         $log = new TranscriptionLog();
         $log->setUser($this->security->getUser());
         $log->setName($name);
-
         $transcription->addTranscriptionLog($log);
+        return $log;
+    }
 
-        return $transcription;
+    public function isLocked(TranscriptionLog $log)
+    {
+        $diff = $log->getCreatedAt()->diff(new \DateTime());
+        return $diff->i <= 2;
+    }
+
+    public function userCanEditTranscription(Transcription $transcription)
+    {
+        $currentUser = $this->security->getUser();
+        $lastLog = $this->em->getRepository(TranscriptionLog::class)->getLastLog($transcription);
+        $status = $lastLog->getName();
+        $logUser = $lastLog->getUser();
+        return $currentUser->getId() === $logUser->getId();
+    }
+
+    public function getLastLog(Transcription $transcription)
+    {
+        $repository = $this->em->getRepository(TranscriptionLog::class);
+        return $repository->getLastLog($transcription);
+    }
+
+    public function getLastLockLog(Transcription $transcription)
+    {
+        $repository = $this->em->getRepository(TranscriptionLog::class);
+        return $repository->getLastLockLog($transcription);
+    }
+
+    public function countValidationLog(Transcription $transcription)
+    {
+        $repository = $this->em->getRepository(TranscriptionLog::class);
+        return $repository->countValidationLog($transcription);
     }
 }

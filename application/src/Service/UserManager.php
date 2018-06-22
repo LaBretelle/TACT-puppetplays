@@ -97,13 +97,9 @@ class UserManager
         if ($user && null === $user->getPasswordRequestedAt()) {
             return $user;
         } elseif ($user && null !== $user->getPasswordRequestedAt()) {
-            $now = new \DateTime('now');
             $requestedAt = $user->getPasswordRequestedAt();
-            $t1 = \StrToTime($now->format('Y-m-d H:i:s'));
-            $t2 = \StrToTime($requestedAt->format('Y-m-d H:i:s'));
-            $diff = $t1 - $t2;
-            $hours = $diff / (60 * 60);
-            return $hours > 2;
+            $diff = $requestedAt->diff(new \DateTime());
+            return $diff->h > 2;
         }
         return false;
     }

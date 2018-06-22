@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Media;
 use App\Entity\Transcription;
+use App\Service\AppEnums;
 use App\Service\MediaManager;
+use App\Service\TranscriptionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,10 +17,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class MediaController extends Controller
 {
     private $mediaManager;
+    private $transcriptionManager;
 
-    public function __construct(MediaManager $mediaManager)
+    public function __construct(MediaManager $mediaManager, TranscriptionManager $transcriptionManager)
     {
         $this->mediaManager = $mediaManager;
+        $this->transcriptionManager = $transcriptionManager;
     }
 
     /**
@@ -28,7 +32,7 @@ class MediaController extends Controller
     {
         return $this->render(
             'media/transcription.html.twig',
-            ['media' => $media, 'edit' => false]
+            ['media' => $media, 'edit' => false, 'locked' => false, 'log' => false]
         );
     }
 
@@ -38,9 +42,24 @@ class MediaController extends Controller
      */
     public function editTranscription(Media $media)
     {
+        $transcription = $media->getTranscription();
+        $canEdit = true;
+        $lockLog = $this->transcriptionManager->getLastLockLog($transcription);
+        $locked = $lockLog ? $this->transcriptionManager->isLocked($lockLog) : false;
+
+        // if transcription is locked only the user responsible for the lock event should be able to edit the transcription
+        if ($locked) {
+            $canEdit = $this->transcriptionManager->userCanEditTranscription($transcription);
+        } else {
+            $lockLog = $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_LOCKED);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($transcription);
+            $em->flush();
+        }
+
         return $this->render(
             'media/transcription.html.twig',
-            ['media' => $media, 'edit' => true]
+            ['media' => $media, 'edit' => $canEdit, 'locked' => $locked, 'log' => $lockLog]
         );
     }
 

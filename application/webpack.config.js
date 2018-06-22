@@ -1,3 +1,4 @@
+/* global require */
 var Encore = require('@symfony/webpack-encore');
 // enable tinymce skins
 var CopyWebpackPlugin = require('copy-webpack-plugin');

@@ -19,6 +19,8 @@ class AppEnums
     public const TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION = 'transcription_log_waiting_for_validation';
     public const TRANSCRIPTION_LOG_VALIDATION_PENDING = 'transcription_log_validation_pending';
     public const TRANSCRIPTION_LOG_VALIDATED = 'transcription_log_validated';
+    public const TRANSCRIPTION_LOG_LOCKED = 'transcription_log_locked';
+    public const TRANSCRIPTION_LOG_UNLOCKED = 'transcription_log_unlocked';
 
     // ProjectUserStatuses
     public const USER_STATUS_MANAGER_DESC = 'user_status_manager_desc';
@@ -47,6 +49,8 @@ class AppEnums
       self::TRANSCRIPTION_LOG_VALIDATED,
       self::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION,
       self::TRANSCRIPTION_LOG_VALIDATION_PENDING,
-      self::TRANSCRIPTION_LOG_VALIDATED
+      self::TRANSCRIPTION_LOG_VALIDATED,
+      self::TRANSCRIPTION_LOG_LOCKED,
+      self::TRANSCRIPTION_LOG_UNLOCKED
     ];
 }
