@@ -35,7 +35,7 @@ $(document).ready(() => {
       validateTranscription(e.target.dataset.id, e.target.dataset.pid)
     })
 
-    // update islocked log every 2 minutes
+    // update islocked log every 2 (-) minutes
     window.setInterval(() => {
       updateLockedLog(logId)
     }, updateLogTimeout)

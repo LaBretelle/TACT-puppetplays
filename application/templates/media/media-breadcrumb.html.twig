@@ -1,0 +1,30 @@
+
+{% set ancestors =  parent | mediaBreadcrumb %}
+
+{# breadcrumb #}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      {% if parent %}
+        <a href="{{ from == 'transcript' ? path('project_transcriptions', {id: project.id, parent: null}) : path('project_media', {id: project.id, parent: null}) }}">
+          <i class="fas fa-home"></i>
+        </a>
+      {% else %}
+        <i class="fas fa-home"></i>
+      {% endif %}
+    </li>
+    {% for dir in ancestors %}
+        {% if dir == parent %}
+        <li class="breadcrumb-item active">
+            {{ dir.name }}
+        </li>
+        {% else %}
+        <li class="breadcrumb-item">
+          <a href="{{ from == 'transcript' ? path('project_transcriptions', {id: project.id, parent: dir.id}) : path('project_media', {id: project.id, parent: dir.id}) }}">
+            {{ dir.name }}
+          </a>
+        </li>
+        {% endif %}
+    {% endfor %}
+  </ol>
+</nav>

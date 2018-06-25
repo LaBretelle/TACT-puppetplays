@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Directory;
 use App\Entity\Media;
 use App\Entity\Project;
 use App\Entity\User;
@@ -121,23 +122,24 @@ class ProjectManager
         // unzip
     }
 
-    public function recursiveBrowse(Project $project, $projectPath, $dir, $parent, $relativePath)
+    public function recursiveBrowse(Project $project, string $projectPath, string $dir, Directory $parent = null, string $relativePath)
     {
         $result = array();
 
         $cdir = scandir($dir);
-        foreach ($cdir as $key => $value) {
+
+        foreach ($cdir as $value) {
             if (!in_array($value, array(".",".."))) {
                 $absolutePath = $dir . DIRECTORY_SEPARATOR . $value;
 
                 if (is_dir($absolutePath)) {
-                    $relativePath = $relativePath . DIRECTORY_SEPARATOR . $value;
+                    $relative = $relativePath . DIRECTORY_SEPARATOR . $value;
                     $newDirectory = $this->dirManager->create($project, $value, $parent);
-                    $this->recursiveBrowse($project, $projectPath, $absolutePath, $newDirectory, $relativePath);
+                    $this->recursiveBrowse($project, $projectPath, $absolutePath, $newDirectory, $relative);
                 } else {
                     $file = new File($absolutePath);
                     $fileRelativePath =  $relativePath.DIRECTORY_SEPARATOR.$value;
-                    $media = $this->mediaManager->createFromFile($file, $fileRelativePath, $parent, $project);
+                    $media = $this->mediaManager->createFromFile($value, $fileRelativePath, $parent, $project);
                 }
             }
         }

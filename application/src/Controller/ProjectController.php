@@ -134,23 +134,28 @@ class ProjectController extends Controller
 
         return $this->render(
           'project/project-media.html.twig',
-          [
+            [
             'form' => $form->createView(),
             'project' => $project,
             'fileLimit' => ini_get('max_file_uploads'),
-            'parent' => $parent
+            'parent' => $parent,
+            'from' => 'media'
           ]
         );
     }
 
     /**
-     * @Route("/{id}/transcription", name="transcriptions", options={"expose"=true})
+     * @Route("/{id}/transcription/{parent}", name="transcriptions", options={"expose"=true}, defaults={"parent"=null})
      */
-    public function displayTranscriptions(Project $project)
+    public function displayTranscriptions(Project $project, Directory $parent = null)
     {
         return $this->render(
             'media/transcriptions.html.twig',
-            ['project' => $project]
+            [
+              'project' => $project,
+              'parent' => $parent,
+              'from' => 'transcript'
+            ]
         );
     }
 

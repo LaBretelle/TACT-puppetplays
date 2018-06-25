@@ -1,24 +1,26 @@
 {% import "media/macros.html.twig" as macros %}
 
+{{ include('media/media-breadcrumb.html.twig', { 'project': project, 'parent': parent, 'from': from }) }}
+
 <div class="album py-5 bg-light">
   <div class="container-fluid">
     <div class="row">
 
       {% for dir in project.dirs if dir.parent == parent %}
-      <div class="col-2">
-        <div class="card mb-2">
-          <div class="card-body">
-            <i class="fas fa-folder"></i>
-            <a href="{{ path('project_media', {id: project.id, parent: dir.id}) }}" class="card-link">
-              {{ dir.name }}
-            </a>
+        <div class="col-2">
+          <div class="card mb-2">
+            <div class="card-body">
+              <i class="fas fa-folder"></i>
+              <a href="{{ from == 'transcript' ? path('project_transcriptions', {id: project.id, parent: dir.id}) : path('project_media', {id: project.id, parent: dir.id}) }}" class="card-link">
+                {{ dir.name }}
+              </a>
+            </div>
           </div>
         </div>
-      </div>
       {% endfor %}
 
-      {# for media in project.medias if media.parent and media.parent == parent #}
-      {% for media in project.medias %}
+      {% for media in project.medias if media.parent == parent %}
+
         <div class="col-2">
           <div class="card mb-2 box-shadow {{media | transcriptionStatusClass}}">
             <img data-toggle="tooltip" title="{{media.name}}" class="card-img-top project-image" src="{{ macros.mediaURL(media) }}" alt=""></img>

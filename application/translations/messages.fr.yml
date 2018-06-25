@@ -42,10 +42,10 @@ no: Non
 not_enabled_yet: (Pas encore activé)
 not_registered: Non inscrit
 password: Mot de passe
-platform_page_title: Administration de la plateforme
 platform_home_text: Texte de la page d'accueil
 platform_logo: Logo de la plateforme
 platform_name: Nom de la plateforme
+platform_page_title: Administration de la plateforme
 project_create: Création d'un projet
 project_delete: Supprimer le projet
 project_deleted: Le projet a été supprimé.
@@ -86,7 +86,9 @@ subscribe_long: L'inscription au projet vous permet de participer, en transcriva
 transcribe_long: Vous permet d'accéder au média et de proposer des transcriptions.
 transcriber: Transcripteur
 transcript_media: Transcription du media
-transcriptions_page_title: Média du projet
+transcription_is_locked: La transcription est bloquée
+transcription_send_to_validation: Demander une validation
+transcriptions_page_title: Transcriptions du projet
 user_account_activated_error: Un problème est survenu lors de l'activation de votre compte.
 user_account_activated: Votre compte est maintenant actif.
 user_account_created: Votre compte et créé mais n'est pas encore activé. Vous devriez recevoir un email qui vous permettra de l'activer.

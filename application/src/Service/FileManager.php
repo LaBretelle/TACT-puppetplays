@@ -45,6 +45,6 @@ class FileManager
 
     public function getUploadPath(Project $project)
     {
-        return $this->params->get('upload_dir').DIRECTORY_SEPARATOR.$project->getId().DIRECTORY_SEPARATOR;
+        return $this->params->get('upload_dir').DIRECTORY_SEPARATOR.$project->getId();
     }
 }

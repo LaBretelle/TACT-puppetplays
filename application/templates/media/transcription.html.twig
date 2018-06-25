@@ -12,7 +12,7 @@
         {% if edit %}
           <div class="btn-group">
             <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}"><i class="fas fa-save"></i></button>
-            <button class="btn btn-link btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'finish' | trans}}" type="button" name="button"><i class="fas fa-check-circle"></i></button>
+            <button class="btn btn-link btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'transcription_send_to_validation' | trans}}" type="button" name="button"><i class="fas fa-check-circle"></i></button>
           </div>
         {% elseif locked %}
           <h5><span class="badge badge-danger">{{'transcription_is_locked' | trans}}</span></h5>

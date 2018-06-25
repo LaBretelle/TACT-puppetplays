@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Directory;
 use App\Entity\Media;
 use App\Entity\Project;
 use App\Entity\Transcription;
@@ -25,13 +26,11 @@ class MediaManager
         $this->transcriptionManager = $transcriptionManager;
     }
 
-    public function createFromFile(File $file, $fullPath, $parent, Project $project)
+    public function createFromFile(string $name, string $fullPath, Directory $parent = null, Project $project)
     {
-        $extension = $file->guessExtension();
-
         $media = new Media();
         $media->setUrl($fullPath);
-        $media->setName($fullPath);
+        $media->setName($name);
         $media->setParent($parent);
         $media->setProject($project);
         $project->addMedia($media);
@@ -48,7 +47,7 @@ class MediaManager
     {
         $transcription = new Transcription();
         $transcription->setContent('');
-        $transcription = $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_CREATED);
+        $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_CREATED);
         $media->setTranscription($transcription);
 
         return $media;
