@@ -25,11 +25,13 @@ class MediaManager
         $this->security = $security;
         $this->transcriptionManager = $transcriptionManager;
     }
-
-    public function createFromFile(string $name, string $fullPath, Directory $parent = null, Project $project)
+    
+    public function createMediaFromFile(File $file, string $fileClientName, Project $project, Directory $parent = null)
     {
+        $name = explode('.', $fileClientName)[0];
+        $extension = $file->guessExtension();
         $media = new Media();
-        $media->setUrl($fullPath);
+        $media->setUrl(md5(uniqid()).'.'.$extension);
         $media->setName($name);
         $media->setParent($parent);
         $media->setProject($project);

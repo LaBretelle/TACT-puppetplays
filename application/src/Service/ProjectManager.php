@@ -108,72 +108,82 @@ class ProjectManager
         return;
     }
 
-    public function initMediaProcessing(Project $project)
+    public function initMediaProcessing(Project $project, string $uploadPath, Directory $parent = null)
     {
-        $fileSystem = new Filesystem();
-
         $projectPath = $this->fileManager->getProjectPath($project);
-        $uploadPath = $this->fileManager->getUploadPath($project);
-        $relativePath = "";
-
-        $this->recursiveBrowse($project, $projectPath, $uploadPath, null, $relativePath);
-        $fileSystem->mirror($uploadPath, $projectPath);
-
-        // unzip
+        $this->recursiveBrowse($project, $projectPath, $uploadPath, $parent);
+        $this->deleteTempFolders($uploadPath);
     }
 
-    public function recursiveBrowse(Project $project, string $projectPath, string $dir, Directory $parent = null, string $relativePath)
+    public function deleteTempFolders(string $path)
     {
-        $result = array();
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($iterator as $filename => $fileInfo) {
+            if ($fileInfo->isDir()) {
+                rmdir($filename);
+            } else {
+                unlink($filename);
+            }
+        }
+    }
 
-        $cdir = scandir($dir);
+    public function recursiveBrowse(Project $project, string $projectPath, string $uploadPath, Directory $parent = null)
+    {
+        $cdir = scandir($uploadPath);
 
         foreach ($cdir as $value) {
             if (!in_array($value, array(".",".."))) {
-                $absolutePath = $dir . DIRECTORY_SEPARATOR . $value;
-
+                $absolutePath = $uploadPath . DIRECTORY_SEPARATOR . $value;
                 if (is_dir($absolutePath)) {
-                    $relative = $relativePath . DIRECTORY_SEPARATOR . $value;
                     $newDirectory = $this->dirManager->create($project, $value, $parent);
-                    $this->recursiveBrowse($project, $projectPath, $absolutePath, $newDirectory, $relative);
+                    $this->recursiveBrowse($project, $projectPath, $absolutePath, $newDirectory);
                 } else {
                     $file = new File($absolutePath);
-                    $fileRelativePath =  $relativePath.DIRECTORY_SEPARATOR.$value;
-                    $media = $this->mediaManager->createFromFile($value, $fileRelativePath, $parent, $project);
+                    $media = $this->mediaManager->createMediaFromFile($file, $value, $project, $parent);
+                    $file->move($projectPath, $media->getUrl());
                 }
             }
         }
     }
 
-    public function addProjectMedia(Project $project, array $files)
+    //addProjectMedia($project, $media, $isZip, $parent);
+    public function addProjectMedia(Project $project, $files, bool $isZip, Directory $parent = null)
     {
+        // base path for all projects media
         $basePath = $this->fileManager->getBaseProjectPath();
-        $uploadPath = $this->fileManager->getProjectPath($project);
+        // project path for media
+        $projectMediaPath = $this->fileManager->getProjectPath($project);
 
         if (!is_dir($basePath)) {
             mkdir($basePath);
         }
 
-        if (!is_dir($uploadPath)) {
-            mkdir($uploadPath);
+        if (!is_dir($projectMediaPath)) {
+            mkdir($projectMediaPath);
         }
 
-        foreach ($files as $file) {
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $media = new Media();
-            // given a jpg guessExtension will result in a jpeg...
-            $extension = $file->guessExtension();
-            $name = explode('.', $file->getClientOriginalName())[0];
-            $media->setUrl(md5(uniqid()).'.'.$extension);
-            $media->setName($name);
-            $file->move($uploadPath, $media->getUrl());
+        $uploadPath = $projectMediaPath . DIRECTORY_SEPARATOR . 'tmp';
+        mkdir($uploadPath);
 
-            $media = $this->mediaManager->initMediaTranscription($media);
-            $project->addMedia($media);
-            $this->em->persist($project);
+        if ($isZip) {
+            $zipName = $files->getClientOriginalName();
+            $files->move($uploadPath, $zipName);
+            $zip = new \ZipArchive;
+            $success = $zip->open($uploadPath . DIRECTORY_SEPARATOR . $zipName);
+            if ($success === true) {
+                $zip->extractTo($uploadPath);
+                $zip->close();
+            }
+
+            unlink($uploadPath . DIRECTORY_SEPARATOR . $zipName);
+        } else {
+            foreach ($files as $file) {
+                $file->move($uploadPath, $file->getClientOriginalName());
+            }
         }
-        $this->em->flush();
 
+        $this->initMediaProcessing($project, $uploadPath, $parent);
+        rmdir($uploadPath);
         return $project;
     }
 

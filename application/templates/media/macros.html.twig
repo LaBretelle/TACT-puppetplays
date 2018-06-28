@@ -1,3 +1,18 @@
+
+
 {% macro mediaURL(media) %}
     {{ asset('project_files/' ~ media.project.id ~ '/' ~ media.url) }}
+{% endmacro %}
+
+
+{% macro projectTree(dir) %}
+    <li>{{dir.name}}</li>
+    {% if dir.children|length > 0 %}
+        {% import _self as treeMacro %}
+        <ul>
+          {% for child in dir.children %}
+             {{ treeMacro.projectTree(child) }}
+          {% endfor %}
+        </ul>
+    {% endif %}
 {% endmacro %}

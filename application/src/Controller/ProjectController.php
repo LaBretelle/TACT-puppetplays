@@ -126,8 +126,10 @@ class ProjectController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $media = $form->get('files')->getData();
-            $this->projectManager->addProjectMedia($project, $media);
+            $fileType = $request->get('file-type');
+            $isZip = $fileType === 'zip';
+            $media = $isZip ? $form->get('zip')->getData() : $form->get('images')->getData();
+            $this->projectManager->addProjectMedia($project, $media, $isZip, $parent);
         }
 
         $file_limit = ini_get('max_file_uploads');

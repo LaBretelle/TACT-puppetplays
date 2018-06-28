@@ -22,13 +22,25 @@ class ProjectMediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('files', FileType::class, [
+          ->add('images', FileType::class, [
               'multiple' => true,
+              //'required' => false,
               'label' => 'project_media_add_file_placeholder',
               'translation_domain' => 'messages',
               'attr' => [
-                    'accept' => 'image/*',
-                    'multiple' => 'multiple'
+                'accept' => 'image/*',
+                'multiple' => 'multiple',
+                'id' => 'add_images_input'
+              ],
+              'mapped' => false
+          ])
+          ->add('zip', FileType::class, [
+              'label' => 'project_media_add_file_placeholder',
+              //'required' => false,
+              'translation_domain' => 'messages',
+              'attr' => [
+                'accept' => 'application/zip',
+                'id' => 'add_images_input'
               ],
               'mapped' => false
           ])

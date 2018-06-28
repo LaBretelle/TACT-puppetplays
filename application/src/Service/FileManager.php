@@ -30,12 +30,12 @@ class FileManager
 
     public function getBaseProjectPath()
     {
-        return $this->params->get('project_file_dir').DIRECTORY_SEPARATOR;
+        return $this->params->get('project_file_dir');
     }
 
     public function getProjectPath(Project $project)
     {
-        return $this->params->get('project_file_dir').DIRECTORY_SEPARATOR.$project->getId().DIRECTORY_SEPARATOR;
+        return $this->params->get('project_file_dir').DIRECTORY_SEPARATOR.$project->getId();
     }
 
     public function getUserPath()
@@ -46,5 +46,13 @@ class FileManager
     public function getUploadPath(Project $project)
     {
         return $this->params->get('upload_dir').DIRECTORY_SEPARATOR.$project->getId();
+    }
+
+    public function moveFiles($files, $path)
+    {
+        foreach ($files as $file) {
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file->move($projectMediaPath, $path . DIRECTORY_SEPARATOR . $file->getClientOriginalName());
+        }
     }
 }

@@ -13,20 +13,48 @@
     </div>
   </div>
   {% if project | isAuthorizedOnProject('manageMedia') %}
-  <div class="row">
-    <div class="col-12">
-        <div class="alert alert-info">
-          <h6>{{'max_file_uploads_message' | trans({'%nb_max%': fileLimit})}} - <span id="nb-media-selected">0</span> {{'selected_media' | trans}} </h6>      
+    <div class="card media-upload-card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-10">
+            Uploader des fichiers images ou un zip
+          </div>
+          <div class="col-2 text-right">
+            <div data-toggle="collapse" data-target="#help-text" aria-expanded="false"><i class="fas fa-question-circle icon-question"></i></div>
+          </div>
         </div>
+      </div>
+      <div class="card-body">
         {{ form_start(form) }}
-          {{ form_row(form.files) }}
+        <div class="collapse" id="help-text">
+          <div class="alert alert-info">
+            this is the help text for media upload
+          </div>
+        </div>
+        <div class="form-group row col">
+          <label class="col-3 col-form-label">Choisissez le type de fichier à uploader</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input radio-file-type" name="file-type" type="radio" id="inlineCheckbox1" checked value="images">
+            <label class="form-check-label" for="inlineCheckbox1">image(s)</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input radio-file-type" name="file-type" type="radio" id="inlineCheckbox2" value="zip">
+            <label class="form-check-label" for="inlineCheckbox2">zip file</label>
+          </div>
+        </div>
+        {# file(s) upload form #}
+          {{ form_row(form.images) }}
+            <div class="max-file-upload-msg">
+              <small class="form-text text-muted max-file-upload-alert"><i class="fas fa-exclamation-triangle fa-fw"></i>{{'max_file_uploads_message' | trans({'%nb_max%': fileLimit})}} - <span id="nb-media-selected">0</span> {{'selected_media' | trans}}</small>
+            </div>
+          {{ form_row(form.zip) }}
           {{ form_row(form.save) }}
         {{ form_end(form) }}
-      <hr/>
+
+      </div>
     </div>
-  </div>
   {% endif %}
-  {{ include('media/media-list-partial.html.twig', { 'project': project }) }}
+  {{ include('media/media-list-manage-partial.html.twig', { 'project': project }) }}
 </div>
 {% endblock %}
 

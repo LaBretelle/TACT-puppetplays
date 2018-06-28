@@ -19,5 +19,8 @@
       "anonymous": "always",
       "named": "never"
     }]
+  },
+  "globals": {
+    "$": false
   }
 }
