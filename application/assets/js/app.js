@@ -1,6 +1,6 @@
 // Import TinyMCE
 import tinymce from 'tinymce/tinymce'
-var toastr = require('toastr');
+import * as Toastr from 'toastr';
 
 // A theme is also required
 import 'tinymce/themes/modern/theme'
@@ -17,7 +17,7 @@ $(document).ready(() => {
   /*******************
     TOASTER
   *******************/
-  toastr.options = {
+  Toastr.options = {
     "closeButton": true,
     "debug": false,
     "newestOnTop": true,
@@ -35,21 +35,21 @@ $(document).ready(() => {
     "hideMethod": "fadeOut"
   }
 
-  $("#flashes .flash").each(function(  ) {
-    toastr.info($(this).data("message"))
+  $("#flashes .flash").each(function() {
+    Toastr.info($(this).data("message"))
   });
 
   /*******************
     TINYMCE
   *******************/
   tinymce.init({
-      selector: 'textarea.tinymce-enabled',
-      plugins: ['paste', 'link'],
-      setup: (editor) => {
-        editor.on('change', function () {
-          editor.save()
-        })
-      }
+    selector: 'textarea.tinymce-enabled',
+    plugins: ['paste', 'link'],
+    setup: (editor) => {
+      editor.on('change', function() {
+        editor.save()
+      })
+    }
   })
 
 })

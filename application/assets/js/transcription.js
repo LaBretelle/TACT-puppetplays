@@ -1,5 +1,6 @@
 /* global $ */
 import AppRouting from './modules/app-routing.js'
+import OpenSeadragon from 'openseadragon';
 import tinymce from 'tinymce/tinymce'
 import 'tinymce/themes/modern/theme'
 import 'tinymce/plugins/paste'
@@ -8,6 +9,29 @@ import 'tinymce/plugins/link'
 const routing = new AppRouting()
 // normally every 2 minutes but to avoid any time problem let's put a bit less
 const updateLogTimeout = 100000
+
+
+var id = "seadragon-viewer";
+var el = document.getElementById(id);
+var url = el.getAttribute('data-url');
+var viewer = OpenSeadragon({
+  id: id,
+  showNavigator: false,
+  showRotationControl: true,
+  prefixUrl: "",
+  zoomInButton:   "osd-zoom-in",
+  zoomOutButton:  "osd-zoom-out",
+  homeButton:     "osd-home",
+  fullPageButton: "osd-full-page",
+  nextButton:     "osd-next",
+  previousButton: "osd-previous",
+  rotateLeftButton: 'osd-left',
+  rotateRightButton: 'osd-right',
+  tileSources: {
+    type: "image",
+    url: url
+  }
+});
 
 $(document).ready(() => {
   const logId = $('#log-id').val()
@@ -50,7 +74,6 @@ $(document).ready(() => {
     modalBody.append(image)
     $('.project-media-modal').modal('show')
   })
-
 })
 
 const updateLockedLog = (id) => {

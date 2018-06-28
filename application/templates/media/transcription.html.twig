@@ -22,7 +22,27 @@
     <hr/>
     <div class="row">
       <div class="col-6">
-        <img class="img-fluid" src="{{ macros.mediaURL(media) }}" alt="">
+          <div class="openseadragon-buttons">
+            <button id="osd-zoom-in" type="button" class="btn btn-light">
+              <i class="fas fa-search-plus"></i>
+            </button>
+            <button id="osd-zoom-out" type="button" class="btn btn-light">
+              <i class="fas fa-search-minus"></i>
+            </button>
+            <button id="osd-home" type="button" class="btn btn-light">
+              <i class="fas fa-home"></i>
+            </button>
+            <button id="osd-full-page" type="button" class="btn btn-light">
+              <i class="fas fa-expand-arrows-alt"></i>
+            </button>
+            <button id="osd-left" type="button" class="btn btn-light">
+              <i class="fas fa-undo"></i>
+            </button>
+            <button id="osd-right" type="button" class="btn btn-light">
+              <i class="fas fa-redo"></i>
+            </button>
+          </div>
+          <div data-url="{{ macros.mediaURL(media) }}" id="seadragon-viewer" style="width:100%;height:600px"></div>
       </div>
       <div class="col-6">
         {% if edit %}
@@ -56,5 +76,6 @@
 
 {% block javascripts %}
   {{ parent() }}
+  <script src="{{ asset('build/js/openseadragon.js') }}"></script>
   <script src="{{ asset('build/js/transcription.js') }}"></script>
 {% endblock %}
