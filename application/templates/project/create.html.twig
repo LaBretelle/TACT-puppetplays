@@ -36,6 +36,9 @@
     {{ form_row(form.name) }}
     {{ form_row(form.description) }}
     {{ form_row(form.public) }}
+    {% if project.id is null %}
+      {{ form_row(form.manager) }}
+    {% endif %}
     {{ form_row(form.image) }}
 
     {% if project.image %}
@@ -52,19 +55,6 @@
     </div>
     {% endif %}
 
-    {% if is_granted('ROLE_ADMIN') %}
-      {{ form_label(form.userStatuses) }}
-      <a id="add-user-status" class="btn btn-sm btn-secondary" href="#">
-        <i class="fas fa-plus" aria-hidden="true"></i> {{"add_user-status"|trans}}
-      </a>
-      <div class="form-group">
-        <div class="userstatuses row" data-prototype="{{ formMacros.userStatusesRow(form.userStatuses.vars.prototype)|e('html_attr') }}">
-          {% for userStatus in form.userStatuses %}
-            {{ formMacros.userStatusesRow(userStatus) }}
-          {% endfor %}
-        </div>
-      </div>
-    {% endif %}
     {{ form_widget(form._token) }}
     {{ form_row(form.save) }}
 </div>
@@ -89,19 +79,8 @@
     </div>
   </div>
 </div>
-
 {% endblock %}
 
-{% macro userStatusesRow(form) %}
-  <div class="col-3 userstatus-container">
-    <span class="btn btn-sm btn-danger pull-right remove-userstatus">
-      <i class="fas fa-trash" aria-hidden="true"></i>
-    </span>
-    <br/>
-    {{ form_row(form.status) }}
-    {{ form_row(form.user) }}
-  </div>
-{% endmacro %}
 
 {% block javascripts %}
   {{ parent() }}
