@@ -40,19 +40,19 @@ class ProjectController extends Controller
     public function create(Request $request)
     {
         $project = new Project();
-        // add a default manager to the project
-        $userStatus = new UserProjectStatus();
-        $userStatus->setStatus($this->getDoctrine()->getRepository(UserStatus::class)->findOneByName(AppEnums::USER_STATUS_MANAGER_NAME));
-        $userStatus->setUser($this->getUser());
-        $project->addUserStatus($userStatus);
+
         $form = $this->createForm(ProjectType::class, $project);
-
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('image')->getData();
             $previous_image = $request->get('previous_image');
+
+            $userStatus = new UserProjectStatus();
+            $manager = $form->get('manager')->getData();
+            $userStatus->setStatus($this->getDoctrine()->getRepository(UserStatus::class)->findOneByName(AppEnums::USER_STATUS_MANAGER_NAME));
+            $userStatus->setUser($manager);
+            $project->addUserStatus($userStatus);
 
             $this->projectManager->createFromForm($project);
             $this->projectManager->handleImage($project, $image, $previous_image);
@@ -89,7 +89,7 @@ class ProjectController extends Controller
             $image = $form->get('image')->getData();
             $previous_image = $request->get('previous_image');
 
-            $this->projectManager->editFromForm($project, $originalStatuses);
+            $this->projectManager->editFromForm($project);
             $this->projectManager->handleImage($project, $image, $previous_image);
 
             $this->flashManager->add('notice', 'project_edited');

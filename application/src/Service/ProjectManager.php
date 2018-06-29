@@ -51,18 +51,9 @@ class ProjectManager
         return $project;
     }
 
-    public function editFromForm($project, $originalStatuses)
+    public function editFromForm($project)
     {
         $project->setUpdatedAt(new \DateTime);
-
-        if ($this->authChecker->isGranted('ROLE_ADMIN')) {
-            foreach ($originalStatuses as $status) {
-                if (!$project->getUserStatuses()->contains($status)) {
-                    $project->removeUserStatus($status);
-                    $this->em->remove($status);
-                }
-            }
-        }
 
         $this->em->persist($project);
         $this->em->flush();

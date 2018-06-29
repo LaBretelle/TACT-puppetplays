@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Project;
+use App\Entity\User;
 use App\Entity\ProjectStatus;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -54,22 +55,18 @@ class ProjectType extends AbstractType
               'data_class' => null
           ])
 
+          ->add('manager', EntityType::class, [
+              'mapped' => false,
+              'class' => User::class,
+              'label' => 'project_manager',
+              'translation_domain' => 'messages',
+              'choice_label' => 'username',
+          ])
+
           ->add('save', SubmitType::class, array(
               'attr' => array('class' => 'save btn btn-primary pull-right'),
               'label' => 'save',
           ));
-
-        if ($this->authChecker->isGranted('ROLE_ADMIN')) {
-            $builder->add('userStatuses', CollectionType::class, [
-            'label' => 'project_user_status',
-            'entry_type' => UserProjectStatusType::class,
-            'prototype' => true,
-            'allow_add' => true,
-            'allow_delete' => true,
-            'mapped' => true,
-            'by_reference' => false,
-          ]);
-        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
