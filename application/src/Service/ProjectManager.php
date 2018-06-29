@@ -95,19 +95,6 @@ class ProjectManager
         return $project;
     }
 
-    public function removeImage(Project $project)
-    {
-        $image = $project->getImage();
-        $path = $this->fileManager->getProjectPath($project).$image;
-        $this->fileManager->delete($path);
-        $project->setImage(null);
-
-        $this->em->persist($project);
-        $this->em->flush();
-
-        return;
-    }
-
     public function initMediaProcessing(Project $project, string $uploadPath, Directory $parent = null)
     {
         $projectPath = $this->fileManager->getProjectPath($project);
@@ -187,17 +174,30 @@ class ProjectManager
         return $project;
     }
 
-    public function removeProjectMedia(Media $media)
+    public function removeProjectMedia(array $ids)
     {
-        $project = $media->getProject();
-
-        $filePath = $this->fileManager->getProjectPath($project).$media->getUrl();
-        $this->fileManager->delete($filePath);
-
-        $this->em->remove($media);
+        $mediaRepository = $this->em->getRepository(Media::class);
+        foreach ($ids as $id) {
+            $media = $mediaRepository->find($id);
+            $project = $media->getProject();
+            $project->removeMedia($media);
+            $filePath = $this->fileManager->getProjectPath($project).$media->getUrl();
+            $this->fileManager->delete($filePath);
+            $this->em->remove($media);
+            $this->em->persist($project);
+        }
         $this->em->flush();
+    }
 
-        return;
+    public function moveProjectMedia(int $target, array $ids)
+    {
+        $targetDir = $this->em->getRepository(Directory::class)->find($target);
+        $mediaRepository = $this->em->getRepository(Media::class);
+        foreach ($ids as $id) {
+            $media = $mediaRepository->find($id);
+            $media->setParent($targetDir);
+            $this->mediaManager->save($media);
+        }
     }
 
     public function getProjectManagerUser(Project $project)

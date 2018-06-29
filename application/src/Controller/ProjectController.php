@@ -162,25 +162,26 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/media/{id}", name="media_delete", options={"expose"=true}, methods="DELETE")
+     * @Route("/media-delete", name="media_delete", options={"expose"=true}, methods="POST")
      */
-    public function removeProjectMedia(Media $media)
+    public function removeProjectMedia(Request $request)
     {
-        $this->projectManager->removeProjectMedia($media);
-
+        $ids = $request->request->get('ids');
+        $this->projectManager->removeProjectMedia($ids);
         return $this->json([], $status = 200);
     }
 
     /**
-     * @Route("/{id}/remove-image", name="delete_image", options={"expose"=true}, methods="DELETE")
+     * @Route("/move-media", name="move_media", options={"expose"=true}, methods="POST")
      */
-    public function removeProjectImage(Project $project)
+    public function moveProjectMedia(Request $request)
     {
-        $this->projectManager->removeImage($project);
-
-        return $this->json([], $status = 200);
+        //$this->projectManager->moveProjectMedia($media);
+        $target = $request->request->get('dirId');
+        $ids = $request->request->get('ids');
+        $this->projectManager->moveProjectMedia($target, $ids);
+        return $this->json(['ids' => $ids, 'target' => $target], $status = 200);
     }
-
 
 
     /**

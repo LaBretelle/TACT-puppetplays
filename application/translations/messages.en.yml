@@ -33,6 +33,7 @@ manage_media_long: Vous permet d'uploader et de supprimer les médias destinés 
 manage_user_statuses_long: Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.
 manager: Manager
 max_file_uploads_message: You can simultaneously upload %nb_max% files
+media_change_directory_title: Choose the target directory
 media_delete_button_title: Delete media
 media_reread_button_title: Reread transcription
 media_transcribe_button_title: Transcribe
@@ -59,9 +60,14 @@ project_manage_media: Manage media
 project_manage_user_statuses: Manage users
 project_management_media: Media management
 project_management_user_statuses: Users management
-project_media_add_file_placeholder: Add media to project
+project_media_add_file: Upload file(s)
+project_media_add_file_placeholder: Select file(s)
+project_media_no_media_in_current_dir: No media in current directory
 project_media_no_media: No media for this project
 project_media_title: Manage project media
+project_media_file_type: Type of file to upload
+project_media_file_type_images: Image(s)
+project_media_file_type_zip: Zip
 project_name: Project name
 project_register: Register to project
 project_registration: Project registration
@@ -74,6 +80,7 @@ public_mail: Email visible to all
 register: register
 repeat_password: Repeat password
 reread_transcription: Reread transcription
+root_directory_option: Root
 save: Save
 selected_media: selected media
 status_edit: Edit status

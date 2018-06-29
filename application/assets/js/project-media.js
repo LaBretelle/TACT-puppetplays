@@ -1,16 +1,52 @@
 import AppRouting from './modules/app-routing.js'
 
 const routing = new AppRouting()
-let currentDeleteAction = null
+let selectedMedia = []
+let selectedFolder = -1
 
 $(document).ready(() => {
-  $('.delete-image').on('click', (e) => {
-    currentDeleteAction = e.target
+  $('.delete-media').on('click', () => {
     $('.delete-project-media-confirm-modal').modal('show')
   })
 
+  $('#select-folder').on('change', (e) => {
+    selectedFolder = e.target.options[e.target.selectedIndex].value
+  })
+
+  $('.move-media').on('click', () => {
+    $('.move-project-media-modal').modal('show')
+  })
+
+  $('.move-media-confirm-button').on('click', () => {
+    moveMedia()
+  })
+
   $('.delete-media-confirm-button').on('click', () => {
-    deleteImage(currentDeleteAction)
+    deleteMedia()
+  })
+
+  $('.image-select').on('change', (e) => {
+    const id = e.target.dataset.id
+    if(e.target.checked && selectedMedia.indexOf(id) === -1) {
+      selectedMedia.push(id)
+    } else {
+      const index = selectedMedia.indexOf(id)
+      selectedMedia.splice(index, 1)
+    }
+
+    if(selectedMedia.length > 0) {
+      $('.images-actions').find('button').attr('disabled', false)
+    } else {
+      $('.images-actions').find('button').attr('disabled', true)
+    }
+  })
+
+  $('#btn-toggle-upload-form').on('click', (e) => {
+    if ($(e.target).children().first().hasClass('fa-toggle-on')) {
+      $(e.target).children().first().removeClass('fa-toggle-on').addClass('fa-toggle-off')
+    } else {
+      $(e.target).children().first().removeClass('fa-toggle-off').addClass('fa-toggle-on')
+    }
   })
 
   // set default to multiple images upload
@@ -52,15 +88,34 @@ $(document).ready(() => {
   })
 })
 
-const deleteImage = (element) => {
-  const url = routing.generateRoute('project_media_delete', {
-    id: element.dataset.id
-  })
+const deleteMedia = () => {
+  const url = routing.generateRoute('project_media_delete')
   $.ajax({
-    method: 'DELETE',
-    url: url
-  }).done(function () {
-    element.closest('.col-2').remove()
-    currentDeleteAction = null
+    method: 'POST',
+    url: url,
+    data: {'ids' : selectedMedia}
+  }).done(() => {
+    selectedMedia.forEach((id) => {
+      $('#img-col-' + id).remove()
+    })
+    selectedMedia = []
+    selectedFolder = -1
+    $('.images-actions').find('button').attr('disabled', true)
+  })
+}
+
+const moveMedia = () => {
+  const url = routing.generateRoute('project_move_media')
+  $.ajax({
+    method: 'POST',
+    url: url,
+    data: {'ids' : selectedMedia, 'dirId': selectedFolder}
+  }).done(() => {
+    selectedMedia.forEach((id) => {
+      $('#img-col-' + id).remove()
+    })
+    selectedMedia = []
+    selectedFolder = -1
+    $('.images-actions').find('button').attr('disabled', true)
   })
 }

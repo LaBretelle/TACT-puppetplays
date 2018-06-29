@@ -17,40 +17,37 @@
       <div class="card-header">
         <div class="row">
           <div class="col-10">
-            Uploader des fichiers images ou un zip
+            {{'project_media_add_file_placeholder' | trans}}
           </div>
           <div class="col-2 text-right">
-            <div data-toggle="collapse" data-target="#help-text" aria-expanded="false"><i class="fas fa-question-circle icon-question"></i></div>
+            <button id="btn-toggle-upload-form" role="button" class="btn btn-link card-header-icon" type="button" data-toggle="collapse" data-target="#upload-form" aria-expanded="false"><i class="fas fa-toggle-off"></i></button>
           </div>
         </div>
       </div>
-      <div class="card-body">
-        {{ form_start(form) }}
-        <div class="collapse" id="help-text">
-          <div class="alert alert-info">
-            this is the help text for media upload
-          </div>
-        </div>
-        <div class="form-group row col">
-          <label class="col-3 col-form-label">Choisissez le type de fichier à uploader</label>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input radio-file-type" name="file-type" type="radio" id="inlineCheckbox1" checked value="images">
-            <label class="form-check-label" for="inlineCheckbox1">image(s)</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input radio-file-type" name="file-type" type="radio" id="inlineCheckbox2" value="zip">
-            <label class="form-check-label" for="inlineCheckbox2">zip file</label>
-          </div>
-        </div>
-        {# file(s) upload form #}
-          {{ form_row(form.images) }}
-            <div class="max-file-upload-msg">
-              <small class="form-text text-muted max-file-upload-alert"><i class="fas fa-exclamation-triangle fa-fw"></i>{{'max_file_uploads_message' | trans({'%nb_max%': fileLimit})}} - <span id="nb-media-selected">0</span> {{'selected_media' | trans}}</small>
+      <div id="upload-form" class="collapse card-body">
+          {{ form_start(form) }}
+            <div class="alert alert-info">
+                this is the help text for media upload
             </div>
-          {{ form_row(form.zip) }}
-          {{ form_row(form.save) }}
-        {{ form_end(form) }}
-
+            <div class="form-group row col">
+              <label class="col-3 col-form-label">{{'project_media_file_type' | trans}}</label>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input radio-file-type" name="file-type" type="radio" id="inlineCheckbox1" checked value="images">
+                <label class="form-check-label" for="inlineCheckbox1">{{'project_media_file_type_images' | trans}}</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input radio-file-type" name="file-type" type="radio" id="inlineCheckbox2" value="zip">
+                <label class="form-check-label" for="inlineCheckbox2">{{'project_media_file_type_zip' | trans}}</label>
+              </div>
+            </div>
+            {# file(s) upload form #}
+            {{ form_row(form.images) }}
+              <div class="max-file-upload-msg">
+                <small class="form-text text-muted max-file-upload-alert"><i class="fas fa-exclamation-triangle fa-fw"></i>{{'max_file_uploads_message' | trans({'%nb_max%': fileLimit})}} - <span id="nb-media-selected">0</span> {{'selected_media' | trans}}</small>
+              </div>
+            {{ form_row(form.zip) }}
+            {{ form_row(form.save) }}
+          {{ form_end(form) }}
       </div>
     </div>
   {% endif %}

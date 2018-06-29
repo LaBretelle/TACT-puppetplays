@@ -4,6 +4,11 @@
 // the ~ allows you to reference things in node_modules
 @import '~bootstrap/scss/bootstrap';
 
+// allow the use of {font-family: 'Font Awesome 5 Free'; content: "\f0a9";}
+
+$fa-font-path : '~@fortawesome/fontawesome-free-webfonts/webfonts';
+@import '~@fortawesome/fontawesome-free-webfonts/scss/fa-solid';
+
 /* BOOTSTRAP OVERRIDE
 --------------------------- */
 body {

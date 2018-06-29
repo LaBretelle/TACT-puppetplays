@@ -25,7 +25,7 @@ class MediaManager
         $this->security = $security;
         $this->transcriptionManager = $transcriptionManager;
     }
-    
+
     public function createMediaFromFile(File $file, string $fileClientName, Project $project, Directory $parent = null)
     {
         $name = explode('.', $fileClientName)[0];
@@ -147,5 +147,13 @@ class MediaManager
         }
 
         return 'status none';
+    }
+
+    public function save(Media $media)
+    {
+        $this->em->persist($media);
+        $this->em->flush();
+
+        return $media;
     }
 }

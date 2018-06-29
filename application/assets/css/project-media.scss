@@ -1,5 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 
+
 .project-image {
   width: 100%;
   display: block;
@@ -37,10 +38,39 @@
   margin-bottom: 15px;
 }
 
-.icon-question {
-  cursor: pointer;
-}
-
 .max-file-upload-msg {
   margin-bottom: 15px;
+}
+.project-tree-col {
+  border-right: 1px solid #eee;
+}
+
+.project-tree {
+  padding: 10px;
+  margin-top: 15px;
+
+  .tree-item{
+    list-style: none;
+    &.active > a {
+      color:red;
+    }
+    &.active::before {
+      font-family: 'Font Awesome 5 Free';
+      content: "\f0a9";
+      color:red;
+    }
+  }
+}
+
+.media-list-row {
+    margin-top: 15px;
+}
+
+.card-header-icon {
+  cursor: pointer;
+  padding: 0;
+  color: #999;
+  &:hover {
+    color: black;
+  }
 }

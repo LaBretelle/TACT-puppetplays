@@ -1,6 +1,6 @@
 // Import TinyMCE
 import tinymce from 'tinymce/tinymce'
-import * as Toastr from 'toastr';
+import * as Toastr from 'toastr'
 
 // A theme is also required
 import 'tinymce/themes/modern/theme'
@@ -18,26 +18,26 @@ $(document).ready(() => {
     TOASTER
   *******************/
   Toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "newestOnTop": true,
-    "progressBar": false,
-    "positionClass": "toast-top-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
+    'closeButton': true,
+    'debug': false,
+    'newestOnTop': true,
+    'progressBar': false,
+    'positionClass': 'toast-top-right',
+    'preventDuplicates': false,
+    'onclick': null,
+    'showDuration': '300',
+    'hideDuration': '1000',
+    'timeOut': '5000',
+    'extendedTimeOut': '1000',
+    'showEasing': 'swing',
+    'hideEasing': 'linear',
+    'showMethod': 'fadeIn',
+    'hideMethod': 'fadeOut'
   }
 
-  $("#flashes .flash").each(function() {
-    Toastr.info($(this).data("message"))
-  });
+  $('#flashes .flash').each(function () {
+    Toastr.info($(this).data('message'))
+  })
 
   /*******************
     TINYMCE
@@ -46,7 +46,7 @@ $(document).ready(() => {
     selector: 'textarea.tinymce-enabled',
     plugins: ['paste', 'link'],
     setup: (editor) => {
-      editor.on('change', function() {
+      editor.on('change', function () {
         editor.save()
       })
     }

@@ -5,13 +5,18 @@
 {% endmacro %}
 
 
-{% macro projectTree(dir) %}
-    <li>{{dir.name}}</li>
+{% macro projectTree(dir, project, current) %}
+
+    <li class="tree-item {{current and dir.id == current.id ? 'active':''}}">
+      <a href="{{ path('project_media', {id: project.id, parent: dir.id}) }}">
+        <i class="fas fa-folder fa-fw"></i>{{dir.name}}
+      </a>
+    </li>
     {% if dir.children|length > 0 %}
         {% import _self as treeMacro %}
         <ul>
           {% for child in dir.children %}
-             {{ treeMacro.projectTree(child) }}
+             {{ treeMacro.projectTree(child, project, current) }}
           {% endfor %}
         </ul>
     {% endif %}
