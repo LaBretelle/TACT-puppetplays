@@ -183,7 +183,6 @@ class ProjectController extends Controller
         return $this->json(['ids' => $ids, 'target' => $target], $status = 200);
     }
 
-
     /**
      * @Route("/{id}", name="display", options={"expose"=true})
      */
