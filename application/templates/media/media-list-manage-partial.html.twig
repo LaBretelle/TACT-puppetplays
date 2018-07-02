@@ -133,7 +133,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <select id="select-folder" name="folder" class="form-control">
+            <select name="folder" class="form-control select-folder">
               <option value="-1">{{'root_directory_option'| trans}}</option>
               {% for dir in project.dirs if dir != parent %}
                 <option value="{{dir.id}}">{{dir.name}}</option>
@@ -180,6 +180,33 @@
           <button type="submit" class="btn btn-primary">{{'add' | trans}}</button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+
+{# move project folder confirm modal #}
+<div class="modal fade move-project-folder-modal" id="move-project-folder-modal" tabindex="-1" role="dialog" aria-labelledby="moveFolderModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="moveFolderModalLabel">{{'project_move_directory_title'| trans}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <select name="folder" class="form-control select-folder">
+              <option value="-1">{{'root_directory_option'| trans}}</option>
+              {% for dir in project.dirs if dir != parent %}
+                <option value="{{dir.id}}">{{dir.name}}</option>
+              {% endfor %}
+            </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-action="cancel" data-dismiss="modal">{{'cancel' | trans}}</button>
+          <button type="button" data-action="confirm" data-dismiss="modal" class="btn btn-danger move-dir-confirm-button">{{'confirm' | trans}}</button>
+        </div>
     </div>
   </div>
 </div>

@@ -60,7 +60,8 @@ $(document).ready(() => {
   deleteFoldersForm = document.forms.namedItem('delete-folder-form')
   moveFoldersForm = document.forms.namedItem('move-folder-form')
 
-  $('#select-folder').on('change', (e) => {
+  // modals folder select element
+  $('.select-folder').on('change', (e) => {
     selectedFolder = e.target.options[e.target.selectedIndex].value
   })
 
@@ -72,8 +73,24 @@ $(document).ready(() => {
     $('.delete-project-folders-confirm-modal').modal('show')
   })
 
+  $('.btn-move-dir').on('click', () => {
+    $('.move-project-folder-modal').modal('show')
+  })
+
+  $('.move-dir-confirm-button').on('click', () => {
+    // clean inputs
+    $('form#move-folder-form').find('input').each((index, el) => {
+      if($(el).hasClass('move-folder')) {
+        $(el).remove()
+      }
+    })
+    // append a field dirId  selectedFolder
+    $('form#move-folder-form').append(`<input class="move-folder" type="hidden" name="dirId" value="${selectedFolder}"></input>`)
+    moveFoldersForm.submit()
+  })
+
   $('.delete-folders-confirm-button').on('click', () => {
-    deleteFolders()
+    deleteFoldersForm.submit()
   })
 
   $('.btn-folder-name-edit').on('click', (e) => {
@@ -108,15 +125,22 @@ $(document).ready(() => {
 
     if(checkedFolders.length > 0) {
       $('.btn-del-dir').attr('disabled', false)
+      $('.btn-move-dir').attr('disabled', false)
+      // clean inputs
       $('form#delete-folder-form').find('input').each((index, el) => {
+        $(el).remove()
+      })
+      $('form#move-folder-form').find('input').each((index, el) => {
         $(el).remove()
       })
       checkedFolders.forEach( (id) => {
         $('form#delete-folder-form').append(`<input type="hidden" name="ids[]" value="${id}"></input>`)
+        $('form#move-folder-form').append(`<input type="hidden" name="ids[]" value="${id}"></input>`)
       })
 
     } else {
       $('.btn-del-dir').attr('disabled', true)
+      $('.btn-move-dir').attr('disabled', true)
     }
   })
 
@@ -200,8 +224,4 @@ const updateFolderName = (id, name) => {
     url: url,
     data: {id: id, name: name}
   }).done(() => {})
-}
-
-const deleteFolders = () => {
-  deleteFoldersForm.submit()
 }

@@ -215,9 +215,9 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/move-folders", name="move_media", options={"expose"=true}, methods="POST")
+     * @Route("/{id}/move-folders", name="move_folders", options={"expose"=true}, methods="POST")
      */
-    public function moveProjectFolders(Request $request)
+    public function moveProjectFolders(Project $project, Request $request)
     {
         $target = intval($request->request->get('dirId'));
         $ids = $request->request->get('ids');
