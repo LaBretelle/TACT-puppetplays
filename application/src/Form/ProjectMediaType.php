@@ -46,7 +46,7 @@ class ProjectMediaType extends AbstractType
           ])
           ->add('save', SubmitType::class, [
               'attr' => ['class' => 'btn btn-primary'],
-              'label' => 'save',
+              'label' => 'project_media_upload',
           ]);
     }
 

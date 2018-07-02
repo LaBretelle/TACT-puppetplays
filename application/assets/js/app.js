@@ -61,6 +61,8 @@ $(document).ready(() => {
   tinymce.init({
     selector: 'textarea.tinymce-enabled',
     plugins: ['paste', 'link'],
+    menubar:false,
+    statusbar: false,
     setup: (editor) => {
       editor.on('change', function() {
         editor.save()

@@ -4,15 +4,18 @@ namespace App\Service;
 
 use App\Entity\Directory;
 use App\Entity\Project;
+use App\Service\FlashManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 class DirectoryManager
 {
     protected $em;
+    protected $fm;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, FlashManager $fm)
     {
         $this->em = $em;
+        $this->fm = $fm;
     }
 
     public function create(Project $project, $name, $parent)
@@ -24,6 +27,8 @@ class DirectoryManager
         $dir->setProject($project);
 
         $this->save($dir);
+
+        $this->fm->add('notice', 'directory_created');
 
         return $dir;
     }
