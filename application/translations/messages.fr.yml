@@ -1,7 +1,9 @@
 access_denied: Vous n'êtes pas autorisé à accéder à cette page.
 actions: Actions
+add: Ajouter
 add_project: Créer un nouveau projet
 add_user-status: Ajouter un statut pour un utilisateur
+add_directory_modal_title: Ajouter un répertoire
 administrate_platform_menu: Administrer la plateforme
 administrate_users_menu: Utilisateurs
 administrate_users_title: Administration des utilisateurs de la plateforme
@@ -23,6 +25,7 @@ email_renew_password_subject: PATCS - Demande de renouvellement de mot de passe.
 email: Mail
 filter_users_by: Filtrer par nom / prénom / mail / login
 firstname: Prénom
+folder_name: Nom du dossier
 home: Accueil
 image: Image
 is_public: Projet public
@@ -38,11 +41,12 @@ media_change_directory_title: Choisir le répertoire cible
 media_delete_button_title: Supprimer le média
 media_reread_button_title: Relire la transcription
 media_transcribe_button_title: Transcrire
-media_view_transcription_button_title: Voire la transcription
+media_view_transcription_button_title: Voir la transcription
 need_to_be_logged: Vous devez être connecté pour participer au projet.
 no: Non
 not_enabled_yet: (Pas encore activé)
 not_registered: Non inscrit
+parent_folder_name: Nom du dossier parent
 password: Mot de passe
 platform_home_text: Texte de la page d'accueil
 platform_logo: Logo de la plateforme
@@ -69,6 +73,7 @@ project_media_title: Gérer les media du projet
 project_media_file_type: Type de fichier à uploader
 project_media_file_type_images: Image(s)
 project_media_file_type_zip: Zip
+project_move_directory_title: Déplacer le dossier
 project_name: Nom du projet
 project_register: S'inscrire au projet
 project_registration: Inscription au projet
