@@ -8,8 +8,12 @@ let checkedFolders = []
 let deleteFoldersForm = null
 let moveFoldersForm = null
 
+// does the project has folder(s) ?
+let hasFolder = false
+
 $(document).ready(() => {
 
+  hasFolder = $('.tree-entry').length > 0
   /* media
   ------------------------------------ */
   $('.delete-media').on('click', () => {
@@ -37,7 +41,7 @@ $(document).ready(() => {
       selectedMedia.splice(index, 1)
     }
 
-    if(selectedMedia.length > 0) {
+    if(selectedMedia.length > 0 && hasFolder) {
       $('.images-actions').find('button').attr('disabled', false)
     } else {
       $('.images-actions').find('button').attr('disabled', true)

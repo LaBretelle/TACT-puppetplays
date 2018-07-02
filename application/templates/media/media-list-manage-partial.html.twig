@@ -14,7 +14,7 @@
             <li class="nav-item float-right">
               <div class="btn-group">
                 <button class="btn btn-link btn-add-dir" type="button" role="button"><i class="fas fas fa-plus"></i></button>
-                <form id="move-folder-form" name="delete-folder-form" action="{{path('project_move_folders', {'id': project.id})}}" method="post">
+                <form id="move-folder-form" name="move-folder-form" action="{{path('project_move_folders', {'id': project.id})}}" method="post">
                   <button class="btn btn-link btn-move-dir" disabled type="button" role="button"><i class="fas fa-arrows-alt-v"></i></button>
                 </form>
                 <form id="delete-folder-form" name="delete-folder-form" action="{{path('project_delete_folders', {'id': project.id})}}" method="post">
@@ -161,19 +161,18 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="inputName">Nom du dossier</label>
+            <label for="inputName">{{'folder_name' | trans}}</label>
             <input type="text" name="folderName" required class="form-control" id="inputName" placeholder="Nom du dossier">
           </div>
           <div class="form-group">
-            <label for="parent-folder">Dossier parent</label>
+            <label for="parent-folder">{{'parent_folder_name' | trans}}</label>
             <select id="parent-folder" name="parent" class="form-control">
               <option value="-1">{{'root_directory_option'| trans}}</option>
-              {% for dir in project.dirs if dir != parent %}
+              {% for dir in project.dirs %}
                 <option value="{{dir.id}}">{{dir.name}}</option>
               {% endfor %}
             </select>
           </div>
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-action="cancel" data-dismiss="modal">{{'cancel' | trans}}</button>

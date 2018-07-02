@@ -180,17 +180,18 @@ class ProjectManager
         $this->em->flush();
     }
 
-    public function deleteFoldersAndMedia(array $ids)
+    public function deleteFolders(Project $project, array $ids)
     {
         $directoryRepository = $this->em->getRepository(Directory::class);
-        foreach ($ids as $dirId) {
-            $dir = $directoryRepository->find($dirId);
-            $medias = $dir->getMedias();
-            $mediasIds = array_map(function ($media) {
-                return $media->getId();
-            }, $medias->toArray());
-            $this->removeProjectMedia($mediasIds);
+        $projectPath = $this->fileManager->getProjectPath($project);
+        foreach ($ids as $id) {
+            $dir = $directoryRepository->find($id);
             $this->em->remove($dir);
+            $medias = $dir->getMedias();
+            foreach ($medias as $media) {
+                $filePath = $projectPath.DIRECTORY_SEPARATOR.$media->getUrl();
+                $this->fileManager->delete($filePath);
+            }
         }
         $this->em->flush();
     }
@@ -204,6 +205,19 @@ class ProjectManager
             $media->setParent($targetDir);
             $this->mediaManager->save($media);
         }
+    }
+
+    public function moveProjectFolders(int $target, array $ids)
+    {
+        $mediaRepository = $this->em->getRepository(Media::class);
+        $dirRepository = $this->em->getRepository(Directory::class);
+        $targetDir = $target === -1 ? null : $dirRepository->find($target);
+        foreach ($ids as $id) {
+            $dir = $dirRepository->find($id);
+            $dir->setParent($targetDir);
+            $this->em->persist($dir);
+        }
+        $this->em->flush();
     }
 
     public function addFolder(Project $project, int $parentId, string $name)
