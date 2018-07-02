@@ -25,7 +25,8 @@
         "symfony/web-link": "^4.0",
         "symfony/webpack-encore-pack": "*",
         "symfony/yaml": "^4.0",
-        "twig/extensions": "^1.5@dev"
+        "twig/extensions": "^1.5@dev",
+        "willdurand/js-translation-bundle": "^2.7@dev"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",

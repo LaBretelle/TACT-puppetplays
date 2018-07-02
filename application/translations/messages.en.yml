@@ -1,9 +1,9 @@
 access_denied: You are not allowed to access this page.
 actions: Actions
-add: Add
+add_directory_modal_title: Add folder
 add_project: Create new project
 add_user-status: Add status for an user
-add_directory_modal_title: Add folder
+add: Add
 administrate_platform_menu: Administrate platform
 administrate_users_menu: Users
 administrate_users_title: Platform users administration
@@ -16,6 +16,7 @@ confirm_project_deletion: Are you sure you want to delete this project ?
 confirm_title: Please confirm!
 confirm: I confirm!
 description: Description
+directory_created: Folder created
 edit_project_long: Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit: Edit
 email_or_login_placeholder: Login / email
@@ -25,6 +26,7 @@ email_renew_password_subject: PATCS - Reset password request.
 email: Mail
 filter_users_by: Filter by lastname / firstname / mail / login
 firstname: Firstname
+folder_name_changed: Folder name edited
 folder_name: Folder name
 home: Home
 image: Image
@@ -37,12 +39,15 @@ manage_media_long: Vous permet d'uploader et de supprimer les médias destinés 
 manage_user_statuses_long: Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.
 manager: Manager
 max_file_uploads_message: You can simultaneously upload %nb_max% files
+media_added: Media added
 media_change_directory_title: Choose the target folder
 media_delete_button_title: Delete media
+media_deleted: Media deleted
+media_moved: Media moved
 media_reread_button_title: Reread transcription
 media_transcribe_button_title: Transcribe
 media_view_transcription_button_title: View transcription
-need_at_least_one_manager: Need at least one manager.
+need_at_least_one_manager: Need t least one manager.
 need_to_be_logged: You have to be logged in to contribute to the project.
 no: No
 not_enabled_yet: (Not enabled yet)
@@ -54,6 +59,7 @@ platform_logo: Platform logo
 platform_name: Platform name
 platform_page_title: Platform administration
 project_create: Project creation
+project_created: Project created
 project_delete: Delete project
 project_deleted: Project was deleted.
 project_description: project description
@@ -67,14 +73,16 @@ project_manage_user_statuses: Manage users
 project_management_media: Media management
 project_management_user_statuses: Users management
 project_media_add_file_placeholder: Select file(s)
+project_media_add_file_title: Add media
+project_media_add_file: Upload file(s)
+project_media_file_type_images: Image(s)
+project_media_file_type_zip: Zip
+project_media_file_type: Type of file to upload
 project_media_no_media_in_current_dir: No media in current folder
 project_media_no_media: No media for this project
 project_media_title: Manage project media
-project_media_file_type: Type of file to upload
-project_media_file_type_images: Image(s)
-project_media_file_type_zip: Zip
+project_media_upload: Send media
 project_move_directory_title: Move folder
-project_media_add_file: Upload file(s)
 project_name: Project name
 project_register: Register to project
 project_registration: Project registration

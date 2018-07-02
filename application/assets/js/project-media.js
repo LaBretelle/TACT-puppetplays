@@ -1,4 +1,5 @@
 import AppRouting from './modules/app-routing.js'
+import * as Toastr from 'toastr'
 
 const routing = new AppRouting()
 let selectedMedia = []
@@ -201,6 +202,7 @@ const deleteMedia = () => {
     selectedMedia = []
     selectedFolder = -1
     $('.images-actions').find('button').attr('disabled', true)
+    Toastr.info(Translator.trans('media_deleted'))
   })
 }
 
@@ -217,6 +219,7 @@ const moveMedia = () => {
     selectedMedia = []
     selectedFolder = -1
     $('.images-actions').find('button').attr('disabled', true)
+    Toastr.info(Translator.trans('media_moved'))
   })
 }
 
@@ -227,5 +230,7 @@ const updateFolderName = (id, name) => {
     method: 'POST',
     url: url,
     data: {id: id, name: name}
-  }).done(() => {})
+  }).done(() => {
+    Toastr.info(Translator.trans('folder_name_changed'))
+  })
 }
