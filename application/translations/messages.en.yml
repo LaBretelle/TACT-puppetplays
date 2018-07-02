@@ -1,7 +1,9 @@
 access_denied: You are not allowed to access this page.
 actions: Actions
+add: Add
 add_project: Create new project
 add_user-status: Add status for an user
+add_directory_modal_title: Add folder
 administrate_platform_menu: Administrate platform
 administrate_users_menu: Users
 administrate_users_title: Platform users administration
@@ -23,6 +25,7 @@ email_renew_password_subject: PATCS - Reset password request.
 email: Mail
 filter_users_by: Filter by lastname / firstname / mail / login
 firstname: Firstname
+folder_name: Folder name
 home: Home
 image: Image
 is_public: Public project
@@ -34,7 +37,7 @@ manage_media_long: Vous permet d'uploader et de supprimer les médias destinés 
 manage_user_statuses_long: Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.
 manager: Manager
 max_file_uploads_message: You can simultaneously upload %nb_max% files
-media_change_directory_title: Choose the target directory
+media_change_directory_title: Choose the target folder
 media_delete_button_title: Delete media
 media_reread_button_title: Reread transcription
 media_transcribe_button_title: Transcribe
@@ -44,6 +47,7 @@ need_to_be_logged: You have to be logged in to contribute to the project.
 no: No
 not_enabled_yet: (Not enabled yet)
 not_registered: Not registered
+parent_folder_name: Parent folder name
 password: Password
 platform_home_text: Platform home text
 platform_logo: Platform logo
@@ -63,6 +67,13 @@ project_manage_user_statuses: Manage users
 project_management_media: Media management
 project_management_user_statuses: Users management
 project_media_add_file_placeholder: Select file(s)
+project_media_no_media_in_current_dir: No media in current folder
+project_media_no_media: No media for this project
+project_media_title: Manage project media
+project_media_file_type: Type of file to upload
+project_media_file_type_images: Image(s)
+project_media_file_type_zip: Zip
+project_move_directory_title: Move folder
 project_media_add_file: Upload file(s)
 project_media_file_type_images: Image(s)
 project_media_file_type_zip: Zip
@@ -82,7 +93,7 @@ public_mail: Email visible to all
 register: register
 repeat_password: Repeat password
 reread_transcription: Reread transcription
-root_directory_option: Root
+root_folder_option: Root
 save: Save
 selected_media: selected media
 status_edit: Edit status

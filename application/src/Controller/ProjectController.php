@@ -210,7 +210,7 @@ class ProjectController extends Controller
     public function deleteProjectFolders(Project $project, Request $request)
     {
         $ids = $request->request->get('ids');
-        $this->projectManager->deleteFoldersAndMedia($ids);
+        $this->projectManager->deleteFolders($project, $ids);
         return $this->redirectToRoute('project_media', ['id' => $project->getId(), 'parent' => null]);
     }
 
@@ -222,7 +222,7 @@ class ProjectController extends Controller
         $target = intval($request->request->get('dirId'));
         $ids = $request->request->get('ids');
         $this->projectManager->moveProjectFolders($target, $ids);
-        return $this->json(['ids' => $ids, 'target' => $target], $status = 200);
+        return $this->redirectToRoute('project_media', ['id' => $project->getId(), 'parent' => null]);
     }
 
     /**
