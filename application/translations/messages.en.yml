@@ -64,6 +64,7 @@ project_delete: Delete project
 project_deleted: Project was deleted.
 project_description: project description
 project_edit: Edit project
+project_edited: Project edited
 project_edition: Project edition
 project_enabled: Enabled
 project_handle_user_statuses: Users management

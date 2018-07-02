@@ -64,6 +64,7 @@ project_delete: Supprimer le projet
 project_deleted: Le projet a été supprimé.
 project_description: Description du projet
 project_edit: Editer le projet
+project_edited: Projet édité
 project_edition: Edition du projet
 project_enabled: Validé ?
 project_handle_user_statuses: Gérer les utilisateurs
