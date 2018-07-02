@@ -11,6 +11,9 @@ import 'tinymce/plugins/link'
 
 $(document).ready(() => {
 
+  /*******************
+    BOOTSTRAP TOOLTIP & POPOVER
+  *******************/
   $('[data-toggle="popover"]').popover()
   $('[data-toggle="tooltip"]').tooltip()
 
@@ -35,8 +38,21 @@ $(document).ready(() => {
     'hideMethod': 'fadeOut'
   }
 
-  $('#flashes .flash').each(function () {
-    Toastr.info($(this).data('message'))
+  $('#flashes .flash').each(function() {
+    let flash = $(this)
+    let type = flash.data('label')
+    let msg = flash.data('message')
+    switch (type) {
+      case 'notice':
+        Toastr.info(msg)
+        break
+      case 'warning':
+        Toastr.warning(msg)
+        break
+      case 'error':
+        Toastr.error(msg)
+        break
+    }
   })
 
   /*******************
@@ -46,7 +62,7 @@ $(document).ready(() => {
     selector: 'textarea.tinymce-enabled',
     plugins: ['paste', 'link'],
     setup: (editor) => {
-      editor.on('change', function () {
+      editor.on('change', function() {
         editor.save()
       })
     }
