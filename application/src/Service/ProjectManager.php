@@ -9,13 +9,14 @@ use App\Entity\User;
 use App\Service\AppEnums;
 use App\Service\DirectoryManager;
 use App\Service\FileManager;
+use App\Service\FlashManager;
 use App\Service\MediaManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class ProjectManager
 {
@@ -24,19 +25,22 @@ class ProjectManager
     protected $mediaManager;
     protected $fileManager;
     protected $dirManager;
+    protected $fm;
 
     public function __construct(
       EntityManagerInterface $em,
       MediaManager $mediaManager,
       AuthorizationCheckerInterface $authChecker,
       FileManager $fileManager,
-      DirectoryManager $dirManager
+      DirectoryManager $dirManager,
+      FlashManager $fm
     ) {
         $this->em = $em;
         $this->authChecker = $authChecker;
         $this->mediaManager = $mediaManager;
         $this->fileManager = $fileManager;
         $this->dirManager = $dirManager;
+        $this->fm = $fm;
     }
 
     public function createFromForm($project)
@@ -162,6 +166,9 @@ class ProjectManager
 
         $this->initMediaProcessing($project, $uploadPath, $parent);
         rmdir($uploadPath);
+
+        $this->fm->add('notice', 'media_added');
+
         return $project;
     }
 
@@ -178,6 +185,8 @@ class ProjectManager
             $this->em->persist($project);
         }
         $this->em->flush();
+
+        return;
     }
 
     public function deleteFolders(Project $project, array $ids)
@@ -205,6 +214,8 @@ class ProjectManager
             $media->setParent($targetDir);
             $this->mediaManager->save($media);
         }
+
+        return;
     }
 
     public function moveProjectFolders(int $target, array $ids)
@@ -217,6 +228,8 @@ class ProjectManager
             $dir->setParent($targetDir);
             $this->em->persist($dir);
         }
+        $this->fm->add('notice', 'folders_moved');
+
         $this->em->flush();
     }
 
@@ -231,6 +244,7 @@ class ProjectManager
         $folder = $this->em->getRepository(Directory::class)->find($id);
         $folder->setName($name);
         $this->dirManager->save($folder);
+
         return  $folder;
     }
 
