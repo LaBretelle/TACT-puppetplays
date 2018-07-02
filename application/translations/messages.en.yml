@@ -75,9 +75,6 @@ project_media_file_type_images: Image(s)
 project_media_file_type_zip: Zip
 project_move_directory_title: Move folder
 project_media_add_file: Upload file(s)
-project_media_file_type_images: Image(s)
-project_media_file_type_zip: Zip
-project_media_file_type: Type of file to upload
 project_media_no_media_in_current_dir: No media in current directory
 project_media_no_media: No media for this project
 project_media_title: Manage project media
