@@ -44,46 +44,54 @@ class UserProjectStatusManager
         return $userProjectStatus;
     }
 
-    public function toggle(UserProjectStatus $userProjectStatus)
+    public function checkBeforeChange(UserProjectStatus $userProjectStatus, $newStatusName)
     {
         $enabled = $userProjectStatus->getEnabled();
-        $statusName = $userProjectStatus->getStatus()->getName();
+        $oldStatusName = $userProjectStatus->getStatus()->getName();
 
-
-        $canToggle = ($enabled && $statusName == AppEnums::USER_STATUS_MANAGER_NAME)
-          ? $this->hasManager($userProjectStatus)
+        return ($needCheck)
+          ? $this->canEdit($userProjectStatus)
           : true;
+    }
 
+    public function toggle(UserProjectStatus $ups)
+    {
+        $enabled = $ups->getEnabled();
 
-        if ($canToggle) {
-            $userProjectStatus->setEnabled(!$enabled);
-
-            $this->em->persist($userProjectStatus);
+        if ($this->canEdit($ups)) {
+            $ups->setEnabled(!$enabled);
+            $this->em->persist($ups);
             $this->em->flush();
         }
 
-        return $userProjectStatus;
+        return $ups;
     }
 
-    public function remove(UserProjectStatus $userProjectStatus)
+    public function remove(UserProjectStatus $ups)
     {
-        if ($this->hasManager($userProjectStatus)) {
-            $this->em->remove($userProjectStatus);
+        if ($this->canEdit($ups)) {
+            $this->em->remove($ups);
             $this->em->flush();
         }
 
         return;
     }
 
-    private function hasManager(UserProjectStatus $userProjectStatus)
+    public function canEdit(UserProjectStatus $ups, $oldStatus = null)
     {
-        $project = $userProjectStatus->getProject();
+        $enabled = $ups->getEnabled();
+        $newStatusName = $ups->getStatus()->getName();
+        $statusName = ($oldStatus)
+          ? $oldStatus
+          : $ups->getStatus()->getName();
 
-        $count = $this->em->getRepository("App:UserProjectStatus")->countManagerByProject($project);
-
-        if ($count < 2) {
-            $this->fm->add('warning', 'need_at_least_one_manager');
-            return false;
+        if (($enabled && $statusName == AppEnums::USER_STATUS_MANAGER_NAME) || ($enabled && $statusName == AppEnums::USER_STATUS_MANAGER_NAME && $statusName != $newStatusName)) {
+            $project = $ups->getProject();
+            $count = $this->em->getRepository("App:UserProjectStatus")->countManagerByProject($project);
+            if ($count < 2) {
+                $this->fm->add('warning', 'need_at_least_one_manager');
+                return false;
+            }
         }
 
         return true;

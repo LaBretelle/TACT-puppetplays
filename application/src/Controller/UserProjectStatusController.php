@@ -72,19 +72,20 @@ class UserProjectStatusController extends Controller
     /**
      * @Route("/{id}/form", name="form_post", methods="POST")
      */
-    public function postForm(UserProjectStatus $status, Request $request)
+    public function postForm(UserProjectStatus $userProjectStatus, Request $request)
     {
-        $form = $this->createForm(UserStatusType::class, $status);
+        $oldStatus = $userProjectStatus->getStatus()->getName();
 
+        $form = $this->createForm(UserStatusType::class, $userProjectStatus);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $this->statusManager->canEdit($userProjectStatus, $oldStatus)) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($status);
+            $em->persist($userProjectStatus);
             $em->flush();
         }
 
-        return $this->redirectToRoute('status_project', ["id" => $status->getProject()->getId()]);
+        return $this->redirectToRoute('status_project', ["id" => $userProjectStatus->getProject()->getId()]);
     }
 
     /**
