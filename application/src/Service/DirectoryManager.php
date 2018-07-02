@@ -23,9 +23,14 @@ class DirectoryManager
         $dir->setParent($parent);
         $dir->setProject($project);
 
-        $this->em->persist($dir);
-        $this->em->flush();
+        $this->save($dir);
 
         return $dir;
+    }
+
+    public function save(Directory $dir)
+    {
+        $this->em->persist($dir);
+        $this->em->flush();
     }
 }

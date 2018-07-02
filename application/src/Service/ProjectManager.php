@@ -172,7 +172,7 @@ class ProjectManager
             $media = $mediaRepository->find($id);
             $project = $media->getProject();
             $project->removeMedia($media);
-            $filePath = $this->fileManager->getProjectPath($project).$media->getUrl();
+            $filePath = $this->fileManager->getProjectPath($project).DIRECTORY_SEPARATOR.$media->getUrl();
             $this->fileManager->delete($filePath);
             $this->em->remove($media);
             $this->em->persist($project);
@@ -180,15 +180,44 @@ class ProjectManager
         $this->em->flush();
     }
 
+    public function deleteFoldersAndMedia(array $ids)
+    {
+        $directoryRepository = $this->em->getRepository(Directory::class);
+        foreach ($ids as $dirId) {
+            $dir = $directoryRepository->find($dirId);
+            $medias = $dir->getMedias();
+            $mediasIds = array_map(function ($media) {
+                return $media->getId();
+            }, $medias->toArray());
+            $this->removeProjectMedia($mediasIds);
+            $this->em->remove($dir);
+        }
+        $this->em->flush();
+    }
+
     public function moveProjectMedia(int $target, array $ids)
     {
-        $targetDir = $this->em->getRepository(Directory::class)->find($target);
+        $targetDir = $target === -1 ? null : $this->em->getRepository(Directory::class)->find($target);
         $mediaRepository = $this->em->getRepository(Media::class);
         foreach ($ids as $id) {
             $media = $mediaRepository->find($id);
             $media->setParent($targetDir);
             $this->mediaManager->save($media);
         }
+    }
+
+    public function addFolder(Project $project, int $parentId, string $name)
+    {
+        $targetDir = $parentId === -1 ? null : $this->em->getRepository(Directory::class)->find($parentId);
+        return $this->dirManager->create($project, $name, $targetDir);
+    }
+
+    public function updateFolderName(int $id, string $name)
+    {
+        $folder = $this->em->getRepository(Directory::class)->find($id);
+        $folder->setName($name);
+        $this->dirManager->save($folder);
+        return  $folder;
     }
 
     public function getProjectManagerUser(Project $project)

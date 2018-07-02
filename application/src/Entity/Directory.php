@@ -36,12 +36,12 @@ class Directory
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Directory", mappedBy="parent", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Directory", mappedBy="parent", cascade={"persist", "remove"})
      */
     private $children;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="parent", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="parent", cascade={"persist", "remove"})
      */
     private $medias;
 

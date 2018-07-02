@@ -270,7 +270,7 @@ class Project
         return $this;
     }
 
-    public function removeDir(Directory $media): self
+    public function removeDir(Directory $directory): self
     {
         if ($this->dirs->contains($directory)) {
             $this->dirs->removeElement($directory);

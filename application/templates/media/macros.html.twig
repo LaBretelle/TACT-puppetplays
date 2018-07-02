@@ -6,15 +6,25 @@
 
 
 {% macro projectTree(dir, project, current) %}
-
-    <li class="tree-item {{current and dir.id == current.id ? 'active':''}}">
-      <a href="{{ path('project_media', {id: project.id, parent: dir.id}) }}">
-        <i class="fas fa-folder fa-fw"></i>{{dir.name}}
+    <li class="list-group-item d-flex justify-content-between align-items-center {{current and dir.id == current.id ? 'list-group-item-secondary':''}}">
+      <a id="dir-{{dir.id}}-name" class="text-dark" href="{{ path('project_media', {id: project.id, parent: dir.id}) }}">
+        <i class="fas fa-folder fa-fw"></i><span id="dir-{{dir.id}}-name-value">{{dir.name}}</span>
       </a>
+      <input class="form-control form-control-sm" id="dir-{{dir.id}}-name-input" type="text" style="display:none;" name="" value="{{dir.name}}">
+      <div class="d-flex justify-content-between align-items-center">
+        <div id="dir-{{dir.id}}-edit-actions" class="btn-group">
+          <div class="form-check">
+            <input type="checkbox" name="folder-select" data-id="{{dir.id}}" class="form-check-input folder-check">
+            <label class="form-check-label"></label>
+          </div>
+          <button id="dir-{{dir.id}}-name-edit-btn" data-id="{{dir.id}}" class="btn btn-link btn-folder-name-edit btn-link-no-padding black" type="button" role="button"><i class="fas fa-pencil-alt"></i></button>
+        </div>
+        <button id="dir-{{dir.id}}-name-update-btn" style="display:none;" data-id="{{dir.id}}" class="btn btn-link btn-folder-name-save" type="button" role="button"><i class="fa fa-save"></i></button>
+      </div>
     </li>
     {% if dir.children|length > 0 %}
         {% import _self as treeMacro %}
-        <ul>
+        <ul class="list-group list-group-flush tree-inner-list">
           {% for child in dir.children %}
              {{ treeMacro.projectTree(child, project, current) }}
           {% endfor %}

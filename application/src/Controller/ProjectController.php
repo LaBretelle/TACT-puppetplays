@@ -120,7 +120,7 @@ class ProjectController extends Controller
     /**
      * @Route("/{id}/media/{parent}", name="media", defaults={"parent"=null})
      */
-    public function addProjectMedia(Request $request, Project $project, Directory $parent = null)
+    public function manageProjectMedia(Request $request, Project $project, Directory $parent = null)
     {
         $form = $this->createForm(ProjectMediaType::class, $project);
         $form->handleRequest($request);
@@ -176,10 +176,52 @@ class ProjectController extends Controller
      */
     public function moveProjectMedia(Request $request)
     {
-        //$this->projectManager->moveProjectMedia($media);
-        $target = $request->request->get('dirId');
+        $target = intval($request->request->get('dirId'));
         $ids = $request->request->get('ids');
         $this->projectManager->moveProjectMedia($target, $ids);
+        return $this->json(['ids' => $ids, 'target' => $target], $status = 200);
+    }
+
+    /**
+     * @Route("/{id}/add-folder", name="add_folder", methods="POST")
+     */
+    public function addFolderToProject(Project $project, Request $request)
+    {
+        $parentId = intval($request->request->get('parent'));
+        $name = $request->request->get('folderName');
+        $newFolder = $this->projectManager->addFolder($project, $parentId, $name);
+        return $this->redirectToRoute('project_media', ['id' => $project->getId(), 'parent' => $newFolder->getId()]);
+    }
+
+    /**
+     * @Route("/update-folder-name", name="update_folder_name", options={"expose"=true}, methods="POST")
+     */
+    public function updateProjectFolderName(Request $request)
+    {
+        $name = $request->request->get('name');
+        $folderId = intval($request->request->get('id'));
+        $folder = $this->projectManager->updateFolderName($folderId, $name);
+        return $this->json(['name' => $folder->getName(), 'id' => $folder->getId()], $status = 200);
+    }
+
+    /**
+     * @Route("/{id}/delete-folders", name="delete_folders", methods="POST")
+     */
+    public function deleteProjectFolders(Project $project, Request $request)
+    {
+        $ids = $request->request->get('ids');
+        $this->projectManager->deleteFoldersAndMedia($ids);
+        return $this->redirectToRoute('project_media', ['id' => $project->getId(), 'parent' => null]);
+    }
+
+    /**
+     * @Route("/move-folders", name="move_media", options={"expose"=true}, methods="POST")
+     */
+    public function moveProjectFolders(Request $request)
+    {
+        $target = intval($request->request->get('dirId'));
+        $ids = $request->request->get('ids');
+        $this->projectManager->moveProjectFolders($target, $ids);
         return $this->json(['ids' => $ids, 'target' => $target], $status = 200);
     }
 
@@ -199,7 +241,7 @@ class ProjectController extends Controller
     /**
      * @Route("/{id}/process-media", name="process", options={"expose"=true})
      */
-    public function process(Project $project)
+    /*public function process(Project $project)
     {
         $projectManagerUser = $this->projectManager->initMediaProcessing($project);
 
@@ -207,5 +249,5 @@ class ProjectController extends Controller
             'project/display.html.twig',
             ['project' => $project, 'manager' => $projectManagerUser]
         );
-    }
+    }*/
 }

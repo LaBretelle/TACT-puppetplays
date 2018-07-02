@@ -13,15 +13,19 @@
           <ul class="navbar-nav">
             <li class="nav-item float-right">
               <div class="btn-group">
-                <button class="btn btn-link" type="button" role="button"><i class="fas fas fa-plus"></i></button>
-                <button class="btn btn-link" disabled type="button" role="button"><i class="fas fa-pencil-alt"></i></button>
-                <button class="btn btn-link" disabled type="button" role="button"><i class="fas fa-trash"></i></button>
+                <button class="btn btn-link btn-add-dir" type="button" role="button"><i class="fas fas fa-plus"></i></button>
+                <form id="move-folder-form" name="delete-folder-form" action="{{path('project_move_folders', {'id': project.id})}}" method="post">
+                  <button class="btn btn-link btn-move-dir" disabled type="button" role="button"><i class="fas fa-arrows-alt-v"></i></button>
+                </form>
+                <form id="delete-folder-form" name="delete-folder-form" action="{{path('project_delete_folders', {'id': project.id})}}" method="post">
+                  <button class="btn btn-link btn-del-dir" disabled type="button" role="button"><i class="fas fa-trash"></i></button>
+                </form>
               </div>
             </li>
           </ul>
         </div>
     </nav>
-    <ul class="project-tree">
+    <ul class="list-group list-group-flush">
       {% for dir in project.dirs if dir.parent is null %}
         {{macros.projectTree(dir, project, parent)}}
       {% endfor %}
@@ -56,7 +60,6 @@
             <div id="img-col-{{media.id}}" class="col-2">
               <div class="card mb-2 box-shadow">
                 <img data-toggle="tooltip" title="{{media.name}}" class="card-img-top project-image" src="{{ macros.mediaURL(media) }}" alt=""></img>
-
                 <div class="card-footer text-center">
                   <div class="form-check">
                     <input type="checkbox" name="image-select" data-id="{{media.id}}" class="form-check-input image-select">
@@ -78,11 +81,11 @@
 </div>
 
 {# delete project media confirm modal #}
-<div class="modal fade delete-project-media-confirm-modal" id="delete-project-media-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade delete-project-media-confirm-modal" id="delete-project-media-modal" tabindex="-1" role="dialog" aria-labelledby="deleteMediaModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{'confirm_title'| trans}}</h5>
+        <h5 class="modal-title" id="deleteMediaModalLabel">{{'confirm_title'| trans}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -93,6 +96,27 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-action="cancel" data-dismiss="modal">{{'cancel' | trans}}</button>
         <button type="button" data-action="confirm" data-dismiss="modal" class="btn btn-danger delete-media-confirm-button">{{'confirm' | trans}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# delete project folders confirm modal #}
+<div class="modal fade delete-project-folders-confirm-modal" id="delete-project-media-modal" tabindex="-1" role="dialog" aria-labelledby="deleteFoldersModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteFoldersModalLabel">{{'confirm_title'| trans}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6>{{'confirm_delete_project_folders' | trans}}</h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-action="cancel" data-dismiss="modal">{{'cancel' | trans}}</button>
+        <button type="button" data-action="confirm" data-dismiss="modal" class="btn btn-danger delete-folders-confirm-button">{{'confirm' | trans}}</button>
       </div>
     </div>
   </div>
@@ -120,6 +144,42 @@
           <button type="button" class="btn btn-secondary" data-action="cancel" data-dismiss="modal">{{'cancel' | trans}}</button>
           <button type="button" data-action="confirm" data-dismiss="modal" class="btn btn-danger move-media-confirm-button">{{'confirm' | trans}}</button>
         </div>
+    </div>
+  </div>
+</div>
+
+{# add directory modal #}
+<div class="modal fade add-dir-modal" id="add-dir-modal" tabindex="-1" role="dialog" aria-labelledby="addDirModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <form action="{{path('project_add_folder', {'id':project.id})}}" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addDirModalLabel">{{'add_directory_modal_title'| trans}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="inputName">Nom du dossier</label>
+            <input type="text" name="folderName" required class="form-control" id="inputName" placeholder="Nom du dossier">
+          </div>
+          <div class="form-group">
+            <label for="parent-folder">Dossier parent</label>
+            <select id="parent-folder" name="parent" class="form-control">
+              <option value="-1">{{'root_directory_option'| trans}}</option>
+              {% for dir in project.dirs if dir != parent %}
+                <option value="{{dir.id}}">{{dir.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-action="cancel" data-dismiss="modal">{{'cancel' | trans}}</button>
+          <button type="submit" class="btn btn-primary">{{'add' | trans}}</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

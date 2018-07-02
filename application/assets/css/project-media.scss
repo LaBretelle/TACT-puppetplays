@@ -45,22 +45,11 @@
   border-right: 1px solid #eee;
 }
 
-.project-tree {
-  padding: 10px;
-  margin-top: 15px;
 
-  .tree-item{
-    list-style: none;
-    &.active > a {
-      color:red;
-    }
-    &.active::before {
-      font-family: 'Font Awesome 5 Free';
-      content: "\f0a9";
-      color:red;
-    }
-  }
+.tree-inner-list {
+  padding-left: 15px;
 }
+
 
 .media-list-row {
     margin-top: 15px;
@@ -72,5 +61,15 @@
   color: #999;
   &:hover {
     color: black;
+  }
+}
+
+.btn-link-no-padding {
+  padding: 0;
+  &.black {
+    color: #999;
+    &:hover {
+      color: black;
+    }
   }
 }

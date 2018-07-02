@@ -8,7 +8,8 @@ administrate_users_title: Administration des utilisateurs de la plateforme
 app_admin: Administrateur du site
 cancel: Annuler
 confirm_account_anonymization: Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
-confirm_delete_project_media: Êtes vous sur de vouloir supprimer ce media ?
+confirm_delete_project_media: Êtes vous sur de vouloir supprimer le(s) média selectionné(s) ?
+confirm_delete_project_folders: Êtes vous sur de vouloir supprimer le(s) dossiers selectionné(s) (les médias seront aussi dupprimés) ?
 confirm_project_deletion: Êtes vous sur de vouloir supprimer ce projet ?
 confirm_title: Veuillez confirmer!
 confirm: Je confirme!

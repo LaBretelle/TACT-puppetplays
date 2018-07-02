@@ -4,13 +4,16 @@ const routing = new AppRouting()
 let selectedMedia = []
 let selectedFolder = -1
 
+let checkedFolders = []
+let deleteFoldersForm = null
+let moveFoldersForm = null
+
 $(document).ready(() => {
+
+  /* media
+  ------------------------------------ */
   $('.delete-media').on('click', () => {
     $('.delete-project-media-confirm-modal').modal('show')
-  })
-
-  $('#select-folder').on('change', (e) => {
-    selectedFolder = e.target.options[e.target.selectedIndex].value
   })
 
   $('.move-media').on('click', () => {
@@ -40,6 +43,85 @@ $(document).ready(() => {
       $('.images-actions').find('button').attr('disabled', true)
     }
   })
+
+  $('.project-image').on('click', (e) => {
+    const image = e.target.cloneNode()
+    image.classList.remove('project-image')
+    image.setAttribute('style', 'width:100%;')
+    const modalBody = $('.project-media-modal').find('.modal-body')
+    modalBody.empty()
+    modalBody.append(image)
+    $('.project-media-modal').modal('show')
+  })
+
+  /* folder(s)
+  ------------------------------------ */
+
+  deleteFoldersForm = document.forms.namedItem('delete-folder-form')
+  moveFoldersForm = document.forms.namedItem('move-folder-form')
+
+  $('#select-folder').on('change', (e) => {
+    selectedFolder = e.target.options[e.target.selectedIndex].value
+  })
+
+  $('.btn-add-dir').on('click', () => {
+    $('.add-dir-modal').modal('show')
+  })
+
+  $('.btn-del-dir').on('click', () => {
+    $('.delete-project-folders-confirm-modal').modal('show')
+  })
+
+  $('.delete-folders-confirm-button').on('click', () => {
+    deleteFolders()
+  })
+
+  $('.btn-folder-name-edit').on('click', (e) => {
+    const id = e.target.dataset.id
+    $(`#dir-${id}-name`).hide()
+    $(`#dir-${id}-edit-actions`).hide()
+    $(`#dir-${id}-name-update-btn`).show()
+    $(`#dir-${id}-name-input`).show()
+  })
+
+  $('.btn-folder-name-save').on('click', (e) => {
+    const id = e.target.dataset.id
+    const name = $(`#dir-${id}-name-input`).val().trim()
+    if(name !== '') {
+      $(`#dir-${id}-name-value`).text(name)
+      $(`#dir-${id}-name`).show()
+      $(`#dir-${id}-edit-actions`).show()
+      $(`#dir-${id}-name-update-btn`).hide()
+      $(`#dir-${id}-name-input`).hide()
+      updateFolderName(id, name)
+    }
+  })
+
+  $('.folder-check').on('change', (e) => {
+    const id = e.target.dataset.id
+    if(e.target.checked && checkedFolders.indexOf(id) === -1) {
+      checkedFolders.push(id)
+    } else {
+      const index = checkedFolders.indexOf(id)
+      checkedFolders.splice(index, 1)
+    }
+
+    if(checkedFolders.length > 0) {
+      $('.btn-del-dir').attr('disabled', false)
+      $('form#delete-folder-form').find('input').each((index, el) => {
+        $(el).remove()
+      })
+      checkedFolders.forEach( (id) => {
+        $('form#delete-folder-form').append(`<input type="hidden" name="ids[]" value="${id}"></input>`)
+      })
+
+    } else {
+      $('.btn-del-dir').attr('disabled', true)
+    }
+  })
+
+  /* File(s) upload
+  ------------------------------------------*/
 
   $('#btn-toggle-upload-form').on('click', (e) => {
     if ($(e.target).children().first().hasClass('fa-toggle-on')) {
@@ -76,16 +158,6 @@ $(document).ready(() => {
       span.textContent = e.target.files.length
     }
   }
-
-  $('.project-image').on('click', (e) => {
-    const image = e.target.cloneNode()
-    image.classList.remove('project-image')
-    image.setAttribute('style', 'width:100%;')
-    const modalBody = $('.project-media-modal').find('.modal-body')
-    modalBody.empty()
-    modalBody.append(image)
-    $('.project-media-modal').modal('show')
-  })
 })
 
 const deleteMedia = () => {
@@ -118,4 +190,18 @@ const moveMedia = () => {
     selectedFolder = -1
     $('.images-actions').find('button').attr('disabled', true)
   })
+}
+
+
+const updateFolderName = (id, name) => {
+  const url = routing.generateRoute('project_update_folder_name')
+  $.ajax({
+    method: 'POST',
+    url: url,
+    data: {id: id, name: name}
+  }).done(() => {})
+}
+
+const deleteFolders = () => {
+  deleteFoldersForm.submit()
 }
