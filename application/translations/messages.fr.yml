@@ -8,8 +8,8 @@ administrate_users_title: Administration des utilisateurs de la plateforme
 app_admin: Administrateur du site
 cancel: Annuler
 confirm_account_anonymization: Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
-confirm_delete_project_media: Êtes vous sur de vouloir supprimer le(s) média selectionné(s) ?
 confirm_delete_project_folders: Êtes vous sur de vouloir supprimer le(s) dossiers selectionné(s) (les médias seront aussi dupprimés) ?
+confirm_delete_project_media: Êtes vous sur de vouloir supprimer le(s) média selectionné(s) ?
 confirm_project_deletion: Êtes vous sur de vouloir supprimer ce projet ?
 confirm_title: Veuillez confirmer!
 confirm: Je confirme!
@@ -38,7 +38,8 @@ media_change_directory_title: Choisir le répertoire cible
 media_delete_button_title: Supprimer le média
 media_reread_button_title: Relire la transcription
 media_transcribe_button_title: Transcrire
-media_view_transcription_button_title: Voire la transcription
+media_view_transcription_button_title: Voir la transcription
+need_at_least_one_manager: Il faut au moins un gestionnaire par projet.
 need_to_be_logged: Vous devez être connecté pour participer au projet.
 no: Non
 not_enabled_yet: (Pas encore activé)
@@ -61,14 +62,14 @@ project_manage_media: Gérer les médias
 project_manage_user_statuses: Gérer les utilisateurs
 project_management_media: Gestion les médias
 project_management_user_statuses: Gestion des utilisateurs
-project_media_add_file: Uploader un/des fichier(s)
 project_media_add_file_placeholder: Sélectionner un/des fichier(s)
+project_media_add_file: Uploader un/des fichier(s)
+project_media_file_type_images: Image(s)
+project_media_file_type_zip: Zip
+project_media_file_type: Type de fichier à uploader
 project_media_no_media_in_current_dir: Aucun média dans le répertoire sélectionné
 project_media_no_media: Aucun média associé au projet
 project_media_title: Gérer les media du projet
-project_media_file_type: Type de fichier à uploader
-project_media_file_type_images: Image(s)
-project_media_file_type_zip: Zip
 project_name: Nom du projet
 project_register: S'inscrire au projet
 project_registration: Inscription au projet
