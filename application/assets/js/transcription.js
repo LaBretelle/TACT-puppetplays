@@ -11,9 +11,9 @@ const routing = new AppRouting()
 const updateLogTimeout = 100000
 
 
-var id = "seadragon-viewer";
-var el = document.getElementById(id);
-var url = el.getAttribute('data-url');
+var id = "seadragon-viewer"
+var el = document.getElementById(id)
+var url = el.getAttribute('data-url')
 var viewer = OpenSeadragon({
   id: id,
   showNavigator: false,
@@ -31,7 +31,7 @@ var viewer = OpenSeadragon({
     type: "image",
     url: url
   }
-});
+})
 
 $(document).ready(() => {
   const logId = $('#log-id').val()
