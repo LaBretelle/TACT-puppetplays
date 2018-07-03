@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "babel-preset-es2017": "^6.24.1",
+        "bazinga-translator": "^2.6.6",
         "copy-webpack-plugin": "^4.5.1",
         "ev": "0.0.7",
         "openseadragon": "^2.3.1",

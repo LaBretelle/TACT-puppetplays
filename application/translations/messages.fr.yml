@@ -28,6 +28,8 @@ filter_users_by: Filtrer par nom / prénom / mail / login
 firstname: Prénom
 folder_name_changed: Nom du dossier modifié
 folder_name: Nom du dossier
+folders_deleted: Dossier(s) supprimé(s)
+folders_moved: Dossier(s) déplacé(s)
 home: Accueil
 image: Image
 is_public: Projet public

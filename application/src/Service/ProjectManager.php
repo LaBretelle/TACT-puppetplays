@@ -203,6 +203,9 @@ class ProjectManager
             }
         }
         $this->em->flush();
+        $this->fm->add('notice', 'folders_deleted');
+
+        return;
     }
 
     public function moveProjectMedia(int $target, array $ids)

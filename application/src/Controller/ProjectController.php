@@ -168,6 +168,7 @@ class ProjectController extends Controller
     {
         $ids = $request->request->get('ids');
         $this->projectManager->removeProjectMedia($ids);
+
         return $this->json([], $status = 200);
     }
 
@@ -179,6 +180,7 @@ class ProjectController extends Controller
         $target = intval($request->request->get('dirId'));
         $ids = $request->request->get('ids');
         $this->projectManager->moveProjectMedia($target, $ids);
+
         return $this->json(['ids' => $ids, 'target' => $target], $status = 200);
     }
 
@@ -190,6 +192,7 @@ class ProjectController extends Controller
         $parentId = intval($request->request->get('parent'));
         $name = $request->request->get('folderName');
         $newFolder = $this->projectManager->addFolder($project, $parentId, $name);
+
         return $this->redirectToRoute('project_media', ['id' => $project->getId(), 'parent' => $newFolder->getId()]);
     }
 
@@ -201,6 +204,7 @@ class ProjectController extends Controller
         $name = $request->request->get('name');
         $folderId = intval($request->request->get('id'));
         $folder = $this->projectManager->updateFolderName($folderId, $name);
+
         return $this->json(['name' => $folder->getName(), 'id' => $folder->getId()], $status = 200);
     }
 
@@ -211,6 +215,7 @@ class ProjectController extends Controller
     {
         $ids = $request->request->get('ids');
         $this->projectManager->deleteFolders($project, $ids);
+
         return $this->redirectToRoute('project_media', ['id' => $project->getId(), 'parent' => null]);
     }
 
@@ -222,6 +227,7 @@ class ProjectController extends Controller
         $target = intval($request->request->get('dirId'));
         $ids = $request->request->get('ids');
         $this->projectManager->moveProjectFolders($target, $ids);
+
         return $this->redirectToRoute('project_media', ['id' => $project->getId(), 'parent' => null]);
     }
 
@@ -237,17 +243,4 @@ class ProjectController extends Controller
             ['project' => $project, 'manager' => $projectManagerUser]
         );
     }
-
-    /**
-     * @Route("/{id}/process-media", name="process", options={"expose"=true})
-     */
-    /*public function process(Project $project)
-    {
-        $projectManagerUser = $this->projectManager->initMediaProcessing($project);
-
-        return $this->render(
-            'project/display.html.twig',
-            ['project' => $project, 'manager' => $projectManagerUser]
-        );
-    }*/
 }

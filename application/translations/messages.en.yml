@@ -28,6 +28,8 @@ filter_users_by: Filter by lastname / firstname / mail / login
 firstname: Firstname
 folder_name_changed: Folder name edited
 folder_name: Folder name
+folders_deleted: Folder(s) deleted
+folders_moved: Folder(s) moved
 home: Home
 image: Image
 is_public: Public project

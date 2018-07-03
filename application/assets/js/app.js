@@ -1,4 +1,4 @@
-// Import TinyMCE
+// Import libs
 import tinymce from 'tinymce/tinymce'
 import * as Toastr from 'toastr'
 

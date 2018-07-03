@@ -53,7 +53,6 @@ Encore
   .createSharedEntry('vendor', [
         'jquery',
         'bootstrap',
-        'toastr',
         //'tinymce/tinymce',
         //'tinymce/themes/modern/theme',
         '@fortawesome/fontawesome',
@@ -62,9 +61,9 @@ Encore
         '@fortawesome/fontawesome-free-webfonts'
   ])
 
-
   // for legacy applications that require $/jQuery as a global variable
   .autoProvidejQuery()
+  .enableVersioning()
 ;
 
 module.exports = Encore.getWebpackConfig();
