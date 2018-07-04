@@ -112,7 +112,9 @@ transcribe_long: Vous permet d'accéder au média et de proposer des transcripti
 transcriber: Transcriber
 transcript_media: Transcription of media
 transcription_is_locked: Transcription is locked
+transcription_saved: Transcription saved
 transcription_send_to_validation: Send to validation
+transcription_validated: Transcription validated
 transcriptions_page_title: Project transcripts
 user_account_activated_error: An error occured while activating your account.
 user_account_activated: Your account is now activated.
@@ -135,6 +137,7 @@ user: User
 userfullname: Lastname - Firstname
 username: Login
 validate_transcription: Validate transcription
+validation_asked: Validation asked
 validator: Validator
 view_profile: View profile
 view_project: View details

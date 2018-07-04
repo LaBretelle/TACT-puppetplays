@@ -2,8 +2,8 @@
 
 namespace App\Service;
 
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class FlashManager
 {

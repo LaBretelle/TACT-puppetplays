@@ -2,6 +2,7 @@
 import AppRouting from './modules/app-routing.js'
 import OpenSeadragon from 'openseadragon';
 import tinymce from 'tinymce/tinymce'
+import * as Toastr from 'toastr'
 import 'tinymce/themes/modern/theme'
 import 'tinymce/plugins/paste'
 import 'tinymce/plugins/link'
@@ -97,7 +98,9 @@ const saveTranscription = (id) => {
     data: {
       'transcription': tinyContent
     }
-  }).done(() => {})
+  }).done(() => {
+      Toastr.info(Translator.trans('transcription_saved'))
+  })
 }
 
 const finishTranscription = (id, pid) => {

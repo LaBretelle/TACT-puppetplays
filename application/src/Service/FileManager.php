@@ -2,9 +2,9 @@
 
 namespace App\Service;
 
-use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use App\Entity\Project;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
 class FileManager
 {

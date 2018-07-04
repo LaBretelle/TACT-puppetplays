@@ -2,15 +2,15 @@
 
 namespace App\Service;
 
-use App\Entity\UserProjectStatus;
-use App\Entity\User;
 use App\Entity\Project;
+use App\Entity\User;
 use App\Entity\UserProject;
+use App\Entity\UserProjectStatus;
 use App\Service\AppEnums;
 use App\Service\FlashManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UserProjectStatusManager
 {

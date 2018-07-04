@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Project;
 use App\Entity\Platform;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends Controller
 {

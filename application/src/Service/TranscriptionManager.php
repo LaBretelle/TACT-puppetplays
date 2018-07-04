@@ -7,7 +7,6 @@ use App\Entity\TranscriptionLog;
 use App\Service\AppEnums;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-
 use Symfony\Component\Security\Core\Security;
 
 class TranscriptionManager

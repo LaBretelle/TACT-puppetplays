@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Media;
 use App\Entity\Transcription;
 use App\Service\AppEnums;
+use App\Service\FlashManager;
 use App\Service\MediaManager;
 use App\Service\TranscriptionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,11 +19,13 @@ class MediaController extends Controller
 {
     private $mediaManager;
     private $transcriptionManager;
+    private $fm;
 
-    public function __construct(MediaManager $mediaManager, TranscriptionManager $transcriptionManager)
+    public function __construct(MediaManager $mediaManager, TranscriptionManager $transcriptionManager, FlashManager $fm)
     {
         $this->mediaManager = $mediaManager;
         $this->transcriptionManager = $transcriptionManager;
+        $this->fm = $fm;
     }
 
     /**
@@ -81,6 +84,7 @@ class MediaController extends Controller
     {
         $content = $request->get('transcription');
         $this->mediaManager->setMediaTranscription($media, $content);
+
         return $this->json([], $status = 200);
     }
 
@@ -91,6 +95,8 @@ class MediaController extends Controller
     {
         $content = $request->get('transcription');
         $this->mediaManager->finishTranscription($media, $content);
+        $this->fm->add('notice', 'validation_asked');
+
         return $this->json([], $status = 200);
     }
 
@@ -101,6 +107,8 @@ class MediaController extends Controller
     {
         $content = $request->get('transcription');
         $this->mediaManager->validateTranscription($media, $content);
+        $this->fm->add('notice', 'transcription_validated');
+
         return $this->json([], $status = 200);
     }
 }
