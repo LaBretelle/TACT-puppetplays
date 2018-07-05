@@ -6,41 +6,43 @@
     <div class="carousel-inner">
       <div id="home" class="carousel-item active">
         <div class="container">
-          <div class="carousel-caption text-left">            
+          <div class="carousel-caption text-left">
               {{home_text | raw}}
           </div>
       </div>
       </div>
     </div>
   </div>
+
   <div class="page-content-container">
-    <div class="row">
-      {% for project in projects %}
-        <div class="col-2">
-          <div class="project hover transition">
-            <div class="project-tile-title transition">
-              {{ project.name }}
+    <div class="card-columns">
+        {% for project in projects %}
+        <div class="card">
+          <img class="card-img-top" src="{{asset('project_files/'~project.id~'/'~project.image)}}">
+            <div class="card-body">
+                <h5 class="card-title">{{ project.name }}</h5>
+                <div>{{ project.description | striptags }}</div>
             </div>
-            <div class="project-tile-desc transition">
-              <p>{{ project.description | truncate(100) | raw}}</p>
+            <div class="card-footer text-right">
+              <a href="{{ path("project_display", {'id': project.id} )}}">{{'view_project' | trans}}</a>
             </div>
-            <div class="project-tile-action transition">
-              <a class="btn btn-link" href="{{ path("project_display", {'id': project.id} )}}" data-toggle="tooltip" title="{{'view_project' | trans}}"> <i class="fas fa-arrow-alt-circle-right "></i></a>
-            </div>
-          </div>
         </div>
       {% endfor %}
-      {% if is_granted('ROLE_ADMIN') %}
-      <div class="col-2">
-        <div class="project">
-          <div class="project-tile-title">
-            <a class="btn btn-link" data-toggle="tooltip" title="{{'add_project' | trans}}" href="{{ path("project_create") }}"> <i class="fas fa-plus"></i></a>
-          </div>
-        </div>
-      </div>
-      {% endif %}
     </div>
-  </div>
+
+      {% if is_granted('ROLE_ADMIN') %}
+
+      <div class="card">
+        <a class="btn btn-link" href="{{ path("project_create") }}"> <i class="fas fa-plus"></i> {{'add_project' | trans}}</a>
+      </div>
+
+
+
+
+      {% endif %}
+
+
+    </div>
 {% endblock %}
 
 {% block javascripts %}

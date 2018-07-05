@@ -29,6 +29,7 @@ RUN apt-get -qqq update && DEBIAN_FRONTEND=noninteractive apt-get install -qqq -
         php7.2-readline \
         php7.2-xml \
         php7.2-zip \
+        php7.2-gd \
         php-common \
         php-imagick
 

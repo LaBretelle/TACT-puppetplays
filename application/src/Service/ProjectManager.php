@@ -71,6 +71,13 @@ class ProjectManager
             $fileName = '__background.'.$file->guessExtension();
             $filePath = $this->fileManager->getProjectPath($project);
             $file->move($filePath, $fileName);
+
+            $imageURL = $filePath.DIRECTORY_SEPARATOR.$fileName;
+            list($width, $height) = getimagesize($imageURL);
+            $imagick = new \Imagick(realpath($imageURL));
+            $imagick->cropImage($width, $width/4, 0, 0);
+            $imagick->writeImage($imageURL);
+
             $project->setImage($fileName);
         } elseif ($previous_image) {
             $project->setImage($previous_image);
