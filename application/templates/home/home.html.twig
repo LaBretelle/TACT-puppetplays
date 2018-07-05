@@ -15,6 +15,11 @@
   </div>
 
   <div class="page-content-container">
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="card mb-3">
+      <a class="btn btn-link" href="{{ path("project_create") }}"> <i class="fas fa-plus"></i> {{'add_project' | trans}}</a>
+    </div>
+    {% endif %}
     <div class="card-columns">
         {% for project in projects %}
         <div class="card">
@@ -29,20 +34,7 @@
         </div>
       {% endfor %}
     </div>
-
-      {% if is_granted('ROLE_ADMIN') %}
-
-      <div class="card">
-        <a class="btn btn-link" href="{{ path("project_create") }}"> <i class="fas fa-plus"></i> {{'add_project' | trans}}</a>
-      </div>
-
-
-
-
-      {% endif %}
-
-
-    </div>
+  </div>
 {% endblock %}
 
 {% block javascripts %}
