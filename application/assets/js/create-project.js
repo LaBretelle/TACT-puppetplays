@@ -1,3 +1,5 @@
+Tiny.initEditor()
+
 const deleteProjectForm = document.forms.deleteProject
 
 $(document).ready(function () {
@@ -21,7 +23,7 @@ $(document).ready(function () {
 
 const formHandler = {
   deleteImage: function (projectId) {
-    var url = Routing.generate('project_delete_image', {
+    var url = Routing.generate('project_image_delete', {
       id: projectId
     })
     $.ajax({

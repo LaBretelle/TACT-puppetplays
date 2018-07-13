@@ -68,7 +68,7 @@ class ProjectManager
     public function handleImage(Project $project, UploadedFile $file = null, string $previous_image = null)
     {
         if ($file) {
-            $fileName = '__background.'.$file->guessExtension();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $filePath = $this->fileManager->getProjectPath($project);
             $file->move($filePath, $fileName);
 
@@ -267,5 +267,17 @@ class ProjectManager
                 return $userProjectStatus->getUser();
             }
         }
+    }
+
+    public function deleteImage(Project $project)
+    {
+        $imagePath = $this->fileManager->getProjectPath($project) . DIRECTORY_SEPARATOR . $project->getImage();
+        unlink($imagePath);
+
+        $project->setImage(null);
+        $this->em->persist($project);
+        $this->em->flush();
+
+        return;
     }
 }

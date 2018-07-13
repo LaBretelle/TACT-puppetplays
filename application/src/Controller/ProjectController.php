@@ -243,4 +243,14 @@ class ProjectController extends Controller
             ['project' => $project, 'manager' => $projectManagerUser]
         );
     }
+
+    /**
+     * @Route("{id}/image/delete", name="image_delete", options={"expose"=true}, methods="DELETE")
+     */
+    public function deleteImage(Project $project, Request $request)
+    {
+        $this->projectManager->deleteImage($project);
+
+        return $this->json([], $status = 200);
+    }
 }
