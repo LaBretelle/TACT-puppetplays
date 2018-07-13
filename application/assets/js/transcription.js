@@ -1,35 +1,27 @@
-/* global $ */
-import AppRouting from './modules/app-routing.js'
-import OpenSeadragon from 'openseadragon';
-import tinymce from 'tinymce/tinymce'
-import * as Toastr from 'toastr'
-import 'tinymce/themes/modern/theme'
-import 'tinymce/plugins/paste'
-import 'tinymce/plugins/link'
+import OpenSeadragon from 'openseadragon'
 
-const routing = new AppRouting()
 // normally every 2 minutes but to avoid any time problem let's put a bit less
 const updateLogTimeout = 100000
 
 
-var id = "seadragon-viewer"
-var el = document.getElementById(id)
-var url = el.getAttribute('data-url')
-var viewer = OpenSeadragon({
+const id = 'seadragon-viewer'
+const el = document.getElementById(id)
+const url = el.getAttribute('data-url')
+OpenSeadragon({
   id: id,
   showNavigator: false,
   showRotationControl: true,
-  prefixUrl: "",
-  zoomInButton:   "osd-zoom-in",
-  zoomOutButton:  "osd-zoom-out",
-  homeButton:     "osd-home",
-  fullPageButton: "osd-full-page",
-  nextButton:     "osd-next",
-  previousButton: "osd-previous",
+  prefixUrl: '',
+  zoomInButton: 'osd-zoom-in',
+  zoomOutButton: 'osd-zoom-out',
+  homeButton: 'osd-home',
+  fullPageButton: 'osd-full-page',
+  nextButton: 'osd-next',
+  previousButton: 'osd-previous',
   rotateLeftButton: 'osd-left',
   rotateRightButton: 'osd-right',
   tileSources: {
-    type: "image",
+    type: 'image',
     url: url
   }
 })
@@ -38,15 +30,7 @@ $(document).ready(() => {
   const logId = $('#log-id').val()
   const isEditMode = logId !== undefined
   if (isEditMode) {
-    tinymce.init({
-      selector: 'textarea.tinymce-transcription',
-      plugins: ['paste', 'link']
-    }).then((editors) => {
-      // load content into tinyMCE
-      editors.forEach(editor => {
-        editor.load()
-      })
-    })
+    Tiny.initTEIEditor()
 
     $('.btn-save-transcription').on('click', (e) => {
       saveTranscription(e.target.dataset.id)
@@ -78,7 +62,7 @@ $(document).ready(() => {
 })
 
 const updateLockedLog = (id) => {
-  const url = routing.generateRoute('transcription_log_locked_update', {
+  const url = Routing.generate('transcription_log_locked_update', {
     id: id
   })
   $.ajax({
@@ -88,8 +72,8 @@ const updateLockedLog = (id) => {
 }
 
 const saveTranscription = (id) => {
-  const tinyContent = tinymce.get('tiny-content').getContent()
-  const url = routing.generateRoute('media_transcription_save', {
+  const tinyContent = Tiny.get('tiny-content').getContent()
+  const url = Routing.generate('media_transcription_save', {
     id: id
   })
   $.ajax({
@@ -99,16 +83,16 @@ const saveTranscription = (id) => {
       'transcription': tinyContent
     }
   }).done(() => {
-      Toastr.info(Translator.trans('transcription_saved'))
+    Toastr.info(Translator.trans('transcription_saved'))
   })
 }
 
 const finishTranscription = (id, pid) => {
-  const tinyContent = tinymce.get('tiny-content').getContent()
-  const url = routing.generateRoute('media_transcription_finish', {
+  const tinyContent = Tiny.get('tiny-content').getContent()
+  const url = Routing.generate('media_transcription_finish', {
     id: id
   })
-  const projectHome = routing.generateRoute('project_transcriptions', {
+  const projectHome = Routing.generate('project_transcriptions', {
     id: pid
   })
   $.ajax({
@@ -123,11 +107,11 @@ const finishTranscription = (id, pid) => {
 }
 
 const validateTranscription = (id, pid) => {
-  const tinyContent = tinymce.get('tiny-content').getContent()
-  const url = routing.generateRoute('media_transcription_validate', {
+  const tinyContent = Tiny.get('tiny-content').getContent()
+  const url = Routing.generate('media_transcription_validate', {
     id: id
   })
-  const projectHome = routing.generateRoute('project_transcriptions', {
+  const projectHome = Routing.generate('project_transcriptions', {
     id: pid
   })
   $.ajax({

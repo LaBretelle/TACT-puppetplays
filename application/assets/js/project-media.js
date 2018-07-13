@@ -1,7 +1,3 @@
-import AppRouting from './modules/app-routing.js'
-import * as Toastr from 'toastr'
-
-const routing = new AppRouting()
 let selectedMedia = []
 let selectedFolder = -1
 
@@ -190,7 +186,7 @@ $(document).ready(() => {
 })
 
 const deleteMedia = () => {
-  const url = routing.generateRoute('project_media_delete')
+  const url = Routing.generate('project_media_delete')
   $.ajax({
     method: 'POST',
     url: url,
@@ -207,7 +203,7 @@ const deleteMedia = () => {
 }
 
 const moveMedia = () => {
-  const url = routing.generateRoute('project_move_media')
+  const url = Routing.generate('project_move_media')
   $.ajax({
     method: 'POST',
     url: url,
@@ -225,7 +221,7 @@ const moveMedia = () => {
 
 
 const updateFolderName = (id, name) => {
-  const url = routing.generateRoute('project_update_folder_name')
+  const url = Routing.generate('project_update_folder_name')
   $.ajax({
     method: 'POST',
     url: url,
