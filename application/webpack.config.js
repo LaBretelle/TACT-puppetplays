@@ -1,7 +1,7 @@
-/* global require */
-var Encore = require('@symfony/webpack-encore');
-// enable tinymce skins
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+/* global require module __dirname */
+const Encore = require('@symfony/webpack-encore')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path')
 
 Encore
   // the project directory where compiled assets will be stored
@@ -17,7 +17,6 @@ Encore
   .addEntry('js/create-project', './assets/js/create-project.js')
   .addEntry('js/user-status-form', './assets/js/user-status-form.js' )
   .addEntry('js/user-list', './assets/js/admin/user-list.js' )
-  .addEntry('js/app-routing', './assets/js/modules/app-routing.js' )
   .addEntry('js/account', './assets/js/account.js' )
   .addEntry('js/project-media', './assets/js/project-media.js' )
   .addEntry('js/transcription', './assets/js/transcription.js' )
@@ -39,31 +38,64 @@ Encore
   .addStyleEntry('css/user', './assets/css/admin/user.scss')
   .addStyleEntry('css/toastr', './node_modules/toastr/build/toastr.min.css')
 
-  .enableSassLoader(function(sassOptions) {}, {
+  .enableSassLoader(function () {}, {
     resolveUrlLoader: false
   })
 
   // will prefix css properties according to the supported browser set in postcss.config.js
   .enablePostCssLoader()
 
-  .configureBabel(function(babelConfig) {
-        babelConfig.presets.push('es2017');
+  .configureBabel(function (babelConfig) {
+    babelConfig.presets.push('es2017')
   })
 
   .createSharedEntry('vendor', [
-        'jquery',
-        'bootstrap',
-        //'tinymce/tinymce',
-        //'tinymce/themes/modern/theme',
-        '@fortawesome/fontawesome',
-        '@fortawesome/fontawesome-free-solid',
-        '@fortawesome/fontawesome-free-brands',
-        '@fortawesome/fontawesome-free-webfonts'
+    'jquery',
+    'bootstrap',
+    '@fortawesome/fontawesome',
+    '@fortawesome/fontawesome-free-solid',
+    '@fortawesome/fontawesome-free-brands',
+    '@fortawesome/fontawesome-free-webfonts'
   ])
 
   // for legacy applications that require $/jQuery as a global variable
   .autoProvidejQuery()
+  .autoProvideVariables({
+    'Routing': 'router',
+    'Toastr': 'Toastr',
+    'Translator': 'Translator',
+    'tinymce' : 'tinymce',
+    'Tiny': 'tiny'
+  })
   .enableVersioning()
-;
 
-module.exports = Encore.getWebpackConfig();
+
+// get "REAL" webpack object
+const config = Encore.getWebpackConfig()
+config.resolve.alias = {
+  'router': path.resolve(__dirname, 'modules/router.js'),
+  'Toastr': path.resolve(__dirname, 'modules/toastr.js'),
+  'Translator': path.resolve(__dirname, 'modules/translator.js'),
+  'tiny' : path.resolve(__dirname, 'modules/tiny.js'),
+}
+
+// https://stackoverflow.com/questions/44439909/confusion-over-various-webpack-shimming-approaches
+config.module = Object.assign(config.module, {
+  loaders: [
+    {
+      test: require.resolve('tinymce/tinymce'),
+      loaders: [
+        'imports?this=>window',
+        'exports?tinymce'
+      ]
+    },
+    {
+      test: /tinymce\/(themes|plugins)\//,
+      loaders: [
+        'imports?this=>window'
+      ]
+    }
+  ]
+})
+
+module.exports = config

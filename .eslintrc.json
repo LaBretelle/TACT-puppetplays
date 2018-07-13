@@ -21,6 +21,10 @@
     }]
   },
   "globals": {
-    "$": false
+    "$": false,
+    "Routing": false,
+    "Toastr" : false,
+    "Translator": false,
+    "Tiny": false
   }
 }

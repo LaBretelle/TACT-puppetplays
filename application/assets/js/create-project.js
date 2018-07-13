@@ -1,8 +1,4 @@
-import AppRouting from './modules/app-routing.js'
-
 const deleteProjectForm = document.forms.deleteProject
-
-const routing = new AppRouting()
 
 $(document).ready(function () {
   $(document).on('click', '#delete-image', function () {
@@ -25,7 +21,7 @@ $(document).ready(function () {
 
 const formHandler = {
   deleteImage: function (projectId) {
-    var url = routing.generateRoute('project_delete_image', {
+    var url = Routing.generate('project_delete_image', {
       id: projectId
     })
     $.ajax({
