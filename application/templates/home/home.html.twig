@@ -23,7 +23,7 @@
     <div class="card-columns">
         {% for project in projects %}
         <div class="card">
-          <img class="card-img-top" src="{{asset('project_files/'~project.id~'/'~project.image)}}">
+          <img class="card-img-top" src="{{ project.image ? asset('project_files/'~project.id~'/'~project.image) : asset('img/project-placeholder.png') }}">
             <div class="card-body">
                 <h5 class="card-title">{{ project.name }}</h5>
                 <div>{{ project.description | striptags }}</div>
