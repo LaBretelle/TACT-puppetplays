@@ -139,7 +139,7 @@ class MediaManager
                 return 'status none';
             } elseif ($status === AppEnums::TRANSCRIPTION_LOG_UPDATED || $status === AppEnums::TRANSCRIPTION_LOG_LOCKED) {
                 return 'status in-progress';
-            } elseif ($status === AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING) {
+            } elseif ($status === AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING || $status === AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION) {
                 return 'status in-reread';
             } elseif ($status === AppEnums::TRANSCRIPTION_LOG_VALIDATED) {
                 return 'status validated';

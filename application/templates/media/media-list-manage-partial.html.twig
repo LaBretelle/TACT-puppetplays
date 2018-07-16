@@ -1,6 +1,5 @@
 {% import "media/macros.html.twig" as macros %}
 
-
 <div class="row">
   {# project tree col #}
   <div class="col-3 project-tree-col">
@@ -8,6 +7,9 @@
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
+              <a class="text-dark" href="{{ path('project_media', {id: project.id}) }}">
+                <i class="fas fa-home fa-fw"></i>
+              </a>
             </li>
           </ul>
           <ul class="navbar-nav">
@@ -26,8 +28,9 @@
         </div>
     </nav>
     <ul class="list-group list-group-flush">
+
       {% for dir in project.dirs if dir.parent is null %}
-        {{macros.projectTree(dir, project, parent)}}
+        {{macros.projectTree(dir, project, current)}}
       {% endfor %}
     </ul>
   </div>
@@ -50,31 +53,45 @@
         </div>
     </nav>
     <div class="row media-list-row">
-        {% if project.medias | length == 0 %}
-          <div class="col-12 text-center">
-            <h5>{{'project_media_no_media' | trans}}</h5>
-          </div>
-        {% else %}
-          {% set nbMediasForCurrentDir = -1 %}
-          {% for media in project.medias if media.parent == parent %}
-            <div id="img-col-{{media.id}}" class="col-2">
-              <div class="card mb-2 box-shadow">
-                <img data-toggle="tooltip" title="{{media.name}}" class="card-img-top project-image" src="{{ macros.mediaURL(media) }}" alt=""></img>
-                <div class="card-footer text-center">
-                  <div class="form-check">
-                    <input type="checkbox" name="image-select" data-id="{{media.id}}" class="form-check-input image-select">
-                    <label class="form-check-label"></label>
+        {% if current is not null %}
+          {% if project.medias | length == 0 %}
+            <div class="col-12 text-center">
+              <h5>{{'project_media_no_media' | trans}}</h5>
+            </div>
+          {% else %}
+            {% set nbMediasForCurrentDir = -1 %}
+            {% for media in project.medias if media.parent == current %}
+              <div id="img-col-{{media.id}}" class="col-2">
+                <div class="card mb-2 box-shadow">
+                  <img data-toggle="tooltip" title="{{media.name}}" class="card-img-top project-image" src="{{ macros.mediaURL(media) }}" alt=""></img>
+                  <div class="card-footer text-center">
+                    <div class="form-check">
+                      <input type="checkbox" name="image-select" data-id="{{media.id}}" class="form-check-input image-select">
+                      <label class="form-check-label"></label>
+                    </div>
                   </div>
                 </div>
               </div>
+              {% set nbMediasForCurrentDir = loop.index %}
+            {% endfor %}
+            {% if nbMediasForCurrentDir == -1  %}
+            <div class="col-12 text-center">
+              <h5>{{'project_media_no_media_in_current_dir' | trans}}</h5>
             </div>
-            {% set nbMediasForCurrentDir = loop.index %}
-          {% endfor %}
-          {% if nbMediasForCurrentDir == -1  %}
-          <div class="col-12 text-center">
-            <h5>{{'project_media_no_media_in_current_dir' | trans}}</h5>
-          </div>
+            {% endif %}
           {% endif %}
+        {% else %}
+          {% for dir in project.dirs if dir.parent is null %}
+          <div class="col-2">
+            <div class="card mb-2 box-shadow">
+              <div class="card-body">
+                <a class="text-dark" href="{{ path('project_media', {id: project.id, current: dir.id}) }}">
+                  <i class="fas fa-folder fa-fw"></i>{{dir.name}}
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
         {% endif %}
     </div>
   </div>
@@ -135,7 +152,7 @@
         <div class="modal-body">
             <select name="folder" class="form-control select-folder">
               <option value="-1">{{'root_directory_option'| trans}}</option>
-              {% for dir in project.dirs if dir != parent %}
+              {% for dir in project.dirs if dir != current %}
                 <option value="{{dir.id}}">{{dir.name}}</option>
               {% endfor %}
             </select>
@@ -197,7 +214,7 @@
         <div class="modal-body">
             <select name="folder" class="form-control select-folder">
               <option value="-1">{{'root_directory_option'| trans}}</option>
-              {% for dir in project.dirs if dir != parent %}
+              {% for dir in project.dirs if dir != current %}
                 <option value="{{dir.id}}">{{dir.name}}</option>
               {% endfor %}
             </select>

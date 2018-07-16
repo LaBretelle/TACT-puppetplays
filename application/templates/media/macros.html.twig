@@ -6,8 +6,8 @@
 
 
 {% macro projectTree(dir, project, current) %}
-    <li class="list-group-item d-flex justify-content-between align-items-center {{current and dir.id == current.id ? 'list-group-item-secondary':''}} tree-entry">
-      <a id="dir-{{dir.id}}-name" class="text-dark" href="{{ path('project_media', {id: project.id, parent: dir.id}) }}">
+    <li class="list-group-item d-flex justify-content-between align-items-center {{current is not null and dir.id == current.id ? 'list-group-item-secondary':''}} tree-entry">
+      <a id="dir-{{dir.id}}-name" class="text-dark" href="{{ path('project_media', {id: project.id, current: dir.id}) }}">
         <i class="fas fa-folder fa-fw"></i><span id="dir-{{dir.id}}-name-value">{{dir.name}}</span>
       </a>
       <input class="form-control form-control-sm" id="dir-{{dir.id}}-name-input" type="text" style="display:none;" name="" value="{{dir.name}}">

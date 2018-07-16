@@ -14,6 +14,7 @@ use App\Service\FileManager;
 use App\Service\FlashManager;
 use App\Service\ProjectManager;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -118,9 +119,10 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/{id}/media/{parent}", name="media", defaults={"parent"=null})
+     * @Route("/{id}/media/{current}", name="media", requirements={"current"="\d+"}, defaults={"current"=null})
+     * @ParamConverter("current", class="App:Directory", options={"id" = "current"})
      */
-    public function manageProjectMedia(Request $request, Project $project, Directory $parent = null)
+    public function manageProjectMedia(Request $request, Project $project, Directory $current = null)
     {
         $form = $this->createForm(ProjectMediaType::class, $project);
         $form->handleRequest($request);
@@ -129,18 +131,17 @@ class ProjectController extends Controller
             $fileType = $request->get('file-type');
             $isZip = $fileType === 'zip';
             $media = $isZip ? $form->get('zip')->getData() : $form->get('images')->getData();
-            $this->projectManager->addProjectMedia($project, $media, $isZip, $parent);
+            $this->projectManager->addProjectMedia($project, $media, $isZip, $current);
         }
 
         $file_limit = ini_get('max_file_uploads');
-
         return $this->render(
           'project/project-media.html.twig',
             [
             'form' => $form->createView(),
             'project' => $project,
             'fileLimit' => ini_get('max_file_uploads'),
-            'parent' => $parent,
+            'current' => $current,
             'from' => 'media'
           ]
         );

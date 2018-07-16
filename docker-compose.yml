@@ -20,7 +20,7 @@ services:
        - ./.db:/var/lib/mysql
      environment:
        - MYSQL_ROOT_PASSWORD=root
-       - MYSQL_DATABASE=phun2db
+       - MYSQL_DATABASE=tactdb
        - MYSQL_USER=isitfun
        - MYSQL_PASSWORD=yesitis
      ports:
