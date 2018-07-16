@@ -4,7 +4,7 @@ PATACS - AKA PHUN2 - project
 
 ### Install
 
-- clone this repo and cd to to the cloned folder
+- clone this repo and cd to to  `clonedfolder/application`
 - create .env file from .env.dist
 
 ```bash
