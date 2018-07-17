@@ -8,6 +8,7 @@ administrate_platform_menu: Administrer la plateforme
 administrate_users_menu: Utilisateurs
 administrate_users_title: Administration des utilisateurs de la plateforme
 app_admin: Administrateur du site
+back_to_transcripts: Retour aux transcriptions
 cancel: Annuler
 confirm_account_anonymization: Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
 confirm_delete_project_folders: Êtes vous sur de vouloir supprimer le(s) dossiers selectionné(s) (les médias seront aussi dupprimés) ?

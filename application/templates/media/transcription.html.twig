@@ -6,7 +6,14 @@
   <div class="page-content-container">
     <div class="row">
       <div class="col-10">
-        <h4><a href="{{ path("project_display", {'id': media.project.id} )}}">{{media.project.name}}</a> - {{'transcript_media' | trans}} {{media.name}}</h4>
+        <h4>
+          <a href="{{ path("project_display", {'id': media.project.id} )}}">{{media.project.name}}</a>
+        </h4>
+        <div>
+            {{'transcript_media' | trans}}
+            <span class="text-muted">{{media.name}}</span>
+            - <a href="{{ path('project_transcriptions', {id: media.project.id, parent: media.parent ? media.parent.id : null})}}">{{"back_to_transcripts" | trans}}</a>
+        </div>
       </div>
       <div class="col-2 text-right">
         {% if edit %}
