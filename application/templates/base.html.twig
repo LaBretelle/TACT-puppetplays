@@ -39,7 +39,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ path('admin_platform_properties')}}">{{ 'administrate_platform_menu' | trans}}</a>
             </li>
-          {% endif %}          
+          {% endif %}
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item float-right">
@@ -71,19 +71,22 @@
     </div>
   </nav>
   <div class="container-fluid">
-
-  {% for label, messages in app.flashes %}
-    {% for message in messages %}
-      <div class="invisible" id="flashes">
-        <div class="flash" data-label="{{ label }}" data-message="{{ message|e('html_attr') }}"></div>
-      </div>
+    {% for label, messages in app.flashes %}
+      {% for message in messages %}
+        <div class="invisible" id="flashes">
+          <div class="flash" data-label="{{ label }}" data-message="{{ message|e('html_attr') }}"></div>
+        </div>
+      {% endfor %}
     {% endfor %}
-  {% endfor %}
-
     {% block body %}{% endblock %}
   </div>
   <nav class="navbar fixed-bottom navbar-light bg-light">
-    <a class="navbar-brand" href="#">Fixed bottom footer</a>
+    <span class="">
+      <img height="32px" src="{{ asset('img/logos/logo_univ_grenoble_alpes.jpg') }}"/>
+      <img height="32px" src="{{ asset('img/logos/logo_cnrs.jpg') }}"/>
+      <img height="32px" src="{{ asset('img/logos/logo_littarts.png') }}"/>
+    </span>
+    <a class="navbar-brand" href="#">{{ platform.name  }} - (Plateforme de) Transcription et d'Annotation de Corpus Textuels</a>
   </nav>
   {% block javascripts %}
   <script src="{{ asset('build/manifest.js') }}"></script>
