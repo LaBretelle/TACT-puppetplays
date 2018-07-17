@@ -32,7 +32,6 @@ folder_name: Nom du dossier
 folders_deleted: Dossier(s) supprimé(s)
 folders_moved: Dossier(s) déplacé(s)
 home: Accueil
-image: Image
 is_public: Projet public
 lastname: Nom
 login: connection
@@ -71,6 +70,7 @@ project_edited: Projet édité
 project_edition: Edition du projet
 project_enabled: Validé ?
 project_handle_user_statuses: Gérer les utilisateurs
+project_image: Image du projet. Ratio de 4:1 conseillé (l'image sera retaillé automatiquement)
 project_is_not_public: Projet privé
 project_manage_media: Gérer les médias
 project_manage_user_statuses: Gérer les utilisateurs

@@ -49,7 +49,7 @@ class ProjectType extends AbstractType
           ])
 
           ->add('image', FileType::class, [
-              'label' => 'image',
+              'label' => 'project_image',
               'translation_domain' => 'messages',
               'required' => false,
               'data_class' => null

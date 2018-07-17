@@ -32,7 +32,6 @@ folder_name: Folder name
 folders_deleted: Folder(s) deleted
 folders_moved: Folder(s) moved
 home: Home
-image: Image
 is_public: Public project
 lastname: Lastname
 login: login
@@ -71,6 +70,7 @@ project_edited: Project edited
 project_edition: Project edition
 project_enabled: Enabled
 project_handle_user_statuses: Users management
+project_image: Project image. A 4:1 ratio is advised (The image will automatically be cropped).
 project_is_private: Project is private
 project_manage_media: Manage media
 project_manage_user_statuses: Manage users
