@@ -87,10 +87,11 @@ class ProjectManager
         $this->em->flush();
     }
 
-    public function delete($project)
+    public function delete(Project $project)
     {
         $project->setUpdatedAt(new \DateTime);
         $project->setDeleted(true);
+        $this->removeAllProjectMedia($project);
         $this->em->persist($project);
         $this->em->flush();
 
@@ -193,6 +194,19 @@ class ProjectManager
         }
         $this->em->flush();
 
+        return;
+    }
+
+    public function removeAllProjectMedia(Project $project)
+    {
+        $mediaRepository = $this->em->getRepository(Media::class);
+        $toDelete = $project->getMedias();
+        foreach ($toDelete as $media) {
+            $project->removeMedia($media);
+            $filePath = $this->fileManager->getProjectPath($project).DIRECTORY_SEPARATOR.$media->getUrl();
+            $this->fileManager->delete($filePath);
+            $this->em->remove($media);
+        }
         return;
     }
 
