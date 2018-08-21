@@ -5,17 +5,19 @@
 {% block body %}
   <div class="page-content-container">
     <div class="row">
-      <div class="col-10">
+      <div class="col">
         <h4>
-          <a href="{{ path("project_display", {'id': media.project.id} )}}">{{media.project.name}}</a>
+          <a href="{{ path('project_display', {'id': media.project.id} )}}">{{media.project.name}}</a>
         </h4>
-        <div>
-            {{'transcript_media' | trans}}
-            <span class="text-muted">{{media.name}}</span>
-            - <a href="{{ path('project_transcriptions', {id: media.project.id, parent: media.parent ? media.parent.id : null})}}">{{"back_to_transcripts" | trans}}</a>
-        </div>
       </div>
-      <div class="col-2 text-right">
+      <div class="col">
+        <a href="{{ path('project_transcriptions', {id: media.project.id, parent: media.parent ? media.parent.id : null})}}" data-toggle="tooltip" title="{{'back_to_transcripts' | trans}}">
+          <i class="fa fa-arrow-left fa-fw"></i>
+        </a>
+        {{'transcript_media' | trans}}
+        <span class="text-muted">{{media.name}}</span>
+      </div>
+      <div class="col text-right">
         {% if edit %}
           <div class="btn-group">
             <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}"><i class="fas fa-save"></i></button>
@@ -24,6 +26,13 @@
         {% elseif locked %}
           <h5><span class="badge badge-danger">{{'transcription_is_locked' | trans}}</span></h5>
         {% endif %}
+
+        {% if  media.project | isAuthorizedOnProject('register') %}
+          <a href="{{ path('status_request', {id:  media.project.id})}}" data-toggle="tooltip" title="{{'project_register' | trans}}">
+            <i class="fas fa-hand-holding-heart fa-fw" aria-hidden="true"></i>
+          </a>
+        {% endif %}
+
       </div>
     </div>
     <hr/>

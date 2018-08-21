@@ -165,10 +165,10 @@ class ProjectController extends Controller
     /**
      * @Route("/media-delete", name="media_delete", options={"expose"=true}, methods="POST")
      */
-    public function removeProjectMedia(Request $request)
+    public function removeProjectMediaByIds(Request $request)
     {
         $ids = $request->request->get('ids');
-        $this->projectManager->removeProjectMedia($ids);
+        $this->projectManager->removeProjectMediaByIds($ids);
 
         return $this->json([], $status = 200);
     }

@@ -91,7 +91,7 @@ class ProjectManager
     {
         $project->setUpdatedAt(new \DateTime);
         $project->setDeleted(true);
-        $this->removeAllProjectMedia($project);
+        $this->removeProjectMedia($project);
         $this->em->persist($project);
         $this->em->flush();
 
@@ -180,7 +180,7 @@ class ProjectManager
         return $project;
     }
 
-    public function removeProjectMedia(array $ids)
+    public function removeProjectMediaByIds(array $ids)
     {
         $mediaRepository = $this->em->getRepository(Media::class);
         foreach ($ids as $id) {
@@ -197,7 +197,7 @@ class ProjectManager
         return;
     }
 
-    public function removeAllProjectMedia(Project $project)
+    public function removeProjectMedia(Project $project)
     {
         $mediaRepository = $this->em->getRepository(Media::class);
         $toDelete = $project->getMedias();
