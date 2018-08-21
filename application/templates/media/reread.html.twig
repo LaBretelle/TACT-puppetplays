@@ -5,11 +5,19 @@
 {% block body %}
   <div class="page-content-container">
     <div class="row">
-      <div class="col-10">
-        <h4><a href="{{ path("project_display", {'id': media.project.id} )}}">{{media.project.name}}</a> - {{'reread_transcription' | trans}} : {{media.name}}</h4>
+      <div class="col">
+        <h4><a href="{{ path("project_display", {'id': media.project.id} )}}">{{media.project.name}}</a></h4>
       </div>
-      <div class="col-2 text-right">
+      <div class="col">
+        <a href="{{ path('project_transcriptions', {id: media.project.id, parent: media.parent ? media.parent.id : null})}}" data-toggle="tooltip" title="{{'back_to_transcripts' | trans}}">
+          <i class="fa fa-arrow-left fa-fw"></i>
+        </a>
+        {{'reread_transcription' | trans}}
+        <span class="text-muted">{{media.name}}</span>
+      </div>
+      <div class="col text-right">
         <div class="btn-group">
+          <button class="btn btn-link btn-unvalidate-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'unvalidate_transcription' | trans}}" type="button" name="button"><i class="fas fa-times-circle"></i></button>
           <button class="btn btn-link btn-validate-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'validate_transcription' | trans}}" type="button" name="button"><i class="fas fa-check-circle"></i></button>
         </div>
       </div>
@@ -17,22 +25,32 @@
     <hr/>
     <div class="row">
       <div class="col-6">
-        <img class="img-fluid" src="{{ macros.mediaURL(media) }}" alt="">
+        <div class="openseadragon-buttons text-center">
+          <button id="osd-zoom-in" type="button" class="btn btn-light">
+            <i class="fas fa-search-plus"></i>
+          </button>
+          <button id="osd-zoom-out" type="button" class="btn btn-light">
+            <i class="fas fa-search-minus"></i>
+          </button>
+          <button id="osd-home" type="button" class="btn btn-light">
+            <i class="fas fa-home"></i>
+          </button>
+          <button id="osd-full-page" type="button" class="btn btn-light">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </button>
+          <button id="osd-left" type="button" class="btn btn-light">
+            <i class="fas fa-undo"></i>
+          </button>
+          <button id="osd-right" type="button" class="btn btn-light">
+            <i class="fas fa-redo"></i>
+          </button>
+        </div>
+        <div data-url="{{ macros.mediaURL(media) }}" id="seadragon-viewer" class="rounded"></div>
       </div>
       <div class="col-6">
-        <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="8" cols="80">
+        <div class="">
           {{media.transcription.content | raw}}
-        </textarea>
-      </div>
-    </div>
-  </div>
-
-
-  {# media modal #}
-  <div class="modal fade project-media-modal" id="project-media-modal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-body"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -40,5 +58,8 @@
 
 {% block javascripts %}
   {{ parent() }}
+  <script type="text/javascript">
+    var mode = 'validation';
+  </script>
   <script src="{{ asset('build/js/transcription.js') }}"></script>
 {% endblock %}

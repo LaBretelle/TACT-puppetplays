@@ -83,7 +83,7 @@
     </div>
   </div>
 
-  {# hidden log inputs #}
+  {# hidden log input... will allow to update log propper log event if needed #}
   {% if edit %}
     <input type="hidden" id="log-id" name="log_id" value="{{log.id}}">
   {% endif %}
@@ -91,6 +91,15 @@
 
 {% block javascripts %}
   {{ parent() }}
+  {% if edit %}
+    <script type="text/javascript">
+      var mode = 'edit';
+    </script>
+  {% else %}
+  <script type="text/javascript">
+    var mode = 'view';
+  </script>
+  {% endif %}
   <script src="{{ asset('build/js/openseadragon.js') }}"></script>
   <script src="{{ asset('build/js/transcription.js') }}"></script>
 {% endblock %}

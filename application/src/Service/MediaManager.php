@@ -73,17 +73,24 @@ class MediaManager
         $this->em->flush();
     }
 
-    public function validateTranscription(Media $media, string $content)
+    public function validateTranscription(Media $media)
     {
         $transcription = $media->getTranscription();
-        $transcription->setContent($content);
 
         $logName = AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING;
-        // find validation number
-        if ($this->transcriptionManager->countValidationLog($transcription) > 1) {
+        // count validation(s) logs
+        if (intval($this->transcriptionManager->countValidationLog($transcription)) > 1) {
             $logName = AppEnums::TRANSCRIPTION_LOG_VALIDATED;
         }
         $this->transcriptionManager->addLog($transcription, $logName);
+        $this->em->persist($transcription);
+        $this->em->flush();
+    }
+
+    public function unvalidateTranscription(Media $media)
+    {
+        $transcription = $media->getTranscription();
+        $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_UPDATED);
         $this->em->persist($transcription);
         $this->em->flush();
     }
@@ -123,7 +130,7 @@ class MediaManager
         } else {
             $lastLog = $this->transcriptionManager->getLastLog($transcription);
             $status = $lastLog->getName();
-            return $status === AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING;
+            return $status === AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION || intval($this->transcriptionManager->countValidationLog($transcription)) < 2;
         }
         return false;
     }

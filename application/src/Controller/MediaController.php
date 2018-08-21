@@ -103,11 +103,21 @@ class MediaController extends Controller
     /**
      * @Route("/{id}/transcription/validate", name="transcription_validate",options={"expose"=true}, methods="POST")
      */
-    public function mediaTranscriptionValidate(Media $media, Request $request)
+    public function mediaTranscriptionValidate(Media $media)
     {
-        $content = $request->get('transcription');
-        $this->mediaManager->validateTranscription($media, $content);
+        $this->mediaManager->validateTranscription($media);
         $this->fm->add('notice', 'transcription_validated');
+
+        return $this->json([], $status = 200);
+    }
+
+    /**
+     * @Route("/{id}/transcription/unvalidate", name="transcription_unvalidate",options={"expose"=true}, methods="POST")
+     */
+    public function mediaTranscriptionUnvalidate(Media $media)
+    {
+        $this->mediaManager->unvalidateTranscription($media);
+        $this->fm->add('notice', 'transcription_unvalidated');
 
         return $this->json([], $status = 200);
     }

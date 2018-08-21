@@ -48,7 +48,7 @@ class TranscriptionLogRepository extends ServiceEntityRepository
 
     public function countValidationLog(Transcription $transcription)
     {
-        $qb = $repository->createQueryBuilder('tl');
+        $qb = $this->createQueryBuilder('tl');
         return $qb->select('COUNT(tl)')
             ->andWhere('tl.transcription = :t')
             ->andWhere('tl.name = :name')

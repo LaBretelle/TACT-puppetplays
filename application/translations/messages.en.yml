@@ -116,7 +116,9 @@ transcription_is_locked: Transcription is locked
 transcription_saved: Transcription saved
 transcription_send_to_validation: Send to validation
 transcription_validated: Transcription validated
+transcription_unvalidated: Transcription unvalidated
 transcriptions_page_title: Project transcripts
+unvalidate_transcription: Unvalidate transcription
 user_account_activated_error: An error occured while activating your account.
 user_account_activated: Your account is now activated.
 user_account_created: Your account was created but is not yet activated. You should receive an email to activate your account.
