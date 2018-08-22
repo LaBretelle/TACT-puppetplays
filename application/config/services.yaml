@@ -6,7 +6,7 @@ parameters:
     project_file_dir: '%kernel.project_dir%/public/project_files'
     platform_file_dir: '%kernel.project_dir%/public/platform'
     upload_dir: '%kernel.project_dir%/public/upload'
-    platform_email: patacs@mail.fr
+    platform_email: patrick.guillou@univ-grenoble-alpes.fr
 
 services:
     # default configuration for services in *this* file

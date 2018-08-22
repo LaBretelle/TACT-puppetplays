@@ -94,13 +94,15 @@ class UserManager
         if (!$user) {
             $user = $this->repository->findOneBy(['username' => $data]);
         }
+
         if ($user && null === $user->getPasswordRequestedAt()) {
             return $user;
         } elseif ($user && null !== $user->getPasswordRequestedAt()) {
             $requestedAt = $user->getPasswordRequestedAt();
             $diff = $requestedAt->diff(new \DateTime());
-            return $diff->h > 2;
+            return $diff->h > 2 ? $user : false;
         }
+
         return false;
     }
 

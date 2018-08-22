@@ -126,9 +126,10 @@ class UserController extends Controller
      */
     public function lostPassword(Request $request)
     {
-        if ($request->get('user_data')) {
+        $userData = $request->get('user_data');
+        if ($userData) {
             // check if user exist and that he has not requested a password less than two hours ago
-            if ($user = $this->userManager->userCanRenewPassword($request->get('user_data'))) {
+            if ($user = $this->userManager->userCanRenewPassword($userData)) {
                 $token = base64_encode(random_bytes(10));
                 $user->setConfirmationToken($token);
                 $user->setPasswordRequestedAt(new \DateTime('now'));

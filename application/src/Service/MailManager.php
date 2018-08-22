@@ -64,6 +64,7 @@ class MailManager
             'messages'
         );
 
+
         $message = (new \Swift_Message($subject))
           ->setFrom($this->params->get('platform_email'))
           ->setTo($user->getEmail())
