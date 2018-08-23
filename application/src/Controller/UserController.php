@@ -144,7 +144,7 @@ class UserController extends Controller
                 $this->flashManager->add('danger', 'user_renew_password_error');
             }
 
-            return $this->redirectToRoute('home');
+            //return $this->redirectToRoute('home');
         }
 
         return $this->render('user/recover.html.twig');

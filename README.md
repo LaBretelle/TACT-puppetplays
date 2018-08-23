@@ -13,10 +13,7 @@ cp .env.dist .env
 
 - edit `.env` file.
 - set the proper database connection string. It must match with environment variables set in `docker-compose.yml`
-- open `config/packages/doctrine.yaml` file
-- check that the driver is set to `driver:db` (this is the docker mysql service name)
-- edit `docker/override.ini` file, it will override php.ini default configuration
-- edit `docker/app.conf` file if you need to
+- in order to make mail work change the MAILER_URL entry
 
 ### Run containers and install dependencies
 
