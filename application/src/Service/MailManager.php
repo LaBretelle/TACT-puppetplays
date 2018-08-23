@@ -32,22 +32,16 @@ class MailManager
           UrlGeneratorInterface::ABSOLUTE_URL
         );
 
-        $subject = $this->translator->trans(
-            'email_registration_confirm_subject',
-            [],
-            'messages'
-        );
+        $subject = $this->translator->trans('email_registration_confirm_subject');
 
-        $message = (new \Swift_Message($subject))
-          ->setFrom($this->params->get('platform_email'))
-          ->setTo($user->getEmail())
-          ->setBody(
-              $this->templating->render(
-                  'emails/registration.html.twig',
-                  ['user' => $user, 'url' => $confiramtionUrl]
-              )
+        $body =   $this->templating->render(
+              'emails/registration.html.twig',
+              ['user' => $user, 'url' => $confiramtionUrl]
           );
-        $this->mailer->send($message);
+
+        $this->send($user->getEmail(), $subject, $body);
+
+        return;
     }
 
     public function sendRecoverPasswordMail(User $user)
@@ -58,22 +52,28 @@ class MailManager
           UrlGeneratorInterface::ABSOLUTE_URL
         );
 
-        $subject = $this->translator->trans(
-            'email_renew_password_subject',
-            [],
-            'messages'
+        $subject = $this->translator->trans('email_renew_password_subject');
+
+        $body = $this->templating->render(
+            'emails/reset.html.twig',
+            ['user' => $user, 'url' => $url]
         );
 
+        $this->send($user->getEmail(), $subject, $body);
 
+        return;
+    }
+
+    private function send($to, $subject, $body)
+    {
         $message = (new \Swift_Message($subject))
+          ->setContentType('text/html')
           ->setFrom($this->params->get('platform_email'))
-          ->setTo($user->getEmail())
-          ->setBody(
-              $this->templating->render(
-                  'emails/reset.html.twig',
-                  ['user' => $user, 'url' => $url]
-              )
-          );
+          ->setTo($to)
+          ->setBody($body);
+
         $this->mailer->send($message);
+
+        return;
     }
 }
