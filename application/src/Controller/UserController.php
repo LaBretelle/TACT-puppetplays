@@ -83,7 +83,7 @@ class UserController extends Controller
             $previous_image = $request->get('previous_image');
 
             $this->userManager->updateUser($user, $image, $previous_image);
-            $this->flashManager->add('success', 'user_account_updated');
+            $this->flashManager->add('notice', 'user_account_updated');
 
             return $this->redirectToRoute('home');
         }
@@ -139,12 +139,10 @@ class UserController extends Controller
                 $this->mailManager->sendRecoverPasswordMail($user);
                 $mailparts = explode('@', $user->getEmail());
                 $obfuscatedMail = substr_replace($mailparts[0], '*', 3).'@'.$mailparts[1];
-                $this->flashManager->add('success', 'user_renew_password_mail_sent', ['%usermail%' => $obfuscatedMail]);
+                $this->flashManager->add('notice', 'user_renew_password_mail_sent', ['%usermail%' => $obfuscatedMail]);
             } else {
-                $this->flashManager->add('danger', 'user_renew_password_error');
+                $this->flashManager->add('error', 'user_renew_password_error');
             }
-
-            //return $this->redirectToRoute('home');
         }
 
         return $this->render('user/recover.html.twig');
@@ -160,7 +158,7 @@ class UserController extends Controller
         if (null === $token) {
             $token = $request->get('token');
             if (!$token) {
-                $this->flashManager->add('danger', 'user_renew_password_error');
+                $this->flashManager->add('error', 'user_renew_password_error');
 
                 return $this->redirectToRoute('home');
             }
@@ -169,7 +167,7 @@ class UserController extends Controller
         $user = $repository->findOneBy(['confirmationToken' => $token]);
 
         if (!$user) {
-            $this->flashManager->add('danger', 'user_renew_password_error');
+            $this->flashManager->add('error', 'user_renew_password_error');
 
             return $this->redirectToRoute('home');
         }
@@ -177,9 +175,9 @@ class UserController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($this->userManager->resetPassword($user)) {
-                $this->flashManager->add('success', 'user_renew_password_success');
+                $this->flashManager->add('notice', 'user_renew_password_success');
             } else {
-                $this->flashManager->add('danger', 'user_renew_password_error');
+                $this->flashManager->add('error', 'user_renew_password_error');
             }
 
             return $this->redirectToRoute('home');
@@ -205,12 +203,12 @@ class UserController extends Controller
             $user->setConfirmationToken(null);
             $em->persist($user);
             $em->flush();
-            $this->flashManager->add('success', 'user_account_activated');
+            $this->flashManager->add('error', 'user_account_activated');
 
             return $this->redirectToRoute('home');
         }
 
-        $this->flashManager->add('danger', 'user_account_activated_error');
+        $this->flashManager->add('error', 'user_account_activated_error');
 
         return $this->redirectToRoute('home');
     }
