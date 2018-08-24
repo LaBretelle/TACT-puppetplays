@@ -107,16 +107,18 @@ status_remove: Supprimer
 status_toggle_off: Invalider
 status_toggle_on: Valider
 status: Statut
+submit_validation: Soumettre
 submit: valider
 subscribe_long: L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
 transcribe_long: Vous permet d'accéder au média et de proposer des transcriptions.
 transcriber: Transcripteur
 transcript_media: Transcription du media
 transcription_is_locked: La transcription est bloquée
+transcription_is_valid: La transcription est valide ?
 transcription_saved: Transcription sauvegardée
 transcription_send_to_validation: Demander une validation
-transcription_validated: Transcription validée
 transcription_unvalidated: Transcription invalidée
+transcription_validated: Transcription validée
 transcriptions_page_title: Transcriptions du projet
 unvalidate_transcription: Invalider la transcription
 user_account_activated_error: Un problème est survenu lors de l'activation de votre compte.
@@ -139,8 +141,9 @@ user_self_edit: Éditer votre profil
 user: Utilisateur
 userfullname: Nom - Prénom
 username: Identifiant
-validate_transcription: Valider la transcription
+validate_transcription: (in)valider la transcription
 validation_asked: Validation demandée
+validation_comment: Commentaire
 validator: Validateur
 view_profile: Voir le profil
 view_project: Voir les détails

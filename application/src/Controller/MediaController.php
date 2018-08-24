@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Media;
 use App\Entity\Transcription;
+use App\Form\ValidationType;
 use App\Service\AppEnums;
 use App\Service\FlashManager;
 use App\Service\MediaManager;
@@ -69,11 +70,36 @@ class MediaController extends Controller
     /**
      * @Route("/{id}/transcription/reread", name="transcription_reread")
      */
-    public function validateTranscription(Media $media)
+    public function validateTranscription(Media $media, Request $request)
     {
+        $form = $this->createForm(ValidationType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $isValid = $form->get('isValid')->getData();
+            $comment = $form->get('comment')->getData();
+
+            if ($isValid) {
+                $this->mediaManager->validateTranscription($media);
+                $this->fm->add('notice', 'transcription_validated');
+            } else {
+                $this->mediaManager->unvalidateTranscription($media);
+                $this->fm->add('notice', 'transcription_unvalidated');
+            }
+
+            $parent = $media->getParent();
+            $project = $media->getProject();
+
+            return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
+        }
+
         return $this->render(
-            'media/reread.html.twig',
-            ['media' => $media]
+          'media/reread.html.twig',
+            [
+            'media' => $media,
+            'form' => $form->createView()
+          ]
         );
     }
 
@@ -96,28 +122,6 @@ class MediaController extends Controller
         $content = $request->get('transcription');
         $this->mediaManager->finishTranscription($media, $content);
         $this->fm->add('notice', 'validation_asked');
-
-        return $this->json([], $status = 200);
-    }
-
-    /**
-     * @Route("/{id}/transcription/validate", name="transcription_validate",options={"expose"=true}, methods="POST")
-     */
-    public function mediaTranscriptionValidate(Media $media)
-    {
-        $this->mediaManager->validateTranscription($media);
-        $this->fm->add('notice', 'transcription_validated');
-
-        return $this->json([], $status = 200);
-    }
-
-    /**
-     * @Route("/{id}/transcription/unvalidate", name="transcription_unvalidate",options={"expose"=true}, methods="POST")
-     */
-    public function mediaTranscriptionUnvalidate(Media $media)
-    {
-        $this->mediaManager->unvalidateTranscription($media);
-        $this->fm->add('notice', 'transcription_unvalidated');
 
         return $this->json([], $status = 200);
     }
