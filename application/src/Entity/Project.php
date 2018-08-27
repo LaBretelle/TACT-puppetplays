@@ -89,6 +89,11 @@ class Project
      */
     private $deleted;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbValidation;
+
     public function __construct()
     {
         $this->financers = new ArrayCollection();
@@ -327,6 +332,18 @@ class Project
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getNbValidation(): ?int
+    {
+        return $this->nbValidation;
+    }
+
+    public function setNbValidation(int $nbValidation): self
+    {
+        $this->nbValidation = $nbValidation;
 
         return $this;
     }

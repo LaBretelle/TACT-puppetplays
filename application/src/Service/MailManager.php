@@ -70,7 +70,7 @@ class MailManager
         $subject = $this->translator->trans('email_transcription_validted_unvalidated_subject');
 
         $url = $this->router->generate(
-          'media_transcription_reread',
+          'media_transcription_edit',
           ['id' => $media->getId()],
           UrlGeneratorInterface::ABSOLUTE_URL
         );

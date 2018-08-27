@@ -78,8 +78,9 @@ class MediaManager
         $transcription = $media->getTranscription();
 
         $logName = AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING;
-        // count validation(s) logs
-        if (intval($this->transcriptionManager->countValidationLog($transcription)) > 1) {
+
+        $fullyValidated = $this->transcriptionManager->countValidationLog($transcription) >= $media->getProject()->getNbValidation() - 1;
+        if ($fullyValidated) {
             $logName = AppEnums::TRANSCRIPTION_LOG_VALIDATED;
         }
         $this->transcriptionManager->addLog($transcription, $logName);
@@ -130,7 +131,7 @@ class MediaManager
         } else {
             $lastLog = $this->transcriptionManager->getLastLog($transcription);
             $status = $lastLog->getName();
-            return $status === AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION || intval($this->transcriptionManager->countValidationLog($transcription)) < 2;
+            return $status === AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION || $status === AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING;
         }
         return false;
     }

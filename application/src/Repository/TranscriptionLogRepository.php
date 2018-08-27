@@ -59,16 +59,18 @@ class TranscriptionLogRepository extends ServiceEntityRepository
           ->getOneOrNullResult();
     }
 
-    public function countValidationLog(Transcription $transcription)
+    public function countValidationLog(Transcription $transcription, TranscriptionLog $lastAskForValidationLog = null)
     {
         $qb = $this->createQueryBuilder('tl');
-        return $qb->select('COUNT(tl)')
+        $qb->select('COUNT(tl)')
             ->andWhere('tl.transcription = :t')
             ->andWhere('tl.name = :name')
             ->setParameter('t', $transcription)
-            ->setParameter('name', AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING)
-            ->getQuery()
-            ->getSingleScalarResult();
+            ->setParameter('name', AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING);
+        if (null !== $lastAskForValidationLog) {
+            $qb->andWhere('tl.createdAt >= :date')->setParameter('date', $lastAskForValidationLog->getCreatedAt());
+        }
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getLogsByUser(Transcription $transcription, User $user)

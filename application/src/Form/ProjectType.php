@@ -8,6 +8,7 @@ use App\Entity\ProjectStatus;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -46,6 +47,11 @@ class ProjectType extends AbstractType
           ->add('public', CheckboxType::class, [
               'label'    => 'is_public',
               'required' => false
+          ])
+          ->add('nbValidation', IntegerType::class, [
+              'label'    => 'nb_validation',
+              'required' => true,
+              'empty_data' => 2,
           ])
 
           ->add('image', FileType::class, [

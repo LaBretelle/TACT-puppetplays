@@ -50,6 +50,7 @@ media_moved: Media moved
 media_reread_button_title: Reread transcription
 media_transcribe_button_title: Transcribe
 media_view_transcription_button_title: View transcription
+nb_validation: Number of reread per media
 need_at_least_one_manager: Need t least one manager.
 need_to_be_logged: You have to be logged in to contribute to the project.
 no: No
@@ -121,6 +122,7 @@ transcription_send_to_validation: Send to validation
 transcription_unvalidated: Transcription unvalidated
 transcription_validated: Transcription validated
 transcriptions_page_title: Project transcripts
+transcription_current_nb_validations: Currently %1% / %2% validations
 unvalidate_transcription: Unvalidate transcription
 user_account_activated_error: An error occured while activating your account.
 user_account_activated: Your account is now activated.
