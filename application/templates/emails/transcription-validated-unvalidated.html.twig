@@ -1,0 +1,18 @@
+{% extends "emails/master.html.twig" %}
+
+{% block body %}
+  <p>Hi {{user.lastname}} {{user.firstname}}!</p>
+  <p>You asked for a transcription validation.</p>
+  {% if valid %}
+  <p>We are happy to say that your transcription has been validated</p>
+  {% else %}
+  <p>Unfortunately it has been rejected.</p>
+  <p>You can review your transcription <a href="{{url}}">here</a></p>
+  {% endif %}
+
+  {% if comment %}
+    <p>
+    {{comment}}
+    </p>
+  {% endif %}
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Media;
 use App\Entity\User;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -57,6 +58,26 @@ class MailManager
         $body = $this->templating->render(
             'emails/reset.html.twig',
             ['user' => $user, 'url' => $url]
+        );
+
+        $this->send($user->getEmail(), $subject, $body);
+
+        return;
+    }
+
+    public function sendValidationOrUnvalidationMail(User $user, Media $media, bool $valid, string $comment = null)
+    {
+        $subject = $this->translator->trans('email_transcription_validted_unvalidated_subject');
+
+        $url = $this->router->generate(
+          'media_transcription_reread',
+          ['id' => $media->getId()],
+          UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $body = $this->templating->render(
+            'emails/transcription-validated-unvalidated.html.twig',
+            ['user' => $user, 'url' => $url, 'valid' => $valid, 'comment' => $comment]
         );
 
         $this->send($user->getEmail(), $subject, $body);

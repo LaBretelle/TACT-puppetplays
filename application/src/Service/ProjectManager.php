@@ -136,7 +136,6 @@ class ProjectManager
         }
     }
 
-    //addProjectMedia($project, $media, $isZip, $parent);
     public function addProjectMedia(Project $project, $files, bool $isZip, Directory $parent = null)
     {
         // base path for all projects media

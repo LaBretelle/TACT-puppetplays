@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>TACT</title>
+        <style type="text/css">
+          body {margin: 0; padding: 10px; min-width: 100%!important;}
+          .content {width: 100%; max-width: 600px;}
+          .footer {width: 100%; max-width: 600px;}
+        </style>
+    </head>
+    <body>
+      <div class="content">
+        {% block body %}
+
+        {% endblock %}
+      </div>
+      <hr/>
+      <div class="footer">
+        {% block footer %}
+          <h6>@The tact team</h6>
+        {% endblock %}
+      </div>
+    </body>
+</html>

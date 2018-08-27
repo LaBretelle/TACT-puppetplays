@@ -1,10 +1,12 @@
-<h5>Hi {{user.lastname}} {{user.firstname}}!</h5>
-<h6>You requested a new password for the PATACS platform.</h6>
-<p>
-In order to set your new password please click an the link below.
-</p>
-<p>
-Note that you won't be able to ask a new password for 2 hours.
-</p>
+{% extends "emails/master.html.twig" %}
 
-<a href="{{url}}">Confirm</a>
+{% block body %}
+  <p>Hi {{user.lastname}} {{user.firstname}}!</p>
+  <p>You requested a new password for the PATACS platform.</p>
+  <p>
+  In order to set your new password please click <a href="{{url}}">here</a>.
+  </p>
+  <p>
+  Note that you won't be able to ask for a new password for 2 hours.
+  </p>
+{% endblock %}

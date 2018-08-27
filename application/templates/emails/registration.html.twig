@@ -1,7 +1,12 @@
-<h5>Welcome {{user.lastname}} {{user.firstname}}!</h5>
-<h6>You just subscribed to PATACS platform.</h6>
-<p>
-In order to activate your account please click an the link below
-</p>
 
-<a href="{{url}}">Confirm</a>
+
+{% extends "emails/master.html.twig" %}
+
+{% block body %}
+  <p>Welcome {{user.lastname}} {{user.firstname}}!</p>
+  <p>You just subscribed to PATACS platform.</p>
+  <p>
+  In order to activate your account please click an the link below
+  </p>
+  <a href="{{url}}">Activate</a>
+{% endblock %}

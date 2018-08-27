@@ -53,6 +53,12 @@ class TranscriptionManager
         return $repository->getLastLog($transcription);
     }
 
+    public function getLastLogByName(Transcription $transcription, string $name)
+    {
+        $repository = $this->em->getRepository(TranscriptionLog::class);
+        return $repository->getLastLogByName($transcription, $name);
+    }
+
     public function getLastLockLog(Transcription $transcription)
     {
         $repository = $this->em->getRepository(TranscriptionLog::class);

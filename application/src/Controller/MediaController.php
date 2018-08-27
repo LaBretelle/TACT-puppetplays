@@ -7,6 +7,7 @@ use App\Entity\Transcription;
 use App\Form\ValidationType;
 use App\Service\AppEnums;
 use App\Service\FlashManager;
+use App\Service\MailManager;
 use App\Service\MediaManager;
 use App\Service\TranscriptionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,12 +22,14 @@ class MediaController extends Controller
     private $mediaManager;
     private $transcriptionManager;
     private $fm;
+    private $mailManager;
 
-    public function __construct(MediaManager $mediaManager, TranscriptionManager $transcriptionManager, FlashManager $fm)
+    public function __construct(MediaManager $mediaManager, TranscriptionManager $transcriptionManager, FlashManager $fm, MailManager $mailManager)
     {
         $this->mediaManager = $mediaManager;
         $this->transcriptionManager = $transcriptionManager;
         $this->fm = $fm;
+        $this->mailManager = $mailManager;
     }
 
     /**
@@ -88,10 +91,13 @@ class MediaController extends Controller
                 $this->fm->add('notice', 'transcription_unvalidated');
             }
 
+            $log = $this->transcriptionManager->getLastLogByName($media->getTranscription(), AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
+            $this->mailManager->sendValidationOrUnvalidationMail($log->getUser(), $media, $isValid, $comment);
+
             $parent = $media->getParent();
             $project = $media->getProject();
 
-            return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
+            return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent->getId()]);
         }
 
         return $this->render(

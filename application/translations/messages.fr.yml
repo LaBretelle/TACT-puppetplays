@@ -25,6 +25,7 @@ email_or_login: Veuillez renseigner votre login ou email
 email_registration_confirm_subject: PATACS - Confirmation d'inscritpion
 email_renew_password_subject: PATCS - Demande de renouvellement de mot de passe.
 email: Mail
+email_transcription_validted_unvalidated_subject: Validation de votre transcription
 filter_users_by: Filtrer par nom / prénom / mail / login
 firstname: Prénom
 folder_name_changed: Nom du dossier modifié

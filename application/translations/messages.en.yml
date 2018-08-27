@@ -25,6 +25,7 @@ email_or_login: Please enter your login or email
 email_registration_confirm_subject: PATACS - Registration validation
 email_renew_password_subject: PATCS - Reset password request.
 email: Mail
+email_transcription_validted_unvalidated_subject: Your transcription validation
 filter_users_by: Filter by lastname / firstname / mail / login
 firstname: Firstname
 folder_name_changed: Folder name edited

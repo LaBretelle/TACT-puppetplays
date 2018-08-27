@@ -46,6 +46,19 @@ class TranscriptionLogRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function getLastLogByName(Transcription $transcription, string $name)
+    {
+        return $this->createQueryBuilder('tl')
+          ->andWhere('tl.transcription = :t')
+          ->andWhere('tl.name = :name')
+          ->setParameter('t', $transcription)
+          ->setParameter('name', $name)
+          ->orderBy('tl.createdAt', 'DESC')
+          ->setMaxResults(1)
+          ->getQuery()
+          ->getOneOrNullResult();
+    }
+
     public function countValidationLog(Transcription $transcription)
     {
         $qb = $this->createQueryBuilder('tl');
