@@ -48,9 +48,15 @@
         <div data-url="{{ macros.mediaURL(media) }}" id="seadragon-viewer" class="rounded"></div>
       </div>
       <div class="col-6">
-        <div class="">
-          {{ media.transcription.content | raw }}
+        {% if media.project.css %}
+        <style>
+          {{ media.project.css | raw }}
+        </style>
+        {% endif %}
+        <div id="transcription-container">
+          {{media.transcription.content | raw}}
         </div>
+        {% endif %}
       </div>
     </div>
   </div>
