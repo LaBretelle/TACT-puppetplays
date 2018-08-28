@@ -11,6 +11,10 @@
     </head>
     <body>
       <div class="content">
+
+
+        {% trans_default_domain 'emails' %}
+
         {% block body %}
 
         {% endblock %}
@@ -18,7 +22,7 @@
       <hr/>
       <div class="footer">
         {% block footer %}
-          <h6>@The tact team</h6>
+          <h6>{{'email_team_footer' | trans}}</h6>
         {% endblock %}
       </div>
     </body>

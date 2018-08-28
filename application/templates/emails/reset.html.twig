@@ -1,12 +1,14 @@
 {% extends "emails/master.html.twig" %}
 
 {% block body %}
-  <p>Hi {{user.lastname}} {{user.firstname}}!</p>
-  <p>You requested a new password for the PATACS platform.</p>
+  <p>{{'email_hello_user' | trans({'%1%': user.lastname, '%2%': user.firstname}) }}</p>
+  <p>{{'email_new_password_request_1' | trans }}</p>
   <p>
-  In order to set your new password please click <a href="{{url}}">here</a>.
+  {{'email_new_password_request_2' | trans }}
   </p>
   <p>
-  Note that you won't be able to ask for a new password for 2 hours.
+  {{'email_new_password_request_3' | trans }}
   </p>
+
+  <p><a href="{{url}}">{{'email_new_password_activate_link' | trans }}</a></p>
 {% endblock %}

@@ -1,13 +1,15 @@
 {% extends "emails/master.html.twig" %}
 
 {% block body %}
-  <p>Hi {{user.lastname}} {{user.firstname}}!</p>
-  <p>You asked for a transcription validation.</p>
+  <p>{{'email_hello_user' | trans({'%1%': user.lastname, '%2%': user.firstname}) }}</p>
+  <p>{{'email_transcription_1' | trans}}</p>
   {% if valid %}
-  <p>We are happy to say that your transcription has been validated</p>
+  <p>{{'email_transcription_2' | trans}}</p>
   {% else %}
-  <p>Unfortunately it has been rejected.</p>
-  <p>You can review your transcription <a href="{{url}}">here</a></p>
+    <p>{{'email_transcription_3' | trans}}</p>
+    <p>{{'email_transcription_4' | trans}}</p>
+
+    <p><a href="{{url}}">{{'email_transcription_link' | trans}}</a></p>
   {% endif %}
 
   {% if comment %}

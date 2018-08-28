@@ -33,7 +33,7 @@ class MailManager
           UrlGeneratorInterface::ABSOLUTE_URL
         );
 
-        $subject = $this->translator->trans('email_registration_confirm_subject');
+        $subject = $this->translator->trans('email_registration_confirm_subject', [], 'emails');
 
         $body =   $this->templating->render(
               'emails/registration.html.twig',
@@ -53,7 +53,7 @@ class MailManager
           UrlGeneratorInterface::ABSOLUTE_URL
         );
 
-        $subject = $this->translator->trans('email_renew_password_subject');
+        $subject = $this->translator->trans('email_renew_password_subject', [], 'emails');
 
         $body = $this->templating->render(
             'emails/reset.html.twig',
@@ -67,7 +67,7 @@ class MailManager
 
     public function sendValidationOrUnvalidationMail(User $user, Media $media, bool $valid, string $comment = null)
     {
-        $subject = $this->translator->trans('email_transcription_validted_unvalidated_subject');
+        $subject = $this->translator->trans('email_transcription_validted_unvalidated_subject', [], 'emails');
 
         $url = $this->router->generate(
           'media_transcription_edit',

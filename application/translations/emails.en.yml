@@ -1,0 +1,18 @@
+
+email_registration_confirm_subject: TACT - Registration validation.
+email_welcome_user: Welcome on TACT Platform %1% %2%!
+email_registration_you_just_subscribed: You just subscribed to TACT platform.
+email_registration_activate: In order to activate your account please click the link below.
+email_registration_activate_link: Activate
+email_renew_password_subject: TACT - Reset password request.
+email_transcription_validted_unvalidated_subject: TACT - Your transcription validation request.
+email_hello_user: Hi %1% %2%
+email_new_password_request_1: You requested a new password for the TACT platform.
+email_new_password_request_2: In order to set your new password please click on the link below.
+email_new_password_request_3: Note that you won't be able to ask for a new password for 2 hours.
+email_new_password_activate_link: Reset password
+email_transcription_1: You asked for a transcription validation.
+email_transcription_2: Your transcription has been validated.
+email_transcription_3: Unfortunately your transcription has been rejected.
+email_transcription_4: You can access to the transcription via the link below.
+email_transcription_link: Access to the transcription.

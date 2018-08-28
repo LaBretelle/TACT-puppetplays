@@ -3,10 +3,10 @@
 {% extends "emails/master.html.twig" %}
 
 {% block body %}
-  <p>Welcome {{user.lastname}} {{user.firstname}}!</p>
-  <p>You just subscribed to PATACS platform.</p>
+  <p> {{'email_welcome_user' | trans({'%1%':user.lastname , '%2%':user.firstname }) }}</p>
+  <p>{{'email_registration_you_just_subscribed' | trans}}</p>
   <p>
-  In order to activate your account please click an the link below
+    {{'email_registration_activate' | trans}}
   </p>
-  <a href="{{url}}">Activate</a>
+  <p><a href="{{url}}">{{'email_registration_activate_link' | trans}}</a></p>
 {% endblock %}

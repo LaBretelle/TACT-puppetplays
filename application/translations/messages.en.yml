@@ -22,10 +22,7 @@ edit_project_long: Vous permet d'éditer les informations sur le projet comme le
 edit: Edit
 email_or_login_placeholder: Login / email
 email_or_login: Please enter your login or email
-email_registration_confirm_subject: PATACS - Registration validation
-email_renew_password_subject: PATCS - Reset password request.
 email: Mail
-email_transcription_validted_unvalidated_subject: Your transcription validation
 filter_users_by: Filter by lastname / firstname / mail / login
 firstname: Firstname
 folder_name_changed: Folder name edited
