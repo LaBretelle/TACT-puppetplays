@@ -53,7 +53,10 @@ class ProjectType extends AbstractType
               'required' => true,
               'empty_data' => 2,
           ])
-
+          ->add('css', TextareaType::class, [
+              'label'    => 'project_css',
+              'required' => false,
+          ])
           ->add('image', FileType::class, [
               'label' => 'project_image',
               'translation_domain' => 'messages',

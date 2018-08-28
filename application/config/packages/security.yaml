@@ -22,6 +22,9 @@ security:
             form_login:
                 login_path: user_login
                 check_path: user_login
+                # https://symfony.com/doc/current/security/form_login.html#using-the-referring-url
+                # should redirect to the previous page... but not sure about that : https://github.com/symfony/symfony/issues/17529
+                use_referer: true
             logout:
                 path:   /logout
                 target: /

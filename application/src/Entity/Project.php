@@ -94,6 +94,11 @@ class Project
      */
     private $nbValidation;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $css;
+
     public function __construct()
     {
         $this->financers = new ArrayCollection();
@@ -344,6 +349,18 @@ class Project
     public function setNbValidation(int $nbValidation): self
     {
         $this->nbValidation = $nbValidation;
+
+        return $this;
+    }
+
+    public function getCss(): ?string
+    {
+        return $this->css;
+    }
+
+    public function setCss(?string $css): self
+    {
+        $this->css = $css;
 
         return $this;
     }

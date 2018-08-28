@@ -13,6 +13,8 @@ use App\Service\TranscriptionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/media", name="media_")
@@ -49,6 +51,8 @@ class MediaController extends Controller
      */
     public function editTranscription(Media $media)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, '');
+
         $transcription = $media->getTranscription();
         $canEdit = true;
         $lockLog = $this->transcriptionManager->getLastLockLog($transcription);
@@ -75,6 +79,8 @@ class MediaController extends Controller
      */
     public function validateTranscription(Media $media, Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, '');
+
         $form = $this->createForm(ValidationType::class);
 
         $form->handleRequest($request);
@@ -103,8 +109,6 @@ class MediaController extends Controller
             return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent->getId()]);
         }
 
-
-
         return $this->render(
           'media/reread.html.twig',
             [
@@ -120,6 +124,7 @@ class MediaController extends Controller
      */
     public function mediaTranscriptionSave(Media $media, Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, '');
         $content = $request->get('transcription');
         $this->mediaManager->setMediaTranscription($media, $content);
 
@@ -131,6 +136,7 @@ class MediaController extends Controller
      */
     public function mediaTranscriptionFinish(Media $media, Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, '');
         $content = $request->get('transcription');
         $this->mediaManager->finishTranscription($media, $content);
         $this->fm->add('notice', 'validation_asked');

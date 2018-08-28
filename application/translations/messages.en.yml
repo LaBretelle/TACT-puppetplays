@@ -61,6 +61,7 @@ platform_name: Platform name
 platform_page_title: Platform administration
 project_create: Project creation
 project_created: Project created
+project_css: Project inline css definition
 project_delete: Delete project
 project_deleted: Project was deleted.
 project_description: project description
@@ -112,6 +113,7 @@ subscribe_long: L'inscription au projet vous permet de participer, en transcriva
 transcribe_long: Vous permet d'accéder au média et de proposer des transcriptions.
 transcriber: Transcriber
 transcript_media: Transcription of media
+transcription_current_nb_validations: Currently %1% / %2% validations
 transcription_is_locked: Transcription is locked
 transcription_is_valid: La transcription est valide ?
 transcription_saved: Transcription saved
@@ -119,7 +121,6 @@ transcription_send_to_validation: Send to validation
 transcription_unvalidated: Transcription unvalidated
 transcription_validated: Transcription validated
 transcriptions_page_title: Project transcripts
-transcription_current_nb_validations: Currently %1% / %2% validations
 unvalidate_transcription: Unvalidate transcription
 user_account_activated_error: An error occured while activating your account.
 user_account_activated: Your account is now activated.
