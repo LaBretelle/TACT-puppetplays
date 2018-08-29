@@ -149,6 +149,8 @@ class ProjectController extends Controller
 
     /**
      * @Route("/{id}/transcription/{parent}", name="transcriptions", options={"expose"=true}, defaults={"parent"=null})
+     * @ParamConverter("project", class="App:Project", options={"id" = "id"})
+     * @ParamConverter("parent", class="App:Directory", options={"id" = "parent"})
      */
     public function displayTranscriptions(Project $project, Directory $parent = null)
     {
