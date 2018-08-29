@@ -1,8 +1,8 @@
 $(document).ready(() => {
   $(document).on('click', '.edit-status', (event) => {
     event.preventDefault()
-    var id = $(this).data('status-id')
-    var url = Routing.generate('status_form_get', {
+    const id = event.target.dataset.statusId
+    const url = Routing.generate('status_form_get', {
       id: id
     })
     $.ajax({
