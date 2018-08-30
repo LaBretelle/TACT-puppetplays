@@ -65,7 +65,7 @@ class Project
     private $financers;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserProjectStatus", mappedBy="project", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\UserProjectStatus", mappedBy="project", cascade={"persist", "remove"})
      */
     private $userStatuses;
 
@@ -85,11 +85,6 @@ class Project
     private $public = 1;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $deleted;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $nbValidation;
@@ -105,7 +100,6 @@ class Project
         $this->userStatuses = new ArrayCollection();
         $this->medias = new ArrayCollection();
         $this->dirs = new ArrayCollection();
-        $this->deleted = false;
     }
 
     public function getId(): ?int
@@ -313,18 +307,6 @@ class Project
     public function setPublic(bool $public): self
     {
         $this->public = $public;
-
-        return $this;
-    }
-
-    public function getDeleted(): ?bool
-    {
-        return $this->deleted;
-    }
-
-    public function setDeleted(bool $deleted): self
-    {
-        $this->deleted = $deleted;
 
         return $this;
     }

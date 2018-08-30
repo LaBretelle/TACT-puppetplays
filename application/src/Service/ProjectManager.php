@@ -89,13 +89,14 @@ class ProjectManager
 
     public function delete(Project $project)
     {
-        $project->setUpdatedAt(new \DateTime);
-        $project->setDeleted(true);
         $this->removeProjectMedia($project);
-        $this->em->persist($project);
+
+        $this->em->remove($project);
         $this->em->flush();
 
-        return $project;
+        $this->fm->add('notice', 'project_deleted');
+
+        return;
     }
 
     public function initMediaProcessing(Project $project, string $uploadPath, Directory $parent = null)
@@ -182,6 +183,7 @@ class ProjectManager
     public function removeProjectMediaByIds(array $ids)
     {
         $mediaRepository = $this->em->getRepository(Media::class);
+
         foreach ($ids as $id) {
             $media = $mediaRepository->find($id);
             $project = $media->getProject();
@@ -200,12 +202,15 @@ class ProjectManager
     {
         $mediaRepository = $this->em->getRepository(Media::class);
         $toDelete = $project->getMedias();
+
+        $projectPath = $this->fileManager->getProjectPath($project);
         foreach ($toDelete as $media) {
             $project->removeMedia($media);
-            $filePath = $this->fileManager->getProjectPath($project).DIRECTORY_SEPARATOR.$media->getUrl();
-            $this->fileManager->delete($filePath);
             $this->em->remove($media);
         }
+
+        $this->fileManager->delete($projectPath);
+
         return;
     }
 

@@ -5,6 +5,8 @@ namespace App\Service;
 use App\Entity\Project;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class FileManager
 {
@@ -19,10 +21,11 @@ class FileManager
 
     public function delete($path)
     {
-        if (file_exists($path)) {
-            unlink($path);
-        } else {
-            //throw new FileNotFoundException(null, 0, null, $path);
+        $fileSystem = new Filesystem();
+        try {
+            $fileSystem->remove($path);
+        } catch (IOExceptionInterface $exception) {
+            echo "An error occurred: ".$exception->getPath();
         }
 
         return;

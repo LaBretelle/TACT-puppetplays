@@ -15,9 +15,7 @@ class HomeController extends Controller
     public function home()
     {
         $em = $this->getDoctrine()->getManager();
-        $projects = $em->getRepository(Project::class)->findBy([
-          'deleted' => false
-        ]);
+        $projects = $em->getRepository(Project::class)->findAll();
 
         $platformParameters = $em->getRepository(Platform::class)->getPlatformParameters();
         return $this->render('home/home.html.twig', [
