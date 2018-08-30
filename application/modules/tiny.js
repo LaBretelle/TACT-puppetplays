@@ -6,6 +6,7 @@ require('tinymce/themes/modern/theme')
 
 // Any plugins you want to use has to be imported
 require('tinymce/plugins/paste')
+require('tinymce/plugins/code')
 require('tinymce/plugins/link')
 
 Tiny.initEditor = () => {
@@ -25,7 +26,9 @@ Tiny.initEditor = () => {
 Tiny.initTEIEditor = () => {
   Tiny.init({
     selector: 'textarea.tinymce-transcription',
-    plugins: ['paste', 'link']
+    plugins: ['paste', 'link', 'code'],
+    valid_elements : '*[*]',
+    entity_encoding : 'raw'
   }).then((editors) => {
     // load content into tinyMCE
     editors.forEach(editor => {
