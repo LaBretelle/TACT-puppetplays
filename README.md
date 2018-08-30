@@ -28,6 +28,10 @@ docker-compose up -d
 # execute makefile:install in apache container service
 docker-compose exec apache make init
 
+# change directories ownership
+docker-compose exec apache bash
+chown -R www-data:www-data application/public/user_images application/public/project_files
+
 ```
 
 - symfony app should be available @ http://localhost:8082/
