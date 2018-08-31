@@ -1,0 +1,61 @@
+{
+  "tei1": [{
+    "cl": "del",
+    "ti": "Suppression",
+    "att": "rend",
+    "values": [{
+      "text": "overtyped",
+      "value": "overtyped"
+    }, {
+      "text": "overstrike",
+      "value": "overstrike"
+    }],
+    "menu": "annot",
+    "icon": "pencil"
+  },
+  {
+    "cl": "choice",
+    "ti": "Choix",
+    "menu": "annot",
+    "icon": "check-circle"
+  },
+  {
+    "cl": "subst",
+    "ti": "Substitution",
+    "menu": "annot",
+    "icon": "check-circle"
+  },
+  {
+    "cl": "ref",
+    "ti": "Référence (lien)",
+    "att": "target",
+    "menu": "struct",
+    "icon": "link"
+  }],
+  "tei2": [{
+    "cl": "del",
+    "ti": "Suppression",
+    "att": "rend",
+    "values": [{
+      "text": "overtyped",
+      "value": "overtyped"
+    }, {
+      "text": "overstrike",
+      "value": "overstrike"
+    }],
+    "menu": "annot",
+    "icon": "pencil"
+  },
+  {
+    "cl": "choice",
+    "ti": "Choix",
+    "menu": "annot",
+    "icon": "check-circle"
+  },
+  {
+    "cl": "subst",
+    "ti": "Substitution",
+    "menu": "annot",
+    "icon": "check-circle"
+  }]
+}

@@ -29,8 +29,7 @@ OpenSeadragon({
 
 $(document).ready(() => {
   const logId = $('#log-id').val()
-  //const isEditMode = logId !== undefined
-  console.log('mode', mode)
+
   if ('edit' === mode) {
     Tiny.initTEIEditor()
 
@@ -49,7 +48,6 @@ $(document).ready(() => {
       updateLockedLog(logId)
     }, updateLogTimeout)
   } else if ('validation' === mode) {
-    console.log('in validation mode')
     $('.btn-validate-transcription').on('click', (e) => {
       validateTranscription(e.target.dataset.id, e.target.dataset.pid)
     })
