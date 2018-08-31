@@ -28,7 +28,6 @@
         </div>
     </nav>
     <ul class="list-group list-group-flush">
-
       {% for dir in project.dirs if dir.parent is null %}
         {{macros.projectTree(dir, project, current)}}
       {% endfor %}
@@ -52,47 +51,49 @@
           </ul>
         </div>
     </nav>
+
     <div class="row media-list-row">
-        {% if current is not null %}
-          {% if project.medias | length == 0 %}
-            <div class="col-12 text-center">
-              <h5>{{'project_media_no_media' | trans}}</h5>
+        {# display directories for current dir #}
+        {% for dir in project.dirs if dir.parent == current %}
+        <div class="col-2">
+          <div class="card mb-2 box-shadow">
+            <div class="card-body">
+              <a class="text-dark" href="{{ path('project_media', {id: project.id, current: dir.id}) }}">
+                <i class="fas fa-folder fa-fw"></i>{{dir.name}}
+              </a>
             </div>
-          {% else %}
-            {% set nbMediasForCurrentDir = -1 %}
-            {% for media in project.medias if media.parent == current %}
-              <div id="img-col-{{media.id}}" class="col-2">
-                <div class="card mb-2 box-shadow">
-                  <img data-toggle="tooltip" title="{{media.name}}" class="card-img-top project-image" src="{{ macros.mediaURL(media) }}" alt=""></img>
-                  <div class="card-footer text-center">
-                    <div class="form-check">
-                      <input type="checkbox" name="image-select" data-id="{{media.id}}" class="form-check-input image-select">
-                      <label class="form-check-label"></label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {% set nbMediasForCurrentDir = loop.index %}
-            {% endfor %}
-            {% if nbMediasForCurrentDir == -1  %}
-            <div class="col-12 text-center">
-              <h5>{{'project_media_no_media_in_current_dir' | trans}}</h5>
-            </div>
-            {% endif %}
-          {% endif %}
-        {% else %}
-          {% for dir in project.dirs if dir.parent is null %}
-          <div class="col-2">
-            <div class="card mb-2 box-shadow">
-              <div class="card-body">
-                <a class="text-dark" href="{{ path('project_media', {id: project.id, current: dir.id}) }}">
-                  <i class="fas fa-folder fa-fw"></i>{{dir.name}}
-                </a>
+          </div>
+        </div>
+        {% endfor %}
+
+      {# display medias for current dir #}
+      {% set nbMediasForCurrentDir = -1 %}
+      {% for media in project.medias if media.parent == current %}
+        <div id="img-col-{{media.id}}" class="col-2">
+          <div class="card mb-2 box-shadow">
+            <img data-toggle="tooltip" title="{{media.name}}" class="card-img-top project-image" src="{{ macros.mediaURL(media) }}" alt=""></img>
+            <div class="card-footer text-center">
+              <div class="form-check">
+                <input type="checkbox" name="image-select" data-id="{{media.id}}" class="form-check-input image-select">
+                <label class="form-check-label"></label>
               </div>
             </div>
           </div>
-          {% endfor %}
-        {% endif %}
+        </div>
+        {% set nbMediasForCurrentDir = loop.index %}
+      {% endfor %}
+
+      {% if project.medias is empty and project.dirs is empty %}
+        <div class="col-12 text-center">
+          <h5>{{'project_media_no_media' | trans}}</h5>
+        </div>
+      {% endif %}
+
+      {% if current != null and current.children is empty and nbMediasForCurrentDir == -1  %}
+      <div class="col-12 text-center">
+        <h5>{{'project_media_no_media_in_current_dir' | trans}}</h5>
+      </div>
+      {% endif %}
     </div>
   </div>
 </div>

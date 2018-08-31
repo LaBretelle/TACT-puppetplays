@@ -38,7 +38,7 @@ $(document).ready(() => {
       selectedMedia.splice(index, 1)
     }
 
-    if(selectedMedia.length > 0 && hasFolder) {
+    if(selectedMedia.length > 0) {
       $('.images-actions').find('button').attr('disabled', false)
     } else {
       $('.images-actions').find('button').attr('disabled', true)
