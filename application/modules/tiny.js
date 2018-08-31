@@ -8,6 +8,7 @@ require('tinymce/themes/modern/theme')
 require('tinymce/plugins/paste')
 require('tinymce/plugins/code')
 require('tinymce/plugins/link')
+require('tinymce/plugins/lists')
 
 Tiny.initEditor = () => {
   Tiny.init({
@@ -38,13 +39,14 @@ const getMenuStructure = (tei) => {
 Tiny.initTEIEditor = (tei) => {
   Tiny.init({
     selector: 'textarea.tinymce-transcription',
-    plugins: ['paste', 'link', 'code'],
+    plugins: ['paste', 'link', 'code', 'lists'],
     valid_elements: '*[*]',
     entity_encoding: 'raw',
     menubar: tei.modules.join(' '),
     menu: getMenuStructure(tei),
-    toolbar1: 'undo redo code',
+    toolbar1: 'undo redo code | numlist',
     setup: (editor) => {
+
       // add buttons to tiny
       tei.elements.forEach( (element) => {
         editor.addMenuItem(element.tag, {
@@ -67,7 +69,7 @@ Tiny.initTEIEditor = (tei) => {
                   Object.keys(this.data).forEach(key => {
 
                     const value = this.data[key]
-                    if (value != 'none') {
+                    if (value !== 'none') {
                       attributes += `${key}="${value}"`
                     }
                   })
@@ -105,6 +107,52 @@ Tiny.initTEIEditor = (tei) => {
   })
 }
 
+
+
+function activate_menu_items() {
+	// Element type selected in TinyMCE
+	element = tinymce.activeEditor.selection.getNode();
+	elementType = element.nodeName;
+	// Tous les items visibles : ceux qui viennent d'apparaître suite au clic sur le menu
+	menuItems = $('.mce-menu-item:visible span');
+  console.log('yope', menuItems)
+	$.each(menuItems, function(i, menuItem) {
+  	menuName = $(menuItem).text();
+		var balise = menuName.substr(0, menuName.indexOf(' '));
+		var contexte = tag_context[balise];
+
+
+
+// 		var contexte = 1; // temporaire == tout est légal
+		if (typeof contexte != 'undefined') {
+			// Remplacement des balises "spéciales" pour qu'elles soient un contexte valide
+			i = contexte.indexOf('HEAD');
+			contexte[i] = 'HEADD';
+			i = contexte.indexOf('TITLE');
+			contexte[i] = 'TITTLE';
+			i = contexte.indexOf('FIGURE');
+			contexte[i] = 'FFIGURE';
+			if ($.inArray(elementType, contexte) > -1 || balise == 'DIV' && elementType == 'BODY') {
+				// On le marque comme visible si le contexte l'autorise ...
+				$(menuItem).parent().addClass('tei-ok');
+			} else {
+				// ... et invisible si non ...
+				$(menuItem).parent().addClass('tei-ko');
+			}
+		}
+	});
+	 // ... et enfin on applique les propriétés à tous les items en même temps.
+	$('.tei-ok').show();
+	$('.tei-ko').hide();
+}
+
+$('body').on('click', '.mce-tinymce > .mce-container-body .mce-btn', function() {
+	activate_menu_items();
+});
+$('body').on('mouseenter', '.mce-tinymce > .mce-container-body .mce-btn', function() {
+	activate_menu_items();
+});
+
 const addFormElementAttr = (element) => {
   const attributes = element.attributes.map(attribute => {
     if (attribute.type === 'text') {
@@ -114,16 +162,22 @@ const addFormElementAttr = (element) => {
         label: attribute.label
       }
     } else if (attribute.type === 'enumerated') {
+      let listValues = attribute.values.map(entry => {
+        return {
+          text: entry,
+          value: entry
+        }
+      })
+      // add a none value so that we wont happend values proposed but not wanted
+      listValues.push({
+        text: 'none',
+        value: 'none'
+      })
       return {
         type: 'listbox',
         name: attribute.key,
         label: attribute.label,
-        values: attribute.values.map(entry => {
-          return {
-            text: entry,
-            value: entry
-          }
-        })
+        values: listValues
       }
     }
   })
