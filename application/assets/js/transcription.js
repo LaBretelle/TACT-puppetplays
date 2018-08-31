@@ -1,4 +1,4 @@
-/* global mode */
+/* global mode require */
 
 import OpenSeadragon from 'openseadragon'
 
@@ -31,7 +31,9 @@ $(document).ready(() => {
   const logId = $('#log-id').val()
 
   if ('edit' === mode) {
-    Tiny.initTEIEditor()
+    // should be loaded depending on project definition
+    const jsonTeiDef = require('./../data/tei_elements_A.json')
+    Tiny.initTEIEditor(jsonTeiDef)
 
     $('.btn-save-transcription').on('click', (e) => {
       saveTranscription(e.target.dataset.id)

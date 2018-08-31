@@ -8,7 +8,11 @@
 
 - chaque projet choisi un schema prédéfini
 - il faut créer des fichiers json pour chaque schema.
-
+- a l'initilisation de tiny il faut aussi charger le bon SCHEMA
+  - pour éviter de l'asynchronne on pourrait enregistrer les schema en base
+	- récupérer le json dans le controller
+	- l'envoyer à la vue dans une balise
+	- récupérer en javascript la valeur de cette balise...
 
 ### brouillon de schema
 

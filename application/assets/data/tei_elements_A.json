@@ -1,0 +1,89 @@
+{
+  "elements": [{
+      "tag": "handShift",
+      "label": "transcr_handshift",
+      "help": "transcr_handshift_help",
+      "module": "transcr",
+      "icon": "handShift",
+      "selfClosed": true,
+      "attributes": [{
+          "key": "rend",
+          "type": "text",
+          "required": false,
+          "label": "attr_rend",
+          "help": "attr_rend_help",
+          "values": []
+        }
+
+      ],
+      "childrens": []
+    },
+    {
+
+      "tag": "damage",
+      "label": "transcr_damage",
+      "help": "transcr_damage_help",
+      "module": "transcr",
+      "icon": "damage",
+      "selfClosed": false,
+      "attributes": [{
+          "key": "rend",
+          "type": "text",
+          "required": false,
+          "label": "attr_rend",
+          "help": "attr_rend_help",
+          "values": []
+        },
+        {
+          "key": "agent",
+          "type": "enumerated",
+          "required": false,
+          "label": "attr_agent",
+          "help": "attr_agent_help",
+          "values": [
+            "rubbing", "mildew", "smoke"
+          ]
+        },
+        {
+          "key": "degree",
+          "type": "enumerated",
+          "required": false,
+          "label": "attr_degree",
+          "help": "attr_degree_help",
+          "values": [
+            "a lot", "a bit", "not so much"
+          ]
+        }
+      ],
+      "childrens": [
+        "handShift",
+        "rhyme"
+      ]
+    },
+    {
+
+      "tag": "rhyme",
+      "label": "verse_rhyme",
+      "help": "verse_rhyme_help",
+      "module": "verse",
+      "icon": "rhyme",
+      "selfClosed": false,
+      "attributes": [{
+        "key": "label",
+        "type": "text",
+        "required": true,
+        "label": "attr_label",
+        "help": "attr_label_help",
+        "values": []
+      }],
+      "childrens": [
+        "handShift",
+        "damage"
+      ]
+    }
+  ],
+  "modules": [
+    "transcr",
+    "verse"
+  ]
+}
