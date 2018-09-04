@@ -21,9 +21,17 @@
 - ajout de l'élément none dans toute liste du formulaire...
   - c'est pour que si on a plusieurs attributs, ceux qu'on ne veut pas voir apparaître n'apparaissent pas
   - MAIS cas de `damage` qui a rend / agent / degree est-ce que ça a du sens de ne mettre que agent et pas degree ?
+  - ajouter none que si attribut optionnel
 
 - certaines balises sont redondantes avec l'HTML du coup c'est pour ça que tit[t]le / t[t]able
   - engendre un problème d'affichage ? si oui alors ça doit être possible de definir un comportement d'affichage spécfifque en CSS pour toute balise de ce type incluse dans une class CSS parente genre "tei"
+
+### @TODO
+
+- activer / désactiver les boutons dispo en fonction de l'élément où on est
+- trouver un moyen de pré remplir les éléments du formulaire si besoin
+  - poser la question à l'utilisateur ?
+  - à ne faire que si le bouton cliqué correspond à la première balise parente trouvée
 
 ### brouillon de schema
 

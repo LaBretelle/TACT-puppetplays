@@ -37,7 +37,7 @@
     </div>
     <hr/>
     <div class="row">
-      <div class="col-6">
+      <div class="col">
           <div class="openseadragon-buttons text-center">
             <button id="osd-zoom-in" type="button" class="btn btn-light">
               <i class="fas fa-search-plus"></i>
@@ -60,7 +60,7 @@
           </div>
           <div data-url="{{ macros.mediaURL(media) }}" id="seadragon-viewer" class="rounded"></div>
       </div>
-      <div class="col-6">
+      <div class="col">
         {% if edit %}
           <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="8" cols="80">
             {{media.transcription.content | raw}}
@@ -76,6 +76,15 @@
           </div>
         {% endif %}
       </div>
+      {% if edit %}
+        <div class="col-2 selected-element">
+          <div class="card">
+            <div class="card-header element-title">
+            </div>
+            <ul class="list-group list-group-flush element-attributes"></ul>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 

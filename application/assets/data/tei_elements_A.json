@@ -9,7 +9,7 @@
       "attributes": [{
           "key": "rend",
           "type": "text",
-          "required": false,
+          "required": true,
           "label": "attr_rend",
           "help": "attr_rend_help",
           "values": []

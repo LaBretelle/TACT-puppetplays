@@ -33,6 +33,8 @@ $(document).ready(() => {
   if ('edit' === mode) {
     // should be loaded depending on project definition
     const jsonTeiDef = require('./../data/tei_elements_A.json')
+    // get json def in html tag
+    // init tiny
     Tiny.initTEIEditor(jsonTeiDef)
 
     $('.btn-save-transcription').on('click', (e) => {

@@ -1,0 +1,26 @@
+/* TINY CONTENT */
+body *:not(p)::before{
+  content: attr(data-tag);
+  margin:0 4px;
+  padding:2px;
+  color:white;
+  background-color:lightgrey;
+  border-bottom-left-radius:3px;
+  border-top-left-radius:3px;
+  text-decoration: none;
+  font-size: smaller;
+}
+
+body *:not(p)::after{
+  content: "/" attr(data-tag);
+  margin:0 4px;
+  padding:2px;
+  color:white;
+  background-color:lightgrey;
+  border-bottom-right-radius:3px;
+  border-top-right-radius:3px;
+  text-decoration: none;
+  font-size: smaller;
+}
+
+/* attributes container */

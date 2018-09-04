@@ -40,13 +40,66 @@ Tiny.initTEIEditor = (tei) => {
   Tiny.init({
     selector: 'textarea.tinymce-transcription',
     plugins: ['paste', 'link', 'code', 'lists'],
+    content_css : '/build/css/transcription.css',
+    forced_root_block : '',
     valid_elements: '*[*]',
     entity_encoding: 'raw',
     menubar: tei.modules.join(' '),
     menu: getMenuStructure(tei),
     toolbar1: 'undo redo code | numlist',
-    setup: (editor) => {
+    init_instance_callback: (editor) => {
+      editor.on('click', (e) => {
+        const currentTinyElement = e.target
+        const currentTeiElement = tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
+        if(currentTeiElement) {
+          const elementTitle = document.querySelector('.element-title')
+          const elementAttributes = document.querySelector('.element-attributes')
+          const cardTitle = document.createTextNode(currentTinyElement.nodeName)
+          // empty content
+          elementTitle.innerHTML = ''
+          elementAttributes.innerHTML = ''
+          elementTitle.appendChild(cardTitle)
+          // iterate through currentTeiElement.attributes
+          currentTeiElement.attributes.forEach(teiAttribute => {
 
+            const tinyAttr = currentTinyElement.attributes.getNamedItem(teiAttribute.key)
+            const label = document.createTextNode(teiAttribute.key)
+            let control
+            switch(teiAttribute.type) {
+              case 'text':
+                // create text input element
+                control = document.createElement('input')
+                // set its value if any
+                control.setAttribute('value', tinyAttr ? tinyAttr.value: '')
+                break
+              case 'enumerated':
+                control = document.createElement('select')
+                // create select options
+                teiAttribute.values.forEach(value => {
+                  const option = document.createElement('option')
+                  option.value = value
+                  option.selected = tinyAttr ? value === tinyAttr.value : ''
+                  option.text = value
+                  control.appendChild(option)
+                })
+                break
+            }
+
+            control.addEventListener(teiAttribute.type === 'text' ? 'input' : 'change', (e) => {
+              currentTinyElement.setAttribute(teiAttribute.key, e.target.value)
+            })
+
+            control.classList.add('form-control')
+            const li = document.createElement('li')
+            li.classList.add('list-group-item')
+            li.appendChild(label)
+            li.appendChild(control)
+            elementAttributes.appendChild(li)
+          })
+        }
+      })
+    },
+    setup: (editor) => {
       // add buttons to tiny
       tei.elements.forEach( (element) => {
         editor.addMenuItem(element.tag, {
@@ -65,7 +118,7 @@ Tiny.initTEIEditor = (tei) => {
                 this.data = e.data
                 editor.undoManager.transact(() => {
                   // apply tags / attributes to selection or add it to content if no selection
-                  let attributes = ''
+                  let attributes = `data-tag="${element.tag}"`
                   Object.keys(this.data).forEach(key => {
 
                     const value = this.data[key]
@@ -76,20 +129,12 @@ Tiny.initTEIEditor = (tei) => {
 
                   // element.selfClosed does not work... tiny seems to happend the opening and closing tags automatically...
                   if(element.selfClosed){
-                    /*Tiny.activeEditor.selection.setContent(
-                      `<${element.tag} ${attributes} />${selection}`
-                    )*/
-                    // it replace the selection if any... bot for a self closed tag we dont want this behaviour
-                    /*Tiny.activeEditor.insertContent(
-                      `<${element.tag} ${attributes} />`
-                    )*/
-
                     Tiny.activeEditor.insertContent(
-                      `<${element.tag} ${attributes} />${selection}`
+                      `<${element.tag} ${attributes}/>${selection}`
                     )
                   } else {
                     Tiny.activeEditor.selection.setContent(
-                      `<${element.tag} ${attributes}>${selection}</${element.tag}>`
+                      `<${element.tag} ${attributes}>${selection ? selection:' '}</${element.tag}>`
                     )
                   }
                 })
@@ -109,52 +154,10 @@ Tiny.initTEIEditor = (tei) => {
 
 
 
-function activate_menu_items() {
-	// Element type selected in TinyMCE
-	element = tinymce.activeEditor.selection.getNode();
-	elementType = element.nodeName;
-	// Tous les items visibles : ceux qui viennent d'apparaître suite au clic sur le menu
-	menuItems = $('.mce-menu-item:visible span');
-  console.log('yope', menuItems)
-	$.each(menuItems, function(i, menuItem) {
-  	menuName = $(menuItem).text();
-		var balise = menuName.substr(0, menuName.indexOf(' '));
-		var contexte = tag_context[balise];
-
-
-
-// 		var contexte = 1; // temporaire == tout est légal
-		if (typeof contexte != 'undefined') {
-			// Remplacement des balises "spéciales" pour qu'elles soient un contexte valide
-			i = contexte.indexOf('HEAD');
-			contexte[i] = 'HEADD';
-			i = contexte.indexOf('TITLE');
-			contexte[i] = 'TITTLE';
-			i = contexte.indexOf('FIGURE');
-			contexte[i] = 'FFIGURE';
-			if ($.inArray(elementType, contexte) > -1 || balise == 'DIV' && elementType == 'BODY') {
-				// On le marque comme visible si le contexte l'autorise ...
-				$(menuItem).parent().addClass('tei-ok');
-			} else {
-				// ... et invisible si non ...
-				$(menuItem).parent().addClass('tei-ko');
-			}
-		}
-	});
-	 // ... et enfin on applique les propriétés à tous les items en même temps.
-	$('.tei-ok').show();
-	$('.tei-ko').hide();
-}
-
-$('body').on('click', '.mce-tinymce > .mce-container-body .mce-btn', function() {
-	activate_menu_items();
-});
-$('body').on('mouseenter', '.mce-tinymce > .mce-container-body .mce-btn', function() {
-	activate_menu_items();
-});
-
 const addFormElementAttr = (element) => {
+
   const attributes = element.attributes.map(attribute => {
+
     if (attribute.type === 'text') {
       return {
         type: 'textbox',
@@ -162,22 +165,20 @@ const addFormElementAttr = (element) => {
         label: attribute.label
       }
     } else if (attribute.type === 'enumerated') {
-      let listValues = attribute.values.map(entry => {
-        return {
-          text: entry,
-          value: entry
-        }
-      })
-      // add a none value so that we wont happend values proposed but not wanted
-      listValues.push({
-        text: 'none',
-        value: 'none'
-      })
+      // add none value if attr is not required
+      if (!attribute.required && !attribute.values.find(value => value === 'none')) {
+        attribute.values.unshift('none')
+      }
       return {
         type: 'listbox',
         name: attribute.key,
         label: attribute.label,
-        values: listValues
+        values: attribute.values.map(entry => {
+          return {
+            text: entry,
+            value: entry
+          }
+        })
       }
     }
   })
