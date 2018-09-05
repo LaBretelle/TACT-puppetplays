@@ -32,6 +32,9 @@
 - trouver un moyen de pré remplir les éléments du formulaire si besoin
   - poser la question à l'utilisateur ?
   - à ne faire que si le bouton cliqué correspond à la première balise parente trouvée
+- impossible d'aller écrire après un ::after si aucun autre élément... problème avec les pseudo classes
+https://stackoverflow.com/questions/11031044/tinymce-caret-positioning-while-moving-in-and-out-of-span
+- si pas de sélection et qu'on insert un tag qui n'est pas autofermé alors comportement étrange (double click séletionne plus que ce qui est dans les balises...)
 
 ### brouillon de schema
 
