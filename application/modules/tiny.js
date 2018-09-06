@@ -82,7 +82,6 @@ const getAllowedElements = (tei, current) => {
       container.style.display = 'flex'
     })
   }
-  $('[data-toggle="popover"]').popover()
 }
 
 const displayCurrentAttributes = (currentTeiElement, currentTinyElement) => {
@@ -131,16 +130,15 @@ const displayCurrentAttributes = (currentTeiElement, currentTinyElement) => {
   } else {
     container.style.display = 'none'
   }
+
 }
 
 const createHelp = (text) => {
-  const help = document.createElement('i')
-  help.classList.add('fas')
-  help.classList.add('fa-question-circle')
+  const help = document.createElement('span')
   help.classList.add('float-right')
-  help.classList.add('text-muted')
-  help.setAttribute('title', text)
-
+  help.innerHTML = '<i class="fas fa-question-circle"></i>'
+  help.setAttribute('data-content', text)
+  help.setAttribute('data-toggle', 'popover')
   return help
 }
 
@@ -168,7 +166,7 @@ const appendLiToAllowedElements = (tei, root, tagName) => {
 const addTeiTag = (teiElement) => {
   const editor = Tiny.activeEditor
   const selectedContent = editor.selection.getContent({
-    format: 'text'
+    format: 'html'
   })
   editor.undoManager.transact(() => {
     if (teiElement.selfClosed) {
@@ -197,6 +195,11 @@ const refreshPanels = (tei) => {
   const currentTeiElement = tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
   displayCurrentAttributes(currentTeiElement, currentTinyElement)
   getAllowedElements(tei, currentTeiElement)
+  $('[data-toggle="popover"]').popover({
+    html : true,
+    placement: 'top',
+    trigger: 'hover'
+  })
 }
 
 module.exports = Tiny
