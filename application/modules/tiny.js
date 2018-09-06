@@ -35,18 +35,23 @@ Tiny.initTEIEditor = (tei) => {
     entity_encoding: 'raw',
     menubar: false,
     statusbar: true,
-    toolbar1: 'undo redo code',
+    toolbar1: 'undo redo | remove-current-tag | code',
+    setup: (editor) => {
+      editor.addButton('remove-current-tag', {
+        text: 'x',
+        tooltip: 'Delete current tag',
+        onclick: () => {
+          deleteCurrentTag(tei)
+        }
+      })
+    },
     init_instance_callback: (editor) => {
-      editor.on('click', (e) => {
-        const currentTinyElement = e.target
-        const currentTeiElement = tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
-        displayCurrentAttributes(currentTeiElement, currentTinyElement)
-        getAllowedElements(tei, currentTeiElement)
+      editor.on('click', () => {
+        refreshPanels(tei)
       }),
       editor.on('change', () => {
         document.getElementById('preview').innerHTML = Tiny.activeEditor.getContent()
-      })
-
+      }),
       document.getElementById('preview').innerHTML = Tiny.activeEditor.getContent()
     }
   }).then((editors) => {
@@ -176,6 +181,22 @@ const addTeiTag = (teiElement) => {
       )
     }
   })
+}
+
+const deleteCurrentTag = (tei) => {
+  let currentTinyElement = Tiny.activeEditor.selection.getNode()
+  // test if current tag is not the root tag.
+  if (!currentTinyElement.classList.contains('tiny-root') ) {
+    Tiny.activeEditor.dom.remove(currentTinyElement, true)
+    refreshPanels(tei)
+  }
+}
+
+const refreshPanels = (tei) => {
+  const currentTinyElement = Tiny.activeEditor.selection.getNode()
+  const currentTeiElement = tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
+  displayCurrentAttributes(currentTeiElement, currentTinyElement)
+  getAllowedElements(tei, currentTeiElement)
 }
 
 module.exports = Tiny
