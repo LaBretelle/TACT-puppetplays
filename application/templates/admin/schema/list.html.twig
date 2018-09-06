@@ -4,10 +4,18 @@
 
 {% block body %}
   <div class="page-content-container">
-    <a href="{{ path('admin_schema_manage')}}">create</button>
-    <ul>
-      {% for item in schemas %}
-        <li>{{item.name}} - <a class="nav-link" href="{{ path('admin_schema_manage', {'id':item.id})}}">{{ 'administrate_schema' | trans}}</a></li>
+    <a class="btn btn-primary" href="{{ path('admin_schema_manage')}}">{{'schema_create'|trans}}</a>
+
+    <hr/>
+
+    <ul class="list-group">
+      {% for schema in schemas %}
+        <li class="list-group-item">
+          <a class="btn btn-secondary" href="{{ path('admin_schema_manage', {'id':schema.id})}}">
+            <i class="fas fa-edit"></i>
+          </a>
+          {{ schema.name }}
+        </li>
       {% endfor %}
     </ul>
   </div>

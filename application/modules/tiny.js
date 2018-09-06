@@ -60,24 +60,34 @@ Tiny.initTEIEditor = (tei) => {
 
 const getAllowedElements = (tei, current) => {
   const root = document.querySelector('.elements')
+  const container = document.querySelector('.elements-container')
   root.innerHTML = ''
   if (current) {
     current.childrens.forEach(tagName => {
       appendLiToAllowedElements(tei, root, tagName)
     })
+    if (current.childrens.length === 0) {
+      container.style.display = 'none'
+    } else {
+      container.style.display = 'flex'
+    }
   } else {
     tei.elements.forEach(element => {
       appendLiToAllowedElements(tei, root, element.tag)
+      container.style.display = 'flex'
     })
   }
+  $('[data-toggle="popover"]').popover()
 }
 
 const displayCurrentAttributes = (currentTeiElement, currentTinyElement) => {
+  const container = document.querySelector('.element-attributes-container')
   const elementTitle = document.querySelector('.element-title')
   const elementAttributes = document.querySelector('.element-attributes')
   elementTitle.innerHTML = ''
   elementAttributes.innerHTML = ''
   if (currentTeiElement) {
+    container.style.display = 'flex'
     const cardTitle = document.createTextNode(currentTinyElement.nodeName)
     elementTitle.appendChild(cardTitle)
     currentTeiElement.attributes.forEach(teiAttribute => {
@@ -108,10 +118,25 @@ const displayCurrentAttributes = (currentTeiElement, currentTinyElement) => {
       const li = document.createElement('li')
       li.classList.add('list-group-item')
       li.appendChild(label)
+      const help = createHelp(teiAttribute.help)
+      li.appendChild(help)
       li.appendChild(control)
       elementAttributes.appendChild(li)
     })
+  } else {
+    container.style.display = 'none'
   }
+}
+
+const createHelp = (text) => {
+  const help = document.createElement('i')
+  help.classList.add('fas')
+  help.classList.add('fa-question-circle')
+  help.classList.add('float-right')
+  help.classList.add('text-muted')
+  help.setAttribute('title', text)
+
+  return help
 }
 
 const appendOptionToUl = (ul, text, selected) => {
@@ -123,12 +148,14 @@ const appendOptionToUl = (ul, text, selected) => {
 }
 
 const appendLiToAllowedElements = (tei, root, tagName) => {
+  const teiElement = tei.elements.find(element => element.tag === tagName)
   const li = document.createElement('li')
+  const help = createHelp(teiElement.help)
   li.textContent = tagName
+  li.appendChild(help)
   li.classList.add('list-group-item')
   root.appendChild(li)
   li.addEventListener('click', () => {
-    const teiElement = tei.elements.find(element => element.tag === tagName)
     addTeiTag(teiElement)
   })
 }

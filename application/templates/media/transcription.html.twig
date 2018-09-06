@@ -2,11 +2,9 @@
 
 {% import "media/macros.html.twig" as macros %}
 
-
-
 {% block body %}
   <style>
-    {{media.project.css ?  media.project.css | raw : ''}}
+  {{ media.project.css ?  media.project.css | raw : ''}}
   </style>
   <div class="page-content-container">
     <div class="row">
@@ -74,10 +72,10 @@
         {% if edit %}
           <ul class="nav nav-tabs">
             <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#edit-full">full</a>
+              <a class="nav-link active" data-toggle="tab" href="#edit-full">{{'transcribe'|trans}}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab"  href="#preview">preview</a>
+              <a class="nav-link" data-toggle="tab"  href="#preview">{{'preview'|trans}}</a>
             </li>
           </ul>
           <div class="tab-content transcription-panel-content">
@@ -91,16 +89,18 @@
                 <div class="col-3 selected-element">
                   <div class="row">
                     <div class="col">
-                      <div class="card">
-                        <div class="card-header element-title"></div>
+                      <div class="card element-attributes-container">
+                        <div class="card-header">
+                          <span class="text-muted">{{'attributes'|trans}}</span>
+                          <span class="element-title"></span>
+                        </div>
                         <ul class="list-group list-group-flush element-attributes"></ul>
                       </div>
                     </div>
                   </div>
-                  <hr/>
                   <div class="row">
                     <div class="col">
-                      <div class="card">
+                      <div class="card elements-container">
                         <div class="card-header">
                           {{'element_list'|trans}}
                         </div>
