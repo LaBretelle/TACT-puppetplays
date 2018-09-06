@@ -1,5 +1,4 @@
 /* global mode require */
-
 import OpenSeadragon from 'openseadragon'
 
 // normally every 2 minutes but to avoid any time problem let's put a bit less

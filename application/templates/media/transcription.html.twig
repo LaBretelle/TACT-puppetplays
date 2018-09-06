@@ -2,7 +2,12 @@
 
 {% import "media/macros.html.twig" as macros %}
 
+
+
 {% block body %}
+  <style>
+    {{media.project.css ?  media.project.css | raw : ''}}
+  </style>
   <div class="page-content-container">
     <div class="row">
       <div class="col">
@@ -20,114 +25,129 @@
       <div class="col text-right">
         {% if edit %}
           <div class="btn-group">
-            <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}"><i class="fas fa-save"></i></button>
-            <button class="btn btn-link btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'transcription_send_to_validation' | trans}}" type="button" name="button"><i class="fas fa-check-circle"></i></button>
+            <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
+              <i class="fas fa-save"></i>
+            </button>
+            <button class="btn btn-link btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'transcription_send_to_validation' | trans}}" type="button" name="button">
+              <i class="fas fa-check-circle"></i>
+            </button>
           </div>
         {% elseif locked %}
-          <h5><span class="badge badge-danger">{{'transcription_is_locked' | trans}}</span></h5>
+          <h5>
+            <span class="badge badge-danger">{{'transcription_is_locked' | trans}}</span>
+          </h5>
         {% endif %}
 
-        {% if  media.project | isAuthorizedOnProject('register') %}
+        {% if media.project | isAuthorizedOnProject('register') %}
           <a href="{{ path('status_request', {id:  media.project.id})}}" data-toggle="tooltip" title="{{'project_register' | trans}}">
             <i class="fas fa-hand-holding-heart fa-fw" aria-hidden="true"></i>
           </a>
         {% endif %}
-
       </div>
     </div>
     <hr/>
     <div class="row">
       <div class="col">
-          <div class="openseadragon-buttons text-center">
-            <button id="osd-zoom-in" type="button" class="btn btn-light">
-              <i class="fas fa-search-plus"></i>
-            </button>
-            <button id="osd-zoom-out" type="button" class="btn btn-light">
-              <i class="fas fa-search-minus"></i>
-            </button>
-            <button id="osd-home" type="button" class="btn btn-light">
-              <i class="fas fa-home"></i>
-            </button>
-            <button id="osd-full-page" type="button" class="btn btn-light">
-              <i class="fas fa-expand-arrows-alt"></i>
-            </button>
-            <button id="osd-left" type="button" class="btn btn-light">
-              <i class="fas fa-undo"></i>
-            </button>
-            <button id="osd-right" type="button" class="btn btn-light">
-              <i class="fas fa-redo"></i>
-            </button>
-          </div>
-          <div data-url="{{ macros.mediaURL(media) }}" id="seadragon-viewer" class="rounded"></div>
+        <div class="openseadragon-buttons text-center">
+          <button id="osd-zoom-in" type="button" class="btn btn-light">
+            <i class="fas fa-search-plus"></i>
+          </button>
+          <button id="osd-zoom-out" type="button" class="btn btn-light">
+            <i class="fas fa-search-minus"></i>
+          </button>
+          <button id="osd-home" type="button" class="btn btn-light">
+            <i class="fas fa-home"></i>
+          </button>
+          <button id="osd-full-page" type="button" class="btn btn-light">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </button>
+          <button id="osd-left" type="button" class="btn btn-light">
+            <i class="fas fa-undo"></i>
+          </button>
+          <button id="osd-right" type="button" class="btn btn-light">
+            <i class="fas fa-redo"></i>
+          </button>
+        </div>
+        <div data-url="{{ macros.mediaURL(media) }}" id="seadragon-viewer" class="rounded"></div>
       </div>
-      <div class="col">
+      <div class="col-7">
         {% if edit %}
-          <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="8" cols="80">
-            {{media.transcription.content | raw}}
-          </textarea>
-        {% else %}
-          {% if media.project.css %}
-          <style>
-            {{ media.project.css | raw }}
-          </style>
-          {% endif %}
-          <div id="transcription-container">
-            {{media.transcription.content | raw}}
-          </div>
-        {% endif %}
-      </div>
-      {% if edit %}
-        <div class="col-2 selected-element">
-          <div class="row">
-            <div class="col">
-              <div class="card">
-                <div class="card-header element-title"></div>
-                <ul class="list-group list-group-flush element-attributes"></ul>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="card">
-                <div class="card-header">
-                  {{'element_list'|trans}}
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#edit-full">full</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab"  href="#preview">preview</a>
+            </li>
+          </ul>
+          <div class="tab-content transcription-panel-content">
+            <div id="edit-full" class="tab-pane fade show active" role="tabpanel">
+              <div class="row">
+                <div class="col">
+                  <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="8" cols="80">
+                    {{media.transcription.content | raw}}
+                  </textarea>
                 </div>
-                <ul class="list-group list-group-flush elements"></ul>
+                <div class="col-3 selected-element">
+                  <div class="row">
+                    <div class="col">
+                      <div class="card">
+                        <div class="card-header element-title"></div>
+                        <ul class="list-group list-group-flush element-attributes"></ul>
+                      </div>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="row">
+                    <div class="col">
+                      <div class="card">
+                        <div class="card-header">
+                          {{'element_list'|trans}}
+                        </div>
+                        <ul class="list-group list-group-flush elements"></ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+            <div id="preview" class="tab-pane fade" role="tabpanel"></div>
           </div>
-
+      {% else %}
+        <div id="transcription-container">
+          {{media.transcription.content | raw}}
         </div>
       {% endif %}
     </div>
   </div>
+</div>
 
-  {# media modal #}
-  <div class="modal fade project-media-modal" id="project-media-modal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-body"></div>
-      </div>
+{# media modal #}
+<div class="modal fade project-media-modal" id="project-media-modal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body"></div>
     </div>
   </div>
+</div>
 
-  {# hidden log input... will allow to update log propper log event if needed #}
-  {% if edit %}
-    <input type="hidden" id="log-id" name="log_id" value="{{log.id}}">
-  {% endif %}
+{# hidden log input... will allow to update log propper log event if needed #}
+{% if edit %}
+  <input type="hidden" id="log-id" name="log_id" value="{{log.id}}">
+{% endif %}
 {% endblock %}
 
 {% block javascripts %}
-  {{ parent() }}
-  {% if edit %}
-    <script type="text/javascript">
-      var mode = 'edit';
-    </script>
-  {% else %}
+{{ parent() }}
+{% if edit %}
+  <script type="text/javascript">
+    var mode = 'edit';
+  </script>
+{% else %}
   <script type="text/javascript">
     var mode = 'view';
   </script>
-  {% endif %}
-  <script src="{{ asset('build/js/openseadragon.js') }}"></script>
-  <script src="{{ asset('build/js/transcription.js') }}"></script>
+{% endif %}
+<script src="{{ asset('build/js/openseadragon.js') }}"></script>
+<script src="{{ asset('build/js/transcription.js') }}"></script>
 {% endblock %}

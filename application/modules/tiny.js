@@ -3,19 +3,14 @@ const Tiny = require('tinymce')
 
 // A theme is also required
 require('tinymce/themes/modern/theme')
-
 // Any plugins you want to use has to be imported
-require('tinymce/plugins/paste')
 require('tinymce/plugins/code')
 require('tinymce/plugins/link')
-require('tinymce/plugins/lists')
-
-
 
 Tiny.initEditor = () => {
   Tiny.init({
     selector: 'textarea.tinymce-enabled',
-    plugins: ['paste', 'link'],
+    plugins: ['link'],
     menubar: false,
     statusbar: false,
     setup: (editor) => {
@@ -29,8 +24,9 @@ Tiny.initEditor = () => {
 Tiny.initTEIEditor = (tei) => {
   Tiny.init({
     selector: 'textarea.tinymce-transcription',
-    plugins: ['paste', 'code'],
-    content_css: '/build/css/transcription.css',
+    plugins: ['code'],
+    branding: false,
+    content_css: '/build/css/tiny.css',
     forced_root_block: 'div',
     forced_root_block_attrs: {
       'class': 'tiny-root'
@@ -46,13 +42,19 @@ Tiny.initTEIEditor = (tei) => {
         const currentTeiElement = tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
         displayCurrentAttributes(currentTeiElement, currentTinyElement)
         getAllowedElements(tei, currentTeiElement)
+      }),
+      editor.on('change', () => {
+        document.getElementById('preview').innerHTML = Tiny.activeEditor.getContent()
       })
+
+      document.getElementById('preview').innerHTML = Tiny.activeEditor.getContent()
     }
   }).then((editors) => {
     // load content into tinyMCE
     editors.forEach(editor => {
       editor.load()
     })
+
   })
 }
 
@@ -139,11 +141,11 @@ const addTeiTag = (teiElement) => {
   editor.undoManager.transact(() => {
     if (teiElement.selfClosed) {
       editor.insertContent(
-        `<${teiElement.tag} data-tag="${teiElement.tag}">&zwj;</${teiElement.tag}>${selectedContent}`
+        `<${teiElement.tag} data-tag="${teiElement.tag}"></${teiElement.tag}>&zwj;${selectedContent}`
       )
     } else {
       editor.selection.setContent(
-        `<${teiElement.tag} data-tag="${teiElement.tag}">${selectedContent ? selectedContent:'&zwj;&zwj;'}</${teiElement.tag}>`
+        `<${teiElement.tag} data-tag="${teiElement.tag}">${selectedContent ? selectedContent:'&zwj;&zwj;'}</${teiElement.tag}>&zwj;`
       )
     }
   })

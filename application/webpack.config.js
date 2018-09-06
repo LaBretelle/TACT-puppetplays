@@ -37,7 +37,7 @@ Encore
   .addStyleEntry('css/project-media', './assets/css/project-media.scss')
   .addStyleEntry('css/user', './assets/css/admin/user.scss')
   .addStyleEntry('css/toastr', './node_modules/toastr/build/toastr.min.css')
-  .addStyleEntry('css/transcription', './assets/css/transcription.scss')
+  .addStyleEntry('css/tiny', './assets/css/tiny.scss')
 
   .enableSassLoader(function () {}, {
     resolveUrlLoader: false
