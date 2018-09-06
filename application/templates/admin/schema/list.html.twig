@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+
+
+{% block body %}
+  <div class="page-content-container">
+    <a href="{{ path('admin_schema_manage')}}">create</button>
+    <ul>
+      {% for item in schemas %}
+        <li>{{item.name}} - <a class="nav-link" href="{{ path('admin_schema_manage', {'id':item.id})}}">{{ 'administrate_schema' | trans}}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
