@@ -11,7 +11,6 @@
   font-size: smaller;
 }
 
-
 .tiny-root *::after{
   content: "/" attr(data-tag);
   margin:0 0 0 4px;

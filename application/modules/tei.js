@@ -27,9 +27,9 @@ class TeiEditor {
       toolbar1: 'undo redo | remove-current-tag | code',
       setup: (editor) => {
         editor.addButton('remove-current-tag', {
-          text: 'delete',
-          icon: 'remove-current-tag',
-          tooltip: 'Delete current tag',
+          text: '',
+          icon: 'fas fa-delete',
+          tooltip: Translator.trans('delete_current_tag'),
           onclick: () => {
             this.deleteCurrentTag(this.tei)
           }

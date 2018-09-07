@@ -4,11 +4,6 @@
 // the ~ allows you to reference things in node_modules
 @import '~bootstrap/scss/bootstrap';
 
-// allow the use of {font-family: 'Font Awesome 5 Free'; content: "\f0a9";}
-
-$fa-font-path : '~@fortawesome/fontawesome-free-webfonts/webfonts';
-@import '~@fortawesome/fontawesome-free-webfonts/scss/fa-solid';
-
 /* BOOTSTRAP OVERRIDE
 --------------------------- */
 body {
@@ -218,6 +213,7 @@ body > .container-fluid{
   letter-spacing: 1px;
 }
 
+
 /* TRANSCRIPTION */
 
 .transcription-panel-content {
@@ -225,17 +221,34 @@ body > .container-fluid{
 }
 
 .selected-element {
-
   .element-attributes-container{
       margin-bottom: 10px;
       display:none;
   }
-
   .elements-container{
       display:none;
   }
-
   .list-group-item, .card-header {
     padding: 0.50rem 0.75rem;
+  }
+}
+
+
+
+
+/* TINYMCE CUSTOM BUTTON ICONS */
+// allow the use of {font-family: 'Font Awesome 5 Free'; content: "\f0a9";}
+// if font path is not specified we are not able to import fa-solid icons ...
+$fa-font-path : '~@fortawesome/fontawesome-free-webfonts/webfonts';
+@import '~@fortawesome/fontawesome-free-webfonts/scss/fa-solid';
+
+.mce-ico.mce-i-fas {
+  display: inline-block;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  text-rendering: auto;
+  font-size: inherit;
+  &.fa-delete::before {
+    content: "\f05e";
   }
 }

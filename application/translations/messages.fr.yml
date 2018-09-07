@@ -19,6 +19,7 @@ confirm_delete_project_media: Êtes vous sur de vouloir supprimer le(s) média s
 confirm_project_deletion: Êtes vous sur de vouloir supprimer ce projet ?
 confirm_title: Veuillez confirmer!
 confirm: Je confirme!
+delete_current_tag: Supprimer le tag courrant
 description: Description
 directory_created: Dossier créé
 edit_project_long: Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.

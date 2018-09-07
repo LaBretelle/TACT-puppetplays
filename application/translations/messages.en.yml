@@ -18,6 +18,7 @@ confirm_delete_project_media: Are you sure you want to delete selected media ?
 confirm_project_deletion: Are you sure you want to delete this project ?
 confirm_title: Please confirm!
 confirm: I confirm!
+delete_current_tag: Delete current tag
 description: Description
 directory_created: Folder created
 edit_project_long: Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
