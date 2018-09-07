@@ -37,6 +37,10 @@ Tiny.initTEIEditor = (tei) => {
     statusbar: true,
     toolbar1: 'undo redo | remove-current-tag | code',
     setup: (editor) => {
+      editor.on('init', () => {
+        editor.getContainer().className += ' rounded'
+      })
+
       editor.addButton('remove-current-tag', {
         text: 'x',
         tooltip: 'Delete current tag',
@@ -97,6 +101,7 @@ const displayCurrentAttributes = (currentTeiElement, currentTinyElement) => {
     currentTeiElement.attributes.forEach(teiAttribute => {
       const tinyAttr = currentTinyElement.attributes.getNamedItem(teiAttribute.key)
       const label = document.createTextNode(teiAttribute.key)
+      label.nodeValue += teiAttribute.required ? '*' : ''
       let control
       switch (teiAttribute.type) {
         case 'text':
@@ -119,6 +124,8 @@ const displayCurrentAttributes = (currentTeiElement, currentTinyElement) => {
       })
 
       control.classList.add('form-control')
+      control.required = teiAttribute.required
+
       const li = document.createElement('li')
       li.classList.add('list-group-item')
       li.appendChild(label)
