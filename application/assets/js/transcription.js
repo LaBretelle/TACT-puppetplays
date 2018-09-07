@@ -7,6 +7,8 @@ const updateLogTimeout = 100000
 const id = 'seadragon-viewer'
 const el = document.getElementById(id)
 const url = el.getAttribute('data-url')
+let editor
+
 OpenSeadragon({
   id: id,
   showNavigator: false,
@@ -32,9 +34,12 @@ $(document).ready(() => {
   if ('edit' === mode) {
     // should be loaded depending on project definition
     const jsonTeiDef = require('./../data/tei_elements_A.json')
+    editor = new TeiEditor(jsonTeiDef)
+    editor.init()
+
     // get json def in html tag
     // init tiny
-    Tiny.initTEIEditor(jsonTeiDef)
+    //Tiny.initTEIEditor(jsonTeiDef)
 
     $('.btn-save-transcription').on('click', (e) => {
       saveTranscription(e.target.dataset.id)
@@ -80,7 +85,7 @@ const updateLockedLog = (id) => {
 }
 
 const saveTranscription = (id) => {
-  const tinyContent = Tiny.get('tiny-content').getContent()
+  const tinyContent = editor.getContent()
   const url = Routing.generate('media_transcription_save', {
     id: id
   })
@@ -96,7 +101,7 @@ const saveTranscription = (id) => {
 }
 
 const finishTranscription = (id, pid) => {
-  const tinyContent = Tiny.get('tiny-content').getContent()
+  const tinyContent = editor.getContent()
   const url = Routing.generate('media_transcription_finish', {
     id: id
   })

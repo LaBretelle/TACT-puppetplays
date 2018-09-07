@@ -23,7 +23,7 @@ Tiny.initEditor = () => {
     }
   })
 }
-
+/*
 Tiny.initTEIEditor = (tei) => {
   Tiny.init({
     selector: 'textarea.tinymce-transcription',
@@ -219,6 +219,6 @@ const refreshPanels = (tei) => {
     trigger: 'hover'
   })
   document.querySelector('.filter-elements').value = ''
-}
+}*/
 
 module.exports = Tiny

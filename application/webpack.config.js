@@ -66,7 +66,7 @@ Encore
     'Toastr': 'Toastr',
     'Translator': 'Translator',
     'tinymce' : 'tinymce',
-    'Tiny': 'tiny'
+    'TeiEditor': 'TeiEditor'
   })
   //.enableVersioning()
 
@@ -78,6 +78,7 @@ config.resolve.alias = {
   'Toastr': path.resolve(__dirname, 'modules/toastr.js'),
   'Translator': path.resolve(__dirname, 'modules/translator.js'),
   'tiny' : path.resolve(__dirname, 'modules/tiny.js'),
+  'TeiEditor' : path.resolve(__dirname, 'modules/tei.js'),
 }
 
 // https://stackoverflow.com/questions/44439909/confusion-over-various-webpack-shimming-approaches
