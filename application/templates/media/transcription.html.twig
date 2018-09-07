@@ -92,7 +92,7 @@
                       <div class="card element-attributes-container">
                         <div class="card-header">
                           <span class="text-muted">{{'attributes'|trans}}</span>
-                          <span class="element-title"></span>                          
+                          <span class="element-title"></span>
                         </div>
                         <ul class="list-group list-group-flush element-attributes"></ul>
                       </div>
@@ -102,7 +102,14 @@
                     <div class="col">
                       <div class="card elements-container">
                         <div class="card-header">
-                          {{'element_list'|trans}}
+                          <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="fas fa-search"></i>
+                              </span>
+                            </div>
+                            <input type="text" class="form-control filter-elements" placeholder="{{'element_list'|trans}}" name="" value="" />
+                          </div>
                         </div>
                         <ul class="list-group list-group-flush elements"></ul>
                       </div>

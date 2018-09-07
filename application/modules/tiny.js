@@ -7,6 +7,9 @@ require('tinymce/themes/modern/theme')
 require('tinymce/plugins/code')
 require('tinymce/plugins/link')
 
+
+
+
 Tiny.initEditor = () => {
   Tiny.init({
     selector: 'textarea.tinymce-enabled',
@@ -26,7 +29,9 @@ Tiny.initTEIEditor = (tei) => {
     selector: 'textarea.tinymce-transcription',
     plugins: ['code'],
     branding: false,
-    content_css: '/build/css/tiny.css',
+    content_css: [
+      '/build/css/tiny.css'
+    ],
     forced_root_block: 'div',
     forced_root_block_attrs: {
       'class': 'tiny-root'
@@ -38,7 +43,8 @@ Tiny.initTEIEditor = (tei) => {
     toolbar1: 'undo redo | remove-current-tag | code',
     setup: (editor) => {
       editor.addButton('remove-current-tag', {
-        text: 'x',
+        text: 'delete',
+        icon: 'remove-current-tag',
         tooltip: 'Delete current tag',
         onclick: () => {
           deleteCurrentTag(tei)
@@ -53,6 +59,15 @@ Tiny.initTEIEditor = (tei) => {
         document.getElementById('preview').innerHTML = Tiny.activeEditor.getContent()
       }),
       document.getElementById('preview').innerHTML = Tiny.activeEditor.getContent()
+
+      // allow user to filter allowed elements
+      const input = document.querySelector('.filter-elements')
+      input.addEventListener('input', (e) => {
+        const elements = document.querySelector('.elements').children
+        Array.prototype.forEach.call(elements, (el) => {
+          el.hidden = el.textContent.toLowerCase().indexOf(e.target.value.toLowerCase()) === -1
+        })
+      })
     }
   }).then((editors) => {
     // load content into tinyMCE
@@ -97,6 +112,7 @@ const displayCurrentAttributes = (currentTeiElement, currentTinyElement) => {
     currentTeiElement.attributes.forEach(teiAttribute => {
       const tinyAttr = currentTinyElement.attributes.getNamedItem(teiAttribute.key)
       const label = document.createTextNode(teiAttribute.key)
+      label.nodeValue += teiAttribute.required ? ' *' : ''
       let control
       switch (teiAttribute.type) {
         case 'text':
@@ -118,7 +134,9 @@ const displayCurrentAttributes = (currentTeiElement, currentTinyElement) => {
         currentTinyElement.setAttribute(teiAttribute.key, e.target.value)
       })
 
+
       control.classList.add('form-control', 'form-control-sm')
+      control.required = teiAttribute.required
       const li = document.createElement('li')
       li.classList.add('list-group-item')
       li.appendChild(label)
@@ -200,6 +218,7 @@ const refreshPanels = (tei) => {
     placement: 'top',
     trigger: 'hover'
   })
+  document.querySelector('.filter-elements').value = ''
 }
 
 module.exports = Tiny

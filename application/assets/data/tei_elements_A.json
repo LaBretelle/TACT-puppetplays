@@ -37,7 +37,7 @@
         {
           "key": "agent",
           "type": "enumerated",
-          "required": false,
+          "required": true,
           "label": "attr_agent",
           "help": "attr_agent_help",
           "values": [
