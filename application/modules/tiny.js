@@ -118,7 +118,7 @@ const displayCurrentAttributes = (currentTeiElement, currentTinyElement) => {
         currentTinyElement.setAttribute(teiAttribute.key, e.target.value)
       })
 
-      control.classList.add('form-control')
+      control.classList.add('form-control', 'form-control-sm')
       const li = document.createElement('li')
       li.classList.add('list-group-item')
       li.appendChild(label)
