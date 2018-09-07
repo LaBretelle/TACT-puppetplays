@@ -1,5 +1,4 @@
-/* global mode */
-
+/* global mode require */
 import OpenSeadragon from 'openseadragon'
 
 // normally every 2 minutes but to avoid any time problem let's put a bit less
@@ -29,10 +28,13 @@ OpenSeadragon({
 
 $(document).ready(() => {
   const logId = $('#log-id').val()
-  //const isEditMode = logId !== undefined
-  console.log('mode', mode)
+
   if ('edit' === mode) {
-    Tiny.initTEIEditor()
+    // should be loaded depending on project definition
+    const jsonTeiDef = require('./../data/tei_elements_A.json')
+    // get json def in html tag
+    // init tiny
+    Tiny.initTEIEditor(jsonTeiDef)
 
     $('.btn-save-transcription').on('click', (e) => {
       saveTranscription(e.target.dataset.id)
@@ -42,14 +44,11 @@ $(document).ready(() => {
       finishTranscription(e.target.dataset.id, e.target.dataset.pid)
     })
 
-
-
     // update islocked log every 2 (-) minutes
     window.setInterval(() => {
       updateLockedLog(logId)
     }, updateLogTimeout)
   } else if ('validation' === mode) {
-    console.log('in validation mode')
     $('.btn-validate-transcription').on('click', (e) => {
       validateTranscription(e.target.dataset.id, e.target.dataset.pid)
     })

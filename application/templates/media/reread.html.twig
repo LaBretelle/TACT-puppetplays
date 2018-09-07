@@ -3,6 +3,10 @@
 {% import "media/macros.html.twig" as macros %}
 
 {% block body %}
+  <style>
+  {{ media.project.css ?  media.project.css | raw : ''}}
+  </style>
+
   <div class="page-content-container">
     <div class="row">
       <div class="col">
@@ -48,15 +52,9 @@
         <div data-url="{{ macros.mediaURL(media) }}" id="seadragon-viewer" class="rounded"></div>
       </div>
       <div class="col-6">
-        {% if media.project.css %}
-        <style>
-          {{ media.project.css | raw }}
-        </style>
-        {% endif %}
         <div id="transcription-container">
           {{media.transcription.content | raw}}
         </div>
-        {% endif %}
       </div>
     </div>
   </div>

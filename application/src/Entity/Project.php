@@ -94,6 +94,12 @@ class Project
      */
     private $css;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\TeiSchema")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $teiSchema;
+
     public function __construct()
     {
         $this->financers = new ArrayCollection();
@@ -343,6 +349,18 @@ class Project
     public function setCss(?string $css): self
     {
         $this->css = $css;
+
+        return $this;
+    }
+
+    public function getTeiSchema(): ?TeiSchema
+    {
+        return $this->teiSchema;
+    }
+
+    public function setTeiSchema(?TeiSchema $teiSchema): self
+    {
+        $this->teiSchema = $teiSchema;
 
         return $this;
     }

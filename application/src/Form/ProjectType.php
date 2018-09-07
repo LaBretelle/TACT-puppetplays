@@ -3,20 +3,21 @@
 namespace App\Form;
 
 use App\Entity\Project;
-use App\Entity\User;
 use App\Entity\ProjectStatus;
+use App\Entity\TeiSchema;
+use App\Entity\User;
+use App\Form\UserProjectStatusType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Form\UserProjectStatusType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProjectType extends AbstractType
@@ -70,6 +71,14 @@ class ProjectType extends AbstractType
               'label' => 'project_manager',
               'translation_domain' => 'messages',
               'choice_label' => 'username',
+          ])
+
+          ->add('teiSchema', EntityType::class, [
+              'mapped' => false,
+              'class' => TeiSchema::class,
+              'label' => 'tei_schema',
+              'translation_domain' => 'messages',
+              'choice_label' => 'name',
           ])
 
           ->add('save', SubmitType::class, array(

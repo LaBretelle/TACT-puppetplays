@@ -1,0 +1,25 @@
+/* TINY CONTENT */
+.tiny-root *::before{
+  content: attr(data-tag);
+  margin:0 4px 0 0;
+  padding:2px;
+  color:white;
+  background-color:lightgrey;
+  border-bottom-left-radius:3px;
+  border-top-left-radius:3px;
+  text-decoration: none;
+  font-size: smaller;
+}
+
+
+.tiny-root *::after{
+  content: "/" attr(data-tag);
+  margin:0 0 0 4px;
+  padding:2px;
+  color:white;
+  background-color:lightgrey;
+  border-bottom-right-radius:3px;
+  border-top-right-radius:3px;
+  text-decoration: none;
+  font-size: smaller;
+}

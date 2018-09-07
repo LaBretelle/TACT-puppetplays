@@ -5,9 +5,11 @@ add_project: Create new project
 add_user-status: Add status for an user
 add: Add
 administrate_platform_menu: Administrate platform
+administrate_schemas_menu: Schémas
 administrate_users_menu: Users
 administrate_users_title: Platform users administration
 app_admin: Site administrator
+attributes: Attributs:
 back_to_transcripts: Back to transcripts
 cancel: Cancel
 confirm_account_anonymization: If you continue the account informations will be anonimized. This action is irreversible.
@@ -20,6 +22,7 @@ description: Description
 directory_created: Folder created
 edit_project_long: Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit: Edit
+element_list: Eléments disponibles
 email_or_login_placeholder: Login / email
 email_or_login: Please enter your login or email
 email: Mail
@@ -59,6 +62,7 @@ platform_home_text: Platform home text
 platform_logo: Platform logo
 platform_name: Platform name
 platform_page_title: Platform administration
+preview: Prévisualiser
 project_create: Project creation
 project_created: Project created
 project_css: Project inline css definition
@@ -102,6 +106,10 @@ repeat_password: Repeat password
 reread_transcription: Reread transcription
 root_folder_option: Root
 save: Save
+schema_create: Créer un schema
+schema_enabled: Schéma activé
+schema_json: JSON
+schema_name: Nom du schema
 selected_media: selected media
 status_edit: Edit status
 status_remove: Remove
@@ -112,6 +120,7 @@ submit_validation: Soumettre
 submit: Submit
 subscribe_long: L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
 transcribe_long: Vous permet d'accéder au média et de proposer des transcriptions.
+transcribe: Transcrire
 transcriber: Transcriber
 transcript_media: Transcription of media
 transcription_current_nb_validations: Currently %1% / %2% validations

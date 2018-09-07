@@ -1,3 +1,4 @@
+
 access_denied: Vous n'êtes pas autorisé à accéder à cette page.
 actions: Actions
 add_directory_modal_title: Ajouter un répertoire
@@ -5,9 +6,11 @@ add_project: Créer un nouveau projet
 add_user-status: Ajouter un statut pour un utilisateur
 add: Ajouter
 administrate_platform_menu: Administrer la plateforme
+administrate_schemas_menu: Schémas
 administrate_users_menu: Utilisateurs
 administrate_users_title: Administration des utilisateurs de la plateforme
 app_admin: Administrateur du site
+attributes: Attributs:
 back_to_transcripts: Retour aux transcriptions
 cancel: Annuler
 confirm_account_anonymization: Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
@@ -20,6 +23,7 @@ description: Description
 directory_created: Dossier créé
 edit_project_long: Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit: Éditer
+element_list: Eléments disponibles
 email_or_login_placeholder: Login / email
 email_or_login: Veuillez renseigner votre login ou email
 email: Mail
@@ -59,6 +63,7 @@ platform_home_text: Texte de la page d'accueil
 platform_logo: Logo de la plateforme
 platform_name: Nom de la plateforme
 platform_page_title: Administration de la plateforme
+preview: Prévisualiser
 project_create: Création d'un projet
 project_created: Projet créé
 project_css: Définition de la css inline pour le projet
@@ -102,6 +107,10 @@ repeat_password: Répéter le mot de passe
 reread_transcription: Relire la transcription
 root_directory_option: Racine
 save: Sauvegarder
+schema_create: Créer un schema
+schema_enabled: Schéma activé
+schema_json: JSON
+schema_name: Nom du schema
 selected_media: média selectionné(s)
 status_edit: Editer le statut
 status_remove: Supprimer
@@ -112,6 +121,7 @@ submit_validation: Soumettre
 submit: valider
 subscribe_long: L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
 transcribe_long: Vous permet d'accéder au média et de proposer des transcriptions.
+transcribe: Transcrire
 transcriber: Transcripteur
 transcript_media: Transcription du media
 transcription_current_nb_validations: Actuellement %1% / %2% validations
