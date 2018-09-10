@@ -74,7 +74,6 @@ class ProjectType extends AbstractType
           ])
 
           ->add('teiSchema', EntityType::class, [
-              'mapped' => false,
               'class' => TeiSchema::class,
               'label' => 'tei_schema',
               'translation_domain' => 'messages',
