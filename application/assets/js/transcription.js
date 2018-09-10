@@ -1,4 +1,4 @@
-/* global mode require */
+/* global mode */
 import OpenSeadragon from 'openseadragon'
 
 // normally every 2 minutes but to avoid any time problem let's put a bit less
@@ -29,17 +29,13 @@ OpenSeadragon({
 })
 
 $(document).ready(() => {
-  const logId = $('#log-id').val()
+  const logId = document.getElementById('log-id').value
 
   if ('edit' === mode) {
-    // should be loaded depending on project definition
-    const jsonTeiDef = require('./../data/tei_elements_A.json')
+    // load proper TEI schema
+    const jsonTeiDef = JSON.parse(document.getElementById('tei-schema').value)
     editor = new TeiEditor(jsonTeiDef)
     editor.init()
-
-    // get json def in html tag
-    // init tiny
-    //Tiny.initTEIEditor(jsonTeiDef)
 
     $('.btn-save-transcription').on('click', (e) => {
       saveTranscription(e.target.dataset.id)

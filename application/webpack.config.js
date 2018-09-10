@@ -65,7 +65,7 @@ Encore
     'Routing': 'router',
     'Toastr': 'Toastr',
     'Translator': 'Translator',
-    'tinymce' : 'tinymce',
+    'TinyEditor' : 'TinyEditor',
     'TeiEditor': 'TeiEditor'
   })
   //.enableVersioning()
@@ -77,8 +77,8 @@ config.resolve.alias = {
   'router': path.resolve(__dirname, 'modules/router.js'),
   'Toastr': path.resolve(__dirname, 'modules/toastr.js'),
   'Translator': path.resolve(__dirname, 'modules/translator.js'),
-  'tiny' : path.resolve(__dirname, 'modules/tiny.js'),
-  'TeiEditor' : path.resolve(__dirname, 'modules/tei.js'),
+  'TinyEditor' : path.resolve(__dirname, 'modules/tiny-editor.js'),
+  'TeiEditor' : path.resolve(__dirname, 'modules/tei-editor.js'),
 }
 
 // https://stackoverflow.com/questions/44439909/confusion-over-various-webpack-shimming-approaches

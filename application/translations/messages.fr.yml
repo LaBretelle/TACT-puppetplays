@@ -121,6 +121,7 @@ status: Statut
 submit_validation: Soumettre
 submit: valider
 subscribe_long: L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
+tei_schema: Schema TEI pour le projet
 transcribe_long: Vous permet d'accéder au média et de proposer des transcriptions.
 transcribe: Transcrire
 transcriber: Transcripteur

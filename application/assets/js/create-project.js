@@ -1,4 +1,5 @@
-Tiny.initEditor()
+const editor = new TinyEditor()
+editor.init()
 
 const deleteProjectForm = document.forms.deleteProject
 

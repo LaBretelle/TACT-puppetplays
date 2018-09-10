@@ -25,7 +25,7 @@
     "Routing": false,
     "Toastr" : false,
     "Translator": false,
-    "Tiny": false,
+    "TinyEditor": false,
     "TeiEditor": false
   }
 }
