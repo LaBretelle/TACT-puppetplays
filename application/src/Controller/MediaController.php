@@ -102,11 +102,10 @@ class MediaController extends Controller
                 $this->mailManager->sendValidationOrUnvalidationMail($log->getUser(), $media, $isValid, $comment);
             }
 
-
             $parent = $media->getParent();
             $project = $media->getProject();
 
-            return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent->getId()]);
+            return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
         }
 
         return $this->render(

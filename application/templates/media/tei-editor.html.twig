@@ -1,0 +1,51 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#edit-full">{{'transcribe'|trans}}</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab"  href="#preview">{{'preview'|trans}}</a>
+  </li>
+</ul>
+<div class="tab-content transcription-panel-content">
+  <div id="edit-full" class="tab-pane fade show active" role="tabpanel">
+    <div class="row">
+      <div class="col">
+        <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="8" cols="80">
+          {{media.transcription.content | raw}}
+        </textarea>
+      </div>
+      <div class="col-3 selected-element">
+        <div class="row">
+          <div class="col">
+            <div class="card element-attributes-container">
+              <div class="card-header">
+                <span class="text-muted">{{'attributes'|trans}}</span>
+                <span class="element-title"></span>
+              </div>
+              <ul class="list-group list-group-flush element-attributes"></ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card elements-container">
+              <div class="card-header">
+                <div class="input-group input-group-sm">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fas fa-search"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control filter-elements" placeholder="{{'element_list'|trans}}" name="" value="" />
+                </div>
+              </div>
+              <ul class="list-group list-group-flush elements"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="preview" class="tab-pane fade" role="tabpanel"></div>
+  <input type="hidden" id="tei-schema" name="tei_schema" value="{{media.project.teiSchema.json}}">
+</div>

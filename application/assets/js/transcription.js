@@ -29,9 +29,10 @@ OpenSeadragon({
 })
 
 $(document).ready(() => {
-  const logId = document.getElementById('log-id').value
+
 
   if ('edit' === mode) {
+    const logId = document.getElementById('log-id').value
     // load proper TEI schema
     const jsonTeiDef = JSON.parse(document.getElementById('tei-schema').value)
     editor = new TeiEditor(jsonTeiDef)
@@ -49,7 +50,12 @@ $(document).ready(() => {
     window.setInterval(() => {
       updateLockedLog(logId)
     }, updateLogTimeout)
+    
   } else if ('validation' === mode) {
+
+    const jsonTeiDef = JSON.parse(document.getElementById('tei-schema').value)
+    editor = new TeiEditor(jsonTeiDef)
+    editor.init()
     $('.btn-validate-transcription').on('click', (e) => {
       validateTranscription(e.target.dataset.id, e.target.dataset.pid)
     })
@@ -57,6 +63,7 @@ $(document).ready(() => {
     $('.btn-unvalidate-transcription').on('click', (e) => {
       unvalidateTranscription(e.target.dataset.id, e.target.dataset.pid)
     })
+
   } else {
     $('.img-fluid').on('click', (e) => {
       const image = e.target.cloneNode()
@@ -81,7 +88,6 @@ const updateLockedLog = (id) => {
 }
 
 const saveTranscription = (id) => {
-  const tinyContent = editor.getContent()
   const url = Routing.generate('media_transcription_save', {
     id: id
   })
@@ -89,7 +95,7 @@ const saveTranscription = (id) => {
     method: 'POST',
     url: url,
     data: {
-      'transcription': tinyContent
+      'transcription': editor.getContent()
     }
   }).done(() => {
     Toastr.info(Translator.trans('transcription_saved'))
@@ -97,7 +103,6 @@ const saveTranscription = (id) => {
 }
 
 const finishTranscription = (id, pid) => {
-  const tinyContent = editor.getContent()
   const url = Routing.generate('media_transcription_finish', {
     id: id
   })
@@ -108,7 +113,7 @@ const finishTranscription = (id, pid) => {
     method: 'POST',
     url: url,
     data: {
-      'transcription': tinyContent
+      'transcription': editor.getContent()
     }
   }).done(() => {
     window.location = projectHome
@@ -125,7 +130,10 @@ const validateTranscription = (id, pid) => {
   })
   $.ajax({
     method: 'POST',
-    url: url
+    url: url,
+    data: {
+      'transcription': editor.getContent()
+    }
   }).done(() => {
     window.location = projectHome
   })

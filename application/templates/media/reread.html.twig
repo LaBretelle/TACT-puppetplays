@@ -52,9 +52,7 @@
         <div data-url="{{ macros.mediaURL(media) }}" id="seadragon-viewer" class="rounded"></div>
       </div>
       <div class="col-6">
-        <div id="transcription-container">
-          {{media.transcription.content | raw}}
-        </div>
+        {{ include('media/tei-editor.html.twig', { 'media': media }) }}
       </div>
     </div>
   </div>
