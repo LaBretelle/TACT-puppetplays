@@ -30,7 +30,7 @@ docker-compose exec apache make init
 
 # change directories ownership
 docker-compose exec apache bash
-chown -R www-data:www-data application/public/user_images application/public/project_files
+chown -R www-data:www-data public/user_images public/project_files var/log var/cache
 
 ```
 
