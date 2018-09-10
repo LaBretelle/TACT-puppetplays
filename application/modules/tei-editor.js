@@ -63,6 +63,7 @@ class TeiEditor {
 
   /*
    * Get element(s) allowed as children of the current element if any
+   * If no current element, display all TEI elements
    */
   getAllowedElements(tei, current) {
     const root = document.querySelector('.elements')
@@ -72,21 +73,18 @@ class TeiEditor {
       current.childrens.forEach(tagName => {
         this.appendLiToAllowedElements(tei, root, tagName)
       })
-      if (current.childrens.length === 0) {
-        container.style.display = 'none'
-      } else {
-        container.style.display = 'flex'
-      }
+      this.displayContainer(container, current.childrens.length > 0)
     } else {
       tei.elements.forEach(element => {
         this.appendLiToAllowedElements(tei, root, element.tag)
-        container.style.display = 'flex'
+        this.displayContainer(container, true)
       })
     }
   }
 
   /*
    * Display available attributes for the selected element
+   * If no current element, hide the panel
    */
   displayCurrentAttributes(currentTeiElement, currentTinyElement){
     const container = document.querySelector('.element-attributes-container')
@@ -95,13 +93,11 @@ class TeiEditor {
     elementTitle.innerHTML = ''
     elementAttributes.innerHTML = ''
     if (currentTeiElement) {
-      container.style.display = 'flex'
+      this.displayContainer(container, true)
       const cardTitle = document.createTextNode(currentTinyElement.nodeName)
       elementTitle.appendChild(cardTitle)
       currentTeiElement.attributes.forEach(teiAttribute => {
         const tinyAttr = currentTinyElement.attributes.getNamedItem(teiAttribute.key)
-        const label = document.createTextNode(teiAttribute.key)
-        label.nodeValue += teiAttribute.required ? ' *' : ''
         let control
         switch (teiAttribute.type) {
           case 'text':
@@ -111,30 +107,27 @@ class TeiEditor {
           case 'enumerated':
             control = document.createElement('select')
             if(!teiAttribute.required) {
-              this.appendOptionToUl(control, 'none', tinyAttr ? 'none' === tinyAttr.value : false)
+              this.appendOptionToSelect(control, 'none', tinyAttr ? 'none' === tinyAttr.value : false)
             }
             teiAttribute.values.forEach(value => {
-              this.appendOptionToUl(control, value, tinyAttr ? value === tinyAttr.value : false)
+              this.appendOptionToSelect(control, value, tinyAttr ? value === tinyAttr.value : false)
             })
             break
         }
-
+        control.classList.add('form-control', 'form-control-sm')
+        control.required = teiAttribute.required
         control.addEventListener(teiAttribute.type === 'text' ? 'input' : 'change', (e) => {
           currentTinyElement.setAttribute(teiAttribute.key, e.target.value)
         })
 
-        control.classList.add('form-control', 'form-control-sm')
-        control.required = teiAttribute.required
-        const li = document.createElement('li')
-        li.classList.add('list-group-item')
-        li.appendChild(label)
-        const help = this.createHelp(teiAttribute.help)
-        li.appendChild(help)
+        let label = teiAttribute.key
+        label += teiAttribute.required ? ' *' : ''
+        const li = this.createLiElement(label, teiAttribute.help)
         li.appendChild(control)
         elementAttributes.appendChild(li)
       })
     } else {
-      container.style.display = 'none'
+      this.displayContainer(container, false)
     }
   }
 
@@ -159,25 +152,50 @@ class TeiEditor {
     })
   }
 
+  /*
+   * Delete current tag from Tiny without deleting its content.
+   * (test if current tag is not the root tag.)
+   */
   deleteCurrentTag(tei) {
     let currentTinyElement = Tiny.activeEditor.selection.getNode()
-    // test if current tag is not the root tag.
     if (!currentTinyElement.classList.contains('tiny-root') ) {
       Tiny.activeEditor.dom.remove(currentTinyElement, true)
       this.refreshPanels(tei)
     }
   }
 
+  /*
+   * Create popover HTML
+   * popovers are initialized in refreshPanels() method
+   */
   createHelp(text) {
     const help = document.createElement('span')
     help.classList.add('float-right')
     help.innerHTML = '<i class="fas fa-question-circle"></i>'
     help.setAttribute('data-content', text)
     help.setAttribute('data-toggle', 'popover')
+
     return help
   }
 
-  appendOptionToUl(ul, text, selected) {
+  /*
+   * Create LI element with a given text and a given help text
+   */
+  createLiElement(labelText, helpText) {
+    const li = document.createElement('li')
+    const label = document.createTextNode(labelText)
+    const help = this.createHelp(helpText)
+    li.appendChild(label)
+    li.appendChild(help)
+    li.classList.add('list-group-item')
+
+    return li
+  }
+
+  /*
+   * Create OPTION element and append to SELECT element
+   */
+  appendOptionToSelect(ul, text, selected) {
     const option = document.createElement('option')
     option.value = text
     option.selected = selected
@@ -185,19 +203,22 @@ class TeiEditor {
     ul.appendChild(option)
   }
 
+  /*
+   *  Create LI element and append to allowed elements UL
+   */
   appendLiToAllowedElements(tei, root, tagName) {
     const teiElement = tei.elements.find(element => element.tag === tagName)
-    const li = document.createElement('li')
-    const help = this.createHelp(teiElement.help)
-    li.textContent = tagName
-    li.appendChild(help)
-    li.classList.add('list-group-item')
+    const li = this.createLiElement(tagName, teiElement.help)
     root.appendChild(li)
     li.addEventListener('click', () => {
       this.addTeiTag(teiElement)
     })
   }
 
+  /*
+   * Refresh right panels with current tiny element
+   * Display attributes & allowed children.
+   */
   refreshPanels(tei) {
     const currentTinyElement = Tiny.activeEditor.selection.getNode()
     const currentTeiElement = tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
@@ -213,6 +234,14 @@ class TeiEditor {
 
   getContent() {
     return Tiny.get('tiny-content').getContent()
+  }
+
+  /*
+   * Toggle container display
+   */
+  displayContainer(container, show) {
+    const value = show ? 'flex' : 'none'
+    container.style.display = value
   }
 }
 
