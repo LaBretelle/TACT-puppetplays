@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Security\Core\Security;
 
-class ImportProjectTranscriptionCommand extends Command
+class ImportToussaintCommand extends Command
 {
     private $em;
     private $transcriptionManager;
@@ -36,16 +36,16 @@ class ImportProjectTranscriptionCommand extends Command
     protected function configure()
     {
         $this
-        ->setName('app:import-transcription')
-        ->setDescription('Import transcriptions from csv for an existing project')
-        ->setHelp('This command allows you to import transcriptions from csv for an existing project');
+        ->setName('app:import-toussaint')
+        ->setDescription('Import transcriptions from csv for JP Toussaint')
+        ->setHelp('This command allows you to import transcriptions from csv for JP Toussaint');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln([
-            'Create transcriptions from CSV',
-            '===============',
+            'Create transcriptions from JP TOUSSAINT CSV',
+            '===========================================',
             '',
         ]);
 
@@ -95,7 +95,6 @@ class ImportProjectTranscriptionCommand extends Command
             while (($data = fgetcsv($handle, 0, ';')) !== false) {
                 $xml = $data[0];
                 if ($xml && $xml !== '') {
-                    //$output->writeln('xml '.$xml.' \r\n');
                     $media_name = basename($data[1], '.xml');
                     $media_name = str_replace(strrchr($media_name, '_'), '', $media_name);
 
@@ -105,11 +104,12 @@ class ImportProjectTranscriptionCommand extends Command
                     if ($media) {
                         // create a transcription for this media
                         $transcription = new Transcription();
+                        // re-encode content
                         $transcription->setContent(utf8_encode($xml));
                         // create a transcription log for each transcription
                         $log = new TranscriptionLog();
                         $log->setTranscription($transcription);
-                        $log->setCreatedAt(new \DateTime);
+                        $log->setCreatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
                         $log->setUser($user);
                         $log->setName(AppEnums::TRANSCRIPTION_LOG_CREATED);
                         $transcription->addTranscriptionLog($log);
