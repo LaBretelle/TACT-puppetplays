@@ -87,6 +87,22 @@ class ImportToussaintCommand extends Command
             exit();
         }
 
+        $question = new ChoiceQuestion(
+          'Last question... What status do you want for the newly imported transcription ? (defaults to created)',
+          array('created', 'validated'),
+          0
+        );
+        $question->setErrorMessage('Status %s is invalid.');
+        $satus = $helper->ask($input, $output, $question);
+
+        $statuses = [
+          'created' => AppEnums::TRANSCRIPTION_LOG_CREATED,
+          'validated' => AppEnums::TRANSCRIPTION_LOG_VALIDATED
+        ];
+        $statusName = $statuses[$satus];
+        // get project path
+        $csvPath = $this->fileManager->getProjectPath($project);
+
         // get project path
         $csvPath = $this->fileManager->getProjectPath($project);
         // open csv
@@ -111,7 +127,7 @@ class ImportToussaintCommand extends Command
                         $log->setTranscription($transcription);
                         $log->setCreatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
                         $log->setUser($user);
-                        $log->setName(AppEnums::TRANSCRIPTION_LOG_CREATED);
+                        $log->setName($statusName);
                         $transcription->addTranscriptionLog($log);
                         $media->setTranscription($transcription);
                         $this->em->persist($media);

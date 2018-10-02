@@ -15,6 +15,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Security\Core\Security;
 
@@ -87,6 +88,19 @@ class ImportBenoiteCommand extends Command
             exit();
         }
 
+        $question = new ChoiceQuestion(
+          'Last question... What status do you want for the newly imported transcription ? (defaults to created)',
+          array('created', 'validated'),
+          0
+        );
+        $question->setErrorMessage('Status %s is invalid.');
+        $satus = $helper->ask($input, $output, $question);
+
+        $statuses = [
+          'created' => AppEnums::TRANSCRIPTION_LOG_CREATED,
+          'validated' => AppEnums::TRANSCRIPTION_LOG_VALIDATED
+        ];
+        $statusName = $statuses[$satus];
         // get project path
         $csvPath = $this->fileManager->getProjectPath($project);
         // open csv
@@ -108,7 +122,7 @@ class ImportBenoiteCommand extends Command
                         $log->setTranscription($transcription);
                         $log->setCreatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
                         $log->setUser($user);
-                        $log->setName(AppEnums::TRANSCRIPTION_LOG_CREATED);
+                        $log->setName($statusName);
                         $transcription->addTranscriptionLog($log);
                         $media->setTranscription($transcription);
                         $this->em->persist($media);
