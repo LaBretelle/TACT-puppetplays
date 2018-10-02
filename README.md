@@ -1,5 +1,5 @@
-PATACS - AKA PHUN2 - project
-============================
+TACT - Plateforme de Transcription et d'Annotation de Corpus Scientifiques
+==========================================================================
 
 
 ### Install
@@ -35,7 +35,7 @@ chown -R www-data:www-data public/user_images public/project_files var/log var/c
 ```
 
 - symfony app should be available @ http://localhost:8082/
-- adminer should be available @ http://localhost:8080/
+- adminer should be available @ http://localhost:8088/
 
 
 ### Usefull commands

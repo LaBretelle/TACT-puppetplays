@@ -31,8 +31,7 @@ RUN apt-get -qqq update && DEBIAN_FRONTEND=noninteractive apt-get install -qqq -
         php7.2-zip \
         php7.2-gd \
         php-common \
-        php-imagick \
-        sendmail
+        php-imagick
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && chmod +x /usr/local/bin/composer
