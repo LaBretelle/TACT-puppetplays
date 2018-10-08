@@ -51,6 +51,7 @@ media_deleted: Media supprimé(s)
 media_moved: Media déplacé(s)
 media_reread_button_title: Relire la transcription
 media_transcribe_button_title: Transcrire
+media_upload_help: Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 media_view_transcription_button_title: Voir la transcription
 nb_validation: Nombre de relectures nécéssaire par fiche
 need_at_least_one_manager: Il faut au moins un gestionnaire par projet.
