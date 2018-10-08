@@ -78,7 +78,10 @@ class PermissionManager
             }
             break;
 
+          default:
+            return false;
+        }
+
         return false;
-      }
     }
 }
