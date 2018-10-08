@@ -23,7 +23,7 @@ class PermissionManager
         $this->security = $security;
     }
 
-    public function isAuthorizedOnProject(Project $project, $action)
+    public function isAuthorizedOnProject(Project $project, string $action)
     {
         $currentUser = $this->security->getUser();
 
@@ -34,39 +34,45 @@ class PermissionManager
         $isPublic = $project->getPublic();
 
         switch ($action) {
-          case "manageMedia":
+          case AppEnums::ACTION_MANAGE_MEDIA:
               if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
                   return true;
               }
               break;
 
-          case "manageUser":
+          case AppEnums::ACTION_MANAGE_USER:
             if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
                 return true;
             }
             break;
 
-          case "editProject":
+          case AppEnums::ACTION_EDIT_PROJECT:
             if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
                 return true;
             }
             break;
 
-          case "transcribe":
+          case AppEnums::ACTION_VALIDATE_TRANSCRIPTION:
+            if ($isAdmin || $statusName === AppEnums::USER_STATUS_VALIDATOR_NAME || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
+                return true;
+            }
+            break;
+
+          case AppEnums::ACTION_TRANSCRIBE:
             if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME || $statusName === AppEnums::USER_STATUS_TRANSCRIBER_NAME) {
                 return true;
             }
             break;
 
-          case 'view_transcriptions':
-            if ($isPublic && !$currentUser) {
+          case AppEnums::ACTION_VIEW_TRANSCRIPTIONS:
+            if ($isPublic) {
                 return true;
-            } elseif ($isPublic && $status === null) {
-                return true;
+            } else {
+                return $isAdmin || $status !== null;
             }
             break;
 
-          case "register":
+          case AppEnums::ACTION_REGISTER:
             if (!$userProjectStatus && $currentUser != null) {
                 return true;
             }

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\TranscriptionLog;
+use App\Service\AppEnums;
+use App\Service\PermissionManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +27,9 @@ class TranscriptionLogController extends Controller
      */
     public function updateLockedLog(TranscriptionLog $log)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_TRANSCRIBE)) {
+            return $this->json([], $status = 403);
+        }
         $log->setCreatedAt(new \DateTime());
         $this->em->persist($log);
         $this->em->flush();
