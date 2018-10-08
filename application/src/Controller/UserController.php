@@ -9,6 +9,7 @@ use App\Form\UserTypeFull;
 use App\Service\FlashManager;
 use App\Service\MailManager;
 use App\Service\UserManager;
+use App\Service\PermissionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -115,6 +116,13 @@ class UserController extends Controller
      */
     public function display(User $user)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, $this->translator->trans('access_denied', [], 'messages'));
+
+        $connectedUser = $this->getUser();
+        if ($connectedUser->getId() !== $user->getId() && false === $authChecker->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
         return $this->render('user/display.html.twig', [
          'user' => $user,
         ]);

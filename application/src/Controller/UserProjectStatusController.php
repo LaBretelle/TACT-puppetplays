@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Entity\UserProjectStatus;
 use App\Form\UserStatusType;
+use App\Service\AppEnums;
 use App\Service\UserProjectStatusManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @Route("/status", name="status_")
@@ -17,10 +20,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserProjectStatusController extends Controller
 {
     private $statusManager;
+    private $translator;
 
-    public function __construct(UserProjectStatusManager $statusManager)
+    public function __construct(UserProjectStatusManager $statusManager, TranslatorInterface $translator)
     {
         $this->statusManager = $statusManager;
+        $this->translator = $translator;
     }
 
     /**
@@ -28,6 +33,10 @@ class UserProjectStatusController extends Controller
      */
     public function toggle(UserProjectStatus $status)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_USER)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
         $this->statusManager->toggle($status);
 
         return $this->redirectToRoute('status_project', ["id" => $status->getProject()->getId()]);
@@ -48,6 +57,10 @@ class UserProjectStatusController extends Controller
      */
     public function remove(UserProjectStatus $status)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_USER)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
         $this->statusManager->remove($status);
 
         return $this->redirectToRoute('status_project', ["id" => $status->getProject()->getId()]);
@@ -58,6 +71,10 @@ class UserProjectStatusController extends Controller
      */
     public function getForm(UserProjectStatus $status)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_USER)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
         $form = $this->createForm(UserStatusType::class, $status);
 
         return $this->render(
@@ -74,6 +91,10 @@ class UserProjectStatusController extends Controller
      */
     public function postForm(UserProjectStatus $userProjectStatus, Request $request)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_USER)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
         $oldStatus = $userProjectStatus->getStatus()->getName();
 
         $form = $this->createForm(UserStatusType::class, $userProjectStatus);
@@ -93,6 +114,10 @@ class UserProjectStatusController extends Controller
      */
     public function handleUserStatuses(Project $project)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_USER)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
         return $this->render(
           'project/user-statuses.html.twig',
           ['project' => $project]

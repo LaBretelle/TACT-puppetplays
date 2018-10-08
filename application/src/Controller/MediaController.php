@@ -9,12 +9,13 @@ use App\Service\AppEnums;
 use App\Service\FlashManager;
 use App\Service\MailManager;
 use App\Service\MediaManager;
+use App\Service\PermissionManager;
 use App\Service\TranscriptionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @Route("/media", name="media_")
@@ -25,13 +26,17 @@ class MediaController extends Controller
     private $transcriptionManager;
     private $fm;
     private $mailManager;
+    private $permissionManager;
+    private $translator;
 
-    public function __construct(MediaManager $mediaManager, TranscriptionManager $transcriptionManager, FlashManager $fm, MailManager $mailManager)
+    public function __construct(MediaManager $mediaManager, TranscriptionManager $transcriptionManager, FlashManager $fm, MailManager $mailManager, PermissionManager $permissionManager, TranslatorInterface $translator)
     {
         $this->mediaManager = $mediaManager;
         $this->transcriptionManager = $transcriptionManager;
         $this->fm = $fm;
         $this->mailManager = $mailManager;
+        $this->permissionManager = $permissionManager;
+        $this->translator = $translator;
     }
 
     /**
@@ -39,6 +44,11 @@ class MediaController extends Controller
      */
     public function displayTranscription(Media $media)
     {
+        // deny access if project is not public and user is not a member
+        if (false === $this->permissionManager->isAuthorizedOnProject($media->getProject(), AppEnums::ACTION_VIEW_TRANSCRIPTIONS)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
         return $this->render(
             'media/transcription.html.twig',
             ['media' => $media, 'edit' => false, 'locked' => false, 'log' => false]
@@ -51,7 +61,9 @@ class MediaController extends Controller
      */
     public function editTranscription(Media $media)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER', null, '');
+        if (false === $this->permissionManager->isAuthorizedOnProject($media->getProject(), AppEnums::ACTION_TRANSCRIBE)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
 
         $transcription = $media->getTranscription();
         $canEdit = true;
@@ -79,7 +91,9 @@ class MediaController extends Controller
      */
     public function validateTranscription(Media $media, Request $request)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER', null, '');
+        if (false === $this->permissionManager->isAuthorizedOnProject($media->getProject(), AppEnums::ACTION_VALIDATE_TRANSCRIPTION)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
 
         $form = $this->createForm(ValidationType::class);
 
@@ -123,7 +137,9 @@ class MediaController extends Controller
      */
     public function mediaTranscriptionSave(Media $media, Request $request)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER', null, '');
+        if (false === $this->permissionManager->isAuthorizedOnProject($media->getProject(), AppEnums::ACTION_TRANSCRIBE)) {
+            return $this->json([], $status = 403);
+        }
         $content = $request->get('transcription');
         $this->mediaManager->setMediaTranscription($media, $content);
 
@@ -135,7 +151,9 @@ class MediaController extends Controller
      */
     public function mediaTranscriptionFinish(Media $media, Request $request)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER', null, '');
+        if (false === $this->permissionManager->isAuthorizedOnProject($media->getProject(), AppEnums::ACTION_TRANSCRIBE)) {
+            return $this->json([], $status = 403);
+        }
         $content = $request->get('transcription');
         $this->mediaManager->finishTranscription($media, $content);
         $this->fm->add('notice', 'validation_asked');

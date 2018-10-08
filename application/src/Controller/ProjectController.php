@@ -12,12 +12,15 @@ use App\Form\ProjectType;
 use App\Service\AppEnums;
 use App\Service\FileManager;
 use App\Service\FlashManager;
+use App\Service\PermissionManager;
 use App\Service\ProjectManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @Route("/project", name="project_")
@@ -27,12 +30,16 @@ class ProjectController extends Controller
     private $projectManager;
     private $fileManager;
     private $flashManager;
+    private $permissionManager;
+    private $translator;
 
-    public function __construct(ProjectManager $projectManager, FileManager $fileManager, FlashManager $flashManager)
+    public function __construct(ProjectManager $projectManager, FileManager $fileManager, FlashManager $flashManager, PermissionManager $permissionManager, TranslatorInterface $translator)
     {
         $this->projectManager = $projectManager;
         $this->fileManager = $fileManager;
         $this->flashManager = $flashManager;
+        $this->permissionManager = $permissionManager;
+        $this->translator = $translator;
     }
 
     /**
@@ -40,6 +47,7 @@ class ProjectController extends Controller
      */
     public function create(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, '');
         $project = new Project();
 
         $form = $this->createForm(ProjectType::class, $project);
@@ -77,6 +85,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project, Request $request)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
         $form = $this->createForm(ProjectType::class, $project);
 
         $originalStatuses = new ArrayCollection();
@@ -112,6 +123,7 @@ class ProjectController extends Controller
      */
     public function delete(Project $project)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, '');
         $this->projectManager->delete($project);
         $this->flashManager->add('info', 'project_deleted');
 
@@ -124,6 +136,10 @@ class ProjectController extends Controller
      */
     public function manageProjectMedia(Request $request, Project $project, Directory $current = null)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
         $form = $this->createForm(ProjectMediaType::class, $project);
         $form->handleRequest($request);
 
@@ -154,6 +170,10 @@ class ProjectController extends Controller
      */
     public function displayTranscriptions(Project $project, Directory $parent = null)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VIEW_TRANSCRIPTIONS)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
         return $this->render(
             'media/transcriptions.html.twig',
             [
@@ -169,6 +189,10 @@ class ProjectController extends Controller
      */
     public function removeProjectMediaByIds(Request $request)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
+            return $this->json([], $status = 403);
+        }
+
         $ids = $request->request->get('ids');
         $this->projectManager->removeProjectMediaByIds($ids);
 
@@ -180,6 +204,10 @@ class ProjectController extends Controller
      */
     public function moveProjectMedia(Request $request)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
+            return $this->json([], $status = 403);
+        }
+
         $target = intval($request->request->get('dirId'));
         $ids = $request->request->get('ids');
         $this->projectManager->moveProjectMedia($target, $ids);
@@ -192,6 +220,10 @@ class ProjectController extends Controller
      */
     public function addFolderToProject(Project $project, Request $request)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
         $parentId = intval($request->request->get('parent'));
         $name = $request->request->get('folderName');
         $newFolder = $this->projectManager->addFolder($project, $parentId, $name);
@@ -204,6 +236,10 @@ class ProjectController extends Controller
      */
     public function updateProjectFolderName(Request $request)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
+            return $this->json([], $status = 403);
+        }
+
         $name = $request->request->get('name');
         $folderId = intval($request->request->get('id'));
         $folder = $this->projectManager->updateFolderName($folderId, $name);
@@ -216,6 +252,10 @@ class ProjectController extends Controller
      */
     public function deleteProjectFolders(Project $project, Request $request)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
         $ids = $request->request->get('ids');
         $this->projectManager->deleteFolders($project, $ids);
 
@@ -227,6 +267,10 @@ class ProjectController extends Controller
      */
     public function moveProjectFolders(Project $project, Request $request)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
+            return $this->json([], $status = 403);
+        }
+
         $target = intval($request->request->get('dirId'));
         $ids = $request->request->get('ids');
         $this->projectManager->moveProjectFolders($target, $ids);
@@ -235,10 +279,14 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="display", options={"expose"=true})
+     * @Route("/{id}", name="display")
      */
     public function display(Project $project)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VIEW_TRANSCRIPTIONS)) {
+            return $this->json([], $status = 403);
+        }
+
         $projectManagerUser = $this->projectManager->getProjectManagerUser($project);
 
         return $this->render(
@@ -252,6 +300,10 @@ class ProjectController extends Controller
      */
     public function deleteImage(Project $project, Request $request)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            return $this->json([], $status = 403);
+        }
+
         $this->projectManager->deleteImage($project);
 
         return $this->json([], $status = 200);

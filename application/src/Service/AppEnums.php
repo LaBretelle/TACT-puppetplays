@@ -30,6 +30,16 @@ class AppEnums
     public const USER_STATUS_VALIDATOR_DESC = 'user_status_validator_desc';
     public const USER_STATUS_VALIDATOR_NAME = 'user_status_validator_name';
 
+    // project actions
+    public const ACTION_VIEW_TRANSCRIPTIONS = 'viewTranscriptions';
+    public const ACTION_MANAGE_MEDIA = 'manageMedia';
+    public const ACTION_MANAGE_USER = 'manageUser';
+    public const ACTION_EDIT_PROJECT = 'editProject';
+    public const ACTION_TRANSCRIBE = 'transcribe';
+    public const ACTION_REGISTER = 'register';
+    public const ACTION_VALIDATE_TRANSCRIPTION = 'validateTranscription';
+
+
     public const LIST = [
       self::PROJECT_STATUS_FINISHED_DESC,
       self::PROJECT_STATUS_FINISHED_NAME,
