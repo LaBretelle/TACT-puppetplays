@@ -64,6 +64,11 @@ class ProjectType extends AbstractType
               'required' => false,
               'data_class' => null
           ])
+          ->add('projectHelpLink', TextType::class, [
+            'label' => 'project_help_link',
+            'translation_domain' => 'messages',
+            'required' => false
+          ])
 
           ->add('manager', EntityType::class, [
               'mapped' => false,

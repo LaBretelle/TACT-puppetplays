@@ -100,6 +100,11 @@ class Project
      */
     private $teiSchema;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $projectHelpLink;
+
     public function __construct()
     {
         $this->financers = new ArrayCollection();
@@ -361,6 +366,18 @@ class Project
     public function setTeiSchema(?TeiSchema $teiSchema): self
     {
         $this->teiSchema = $teiSchema;
+
+        return $this;
+    }
+
+    public function getProjectHelpLink(): ?string
+    {
+        return $this->projectHelpLink;
+    }
+
+    public function setProjectHelpLink(string $projectHelpLink): self
+    {
+        $this->projectHelpLink = $projectHelpLink;
 
         return $this;
     }

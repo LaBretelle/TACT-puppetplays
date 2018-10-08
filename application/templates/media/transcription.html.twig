@@ -29,6 +29,9 @@
             <button class="btn btn-link btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'transcription_send_to_validation' | trans}}" type="button" name="button">
               <i class="fas fa-check-circle"></i>
             </button>
+            <a class="btn btn-link" href="{{media.project.projectHelpLink}}" data-toggle="tooltip" title="{{'project_help_link' | trans }}">
+              <i class="fas fa-question-circle"></i>
+            </a>
           </div>
         {% elseif locked %}
           <h5>
@@ -70,7 +73,7 @@
       </div>
       <div class="col-7">
         {% if edit %}
-          {{ include('media/tei-editor.html.twig', { 'media': media }) }}          
+          {{ include('media/tei-editor.html.twig', { 'media': media }) }}
       {% else %}
         <div id="transcription-container">
           {{media.transcription.content | raw}}
