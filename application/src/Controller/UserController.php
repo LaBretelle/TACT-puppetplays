@@ -211,7 +211,7 @@ class UserController extends Controller
             $user->setConfirmationToken(null);
             $em->persist($user);
             $em->flush();
-            $this->flashManager->add('error', 'user_account_activated');
+            $this->flashManager->add('notice', 'user_account_activated');
 
             return $this->redirectToRoute('home');
         }
