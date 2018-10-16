@@ -1,7 +1,7 @@
 
-email_registration_confirm_subject: TACT - Confirmation d'inscritpion.
+email_registration_confirm_subject: TACT - Confirmation d'inscription.
 email_welcome_user: Bienvenue sur la plateforme TACT %1% %2% !
-email_registration_you_just_subscribed: Vous venez de vous inscrire à la pateforme TACT.
+email_registration_you_just_subscribed: Vous venez de vous inscrire à la plateforme TACT.
 email_registration_activate: Pour activer votre compte merci de cliquer sur le lien ci-dessous.
 email_registration_activate_link: Activer
 email_renew_password_subject: TACT - Demande de renouvellement de mot de passe.
