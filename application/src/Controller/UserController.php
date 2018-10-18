@@ -13,6 +13,8 @@ use App\Service\PermissionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -114,7 +116,7 @@ class UserController extends Controller
     /**
      * @Route("/profile/{id}", name="profile")
      */
-    public function display(User $user)
+    public function display(User $user, AuthorizationCheckerInterface $authChecker)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, $this->translator->trans('access_denied', [], 'messages'));
 
@@ -219,5 +221,30 @@ class UserController extends Controller
         $this->flashManager->add('error', 'user_account_activated_error');
 
         return $this->redirectToRoute('home');
+    }
+
+    /**
+     *  @Route("/export/{id}", name="export", methods="POST")
+     * @return Response
+     */
+    public function exportUser(User $user, AuthorizationCheckerInterface $authChecker)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, $this->translator->trans('access_denied', [], 'messages'));
+
+        $connectedUser = $this->getUser();
+        if ($connectedUser->getId() !== $user->getId() && false === $authChecker->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
+        $userData = $this->userManager->exportUserData($user);
+        $response = new Response(json_encode($userData));
+        $disposition = $response->headers->makeDisposition(
+           ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+           'user-'.$user->getFirstName().'-'.$user->getLastName().'-export.json'
+         );
+        $response->headers->set('Content-Disposition', $disposition);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 }

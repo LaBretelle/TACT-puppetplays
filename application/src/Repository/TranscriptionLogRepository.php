@@ -86,32 +86,37 @@ class TranscriptionLogRepository extends ServiceEntityRepository
           ->getResult();
     }
 
-//    /**
-//     * @return TranscriptionLog[] Returns an array of TranscriptionLog objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function userHasTranscription(Transcription $transcription, User $user)
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $results = $this->createQueryBuilder('tl')
+          ->andWhere('tl.user = :user')
+          ->andWhere('tl.transcription = :t')
+          ->andWhere('tl.name IN(:names)')
+          ->setParameter('t', $transcription)
+          ->setParameter('user', $user)
+          ->setParameter('names', 'transcription_log_locked, transcription_log_created, transcription_log_waiting_for_validation, transcription_log_rereaded')
+          ->orderBy('tl.createdAt', 'ASC')
+          ->setMaxResults(10)
+          ->getQuery()
+          ->getResult();
 
-    /*
-    public function findOneBySomeField($value): ?TranscriptionLog
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return count($results) > 0;
     }
-    */
+
+    public function userHasValidation(Transcription $transcription, User $user)
+    {
+        $results = $this->createQueryBuilder('tl')
+          ->andWhere('tl.user = :user')
+          ->andWhere('tl.transcription = :t')
+          ->andWhere('tl.name IN(:names)')
+          ->setParameter('t', $transcription)
+          ->setParameter('user', $user)
+          ->setParameter('names', 'transcription_log_validated')
+          ->orderBy('tl.createdAt', 'ASC')
+          ->setMaxResults(10)
+          ->getQuery()
+          ->getResult();
+
+        return count($results) > 0;
+    }
 }

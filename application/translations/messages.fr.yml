@@ -148,6 +148,8 @@ user_anonymize_fully: Anonymiser complètement le compte de l'utilisateur
 user_anonymize_partially: Anonymiser partiellement le compte de l'utilisateur (le nom et le prénom seront préservés)
 user_delete_account_image: Supprimer l'image associée à ce compte
 user_edit: Éditer le profil
+user_export: Exporter
+user_export_details: Exporte les données relatives au compte
 user_is_active: Compte activé
 user_is_anonymized: Compte anonymisé
 user_renew_password_error: Une erreur s'est produite lors de la demande de renouvellement de mot de passe.

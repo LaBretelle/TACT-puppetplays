@@ -4,15 +4,23 @@
 
 {% block body %}
 <div class="page-content-container">
-  {% if app.user == user %}
-  <p>
-    <a href="{{ path("user_edit", {id: user.id})}}">
-      <button type="button" class="btn btn-secondary">
-        <i class="fas fa-edit"></i> {{ 'user_edit' | trans}}
-      </button>
-    </a>
-  </p>
-  {% endif %}
+  <div class="row user-profile-action">
+    <div class="col text-right">
+      <div class="btn-group">
+        {% if app.user == user or is_granted('ROLE_ADMIN') %}
+          <a class="btn btn-link" href="{{ path("user_edit", {id: user.id})}}">
+            <i class="fas fa-edit"></i> {{ 'user_edit' | trans}}
+          </a>
+          <form action="{{path("user_export", {id: user.id})}}" method="post">
+            <button data-toggle="tooltip" title="{{ 'user_export_details' | trans}}" class="btn btn-link" type="submit">
+              <i class="fas fa-external-link-alt"></i> {{ 'user_export' | trans}}
+            </button>
+          </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
 
   {{ macros.userSummary(user, true) }}
 </div>

@@ -9,6 +9,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+
+
+
+
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class UserManager
 {
@@ -16,17 +24,20 @@ class UserManager
     private $em;
     private $repository;
     private $fileManager;
+    private $translator;
 
     public function __construct(
       UserPasswordEncoderInterface $passwordEncoder,
       EntityManagerInterface $em,
       UserRepository $repository,
-      FileManager $fileManager
+      FileManager $fileManager,
+      TranslatorInterface $translator
       ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->em = $em;
         $this->repository = $repository;
         $this->fileManager = $fileManager;
+        $this->translator = $translator;
     }
 
     public function createUser(string $lastname, string $firstname, string $username, string $email, string $plainPassword, array $roles)
@@ -163,5 +174,63 @@ class UserManager
     {
         $this->em->remove($user);
         $this->em->flush();
+    }
+
+    public function exportUserData(User $user)
+    {
+        $result = [
+          'id' => $user->getId(),
+          'lastname' => $user->getLastName(),
+          'firstname' => $user->getFirstName(),
+          'login' => $user->getUserName(),
+          'email' => $user->getEmail(),
+          'description' => $user->getDescription(),
+          'image' => $user->getImage(),
+          'roles' => $user->getRoles(),
+          'mailIsPublic' => $user->getPublicMail(),
+          'accountIsActive' => $user->isActive(),
+          'isAnonymous' => $user->isAnonymous(),
+          'createdAt' => $user->getCreatedAt(),
+          'updatedAt' => $user->getUpdatedAt(),
+          'passwordRequestedAt' => $user->getPasswordRequestedAt(),
+          'projects' => []
+        ];
+
+        $transcriptionLogRepo =  $this->em->getRepository('App:TranscriptionLog');
+        foreach ($user->getProjectStatus() as $ups) {
+            if ($ups->getEnabled()) {
+                $project = $ups->getProject();
+                $status = $ups->getStatus();
+                $projectToAdd = [
+                  'id' => $project->getId(),
+                  'name' => $project->getName(),
+                  'role' => $this->translator->trans($status->getName(), [], 'fixtures'),
+                  'transcriptions' => [],
+                  'validations' => []
+                ];
+
+                $medias = $project->getMedias();
+                foreach ($medias as $media) {
+                    $transcription = $media->getTranscription();
+                    if ($transcriptionLogRepo->userHasTranscription($transcription, $user)) {
+                        $projectToAdd['transcriptions'][] = [
+                          'transcriptionId' => $transcription->getId(),
+                          'media' => $transcription->getMedia()->getName()
+                        ];
+                    }
+
+                    if ($transcriptionLogRepo->userHasValidation($transcription, $user)) {
+                        $projectToAdd['validations'][] = [
+                          'transcriptionId' => $transcription->getId(),
+                          'media' => $transcription->getMedia()->getName()
+                        ];
+                    }
+                }
+
+                $result['projects'][] = $projectToAdd;
+            }
+        }
+
+        return $result;
     }
 }
