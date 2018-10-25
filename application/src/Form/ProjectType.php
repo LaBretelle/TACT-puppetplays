@@ -69,7 +69,6 @@ class ProjectType extends AbstractType
             'translation_domain' => 'messages',
             'required' => false
           ])
-
           ->add('manager', EntityType::class, [
               'mapped' => false,
               'class' => User::class,
@@ -77,15 +76,6 @@ class ProjectType extends AbstractType
               'translation_domain' => 'messages',
               'choice_label' => 'username',
           ])
-
-          ->add('teiSchema', EntityType::class, [
-              'mapped' => true,
-              'class' => TeiSchema::class,
-              'label' => 'tei_schema',
-              'translation_domain' => 'messages',
-              'choice_label' => 'name',
-          ])
-
           ->add('save', SubmitType::class, array(
               'attr' => array('class' => 'save btn btn-primary pull-right'),
               'label' => 'save',

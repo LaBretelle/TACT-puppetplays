@@ -10,7 +10,7 @@ administrate_schemas_menu: Schémas
 administrate_users_menu: Utilisateurs
 administrate_users_title: Administration des utilisateurs de la plateforme
 app_admin: Administrateur du site
-attributes: Attributs:
+attributes: Attributs pour l'élément
 back_to_transcripts: Retour aux transcriptions
 cancel: Annuler
 confirm_account_anonymization: Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
@@ -124,6 +124,8 @@ submit_validation: Soumettre
 submit: valider
 subscribe_long: L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
 tei_schema: Schema TEI pour le projet
+tei_link_to_official_doc: Voir la documentation pour %element%
+tei_link_to_official_attr_doc: Voir la documentation pour l'élément relatif à cet attribut
 transcribe_long: Vous permet d'accéder au média et de proposer des transcriptions.
 transcribe: Transcrire
 transcriber: Transcripteur

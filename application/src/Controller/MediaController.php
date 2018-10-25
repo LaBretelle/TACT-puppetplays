@@ -6,6 +6,7 @@ use App\Entity\Media;
 use App\Entity\Transcription;
 use App\Form\ValidationType;
 use App\Service\AppEnums;
+use App\Service\FileManager;
 use App\Service\FlashManager;
 use App\Service\MailManager;
 use App\Service\MediaManager;
@@ -28,15 +29,24 @@ class MediaController extends Controller
     private $mailManager;
     private $permissionManager;
     private $translator;
+    private $fileManager;
 
-    public function __construct(MediaManager $mediaManager, TranscriptionManager $transcriptionManager, FlashManager $fm, MailManager $mailManager, PermissionManager $permissionManager, TranslatorInterface $translator)
-    {
+    public function __construct(
+      MediaManager $mediaManager,
+      TranscriptionManager $transcriptionManager,
+      FlashManager $fm,
+      MailManager $mailManager,
+      PermissionManager $permissionManager,
+      TranslatorInterface $translator,
+      FileManager $fileManager
+    ) {
         $this->mediaManager = $mediaManager;
         $this->transcriptionManager = $transcriptionManager;
         $this->fm = $fm;
         $this->mailManager = $mailManager;
         $this->permissionManager = $permissionManager;
         $this->translator = $translator;
+        $this->fileManager = $fileManager;
     }
 
     /**
@@ -79,10 +89,11 @@ class MediaController extends Controller
             $em->persist($transcription);
             $em->flush();
         }
+        $schema = $this->fileManager->getProjectTeiSchema($media->getProject());
 
         return $this->render(
             'media/transcription.html.twig',
-            ['media' => $media, 'edit' => $canEdit, 'locked' => $locked, 'log' => $lockLog]
+            ['media' => $media, 'edit' => $canEdit, 'locked' => $locked, 'log' => $lockLog, 'schema' => $schema]
         );
     }
 

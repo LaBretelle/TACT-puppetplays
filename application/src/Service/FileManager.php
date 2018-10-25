@@ -7,15 +7,19 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Translation\Dumper\YamlFileDumper;
+use Symfony\Component\Yaml\Yaml;
 
 class FileManager
 {
     protected $params;
+    protected $translator;
 
-    public function __construct(
-        ParameterBagInterface $params
-      ) {
+    public function __construct(ParameterBagInterface $params, TranslatorInterface $translator)
+    {
         $this->params = $params;
+        $this->translator = $translator;
     }
 
 
@@ -57,5 +61,32 @@ class FileManager
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file->move($projectMediaPath, $path . DIRECTORY_SEPARATOR . $file->getClientOriginalName());
         }
+    }
+
+    public function saveJsonTeiFile(string $path, string $content)
+    {
+        $fs = new Filesystem();
+        $fs->dumpFile($path, $content);
+    }
+
+    public function getProjectTeiSchema(Project $project)
+    {
+        $path = $this->getProjectPath($project). DIRECTORY_SEPARATOR . 'tei-schema.json';
+        if (file_exists($path)) {
+            $content = file_get_contents($path);
+            return $content;
+        }
+        return json_encode([]);
+    }
+
+    public function writeTeiTranslationFiles(array $translations, string $lang = 'fr')
+    {
+        $rootPath =  $this->params->get('kernel.project_dir');
+        $yamlPath = $rootPath.DIRECTORY_SEPARATOR.'translations/tei.'.$lang.'.yml';
+        $existingValues = Yaml::parseFile($yamlPath);
+        $toAdd = $existingValues ? array_diff($translations, $existingValues) : $translations;
+        $yaml = Yaml::dump($toAdd);
+
+        return file_put_contents($yamlPath, $yaml);
     }
 }

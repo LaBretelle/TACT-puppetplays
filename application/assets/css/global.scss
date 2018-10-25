@@ -245,12 +245,19 @@ body > .container-fluid{
   .list-group-item, .card-header {
     padding: 0.50rem 0.75rem;
   }
+  .tei-element-li {
+    span {
+        vertical-align: -moz-middle-with-baseline;
+        vertical-align: -webkit-baseline-middle;
+    }
+    .btn-group {
+      float:right;
+    }
+  }
 }
 
-
-
-
 /* TINYMCE CUSTOM BUTTON ICONS */
+// It has to be in the main css, not in tiny.scss... because the later is used for content
 // allow the use of {font-family: 'Font Awesome 5 Free'; content: "\f0a9";}
 // if font path is not specified we are not able to import fa-solid icons ...
 $fa-font-path : '~@fortawesome/fontawesome-free-webfonts/webfonts';

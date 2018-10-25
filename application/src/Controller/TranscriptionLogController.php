@@ -16,10 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class TranscriptionLogController extends Controller
 {
     protected $em;
+    protected $permissionManager;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, PermissionManager $permissionManager)
     {
         $this->em = $em;
+        $this->permissionManager = $permissionManager;
     }
 
     /**
@@ -27,6 +29,7 @@ class TranscriptionLogController extends Controller
      */
     public function updateLockedLog(TranscriptionLog $log)
     {
+        $project = $log->getTranscription()->getMedia()->getProject();
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_TRANSCRIBE)) {
             return $this->json([], $status = 403);
         }

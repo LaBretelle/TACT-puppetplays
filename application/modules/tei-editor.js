@@ -16,10 +16,7 @@ class TeiEditor {
       content_css: [
         '/build/css/tiny.css'
       ],
-      forced_root_block: 'div',
-      forced_root_block_attrs: {
-        'class': 'tiny-root'
-      },
+      forced_root_block: 'p',
       valid_elements: '*[*]',
       entity_encoding: 'raw',
       menubar: false,
@@ -28,7 +25,7 @@ class TeiEditor {
       setup: (editor) => {
         editor.addButton('remove-current-tag', {
           text: '',
-          icon: 'fas fa-delete',
+          icon: 'fas fa-delete', // defined in app.scss
           tooltip: Translator.trans('delete_current_tag'),
           onclick: () => {
             this.deleteCurrentTag(this.tei)
@@ -52,6 +49,7 @@ class TeiEditor {
             el.hidden = el.textContent.toLowerCase().indexOf(e.target.value.toLowerCase()) === -1
           })
         })
+
       }
     }).then((editors) => {
       // load content into tinyMCE
@@ -94,7 +92,7 @@ class TeiEditor {
     elementAttributes.innerHTML = ''
     if (currentTeiElement) {
       this.displayContainer(container, true)
-      const cardTitle = document.createTextNode(currentTinyElement.nodeName)
+      const cardTitle = document.createTextNode('[' + currentTinyElement.nodeName + ']')
       elementTitle.appendChild(cardTitle)
       currentTeiElement.attributes.forEach(teiAttribute => {
         const tinyAttr = currentTinyElement.attributes.getNamedItem(teiAttribute.key)
@@ -122,7 +120,7 @@ class TeiEditor {
 
         let label = teiAttribute.key
         label += teiAttribute.required ? ' *' : ''
-        const li = this.createLiElement(label, teiAttribute.help)
+        const li = this.createLiElement(label, teiAttribute, true)
         li.appendChild(control)
         elementAttributes.appendChild(li)
       })
@@ -142,11 +140,11 @@ class TeiEditor {
     editor.undoManager.transact(() => {
       if (teiElement.selfClosed) {
         editor.insertContent(
-          `<${teiElement.tag} data-tag="${teiElement.tag}"></${teiElement.tag}>&zwj;${selectedContent}`
+          `<${teiElement.tag}></${teiElement.tag}>&zwj;${selectedContent}`
         )
       } else {
         editor.selection.setContent(
-          `<${teiElement.tag} data-tag="${teiElement.tag}">${selectedContent ? selectedContent:'&zwj;&zwj;'}</${teiElement.tag}>&zwj;`
+          `<${teiElement.tag}>${selectedContent ? selectedContent:'&zwj;&zwj;'}</${teiElement.tag}>&zwj;`
         )
       }
     })
@@ -157,37 +155,73 @@ class TeiEditor {
    * (test if current tag is not the root tag.)
    */
   deleteCurrentTag(tei) {
+    const editor = Tiny.activeEditor
     let currentTinyElement = Tiny.activeEditor.selection.getNode()
-    if (!currentTinyElement.classList.contains('tiny-root') ) {
+    //if (!currentTinyElement.classList.contains('tiny-root') ) {
+    editor.undoManager.transact(() => {
       Tiny.activeEditor.dom.remove(currentTinyElement, true)
       this.refreshPanels(tei)
-    }
+    })
+    //}
   }
 
   /*
    * Create popover HTML
    * popovers are initialized in refreshPanels() method
    */
-  createHelp(text) {
-    const help = document.createElement('span')
-    help.classList.add('float-right')
+  createHelp(teiElement, isAttribute) {
+
+    const help = document.createElement('button')
+    help.classList.add('btn', 'btn-link')
     help.innerHTML = '<i class="fas fa-question-circle"></i>'
-    help.setAttribute('data-content', text)
     help.setAttribute('data-toggle', 'popover')
 
+    const title = isAttribute ? teiElement.key :  teiElement.tag
+    const link = Translator.locale === 'fr' ? teiElement.link_fr: teiElement.link_en
+    const linkText = isAttribute ? Translator.trans('tei_link_to_official_attr_doc', {}) : Translator.trans('tei_link_to_official_doc', {'element': title})
+    const popoverContent = `
+      <div>
+        <h6>${title}</h6>
+        <hr/>
+        <p>${Translator.trans(teiElement.help, {}, 'tei')}</p>
+        <p>
+          <a target="_blank" href="${link}">
+            ${linkText}
+          </a>
+        </p>
+      </div>
+    `
+    help.setAttribute('data-content', popoverContent)
     return help
   }
 
   /*
    * Create LI element with a given text and a given help text
    */
-  createLiElement(labelText, helpText) {
+  createLiElement(labelText, teiElement, isAttribute = false) {
     const li = document.createElement('li')
+    const labelContainer = document.createElement('span')
     const label = document.createTextNode(labelText)
-    const help = this.createHelp(helpText)
-    li.appendChild(label)
-    li.appendChild(help)
-    li.classList.add('list-group-item')
+    labelContainer.appendChild(label)
+    const help = this.createHelp(teiElement, isAttribute)
+    const btnGroup = document.createElement('div')
+    btnGroup.classList.add('btn-group')
+    if(!isAttribute) {
+      const addBtn = document.createElement('button')
+      addBtn.classList.add('btn', 'btn-link')
+      addBtn.setAttribute('title', Translator.trans('add', {}))
+      addBtn.innerHTML = '<i class="fas fa-plus"></i>'
+
+      addBtn.addEventListener('click', () => {
+        this.addTeiTag(teiElement)
+      })
+      btnGroup.appendChild(addBtn)
+    }
+
+    btnGroup.appendChild(help)
+    li.appendChild(labelContainer)
+    li.appendChild(btnGroup)
+    li.classList.add('list-group-item', 'tei-element-li')
 
     return li
   }
@@ -208,11 +242,8 @@ class TeiEditor {
    */
   appendLiToAllowedElements(tei, root, tagName) {
     const teiElement = tei.elements.find(element => element.tag === tagName)
-    const li = this.createLiElement(tagName, teiElement.help)
+    const li = this.createLiElement(tagName, teiElement)
     root.appendChild(li)
-    li.addEventListener('click', () => {
-      this.addTeiTag(teiElement)
-    })
   }
 
   /*
@@ -226,8 +257,7 @@ class TeiEditor {
     this.getAllowedElements(tei, currentTeiElement)
     $('[data-toggle="popover"]').popover({
       html : true,
-      placement: 'top',
-      trigger: 'hover'
+      placement: 'top'
     })
     document.querySelector('.filter-elements').value = ''
   }
