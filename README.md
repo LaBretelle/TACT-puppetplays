@@ -4,16 +4,20 @@ TACT - Plateforme de Transcription et d'Annotation de Corpus Scientifiques
 
 ### Install
 
-- clone this repo and cd to to  `clonedfolder/application`
+- clone this repo
+- cd to `clonedfolder`
 - create .env file from .env.dist
 
 ```bash
-cp .env.dist .env
+mv .env.dist .env
 ```
 
-- edit `.env` file.
-- set the proper database connection string. It must match with environment variables set in `docker-compose.yml`
-- in order to make mail work change the MAILER_URL entry
+- edit `.env` file entries. It must match with environment variables set in `docker-compose.yml`
+
+
+- do the same with the .env.dist file in  `clonedfolder/application`
+- create .env file from .env.dist
+
 
 ### Run containers and install dependencies
 
@@ -56,3 +60,5 @@ chown -R www-data:www-data public/user_images public/project_files var/log var/c
 
 - load fixtures
 `make fixtures`
+
+- other usefull commands can be found in `application/Makefile`
