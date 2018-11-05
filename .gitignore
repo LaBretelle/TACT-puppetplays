@@ -1,3 +1,11 @@
+### docker env
+/.env
+
+###> docker mysql folder ###
+/.db/
+
+npm-debug.log
+
 ###> symfony/framework-bundle ###
 /application/.bash_history
 /application/.env
@@ -31,9 +39,3 @@ application/web/*
 ###> symfony/web-server-bundle ###
 /application/.web-server-pid
 ###< symfony/web-server-bundle ###
-
-
-###> docker mysql folder ###
-/.db/
-
-npm-debug.log
