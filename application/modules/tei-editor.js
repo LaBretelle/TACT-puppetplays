@@ -98,7 +98,7 @@ class TeiEditor {
         const tinyAttr = currentTinyElement.attributes.getNamedItem(teiAttribute.key)
         let control
         switch (teiAttribute.type) {
-          case 'text':
+          case 'string':
             control = document.createElement('input')
             control.setAttribute('value', tinyAttr ? tinyAttr.value : '')
             break
