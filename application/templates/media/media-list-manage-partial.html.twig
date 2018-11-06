@@ -44,8 +44,9 @@
           <ul class="navbar-nav">
             <li class="nav-item float-right">
               <div class="btn-group images-actions">
-                <button class="btn btn-link move-media" disabled type="button" role="button"><i class="fas fas fa-arrows-alt-v"></i></button>
-                <button class="btn btn-link delete-media" disabled type="button" role="button"><i class="fas fa-trash"></i></button>
+                <button data-state="check" data-toggle="tooltip" title="{{'toggle_all_media_selection' | trans}}" class="btn btn-link toggle-select-all-media" type="button" role="button"><i class="fas fas fa-list-alt"></i></button>
+                <button data-toggle="tooltip" title="{{'move_media' | trans}}" class="btn btn-link move-media" disabled type="button" role="button"><i class="fas fas fa-arrows-alt-v"></i></button>
+                <button data-toggle="tooltip" title="{{'delete_media' | trans}}" class="btn btn-link delete-media" disabled type="button" role="button"><i class="fas fa-trash"></i></button>
               </div>
             </li>
           </ul>

@@ -21,6 +21,16 @@ $(document).ready(() => {
     $('.move-project-media-modal').modal('show')
   })
 
+  // toggle all media selection / unselection
+  $('.toggle-select-all-media').on('click', (e) => {
+    const checked = e.target.dataset.state === 'check'
+    $('.image-select').each((index, element) => {
+      element.checked = checked
+      handleMediaSelection(element)
+    })
+    e.target.dataset.state  = checked ? 'uncheck' : 'check'
+  })
+
   $('.move-media-confirm-button').on('click', () => {
     moveMedia()
   })
@@ -30,19 +40,8 @@ $(document).ready(() => {
   })
 
   $('.image-select').on('change', (e) => {
-    const id = e.target.dataset.id
-    if(e.target.checked && selectedMedia.indexOf(id) === -1) {
-      selectedMedia.push(id)
-    } else {
-      const index = selectedMedia.indexOf(id)
-      selectedMedia.splice(index, 1)
-    }
+    handleMediaSelection(e.target)
 
-    if(selectedMedia.length > 0) {
-      $('.images-actions').find('button').attr('disabled', false)
-    } else {
-      $('.images-actions').find('button').attr('disabled', true)
-    }
   })
 
   $('.project-image').on('click', (e) => {
@@ -229,4 +228,22 @@ const updateFolderName = (id, name) => {
   }).done(() => {
     Toastr.info(Translator.trans('folder_name_changed'))
   })
+}
+
+const handleMediaSelection = (element) => {
+  const id = element.dataset.id
+  if(element.checked && selectedMedia.indexOf(id) === -1) {
+    selectedMedia.push(id)
+  } else {
+    const index = selectedMedia.indexOf(id)
+    selectedMedia.splice(index, 1)
+  }
+
+  if(selectedMedia.length > 0) {
+    $('.delete-media').attr('disabled', false)
+    $('.move-media').attr('disabled', false)
+  } else {
+    $('.delete-media').attr('disabled', true)
+    $('.move-media').attr('disabled', true)
+  }
 }

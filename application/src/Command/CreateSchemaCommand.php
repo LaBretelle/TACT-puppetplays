@@ -97,7 +97,7 @@ class CreateSchemaCommand extends Command
                         $linkToDocFr = 'http://www.tei-c.org/Vault/P5/current/doc/tei-p5-doc/fr/html/ref-'.$tag.'.html';
                         $tags[$tag] = [
                           'tag' => $tag,
-                          'selfClosed' => $data[$csvColumnIndexes['selfClosed']],
+                          'selfClosed' => $data[$csvColumnIndexes['selfClosed']] === 'true',
                           'help' => $tag,
                           'link_fr' => $linkToDocFr,
                           'link_en' => $linkToDocEn,
