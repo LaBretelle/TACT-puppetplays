@@ -114,7 +114,8 @@ class TeiEditor {
         }
         control.classList.add('form-control', 'form-control-sm')
         control.required = teiAttribute.required
-        control.addEventListener(teiAttribute.type === 'text' ? 'input' : 'change', (e) => {
+
+        control.addEventListener(teiAttribute.type === 'string' ? 'input' : 'change', (e) => {
           currentTinyElement.setAttribute(teiAttribute.key, e.target.value)
         })
 
@@ -251,6 +252,7 @@ class TeiEditor {
    * Display attributes & allowed children.
    */
   refreshPanels(tei) {
+
     const currentTinyElement = Tiny.activeEditor.selection.getNode()
     const currentTeiElement = tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
     this.displayCurrentAttributes(currentTeiElement, currentTinyElement)

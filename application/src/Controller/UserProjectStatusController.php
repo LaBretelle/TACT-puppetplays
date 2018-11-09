@@ -6,6 +6,7 @@ use App\Entity\Project;
 use App\Entity\UserProjectStatus;
 use App\Form\UserStatusType;
 use App\Service\AppEnums;
+use App\Service\PermissionManager;
 use App\Service\UserProjectStatusManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,11 +22,13 @@ class UserProjectStatusController extends Controller
 {
     private $statusManager;
     private $translator;
+    private $permissionManager;
 
-    public function __construct(UserProjectStatusManager $statusManager, TranslatorInterface $translator)
+    public function __construct(UserProjectStatusManager $statusManager, TranslatorInterface $translator, PermissionManager $permissionManager)
     {
         $this->statusManager = $statusManager;
         $this->translator = $translator;
+        $this->permissionManager = $permissionManager;
     }
 
     /**

@@ -50,7 +50,7 @@ $(document).ready(() => {
     window.setInterval(() => {
       updateLockedLog(logId)
     }, updateLogTimeout)
-    
+
   } else if ('validation' === mode) {
 
     const jsonTeiDef = JSON.parse(document.getElementById('tei-schema').value)
