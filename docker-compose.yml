@@ -4,7 +4,7 @@ services:
    apache:
      build: docker-files
      ports:
-       - "8082:80"
+       - "8098:80"
      expose:
          - "80"
      restart: always
@@ -24,10 +24,10 @@ services:
        - MYSQL_USER=${MYSQL_USER}
        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
      ports:
-       - "3390:3306"
+       - "3398:3306"
    adminer:
      image: adminer
      ports:
-       - "8088:8080"
+       - "8096:8080"
      links:
        - db:db
