@@ -5,7 +5,7 @@ services:
      build: docker-files
      ports:
        - "8443:443"
-       - "8098:80"
+       - "8082:80"
      expose:
        - "80"
        - "443"
@@ -26,10 +26,10 @@ services:
        - MYSQL_USER=${MYSQL_USER}
        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
      ports:
-       - "3398:3306"
+       - "3390:3306"
    adminer:
      image: adminer
      ports:
-       - "8096:8080"
+       - "8088:8080"
      links:
        - db:db
