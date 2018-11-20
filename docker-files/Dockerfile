@@ -52,16 +52,16 @@ ADD ./certs/server.crt /etc/ssl/certs/server.crt
 ADD ./certs/server.key /etc/ssl/private/server.key
 # ADD ./certs/ca.crt /etc/ssl/certs/ca.crt
 
-# For production
-# ADD /etc/ssl/certs/star_demarre-shs_fr.crt /etc/ssl/certs/server.crt
-# ADD /etc/ssl/private/demarre-shs.fr.key /etc/ssl/certs/server.key
-# is this one needed ?
-# ADD /etc/ssl/certs/DigiCertCA.crt /etc/ssl/certs/ca.crt
+# For production (/!\ you have to copy the .crt and .key files in docker-files/certs folder) :
+# ADD ./certs/star_demarre-shs_fr.crt /etc/ssl/certs/server.crt
+# ADD ./certs/demarre-shs.fr.key /etc/ssl/private/server.key
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 ADD ./app.conf /etc/apache2/sites-available/app.conf
+ADD ./app-ssl.conf /etc/apache2/sites-available/app-ssl.conf
 
 RUN a2ensite app.conf
+RUN a2ensite app-ssl.conf
 RUN a2enmod headers
 RUN a2enmod deflate
 RUN a2enmod rewrite
