@@ -4,9 +4,11 @@ services:
    apache:
      build: docker-files
      ports:
+       - "8443:443"
        - "8098:80"
      expose:
-         - "80"
+       - "80"
+       - "443"
      restart: always
      volumes:
          - ./application:/var/www

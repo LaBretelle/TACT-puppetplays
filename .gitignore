@@ -1,5 +1,7 @@
-### docker env
+### docker
 /.env
+/docker-files/certs/*
+!/docker-files/certs/.gitkeep
 
 ###> docker mysql folder ###
 /.db/

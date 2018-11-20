@@ -7,7 +7,6 @@ parameters:
     platform_file_dir: '%kernel.project_dir%/public/platform'
     upload_dir: '%kernel.project_dir%/public/upload'
     platform_email: tact-no-reply@univ-grenoble-alpes.fr
-    is_dev_env: '%kernel.debug%'
 
 services:
     # default configuration for services in *this* file

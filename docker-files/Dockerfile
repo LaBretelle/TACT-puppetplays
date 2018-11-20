@@ -11,6 +11,7 @@ RUN apt-get -qqq update && DEBIAN_FRONTEND=noninteractive apt-get install -qqq -
         curl \
         gdebi \
         apache2 \
+        openssl \
         python2.7 \
         python-pip \
         php7.2 \
@@ -45,6 +46,18 @@ RUN mkdir /var/www/public
 
 # Configure Apache
 RUN rm -rf /etc/apache2/sites-available/* && rm -rf /etc/apache2/sites-enabled/*
+
+# For local dev
+ADD ./certs/server.crt /etc/ssl/certs/server.crt
+ADD ./certs/server.key /etc/ssl/private/server.key
+# ADD ./certs/ca.crt /etc/ssl/certs/ca.crt
+
+# For production
+# ADD /etc/ssl/certs/star_demarre-shs_fr.crt /etc/ssl/certs/server.crt
+# ADD /etc/ssl/private/demarre-shs.fr.key /etc/ssl/certs/server.key
+# is this one needed ?
+# ADD /etc/ssl/certs/DigiCertCA.crt /etc/ssl/certs/ca.crt
+
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 ADD ./app.conf /etc/apache2/sites-available/app.conf
 
@@ -52,6 +65,7 @@ RUN a2ensite app.conf
 RUN a2enmod headers
 RUN a2enmod deflate
 RUN a2enmod rewrite
+RUN a2enmod ssl
 RUN service apache2 restart
 
 WORKDIR /var/www/
@@ -60,5 +74,6 @@ WORKDIR /var/www/
 RUN usermod -u 1000 www-data
 
 EXPOSE 80
+EXPOSE 443
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]

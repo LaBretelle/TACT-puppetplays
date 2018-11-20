@@ -27,15 +27,11 @@ class MailManager
 
     public function sendConfirmationMail(User $user)
     {
-        $dev_env = $this->params->get('is_dev_env');
-        $baseUrl = $this->router->generate(
+        $confirmationUrl = $this->router->generate(
           'user_activate_account',
           ['token' => $user->getConfirmationToken()],
-          //UrlGeneratorInterface::ABSOLUTE_URL
-          UrlGeneratorInterface::NETWORK_PATH
+          UrlGeneratorInterface::ABSOLUTE_URL
         );
-
-        $confirmationUrl = $dev_env ? 'http:'.$baseUrl : 'https:'.$baseUrl;
 
         $subject = $this->translator->trans('email_registration_confirm_subject', [], 'emails');
 
