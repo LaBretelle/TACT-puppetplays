@@ -50,9 +50,8 @@ RUN rm -rf /etc/apache2/sites-available/* && rm -rf /etc/apache2/sites-enabled/*
 # For local dev
 ADD ./certs/server.crt /etc/ssl/certs/server.crt
 ADD ./certs/server.key /etc/ssl/private/server.key
-# ADD ./certs/ca.crt /etc/ssl/certs/ca.crt
 
-# For production (/!\ you have to copy the .crt and .key files in docker-files/certs folder) :
+# For production ( /!!!!\ you have to copy the .crt and .key files in docker-files/certs folder) :
 # ADD ./certs/star_demarre-shs_fr.crt /etc/ssl/certs/server.crt
 # ADD ./certs/demarre-shs.fr.key /etc/ssl/private/server.key
 

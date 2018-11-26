@@ -20,7 +20,6 @@
       {% endfor %}
 
       {% for media in project.medias if media.parent == parent %}
-
         <div class="col-2">
           <div class="card mb-2 box-shadow {{media | transcriptionStatusClass}}">
             <img data-toggle="tooltip" title="{{media.name}}" class="card-img-top project-image" src="{{ macros.mediaURL(media) }}" alt=""></img>
@@ -31,7 +30,7 @@
                   {% if project | isAuthorizedOnProject('transcribe') %}
                     {% if media | isTranscribable %}
                       <a data-toggle="tooltip" title="{{'media_transcribe_button_title' | trans}}" href="{{path('media_transcription_edit', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-pencil-alt"></i></a>
-                    {% elseif media | isInReread %}
+                    {% elseif media | isInReread  and  project | isAuthorizedOnProject('validateTranscription') %}
                       <a data-toggle="tooltip" title="{{'media_reread_button_title' | trans}}" href="{{path('media_transcription_reread', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i></a>
                     {% endif %}
                     {% if project | isAuthorizedOnProject('manageMedia') %}

@@ -37,8 +37,8 @@ folders_moved: Dossier(s) déplacé(s)
 home: Accueil
 is_public: Projet public
 lastname: Nom
-login: connection
-logout: déconnection
+login: connexion
+logout: déconnexion
 lost_password_link: J'ai oublié mon mot de passe
 manage_media_long: Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
 manage_user_statuses_long: Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.

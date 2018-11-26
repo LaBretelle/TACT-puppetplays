@@ -131,39 +131,45 @@ class TeiEditor {
   }
 
   /*
-   * Append the proper tag to tinymce content
+   * Append the proper tag to tinymce content and refresh available tags and attributes
    */
   addTeiTag(teiElement) {
     const editor = Tiny.activeEditor
     const selectedContent = editor.selection.getContent({
       format: 'html'
     })
+    // keep selected range to reselect after content insert
+    const range = editor.selection.getRng()
+
     editor.undoManager.transact(() => {
+      let elem = null
       if (teiElement.selfClosed) {
-        editor.insertContent(
-          `<${teiElement.tag}></${teiElement.tag}>&zwj;${selectedContent}`
-        )
+        elem = editor.dom.create(teiElement.tag, {})
       } else {
-        editor.selection.setContent(
-          `<${teiElement.tag}>${selectedContent ? selectedContent:'&zwj;&zwj;'}</${teiElement.tag}>&zwj;`
-        )
+        elem = editor.dom.create(teiElement.tag, {}, selectedContent)
+        range.deleteContents()
       }
+
+      range.insertNode(elem)
+      // force selection
+      editor.selection.select(elem)
+      editor.focus()
+      // show available attributes and children
+      this.refreshPanels(this.tei)
+
     })
   }
 
   /*
    * Delete current tag from Tiny without deleting its content.
-   * (test if current tag is not the root tag.)
    */
   deleteCurrentTag(tei) {
     const editor = Tiny.activeEditor
     let currentTinyElement = Tiny.activeEditor.selection.getNode()
-    //if (!currentTinyElement.classList.contains('tiny-root') ) {
     editor.undoManager.transact(() => {
       Tiny.activeEditor.dom.remove(currentTinyElement, true)
       this.refreshPanels(tei)
     })
-    //}
   }
 
   /*
