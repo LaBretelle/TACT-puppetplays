@@ -265,7 +265,8 @@ class TeiEditor {
     this.getAllowedElements(tei, currentTeiElement)
     $('[data-toggle="popover"]').popover({
       html : true,
-      placement: 'top'
+      placement: 'top',
+      trigger: 'focus'
     })
     document.querySelector('.filter-elements').value = ''
   }
