@@ -36,13 +36,14 @@ class UserProjectStatusController extends Controller
      */
     public function toggle(UserProjectStatus $status)
     {
+        $project = $status->getProject();
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_USER)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
 
         $this->statusManager->toggle($status);
 
-        return $this->redirectToRoute('status_project', ["id" => $status->getProject()->getId()]);
+        return $this->redirectToRoute('status_project', ["id" => $project->getId()]);
     }
 
     /**
@@ -60,13 +61,14 @@ class UserProjectStatusController extends Controller
      */
     public function remove(UserProjectStatus $status)
     {
+        $project = $status->getProject();
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_USER)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
 
         $this->statusManager->remove($status);
 
-        return $this->redirectToRoute('status_project', ["id" => $status->getProject()->getId()]);
+        return $this->redirectToRoute('status_project', ["id" => $project->getId()]);
     }
 
     /**
@@ -74,6 +76,7 @@ class UserProjectStatusController extends Controller
      */
     public function getForm(UserProjectStatus $status)
     {
+        $project = $status->getProject();
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_USER)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
@@ -94,6 +97,7 @@ class UserProjectStatusController extends Controller
      */
     public function postForm(UserProjectStatus $userProjectStatus, Request $request)
     {
+        $project = $userProjectStatus->getProject();
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_USER)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
