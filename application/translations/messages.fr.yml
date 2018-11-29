@@ -1,171 +1,172 @@
 
-access_denied: Vous n'êtes pas autorisé à accéder à cette page.
-actions: Actions
-add_directory_modal_title: Ajouter un répertoire
-add_project: Créer un nouveau projet
-add_user-status: Ajouter un statut pour un utilisateur
-add: Ajouter
-administrate_platform_menu: Administrer la plateforme
-administrate_schemas_menu: Schémas
-administrate_users_menu: Utilisateurs
-administrate_users_title: Administration des utilisateurs de la plateforme
-app_admin: Administrateur du site
-attributes: Attributs pour l'élément
-back_to_transcripts: Retour aux transcriptions
-cancel: Annuler
-confirm_account_anonymization: Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
-confirm_delete_project_folders: Êtes vous sur de vouloir supprimer le(s) dossiers selectionné(s) (les médias seront aussi dupprimés) ?
-confirm_delete_project_media: Êtes vous sur de vouloir supprimer le(s) média selectionné(s) ?
-confirm_project_deletion: Êtes vous sur de vouloir supprimer ce projet ?
-confirm_title: Veuillez confirmer!
-confirm: Je confirme!
-delete_current_tag: Supprimer le tag courrant
-description: Description
-directory_created: Dossier créé
-edit_project_long: Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
-edit: Éditer
-element_list: Eléments disponibles
-email_or_login_placeholder: Login / email
-email_or_login: Veuillez renseigner votre login ou email
-email: Mail
-filter_users_by: Filtrer par nom / prénom / mail / login
-firstname: Prénom
-folder_name_changed: Nom du dossier modifié
-folder_name: Nom du dossier
-folders_deleted: Dossier(s) supprimé(s)
-folders_moved: Dossier(s) déplacé(s)
-home: Accueil
-is_public: Projet public
-lastname: Nom
-login: connexion
-logout: déconnexion
-lost_password_link: J'ai oublié mon mot de passe
-manage_media_long: Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
-manage_user_statuses_long: Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.
-manager: Gestionnaire
-max_file_uploads_message: Vous pouvez uploader simultanément %nb_max% fichiers
-media_added: Media ajouté(s)
-media_change_directory_title: Choisir le répertoire cible
-media_delete_button_title: Supprimer le média
-media_deleted: Media supprimé(s)
-media_moved: Media déplacé(s)
-media_reread_button_title: Relire la transcription
-media_transcribe_button_title: Transcrire
-media_upload_help: Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
+access_denied:                         Vous n'êtes pas autorisé à accéder à cette page.
+actions:                               Actions
+add_directory_modal_title:             Ajouter un répertoire
+add_project:                           Créer un nouveau projet
+add_user-status:                       Ajouter un statut pour un utilisateur
+add:                                   Ajouter
+administrate_platform_menu:            Administrer la plateforme
+administrate_schemas_menu:             Schémas
+administrate_users_menu:               Utilisateurs
+administrate_users_title:              Administration des utilisateurs de la plateforme
+app_admin:                             Administrateur du site
+attributes:                            Attributs pour l'élément
+back_to_transcripts:                   Retour aux transcriptions
+cancel:                                Annuler
+confirm_account_anonymization:         Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
+confirm_delete_project_folders:        Êtes vous sur de vouloir supprimer le(s) dossiers selectionné(s) (les médias seront aussi dupprimés) ?
+confirm_delete_project_media:          Êtes vous sur de vouloir supprimer le(s) média selectionné(s) ?
+confirm_project_deletion:              Êtes vous sur de vouloir supprimer ce projet ?
+confirm_title:                         Veuillez confirmer!
+confirm:                               Je confirme!
+delete_current_tag:                    Supprimer le tag courrant
+description:                           Description
+directory_created:                     Dossier créé
+edit_project_long:                     Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
+edit:                                  Éditer
+element_list:                          Eléments disponibles
+email_or_login_placeholder:            Login / email
+email_or_login:                        Veuillez renseigner votre login ou email
+email:                                 Mail
+filter_users_by:                       Filtrer par nom / prénom / mail / login
+firstname:                             Prénom
+folder_name_changed:                   Nom du dossier modifié
+folder_name:                           Nom du dossier
+folders_deleted:                       Dossier(s) supprimé(s)
+folders_moved:                         Dossier(s) déplacé(s)
+home:                                  Accueil
+is_public:                             Projet public
+lastname:                              Nom
+login:                                 connexion
+logout:                                déconnexion
+lost_password_link:                    J'ai oublié mon mot de passe
+manage_media_long:                     Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
+manage_user_statuses_long:             Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.
+manager:                               Gestionnaire
+max_file_uploads_message:              Vous pouvez uploader simultanément %nb_max% fichiers
+media_added:                           Media ajouté(s)
+media_change_directory_title:          Choisir le répertoire cible
+media_delete_button_title:             Supprimer le média
+media_deleted:                         Media supprimé(s)
+media_moved:                           Media déplacé(s)
+media_reread_button_title:             Relire la transcription
+media_transcribe_button_title:         Transcrire
+media_upload_help:                     Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 media_view_transcription_button_title: Voir la transcription
-nb_validation: Nombre de relectures nécéssaire par fiche
-need_at_least_one_manager: Il faut au moins un gestionnaire par projet.
-need_to_be_logged: Vous devez être connecté pour participer au projet.
-no: Non
-not_enabled_yet: (Pas encore activé)
-not_registered: Non inscrit
-parent_folder_name: Nom du dossier parent
-password: Mot de passe
-platform_home_text: Texte de la page d'accueil
-platform_logo: Logo de la plateforme
-platform_name: Nom de la plateforme
-platform_page_title: Administration de la plateforme
-preview: Prévisualiser
-project_create: Création d'un projet
-project_created: Projet créé
-project_css: Définition de la css inline pour le projet
-project_delete: Supprimer le projet
-project_deleted: Le projet a été supprimé.
-project_description: Description du projet
-project_edit: Editer le projet
-project_edited: Projet édité
-project_edition: Edition du projet
-project_enabled: Validé ?
-project_handle_user_statuses: Gérer les utilisateurs
-project_help_link: Lien vers l'aide à la transcription
-project_image: Image du projet. Ratio de 4:1 conseillé (l'image sera retaillé automatiquement)
-project_is_not_public: Projet privé
-project_manage_media: Gérer les médias
-project_manage_user_statuses: Gérer les utilisateurs
-project_management_media: Gestion les médias
-project_management_user_statuses: Gestion des utilisateurs
-project_manager: Manager du projet
-project_media_add_file_placeholder: Sélectionner un/des fichier(s)
-project_media_add_file_title: Ajouter des média
-project_media_add_file: Uploader un/des fichier(s)
-project_media_file_type_images: Image(s)
-project_media_file_type_zip: Zip
-project_media_file_type: Type de fichier à uploader
+nb_validation:                         Nombre de relectures nécéssaire par fiche
+need_at_least_one_manager:             Il faut au moins un gestionnaire par projet.
+need_to_be_logged:                     Vous devez être connecté pour participer au projet.
+no_attribute:                          Aucun attribut
+no:                                    Non
+not_enabled_yet:                       (Pas encore activé)
+not_registered:                        Non inscrit
+parent_folder_name:                    Nom du dossier parent
+password:                              Mot de passe
+platform_home_text:                    Texte de la page d'accueil
+platform_logo:                         Logo de la plateforme
+platform_name:                         Nom de la plateforme
+platform_page_title:                   Administration de la plateforme
+preview:                               Prévisualiser
+project_create:                        Création d'un projet
+project_created:                       Projet créé
+project_css:                           Définition de la css inline pour le projet
+project_delete:                        Supprimer le projet
+project_deleted:                       Le projet a été supprimé.
+project_description:                   Description du projet
+project_edit:                          Editer le projet
+project_edited:                        Projet édité
+project_edition:                       Edition du projet
+project_enabled:                       Validé ?
+project_handle_user_statuses:          Gérer les utilisateurs
+project_help_link:                     Lien vers l'aide à la transcription
+project_image:                         Image du projet. Ratio de 4:1 conseillé (l'image sera retaillé automatiquement)
+project_is_not_public:                 Projet privé
+project_manage_media:                  Gérer les médias
+project_manage_user_statuses:          Gérer les utilisateurs
+project_management_media:              Gestion les médias
+project_management_user_statuses:      Gestion des utilisateurs
+project_manager:                       Manager du projet
+project_media_add_file_placeholder:    Sélectionner un/des fichier(s)
+project_media_add_file_title:          Ajouter des média
+project_media_add_file:                Uploader un/des fichier(s)
+project_media_file_type_images:        Image(s)
+project_media_file_type_zip:           Zip
+project_media_file_type:               Type de fichier à uploader
 project_media_no_media_in_current_dir: Aucun média dans le répertoire sélectionné
-project_media_no_media: Aucun média associé au projet
-project_media_title: Gérer les media du projet
-project_media_upload: Envoyer les media
-project_move_directory_title: Déplacer le dossier
-project_name: Nom du projet
-project_register: S'inscrire au projet
-project_registration: Inscription au projet
-project_status: Statut du projet
-project_transcript: Transcrire
-project_transcription: Transcription
-project_user_status: Statut des utilisateurs
-project_view_transciptions: Voir les transcriptions
-public_mail: Email visible par tous
-register: s'enregistrer
-repeat_password: Répéter le mot de passe
-reread_transcription: Relire la transcription
-root_directory_option: Racine
-save: Sauvegarder
-schema_create: Créer un schema
-schema_enabled: Schéma activé
-schema_json: JSON
-schema_name: Nom du schema
-selected_media: média selectionné(s)
-status_edit: Editer le statut
-status_remove: Supprimer
-status_toggle_off: Invalider
-status_toggle_on: Valider
-status: Statut
-submit_validation: Soumettre
-submit: valider
-subscribe_long: L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
-tei_schema: Schema TEI pour le projet
-tei_link_to_official_doc: Voir la documentation pour %element%
-tei_link_to_official_attr_doc: Voir la documentation pour l'élément relatif à cet attribut
-transcribe_long: Vous permet d'accéder au média et de proposer des transcriptions.
-transcribe: Transcrire
-transcriber: Transcripteur
-transcript_media: Transcription du media
-transcription_current_nb_validations: Actuellement %1% / %2% validations
-transcription_is_locked: La transcription est bloquée
-transcription_is_valid: La transcription est valide ?
-transcription_saved: Transcription sauvegardée
-transcription_send_to_validation: Demander une validation
-transcription_unvalidated: Transcription invalidée
-transcription_validated: Transcription validée
-transcriptions_page_title: Transcriptions du projet
-unvalidate_transcription: Invalider la transcription
-user_account_activated_error: Un problème est survenu lors de l'activation de votre compte.
-user_account_activated: Votre compte est maintenant actif.
-user_account_created: Votre compte et créé mais n'est pas encore activé. Vous devriez recevoir un email qui vous permettra de l'activer.
-user_account_updated: Votre compte à été mis à jour.
-user_activate_action: Activer / désactiver le compte
-user_add: Ajouter un utilisateur
-user_admin_account: Compte admin
-user_anonymize_fully: Anonymiser complètement le compte de l'utilisateur
-user_anonymize_partially: Anonymiser partiellement le compte de l'utilisateur (le nom et le prénom seront préservés)
-user_delete_account_image: Supprimer l'image associée à ce compte
-user_edit: Éditer le profil
-user_export: Exporter
-user_export_details: Exporte les données relatives au compte
-user_is_active: Compte activé
-user_is_anonymized: Compte anonymisé
-user_renew_password_error: Une erreur s'est produite lors de la demande de renouvellement de mot de passe.
-user_renew_password_mail_sent: Un email vous a été envoyé à l'adresse %usermail%
-user_renew_password_success: Votre mot de passe a été mis à jour.
-user_self_edit: Éditer votre profil
-user: Utilisateur
-userfullname: Nom - Prénom
-username: Identifiant
-validate_transcription: (in)valider la transcription
-validation_asked: Validation demandée
-validation_comment: Commentaire
-validator: Validateur
-view_profile: Voir le profil
-view_project: Voir les détails
-view_transcriptions_long: Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
-yes: Oui
+project_media_no_media:                Aucun média associé au projet
+project_media_title:                   Gérer les media du projet
+project_media_upload:                  Envoyer les media
+project_move_directory_title:          Déplacer le dossier
+project_name:                          Nom du projet
+project_register:                      S'inscrire au projet
+project_registration:                  Inscription au projet
+project_status:                        Statut du projet
+project_transcript:                    Transcrire
+project_transcription:                 Transcription
+project_user_status:                   Statut des utilisateurs
+project_view_transciptions:            Voir les transcriptions
+public_mail:                           Email visible par tous
+register:                              s'enregistrer
+repeat_password:                       Répéter le mot de passe
+reread_transcription:                  Relire la transcription
+root_directory_option:                 Racine
+save:                                  Sauvegarder
+schema_create:                         Créer un schema
+schema_enabled:                        Schéma activé
+schema_json:                           JSON
+schema_name:                           Nom du schema
+selected_media:                        média selectionné(s)
+status_edit:                           Editer le statut
+status_remove:                         Supprimer
+status_toggle_off:                     Invalider
+status_toggle_on:                      Valider
+status:                                Statut
+submit_validation:                     Soumettre
+submit:                                valider
+subscribe_long:                        L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
+tei_link_to_official_attr_doc:         Voir la documentation pour l'élément relatif à cet attribut
+tei_link_to_official_doc:              Voir la documentation pour %element%
+tei_schema:                            Schema TEI pour le projet
+transcribe_long:                       Vous permet d'accéder au média et de proposer des transcriptions.
+transcribe:                            Transcrire
+transcriber:                           Transcripteur
+transcript_media:                      Transcription du media
+transcription_current_nb_validations:  Actuellement %1% / %2% validations
+transcription_is_locked:               La transcription est bloquée
+transcription_is_valid:                La transcription est valide ?
+transcription_saved:                   Transcription sauvegardée
+transcription_send_to_validation:      Demander une validation
+transcription_unvalidated:             Transcription invalidée
+transcription_validated:               Transcription validée
+transcriptions_page_title:             Transcriptions du projet
+unvalidate_transcription:              Invalider la transcription
+user_account_activated_error:          Un problème est survenu lors de l'activation de votre compte.
+user_account_activated:                Votre compte est maintenant actif.
+user_account_created:                  Votre compte et créé mais n'est pas encore activé. Vous devriez recevoir un email qui vous permettra de l'activer.
+user_account_updated:                  Votre compte à été mis à jour.
+user_activate_action:                  Activer / désactiver le compte
+user_add:                              Ajouter un utilisateur
+user_admin_account:                    Compte admin
+user_anonymize_fully:                  Anonymiser complètement le compte de l'utilisateur
+user_anonymize_partially:              Anonymiser partiellement le compte de l'utilisateur (le nom et le prénom seront préservés)
+user_delete_account_image:             Supprimer l'image associée à ce compte
+user_edit:                             Éditer le profil
+user_export_details:                   Exporte les données relatives au compte
+user_export:                           Exporter
+user_is_active:                        Compte activé
+user_is_anonymized:                    Compte anonymisé
+user_renew_password_error:             Une erreur s'est produite lors de la demande de renouvellement de mot de passe.
+user_renew_password_mail_sent:         Un email vous a été envoyé à l'adresse %usermail%
+user_renew_password_success:           Votre mot de passe a été mis à jour.
+user_self_edit:                        Éditer votre profil
+user:                                  Utilisateur
+userfullname:                          Nom - Prénom
+username:                              Identifiant
+validate_transcription:                (in)valider la transcription
+validation_asked:                      Validation demandée
+validation_comment:                    Commentaire
+validator:                             Validateur
+view_profile:                          Voir le profil
+view_project:                          Voir les détails
+view_transcriptions_long:              Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
+yes:                                   Oui

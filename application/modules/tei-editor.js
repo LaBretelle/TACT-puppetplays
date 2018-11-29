@@ -97,37 +97,46 @@ class TeiEditor {
       this.displayContainer(container, true)
       const cardTitle = document.createTextNode('[' + currentTinyElement.nodeName + ']')
       elementTitle.appendChild(cardTitle)
-      currentTeiElement.attributes.forEach(teiAttribute => {
-        const tinyAttr = currentTinyElement.attributes.getNamedItem(teiAttribute.key)
-        let control
-        switch (teiAttribute.type) {
-          case 'string':
-            control = document.createElement('input')
-            control.setAttribute('value', tinyAttr ? tinyAttr.value : '')
-            break
-          case 'enumerated':
-            control = document.createElement('select')
-            if(!teiAttribute.required) {
-              this.appendOptionToSelect(control, 'none', tinyAttr ? 'none' === tinyAttr.value : false)
-            }
-            teiAttribute.values.forEach(value => {
-              this.appendOptionToSelect(control, value, tinyAttr ? value === tinyAttr.value : false)
-            })
-            break
-        }
-        control.classList.add('form-control', 'form-control-sm')
-        control.required = teiAttribute.required
 
-        control.addEventListener(teiAttribute.type === 'string' ? 'input' : 'change', (e) => {
-          currentTinyElement.setAttribute(teiAttribute.key, e.target.value)
+      if (currentTeiElement.attributes.length > 0) {
+        currentTeiElement.attributes.forEach(teiAttribute => {
+          const tinyAttr = currentTinyElement.attributes.getNamedItem(teiAttribute.key)
+          let control
+          switch (teiAttribute.type) {
+            case 'string':
+              control = document.createElement('input')
+              control.setAttribute('value', tinyAttr ? tinyAttr.value : '')
+              break
+            case 'enumerated':
+              control = document.createElement('select')
+              if(!teiAttribute.required) {
+                this.appendOptionToSelect(control, 'none', tinyAttr ? 'none' === tinyAttr.value : false)
+              }
+              teiAttribute.values.forEach(value => {
+                this.appendOptionToSelect(control, value, tinyAttr ? value === tinyAttr.value : false)
+              })
+              break
+          }
+          control.classList.add('form-control', 'form-control-sm')
+          control.required = teiAttribute.required
+
+          control.addEventListener(teiAttribute.type === 'string' ? 'input' : 'change', (e) => {
+            currentTinyElement.setAttribute(teiAttribute.key, e.target.value)
+          })
+
+          let label = teiAttribute.key
+          label += teiAttribute.required ? ' *' : ''
+          const li = this.createLiElement(label, teiAttribute, true)
+          li.appendChild(control)
+          elementAttributes.appendChild(li)
         })
-
-        let label = teiAttribute.key
-        label += teiAttribute.required ? ' *' : ''
-        const li = this.createLiElement(label, teiAttribute, true)
-        li.appendChild(control)
+      } else {
+        const li = document.createElement('li')
+        li.innerHTML = Translator.trans('no_attribute')
+        li.classList.add('list-group-item', 'tei-element-li', 'text-muted')
         elementAttributes.appendChild(li)
-      })
+      }
+
     } else {
       this.displayContainer(container, false)
     }
