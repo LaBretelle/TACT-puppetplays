@@ -41,3 +41,7 @@ application/web/*
 ###> symfony/web-server-bundle ###
 /application/.web-server-pid
 ###< symfony/web-server-bundle ###
+
+## generated translation files
+application/translations/tei.en.yml
+application/translations/tei.fr.yml
