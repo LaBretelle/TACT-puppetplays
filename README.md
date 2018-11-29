@@ -9,7 +9,7 @@ TACT - Plateforme de Transcription et d'Annotation de Corpus Scientifiques
 - create .env file from .env.dist
 
 ```bash
-mv .env.dist .env
+cp .env.dist .env
 ```
 
 - edit `.env` file entries.
