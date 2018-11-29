@@ -16,7 +16,9 @@ class TeiEditor {
       content_css: [
         '/build/css/tiny.css'
       ],
-      forced_root_block: 'p',
+      extended_valid_elements: 'root',
+      custom_elements: 'root',
+      forced_root_block: false,
       valid_elements: '*[*]',
       entity_encoding: 'raw',
       menubar: false,
@@ -67,6 +69,7 @@ class TeiEditor {
     const root = document.querySelector('.elements')
     const container = document.querySelector('.elements-container')
     root.innerHTML = ''
+
     if (current) {
       current.childrens.forEach(tagName => {
         this.appendLiToAllowedElements(tei, root, tagName)
@@ -166,10 +169,12 @@ class TeiEditor {
   deleteCurrentTag(tei) {
     const editor = Tiny.activeEditor
     let currentTinyElement = Tiny.activeEditor.selection.getNode()
-    editor.undoManager.transact(() => {
-      Tiny.activeEditor.dom.remove(currentTinyElement, true)
-      this.refreshPanels(tei)
-    })
+    if (!currentTinyElement.classList.contains('mce-content-body')) {
+      editor.undoManager.transact(() => {
+        Tiny.activeEditor.dom.remove(currentTinyElement, true)
+        this.refreshPanels(tei)
+      })
+    }
   }
 
   /*
