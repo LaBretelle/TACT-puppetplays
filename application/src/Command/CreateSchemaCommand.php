@@ -42,6 +42,7 @@ class CreateSchemaCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln([
+            '',
             'Create JSON TEI schema from CSV ...',
             '======================================================',
             '',
@@ -170,29 +171,6 @@ class CreateSchemaCommand extends Command
                         $frDef = 'Aucune définition pour '.$tagAttribute;
                         $en[$tagAttribute] = $enDef;
                         $fr[$tagAttribute] = $frDef;
-
-                        /*
-
-                                                // THIS DOES NOT WORK, ONLY TAGS ARE DOCUMENTED @FIRST LEVEL
-                                                // do it in english
-                                                $response = $this->doCurlRequest('http://www.tei-c.org/Vault/P5/current/doc/tei-p5-doc/en/html/ref-'.$tagAttribute.'.html');
-                                                if ($response['status'] === 200) {
-                                                    $enDef = $this->getTeiDefinition($response['content']);
-                                                } else {
-                                                    $enDef = 'No definition found for attribute '.$tagAttribute;
-                                                }
-
-                                                $en['attr_'.$tagAttribute.'_help'] = $enDef;
-                                                // do it in french
-                                                $response = $this->doCurlRequest('http://www.tei-c.org/Vault/P5/current/doc/tei-p5-doc/fr/html/ref-'.$tagAttribute.'.html');
-                                                if ($response['status'] === 200) {
-                                                    $frDef = $this->getTeiDefinition($response['content']);
-                                                } else {
-                                                    $frDef = 'Aucune définition trouvée pour l\'attribut '.$tagAttribute;
-                                                }
-
-                                                $fr['attr_'.$tagAttribute.'_help'] = $frDef;
-                        */
                     }
                 }
                 $lineNumber++;
