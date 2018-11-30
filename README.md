@@ -74,6 +74,16 @@ chown -R www-data:www-data public/user_images public/project_files var/log var/c
 - symfony app should be available @ http://localhost:8082/
 - adminer should be available @ http://localhost:8088/
 
+### Update project TEI Schema
+
+> Each project *must* define a schema.
+
+- Put the CSV file (must be named `schema.csv`) in the `public/project_files/{projectid}/` folder
+- Exec `php bin/console app:create-schema` (*inside the php docker container*)
+- You'll be asked for the id of the project...
+- This will  
+  - Generate the file `tei-schema.json`
+  - Update tranalations files `tei.en.yml` and `tei.fr.yml` 
 
 ### Usefull commands
 
