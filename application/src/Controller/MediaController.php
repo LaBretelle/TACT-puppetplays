@@ -107,9 +107,12 @@ class MediaController extends Controller
         }
 
         $form = $this->createForm(ValidationType::class);
-
         $form->handleRequest($request);
         $nbCurrentValidation = $this->transcriptionManager->countValidationLog($media->getTranscription());
+
+        $parent = $media->getParent();
+        $project = $media->getProject();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $isValid = $form->get('isValid')->getData();
             $comment = $form->get('comment')->getData();
@@ -123,15 +126,15 @@ class MediaController extends Controller
             }
 
             $log = $this->transcriptionManager->getLastLogByName($media->getTranscription(), AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
-            if (!$isValid || $isValid && $nbCurrentValidation >= $media->getProject()->getNbValidation()) {
+
+            if (!$isValid || $isValid && $nbCurrentValidation >= $project->getNbValidation()) {
                 $this->mailManager->sendValidationOrUnvalidationMail($log->getUser(), $media, $isValid, $comment);
             }
 
-            $parent = $media->getParent();
-            $project = $media->getProject();
-
             return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
         }
+
+        $schema = $this->fileManager->getProjectTeiSchema($project);
 
         return $this->render(
           'media/reread.html.twig',
@@ -139,6 +142,7 @@ class MediaController extends Controller
             'media' => $media,
             'form' => $form->createView(),
             'nbCurrentValidation' => $nbCurrentValidation,
+            'schema' => $schema,
           ]
         );
     }

@@ -33,9 +33,6 @@
                     {% elseif media | isInReread  and  project | isAuthorizedOnProject('validateTranscription') %}
                       <a data-toggle="tooltip" title="{{'media_reread_button_title' | trans}}" href="{{path('media_transcription_reread', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i></a>
                     {% endif %}
-                    {% if project | isAuthorizedOnProject('manageMedia') %}
-                      <button type="button" data-toggle="tooltip" title="{{'media_delete_button_title' | trans}}" data-id="{{media.id}}" role="button" class="btn btn-sm btn-outline-secondary delete-image"><i class="fas fa-trash"></i></button>
-                    {% endif %}
                   {% endif %}
                 </div>
               </div>
