@@ -2,9 +2,33 @@
 
 {{ include('media/media-breadcrumb.html.twig', { 'project': project, 'parent': parent, 'from': from }) }}
 
+<div class='row mb-3'>
+  <div class="col-12">
+    <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary media-filter-clear">
+        <input type="radio" name="options" id="option0" checked>
+        <i class="fas fa-eraser"></i>
+      </label>
+      <label class="btn btn-danger media-filter" data-status="none">
+        <input type="radio" name="options" id="option1"> {{'transcription_status_none'|trans({},"fixtures")}}
+      </label>
+      <label class="btn btn-warning media-filter" data-status="in-progress">
+        <input type="radio" name="options" id="option1"> {{'transcription_status_in_progress'|trans({},"fixtures")}}
+      </label>
+      <label class="btn btn-info media-filter" data-status="in-reread">
+        <input type="radio" name="options" id="option2"> {{'transcription_status_in_reread'|trans({},"fixtures")}}
+      </label>
+      <label class="btn btn-success media-filter" data-status="validated">
+        <input type="radio" name="options" id="option1"> {{'transcription_status_validated'|trans({},"fixtures")}}
+      </label>
+    </div>
+  </div>
+</div>
+
 <div class="album py-5 bg-light">
   <div class="container-fluid">
     <div class="row">
+
 
       {% for dir in project.dirs if dir.parent == parent %}
         <div class="col-2">

@@ -21,6 +21,14 @@ $(document).ready(() => {
     $('.move-project-media-modal').modal('show')
   })
 
+  $('.media-filter').on('click', (e) => {
+    filterOnStatus(e.target.dataset.status)
+  })
+
+  $('.media-filter-clear').on('click', () => {
+    filterClear()
+  })
+
   // toggle all media selection / unselection
   $('.toggle-select-all-media').on('click', (e) => {
     const checked = e.target.dataset.state === 'check'
@@ -41,7 +49,6 @@ $(document).ready(() => {
 
   $('.image-select').on('change', (e) => {
     handleMediaSelection(e.target)
-
   })
 
   $('.project-image').on('click', (e) => {
@@ -246,4 +253,22 @@ const handleMediaSelection = (element) => {
     $('.delete-media').attr('disabled', true)
     $('.move-media').attr('disabled', true)
   }
+}
+
+const filterOnStatus = (status, checked) => {
+  let medias = Array.from(document.getElementsByClassName('status'))
+  medias.forEach(function (media) {
+    if (media.classList.contains(status)) {
+      media.parentNode.classList.remove('d-none')
+    } else {
+      media.parentNode.classList.add('d-none')
+    }
+  })
+}
+
+const filterClear = () => {
+  let medias = Array.from(document.getElementsByClassName('status'))
+  medias.forEach(function (media) {
+    media.parentNode.classList.remove('d-none')
+  })
 }
