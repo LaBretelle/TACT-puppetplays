@@ -8,7 +8,7 @@
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active {{ project.image ? "carousel-custom" }}" style="{{ project.image ? 'background-image: url(' ~ asset('project_files/'~project.id~'/'~project.image) ~ ')' }}">
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgba(255, 255, 255, 0.7)">
+        <nav id="project-nav" class="navbar navbar-expand-lg navbar-light" style="background-color:rgba(255, 255, 255, 0.7)">
           <a class="navbar-brand" href="#">{{ project.name }}</a>
           <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">

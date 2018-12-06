@@ -55,6 +55,7 @@ class ProjectType extends AbstractType
               'empty_data' => 2,
           ])
           ->add('catchPhrase', TextType::class, [
+            'required' => false,
             'label' => 'project_catchphrase',
             'translation_domain' => 'messages'
           ])

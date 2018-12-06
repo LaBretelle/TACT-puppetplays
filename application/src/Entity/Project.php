@@ -129,18 +129,6 @@ class Project
         return $this;
     }
 
-    public function getCatchPhrase(): ?string
-    {
-        return $this->catchPhrase;
-    }
-
-    public function setCatchPhrase(string $catchPhrase): self
-    {
-        $this->catchPhrase = $catchPhrase;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -377,6 +365,18 @@ class Project
     public function setProjectHelpLink(string $projectHelpLink): self
     {
         $this->projectHelpLink = $projectHelpLink;
+
+        return $this;
+    }
+
+    public function getCatchPhrase(): ?string
+    {
+        return $this->catchPhrase;
+    }
+
+    public function setCatchPhrase(?string $catchPhrase): self
+    {
+        $this->catchPhrase = $catchPhrase;
 
         return $this;
     }
