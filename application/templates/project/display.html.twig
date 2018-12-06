@@ -8,123 +8,77 @@
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active {{ project.image ? "carousel-custom" }}" style="{{ project.image ? 'background-image: url(' ~ asset('project_files/'~project.id~'/'~project.image) ~ ')' }}">
-        <div class="container">
-          <div class="carousel-caption text-left">
-            <h1>{{ project.name }}</h1>
-            <div class='row'>
-              <div class="project-description col-8">
-                {{ project.description | raw }}
-              </div>
-              <div class='col-4'>
-                {{ macros.userSummary(manager, false) }}
-              </div>
-            </div>
-            <p>
-              {% if userStatus %}
-              <span class="badge badge-info">
-                {{ userStatus.status.name | trans({}, 'fixtures') }} {{ not userStatus.enabled ? 'not_enabled_yet' | trans}}
-              </span>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgba(255, 255, 255, 0.7)">
+          <a class="navbar-brand" href="#">{{ project.name }}</a>
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <ul class="navbar-nav">
+              {% if project | isAuthorizedOnProject('transcribe') %}
+                <a href="{{ path('project_transcriptions', {id: project.id})}}" class="nav-link" data-toggle="tooltip" data-placement="top" title="{{"transcribe_long"|trans}}">
+                  {{'project_transcript'|trans }}
+                </a>
+              {% elseif project | isAuthorizedOnProject('viewTranscriptions') %}
+                <a href="{{ path('project_transcriptions', {id: project.id})}}" class="nav-link" data-toggle="tooltip" data-placement="top" title="{{"view_transcriptions_long"|trans}}">
+                  {{'project_view_transciptions'|trans }}
+                </a>
               {% endif %}
-              {% if is_granted('ROLE_ADMIN') %}
-              <span class="badge badge-success">
-                {{"app_admin"|trans}}
-              </span>
+              {% if project | isAuthorizedOnProject('editProject') %}
+                <a href="{{ path('project_edit', {id: project.id}) }}" class="nav-link" data-toggle="tooltip" data-placement="top" title="{{"edit_project_long"|trans}}">
+                  {{'project_edit' | trans}}
+                </a>
               {% endif %}
-
-              {% if not project.public %}
-                <span class="badge badge-danger">
-                  {{'project_is_not_public' | trans}}
-                </span>
+              {% if project | isAuthorizedOnProject('manageMedia') %}
+                <a href="{{ path('project_media', {id: project.id}) }}" class="nav-link" data-toggle="tooltip" data-placement="top" title="{{"manage_media_long"|trans}}">
+                  {{'project_manage_media' | trans}}
+                </a>
               {% endif %}
-            </p>
+              {% if project | isAuthorizedOnProject('manageUser') %}
+                <a href="{{ path('status_project', {id: project.id}) }}" class="nav-link" data-toggle="tooltip" data-placement="top" title="{{"manage_user_statuses_long"|trans}}">
+                  {{'project_manage_user_statuses' | trans}}
+                </a>
+              {% endif %}
+            </ul>
           </div>
-      </div>
+        </nav>
+
+        <h1 id="catchphrase">
+          {{ project.catchPhrase }}
+        </h1>
+
+        {% if project | isAuthorizedOnProject('register') %}
+        <span id="register-container">
+          <a href="{{ path('status_request', {id: project.id})}}" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="{{"subscribe_long"|trans}}">
+            {{'project_register' | trans}}
+          </a>
+        </span>
+        {% endif %}
+
       </div>
     </div>
   </div>
   <div class="page-content-container">
     <div class="row">
-      <div class="col-12">
-        <div class="card-deck">
-            {% if project | isAuthorizedOnProject('transcribe') %}
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><i class="fas fa-image fa-fw" aria-hidden="true"></i> {{'project_transcription' | trans}}</h5>
-                  <p class="card-text text-muted text-justify">{{"transcribe_long"|trans}}</p>
-                </div>
-                <div class="card-footer text-right">
-                  <a href="{{ path('project_transcriptions', {id: project.id})}}" class="card-link">
-                    {{'project_transcript'|trans }}
-                  </a>
-                </div>
-              </div>
-            {% elseif project | isAuthorizedOnProject('viewTranscriptions') %}
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><i class="fas fa-image fa-fw" aria-hidden="true"></i> {{'project_transcription' | trans}}</h5>
-                  <p class="card-text text-muted text-justify">{{"view_transcriptions_long"|trans}}</p>
-                </div>
-                <div class="card-footer text-right">
-                  <a href="{{ path('project_transcriptions', {id: project.id})}}" class="card-link">
-                    {{'project_view_transciptions'|trans }}
-                  </a>
-                </div>
-              </div>
-            {% endif %}
-            {% if project | isAuthorizedOnProject('editProject') %}
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i> {{'project_edition' | trans}}</h5>
-                  <p class="card-text text-muted text-justify">{{"edit_project_long"|trans}}</p>
-                </div>
-                <div class="card-footer text-right">
-                  <a href="{{ path('project_edit', {id: project.id}) }}" class="card-link">
-                    {{'project_edit' | trans}}
-                  </a>
-                </div>
-              </div>
-            {% endif %}
-            {% if project | isAuthorizedOnProject('manageMedia') %}
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><i class="fas fa-image fa-fw" aria-hidden="true"></i> {{'project_management_media' | trans}}</h5>
-                  <p class="card-text text-muted text-justify">{{"manage_media_long"|trans}}</p>
-                </div>
-                <div class="card-footer text-right">
-                  <a href="{{ path('project_media', {id: project.id}) }}" class="card-link">
-                    {{'project_manage_media' | trans}}
-                  </a>
-                </div>
-              </div>
-            {% endif %}
-            {% if project | isAuthorizedOnProject('manageUser') %}
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><i class="fas fa-users fa-fw" aria-hidden="true"></i> {{'project_management_user_statuses' | trans}}</h5>
-                  <p class="card-text text-muted text-justify">{{"manage_user_statuses_long"|trans}}</p>
-                </div>
-                <div class="card-footer text-right">
-                  <a href="{{ path('status_project', {id: project.id}) }}" class="card-link">
-                    {{'project_manage_user_statuses' | trans}}
-                  </a>
-                </div>
-              </div>
-            {% endif %}
-
-          {% if project | isAuthorizedOnProject('register') %}
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-hand-holding-heart fa-fw" aria-hidden="true"></i> {{'project_registration' | trans}}</h5>
-                <p class="card-text text-muted text-justify">{{'subscribe_long' | trans}}</p>
-              </div>
-              <div class="card-footer text-right">
-                <a href="{{ path('status_request', {id: project.id})}}" class="card-link">
-                  {{'project_register' | trans}}
-                </a>
-              </div>
-            </div>
+      <div class="col">
+        <p>
+          {% if userStatus %}
+          <span class="badge badge-info">
+            {{ userStatus.status.name | trans({}, 'fixtures') }} {{ not userStatus.enabled ? 'not_enabled_yet' | trans}}
+          </span>
           {% endif %}
-        </div>
+          {% if is_granted('ROLE_ADMIN') %}
+          <span class="badge badge-success">
+            {{"app_admin"|trans}}
+          </span>
+          {% endif %}
+
+          {% if not project.public %}
+            <span class="badge badge-danger">
+              {{'project_is_not_public' | trans}}
+            </span>
+          {% endif %}
+        </p>
+        {{ project.description | raw }}
       </div>
     </div>
   </div>

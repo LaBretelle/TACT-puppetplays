@@ -54,6 +54,10 @@ class ProjectType extends AbstractType
               'required' => true,
               'empty_data' => 2,
           ])
+          ->add('catchPhrase', TextType::class, [
+            'label' => 'project_catchphrase',
+            'translation_domain' => 'messages'
+          ])
           ->add('css', TextareaType::class, [
               'label'    => 'project_css',
               'required' => false,

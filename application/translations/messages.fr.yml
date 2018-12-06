@@ -67,6 +67,7 @@ platform_logo:                         Logo de la plateforme
 platform_name:                         Nom de la plateforme
 platform_page_title:                   Administration de la plateforme
 preview:                               Prévisualiser
+project_catchphrase:                   Phrase d'accroche
 project_create:                        Création d'un projet
 project_created:                       Projet créé
 project_css:                           Définition de la css inline pour le projet
