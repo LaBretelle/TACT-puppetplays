@@ -1,12 +1,9 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-  <div class="page-content-container">
-    <h3>
-      <a href="{{ path("project_display", {'id': project.id} )}}">{{ project.name }}</a>
-      - {{ "project_manage_user_statuses"|trans }}
-      <hr/>
-    </h3>
+{% include 'project/navigation.html.twig' with {'subtitle': 'project_manage_user_statuses'} %}
+
+<div id="main-container">
     <table class="table  table-striped">
       <thead class="thead-dark">
         <tr>

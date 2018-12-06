@@ -5,24 +5,9 @@
 {% endblock %}
 
 {% block body %}
-<div class="page-content-container">
-  <div class="row">
-    <div class="col-10">
-      <h4><a href="{{ path("project_display", {'id': project.id} )}}">{{project.name}}</a> - {{'transcriptions_page_title' | trans}}</h4>
-    </div>
-    <div class="col-2 text-right">
-      <div class="btn-group">
-        <a class="btn btn-link" href="{{project.projectHelpLink}}" data-toggle="tooltip" title="{{'project_help_link' | trans }}">
-          <i class="fas fa-question-circle"></i>
-        </a>
-        {% if project | isAuthorizedOnProject('register') %}
-          <a href="{{ path('status_request', {id: project.id})}}" data-toggle="tooltip" title="{{'project_register' | trans}}">
-            <i class="fas fa-hand-holding-heart fa-fw" aria-hidden="true"></i>
-          </a>
-        {% endif %}
-      </div>
-    </div>
-  </div>
+{% include 'project/navigation.html.twig' with {'subtitle': 'project_transcript'} %}
+
+<div id="main-container">
   {{ include('media/media-list-partial.html.twig', { 'project': project }) }}
 </div>
 {% endblock %}

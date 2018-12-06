@@ -67,6 +67,7 @@ platform_name:                         Platform name
 platform_page_title:                   Platform administration
 preview:                               Prévisualiser
 project_catchphrase:                   Catchphrase
+project_create_edit:                   Create / Edit a project
 project_create:                        Project creation
 project_created:                       Project created
 project_css:                           Project inline css definition

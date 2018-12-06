@@ -8,39 +8,8 @@
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active {{ project.image ? "carousel-custom" }}" style="{{ project.image ? 'background-image: url(' ~ asset('project_files/'~project.id~'/'~project.image) ~ ')' }}">
-        <nav id="project-nav" class="navbar navbar-expand-lg navbar-light" style="background-color:rgba(255, 255, 255, 0.7)">
-          <a class="navbar-brand" href="#">{{ project.name }}</a>
-          <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-            </ul>
-            <ul class="navbar-nav">
-              {% if project | isAuthorizedOnProject('transcribe') %}
-                <a href="{{ path('project_transcriptions', {id: project.id})}}" class="nav-link" data-toggle="tooltip" data-placement="top" title="{{"transcribe_long"|trans}}">
-                  {{'project_transcript'|trans }}
-                </a>
-              {% elseif project | isAuthorizedOnProject('viewTranscriptions') %}
-                <a href="{{ path('project_transcriptions', {id: project.id})}}" class="nav-link" data-toggle="tooltip" data-placement="top" title="{{"view_transcriptions_long"|trans}}">
-                  {{'project_view_transciptions'|trans }}
-                </a>
-              {% endif %}
-              {% if project | isAuthorizedOnProject('editProject') %}
-                <a href="{{ path('project_edit', {id: project.id}) }}" class="nav-link" data-toggle="tooltip" data-placement="top" title="{{"edit_project_long"|trans}}">
-                  {{'project_edit' | trans}}
-                </a>
-              {% endif %}
-              {% if project | isAuthorizedOnProject('manageMedia') %}
-                <a href="{{ path('project_media', {id: project.id}) }}" class="nav-link" data-toggle="tooltip" data-placement="top" title="{{"manage_media_long"|trans}}">
-                  {{'project_manage_media' | trans}}
-                </a>
-              {% endif %}
-              {% if project | isAuthorizedOnProject('manageUser') %}
-                <a href="{{ path('status_project', {id: project.id}) }}" class="nav-link" data-toggle="tooltip" data-placement="top" title="{{"manage_user_statuses_long"|trans}}">
-                  {{'project_manage_user_statuses' | trans}}
-                </a>
-              {% endif %}
-            </ul>
-          </div>
-        </nav>
+
+        {% include 'project/navigation.html.twig' %}
 
         <h1 id="catchphrase">
           {{ project.catchPhrase }}
@@ -57,7 +26,7 @@
       </div>
     </div>
   </div>
-  <div class="page-content-container">
+  <div id="main-container">
     <div class="row">
       <div class="col">
         <p>

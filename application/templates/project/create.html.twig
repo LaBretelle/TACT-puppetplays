@@ -8,30 +8,12 @@
 {% endblock %}
 
 {% block body %}
-<div class="page-content-container">
-  <div class="row">
-    <div class="col-10">
 
-      <h3>
-        {% if project.id %}
-          <a href="{{ path("project_display", {'id': project.id} )}}">{{ project.name }}</a>
-          - {{ 'project_edit'|trans }}
-        {% else %}
-          {{ 'project_create'|trans }}
-        {% endif %}
-      </h3>
-    </div>
-    <div class="col-2 text-right">
-      {% if  project.id %}
-      <form name="deleteProject" action="{{ path("project_delete", {'id': project.id} )}}" method="post">
-        <button class="btn btn-link" type="submit" title="{{'project_delete' | trans}}" data-toggle="tooltip">
-          <i class="fas fa-trash"></i>
-        </button>
-      </form>
-      {% endif %}
-    </div>
-  </div>
-  <hr/>
+{% if project.id %}
+  {% include 'project/navigation.html.twig' with {'subtitle': 'project_create_edit'} %}
+{% endif %}
+
+<div id="main-container">
   {{ form_start(form) }}
     {{ form_row(form.name) }}
     {{ form_row(form.description) }}
@@ -61,6 +43,14 @@
 
     {{ form_widget(form._token) }}
     {{ form_row(form.save) }}
+
+    {% if  project.id %}
+    <form name="deleteProject" action="{{ path("project_delete", {'id': project.id} )}}" method="post">
+      <button class="btn btn-danger" type="submit">
+        <i class="fas fa-trash"></i> {{'project_delete' | trans}}
+      </button>
+    </form>
+    {% endif %}
 </div>
 
 {# delete project confirm modal #}

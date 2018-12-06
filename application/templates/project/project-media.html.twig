@@ -5,13 +5,10 @@
 {% endblock %}
 
 {% block body %}
-<div class="page-content-container">
-  <div class="row">
-    <div class="col-12">
-      <h4><a href="{{ path("project_display", {'id': project.id} )}}">{{project.name}}</a> - {{'project_media_title' | trans}}</h4>
-      <hr/>
-    </div>
-  </div>
+
+{% include 'project/navigation.html.twig' with {'subtitle': 'project_manage_media'} %}
+
+<div id="main-container">
   {% if project | isAuthorizedOnProject('manageMedia') %}
     <div class="card media-upload-card">
       <div class="card-header">
