@@ -163,7 +163,7 @@ user_renew_password_success:           Votre mot de passe a été mis à jour.
 user_self_edit:                        Éditer votre profil
 user:                                  Utilisateur
 userfullname:                          Nom - Prénom
-username:                              Identifiant
+username:                              Nom d'utilisateur
 validate_transcription:                (in)valider la transcription
 validation_asked:                      Validation demandée
 validation_comment:                    Commentaire

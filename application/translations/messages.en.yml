@@ -162,7 +162,7 @@ user_renew_password_success:           Your password was updated.
 user_self_edit:                        Edit your profile
 user:                                  User
 userfullname:                          Lastname - Firstname
-username:                              Login
+username:                              Username
 validate_transcription:                (in)valider la transcription
 validation_asked:                      Validation asked
 validation_comment:                    Comment
