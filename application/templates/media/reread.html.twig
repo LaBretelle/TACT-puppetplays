@@ -3,21 +3,18 @@
 {% import "media/macros.html.twig" as macros %}
 
 {% block body %}
+  {% include 'project/navigation.html.twig' with {'subtitle': 'reread_transcription'|trans ~' '~ media.name, 'project': media.project} %}
+
   <style>
   {{ media.project.css ?  media.project.css | raw : ''}}
   </style>
 
-  <div class="page-content-container">
+  <div id="main-container">
     <div class="row">
-      <div class="col">
-        <h4><a href="{{ path("project_display", {'id': media.project.id} )}}">{{media.project.name}}</a></h4>
-      </div>
       <div class="col">
         <a href="{{ path('project_transcriptions', {id: media.project.id, parent: media.parent ? media.parent.id : null})}}" data-toggle="tooltip" title="{{'back_to_transcripts' | trans}}">
           <i class="fa fa-arrow-left fa-fw"></i>
         </a>
-        {{'reread_transcription' | trans}}
-        <span class="text-muted">{{media.name}}</span>
       </div>
       <div class="col text-right">
         <span class="badge badge-info">{{'transcription_current_nb_validations' | trans({'%1%': nbCurrentValidation, '%2%': media.project.nbValidation})}}</span>

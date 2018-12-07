@@ -1,13 +1,9 @@
 {% extends "base.html.twig" %}
 
-
-
 {% block body %}
-  <div class="page-content-container">
+  <div id="main-container">
     <a class="btn btn-primary" href="{{ path('admin_schema_manage')}}">{{'schema_create'|trans}}</a>
-
     <hr/>
-
     <ul class="list-group">
       {% for schema in schemas %}
         <li class="list-group-item">

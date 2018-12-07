@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="page-content-container">
+<div id="main-container">
   {{ form_start(form) }}
 
     {% if is_granted('ROLE_ADMIN', app.user) %}
