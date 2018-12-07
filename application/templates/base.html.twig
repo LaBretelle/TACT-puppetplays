@@ -80,23 +80,29 @@
     {% endfor %}
     {% block body %}{% endblock %}
   </div>
-  <nav class="navbar fixed-bottom navbar-light bg-light">
-    <span class="">
-      <a href=" http://univ-grenoble-alpes.fr" target="_blank">
-        <img class="logo-bottom" data-toggle="tooltip" title="Université Grenoble Alpes" src="{{ asset('img/logos/logo_univ_grenoble_alpes.jpg') }}"/>
-      </a>
-      <a href="http://www.cnrs.fr" target="_blank">
-        <img class="logo-bottom" data-toggle="tooltip" title="CNRS Centre national de la recherche scientifique" src="{{ asset('img/logos/logo_cnrs.jpg') }}"/>
-      </a>
-      <a target="_blank" href="http://litt-arts.univ-grenoble-alpes.fr/litt-arts-arts-et-pratiques-du-texte-de-l-image-de-l-ecran-et-de-la-scene-62796.kjsp">
-        <img class="logo-bottom" data-toggle="tooltip" title="Litt&Arts (UMR 5316) - Arts et pratiques du texte, de l'image, de l'écran et de la scène" src="{{ asset('img/logos/logo_littarts.png') }}"/>
-      </a>
-      <a href="https://demarreshs.hypotheses.org/" target="_blank">
-        <img class="logo-bottom" data-toggle="tooltip" title="DémarreSHS!" src="{{ asset('img/logos/logo_demarre_shs.jpg') }}"/>
-      </a>
-    </span>
-    <a class="navbar-brand" href="#">{{ platform.name  }} - (Plateforme de) Transcription et d'Annotation de Corpus Textuels</a>
-  </nav>
+
+  <footer id="footer" class="text-muted">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">{{"backtotop"|trans}}</a>
+      </p>
+      <p>
+        <a class="btn" href=" http://univ-grenoble-alpes.fr" target="_blank">
+          <img class="logo-bottom" data-toggle="tooltip" title="Université Grenoble Alpes" src="{{ asset('img/logos/logo_univ_grenoble_alpes.jpg') }}"/>
+        </a>
+        <a class="btn" href="http://www.cnrs.fr" target="_blank">
+          <img class="logo-bottom" data-toggle="tooltip" title="CNRS Centre national de la recherche scientifique" src="{{ asset('img/logos/logo_cnrs.jpg') }}"/>
+        </a>
+        <a class="btn" target="_blank" href="http://litt-arts.univ-grenoble-alpes.fr/litt-arts-arts-et-pratiques-du-texte-de-l-image-de-l-ecran-et-de-la-scene-62796.kjsp">
+          <img class="logo-bottom" data-toggle="tooltip" title="Litt&Arts (UMR 5316) - Arts et pratiques du texte, de l'image, de l'écran et de la scène" src="{{ asset('img/logos/logo_littarts.png') }}"/>
+        </a>
+        <a class="btn" href="https://demarreshs.hypotheses.org/" target="_blank">
+          <img class="logo-bottom" data-toggle="tooltip" title="DémarreSHS!" src="{{ asset('img/logos/logo_demarre_shs.jpg') }}"/>
+        </a>
+      </p>
+    </div>
+  </footer>
+
   {% block javascripts %}
   <script src="{{ asset('build/manifest.js') }}"></script>
   <script src="{{ asset('build/vendor.js') }}"></script>

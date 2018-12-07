@@ -12,6 +12,7 @@ administrate_users_title:              Administration des utilisateurs de la pla
 app_admin:                             Administrateur du site
 attributes:                            Attributs pour l'élément
 back_to_transcripts:                   Retour aux transcriptions
+backtotop:                             Haut de page
 cancel:                                Annuler
 confirm_account_anonymization:         Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
 confirm_delete_project_folders:        Êtes vous sur de vouloir supprimer le(s) dossiers selectionné(s) (les médias seront aussi dupprimés) ?

@@ -4,10 +4,6 @@
 @import '~bootstrap/scss/bootstrap';
 /* BOOTSTRAP OVERRIDE
 --------------------------- */
-body {
-  padding-bottom: 70px;
-}
-
 body > .container-fluid {
   padding-top: 40px;
   margin: 0 !important;
@@ -21,6 +17,16 @@ body > .container-fluid {
     color: #aaa;
   }
 }
+
+#footer {
+  margin-top:100px;
+  padding: 1.5rem 0;
+  color: #999;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: 0.05rem solid #e5e5e5;
+}
+
 /* OPENSEADRAGON
 ******************/
 .openseadragon-buttons {

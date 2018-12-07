@@ -11,6 +11,7 @@ administrate_users_title:              Platform users administration
 app_admin:                             Site administrator
 attributes:                            Attributs for element
 back_to_transcripts:                   Back to transcripts
+backtotop:                             Back to top
 cancel:                                Cancel
 confirm_account_anonymization:         If you continue the account informations will be anonimized. This action is irreversible.
 confirm_delete_project_folders:        Are you sure you want to delete selected folder(s) (Media will also be removed) ?
