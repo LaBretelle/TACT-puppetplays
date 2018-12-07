@@ -83,7 +83,6 @@ date {
 }
 
 head {
-  display: block;
   &::before {
     content: "<head>";
   }
