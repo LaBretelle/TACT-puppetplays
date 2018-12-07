@@ -19,7 +19,7 @@
           </div>
           <button id="dir-{{dir.id}}-name-edit-btn" data-id="{{dir.id}}" class="btn btn-link btn-folder-name-edit btn-link-no-padding black" type="button" role="button"><i class="fas fa-pencil-alt"></i></button>
         </div>
-        <button id="dir-{{dir.id}}-name-update-btn" style="display:none;" data-id="{{dir.id}}" class="btn btn-link btn-folder-name-save" type="button" role="button"><i class="fa fa-save"></i></button>
+        <button id="dir-{{dir.id}}-name-update-btn" style="display:none;" data-pid="{{project.id}}" data-id="{{dir.id}}" class="btn btn-link btn-folder-name-save" type="button" role="button"><i class="fa fa-save"></i></button>
       </div>
     </li>
     {% if dir.children|length > 0 %}

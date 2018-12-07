@@ -5,12 +5,9 @@ let checkedFolders = []
 let deleteFoldersForm = null
 let moveFoldersForm = null
 
-// does the project has folder(s) ?
-let hasFolder = false
 
 $(document).ready(() => {
 
-  hasFolder = $('.tree-entry').length > 0
   /* media
   ------------------------------------ */
   $('.delete-media').on('click', () => {
@@ -39,12 +36,12 @@ $(document).ready(() => {
     e.target.dataset.state  = checked ? 'uncheck' : 'check'
   })
 
-  $('.move-media-confirm-button').on('click', () => {
-    moveMedia()
+  $('.move-media-confirm-button').on('click', (e) => {
+    moveMedia(e.target.dataset.pid)
   })
 
-  $('.delete-media-confirm-button').on('click', () => {
-    deleteMedia()
+  $('.delete-media-confirm-button').on('click', (e) => {
+    deleteMedia(e.target.dataset.pid)
   })
 
   $('.image-select').on('change', (e) => {
@@ -110,6 +107,7 @@ $(document).ready(() => {
 
   $('.btn-folder-name-save').on('click', (e) => {
     const id = e.target.dataset.id
+    const pid = e.target.dataset.pid
     const name = $(`#dir-${id}-name-input`).val().trim()
     if(name !== '') {
       $(`#dir-${id}-name-value`).text(name)
@@ -117,7 +115,7 @@ $(document).ready(() => {
       $(`#dir-${id}-edit-actions`).show()
       $(`#dir-${id}-name-update-btn`).hide()
       $(`#dir-${id}-name-input`).hide()
-      updateFolderName(id, name)
+      updateFolderName(pid, id, name)
     }
   })
 
@@ -191,8 +189,8 @@ $(document).ready(() => {
   }
 })
 
-const deleteMedia = () => {
-  const url = Routing.generate('project_media_delete')
+const deleteMedia = (projectId) => {
+  const url = Routing.generate('project_media_delete', {id:projectId})
   $.ajax({
     method: 'POST',
     url: url,
@@ -208,8 +206,8 @@ const deleteMedia = () => {
   })
 }
 
-const moveMedia = () => {
-  const url = Routing.generate('project_move_media')
+const moveMedia = (projectId) => {
+  const url = Routing.generate('project_move_media', {id:projectId})
   $.ajax({
     method: 'POST',
     url: url,
@@ -226,8 +224,8 @@ const moveMedia = () => {
 }
 
 
-const updateFolderName = (id, name) => {
-  const url = Routing.generate('project_update_folder_name')
+const updateFolderName = (projectId, id, name) => {
+  const url = Routing.generate('project_update_folder_name', {id:projectId})
   $.ajax({
     method: 'POST',
     url: url,
@@ -255,7 +253,7 @@ const handleMediaSelection = (element) => {
   }
 }
 
-const filterOnStatus = (status, checked) => {
+const filterOnStatus = (status) => {
   let medias = Array.from(document.getElementsByClassName('status'))
   medias.forEach(function (media) {
     if (media.classList.contains(status)) {

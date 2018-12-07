@@ -83,6 +83,7 @@ date {
 }
 
 head {
+  display: block;
   &::before {
     content: "<head>";
   }
@@ -196,5 +197,14 @@ corr {
   }
   &::after {
     content: "</corr>";
+  }
+}
+
+subst {
+  &::before {
+    content: "<subst>";
+  }
+  &::after {
+    content: "</subst>";
   }
 }

@@ -185,9 +185,9 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/media-delete", name="media_delete", options={"expose"=true}, methods="POST")
+     * @Route("/{id}/media-delete", name="media_delete", options={"expose"=true}, methods="POST")
      */
-    public function removeProjectMediaByIds(Request $request)
+    public function removeProjectMediaByIds(Project $project, Request $request)
     {
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
             return $this->json([], $status = 403);
@@ -200,9 +200,9 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/move-media", name="move_media", options={"expose"=true}, methods="POST")
+     * @Route("/{id}/move-media", name="move_media", options={"expose"=true}, methods="POST")
      */
-    public function moveProjectMedia(Request $request)
+    public function moveProjectMedia(Project $project, Request $request)
     {
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
             return $this->json([], $status = 403);
@@ -232,9 +232,9 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/update-folder-name", name="update_folder_name", options={"expose"=true}, methods="POST")
+     * @Route("/{id}/update-folder-name", name="update_folder_name", options={"expose"=true}, methods="POST")
      */
-    public function updateProjectFolderName(Request $request)
+    public function updateProjectFolderName(Project $project, Request $request)
     {
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
             return $this->json([], $status = 403);
