@@ -283,10 +283,6 @@ class ProjectController extends Controller
      */
     public function display(Project $project)
     {
-        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VIEW_TRANSCRIPTIONS)) {
-            return $this->json([], $status = 403);
-        }
-
         $projectManagerUser = $this->projectManager->getProjectManagerUser($project);
 
         return $this->render(
