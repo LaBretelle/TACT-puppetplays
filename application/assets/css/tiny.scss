@@ -44,166 +44,169 @@
  font-size: smaller;
 }
 
+#tinymce {
 
-div {
-  &::before {
-    content: "<div>";
-  }
-  &::after {
-    content: "</div>";
-  }
-}
-
-p {
-  &::before {
-    content: "<p>";
-  }
-  &::after {
-    content: "</p>";
+  div {
+    &::before {
+      content: "<div>";
+    }
+    &::after {
+      content: "</div>";
+    }
   }
 
-}
+  p {
+    &::before {
+      content: "<p>";
+    }
+    &::after {
+      content: "</p>";
+    }
 
-num {
-  &::before {
-    content: "<num>";
   }
-  &::after {
-    content: "</num>";
-  }
-}
 
-date {
-  &::before {
-    content: "<date>";
+  num {
+    &::before {
+      content: "<num>";
+    }
+    &::after {
+      content: "</num>";
+    }
   }
-  &::after {
-    content: "</date>";
-  }
-}
 
-head {
-  &::before {
-    content: "<head>";
+  date {
+    &::before {
+      content: "<date>";
+    }
+    &::after {
+      content: "</date>";
+    }
   }
-  &::after {
-    content: "</head>";
-  }
-}
 
-hi {
-  &::before {
-    content: "<hi>";
+  title {
+    display: block;
+    &::before {
+      content: "<title>";
+    }
+    &::after {
+      content: "</title>";
+    }
   }
-  &::after {
-    content: "</hi>";
-  }
-}
 
-del {
-  &::before {
-    content: "<del>";
+  hi {
+    &::before {
+      content: "<hi>";
+    }
+    &::after {
+      content: "</hi>";
+    }
   }
-  &::after {
-    content: "</del>";
-  }
-}
 
-add {
-  &::before {
-    content: "<add>";
+  del {
+    &::before {
+      content: "<del>";
+    }
+    &::after {
+      content: "</del>";
+    }
   }
-  &::after {
-    content: "</add>";
-  }
-}
 
-placeName {
-  &::before {
-    content: "<placeName>";
+  add {
+    &::before {
+      content: "<add>";
+    }
+    &::after {
+      content: "</add>";
+    }
   }
-  &::after {
-    content: "</placeName>";
-  }
-}
 
-persName {
-  &::before {
-    content: "<persName>";
+  placeName {
+    &::before {
+      content: "<placeName>";
+    }
+    &::after {
+      content: "</placeName>";
+    }
   }
-  &::after {
-    content: "</persName>";
-  }
-}
 
-metamark {
-  &::before {
-    content: "<metamark>";
+  persName {
+    &::before {
+      content: "<persName>";
+    }
+    &::after {
+      content: "</persName>";
+    }
   }
-  &::after {
-    content: "</metamark>";
-  }
-}
 
-abbr {
-  &::before {
-    content: "<abbr>";
+  metamark {
+    &::before {
+      content: "<metamark>";
+    }
+    &::after {
+      content: "</metamark>";
+    }
   }
-  &::after {
-    content: "</abbr>";
-  }
-}
 
-choice {
-  &::before {
-    content: "<choice>";
+  abbr {
+    &::before {
+      content: "<abbr>";
+    }
+    &::after {
+      content: "</abbr>";
+    }
   }
-  &::after {
-    content: "</choice>";
-  }
-}
 
-unclear {
-  &::before {
-    content: "<unclear>";
+  choice {
+    &::before {
+      content: "<choice>";
+    }
+    &::after {
+      content: "</choice>";
+    }
   }
-  &::after {
-    content: "</unclear>";
-  }
-}
 
-seg {
-  &::before {
-    content: "<seg>";
+  unclear {
+    &::before {
+      content: "<unclear>";
+    }
+    &::after {
+      content: "</unclear>";
+    }
   }
-  &::after {
-    content: "</seg>";
-  }
-}
 
-sic {
-  &::before {
-    content: "<sic>";
+  seg {
+    &::before {
+      content: "<seg>";
+    }
+    &::after {
+      content: "</seg>";
+    }
   }
-  &::after {
-    content: "</sic>";
-  }
-}
 
-corr {
-  &::before {
-    content: "<corr>";
+  sic {
+    &::before {
+      content: "<sic>";
+    }
+    &::after {
+      content: "</sic>";
+    }
   }
-  &::after {
-    content: "</corr>";
-  }
-}
 
-subst {
-  &::before {
-    content: "<subst>";
+  corr {
+    &::before {
+      content: "<corr>";
+    }
+    &::after {
+      content: "</corr>";
+    }
   }
-  &::after {
-    content: "</subst>";
+
+  subst {
+    &::before {
+      content: "<subst>";
+    }
+    &::after {
+      content: "</subst>";
+    }
   }
 }

@@ -16,8 +16,6 @@ class TeiEditor {
       content_css: [
         '/build/css/tiny.css'
       ],
-      extended_valid_elements: 'root',
-      custom_elements: 'root',
       forced_root_block: false,
       valid_elements: '*[*]',
       entity_encoding: 'raw',

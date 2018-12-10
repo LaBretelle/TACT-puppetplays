@@ -8,7 +8,7 @@ update-prod:
 	npm run build
 	php bin/console doctrine:schema:update --force
 	php bin/console cache:clear --env=prod
-	php bin/console cache:warmup --env=prod
+	chown -R www-data:www-data var/
 
 install:
 	composer install --prefer-source
@@ -23,8 +23,6 @@ install:
 cache:
 	php bin/console cache:clear
 	php bin/console cache:clear --env=prod
-	php bin/console cache:warmup
-	php bin/console cache:warmup --env=prod
 
 routes:
 	php bin/console fos:js-routing:dump --format=json --target=public/routes/fos_js_routes.json
@@ -44,4 +42,4 @@ update-dev:
 	npm run dev
 	php bin/console doctrine:schema:update --force
 	php bin/console cache:clear
-	php bin/console cache:warmup
+	chown -R www-data:www-data var/
