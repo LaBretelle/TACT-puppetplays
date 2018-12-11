@@ -102,6 +102,10 @@ class ProjectManager
     public function initMediaProcessing(Project $project, string $uploadPath, Directory $parent = null)
     {
         $projectPath = $this->fileManager->getProjectPath($project);
+        $thumbnailDir = $projectPath.DIRECTORY_SEPARATOR.'thumbnails';
+        if (!is_dir($thumbnailDir)) {
+            mkdir($thumbnailDir);
+        }
         $this->recursiveBrowse($project, $projectPath, $uploadPath, $parent);
         $this->deleteTempFolders($uploadPath);
     }
@@ -132,6 +136,9 @@ class ProjectManager
                     $file = new File($absolutePath);
                     $media = $this->mediaManager->createMediaFromFile($file, $value, $project, $parent);
                     $file->move($projectPath, $media->getUrl());
+
+
+                    $this->generateThumbnail($projectPath, $media->getUrl());
                 }
             }
         }
@@ -297,5 +304,13 @@ class ProjectManager
         $this->em->flush();
 
         return;
+    }
+
+    public function generateThumbnail($path, $fileName)
+    {
+        $imageURL = $path.DIRECTORY_SEPARATOR.$fileName;
+        $imagick = new \Imagick(realpath($imageURL));
+        $imagick->adaptiveResizeImage(256, 0);
+        $imagick->writeImage($path.DIRECTORY_SEPARATOR.'thumbnails'.DIRECTORY_SEPARATOR.$fileName);
     }
 }
