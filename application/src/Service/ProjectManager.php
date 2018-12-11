@@ -193,10 +193,15 @@ class ProjectManager
 
         foreach ($ids as $id) {
             $media = $mediaRepository->find($id);
+            $mediaURL = $media->getUrl();
             $project = $media->getProject();
             $project->removeMedia($media);
-            $filePath = $this->fileManager->getProjectPath($project).DIRECTORY_SEPARATOR.$media->getUrl();
+            $projectPath = $this->fileManager->getProjectPath($project);
+            $filePath = $projectPath.DIRECTORY_SEPARATOR.$mediaURL;
             $this->fileManager->delete($filePath);
+            $thumbnailPath = $projectPath.DIRECTORY_SEPARATOR.'thumbnails'.DIRECTORY_SEPARATOR.$mediaURL;
+            $this->fileManager->delete($thumbnailPath);
+
             $this->em->remove($media);
             $this->em->persist($project);
         }
