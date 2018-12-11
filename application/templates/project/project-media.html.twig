@@ -13,14 +13,10 @@
     <div class="card media-upload-card">
       <div class="card-header">
         <div class="row">
-          <div class="col">
-            <span data-toggle="collapse" data-target="#upload-form">
-            {{'project_media_add_file_title' | trans}}
-            </span>
-            <span class="float-right">
-              <button id="btn-toggle-upload-form" role="button" class="btn btn-link card-header-icon" type="button" data-toggle="collapse" data-target="#upload-form" aria-expanded="false">
-                <i class="fas fa-toggle-off"></i>
-              </button>
+          <div class="col" data-toggle="collapse" data-target="#upload-form">
+            <span class="btn btn-secondary">
+              <i class="fas fa-plus"></i>
+              {{'project_media_add_file_title' | trans}}
             </span>
           </div>
         </div>
