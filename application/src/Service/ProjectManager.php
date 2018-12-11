@@ -137,8 +137,7 @@ class ProjectManager
                     $media = $this->mediaManager->createMediaFromFile($file, $value, $project, $parent);
                     $file->move($projectPath, $media->getUrl());
 
-
-                    $this->generateThumbnail($projectPath, $media->getUrl());
+                    $this->generateThumbnail($projectPath, $media->getUrl(), 512);
                 }
             }
         }
@@ -311,11 +310,13 @@ class ProjectManager
         return;
     }
 
-    public function generateThumbnail($path, $fileName)
+    public function generateThumbnail($path, $fileName, $width)
     {
         $imageURL = $path.DIRECTORY_SEPARATOR.$fileName;
         $imagick = new \Imagick(realpath($imageURL));
-        $imagick->adaptiveResizeImage(256, 0);
+        $imagick->adaptiveResizeImage($width, 0);
         $imagick->writeImage($path.DIRECTORY_SEPARATOR.'thumbnails'.DIRECTORY_SEPARATOR.$fileName);
+
+        return;
     }
 }

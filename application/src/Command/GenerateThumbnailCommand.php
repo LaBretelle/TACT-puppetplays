@@ -70,6 +70,17 @@ class GenerateThumbnailCommand extends Command
             exit();
         }
 
+        $question = new Question('Thumbnail width: ');
+        $question->setValidator(function ($answer) {
+            if (!is_string($answer) || trim($answer) === '') {
+                throw new \Exception('Thumbnail width is required');
+            }
+
+            return $answer;
+        });
+        $width = intval($helper->ask($input, $output, $question));
+
+
         $medias = $project->getMedias();
         $projectFilesPath = $this->fileManager->getProjectPath($project);
 
@@ -79,7 +90,7 @@ class GenerateThumbnailCommand extends Command
         }
 
         foreach ($medias as $media) {
-            $this->pm->generateThumbnail($projectFilesPath, $media->getUrl());
+            $this->pm->generateThumbnail($projectFilesPath, $media->getUrl(), $width);
         }
     }
 }
