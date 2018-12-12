@@ -132,6 +132,7 @@ subscribe_long:                        L'inscription au projet vous permet de pa
 tei_link_to_official_attr_doc:         Voir la documentation pour l'élément relatif à cet attribut
 tei_link_to_official_doc:              Voir la documentation pour %element%
 tei_schema:                            Schema TEI pour le projet
+terms:                                 Conditions d'utilisation
 toggle_all_media_selection:            Sélectionner / Désélectionner tous les média
 transcribe_long:                       Vous permet d'accéder au média et de proposer des transcriptions.
 transcribe:                            Transcrire

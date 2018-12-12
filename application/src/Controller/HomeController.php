@@ -23,4 +23,12 @@ class HomeController extends Controller
          'home_text' => $platformParameters->getHomeText(),
         ]);
     }
+
+    /**
+     * @Route("/terms", name="terms")
+     */
+    public function terms()
+    {
+        return $this->render('home/terms.html.twig');
+    }
 }
