@@ -43,15 +43,19 @@
 
     {{ form_widget(form._token) }}
     {{ form_row(form.save) }}
+  </form>
 
-    {% if  project.id %}
-    <form name="deleteProject" action="{{ path("project_delete", {'id': project.id} )}}" method="post">
-      <button class="btn btn-danger" type="submit">
+  {% if  project.id %}
+  <div class="float-right">
+    <form name="deleteProject" action="{{ path("project_delete", {'id': project.id} )}}" method="POST">
+      <button class="btn btn-sm btn-danger" type="submit">
         <i class="fas fa-trash"></i> {{'project_delete' | trans}}
       </button>
     </form>
-    {% endif %}
+  </div>
+{% endif %}
 </div>
+
 
 {# delete project confirm modal #}
 <div class="modal fade delete-project-confirm-modal" id="deleteProjectConfirmModal" tabindex="-1" role="dialog" aria-labelledby="deleteProjectConfirmModalLabel" aria-hidden="true">
