@@ -19,14 +19,13 @@ body > .container-fluid {
 }
 
 #footer {
-  margin-top:100px;
+  margin-top: 100px;
   padding: 1.5rem 0;
   color: #999;
   text-align: center;
   background-color: #f9f9f9;
   border-top: 0.05rem solid #e5e5e5;
 }
-
 /* OPENSEADRAGON
 ******************/
 .openseadragon-buttons {
@@ -80,8 +79,9 @@ body > .container-fluid {
   text-align: center;
 }
 
-#project-nav {
+#secondary-nav {
   height: 90px;
+  background-color: rgba(211, 211, 211, 0.7);
 }
 
 #main-container {

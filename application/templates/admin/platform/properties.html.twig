@@ -5,13 +5,10 @@
 {% endblock %}
 
 {% block body %}
+
+{% include 'header.html.twig' with {'title' : 'platform_page_title'} %}
+
 <div id="main-container">
-  <div class="row">
-    <div class="col">
-      <h5>{{'platform_page_title' | trans}}</h5>
-    </div>
-  </div>
-  <hr/>
   {{ form_start(form) }}
     {{ form_row(form.name) }}
     {{ form_row(form.homeText) }}
@@ -30,7 +27,6 @@
       </div>
     </div>
     {% endif %}
-    <hr/>
     <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
   {{ form_end(form) }}
 </div>
