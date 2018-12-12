@@ -3,6 +3,8 @@
 {% import "user/macros.html.twig" as macros %}
 
 {% block body %}
+{% include 'header.html.twig' with {'title' : 'profile'} %}
+
 <div id="main-container">
   <div class="row user-profile-action">
     <div class="col text-right">
@@ -20,8 +22,6 @@
       </div>
     </div>
   </div>
-
-
   {{ macros.userSummary(user, true) }}
 </div>
 {% endblock %}

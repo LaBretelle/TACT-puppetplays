@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block body %}
+{% include 'header.html.twig' with {'title' : 'user_edit'} %}
+
 <div id="main-container">
   {{ form_start(form) }}
 
