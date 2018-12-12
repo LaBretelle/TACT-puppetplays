@@ -8,7 +8,7 @@ update-prod:
 	npm run build
 	php bin/console doctrine:schema:update --force
 	php bin/console cache:clear --env=prod
-	chown -R www-data:www-data var/
+	chown -R www-data:www-data public/user_images
 
 install:
 	composer install --prefer-source
@@ -19,6 +19,7 @@ install:
 	php bin/console fos:js-routing:dump --format=json --target=public/routes/fos_js_routes.json
 	php bin/console doctrine:fixtures:load
 	php bin/console bazinga:js-translation:dump
+	chown -R www-data:www-data var/
 
 cache:
 	php bin/console cache:clear
