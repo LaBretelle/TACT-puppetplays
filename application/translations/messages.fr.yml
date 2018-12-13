@@ -85,11 +85,11 @@ project_edition:                       Edition du projet
 project_enabled:                       Validé ?
 project_handle_user_statuses:          Gérer les utilisateurs
 project_help_link:                     Lien vers l'aide à la transcription
-project_image:                         Image du projet. Ratio de 4:1 conseillé (l'image sera retaillé automatiquement)
+project_image:                         Image du projet. Ratio de 4:1 conseillé (l'image sera retaillée automatiquement)
 project_is_not_public:                 Projet privé
 project_manage_media:                  Gérer les médias
 project_manage_user_statuses:          Gérer les utilisateurs
-project_management_media:              Gestion les médias
+project_management_media:              Gestion des médias
 project_management_user_statuses:      Gestion des utilisateurs
 project_manager:                       Manager du projet
 project_media_add_file_placeholder:    Sélectionner un/des fichier(s)
