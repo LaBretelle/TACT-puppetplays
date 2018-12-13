@@ -54,19 +54,21 @@ body > .container-fluid {
 }
 /* Declare heights because of positioning of img element */
 .carousel-item {
-  background-color: #444;
+  background-color: #285A78;
   min-height: 28rem;
   background-image: url("../img/px_by_Gre3g.png");
 }
 
-#home.carousel-item {
-  background-image: url("../img/congruent_outline.png");
-}
-
-#catchphrase {
-  text-shadow: 1px 1px 2px white;
+#catchphrase-container {
+  font-size: large;
   text-align: center;
-  margin-top: 12px;
+  padding: 4px;
+  position: relative;
+  left:0;
+  right: 0;
+  margin: auto;
+  background-color: #285A78;
+  color:white;
 }
 
 #register-container {
@@ -81,7 +83,17 @@ body > .container-fluid {
 
 #secondary-nav {
   height: 90px;
-  background-color: rgba(211, 211, 211, 0.7);
+  background-color: #285A78;
+  box-shadow:  0 4px 10px -8px black;
+  z-index: 10;
+  color:white;
+
+  a{
+      color:white;
+      &.active{
+        text-decoration: underline;
+      }
+  }
 }
 
 #main-container {
