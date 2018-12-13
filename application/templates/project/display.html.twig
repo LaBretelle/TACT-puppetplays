@@ -9,7 +9,7 @@
     <div class="carousel-inner">
       <div class="carousel-item active {{ project.image ? "carousel-custom" }}" style="{{ project.image ? 'background-image: url(' ~ asset('project_files/'~project.id~'/'~project.image) ~ ')' }}">
 
-        {% include 'project/navigation.html.twig' %}
+        {% include 'project/navigation.html.twig' with {'current': ''} %}
 
         <h1 id="catchphrase">
           {{ project.catchPhrase }}

@@ -10,7 +10,9 @@
 {% block body %}
 
 {% if project.id %}
-  {% include 'project/navigation.html.twig' with {'subtitle': 'project_create_edit'} %}
+  {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
+{% else %}
+  {% include 'header.html.twig' with {'title': 'project_create'} %}
 {% endif %}
 
 <div id="main-container">

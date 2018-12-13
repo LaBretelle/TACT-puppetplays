@@ -3,7 +3,7 @@
 {% import "media/macros.html.twig" as macros %}
 
 {% block body %}
-  {% include 'project/navigation.html.twig' with {'subtitle': 'transcript_media'|trans ~' '~ media.name, 'project': media.project} %}
+  {% include 'project/navigation.html.twig' with {'project': media.project, 'current': 'project_transcriptions'} %}
 
   <style>
   {{ media.project.css ?  media.project.css | raw : ''}}
@@ -14,6 +14,7 @@
         <a href="{{ path('project_transcriptions', {id: media.project.id, parent: media.parent ? media.parent.id : null})}}" data-toggle="tooltip" title="{{'back_to_transcripts' | trans}}">
           <i class="fa fa-arrow-left fa-fw"></i>
         </a>
+        {{ 'transcript_media'|trans }} <span class="text-muted">{{media.name}}</span>
       </div>
       <div class="col text-right">
         {% if edit %}

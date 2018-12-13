@@ -55,6 +55,7 @@ media_reread_button_title:             Relire la transcription
 media_transcribe_button_title:         Transcrire
 media_upload_help:                     Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 media_view_transcription_button_title: Voir la transcription
+medias:                                Medias
 move_media:                            Déplacer les média sélectionnés
 nb_validation:                         Nombre de relectures nécéssaire par fiche
 need_at_least_one_manager:             Il faut au moins un gestionnaire par projet.
@@ -135,7 +136,7 @@ tei_link_to_official_doc:              Voir la documentation pour %element%
 tei_schema:                            Schema TEI pour le projet
 terms:                                 Conditions d'utilisation
 toggle_all_media_selection:            Sélectionner / Désélectionner tous les média
-transcribe_long:                       Vous permet d'accéder au média et de proposer des transcriptions.
+transcribe_long:                       Vous permet d'accéder aux médias et de proposer des transcriptions.
 transcribe:                            Transcrire
 transcriber:                           Transcripteur
 transcript_media:                      Transcription du media
@@ -170,6 +171,7 @@ user_self_edit:                        Éditer votre profil
 user:                                  Utilisateur
 userfullname:                          Nom - Prénom
 username:                              Nom d'utilisateur
+users:                                 Utilisateurs
 validate_transcription:                (in)valider la transcription
 validation_asked:                      Validation demandée
 validation_comment:                    Commentaire

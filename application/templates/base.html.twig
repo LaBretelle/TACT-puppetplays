@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-
 {% set platform = '' | getPlatformParams %}
-
 <html lang="{{ app.request.locale|split('_')[0] }}">
   <head>
     <meta charset="UTF-8" />
     <title>
-      {% block title %}
-        {{ platform.name  }}
-      {% endblock %}
+    {% block title %}
+      {{ platform.name  }}
+    {% endblock %}
     </title>
     {% block stylesheets %}
-      <link rel="stylesheet" href="{{ asset('build/css/app.css') }}" />
-      <link rel="stylesheet" href="{{ asset('build/css/toastr.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/css/toastr.css') }}" />
     {% endblock %}
   </head>
   <body>

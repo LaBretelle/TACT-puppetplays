@@ -54,6 +54,7 @@ media_reread_button_title:             Reread transcription
 media_transcribe_button_title:         Transcribe
 media_upload_help:                     Choose files or a zip archive to upload. Files will be uploaded / extracted to the current active folder if any.
 media_view_transcription_button_title: View transcription
+medias:                                Medias
 move_media:                            Move selected media
 nb_validation:                         Number of reread per media
 need_at_least_one_manager:             Need t least one manager.
@@ -169,6 +170,7 @@ user_self_edit:                        Edit your profile
 user:                                  User
 userfullname:                          Lastname - Firstname
 username:                              Username
+users:                                 Users
 validate_transcription:                (in)valider la transcription
 validation_asked:                      Validation asked
 validation_comment:                    Comment

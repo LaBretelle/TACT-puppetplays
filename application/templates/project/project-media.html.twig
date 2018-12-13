@@ -6,7 +6,7 @@
 
 {% block body %}
 
-{% include 'project/navigation.html.twig' with {'subtitle': 'project_manage_media'} %}
+{% include 'project/navigation.html.twig' with {'current': 'project_media'} %}
 
 <div id="main-container">
   {% if project | isAuthorizedOnProject('manageMedia') %}
