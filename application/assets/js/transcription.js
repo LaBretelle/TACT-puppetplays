@@ -29,8 +29,6 @@ OpenSeadragon({
 })
 
 $(document).ready(() => {
-
-
   if ('edit' === mode) {
     const logId = document.getElementById('log-id').value
     // load proper TEI schema
@@ -38,12 +36,12 @@ $(document).ready(() => {
     editor = new TeiEditor(jsonTeiDef)
     editor.init()
 
-    $('.btn-save-transcription').on('click', (e) => {
-      saveTranscription(e.target.dataset.id)
-    })
-
     $('.btn-finish-transcription').on('click', (e) => {
       finishTranscription(e.target.dataset.id, e.target.dataset.pid)
+    })
+
+    $('.btn-save-transcription').on('click', (e) => {
+      saveTranscription(e.target.dataset.id)
     })
 
     // update islocked log every 2 (-) minutes
@@ -52,16 +50,12 @@ $(document).ready(() => {
     }, updateLogTimeout)
 
   } else if ('validation' === mode) {
-
     const jsonTeiDef = JSON.parse(document.getElementById('tei-schema').value)
     editor = new TeiEditor(jsonTeiDef)
     editor.init()
-    $('.btn-validate-transcription').on('click', (e) => {
-      validateTranscription(e.target.dataset.id, e.target.dataset.pid)
-    })
 
-    $('.btn-unvalidate-transcription').on('click', (e) => {
-      unvalidateTranscription(e.target.dataset.id, e.target.dataset.pid)
+    $('.btn-save-transcription').on('click', (e) => {
+      saveTranscription(e.target.dataset.id)
     })
 
   } else {
@@ -100,6 +94,8 @@ const saveTranscription = (id) => {
   }).done(() => {
     Toastr.info(Translator.trans('transcription_saved'))
   })
+
+  return true
 }
 
 const finishTranscription = (id, pid) => {
@@ -115,40 +111,6 @@ const finishTranscription = (id, pid) => {
     data: {
       'transcription': editor.getContent()
     }
-  }).done(() => {
-    window.location = projectHome
-  })
-}
-
-const validateTranscription = (id, pid) => {
-
-  const url = Routing.generate('media_transcription_validate', {
-    id: id
-  })
-  const projectHome = Routing.generate('project_transcriptions', {
-    id: pid
-  })
-  $.ajax({
-    method: 'POST',
-    url: url,
-    data: {
-      'transcription': editor.getContent()
-    }
-  }).done(() => {
-    window.location = projectHome
-  })
-}
-
-const unvalidateTranscription = (id, pid) => {
-  const url = Routing.generate('media_transcription_unvalidate', {
-    id: id
-  })
-  const projectHome = Routing.generate('project_transcriptions', {
-    id: pid
-  })
-  $.ajax({
-    method: 'POST',
-    url: url
   }).done(() => {
     window.location = projectHome
   })
