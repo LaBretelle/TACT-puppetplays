@@ -1,5 +1,10 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('build/css/intro.css') }}" />
+{% endblock %}
+
 {% import "media/macros.html.twig" as macros %}
 
 {% block body %}
@@ -19,15 +24,19 @@
       <div class="col text-right">
         {% if edit %}
           <div class="btn-group">
-            <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
-              <i class="fas fa-save"></i>
-            </button>
-            <button class="btn btn-link btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'transcription_send_to_validation' | trans}}" type="button" name="button">
-              <i class="fas fa-check-circle"></i>
-            </button>
-            <a class="btn btn-link" href="{{media.project.projectHelpLink}}" data-toggle="tooltip" title="{{'project_help_link' | trans }}">
-              <i class="fas fa-question-circle"></i>
-            </a>
+            <span data-intro="{{'help6'|trans}}" data-step="6">
+              <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
+                <i class="fas fa-save"></i>
+              </button>
+              <button class="btn btn-link btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'transcription_send_to_validation' | trans}}" type="button" name="button">
+                <i class="fas fa-check-circle"></i>
+              </button>
+            </span>
+            <span data-intro="{{'help7'|trans}}" data-step="7" data-toggle="tooltip" title="{{'help'|trans}}">
+              <button class="btn btn-link" data-toggle="modal" data-target="#help-modal" type="button">
+                <i class="fas fa-question-circle"></i>
+              </button>
+            </span>
           </div>
         {% elseif locked %}
           <h5>
@@ -44,7 +53,7 @@
     </div>
     <hr/>
     <div class="row">
-      <div class="col">
+      <div data-intro="{{'help1'|trans}}" data-step="1" class="col">
         <div class="openseadragon-buttons text-center">
           <button id="osd-zoom-in" type="button" class="btn btn-light">
             <i class="fas fa-search-plus"></i>
@@ -67,7 +76,7 @@
         </div>
         <div data-url="{{ macros.mediaURL(media) }}" id="seadragon-viewer" class="rounded"></div>
       </div>
-      <div class="col-7">
+      <div data-intro="{{'help2'|trans}}" data-step="2" class="col-7">
         {% if edit %}
           {{ include('media/tei-editor.html.twig', { 'media': media }) }}
       {% else %}
@@ -88,6 +97,35 @@
   </div>
 </div>
 
+{# media modal #}
+<div class="modal fade help-modal" id="help-modal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body text-center">
+        <div class="row">
+          <div class="col">
+            {% if media.project.projectHelpLink %}
+            <h4>
+              <i class="fas fa-book"></i> {{'transcript_help'|trans}}
+            </h4>
+            <a class="btn btn-sm btn-secondary" href="{{media.project.projectHelpLink}}" target="_blank">
+              {{'transcript_help_doc'|trans}}
+            </a>
+            {% endif %}
+          </div>
+          <div class="col">
+            <h4><i class="fas fa-magic"></i> {{"tutorial"|trans}}</h4>
+            <a id="start-tutorial" class="btn btn-sm btn-secondary" href="{{media.project.projectHelpLink}}" target="_blank" data-dismiss="modal">
+              Activer le tutoriel
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {# hidden inputs... #}
 {% if edit %}
   <input type="hidden" id="log-id" name="log_id" value="{{log.id}}">
@@ -96,15 +134,9 @@
 
 {% block javascripts %}
 {{ parent() }}
-{% if edit %}
-  <script type="text/javascript">
-    var mode = 'edit';
-  </script>
-{% else %}
-  <script type="text/javascript">
-    var mode = 'view';
-  </script>
-{% endif %}
+<script type="text/javascript">
+  var mode = {{ edit ? '"edit"': '"view"' }};
+</script>
 <script src="{{ asset('build/js/openseadragon.js') }}"></script>
 <script src="{{ asset('build/js/transcription.js') }}"></script>
 {% endblock %}

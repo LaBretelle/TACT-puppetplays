@@ -1,5 +1,6 @@
 /* global mode */
 import OpenSeadragon from 'openseadragon'
+import introJs from 'intro.js'
 
 // normally every 2 minutes but to avoid any time problem let's put a bit less
 const updateLogTimeout = 100000
@@ -29,6 +30,7 @@ OpenSeadragon({
 })
 
 $(document).ready(() => {
+
   if ('edit' === mode) {
     const logId = document.getElementById('log-id').value
     // load proper TEI schema
@@ -42,6 +44,10 @@ $(document).ready(() => {
 
     $('.btn-save-transcription').on('click', (e) => {
       saveTranscription(e.target.dataset.id)
+    })
+
+    $('#start-tutorial').on('click', () => {
+      startTutorial()
     })
 
     // update islocked log every 2 (-) minutes
@@ -114,4 +120,14 @@ const finishTranscription = (id, pid) => {
   }).done(() => {
     window.location = projectHome
   })
+}
+
+const startTutorial = () => {
+  introJs().setOptions({
+    'showProgress': true,
+    'showBullets': false,
+    'showStepNumbers': false,
+    'scrollToElement': false,
+    'overlayOpacity': 0.5
+  }).start()
 }

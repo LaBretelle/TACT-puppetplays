@@ -13,6 +13,7 @@ attributes:                            Attributs for element
 back_to_transcripts:                   Back to transcripts
 backtotop:                             Back to top
 cancel:                                Cancel
+close:                                 Close
 confirm_account_anonymization:         If you continue the account informations will be anonimized. This action is irreversible.
 confirm_delete_project_folders:        Are you sure you want to delete selected folder(s) (Media will also be removed) ?
 confirm_delete_project_media:          Are you sure you want to delete selected media ?
@@ -35,6 +36,14 @@ folder_name_changed:                   Folder name edited
 folder_name:                           Folder name
 folders_deleted:                       Folder(s) deleted
 folders_moved:                         Folder(s) moved
+help:                                  Help
+help1:                                 Média à transcrire
+help2:                                 La transcription se passe ici. Saisissez un texte, par exemple la phrase; "Ces ½ mondaines étt d’ailleurs bien svt des superfemmes" et sélectionner un mot, par exemple "étt" que l’on va annoter comme une abréviation ou bien "superfemmes" que l’on va indiquer comme étant en rouge.
+help3:                                 Choisissez maintenant une balise en cliquant sur « + ». "abbr" pour abréviation et "hi" pour mettre en valeur un mot (en couleur par exemple).
+help4:                                 Sélectionnez la valeur souhaitée.
+help5:                                 Vous pouvez visualiser le rendu de la transcription sur cet onglet.
+help6:                                 À tout moment, vous pouvez sauvegarder votre transcription et une fois qu’elle vous satisfait, en demander une validation.
+help7:                                 En cliquant ici vous pouvez retrouver un document d’aide à la transcription ou bien relancer le tutoriel.
 home:                                  Home
 is_public:                             Public project
 lastname:                              Lastname
@@ -138,6 +147,8 @@ toggle_all_media_selection:            Select / Unselect all media
 transcribe_long:                       Vous permet d'accéder au média et de proposer des transcriptions.
 transcribe:                            Transcrire
 transcriber:                           Transcriber
+transcript_help_doc:                   Transcript help document
+transcript_help:                       Transcript help
 transcript_media:                      Transcription of media
 transcription_current_nb_validations:  Currently %1% / %2% validations
 transcription_is_locked:               Transcription is locked
@@ -147,6 +158,8 @@ transcription_send_to_validation:      Send to validation
 transcription_unvalidated:             Transcription unvalidated
 transcription_validated:               Transcription validated
 transcriptions_page_title:             Project transcripts
+tutorial_enable:                       Enable tutorial
+tutorial:                              Tutorial
 unvalidate_transcription:              Unvalidate transcription
 user_account_activated_error:          An error occured while activating your account.
 user_account_activated:                Your account is now activated.
