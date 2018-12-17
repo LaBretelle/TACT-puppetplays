@@ -14,7 +14,7 @@ class TeiEditor {
       plugins: ['code'],
       branding: false,
       content_css: [
-        '/css/tiny.css'
+        '/css/tiny-20181217A.css'
       ],
       forced_root_block: false,
       valid_elements: '*[*]',
