@@ -38,6 +38,13 @@ folder_name:                           Nom du dossier
 folders_deleted:                       Dossier(s) supprimé(s)
 folders_moved:                         Dossier(s) déplacé(s)
 help:                                  Aide
+help1:                                 Média à transcrire
+help2:                                 La transcription se passe ici. Saisissez un texte, par exemple la phrase; "Ces ½ mondaines étt d’ailleurs bien svt des superfemmes" et sélectionner un mot, par exemple "étt" que l’on va annoter comme une abréviation ou bien "superfemmes" que l’on va indiquer comme étant en rouge.
+help3:                                 Choisissez maintenant une balise en cliquant sur « + ». "abbr" pour abréviation et "hi" pour mettre en valeur un mot (en couleur par exemple).
+help4:                                 Sélectionnez la valeur souhaitée.
+help5:                                 Vous pouvez visualiser le rendu de la transcription sur cet onglet.
+help6:                                 À tout moment, vous pouvez sauvegarder votre transcription et une fois qu’elle vous satisfait, en demander une validation.
+help7:                                 En cliquant ici vous pouvez retrouver un document d’aide à la transcription ou bien relancer le tutoriel.
 home:                                  Accueil
 is_public:                             Projet public
 lastname:                              Nom
@@ -141,6 +148,7 @@ toggle_all_media_selection:            Sélectionner / Désélectionner tous les
 transcribe_long:                       Vous permet d'accéder aux médias et de proposer des transcriptions.
 transcribe:                            Transcrire
 transcriber:                           Transcripteur
+transcript_help_doc_undefined:         Document d'aide non défini
 transcript_help_doc:                   Accéder au document d'aide à la transcription
 transcript_help:                       Aide à la transcription
 transcript_media:                      Transcription du media
@@ -186,10 +194,3 @@ view_profile:                          Voir le profil
 view_project:                          Voir les détails
 view_transcriptions_long:              Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
 yes:                                   Oui
-help1:                                 Média à transcrire
-help2:                                 La transcription se passe ici. Saisissez un texte, par exemple la phrase; "Ces ½ mondaines étt d’ailleurs bien svt des superfemmes" et sélectionner un mot, par exemple "étt" que l’on va annoter comme une abréviation ou bien "superfemmes" que l’on va indiquer comme étant en rouge.
-help3:                                 Choisissez maintenant une balise en cliquant sur « + ». "abbr" pour abréviation et "hi" pour mettre en valeur un mot (en couleur par exemple).
-help4:                                 Sélectionnez la valeur souhaitée.
-help5:                                 Vous pouvez visualiser le rendu de la transcription sur cet onglet.
-help6:                                 À tout moment, vous pouvez sauvegarder votre transcription et une fois qu’elle vous satisfait, en demander une validation.
-help7:                                 En cliquant ici vous pouvez retrouver un document d’aide à la transcription ou bien relancer le tutoriel.

@@ -147,6 +147,7 @@ toggle_all_media_selection:            Select / Unselect all media
 transcribe_long:                       Vous permet d'accéder au média et de proposer des transcriptions.
 transcribe:                            Transcrire
 transcriber:                           Transcriber
+transcript_help_doc_undefined:         Transcript help document undefined
 transcript_help_doc:                   Transcript help document
 transcript_help:                       Transcript help
 transcript_media:                      Transcription of media

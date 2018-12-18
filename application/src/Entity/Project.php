@@ -362,7 +362,7 @@ class Project
         return $this->projectHelpLink;
     }
 
-    public function setProjectHelpLink(string $projectHelpLink): self
+    public function setProjectHelpLink(?string $projectHelpLink): self
     {
         $this->projectHelpLink = $projectHelpLink;
 
