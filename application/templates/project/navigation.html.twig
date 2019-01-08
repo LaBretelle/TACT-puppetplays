@@ -11,6 +11,11 @@
   <span class="navbar-brand text-muted">{% if subtitle is defined %}({{ subtitle|trans }}){% endif %}</span>
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav ml-auto">
+      {% if project.projectHelpLink %}
+        <a href="{{ project.projectHelpLink }}" class="nav-link" target="_blank" data-toggle="tooltip" data-placement="bottom" title="{{"transcript_help_doc"|trans}}">
+          {{'help'|trans}}
+        </a>
+      {% endif %}
       {% if project | isAuthorizedOnProject('transcribe') %}
         <a href="{{ path('project_transcriptions', {id: project.id})}}" class="nav-link {{macros.addActiveClass(current, "project_transcriptions")}}" data-toggle="tooltip" data-placement="top" title="{{"transcribe_long"|trans}}">
           {{'project_transcript'|trans }}
