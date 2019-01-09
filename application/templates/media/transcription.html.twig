@@ -28,7 +28,7 @@
               <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
                 <i class="fas fa-save"></i>
               </button>
-              <button class="btn btn-link btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'transcription_send_to_validation' | trans}}" type="button" name="button">
+              <button class="btn btn-link btn-validation-modal" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'transcription_send_to_validation' | trans}}" type="button" name="button">
                 <i class="fas fa-check-circle"></i>
               </button>
             </span>
@@ -122,6 +122,29 @@
             </a>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# ask validation modal #}
+<div class="modal fade help-modal" id="validation-modal" tabindex="-1" role="dialog" aria-labelledby="validationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="alert alert-primary" role="alert">
+          {{ "leave_warning" |trans}}
+          <button class="btn btn-sm btn-outline-primary" data-id="{{media.id}}">
+            <i class="fas fa-save"></i> {{'save' | trans}}
+          </button>
+        </div>
+        {{ "ask_validation_text" |trans}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'cancel'|trans}}</button>
+        <button class="btn btn-primary btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" type="button" name="button">
+          {{'transcription_send_to_validation'|trans}}
+        </button>
       </div>
     </div>
   </div>

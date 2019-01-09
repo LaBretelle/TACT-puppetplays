@@ -38,6 +38,10 @@ $(document).ready(() => {
     editor = new TeiEditor(jsonTeiDef)
     editor.init()
 
+    $('.btn-validation-modal').on('click', () => {
+      $('#validation-modal').modal('show')
+    })
+
     $('.btn-finish-transcription').on('click', (e) => {
       finishTranscription(e.target.dataset.id, e.target.dataset.pid)
     })

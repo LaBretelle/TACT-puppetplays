@@ -10,6 +10,7 @@ administrate_schemas_menu:             Schémas
 administrate_users_menu:               Utilisateurs
 administrate_users_title:              Administration des utilisateurs de la plateforme
 app_admin:                             Administrateur du site
+ask_validation_text:                   Vous êtes sur le point de demander la validation/mise en relecture de cette transcription.
 attributes:                            Attributs pour l'élément
 back_to_transcripts:                   Retour aux transcriptions
 backtotop:                             Haut de page
@@ -48,6 +49,7 @@ help7:                                 En cliquant ici vous pouvez retrouver un 
 home:                                  Accueil
 is_public:                             Projet public
 lastname:                              Nom
+leave_warning:                         Si vous avez fait des modifications à cette transcription, et que vous n'avez pas encore sauvegardé celles-ci, elles ne seront pas prises en compte. 
 login:                                 connexion
 logout:                                déconnexion
 lost_password_link:                    J'ai oublié mon mot de passe
