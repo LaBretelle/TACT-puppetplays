@@ -97,11 +97,10 @@
   </div>
 </div>
 
-{# media modal #}
+{# help modal #}
 <div class="modal fade help-modal" id="help-modal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-
       <div class="modal-body text-center">
         <div class="row">
           <div class="col">
@@ -119,7 +118,7 @@
           <div class="col">
             <h4><i class="fas fa-magic"></i> {{"tutorial"|trans}}</h4>
             <a id="start-tutorial" class="btn btn-sm btn-secondary" href="{{media.project.projectHelpLink}}" target="_blank" data-dismiss="modal">
-              Activer le tutoriel
+              {{'tutorial_enable'|trans}}
             </a>
           </div>
         </div>
@@ -127,6 +126,7 @@
     </div>
   </div>
 </div>
+
 
 {# hidden inputs... #}
 {% if edit %}
