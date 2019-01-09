@@ -43,23 +43,23 @@
           {% if app.user %}
             <li class="nav-item">
               <a class="nav-link" href="{{ path('user_profile', {'id': app.user.id}) }}" data-placement="bottom" data-toggle="tooltip" title="{{ 'view_profile' | trans}}">
-                <i class="fas fa-user fa-fw"></i>{{app.user.fullname}}
+                <i class="fas fa-user fa-fw"></i> {{app.user.fullname}}
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ path('logout') }}" data-placement="bottom" data-toggle="tooltip" title="{{ 'logout' | trans({}, 'messages')}}">
-                <i class="fas fa-sign-out-alt fa-fw"></i>
+              <a class="nav-link" href="{{ path('logout') }}">
+                <i class="fas fa-sign-out-alt fa-fw"></i> {{ 'logout' | trans()}}
               </a>
             </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ path('user_login') }}" data-placement="bottom" data-toggle="tooltip" title="{{ 'login' | trans({}, 'messages')}}">
-                <i class="fas fa-sign-out-alt fa-fw"></i>
+              <a class="nav-link" href="{{ path('user_login') }}">
+                <i class="fas fa-sign-out-alt fa-fw"></i> {{'login'|trans}}
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ path('user_register') }}" data-placement="bottom" data-toggle="tooltip" title="{{ 'register' | trans({}, 'messages')}}">
-                <i class="fas fa-id-card fa-fw"></i>
+              <a class="nav-link" href="{{ path('user_register') }}">
+                <i class="fas fa-id-card fa-fw"></i> {{'register'|trans}}
               </a>
             </li>
           {% endif %}
