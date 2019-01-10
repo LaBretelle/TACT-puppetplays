@@ -43,6 +43,9 @@
         </div>
       {% endfor %}
 
+      {% set canTranscribe = project | isAuthorizedOnProject('transcribe') %}
+      {% set canValidate = project | isAuthorizedOnProject('validateTranscription') %}
+
       {% for media in project.medias if media.parent == parent %}
         <div class="col-2">
           <div class="card mb-2 box-shadow {{media | transcriptionStatusClass}}">
@@ -51,10 +54,10 @@
               <div class="d-flex justify-content-center">
                 <div class="btn-group">
                   <a data-toggle="tooltip" title="{{'media_view_transcription_button_title' | trans}}" href="{{path('media_transcription_display', {'id': media.id})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
-                  {% if project | isAuthorizedOnProject('transcribe') %}
+                  {% if canTranscribe %}
                     {% if media | isTranscribable %}
                       <a data-toggle="tooltip" title="{{'media_transcribe_button_title' | trans}}" href="{{path('media_transcription_edit', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-pencil-alt"></i></a>
-                    {% elseif media | isInReread  and  project | isAuthorizedOnProject('validateTranscription') %}
+                    {% elseif canValidate and media | isInReread %}
                       <a data-toggle="tooltip" title="{{'media_reread_button_title' | trans}}" href="{{path('media_transcription_reread', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i></a>
                     {% endif %}
                   {% endif %}
