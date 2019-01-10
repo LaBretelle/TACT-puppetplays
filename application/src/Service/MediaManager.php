@@ -109,19 +109,6 @@ class MediaManager
         return false;
     }
 
-    public function shouldBeValidated(Media $media)
-    {
-        $transcription = $media->getTranscription();
-        if (null === $transcription) {
-            return false;
-        } else {
-            $lastLog = $this->transcriptionManager->getLastLog($transcription);
-            $status = $lastLog->getName();
-            return $status === AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION;
-        }
-        return false;
-    }
-
     public function isInReread(Media $media)
     {
         $transcription = $media->getTranscription();
