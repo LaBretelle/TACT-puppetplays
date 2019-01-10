@@ -1,0 +1,10 @@
+<ul class="list-group">
+{% for log in logs %}
+  <li class="list-group-item">
+    {{ log.name|trans ~' '~ 'by'|trans }} <a target="_blank" href="{{ path('user_profile', {'id': log.user.id}) }}">{{log.user.username}}</a>
+    <span class="float-right">
+      {{ log.createdAt|date("d/m/Y H:i:s") }}
+    </span>
+  </li>
+{% endfor %}
+</ul>

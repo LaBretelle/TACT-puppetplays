@@ -71,7 +71,9 @@ class MediaController extends Controller
      */
     public function editTranscription(Media $media)
     {
-        if (false === $this->permissionManager->isAuthorizedOnProject($media->getProject(), AppEnums::ACTION_TRANSCRIBE)) {
+        $project = $media->getProject();
+
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_TRANSCRIBE)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
 
@@ -89,11 +91,22 @@ class MediaController extends Controller
             $em->persist($transcription);
             $em->flush();
         }
-        $schema = $this->fileManager->getProjectTeiSchema($media->getProject());
+        $schema = $this->fileManager->getProjectTeiSchema($project);
+
+        $logs = $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VIEW_LOGS)
+          ? $this->transcriptionManager->getLogs($transcription)
+          : null;
 
         return $this->render(
             'media/transcription.html.twig',
-            ['media' => $media, 'edit' => $canEdit, 'locked' => $locked, 'log' => $lockLog, 'schema' => $schema]
+            [
+              'media' => $media,
+              'edit' => $canEdit,
+              'locked' => $locked,
+              'log' => $lockLog,
+              'schema' => $schema,
+              'logs' => $logs
+            ]
         );
     }
 
@@ -102,16 +115,18 @@ class MediaController extends Controller
      */
     public function validateTranscription(Media $media, Request $request)
     {
-        if (false === $this->permissionManager->isAuthorizedOnProject($media->getProject(), AppEnums::ACTION_VALIDATE_TRANSCRIPTION)) {
+        $project = $media->getProject();
+        $transcription = $media->getTranscription();
+
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VALIDATE_TRANSCRIPTION)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
 
         $form = $this->createForm(ValidationType::class);
         $form->handleRequest($request);
-        $nbCurrentValidation = $this->transcriptionManager->countValidationLog($media->getTranscription());
+        $nbCurrentValidation = $this->transcriptionManager->countValidationLog($transcription);
 
         $parent = $media->getParent();
-        $project = $media->getProject();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $isValid = $form->get('isValid')->getData();
@@ -125,7 +140,7 @@ class MediaController extends Controller
                 $this->fm->add('notice', 'transcription_unvalidated');
             }
 
-            $log = $this->transcriptionManager->getLastLogByName($media->getTranscription(), AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
+            $log = $this->transcriptionManager->getLastLogByName($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
 
             if (!$isValid || $isValid && $nbCurrentValidation >= $project->getNbValidation()) {
                 $this->mailManager->sendValidationOrUnvalidationMail($log->getUser(), $media, $isValid, $comment);
@@ -133,8 +148,11 @@ class MediaController extends Controller
 
             return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
         }
-
         $schema = $this->fileManager->getProjectTeiSchema($project);
+
+        $logs = $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VIEW_LOGS)
+          ? $this->transcriptionManager->getLogs($transcription)
+          : null;
 
         return $this->render(
           'media/reread.html.twig',
@@ -143,6 +161,7 @@ class MediaController extends Controller
             'form' => $form->createView(),
             'nbCurrentValidation' => $nbCurrentValidation,
             'schema' => $schema,
+            'logs' => $logs
           ]
         );
     }

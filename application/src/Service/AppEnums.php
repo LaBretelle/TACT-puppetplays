@@ -38,7 +38,7 @@ class AppEnums
     public const ACTION_TRANSCRIBE = 'transcribe';
     public const ACTION_REGISTER = 'register';
     public const ACTION_VALIDATE_TRANSCRIPTION = 'validateTranscription';
-
+    public const ACTION_VIEW_LOGS = 'viewLogs';
 
     public const LIST = [
       self::PROJECT_STATUS_FINISHED_DESC,

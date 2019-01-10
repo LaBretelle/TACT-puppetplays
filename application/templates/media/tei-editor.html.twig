@@ -5,6 +5,11 @@
   <li class="nav-item" data-intro="{{'help5'|trans}}" data-step="5">
     <a class="nav-link" data-toggle="tab"  href="#preview">{{'preview'|trans}}</a>
   </li>
+  {% if media.project | isAuthorizedOnProject('viewLogs') %}
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab"  href="#logs">{{'logs'|trans}}</a>
+  </li>
+  {% endif %}
 </ul>
 <div class="tab-content transcription-panel-content">
   <div id="edit-full" class="tab-pane fade show active" role="tabpanel">
@@ -47,5 +52,9 @@
     </div>
   </div>
   <div id="preview" class="tab-pane fade" role="tabpanel"></div>
+  <div id="logs" class="tab-pane fade" role="tabpanel">
+    {{ include('log/list.html.twig') }}
+  </div>
+
   <input type="hidden" id="tei-schema" name="tei_schema" value="{{schema}}">
 </div>

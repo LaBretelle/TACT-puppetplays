@@ -86,6 +86,18 @@ class TranscriptionLogRepository extends ServiceEntityRepository
           ->getResult();
     }
 
+    public function getLogs(Transcription $transcription)
+    {
+        return $this->createQueryBuilder('tl')
+          ->andWhere('tl.transcription = :t')
+          ->andWhere('tl.name NOT IN(:exceptions)')
+          ->setParameter('t', $transcription)
+          ->setParameter('exceptions', 'transcription_log_locked')
+          ->orderBy('tl.createdAt', 'ASC')
+          ->getQuery()
+          ->getResult();
+    }
+
     public function userHasTranscription(Transcription $transcription, User $user)
     {
         $results = $this->createQueryBuilder('tl')

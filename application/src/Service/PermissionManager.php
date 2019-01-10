@@ -34,11 +34,17 @@ class PermissionManager
         $isPublic = $project->getPublic();
 
         switch ($action) {
+          case AppEnums::ACTION_VIEW_LOGS:
+            if ($isAdmin) {
+                return true;
+            }
+            break;
+
           case AppEnums::ACTION_MANAGE_MEDIA:
-              if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
-                  return true;
-              }
-              break;
+            if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
+                return true;
+            }
+            break;
 
           case AppEnums::ACTION_MANAGE_USER:
             if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
