@@ -83,7 +83,7 @@ chown -R www-data:www-data public/user_images public/project_files var/log var/c
 - You'll be asked for the id of the project...
 - This will  
   - Generate the file `tei-schema.json`
-  - Update tranalations files `tei.en.yml` and `tei.fr.yml` 
+  - Update tranalations files `tei.en.yml` and `tei.fr.yml`
 
 ### Usefull commands
 
@@ -105,3 +105,9 @@ chown -R www-data:www-data public/user_images public/project_files var/log var/c
 `make fixtures`
 
 - other usefull commands can be found in `application/Makefile`
+
+### Tagging
+- vX.Y.Z
+X incremented for major changes
+Y incremented for new feature
+Z incremented for bug fix
