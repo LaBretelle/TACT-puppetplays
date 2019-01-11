@@ -42,6 +42,6 @@ class ReviewRequestController extends Controller
 
         $this->reviewRequestManager->create($transcription);
 
-        return $this->redirectToRoute('project_display', ['id' => $project->getId()]);
+        return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId()]);
     }
 }

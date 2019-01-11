@@ -29,6 +29,7 @@ class TranscriptionManager
         $log->setUser($this->security->getUser());
         $log->setName($name);
         $transcription->addTranscriptionLog($log);
+        
         return $log;
     }
 

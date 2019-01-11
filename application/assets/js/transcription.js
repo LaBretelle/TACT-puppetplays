@@ -42,10 +42,6 @@ $(document).ready(() => {
       $('#validation-modal').modal('show')
     })
 
-    $('.btn-finish-transcription').on('click', (e) => {
-      finishTranscription(e.target.dataset.id, e.target.dataset.pid)
-    })
-
     $('.btn-save-transcription').on('click', (e) => {
       saveTranscription(e.target.dataset.id)
     })
@@ -106,24 +102,6 @@ const saveTranscription = (id) => {
   })
 
   return true
-}
-
-const finishTranscription = (id, pid) => {
-  const url = Routing.generate('media_transcription_finish', {
-    id: id
-  })
-  const projectHome = Routing.generate('project_transcriptions', {
-    id: pid
-  })
-  $.ajax({
-    method: 'POST',
-    url: url,
-    data: {
-      'transcription': editor.getContent()
-    }
-  }).done(() => {
-    window.location = projectHome
-  })
 }
 
 const startTutorial = () => {

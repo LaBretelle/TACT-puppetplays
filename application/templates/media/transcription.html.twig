@@ -142,9 +142,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'cancel'|trans}}</button>
-        <button class="btn btn-primary btn-finish-transcription" data-pid="{{media.project.id}}" data-id="{{media.id}}" type="button" name="button">
+        <a href="{{ path("review_request_create", {projectId:  media.project.id, transcriptionId: media.transcription.id}) }}" class="btn btn-primary" type="button" name="button">
           {{'transcription_send_to_validation'|trans}}
-        </button>
+        </a>
       </div>
     </div>
   </div>
