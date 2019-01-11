@@ -54,7 +54,9 @@
               <div class="d-flex justify-content-center">
                 <div class="btn-group">
                   {# display #}
-                  <a data-toggle="tooltip" title="{{'media_view_transcription_button_title' | trans}}" href="{{path('media_transcription_display', {'id': media.id})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                  {% if transcriptionStatus != "none" %}
+                  <a data-toggle="tooltip" title="{{'media_view_transcription_button_title'| trans}}" href="{{path('media_transcription_display', {'id': media.id})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                  {% endif %}
                   {# transcribe #}
                   {% if canTranscribe and (transcriptionStatus == "none" or transcriptionStatus == "in-progress") %}
                   <a data-toggle="tooltip" title="{{'media_transcribe_button_title' | trans}}" href="{{path('media_transcription_edit', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-pencil-alt"></i></a>

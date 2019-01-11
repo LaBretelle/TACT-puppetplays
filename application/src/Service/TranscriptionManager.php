@@ -83,14 +83,14 @@ class TranscriptionManager
 
     public function getStatus(Transcription $transcription)
     {
-        if ($transcription->getIsValid() === true) {
+        if ($transcription->getIsValid()) {
             return 'validated';
-        }
-        if ($transcription === null || $transcription === "") {
-            return 'none';
         }
         if ($transcription->getReviewRequest() != null) {
             return 'in-reread';
+        }
+        if ($transcription->getContent() === null || $transcription->getContent() === '') {
+            return 'none';
         }
         if ($transcription != null) {
             return 'in-progress';
