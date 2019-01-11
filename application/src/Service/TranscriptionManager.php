@@ -80,4 +80,20 @@ class TranscriptionManager
         $repository = $this->em->getRepository(TranscriptionLog::class);
         return $repository->countValidationLog($transcription, $lastAskForValidationLog);
     }
+
+    public function getStatus(Transcription $transcription)
+    {
+        if ($transcription->getIsValid() === true) {
+            return 'validated';
+        }
+        if ($transcription === null || $transcription === "") {
+            return 'none';
+        }
+        if ($transcription->getReviewRequest() != null) {
+            return 'in-reread';
+        }
+        if ($transcription != null) {
+            return 'in-progress';
+        }
+    }
 }

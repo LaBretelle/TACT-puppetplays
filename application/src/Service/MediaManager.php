@@ -96,53 +96,6 @@ class MediaManager
         $this->em->flush();
     }
 
-    public function isTranscribable(Media $media)
-    {
-        $transcription = $media->getTranscription();
-        if (null === $transcription) {
-            return true;
-        } else {
-            $lastLog = $this->transcriptionManager->getLastLog($transcription);
-            $status = $lastLog->getName();
-            return $status === AppEnums::TRANSCRIPTION_LOG_CREATED || $status === AppEnums::TRANSCRIPTION_LOG_UPDATED || $status === AppEnums::TRANSCRIPTION_LOG_LOCKED;
-        }
-        return false;
-    }
-
-    public function isInReread(Media $media)
-    {
-        $transcription = $media->getTranscription();
-
-        if (null === $transcription) {
-            return false;
-        } else {
-            $lastLog = $this->transcriptionManager->getLastLog($transcription);
-            $status = $lastLog->getName();
-            return $status === AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION || $status === AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING;
-        }
-        return false;
-    }
-
-    public function transcriptionStatusClass(Media $media)
-    {
-        $transcription = $media->getTranscription();
-        if ($transcription) {
-            $lastLog = $this->transcriptionManager->getLastLog($transcription);
-            $status = $lastLog->getName();
-
-            if ($status === AppEnums::TRANSCRIPTION_LOG_CREATED) {
-                return 'status none';
-            } elseif ($status === AppEnums::TRANSCRIPTION_LOG_UPDATED || $status === AppEnums::TRANSCRIPTION_LOG_LOCKED) {
-                return 'status in-progress';
-            } elseif ($status === AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING || $status === AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION) {
-                return 'status in-reread';
-            } elseif ($status === AppEnums::TRANSCRIPTION_LOG_VALIDATED) {
-                return 'status validated';
-            }
-        }
-
-        return 'status none';
-    }
 
     public function save(Media $media)
     {

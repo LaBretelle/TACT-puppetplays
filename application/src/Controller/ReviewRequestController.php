@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Project;
 use App\Entity\ReviewRequest;
+use App\Entity\Transcription;
+use App\Service\AppEnums;
+use App\Service\PermissionManager;
 use App\Service\ReviewRequestManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,14 +19,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReviewRequestController extends Controller
 {
     private $reviewRequestManager;
+    private $permissionManager;
 
-    public function __construct(ReviewRequestManager $reviewRequestManager)
-    {
+    public function __construct(
+      ReviewRequestManager $reviewRequestManager,
+      PermissionManager $permissionManager
+    ) {
         $this->reviewRequestManager = $reviewRequestManager;
+        $this->permissionManager = $permissionManager;
     }
 
     /**
-     * @Route("/create", name="create")
+     * @Route("/create/{projectId}/{transcriptionId}", name="create")
+     * @ParamConverter("project", class="App:Project", options={"id" = "projectId"})
+     * @ParamConverter("transcription", class="App:Transcription", options={"id" = "transcriptionId"})
      */
     public function create(Project $project, Transcription $transcription)
     {

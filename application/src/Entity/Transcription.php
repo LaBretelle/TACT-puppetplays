@@ -38,9 +38,15 @@ class Transcription
      */
     private $reviewRequest;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isValid;
+
     public function __construct()
     {
         $this->transcriptionLogs = new ArrayCollection();
+        $this->isValid = false;
     }
 
     public function getId(): ?int
@@ -122,6 +128,18 @@ class Transcription
         if ($this !== $reviewRequest->getTranscription()) {
             $reviewRequest->setTranscription($this);
         }
+
+        return $this;
+    }
+
+    public function getIsValid(): ?bool
+    {
+        return $this->isValid;
+    }
+
+    public function setIsValid(?bool $isValid): self
+    {
+        $this->isValid = $isValid;
 
         return $this;
     }
