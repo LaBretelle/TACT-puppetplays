@@ -119,6 +119,16 @@ class User implements UserInterface, \Serializable
      */
     private $transcriptionLogs;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ReviewRequest", mappedBy="user", orphanRemoval=true)
+     */
+    private $reviewRequests;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="user")
+     */
+    private $reviews;
+
     public function __construct()
     {
         $this->active = false;
@@ -128,6 +138,8 @@ class User implements UserInterface, \Serializable
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
         $this->transcriptionLogs = new ArrayCollection();
+        $this->reviewRequests = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId() :int
@@ -443,6 +455,68 @@ class User implements UserInterface, \Serializable
             // set the owning side to null (unless already changed)
             if ($transcriptionLog->getUser() === $this) {
                 $transcriptionLog->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ReviewRequest[]
+     */
+    public function getReviewRequests(): Collection
+    {
+        return $this->reviewRequests;
+    }
+
+    public function addReviewRequest(ReviewRequest $reviewRequest): self
+    {
+        if (!$this->reviewRequests->contains($reviewRequest)) {
+            $this->reviewRequests[] = $reviewRequest;
+            $reviewRequest->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReviewRequest(ReviewRequest $reviewRequest): self
+    {
+        if ($this->reviewRequests->contains($reviewRequest)) {
+            $this->reviewRequests->removeElement($reviewRequest);
+            // set the owning side to null (unless already changed)
+            if ($reviewRequest->getUser() === $this) {
+                $reviewRequest->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Review[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews[] = $review;
+            $review->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->contains($review)) {
+            $this->reviews->removeElement($review);
+            // set the owning side to null (unless already changed)
+            if ($review->getUser() === $this) {
+                $review->setUser(null);
             }
         }
 

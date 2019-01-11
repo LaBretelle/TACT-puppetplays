@@ -33,6 +33,11 @@ class Transcription
      */
     private $transcriptionLogs;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ReviewRequest", mappedBy="transcription", cascade={"persist", "remove"})
+     */
+    private $reviewRequest;
+
     public function __construct()
     {
         $this->transcriptionLogs = new ArrayCollection();
@@ -99,6 +104,23 @@ class Transcription
             if ($transcriptionLog->getTranscription() === $this) {
                 $transcriptionLog->setTranscription(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getReviewRequest(): ?ReviewRequest
+    {
+        return $this->reviewRequest;
+    }
+
+    public function setReviewRequest(ReviewRequest $reviewRequest): self
+    {
+        $this->reviewRequest = $reviewRequest;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $reviewRequest->getTranscription()) {
+            $reviewRequest->setTranscription($this);
         }
 
         return $this;
