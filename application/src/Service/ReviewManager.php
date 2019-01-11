@@ -25,13 +25,34 @@ class ReviewManager
         $this->security = $security;
     }
 
-    public function create(ReviewRequest $request)
+    public function create(ReviewRequest $request, $isValid, $comment)
     {
         $user = $this->security->getUser();
         $review = new Review();
         $review->setUser($user);
+        $review->setIsValid($isValid);
+        $review->setComment($comment);
         $review->setRequest($request);
 
+        $text = $isValid ? 'transcription_validated' : 'transcription_unvalidated';
+        $this->fm->add('notice', $text);
+
         return $review;
+    }
+
+    public function countReview(Transcription $transcription, $valid = true)
+    {
+        $count = 0;
+        if ($request = $transcription->getReviewRequest()) {
+            // TODO > faire une joli requête pour éviter de boucler
+            $reviews = $request->getReviews();
+            foreach ($reviews as $review) {
+                if ($review->getIsValid() === $valid) {
+                    $count++;
+                }
+            }
+        }
+
+        return $count;
     }
 }

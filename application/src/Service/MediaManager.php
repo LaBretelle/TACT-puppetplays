@@ -64,15 +64,6 @@ class MediaManager
         $this->em->flush();
     }
 
-    public function finishTranscription(Media $media, string $content)
-    {
-        $transcription = $media->getTranscription();
-        $transcription->setContent($content);
-        $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
-        $this->em->persist($transcription);
-        $this->em->flush();
-    }
-
     public function validateTranscription(Media $media)
     {
         $transcription = $media->getTranscription();

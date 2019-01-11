@@ -2,9 +2,11 @@
 
 namespace App\Service;
 
+use App\Entity\Project;
 use App\Entity\Transcription;
 use App\Entity\TranscriptionLog;
 use App\Service\AppEnums;
+use App\Service\PermissionManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Security;
@@ -14,12 +16,18 @@ class TranscriptionManager
     protected $em;
     protected $security;
     protected $params;
+    protected $permissionManager;
 
-    public function __construct(EntityManagerInterface $em, Security $security, ParameterBagInterface $params)
-    {
+    public function __construct(
+      EntityManagerInterface $em,
+      Security $security,
+      ParameterBagInterface $params,
+      PermissionManager $permissionManager
+    ) {
         $this->em = $em;
         $this->security = $security;
         $this->params = $params;
+        $this->permissionManager = $permissionManager;
     }
 
     public function addLog(Transcription $transcription, string $name)
@@ -29,13 +37,14 @@ class TranscriptionManager
         $log->setUser($this->security->getUser());
         $log->setName($name);
         $transcription->addTranscriptionLog($log);
-        
+
         return $log;
     }
 
     public function isLocked(TranscriptionLog $log)
     {
         $diff = $log->getCreatedAt()->diff(new \DateTime());
+
         return $diff->i <= 2;
     }
 
@@ -51,25 +60,28 @@ class TranscriptionManager
     public function getLastLog(Transcription $transcription)
     {
         $repository = $this->em->getRepository(TranscriptionLog::class);
+
         return $repository->getLastLog($transcription);
     }
 
-    public function getLogs(Transcription $transcription)
+    public function getLogs(Transcription $transcription, Project $project)
     {
-        $repository = $this->em->getRepository(TranscriptionLog::class);
-
-        return $repository->getLogs($transcription);
+        return $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VIEW_LOGS)
+          ? $this->em->getRepository(TranscriptionLog::class)->getLogs($transcription)
+          : null;
     }
 
     public function getLastLogByName(Transcription $transcription, string $name)
     {
         $repository = $this->em->getRepository(TranscriptionLog::class);
+
         return $repository->getLastLogByName($transcription, $name);
     }
 
     public function getLastLockLog(Transcription $transcription)
     {
         $repository = $this->em->getRepository(TranscriptionLog::class);
+
         return $repository->getLastLockLog($transcription);
     }
 
@@ -79,6 +91,7 @@ class TranscriptionManager
         $lastAskForValidationLog = $this->getLastLogByName($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
 
         $repository = $this->em->getRepository(TranscriptionLog::class);
+
         return $repository->countValidationLog($transcription, $lastAskForValidationLog);
     }
 
@@ -90,11 +103,10 @@ class TranscriptionManager
         if ($transcription->getReviewRequest() != null) {
             return 'in-reread';
         }
-        if ($transcription->getContent() === null || $transcription->getContent() === '') {
-            return 'none';
-        }
-        if ($transcription != null) {
+        if ($transcription->getContent() != "") {
             return 'in-progress';
         }
+
+        return 'none';
     }
 }

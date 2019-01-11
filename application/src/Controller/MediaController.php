@@ -10,6 +10,7 @@ use App\Service\FileManager;
 use App\Service\FlashManager;
 use App\Service\MailManager;
 use App\Service\MediaManager;
+use App\Service\ReviewManager;
 use App\Service\PermissionManager;
 use App\Service\TranscriptionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,6 +27,7 @@ class MediaController extends Controller
     private $mediaManager;
     private $transcriptionManager;
     private $fm;
+    private $reviewManager;
     private $mailManager;
     private $permissionManager;
     private $translator;
@@ -35,6 +37,7 @@ class MediaController extends Controller
       MediaManager $mediaManager,
       TranscriptionManager $transcriptionManager,
       FlashManager $fm,
+      ReviewManager $reviewManager,
       MailManager $mailManager,
       PermissionManager $permissionManager,
       TranslatorInterface $translator,
@@ -43,6 +46,7 @@ class MediaController extends Controller
         $this->mediaManager = $mediaManager;
         $this->transcriptionManager = $transcriptionManager;
         $this->fm = $fm;
+        $this->reviewManager = $reviewManager;
         $this->mailManager = $mailManager;
         $this->permissionManager = $permissionManager;
         $this->translator = $translator;
@@ -92,10 +96,7 @@ class MediaController extends Controller
             $em->flush();
         }
         $schema = $this->fileManager->getProjectTeiSchema($project);
-
-        $logs = $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VIEW_LOGS)
-          ? $this->transcriptionManager->getLogs($transcription)
-          : null;
+        $logs = $this->transcriptionManager->getLogs($transcription, $project);
 
         return $this->render(
             'media/transcription.html.twig',
@@ -117,6 +118,7 @@ class MediaController extends Controller
     {
         $project = $media->getProject();
         $transcription = $media->getTranscription();
+        $reviewRequest = $transcription->getReviewRequest();
 
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VALIDATE_TRANSCRIPTION)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
@@ -132,14 +134,7 @@ class MediaController extends Controller
             $isValid = $form->get('isValid')->getData();
             $comment = $form->get('comment')->getData();
 
-            if ($isValid) {
-                $this->mediaManager->validateTranscription($media);
-                $this->fm->add('notice', 'transcription_validated');
-            } else {
-                $this->mediaManager->unvalidateTranscription($media);
-                $this->fm->add('notice', 'transcription_unvalidated');
-            }
-
+            $this->reviewManager->create($reviewRequest, $isValid, $comment);
             $log = $this->transcriptionManager->getLastLogByName($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
 
             if (!$isValid || $isValid && $nbCurrentValidation >= $project->getNbValidation()) {
@@ -149,10 +144,7 @@ class MediaController extends Controller
             return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
         }
         $schema = $this->fileManager->getProjectTeiSchema($project);
-
-        $logs = $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VIEW_LOGS)
-          ? $this->transcriptionManager->getLogs($transcription)
-          : null;
+        $logs = $this->transcriptionManager->getLogs($transcription, $project);
 
         return $this->render(
           'media/reread.html.twig',
@@ -176,21 +168,6 @@ class MediaController extends Controller
         }
         $content = $request->get('transcription');
         $this->mediaManager->setMediaTranscription($media, $content);
-
-        return $this->json([], $status = 200);
-    }
-
-    /**
-     * @Route("/{id}/transcription/finish", name="transcription_finish",options={"expose"=true}, methods="POST")
-     */
-    public function mediaTranscriptionFinish(Media $media, Request $request)
-    {
-        if (false === $this->permissionManager->isAuthorizedOnProject($media->getProject(), AppEnums::ACTION_TRANSCRIBE)) {
-            return $this->json([], $status = 403);
-        }
-        $content = $request->get('transcription');
-        $this->mediaManager->finishTranscription($media, $content);
-        $this->fm->add('notice', 'validation_asked');
 
         return $this->json([], $status = 200);
     }
