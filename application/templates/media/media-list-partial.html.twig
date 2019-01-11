@@ -63,7 +63,7 @@
                   {% endif %}
                   {# review #}
                   {% if canValidate and transcriptionStatus == "in-reread" %}
-                    <a data-toggle="tooltip" title="{{'media_reread_button_title' | trans}}" href="{{path('media_transcription_reread', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i></a>
+                    <a data-toggle="tooltip" title="{{'media_reread_button_title' | trans}}" href="{{path('media_transcription_review', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i></a>
                   {% endif %}
                 </div>
               </div>

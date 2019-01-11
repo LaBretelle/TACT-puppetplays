@@ -112,37 +112,38 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/{id}/transcription/reread", name="transcription_reread")
+     * @Route("/{id}/transcription/review", name="transcription_review")
      */
-    public function validateTranscription(Media $media, Request $request)
+    public function reviewTranscription(Media $media, Request $request)
     {
         $project = $media->getProject();
-        $transcription = $media->getTranscription();
-        $reviewRequest = $transcription->getReviewRequest();
 
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VALIDATE_TRANSCRIPTION)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
 
+        $transcription = $media->getTranscription();
+        $reviewRequest = $transcription->getReviewRequest();
+        $nbPositiveReview = $this->reviewManager->countReview($transcription, true);
+
         $form = $this->createForm(ValidationType::class);
         $form->handleRequest($request);
-        $nbCurrentValidation = $this->transcriptionManager->countValidationLog($transcription);
-
-        $parent = $media->getParent();
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $parent = $media->getParent();
             $isValid = $form->get('isValid')->getData();
             $comment = $form->get('comment')->getData();
-
+            // todo > vérifier que l'utilisateur n'a pas déjà review la transcription... récupérer la review !
             $this->reviewManager->create($reviewRequest, $isValid, $comment);
-            $log = $this->transcriptionManager->getLastLogByName($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
-
-            if (!$isValid || $isValid && $nbCurrentValidation >= $project->getNbValidation()) {
-                $this->mailManager->sendValidationOrUnvalidationMail($log->getUser(), $media, $isValid, $comment);
+            $nbPositiveReview = $this->reviewManager->countReview($transcription, true);
+            if ($nbPositiveReview >= $project->getNbValidation()) {
+                $this->transcriptionManager->validate($transcription, true);
+                $this->mailManager->sendValidationMail($reviewRequest->getUser(), $media, $isValid, $comment);
             }
 
             return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
         }
+
         $schema = $this->fileManager->getProjectTeiSchema($project);
         $logs = $this->transcriptionManager->getLogs($transcription, $project);
 
@@ -151,7 +152,7 @@ class MediaController extends Controller
             [
             'media' => $media,
             'form' => $form->createView(),
-            'nbCurrentValidation' => $nbCurrentValidation,
+            'nbCurrentValidation' => $nbPositiveReview,
             'schema' => $schema,
             'logs' => $logs
           ]

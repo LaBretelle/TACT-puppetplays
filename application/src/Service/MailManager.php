@@ -65,7 +65,7 @@ class MailManager
         return;
     }
 
-    public function sendValidationOrUnvalidationMail(User $user, Media $media, bool $valid, string $comment = null)
+    public function sendValidationMail(User $user, Media $media, bool $valid, string $comment = null)
     {
         $subject = $this->translator->trans('email_transcription_validted_unvalidated_subject', [], 'emails');
 

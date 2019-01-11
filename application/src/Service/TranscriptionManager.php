@@ -109,4 +109,13 @@ class TranscriptionManager
 
         return 'none';
     }
+
+    public function validate(Transcription $transcription, $isValid)
+    {
+        $transcription->setIsValid($isValid);
+        $this->em->persist($transcription);
+        $this->em->flush();
+
+        return;
+    }
 }

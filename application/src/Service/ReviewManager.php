@@ -27,12 +27,15 @@ class ReviewManager
 
     public function create(ReviewRequest $request, $isValid, $comment)
     {
+        // todo > vérifier que l'utilisateur n'a pas déjà review la transcription
         $user = $this->security->getUser();
         $review = new Review();
         $review->setUser($user);
         $review->setIsValid($isValid);
         $review->setComment($comment);
         $review->setRequest($request);
+        $this->em->persist($review);
+        $this->em->flush();
 
         $text = $isValid ? 'transcription_validated' : 'transcription_unvalidated';
         $this->fm->add('notice', $text);
