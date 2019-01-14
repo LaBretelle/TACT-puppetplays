@@ -175,7 +175,7 @@ class ProjectController extends Controller
         }
 
         return $this->render(
-            'media/transcriptions.html.twig',
+            'transcribe/index.html.twig',
             [
               'project' => $project,
               'parent' => $parent,

@@ -1,0 +1,50 @@
+{% import "media/macros.html.twig" as macros %}
+
+<div class="row">
+  <div class="col">
+    {{ macros.backToParentDir(media)}}
+    {{ review == true ? 'reread_transcription'|trans:'transcript_media'|trans}} <span class="text-muted">{{media.name}}</span>
+  </div>
+
+  <div class="col text-right">
+    {% if review == true %}
+    <span class="badge badge-info">
+      {{'transcription_current_nb_validations' | trans({'%1%': nbCurrentValidation, '%2%': project.nbValidation})}}
+    </span>
+    <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
+      <i class="fas fa-save"></i>
+    </button>
+    <span data-toggle="tooltip" title="{{'validate_transcription' | trans}}">
+      <button data-toggle="modal" data-target="#validation-modal" class="btn btn-link" >
+        <i class="fas fa-thumbs-up"></i>
+      </button>
+    </span>
+    {% endif %}
+
+    {% if edit is defined and edit == true %}
+      <span data-intro="{{'help6'|trans}}" data-step="6">
+        <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
+          <i class="fas fa-save"></i>
+        </button>
+        <button class="btn btn-link btn-validation-modal" data-pid="{{project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'transcription_send_to_validation' | trans}}" type="button" name="button">
+          <i class="fas fa-check-circle"></i>
+        </button>
+      </span>
+      <span data-intro="{{'help7'|trans}}" data-step="7" data-toggle="tooltip" title="{{'help'|trans}}">
+        <button class="btn btn-link" data-toggle="modal" data-target="#help-modal" type="button">
+          <i class="fas fa-question-circle"></i>
+        </button>
+      </span>
+    {% elseif locked is defined and locked == true %}
+      <h5>
+        <span class="badge badge-danger">{{'transcription_is_locked' | trans}}</span>
+      </h5>
+    {% endif %}
+
+    {% if project | isAuthorizedOnProject('register') %}
+      <a href="{{ path('status_request', {id:  project.id})}}" data-toggle="tooltip" title="{{'project_register' | trans}}">
+        <i class="fas fa-hand-holding-heart fa-fw" aria-hidden="true"></i>
+      </a>
+    {% endif %}
+  </div>
+</div>

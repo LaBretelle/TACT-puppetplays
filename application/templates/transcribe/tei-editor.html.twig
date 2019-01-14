@@ -1,7 +1,7 @@
-  {% set canValidate = media.project | isAuthorizedOnProject('validateTranscription') %}
-  {% set canViewLogs = media.project | isAuthorizedOnProject('viewLogs') %}
+{% set canValidate = media.project | isAuthorizedOnProject('validateTranscription') %}
+{% set canViewLogs = media.project | isAuthorizedOnProject('viewLogs') %}
 
-  <ul class="nav nav-tabs">
+<ul class="nav nav-tabs">
   <li class="nav-item">
     <a class="nav-link active" data-toggle="tab" href="#edit-full">{{'transcribe'|trans}}</a>
   </li>

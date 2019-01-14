@@ -62,31 +62,9 @@ class MediaManager
         $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_UPDATED);
         $this->em->persist($transcription);
         $this->em->flush();
+
+        return;
     }
-
-    public function validateTranscription(Media $media)
-    {
-        $transcription = $media->getTranscription();
-
-        $logName = AppEnums::TRANSCRIPTION_LOG_VALIDATION_PENDING;
-
-        $fullyValidated = $this->transcriptionManager->countValidationLog($transcription) >= $media->getProject()->getNbValidation() - 1;
-        if ($fullyValidated) {
-            $logName = AppEnums::TRANSCRIPTION_LOG_VALIDATED;
-        }
-        $this->transcriptionManager->addLog($transcription, $logName);
-        $this->em->persist($transcription);
-        $this->em->flush();
-    }
-
-    public function unvalidateTranscription(Media $media)
-    {
-        $transcription = $media->getTranscription();
-        $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_UPDATED);
-        $this->em->persist($transcription);
-        $this->em->flush();
-    }
-
 
     public function save(Media $media)
     {

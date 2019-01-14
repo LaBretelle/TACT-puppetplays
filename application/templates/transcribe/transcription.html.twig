@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+  {% set project = media.project %}
+  {% include 'project/navigation.html.twig' with {'project': project, 'current': 'project_transcriptions'} %}
+
+  <style>
+  {{ project.css ?  project.css | raw : ''}}
+  </style>
+
+  <div id="main-container">
+    {{ include('media/action-bar.html.twig') }}
+    <hr/>
+    {# OSD + EDITOR/TRANSCRIPTION #}
+    <div class="row">
+      <div data-intro="{{'help1'|trans}}" data-step="1" class="col">
+        {{ include("media/openseadragon.html.twig") }}
+      </div>
+      <div data-intro="{{'help2'|trans}}" data-step="2" class="col-7">
+        {% if edit %}
+          {{ include('transcribe/tei-editor.html.twig', { 'media': media }) }}
+      {% else %}
+        <div id="transcription-container">
+          {{ media.transcription.content | raw}}
+        </div>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {# help modal #}
+  {{ include('project/help-modal.html.twig', { 'project': project }) }}
+
+  {# ask validation modal #}
+  {{ include('review/ask.html.twig') }}
+
+  {# hidden inputs... #}
+  {% if edit %}
+    <input type="hidden" id="log-id" name="log_id" value="{{log.id}}">
+  {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('build/css/intro.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    var mode = {{ edit ? '"edit"': '"view"' }};
+  </script>
+  <script src="{{ asset('build/js/openseadragon.js') }}"></script>
+  <script src="{{ asset('build/js/transcription.js') }}"></script>
+{% endblock %}

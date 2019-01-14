@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+  {% set project = media.project %}
+  {% include 'project/navigation.html.twig' with {'project': project, 'current': 'project_transcriptions'} %}
+
+  <style>
+  {{ project.css ?  project.css | raw : ''}}
+  </style>
+
+  <div id="main-container">
+    {{ include('media/action-bar.html.twig') }}
+    <hr/>
+    {# OSD + EDITOR #}
+    <div class="row">
+      <div class="col-6">
+        {{ include('media/openseadragon.html.twig') }}
+      </div>
+      <div class="col-6">
+        {{ include('transcribe/tei-editor.html.twig', { 'media': media }) }}
+      </div>
+    </div>
+  </div>
+
+  {# MODAL WITH REVIEW FORM #}
+  {{ include('review/form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    var mode = 'validation';
+  </script>
+  <script src="{{ asset('build/js/transcription.js') }}"></script>
+{% endblock %}

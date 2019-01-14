@@ -68,11 +68,16 @@ class MediaController extends Controller
         }
 
         return $this->render(
-            'media/transcription.html.twig',
-            ['media' => $media, 'edit' => false, 'locked' => false, 'log' => false]
+            'transcribe/transcription.html.twig',
+            [
+              'media' => $media,
+              'edit' => false,
+              'locked' => false,
+              'log' => false,
+              'review' => false
+            ]
         );
     }
-
 
     /**
      * @Route("/{id}/transcription/edit", name="transcription_edit")
@@ -103,14 +108,15 @@ class MediaController extends Controller
         $logs = $this->transcriptionManager->getLogs($transcription, $project);
 
         return $this->render(
-            'media/transcription.html.twig',
+            'transcribe/transcription.html.twig',
             [
               'media' => $media,
               'edit' => $canEdit,
               'locked' => $locked,
               'log' => $lockLog,
               'schema' => $schema,
-              'logs' => $logs
+              'logs' => $logs,
+              'review' => false
             ]
         );
     }
@@ -150,13 +156,14 @@ class MediaController extends Controller
         $nbPositiveReview = $this->reviewManager->countReview($transcription, true);
 
         return $this->render(
-          'media/reread.html.twig',
+          'review/index.html.twig',
             [
             'media' => $media,
             'form' => $form->createView(),
             'nbCurrentValidation' => $nbPositiveReview,
             'schema' => $schema,
-            'logs' => $logs
+            'logs' => $logs,
+            'review' => true
           ]
         );
     }

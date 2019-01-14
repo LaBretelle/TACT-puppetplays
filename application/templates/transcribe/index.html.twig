@@ -5,11 +5,10 @@
 {% endblock %}
 
 {% block body %}
-{% include 'project/navigation.html.twig' with {'current': 'project_transcriptions'} %}
-
-<div id="main-container">
-  {{ include('media/media-list-partial.html.twig', { 'project': project }) }}
-</div>
+  {% include 'project/navigation.html.twig' with {'current': 'project_transcriptions'} %}
+  <div id="main-container">
+    {{ include('media/media-list-partial.html.twig', { 'project': project }) }}
+  </div>
 {% endblock %}
 
 {% block javascripts %}
