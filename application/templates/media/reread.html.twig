@@ -1,25 +1,25 @@
 {% extends "base.html.twig" %}
 
-{% import "media/macros.html.twig" as macros %}
-
 {% block body %}
-  {% include 'project/navigation.html.twig' with {'project': media.project, 'current': 'project_transcriptions'} %}
+  {% set project = media.project %}
+  {% include 'project/navigation.html.twig' with {'project': project, 'current': 'project_transcriptions'} %}
 
   <style>
-  {{ media.project.css ?  media.project.css | raw : ''}}
+  {{ project.css ?  project.css | raw : ''}}
   </style>
 
   <div id="main-container">
+    {# ACTION MENU #}
     <div class="row">
       <div class="col">
-        <a href="{{ path('project_transcriptions', {id: media.project.id, parent: media.parent ? media.parent.id : null})}}" data-toggle="tooltip" title="{{'back_to_transcripts' | trans}}">
+        <a href="{{ path('project_transcriptions', {id: project.id, parent: media.parent ? media.parent.id : null})}}" data-toggle="tooltip" title="{{'back_to_transcripts' | trans}}">
           <i class="fa fa-arrow-left fa-fw"></i>
         </a>
         {{'reread_transcription'|trans}} <span class="text-muted">{{media.name}}</span>
       </div>
       <div class="col text-right">
         <span class="badge badge-info">
-          {{'transcription_current_nb_validations' | trans({'%1%': nbCurrentValidation, '%2%': media.project.nbValidation})}}
+          {{'transcription_current_nb_validations' | trans({'%1%': nbCurrentValidation, '%2%': project.nbValidation})}}
         </span>
         <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
           <i class="fas fa-save"></i>
@@ -32,29 +32,11 @@
       </div>
     </div>
     <hr/>
+
+    {# OSD + EDITOR #}
     <div class="row">
       <div class="col-6">
-        <div class="openseadragon-buttons text-center">
-          <button id="osd-zoom-in" type="button" class="btn btn-light">
-            <i class="fas fa-search-plus"></i>
-          </button>
-          <button id="osd-zoom-out" type="button" class="btn btn-light">
-            <i class="fas fa-search-minus"></i>
-          </button>
-          <button id="osd-home" type="button" class="btn btn-light">
-            <i class="fas fa-home"></i>
-          </button>
-          <button id="osd-full-page" type="button" class="btn btn-light">
-            <i class="fas fa-expand-arrows-alt"></i>
-          </button>
-          <button id="osd-left" type="button" class="btn btn-light">
-            <i class="fas fa-undo"></i>
-          </button>
-          <button id="osd-right" type="button" class="btn btn-light">
-            <i class="fas fa-redo"></i>
-          </button>
-        </div>
-        <div data-url="{{ macros.mediaURL(media) }}" id="seadragon-viewer" class="rounded"></div>
+        {{ include('media/openseadragon.html.twig') }}
       </div>
       <div class="col-6">
         {{ include('media/tei-editor.html.twig', { 'media': media }) }}
@@ -62,27 +44,8 @@
     </div>
   </div>
 
-  <div class="modal fade validation-modal" id="validation-modal" tabindex="-1" role="dialog" aria-labelledby="validation-modal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="validation-modal-label">{{'validate_transcription'| trans}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="alert alert-primary" role="alert">
-            {{"leave_warning"|trans}}
-            <button class="btn btn-sm btn-outline-primary" data-id="{{media.id}}">
-              <i class="fas fa-save"></i> {{'save' | trans}}
-            </button>
-          </div>
-          {{ form(form) }}
-        </div>
-      </div>
-    </div>
-  </div>
+  {# MODAL WITH REVIEW FORM #}
+  {{ include('review/form.html.twig') }}
 {% endblock %}
 
 {% block javascripts %}

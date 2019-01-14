@@ -1,0 +1,21 @@
+<div class="modal fade help-modal" id="validation-modal" tabindex="-1" role="dialog" aria-labelledby="validationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="alert alert-primary" role="alert">
+          {{ "leave_warning" |trans}}
+          <button class="btn btn-sm btn-outline-primary" data-id="{{media.id}}">
+            <i class="fas fa-save"></i> {{'save' | trans}}
+          </button>
+        </div>
+        {{ "ask_validation_text" |trans}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'cancel'|trans}}</button>
+        <a href="{{ path("review_request_create", {projectId:  media.project.id, transcriptionId: media.transcription.id}) }}" class="btn btn-primary" type="button" name="button">
+          {{'transcription_send_to_validation'|trans}}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

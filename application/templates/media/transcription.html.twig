@@ -1,22 +1,18 @@
 {% extends "base.html.twig" %}
 
-{% block stylesheets %}
-{{ parent() }}
-<link rel="stylesheet" href="{{ asset('build/css/intro.css') }}" />
-{% endblock %}
-
-{% import "media/macros.html.twig" as macros %}
-
 {% block body %}
-  {% include 'project/navigation.html.twig' with {'project': media.project, 'current': 'project_transcriptions'} %}
+  {% set project = media.project %}
+  {% include 'project/navigation.html.twig' with {'project': project, 'current': 'project_transcriptions'} %}
 
   <style>
-  {{ media.project.css ?  media.project.css | raw : ''}}
+  {{ project.css ?  project.css | raw : ''}}
   </style>
+
   <div id="main-container">
+    {# ACTION MENU #}
     <div class="row">
       <div class="col">
-        <a href="{{ path('project_transcriptions', {id: media.project.id, parent: media.parent ? media.parent.id : null})}}" data-toggle="tooltip" title="{{'back_to_transcripts' | trans}}">
+        <a href="{{ path('project_transcriptions', {id: project.id, parent: media.parent ? media.parent.id : null})}}" data-toggle="tooltip" title="{{'back_to_transcripts' | trans}}">
           <i class="fa fa-arrow-left fa-fw"></i>
         </a>
         {{ 'transcript_media'|trans }} <span class="text-muted">{{media.name}}</span>
@@ -28,7 +24,7 @@
               <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
                 <i class="fas fa-save"></i>
               </button>
-              <button class="btn btn-link btn-validation-modal" data-pid="{{media.project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'transcription_send_to_validation' | trans}}" type="button" name="button">
+              <button class="btn btn-link btn-validation-modal" data-pid="{{project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'transcription_send_to_validation' | trans}}" type="button" name="button">
                 <i class="fas fa-check-circle"></i>
               </button>
             </span>
@@ -44,108 +40,48 @@
           </h5>
         {% endif %}
 
-        {% if media.project | isAuthorizedOnProject('register') %}
-          <a href="{{ path('status_request', {id:  media.project.id})}}" data-toggle="tooltip" title="{{'project_register' | trans}}">
+        {% if project | isAuthorizedOnProject('register') %}
+          <a href="{{ path('status_request', {id:  project.id})}}" data-toggle="tooltip" title="{{'project_register' | trans}}">
             <i class="fas fa-hand-holding-heart fa-fw" aria-hidden="true"></i>
           </a>
         {% endif %}
       </div>
     </div>
     <hr/>
+
+    {# OSD + EDITOR/TRANSCRIPTION #}
     <div class="row">
       <div data-intro="{{'help1'|trans}}" data-step="1" class="col">
-        <div class="openseadragon-buttons text-center">
-          <button id="osd-zoom-in" type="button" class="btn btn-light">
-            <i class="fas fa-search-plus"></i>
-          </button>
-          <button id="osd-zoom-out" type="button" class="btn btn-light">
-            <i class="fas fa-search-minus"></i>
-          </button>
-          <button id="osd-home" type="button" class="btn btn-light">
-            <i class="fas fa-home"></i>
-          </button>
-          <button id="osd-full-page" type="button" class="btn btn-light">
-            <i class="fas fa-expand-arrows-alt"></i>
-          </button>
-          <button id="osd-left" type="button" class="btn btn-light">
-            <i class="fas fa-undo"></i>
-          </button>
-          <button id="osd-right" type="button" class="btn btn-light">
-            <i class="fas fa-redo"></i>
-          </button>
-        </div>
-        <div data-url="{{ macros.mediaURL(media) }}" id="seadragon-viewer" class="rounded"></div>
+        {{ include("media/openseadragon.html.twig") }}
       </div>
       <div data-intro="{{'help2'|trans}}" data-step="2" class="col-7">
         {% if edit %}
           {{ include('media/tei-editor.html.twig', { 'media': media }) }}
       {% else %}
         <div id="transcription-container">
-          {{media.transcription.content | raw}}
+          {{ media.transcription.content | raw}}
         </div>
       {% endif %}
+      </div>
     </div>
   </div>
-</div>
 
 {# help modal #}
-<div class="modal fade help-modal" id="help-modal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-body text-center">
-        <div class="row">
-          <div class="col">
-            <h4>
-              <i class="fas fa-book"></i> {{'transcript_help'|trans}}
-            </h4>
-            {% if media.project.projectHelpLink %}
-            <a class="btn btn-sm btn-secondary" href="{{media.project.projectHelpLink}}" target="_blank">
-              {{'transcript_help_doc'|trans}}
-            </a>
-            {% else %}
-              <span class="text-muted">{{'transcript_help_doc_undefined'|trans}}</span>
-            {% endif %}
-          </div>
-          <div class="col">
-            <h4><i class="fas fa-magic"></i> {{"tutorial"|trans}}</h4>
-            <a id="start-tutorial" class="btn btn-sm btn-secondary" href="{{media.project.projectHelpLink}}" target="_blank" data-dismiss="modal">
-              {{'tutorial_enable'|trans}}
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{{ include('project/help-modal.html.twig', { 'project': project }) }}
 
 {# ask validation modal #}
-<div class="modal fade help-modal" id="validation-modal" tabindex="-1" role="dialog" aria-labelledby="validationModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="alert alert-primary" role="alert">
-          {{ "leave_warning" |trans}}
-          <button class="btn btn-sm btn-outline-primary" data-id="{{media.id}}">
-            <i class="fas fa-save"></i> {{'save' | trans}}
-          </button>
-        </div>
-        {{ "ask_validation_text" |trans}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'cancel'|trans}}</button>
-        <a href="{{ path("review_request_create", {projectId:  media.project.id, transcriptionId: media.transcription.id}) }}" class="btn btn-primary" type="button" name="button">
-          {{'transcription_send_to_validation'|trans}}
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
+{{ include('review/ask.html.twig') }}
 
 {# hidden inputs... #}
 {% if edit %}
   <input type="hidden" id="log-id" name="log_id" value="{{log.id}}">
 {% endif %}
+{% endblock %}
+
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('build/css/intro.css') }}" />
 {% endblock %}
 
 {% block javascripts %}

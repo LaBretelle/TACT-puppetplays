@@ -1,0 +1,21 @@
+<div class="modal fade validation-modal" id="validation-modal" tabindex="-1" role="dialog" aria-labelledby="validation-modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="validation-modal-label">{{'validate_transcription'| trans}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-primary" role="alert">
+          {{"leave_warning"|trans}}
+          <button class="btn btn-sm btn-outline-primary" data-id="{{media.id}}">
+            <i class="fas fa-save"></i> {{'save' | trans}}
+          </button>
+        </div>
+        {{ form(form) }}
+      </div>
+    </div>
+  </div>
+</div>
