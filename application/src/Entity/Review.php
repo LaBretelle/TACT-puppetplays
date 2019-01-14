@@ -39,7 +39,7 @@ class Review
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ReviewRequest", inversedBy="reviews")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
      */
     private $request;
 

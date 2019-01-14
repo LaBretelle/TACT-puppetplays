@@ -125,7 +125,7 @@ class User implements UserInterface, \Serializable
     private $reviewRequests;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="user", orphanRemoval=true)
      */
     private $reviews;
 

@@ -18,6 +18,9 @@
         {{'reread_transcription'|trans}} <span class="text-muted">{{media.name}}</span>
       </div>
       <div class="col text-right">
+        <span class="badge badge-info">
+          {{'transcription_current_nb_validations' | trans({'%1%': nbCurrentValidation, '%2%': media.project.nbValidation})}}
+        </span>
         <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
           <i class="fas fa-save"></i>
         </button>
@@ -26,7 +29,6 @@
             <i class="fas fa-thumbs-up"></i>
           </button>
         </span>
-        <span class="badge badge-info">{{'transcription_current_nb_validations' | trans({'%1%': nbCurrentValidation, '%2%': media.project.nbValidation})}}</span>
       </div>
     </div>
     <hr/>
@@ -81,7 +83,6 @@
       </div>
     </div>
   </div>
-
 {% endblock %}
 
 {% block javascripts %}

@@ -25,23 +25,31 @@ class ReviewManager
         $this->security = $security;
     }
 
-    public function create(ReviewRequest $request, $isValid, $comment)
+    public function create(ReviewRequest $request)
     {
-        // todo > vérifier que l'utilisateur n'a pas déjà review la transcription
         $user = $this->security->getUser();
-        $review = new Review();
-        $review->setUser($user);
-        $review->setIsValid($isValid);
-        $review->setComment($comment);
-        $review->setRequest($request);
+
+        if (!$review = $this->em->getRepository(Review::class)->findOneBy(['user' => $user, 'request' => $request])) {
+            $review = new Review();
+            $review->setUser($user);
+            $review->setRequest($request);
+        }
+
+        return $review;
+    }
+
+    public function save(Review $review)
+    {
         $this->em->persist($review);
         $this->em->flush();
 
-        $text = $isValid ? 'transcription_validated' : 'transcription_unvalidated';
+        $text = $review->getIsValid() ? 'transcription_validated' : 'transcription_unvalidated';
         $this->fm->add('notice', $text);
 
         return $review;
     }
+
+
 
     public function countReview(Transcription $transcription, $valid = true)
     {

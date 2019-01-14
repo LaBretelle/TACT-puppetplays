@@ -65,7 +65,7 @@ class PermissionManager
             break;
 
           case AppEnums::ACTION_TRANSCRIBE:
-            if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME || $statusName === AppEnums::USER_STATUS_TRANSCRIBER_NAME) {
+            if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME || $statusName === AppEnums::USER_STATUS_VALIDATOR_NAME || $statusName === AppEnums::USER_STATUS_TRANSCRIBER_NAME) {
                 return true;
             }
             break;

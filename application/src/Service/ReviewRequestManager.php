@@ -54,8 +54,6 @@ class ReviewRequestManager
         $this->em->remove($request);
         $this->em->flush();
 
-        $this->fm->add('notice', 'review_request_deleted');
-
         return;
     }
 }

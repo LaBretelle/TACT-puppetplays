@@ -4,14 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Media;
 use App\Entity\Transcription;
-use App\Form\ValidationType;
+use App\Form\ReviewType;
 use App\Service\AppEnums;
 use App\Service\FileManager;
 use App\Service\FlashManager;
 use App\Service\MailManager;
 use App\Service\MediaManager;
-use App\Service\ReviewManager;
 use App\Service\PermissionManager;
+use App\Service\ReviewManager;
+use App\Service\ReviewRequestManager;
 use App\Service\TranscriptionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +29,7 @@ class MediaController extends Controller
     private $transcriptionManager;
     private $fm;
     private $reviewManager;
+    private $reviewRequestManager;
     private $mailManager;
     private $permissionManager;
     private $translator;
@@ -38,6 +40,7 @@ class MediaController extends Controller
       TranscriptionManager $transcriptionManager,
       FlashManager $fm,
       ReviewManager $reviewManager,
+      ReviewRequestManager $reviewRequestManager,
       MailManager $mailManager,
       PermissionManager $permissionManager,
       TranslatorInterface $translator,
@@ -47,6 +50,7 @@ class MediaController extends Controller
         $this->transcriptionManager = $transcriptionManager;
         $this->fm = $fm;
         $this->reviewManager = $reviewManager;
+        $this->reviewRequestManager = $reviewRequestManager;
         $this->mailManager = $mailManager;
         $this->permissionManager = $permissionManager;
         $this->translator = $translator;
@@ -124,28 +128,26 @@ class MediaController extends Controller
 
         $transcription = $media->getTranscription();
         $reviewRequest = $transcription->getReviewRequest();
-        $nbPositiveReview = $this->reviewManager->countReview($transcription, true);
-
-        $form = $this->createForm(ValidationType::class);
+        $review = $this->reviewManager->create($reviewRequest);
+        $form = $this->createForm(ReviewType::class, $review);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $parent = $media->getParent();
-            $isValid = $form->get('isValid')->getData();
-            $comment = $form->get('comment')->getData();
-            // todo > vérifier que l'utilisateur n'a pas déjà review la transcription... récupérer la review !
-            $this->reviewManager->create($reviewRequest, $isValid, $comment);
+            $this->reviewManager->save($review);
             $nbPositiveReview = $this->reviewManager->countReview($transcription, true);
             if ($nbPositiveReview >= $project->getNbValidation()) {
                 $this->transcriptionManager->validate($transcription, true);
-                $this->mailManager->sendValidationMail($reviewRequest->getUser(), $media, $isValid, $comment);
+                //$this->reviewRequestManager->delete($reviewRequest);
+                //$this->mailManager->sendValidationMail($reviewRequest->getUser(), $media, $review->getIsValid(), $review->getComment());
             }
+            $parent = $media->getParent();
 
             return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
         }
 
         $schema = $this->fileManager->getProjectTeiSchema($project);
         $logs = $this->transcriptionManager->getLogs($transcription, $project);
+        $nbPositiveReview = $this->reviewManager->countReview($transcription, true);
 
         return $this->render(
           'media/reread.html.twig',

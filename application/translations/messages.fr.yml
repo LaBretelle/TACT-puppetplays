@@ -11,6 +11,7 @@ administrate_users_menu:                  Utilisateurs
 administrate_users_title:                 Administration des utilisateurs de la plateforme
 app_admin:                                Administrateur du site
 ask_validation_text:                      Vous êtes sur le point de demander la validation/mise en relecture de cette transcription.
+asked_by:                                 Demande faite par
 attributes:                               Attributs pour l'élément
 back_to_transcripts:                      Retour aux transcriptions
 backtotop:                                Haut de page
@@ -74,6 +75,8 @@ nb_validation:                            Nombre de relectures nécéssaire par 
 need_at_least_one_manager:                Il faut au moins un gestionnaire par projet.
 need_to_be_logged:                        Vous devez être connecté pour participer au projet.
 no_attribute:                             Aucun attribut
+no_review_asked:                          Pas de relecture demandée
+no_review_yet:                            Aucune relecture effectuée pour le moment
 no:                                       Non
 not_enabled_yet:                          (Pas encore activé)
 not_registered:                           Non inscrit
@@ -129,6 +132,8 @@ public_mail:                              Email visible par tous
 register:                                 S'enregistrer
 repeat_password:                          Répéter le mot de passe
 reread_transcription:                     Relire la transcription
+reviews_infos:                            Informations sur les relectures
+reviews:                                  Relectures
 root_directory_option:                    Racine
 save:                                     Sauvegarder
 schema_create:                            Créer un schema
@@ -158,7 +163,7 @@ transcript_help:                          Aide à la transcription
 transcript_media:                         Transcription du media
 transcription_current_nb_validations:     Actuellement %1% / %2% validations
 transcription_is_locked:                  La transcription est bloquée
-transcription_is_valid:                   La transcription est valide ?
+transcription_is_valid:                   La transcription vous parait-elle valide ?
 transcription_log_created:                Transcription initialisée
 transcription_log_updated:                Transcription mise à jour
 transcription_log_waiting_for_validation: Demande de validation
@@ -193,7 +198,7 @@ user:                                     Utilisateur
 userfullname:                             Nom - Prénom
 username:                                 Nom d'utilisateur
 users:                                    Utilisateurs
-validate_transcription:                   (in)valider la transcription
+validate_transcription:                   Valider la transcription
 validation_asked:                         Validation demandée
 validation_comment:                       Commentaire
 validator:                                Validateur

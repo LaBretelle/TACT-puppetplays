@@ -30,13 +30,13 @@ class ReviewRequest
     private $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Transcription", inversedBy="reviewRequest", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Transcription", inversedBy="reviewRequest")
      * @ORM\JoinColumn(nullable=false)
      */
     private $transcription;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="request")
+     * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="request", cascade={"persist","remove"}, orphanRemoval=true)
      */
     private $reviews;
 

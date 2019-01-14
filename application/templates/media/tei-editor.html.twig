@@ -1,11 +1,19 @@
-<ul class="nav nav-tabs">
+  {% set canValidate = media.project | isAuthorizedOnProject('validateTranscription') %}
+  {% set canViewLogs = media.project | isAuthorizedOnProject('viewLogs') %}
+
+  <ul class="nav nav-tabs">
   <li class="nav-item">
     <a class="nav-link active" data-toggle="tab" href="#edit-full">{{'transcribe'|trans}}</a>
   </li>
   <li class="nav-item" data-intro="{{'help5'|trans}}" data-step="5">
     <a class="nav-link" data-toggle="tab"  href="#preview">{{'preview'|trans}}</a>
   </li>
-  {% if media.project | isAuthorizedOnProject('viewLogs') %}
+  {% if canValidate %}
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab"  href="#reviews">{{'reviews'|trans}}</a>
+  </li>
+  {% endif %}
+  {% if canViewLogs %}
   <li class="nav-item">
     <a class="nav-link" data-toggle="tab"  href="#logs">{{'logs'|trans}}</a>
   </li>
@@ -16,7 +24,7 @@
     <div class="row">
       <div class="col">
         <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="20" cols="60">
-          {{media.transcription.content | raw}}
+          {{ media.transcription.content | raw }}
         </textarea>
       </div>
       <div class="col-3 selected-element">
@@ -51,10 +59,18 @@
       </div>
     </div>
   </div>
-  <div id="preview" class="tab-pane fade" role="tabpanel"></div>
+  <div id="preview" class="tab-pane fade" role="tabpanel">
+  </div>
+  {% if canValidate %}
+  <div id="reviews" class="tab-pane fade" role="tabpanel">
+    {{ include('review/list.html.twig') }}
+  </div>
+  {% endif %}
+  {% if canViewLogs %}
   <div id="logs" class="tab-pane fade" role="tabpanel">
     {{ include('log/list.html.twig') }}
   </div>
+  {% endif %}
 
   <input type="hidden" id="tei-schema" name="tei_schema" value="{{schema}}">
 </div>

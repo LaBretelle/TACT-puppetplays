@@ -11,6 +11,7 @@ administrate_users_menu:                  Users
 administrate_users_title:                 Platform users administration
 app_admin:                                Site administrator
 ask_validation_text:                      Vous êtes sur le point de demander la validation/mise en relecture de cette transcription.
+asked_by:                                 Demande faite par
 attributes:                               Attributs for element
 back_to_transcripts:                      Back to transcripts
 backtotop:                                Back to top
@@ -74,6 +75,8 @@ nb_validation:                            Number of reread per media
 need_at_least_one_manager:                Need t least one manager.
 need_to_be_logged:                        You have to be logged in to contribute to the project.
 no_attribute:                             No attribute
+no_review_asked:                          Pas de relecture demandée
+no_review_yet:                            Aucune relecture effectuée pour le moment
 no:                                       No
 not_enabled_yet:                          (Not enabled yet)
 not_registered:                           Not registered
@@ -129,6 +132,8 @@ public_mail:                              Email visible to all
 register:                                 register
 repeat_password:                          Repeat password
 reread_transcription:                     Reread transcription
+reviews_infos:                            Informations sur les relectures
+reviews:                                  Relectures
 root_folder_option:                       Root
 save:                                     Save
 schema_create:                            Créer un schema
@@ -193,7 +198,7 @@ user:                                     User
 userfullname:                             Lastname - Firstname
 username:                                 Username
 users:                                    Users
-validate_transcription:                   (in)valider la transcription
+validate_transcription:                   Valider la transcription
 validation_asked:                         Validation asked
 validation_comment:                       Comment
 validator:                                Validator

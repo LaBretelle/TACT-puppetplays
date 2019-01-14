@@ -24,7 +24,7 @@ class Transcription
     private $content;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Media", mappedBy="transcription", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Media", mappedBy="transcription")
      */
     private $media;
 
