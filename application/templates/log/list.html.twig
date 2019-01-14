@@ -3,7 +3,7 @@
   <li class="list-group-item">
     {{ log.name|trans ~' '~ 'by'|trans }} <a target="_blank" href="{{ path('user_profile', {'id': log.user.id}) }}">{{log.user.username}}</a>
     <span class="float-right">
-      {{ log.createdAt|date("d/m/Y H:i:s") }}
+      {{ log.createdAt|date("d/m/Y H:i") }}
     </span>
   </li>
 {% endfor %}

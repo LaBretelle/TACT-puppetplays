@@ -2,7 +2,7 @@
 <ul class="list-group">
   {% if request %}
     <li class="list-group-item list-group-item-dark">
-      {{"asked_by"|trans}} <a target="_blank" href="{{ path('user_profile', {'id': request.user.id}) }}">{{request.user.username}}</a> ({{ request.createdAt|date}}).
+      {{"asked_by"|trans}} <a target="_blank" href="{{ path('user_profile', {'id': request.user.id}) }}">{{request.user.username}}</a> ({{ request.createdAt|date("d/m/Y H:i")}}).
     </li>
     {% if request.reviews is empty %}
     <li class="list-group-item">
@@ -13,7 +13,7 @@
     <li class="list-group-item">
       <h6>
         <i class="fas fa-thumbs-{{ review.isValid ? 'up' : 'down'}}"></i>
-        <a target="_blank" href="{{ path('user_profile', {'id': review.user.id}) }}">{{review.user.username}}</a> ({{ review.createdAt|date}})
+        <a target="_blank" href="{{ path('user_profile', {'id': review.user.id}) }}">{{review.user.username}}</a> ({{ review.createdAt|date("d/m/Y H:i")}})
       </h6>
       <i>{{ review.comment }}</i>
     </li>
