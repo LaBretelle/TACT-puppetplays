@@ -17,7 +17,7 @@
         {% for userStatus in project.userStatuses %}
         <tr>
           <td>{{ userStatus.user.username }}</td>
-          <td>{{ userStatus.status.name | trans({}, 'fixtures') }}</td>
+          <td>{{ userStatus.status.name | trans }}</td>
           <td>{{ userStatus.enabled ? "yes"|trans : "no"|trans }}</td>
           <td>
             <a href="#" type="button" class="btn btn-link edit-status" data-status-id="{{ userStatus.id}}">

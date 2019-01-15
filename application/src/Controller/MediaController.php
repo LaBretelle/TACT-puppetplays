@@ -179,9 +179,9 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/{id}/transcription/unvalidate", name="transcription_unvalidate")
+     * @Route("/{id}/transcription/validate/{valid}", name="transcription_validate")
      */
-    public function unvalidateTranscription(Media $media)
+    public function validateTranscription(Media $media, $valid)
     {
         $project = $media->getProject();
         $parent = $media->getParent();
@@ -189,7 +189,7 @@ class MediaController extends Controller
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
             return $this->json([], $status = 403);
         }
-        $this->transcriptionManager->validate($media->getTranscription(), false);
+        $this->transcriptionManager->validate($media->getTranscription(), $valid);
 
         return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
     }

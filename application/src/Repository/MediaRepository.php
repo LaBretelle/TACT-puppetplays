@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Media;
+use App\Entity\Project;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,32 +20,59 @@ class MediaRepository extends ServiceEntityRepository
         parent::__construct($registry, Media::class);
     }
 
-//    /**
-//     * @return Media[] Returns an array of Media objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function countValidated(Project $project)
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('count(m.id)')
+            ->leftJoin('m.transcription', 't')
+            ->andWhere('m.project = :project')
+            ->andWhere('t.isValid = true')
+            ->setParameter('project', $project)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getSingleScalarResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Media
+    public function countInReview(Project $project)
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('count(m.id)')
+            ->leftJoin('m.transcription', 't')
+            ->leftJoin('t.reviewRequest', 'r')
+            ->andWhere('m.project = :project')
+            ->andWhere('r IS NOT NULL')
+            ->andWhere('t.isValid != true')
+            ->setParameter('project', $project)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getSingleScalarResult();
     }
-    */
+
+    public function countInProgress(Project $project)
+    {
+        return $this->createQueryBuilder('m')
+            ->select('count(m.id)')
+            ->join('m.transcription', 't')
+            ->leftJoin('t.reviewRequest', 'r')
+            ->andWhere('m.project = :project')
+            ->andWhere('t.content != :empty')
+            ->andWhere('t.isValid != true')
+            ->andWhere('r IS NULL')
+            ->setParameter('project', $project)
+            ->setParameter('empty', '')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function countNoTranscription(Project $project)
+    {
+        return $this->createQueryBuilder('m')
+            ->select('count(m.id)')
+            ->join('m.transcription', 't')
+            ->andWhere('m.project = :project')
+            ->andWhere('t.content = :empty')
+            ->andWhere('t.isValid != true')
+            ->setParameter('project', $project)
+            ->setParameter('empty', '')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

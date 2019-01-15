@@ -124,6 +124,12 @@ project_move_directory_title:             Déplacer le dossier
 project_name:                             Nom du projet
 project_register:                         S'inscrire au projet
 project_registration:                     Inscription au projet
+project_status_finished_desc:          Le projet est terminé et prêt à être diffusé mondialement.
+project_status_finished_name:          Terminé
+project_status_in_progress_desc:       Le projet est en cours et donc il n'est pas prêt à être diffusé mondialement.
+project_status_in_progress_name:       En cours
+project_status_new_desc:               Le projet est complètement nouveau.
+project_status_new_name:               Nouveau
 project_status:                           Statut du projet
 project_transcript:                       Transcrire
 project_transcription:                    Transcription
@@ -170,6 +176,11 @@ transcription_log_updated:                Transcription mise à jour
 transcription_log_waiting_for_validation: Demande de validation
 transcription_saved:                      Transcription sauvegardée
 transcription_send_to_validation:         Demander une validation
+transcription_status_in_progress:      Transcription en cours
+transcription_status_in_reread:        Transcription en relecture
+transcription_status_no_transcription: Aucune transcription
+transcription_status_none:             Aucune transcription
+transcription_status_validated:        Transcription validée
 transcription_unvalidate:                 Invalider la transcription (et changer les reviews positives en reviews négatives)
 transcription_unvalidated:                Transcription invalidée
 transcription_validated:                  Transcription validée
@@ -196,6 +207,12 @@ user_renew_password_error:                Une erreur s'est produite lors de la d
 user_renew_password_mail_sent:            Un email vous a été envoyé à l'adresse %usermail%
 user_renew_password_success:              Votre mot de passe a été mis à jour.
 user_self_edit:                           Éditer votre profil
+user_status_manager_desc:              Le gestionnaire de projet peut transcrire, relire, valider les transriptions et gérer touts les aspects du projet.
+user_status_manager_name:              Gestionnaire
+user_status_transcriber_desc:          Le transcripteur peut transcrire les media et relire les transcriptions.
+user_status_transcriber_name:          Transcripteur
+user_status_validator_desc:            Le validateur peut transcrire, relire et valider les transriptions.
+user_status_validator_name:            Validateur
 user:                                     Utilisateur
 userfullname:                             Nom - Prénom
 username:                                 Nom d'utilisateur

@@ -85,16 +85,6 @@ class TranscriptionManager
         return $repository->getLastLockLog($transcription);
     }
 
-    public function countValidationLog(Transcription $transcription)
-    {
-        // only count validation logs that happend after the last valdation demand
-        $lastAskForValidationLog = $this->getLastLogByName($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
-
-        $repository = $this->em->getRepository(TranscriptionLog::class);
-
-        return $repository->countValidationLog($transcription, $lastAskForValidationLog);
-    }
-
     public function getStatus(Transcription $transcription)
     {
         if ($transcription->getIsValid()) {
@@ -115,14 +105,10 @@ class TranscriptionManager
         $transcription->setIsValid($isValid);
         $this->em->persist($transcription);
 
-        if (!$isValid) {
-            if ($request = $transcription->getReviewRequest()) {
-                foreach ($request->getReviews() as $review) {
-                    $review->setIsValid(false);
-                    $this->em->persist($review);
-                }
-            }
+        if ($request = $transcription->getReviewRequest()) {
+            $this->em->remove($request);
         }
+        
         $this->em->flush();
 
         return;

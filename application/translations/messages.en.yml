@@ -124,6 +124,12 @@ project_move_directory_title:             Move folder
 project_name:                             Project name
 project_register:                         Register to project
 project_registration:                     Project registration
+project_status_finished_desc:             The project is finished and ready for world wide diffusion.
+project_status_finished_name:             Finished
+project_status_in_progress_desc:          The project is in progress and therefore not ready for world wide diffusion.
+project_status_in_progress_name:          In progress
+project_status_new_desc:                  The project is totally new.
+project_status_new_name:                  New
 project_status:                           Project status
 project_transcript:                       Transcribe
 project_transcription:                    Transcription
@@ -170,6 +176,11 @@ transcription_log_updated:                Transcription mise à jour
 transcription_log_waiting_for_validation: Demande de validation
 transcription_saved:                      Transcription saved
 transcription_send_to_validation:         Send to validation
+transcription_status_in_progress:         In progress
+transcription_status_in_reread:           Reread
+transcription_status_no_transcription:    None
+transcription_status_none:                No transcript
+transcription_status_validated:           Validated
 transcription_unvalidate:                 Invalider la transcription (et changer les reviews positives en reviews négatives)
 transcription_unvalidated:                Transcription unvalidated
 transcription_validated:                  Transcription validated
@@ -196,6 +207,12 @@ user_renew_password_error:                An error occured while requesting a ne
 user_renew_password_mail_sent:            An email has ben sent at the following address %usermail%
 user_renew_password_success:              Your password was updated.
 user_self_edit:                           Edit your profile
+user_status_manager_desc:                 The project manager can transcribe, reread, validate transriptions and manage all aspects of the project.
+user_status_manager_name:                 Gestionnaire
+user_status_transcriber_desc:             The transcriber can transcribe the media and reread the transcripts.
+user_status_transcriber_name:             Transcriber
+user_status_validator_desc:               The validator can transcribe, read and validate the transcripts.
+user_status_validator_name:               Validator
 user:                                     User
 userfullname:                             Lastname - Firstname
 username:                                 Username
