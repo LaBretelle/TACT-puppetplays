@@ -54,6 +54,10 @@ class ProjectType extends AbstractType
               'required' => true,
               'empty_data' => 2,
           ])
+          ->add('hasScheme', CheckboxType::class, [
+              'label'    => 'has_scheme',
+              'required' => false
+          ])
           ->add('catchPhrase', TextType::class, [
             'required' => false,
             'label' => 'project_catchphrase',

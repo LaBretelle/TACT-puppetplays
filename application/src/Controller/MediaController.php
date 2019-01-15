@@ -7,7 +7,6 @@ use App\Entity\Transcription;
 use App\Form\ReviewType;
 use App\Service\AppEnums;
 use App\Service\FileManager;
-use App\Service\FlashManager;
 use App\Service\MailManager;
 use App\Service\MediaManager;
 use App\Service\PermissionManager;
@@ -27,7 +26,6 @@ class MediaController extends Controller
 {
     private $mediaManager;
     private $transcriptionManager;
-    private $fm;
     private $reviewManager;
     private $reviewRequestManager;
     private $mailManager;
@@ -38,7 +36,6 @@ class MediaController extends Controller
     public function __construct(
       MediaManager $mediaManager,
       TranscriptionManager $transcriptionManager,
-      FlashManager $fm,
       ReviewManager $reviewManager,
       ReviewRequestManager $reviewRequestManager,
       MailManager $mailManager,
@@ -48,7 +45,6 @@ class MediaController extends Controller
     ) {
         $this->mediaManager = $mediaManager;
         $this->transcriptionManager = $transcriptionManager;
-        $this->fm = $fm;
         $this->reviewManager = $reviewManager;
         $this->reviewRequestManager = $reviewRequestManager;
         $this->mailManager = $mailManager;
@@ -180,5 +176,21 @@ class MediaController extends Controller
         $this->mediaManager->setMediaTranscription($media, $content);
 
         return $this->json([], $status = 200);
+    }
+
+    /**
+     * @Route("/{id}/transcription/unvalidate", name="transcription_unvalidate")
+     */
+    public function unvalidateTranscription(Media $media)
+    {
+        $project = $media->getProject();
+        $parent = $media->getParent();
+
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            return $this->json([], $status = 403);
+        }
+        //todo unvalidate transcription
+
+        return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
     }
 }

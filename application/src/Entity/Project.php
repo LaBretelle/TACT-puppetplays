@@ -104,6 +104,11 @@ class Project
      */
     private $projectHelpLink;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $hasScheme = true;
+
     public function __construct()
     {
         $this->financers = new ArrayCollection();
@@ -377,6 +382,18 @@ class Project
     public function setCatchPhrase(?string $catchPhrase): self
     {
         $this->catchPhrase = $catchPhrase;
+
+        return $this;
+    }
+
+    public function getHasScheme(): ?bool
+    {
+        return $this->hasScheme;
+    }
+
+    public function setHasScheme(bool $hasScheme): self
+    {
+        $this->hasScheme = $hasScheme;
 
         return $this;
     }

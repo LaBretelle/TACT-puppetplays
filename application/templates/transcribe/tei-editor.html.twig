@@ -27,6 +27,7 @@
           {{ media.transcription.content | raw }}
         </textarea>
       </div>
+      {% if project.hasScheme %}
       <div class="col-3 selected-element">
         <div class="row" data-intro="{{'help4'|trans}}" data-step="4">
           <div class="col">
@@ -57,6 +58,8 @@
           </div>
         </div>
       </div>
+      {% endif %}
+
     </div>
   </div>
   <div id="preview" class="tab-pane fade" role="tabpanel">
