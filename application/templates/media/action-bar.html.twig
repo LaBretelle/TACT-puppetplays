@@ -42,8 +42,14 @@
     {% endif %}
 
     {% if project | isAuthorizedOnProject('register') %}
-      <a href="{{ path('status_request', {id:  project.id})}}" data-toggle="tooltip" title="{{'project_register' | trans}}">
+      <a class="btn btn-link" href="{{ path('status_request', {id:  project.id})}}" data-toggle="tooltip" title="{{'project_register' | trans}}">
         <i class="fas fa-hand-holding-heart fa-fw" aria-hidden="true"></i>
+      </a>
+    {% endif %}
+
+    {% if media.transcription.isValid and project | isAuthorizedOnProject('editProject') %}
+      <a class="btn btn-link" href="{{ path('media_transcription_unvalidate', {id:  media.id})}}" data-toggle="tooltip" title="{{'transcription_unvalidate' | trans}}">
+        <i class="fas fa-poo" aria-hidden="true"></i>
       </a>
     {% endif %}
   </div>

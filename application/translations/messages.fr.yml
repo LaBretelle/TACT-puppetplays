@@ -170,6 +170,7 @@ transcription_log_updated:                Transcription mise à jour
 transcription_log_waiting_for_validation: Demande de validation
 transcription_saved:                      Transcription sauvegardée
 transcription_send_to_validation:         Demander une validation
+transcription_unvalidate:                 Invalider la transcription (et changer les reviews positives en reviews négatives)
 transcription_unvalidated:                Transcription invalidée
 transcription_validated:                  Transcription validée
 transcriptions_page_title:                Transcriptions du projet

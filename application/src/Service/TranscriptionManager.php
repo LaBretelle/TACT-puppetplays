@@ -114,6 +114,15 @@ class TranscriptionManager
     {
         $transcription->setIsValid($isValid);
         $this->em->persist($transcription);
+
+        if (!$isValid) {
+            if ($request = $transcription->getReviewRequest()) {
+                foreach ($request->getReviews() as $review) {
+                    $review->setIsValid(false);
+                    $this->em->persist($review);
+                }
+            }
+        }
         $this->em->flush();
 
         return;

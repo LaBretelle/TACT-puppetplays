@@ -189,7 +189,7 @@ class MediaController extends Controller
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
             return $this->json([], $status = 403);
         }
-        //todo unvalidate transcription
+        $this->transcriptionManager->validate($media->getTranscription(), false);
 
         return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
     }
