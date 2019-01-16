@@ -175,7 +175,9 @@ transcription_is_locked:                  La transcription est bloquée
 transcription_is_valid:                   La transcription vous parait-elle valide ?
 transcription_log_created:                Transcription initialisée
 transcription_log_rereaded:               Relecture soumise
+transcription_log_unvalidated:            Transcription invalidée
 transcription_log_updated:                Transcription mise à jour
+transcription_log_validated:              Transcription validée
 transcription_log_waiting_for_validation: Demande de relecture
 transcription_saved:                      Transcription sauvegardée
 transcription_send_to_validation:         Demander une relecture

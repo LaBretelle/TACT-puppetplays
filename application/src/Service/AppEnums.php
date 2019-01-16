@@ -19,6 +19,7 @@ class AppEnums
     public const TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION = 'transcription_log_waiting_for_validation';
     public const TRANSCRIPTION_LOG_VALIDATION_PENDING = 'transcription_log_validation_pending';
     public const TRANSCRIPTION_LOG_VALIDATED = 'transcription_log_validated';
+    public const TRANSCRIPTION_LOG_UNVALIDATED = 'transcription_log_unvalidated';
     public const TRANSCRIPTION_LOG_LOCKED = 'transcription_log_locked';
     public const TRANSCRIPTION_LOG_UNLOCKED = 'transcription_log_unlocked';
 

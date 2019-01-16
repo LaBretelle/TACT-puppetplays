@@ -54,7 +54,7 @@ class TranscriptionManager
         $lastLog = $this->em->getRepository(TranscriptionLog::class)->getLastLog($transcription);
         $status = $lastLog->getName();
         $logUser = $lastLog->getUser();
-        
+
         return $currentUser->getId() === $logUser->getId();
     }
 
@@ -109,6 +109,10 @@ class TranscriptionManager
         if ($request = $transcription->getReviewRequest()) {
             $this->em->remove($request);
         }
+
+        $logType = $isValid ? AppEnums::TRANSCRIPTION_LOG_VALIDATED : AppEnums::TRANSCRIPTION_LOG_UNVALIDATED;
+        $log = $this->addLog($transcription, $logType);
+        $this->em->persist($log);
 
         $this->em->flush();
 

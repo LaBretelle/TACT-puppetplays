@@ -37,8 +37,8 @@ class ReviewRequestManager
             $request->setTranscription($transcription);
             $this->em->persist($request);
 
-            $this->tm->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
-            $this->em->persist($transcription);
+            $log = $this->tm->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
+            $this->em->persist($log);
             $this->em->flush();
 
             $this->fm->add('notice', 'review_request_created');
