@@ -22,22 +22,12 @@
     {% endif %}
     <div class="card-columns">
         {% for project in projects %}
-        {% set validated = project|validationPercent|round %}
-        {% set inReview = project|reviewPercent|round %}
-        {% set noTranscription = project|nonePercent|round %}
-        {% set progressPercent = project|progressPercent|round %}
         <div class="card">
           <img class="card-img-top" src="{{ project.image ? asset('project_files/'~project.id~'/'~project.image) : asset('img/project-placeholder.png') }}">
             <div class="card-body">
                 <h5 class="card-title">{{ project.name }}</h5>
                 {{ project.description | striptags | truncate(100, true)| raw }}
-
-                <div class="progress mt-4">
-                  <div data-toggle="tooltip" title="{{"transcription_status_none"|trans}}" class="progress-bar bg-danger" role="progressbar" style="width: {{ noTranscription }}%;">{{ noTranscription }}%</div>
-                  <div data-toggle="tooltip" title="{{"transcription_status_in_progress"|trans}}" class="progress-bar bg-warning" role="progressbar" style="width: {{ progressPercent }}%;">{{ progressPercent }}%</div>
-                  <div data-toggle="tooltip" title="{{"transcription_status_in_reread"|trans}}" class="progress-bar bg-info" role="progressbar" style="width: {{ inReview }}%;">{{ inReview }}%</div>
-                  <div data-toggle="tooltip" title="{{"transcription_status_validated"|trans}}" class="progress-bar bg-success" role="progressbar" style="width: {{ validated }}%;">{{ validated }}%</div>
-                </div>
+                {% include 'project/progressbar.html.twig' with {'project': project} %}
             </div>
             <div class="card-footer text-right">
               <a href="{{ path("project_display", {'id': project.id} )}}">{{'view_project' | trans}}</a>

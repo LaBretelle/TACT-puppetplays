@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+use App\Entity\Project;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProjectExtension extends AbstractExtension
@@ -18,54 +19,40 @@ class ProjectExtension extends AbstractExtension
     public function getFilters()
     {
         return array(
-            new TwigFilter('validationPercent', array($this, 'validationPercent')),
-            new TwigFilter('reviewPercent', array($this, 'reviewPercent')),
-            new TwigFilter('nonePercent', array($this, 'nonePercent')),
-            new TwigFilter('progressPercent', array($this, 'progressPercent')),
+            new TwigFilter('percents', array($this, 'getPercents')),
         );
     }
 
-    public function validationPercent($project)
+    public function getPercents(Project $project)
     {
         $total = $this->em->getRepository("App:Media")->countByProject($project);
 
-        if ($validated = (int)$this->em->getRepository("App:Media")->countValidated($project)) {
-            return $validated/$total*100;
-        }
+        $validated = (int)$this->em->getRepository("App:Media")->countValidated($project);
+        $progress = (int)$this->em->getRepository("App:Media")->countInProgress($project);
+        $review = (int)$this->em->getRepository("App:Media")->countInReview($project);
+        $none = $total - ($validated + $review + $progress);
 
-        return 0;
-    }
+        $validatedPercent = ($validated != 0)
+          ? $validated/$total*100
+          : 0;
 
-    public function reviewPercent($project)
-    {
-        $total = $this->em->getRepository("App:Media")->countByProject($project);
+        $progressPercent = ($progress != 0)
+          ? $progress/$total*100
+          : 0;
 
-        if ($validated = (int)$this->em->getRepository("App:Media")->countInReview($project)) {
-            return $validated/$total*100;
-        }
+        $reviewPercent = ($review != 0)
+          ? $review/$total*100
+          : 0;
 
-        return 0;
-    }
+        $nonePercent = ($none != 0)
+          ? $none/$total*100
+          : 0;
 
-    public function progressPercent($project)
-    {
-        $total = $this->em->getRepository("App:Media")->countByProject($project);
-
-        if ($validated = (int)$this->em->getRepository("App:Media")->countInProgress($project)) {
-            return $validated/$total*100;
-        }
-
-        return 0;
-    }
-
-    public function nonePercent($project)
-    {
-        $total = $this->em->getRepository("App:Media")->countByProject($project);
-
-        if ($validated = (int)$this->em->getRepository("App:Media")->countNoTranscription($project)) {
-            return $validated/$total*100;
-        }
-
-        return 0;
+        return [
+          $validatedPercent,
+          $progressPercent,
+          $reviewPercent,
+          $nonePercent
+        ];
     }
 }
