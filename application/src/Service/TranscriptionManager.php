@@ -30,13 +30,18 @@ class TranscriptionManager
         $this->permissionManager = $permissionManager;
     }
 
-    public function addLog(Transcription $transcription, string $name)
+    public function addLog(Transcription $transcription, string $name, $flush = false)
     {
         $currentUser = $this->security->getUser();
         $log = new TranscriptionLog();
         $log->setUser($this->security->getUser());
         $log->setName($name);
         $transcription->addTranscriptionLog($log);
+
+        if ($flush) {
+            $this->em->persist($log);
+            $this->em->flush();
+        }
 
         return $log;
     }

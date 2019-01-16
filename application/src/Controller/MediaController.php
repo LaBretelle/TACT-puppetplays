@@ -91,19 +91,10 @@ class MediaController extends Controller
             return $this->redirectToRoute('media_transcription_review', ['id' => $media->getId()]);
         }
 
-        $canEdit = true;
         $lockLog = $this->transcriptionManager->getLastLockLog($transcription);
         $locked = $lockLog ? $this->transcriptionManager->isLocked($lockLog) : false;
-
-        // if transcription is locked only the user responsible for the lock event should be able to edit the transcription
-        if ($locked) {
-            $canEdit = $this->transcriptionManager->userCanEditTranscription($transcription);
-        } else {
-            $lockLog = $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_LOCKED);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($transcription);
-            $em->flush();
-        }
+        $canEdit = (!$locked || $locked && $this->transcriptionManager->userCanEditTranscription($transcription));
+        $lockLog = (!$locked) ? $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_LOCKED, true) : $lockLog;
         $schema = $this->fileManager->getProjectTeiSchema($project);
         $logs = $this->transcriptionManager->getLogs($transcription, $project);
 
@@ -154,20 +145,10 @@ class MediaController extends Controller
             return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
         }
 
-        $canEdit = true;
         $lockLog = $this->transcriptionManager->getLastLockLog($transcription);
         $locked = $lockLog ? $this->transcriptionManager->isLocked($lockLog) : false;
-        // if transcription is locked only the user responsible for the lock event should be able to edit the transcription
-        if ($locked) {
-            $canEdit = $this->transcriptionManager->userCanEditTranscription($transcription);
-        } else {
-            $lockLog = $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_LOCKED);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($transcription);
-            $em->flush();
-        }
-
-
+        $canEdit = (!$locked || $locked && $this->transcriptionManager->userCanEditTranscription($transcription));
+        $lockLog = (!$locked) ? $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_LOCKED, true) : $lockLog;
         $schema = $this->fileManager->getProjectTeiSchema($project);
         $logs = $this->transcriptionManager->getLogs($transcription, $project);
         $nbPositiveReview = $this->reviewManager->countReview($transcription, true);
