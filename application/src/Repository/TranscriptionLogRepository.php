@@ -79,7 +79,7 @@ class TranscriptionLogRepository extends ServiceEntityRepository
           ->andWhere('tl.name NOT IN(:exceptions)')
           ->setParameter('t', $transcription)
           ->setParameter('exceptions', 'transcription_log_locked')
-          ->orderBy('tl.createdAt', 'ASC')
+          ->orderBy('tl.createdAt', 'DESC')
           ->getQuery()
           ->getResult();
     }
