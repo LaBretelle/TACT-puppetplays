@@ -24,6 +24,10 @@
 
   {# MODAL WITH REVIEW FORM #}
   {{ include('review/form.html.twig') }}
+
+  {% if edit %}
+    <input type="hidden" id="log-id" name="log_id" value="{{log.id}}">
+  {% endif %}
 {% endblock %}
 
 {% block javascripts %}

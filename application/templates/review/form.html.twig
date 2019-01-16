@@ -2,18 +2,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="validation-modal-label">{{'validate_transcription'| trans}}</h5>
+        <h5 class="modal-title" id="validation-modal-label">{{'review_transcription'| trans}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        {% if edit %}
         <div class="alert alert-primary" role="alert">
           {{"leave_warning"|trans}}
           <button class="btn btn-sm btn-outline-primary btn-save-transcription" data-id="{{media.id}}">
             <i class="fas fa-save"></i> {{'save' | trans}}
           </button>
         </div>
+        {% endif %}
         {{ form(form) }}
       </div>
     </div>

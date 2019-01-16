@@ -7,21 +7,7 @@
   </div>
 
   <div class="col text-right">
-    {% if review == true %}
-    <span class="badge badge-info">
-      {{'transcription_current_nb_validations' | trans({'%1%': nbCurrentValidation, '%2%': project.nbValidation})}}
-    </span>
-    <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
-      <i class="fas fa-save"></i>
-    </button>
-    <span data-toggle="tooltip" title="{{'validate_transcription' | trans}}">
-      <button data-toggle="modal" data-target="#validation-modal" class="btn btn-link" >
-        <i class="fas fa-thumbs-up"></i>
-      </button>
-    </span>
-    {% endif %}
-
-    {% if edit is defined and edit == true %}
+    {% if edit is defined and edit == true and review == false %}
       <span data-intro="{{'help6'|trans}}" data-step="6">
         <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
           <i class="fas fa-save"></i>
@@ -35,16 +21,30 @@
           <i class="fas fa-question-circle"></i>
         </button>
       </span>
-    {% elseif locked is defined and locked == true %}
-      <h5>
+    {% elseif locked is defined and locked == true and edit == false %}
         <span class="badge badge-danger">{{'transcription_is_locked' | trans}}</span>
-      </h5>
     {% endif %}
 
     {% if project | isAuthorizedOnProject('register') %}
       <a class="btn btn-link" href="{{ path('status_request', {id:  project.id})}}" data-toggle="tooltip" title="{{'project_register' | trans}}">
         <i class="fas fa-hand-holding-heart fa-fw" aria-hidden="true"></i>
       </a>
+    {% endif %}
+
+    {% if review == true %}
+      <span class="badge badge-info">
+        {{'transcription_current_nb_validations' | trans({'%1%': nbCurrentValidation, '%2%': project.nbValidation})}}
+      </span>
+      {% if edit %}
+        <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
+          <i class="fas fa-save"></i>
+        </button>
+      {% endif %}
+      <span data-toggle="tooltip" title="{{'review_transcription' | trans}}">
+        <button data-toggle="modal" data-target="#validation-modal" class="btn btn-link" >
+          <i class="fas fa-glasses"></i>
+        </button>
+      </span>
     {% endif %}
 
     {% if project | isAuthorizedOnProject('editProject') %}
@@ -54,7 +54,7 @@
         </a>
       {% else %}
       <a class="btn btn-link" href="{{ path('media_transcription_validate', {id:  media.id, valid: 1})}}" data-toggle="tooltip" title="{{'transcription_validate' | trans}}">
-      <i class="far fa-hand-peace"></i>
+        <i class="fas fa-thumbs-up"></i>
       </a>
       {% endif %}
     {% endif %}

@@ -32,8 +32,7 @@ OpenSeadragon({
 $(document).ready(() => {
 
   if ('edit' === mode) {
-    const logId = document.getElementById('log-id').value
-    // load proper TEI schema
+    lockTranscription()
     const jsonTeiDef = JSON.parse(document.getElementById('tei-schema').value)
     editor = new TeiEditor(jsonTeiDef)
     editor.init()
@@ -50,12 +49,8 @@ $(document).ready(() => {
       startTutorial()
     })
 
-    // update islocked log every 2 (-) minutes
-    window.setInterval(() => {
-      updateLockedLog(logId)
-    }, updateLogTimeout)
-
   } else if ('validation' === mode) {
+    lockTranscription()
     const jsonTeiDef = JSON.parse(document.getElementById('tei-schema').value)
     editor = new TeiEditor(jsonTeiDef)
     editor.init()
@@ -76,6 +71,17 @@ $(document).ready(() => {
     })
   }
 })
+
+const lockTranscription = () => {
+
+  const logIdEl = document.getElementById('log-id')
+  if (logIdEl) {
+    const logId = logIdEl.value
+    window.setInterval(() => {
+      updateLockedLog(logId)
+    }, updateLogTimeout)
+  }
+}
 
 const updateLockedLog = (id) => {
   const url = Routing.generate('transcription_log_locked_update', {

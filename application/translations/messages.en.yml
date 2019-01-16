@@ -139,6 +139,7 @@ public_mail:                              Email visible to all
 register:                                 register
 repeat_password:                          Repeat password
 reread_transcription:                     Reread transcription
+review_transcription:                     Soumettre la relecture
 reviews_infos:                            Informations sur les relectures
 reviews:                                  Relectures
 root_folder_option:                       Root
@@ -183,6 +184,7 @@ transcription_status_none:                No transcript
 transcription_status_validated:           Validated
 transcription_unvalidate:                 Invalider la transcription (et changer les reviews positives en reviews négatives)
 transcription_unvalidated:                Transcription unvalidated
+transcription_validate:                   Valider la transcription directement
 transcription_validated:                  Transcription validated
 transcriptions_page_title:                Project transcripts
 tutorial_enable:                          Enable tutorial
@@ -217,7 +219,6 @@ user:                                     User
 userfullname:                             Lastname - Firstname
 username:                                 Username
 users:                                    Users
-validate_transcription:                   Valider la transcription
 validation_asked:                         Validation asked
 validation_comment:                       Comment
 validator:                                Validator

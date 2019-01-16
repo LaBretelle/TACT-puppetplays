@@ -10,7 +10,7 @@ administrate_schemas_menu:                Schémas
 administrate_users_menu:                  Utilisateurs
 administrate_users_title:                 Administration des utilisateurs de la plateforme
 app_admin:                                Administrateur du site
-ask_validation_text:                      Vous êtes sur le point de demander la validation/mise en relecture de cette transcription.
+ask_validation_text:                      Vous êtes sur le point de demander la relecture de cette transcription.
 asked_by:                                 Demande faite par
 attributes:                               Attributs pour l'élément
 back_to_transcripts:                      Retour aux transcriptions
@@ -47,7 +47,7 @@ help2:                                    La transcription se passe ici. Saisiss
 help3:                                    Choisissez maintenant une balise en cliquant sur « + ». "abbr" pour abréviation et "hi" pour mettre en valeur un mot (en couleur par exemple).
 help4:                                    Sélectionnez la valeur souhaitée.
 help5:                                    Vous pouvez visualiser le rendu de la transcription sur cet onglet.
-help6:                                    À tout moment, vous pouvez sauvegarder votre transcription et une fois qu’elle vous satisfait, en demander une validation.
+help6:                                    À tout moment, vous pouvez sauvegarder votre transcription et une fois qu’elle vous satisfait, en demander une relecture.
 help7:                                    En cliquant ici vous pouvez retrouver un document d’aide à la transcription ou bien relancer le tutoriel.
 home:                                     Accueil
 is_public:                                Projet public
@@ -124,12 +124,12 @@ project_move_directory_title:             Déplacer le dossier
 project_name:                             Nom du projet
 project_register:                         S'inscrire au projet
 project_registration:                     Inscription au projet
-project_status_finished_desc:          Le projet est terminé et prêt à être diffusé mondialement.
-project_status_finished_name:          Terminé
-project_status_in_progress_desc:       Le projet est en cours et donc il n'est pas prêt à être diffusé mondialement.
-project_status_in_progress_name:       En cours
-project_status_new_desc:               Le projet est complètement nouveau.
-project_status_new_name:               Nouveau
+project_status_finished_desc:             Le projet est terminé et prêt à être diffusé mondialement.
+project_status_finished_name:             Terminé
+project_status_in_progress_desc:          Le projet est en cours et donc il n'est pas prêt à être diffusé mondialement.
+project_status_in_progress_name:          En cours
+project_status_new_desc:                  Le projet est complètement nouveau.
+project_status_new_name:                  Nouveau
 project_status:                           Statut du projet
 project_transcript:                       Transcrire
 project_transcription:                    Transcription
@@ -139,6 +139,7 @@ public_mail:                              Email visible par tous
 register:                                 S'enregistrer
 repeat_password:                          Répéter le mot de passe
 reread_transcription:                     Relire la transcription
+review_transcription:                     Soumettre la relecture
 reviews_infos:                            Informations sur les relectures
 reviews:                                  Relectures
 root_directory_option:                    Racine
@@ -168,21 +169,22 @@ transcript_help_doc_undefined:            Document d'aide non défini
 transcript_help_doc:                      Accéder au document d'aide à la transcription
 transcript_help:                          Aide à la transcription
 transcript_media:                         Transcription du media
-transcription_current_nb_validations:     Actuellement %1% / %2% validations
+transcription_current_nb_validations:     '%1% / %2% relectures positives'
 transcription_is_locked:                  La transcription est bloquée
 transcription_is_valid:                   La transcription vous parait-elle valide ?
 transcription_log_created:                Transcription initialisée
 transcription_log_updated:                Transcription mise à jour
-transcription_log_waiting_for_validation: Demande de validation
+transcription_log_waiting_for_validation: Demande de relecture
 transcription_saved:                      Transcription sauvegardée
-transcription_send_to_validation:         Demander une validation
-transcription_status_in_progress:      Transcription en cours
-transcription_status_in_reread:        Transcription en relecture
-transcription_status_no_transcription: Aucune transcription
-transcription_status_none:             Aucune transcription
-transcription_status_validated:        Transcription validée
-transcription_unvalidate:                 Invalider la transcription (et changer les reviews positives en reviews négatives)
+transcription_send_to_validation:         Demander une relecture
+transcription_status_in_progress:         Transcription en cours
+transcription_status_in_reread:           Transcription en relecture
+transcription_status_no_transcription:    Aucune transcription
+transcription_status_none:                Aucune transcription
+transcription_status_validated:           Transcription validée
+transcription_unvalidate:                 Invalider la transcription (et supprimer les reviews)
 transcription_unvalidated:                Transcription invalidée
+transcription_validate:                   Valider la transcription directement (et supprimer les reviews)
 transcription_validated:                  Transcription validée
 transcriptions_page_title:                Transcriptions du projet
 tutorial_enable:                          Activer le tutoriel
@@ -207,18 +209,17 @@ user_renew_password_error:                Une erreur s'est produite lors de la d
 user_renew_password_mail_sent:            Un email vous a été envoyé à l'adresse %usermail%
 user_renew_password_success:              Votre mot de passe a été mis à jour.
 user_self_edit:                           Éditer votre profil
-user_status_manager_desc:              Le gestionnaire de projet peut transcrire, relire, valider les transriptions et gérer touts les aspects du projet.
-user_status_manager_name:              Gestionnaire
-user_status_transcriber_desc:          Le transcripteur peut transcrire les media et relire les transcriptions.
-user_status_transcriber_name:          Transcripteur
-user_status_validator_desc:            Le validateur peut transcrire, relire et valider les transriptions.
-user_status_validator_name:            Validateur
+user_status_manager_desc:                 Le gestionnaire de projet peut transcrire, relire, valider les transriptions et gérer touts les aspects du projet.
+user_status_manager_name:                 Gestionnaire
+user_status_transcriber_desc:             Le transcripteur peut transcrire les media et relire les transcriptions.
+user_status_transcriber_name:             Transcripteur
+user_status_validator_desc:               Le validateur peut transcrire, relire et valider les transriptions.
+user_status_validator_name:               Validateur
 user:                                     Utilisateur
 userfullname:                             Nom - Prénom
 username:                                 Nom d'utilisateur
 users:                                    Utilisateurs
-validate_transcription:                   Valider la transcription
-validation_asked:                         Validation demandée
+validation_asked:                         Relecture demandée
 validation_comment:                       Commentaire
 validator:                                Validateur
 view_profile:                             Voir le profil

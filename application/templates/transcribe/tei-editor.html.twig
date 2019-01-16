@@ -2,11 +2,13 @@
 {% set canViewLogs = media.project | isAuthorizedOnProject('viewLogs') %}
 
 <ul class="nav nav-tabs">
+  {% if edit %}
   <li class="nav-item">
     <a class="nav-link active" data-toggle="tab" href="#edit-full">{{'transcribe'|trans}}</a>
   </li>
+  {% endif %}
   <li class="nav-item" data-intro="{{'help5'|trans}}" data-step="5">
-    <a class="nav-link" data-toggle="tab"  href="#preview">{{'preview'|trans}}</a>
+    <a class="nav-link {% if not edit %}active{% endif %}" data-toggle="tab"  href="#preview">{{'preview'|trans}}</a>
   </li>
   {% if canValidate %}
   <li class="nav-item">
@@ -20,6 +22,8 @@
   {% endif %}
 </ul>
 <div class="tab-content transcription-panel-content">
+
+  {% if edit %}
   <div id="edit-full" class="tab-pane fade show active" role="tabpanel">
     <div class="row">
       <div class="col">
@@ -59,10 +63,12 @@
         </div>
       </div>
       {% endif %}
-
     </div>
   </div>
-  <div id="preview" class="tab-pane fade" role="tabpanel">
+  {% endif %}
+
+  <div id="preview" class="tab-pane fade {% if not edit %}show active{% endif %}" role="tabpanel">
+    {{ media.transcription.content | raw}}
   </div>
   {% if canValidate %}
   <div id="reviews" class="tab-pane fade" role="tabpanel">

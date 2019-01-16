@@ -46,13 +46,14 @@ class TeiEditor {
 
         // allow user to filter allowed elements
         const input = document.querySelector('.filter-elements')
-        input.addEventListener('input', (e) => {
-          const elements = document.querySelector('.elements').children
-          Array.prototype.forEach.call(elements, (el) => {
-            el.hidden = el.textContent.toLowerCase().indexOf(e.target.value.toLowerCase()) === -1
+        if (input) {
+          input.addEventListener('input', (e) => {
+            const elements = document.querySelector('.elements').children
+            Array.prototype.forEach.call(elements, (el) => {
+              el.hidden = el.textContent.toLowerCase().indexOf(e.target.value.toLowerCase()) === -1
+            })
           })
-        })
-
+        }
       }
     }).then((editors) => {
       // load content into tinyMCE
@@ -275,15 +276,17 @@ class TeiEditor {
   refreshPanels(tei) {
 
     const currentTinyElement = Tiny.activeEditor.selection.getNode()
-    const currentTeiElement = tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
-    this.displayCurrentAttributes(currentTeiElement, currentTinyElement)
-    this.getAllowedElements(tei, currentTeiElement)
-    $('[data-toggle="popover"]').popover({
-      html : true,
-      placement: 'top',
-      trigger: 'focus'
-    })
-    document.querySelector('.filter-elements').value = ''
+    if (tei.elements) {
+      const currentTeiElement = tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
+      this.displayCurrentAttributes(currentTeiElement, currentTinyElement)
+      this.getAllowedElements(tei, currentTeiElement)
+      $('[data-toggle="popover"]').popover({
+        html : true,
+        placement: 'top',
+        trigger: 'focus'
+      })
+      document.querySelector('.filter-elements').value = ''
+    }
   }
 
   getContent() {

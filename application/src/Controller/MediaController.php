@@ -81,12 +81,16 @@ class MediaController extends Controller
     public function editTranscription(Media $media)
     {
         $project = $media->getProject();
+        $transcription = $media->getTranscription();
 
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_TRANSCRIBE)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
 
-        $transcription = $media->getTranscription();
+        if ($transcription->getReviewRequest()) {
+            return $this->redirectToRoute('media_transcription_review', ['id' => $media->getId()]);
+        }
+
         $canEdit = true;
         $lockLog = $this->transcriptionManager->getLastLockLog($transcription);
         $locked = $lockLog ? $this->transcriptionManager->isLocked($lockLog) : false;
@@ -123,12 +127,16 @@ class MediaController extends Controller
     public function reviewTranscription(Media $media, Request $request)
     {
         $project = $media->getProject();
+        $transcription = $media->getTranscription();
 
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VALIDATE_TRANSCRIPTION)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
 
-        $transcription = $media->getTranscription();
+        if (!$transcription->getReviewRequest()) {
+            return $this->redirectToRoute('media_transcription_edit', ['id' => $media->getId()]);
+        }
+
         $reviewRequest = $transcription->getReviewRequest();
         $review = $this->reviewManager->create($reviewRequest);
         $form = $this->createForm(ReviewType::class, $review);
@@ -139,13 +147,27 @@ class MediaController extends Controller
             $nbPositiveReview = $this->reviewManager->countReview($transcription, true);
             if ($nbPositiveReview >= $project->getNbValidation()) {
                 $this->transcriptionManager->validate($transcription, true);
-                //$this->reviewRequestManager->delete($reviewRequest);
                 //$this->mailManager->sendValidationMail($reviewRequest->getUser(), $media, $review->getIsValid(), $review->getComment());
             }
             $parent = $media->getParent();
 
             return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
         }
+
+
+        $canEdit = true;
+        $lockLog = $this->transcriptionManager->getLastLockLog($transcription);
+        $locked = $lockLog ? $this->transcriptionManager->isLocked($lockLog) : false;
+        // if transcription is locked only the user responsible for the lock event should be able to edit the transcription
+        if ($locked) {
+            $canEdit = $this->transcriptionManager->userCanEditTranscription($transcription);
+        } else {
+            $lockLog = $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_LOCKED);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($transcription);
+            $em->flush();
+        }
+
 
         $schema = $this->fileManager->getProjectTeiSchema($project);
         $logs = $this->transcriptionManager->getLogs($transcription, $project);
@@ -159,7 +181,10 @@ class MediaController extends Controller
             'nbCurrentValidation' => $nbPositiveReview,
             'schema' => $schema,
             'logs' => $logs,
-            'review' => true
+            'review' => true,
+            'edit' => $canEdit,
+            'locked' => $locked,
+            'log' => $lockLog,
           ]
         );
     }
@@ -187,7 +212,7 @@ class MediaController extends Controller
         $parent = $media->getParent();
 
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
-            return $this->json([], $status = 403);
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
         $this->transcriptionManager->validate($media->getTranscription(), $valid);
 

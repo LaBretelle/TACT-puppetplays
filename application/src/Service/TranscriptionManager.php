@@ -54,6 +54,7 @@ class TranscriptionManager
         $lastLog = $this->em->getRepository(TranscriptionLog::class)->getLastLog($transcription);
         $status = $lastLog->getName();
         $logUser = $lastLog->getUser();
+        
         return $currentUser->getId() === $logUser->getId();
     }
 
@@ -108,7 +109,7 @@ class TranscriptionManager
         if ($request = $transcription->getReviewRequest()) {
             $this->em->remove($request);
         }
-        
+
         $this->em->flush();
 
         return;

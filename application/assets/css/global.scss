@@ -266,7 +266,7 @@ body > .container-fluid {
 // allow the use of {font-family: 'Font Awesome 5 Free'; content: "\f0a9";}
 // if font path is not specified we are not able to import fa-solid icons ...
 $fa-font-path: '~@fortawesome/fontawesome-free-webfonts/webfonts';
-@import '~@fortawesome/fontawesome-free-webfonts/scss/fa-solid';
+@import '~@fortawesome/fontawesome-free-webfonts/scss/fontawesome';
 
 .mce-ico.mce-i-fas {
   display: inline-block;

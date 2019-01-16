@@ -2,12 +2,14 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
+        {% if edit %}
         <div class="alert alert-primary" role="alert">
           {{ "leave_warning" |trans}}
           <button class="btn btn-sm btn-outline-primary btn-save-transcription" data-id="{{media.id}}">
             <i class="fas fa-save"></i> {{'save' | trans}}
           </button>
         </div>
+        {% endif %}
         {{ "ask_validation_text" |trans}}
       </div>
       <div class="modal-footer">
