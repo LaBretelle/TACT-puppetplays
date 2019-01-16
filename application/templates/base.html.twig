@@ -26,16 +26,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ path('home') }}">{{ 'home' | trans}}
-              <span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('home') }}">
+              <i class="fas fa-home"></i> {{ 'home' | trans}}
+            </a>
           </li>
           {% if is_granted('ROLE_ADMIN', app.user) %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ path('admin_user_list') }}">{{ 'administrate_users_menu' | trans}}</a>
+              <a class="nav-link" href="{{ path('admin_user_list') }}">
+                <i class="fas fa-users"></i> {{ 'administrate_users_menu' | trans}}
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ path('admin_platform_properties')}}">{{ 'administrate_platform_menu' | trans}}</a>
+              <a class="nav-link" href="{{ path('admin_platform_properties')}}">
+                <i class="fas fa-cogs"></i> {{ 'administrate_platform_menu' | trans}}
+              </a>
             </li>
           {% endif %}
         </ul>
