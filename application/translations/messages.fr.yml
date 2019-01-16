@@ -139,6 +139,7 @@ public_mail:                              Email visible par tous
 register:                                 S'enregistrer
 repeat_password:                          Répéter le mot de passe
 reread_transcription:                     Relire la transcription
+review_request_created:                   Demande de relecture effectuée
 review_transcription:                     Soumettre la relecture
 reviews_infos:                            Informations sur les relectures
 reviews:                                  Relectures
