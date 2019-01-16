@@ -154,7 +154,6 @@ class MediaController extends Controller
             return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
         }
 
-
         $canEdit = true;
         $lockLog = $this->transcriptionManager->getLastLockLog($transcription);
         $locked = $lockLog ? $this->transcriptionManager->isLocked($lockLog) : false;

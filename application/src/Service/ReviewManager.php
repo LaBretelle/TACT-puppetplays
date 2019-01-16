@@ -6,6 +6,7 @@ use App\Entity\Review;
 use App\Entity\ReviewRequest;
 use App\Entity\Transcription;
 use App\Service\FlashManager;
+use App\Service\TranscriptionManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 
@@ -14,15 +15,18 @@ class ReviewManager
     protected $em;
     protected $fm;
     protected $security;
+    protected $tm;
 
     public function __construct(
       EntityManagerInterface $em,
       FlashManager $fm,
-      Security $security
+      Security $security,
+      TranscriptionManager $tm
     ) {
         $this->em = $em;
         $this->fm = $fm;
         $this->security = $security;
+        $this->tm = $tm;
     }
 
     public function create(ReviewRequest $request)
@@ -41,6 +45,10 @@ class ReviewManager
     public function save(Review $review)
     {
         $this->em->persist($review);
+
+        $log = $this->tm->addLog($review->getRequest()->getTranscription(), AppEnums::TRANSCRIPTION_LOG_REREADED);
+        $this->em->persist($log);
+
         $this->em->flush();
 
         $text = $review->getIsValid() ? 'transcription_validated' : 'transcription_unvalidated';
