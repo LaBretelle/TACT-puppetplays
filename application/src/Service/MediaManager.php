@@ -58,10 +58,14 @@ class MediaManager
     public function setMediaTranscription(Media $media, string $content)
     {
         $transcription = $media->getTranscription();
-        $transcription->setContent($content);
-        $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_UPDATED);
-        $this->em->persist($transcription);
-        $this->em->flush();
+        $oldContent = $transcription->getContent();
+        
+        if ($oldContent !== $content) {
+            $transcription->setContent($content);
+            $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_UPDATED);
+            $this->em->persist($transcription);
+            $this->em->flush();
+        }
 
         return;
     }
