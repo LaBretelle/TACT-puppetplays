@@ -28,7 +28,7 @@ class TeiEditor {
       setup: (editor) => {
         editor.addButton('remove-current-tag', {
           text: '',
-          icon: 'fas fa-delete', // defined in app.scss
+          icon: 'fas fa-delete',
           tooltip: Translator.trans('delete_current_tag'),
           onclick: () => {
             this.deleteCurrentTag(this.tei)
