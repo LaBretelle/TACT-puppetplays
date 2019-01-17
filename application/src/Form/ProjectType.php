@@ -53,6 +53,9 @@ class ProjectType extends AbstractType
               'label'    => 'nb_validation',
               'required' => true,
               'empty_data' => 2,
+              'attr' => [
+                'min' => '1'
+              ]
           ])
           ->add('hasScheme', CheckboxType::class, [
               'label'    => 'has_scheme',
