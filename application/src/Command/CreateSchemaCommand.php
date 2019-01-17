@@ -68,7 +68,6 @@ class CreateSchemaCommand extends Command
             exit();
         }
 
-
         // get project path
         $projectFilesPath = $this->fileManager->getProjectPath($project);
         $tags = [];
@@ -132,7 +131,7 @@ class CreateSchemaCommand extends Command
             }
             fclose($handle);
         }
-        $output->writeln('Parsing tags - done');
+        $output->writeln('Done');
 
         $output->writeln('Parsing attributes...');
         $lineNumber = 0;
@@ -177,19 +176,19 @@ class CreateSchemaCommand extends Command
             }
             fclose($handle);
         }
-        $output->writeln('Parsing attributes - done');
+        $output->writeln('Done');
 
-        $output->writeln('Creating project schema file');
+        $output->writeln('Creating project schema file...');
         $this->fileManager->saveJsonTeiFile($projectFilesPath.DIRECTORY_SEPARATOR.'tei-schema.json', json_encode(['elements' => array_values($tags)]));
-        $output->writeln('Creating project schema file - done');
+        $output->writeln('Done');
 
-        $output->writeln('Write FR translations');
+        $output->writeln('Writing FR translations...');
         $this->fileManager->writeTeiTranslationFiles($fr);
-        $output->writeln('Write FR translations - done');
+        $output->writeln('Done');
 
-        $output->writeln('Write EN translations');
+        $output->writeln('Writing EN translations...');
         $this->fileManager->writeTeiTranslationFiles($en, 'en');
-        $output->writeln('Write EN translations - done');
+        $output->writeln('Done');
 
         $output->writeln('Everything done ! \o/');
     }

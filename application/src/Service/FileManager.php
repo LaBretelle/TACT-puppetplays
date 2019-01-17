@@ -84,15 +84,17 @@ class FileManager
         $rootPath =  $this->params->get('kernel.project_dir');
         $yamlPath = $rootPath.DIRECTORY_SEPARATOR.'translations/tei.'.$lang.'.yml';
         if (!file_exists($yamlPath)) {
-            // create file and close
             $file = fopen($yamlPath, 'w');
             fclose($file);
         }
         $existingValues = Yaml::parseFile($yamlPath);
-
         $toAdd = $existingValues ? array_diff_key($translations, $existingValues) : $translations;
-        $yaml = Yaml::dump($toAdd);
 
-        return file_put_contents($yamlPath, $yaml, FILE_APPEND);
+        if (!empty($toAdd)) {
+            $yaml = Yaml::dump($toAdd);
+            file_put_contents($yamlPath, $yaml, FILE_APPEND);
+        }
+
+        return;
     }
 }
