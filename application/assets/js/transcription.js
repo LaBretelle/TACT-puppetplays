@@ -10,7 +10,7 @@ const el = document.getElementById(id)
 const url = el.getAttribute('data-url')
 let editor
 
-OpenSeadragon({
+let viewer = new OpenSeadragon.Viewer({
   id: id,
   showNavigator: false,
   showRotationControl: true,
@@ -28,6 +28,8 @@ OpenSeadragon({
     url: url
   }
 })
+// disable keyboard shortcuts
+viewer.innerTracker.keyHandler = null
 
 $(document).ready(() => {
 
