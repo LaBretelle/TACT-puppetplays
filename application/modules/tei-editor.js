@@ -274,9 +274,8 @@ class TeiEditor {
    * Display attributes & allowed children.
    */
   refreshPanels(tei) {
-
-    const currentTinyElement = Tiny.activeEditor.selection.getNode()
-    if (tei.elements) {
+    if (typeof tei.elements !== 'undefined' ) {
+      const currentTinyElement = Tiny.activeEditor.selection.getNode()
       const currentTeiElement = tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
       this.displayCurrentAttributes(currentTeiElement, currentTinyElement)
       this.getAllowedElements(tei, currentTeiElement)
