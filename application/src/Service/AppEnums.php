@@ -17,7 +17,6 @@ class AppEnums
     public const TRANSCRIPTION_LOG_UPDATED = 'transcription_log_updated';
     public const TRANSCRIPTION_LOG_REREADED = 'transcription_log_rereaded';
     public const TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION = 'transcription_log_waiting_for_validation';
-    public const TRANSCRIPTION_LOG_VALIDATION_PENDING = 'transcription_log_validation_pending';
     public const TRANSCRIPTION_LOG_VALIDATED = 'transcription_log_validated';
     public const TRANSCRIPTION_LOG_UNVALIDATED = 'transcription_log_unvalidated';
     public const TRANSCRIPTION_LOG_LOCKED = 'transcription_log_locked';
@@ -59,7 +58,6 @@ class AppEnums
       self::TRANSCRIPTION_LOG_REREADED,
       self::TRANSCRIPTION_LOG_VALIDATED,
       self::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION,
-      self::TRANSCRIPTION_LOG_VALIDATION_PENDING,
       self::TRANSCRIPTION_LOG_VALIDATED,
       self::TRANSCRIPTION_LOG_LOCKED,
       self::TRANSCRIPTION_LOG_UNLOCKED
