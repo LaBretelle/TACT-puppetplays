@@ -5,13 +5,13 @@ namespace App\Controller\Admin;
 use App\Entity\Platform;
 use App\Service\PlatformManager;
 use App\Form\PlatformType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /** @Route("/admin/platform", name="admin_platform_") */
-class PlatformController extends Controller
+class PlatformController extends AbstractController
 {
     private $manager;
 

@@ -13,7 +13,7 @@ use App\Service\PermissionManager;
 use App\Service\ReviewManager;
 use App\Service\ReviewRequestManager;
 use App\Service\TranscriptionManager;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -22,7 +22,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * @Route("/media", name="media_")
  */
-class MediaController extends Controller
+class MediaController extends AbstractController
 {
     private $mediaManager;
     private $transcriptionManager;

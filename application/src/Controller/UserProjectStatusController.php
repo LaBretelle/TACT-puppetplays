@@ -9,7 +9,7 @@ use App\Service\AppEnums;
 use App\Service\PermissionManager;
 use App\Service\UserProjectStatusManager;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -18,7 +18,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * @Route("/status", name="status_")
  */
-class UserProjectStatusController extends Controller
+class UserProjectStatusController extends AbstractController
 {
     private $statusManager;
     private $translator;

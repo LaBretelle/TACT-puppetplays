@@ -10,7 +10,7 @@ use App\Service\FlashManager;
 use App\Service\MailManager;
 use App\Service\UserManager;
 use App\Service\PermissionManager;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +22,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /** @Route("/user", name="user_") */
-class UserController extends Controller
+class UserController extends AbstractController
 {
     private $userManager;
     private $mailManager;

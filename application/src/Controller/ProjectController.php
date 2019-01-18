@@ -16,7 +16,7 @@ use App\Service\PermissionManager;
 use App\Service\ProjectManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -25,7 +25,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * @Route("/project", name="project_")
  */
-class ProjectController extends Controller
+class ProjectController extends AbstractController
 {
     private $projectManager;
     private $fileManager;

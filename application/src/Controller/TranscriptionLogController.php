@@ -6,14 +6,14 @@ use App\Entity\TranscriptionLog;
 use App\Service\AppEnums;
 use App\Service\PermissionManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/transcriptionlog", name="transcription_log_")
  */
-class TranscriptionLogController extends Controller
+class TranscriptionLogController extends AbstractController
 {
     protected $em;
     protected $permissionManager;

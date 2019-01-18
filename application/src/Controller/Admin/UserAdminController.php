@@ -5,13 +5,13 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Form\UserAdminType;
 use App\Service\UserManager;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /** @Route("/admin/user", name="admin_user_") */
-class UserAdminController extends Controller
+class UserAdminController extends AbstractController
 {
     private $userManager;
 

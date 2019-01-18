@@ -9,14 +9,14 @@ use App\Service\AppEnums;
 use App\Service\PermissionManager;
 use App\Service\ReviewRequestManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/review_request", name="review_request_")
  */
-class ReviewRequestController extends Controller
+class ReviewRequestController extends AbstractController
 {
     private $reviewRequestManager;
     private $permissionManager;
