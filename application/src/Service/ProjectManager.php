@@ -159,7 +159,9 @@ class ProjectManager
         }
 
         $uploadPath = $projectMediaPath . DIRECTORY_SEPARATOR . 'tmp';
-        mkdir($uploadPath);
+        if (!is_dir($basePath)) {
+            mkdir($uploadPath);
+        }
 
         if ($isZip) {
             $zipName = $files->getClientOriginalName();
