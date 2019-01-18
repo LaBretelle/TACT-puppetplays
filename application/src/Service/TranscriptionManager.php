@@ -53,21 +53,12 @@ class TranscriptionManager
         return $diff->i <= 2;
     }
 
-    public function userCanEditTranscription(Transcription $transcription)
+    public function isLockedByCurrentUser(Transcription $transcription, $lockLog)
     {
         $currentUser = $this->security->getUser();
-        $lastLog = $this->em->getRepository(TranscriptionLog::class)->getLastLog($transcription);
-        $status = $lastLog->getName();
-        $logUser = $lastLog->getUser();
+        $logUser = $lockLog->getUser();
 
         return $currentUser->getId() === $logUser->getId();
-    }
-
-    public function getLastLog(Transcription $transcription)
-    {
-        $repository = $this->em->getRepository(TranscriptionLog::class);
-
-        return $repository->getLastLog($transcription);
     }
 
     public function getLogs(Transcription $transcription, Project $project)
@@ -75,13 +66,6 @@ class TranscriptionManager
         return $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VIEW_LOGS)
           ? $this->em->getRepository(TranscriptionLog::class)->getLogs($transcription)
           : null;
-    }
-
-    public function getLastLogByName(Transcription $transcription, string $name)
-    {
-        $repository = $this->em->getRepository(TranscriptionLog::class);
-
-        return $repository->getLastLogByName($transcription, $name);
     }
 
     public function getLastLockLog(Transcription $transcription)

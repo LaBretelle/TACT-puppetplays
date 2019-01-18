@@ -93,7 +93,7 @@ class MediaController extends AbstractController
 
         $lockLog = $this->transcriptionManager->getLastLockLog($transcription);
         $locked = $lockLog ? $this->transcriptionManager->isLocked($lockLog) : false;
-        $canEdit = (!$locked || $locked && $this->transcriptionManager->userCanEditTranscription($transcription));
+        $canEdit = (!$locked || $locked && $this->transcriptionManager->isLockedByCurrentUser($transcription, $lockLog));
         $lockLog = (!$locked) ? $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_LOCKED, true) : $lockLog;
         $schema = $this->fileManager->getProjectTeiSchema($project);
         $logs = $this->transcriptionManager->getLogs($transcription, $project);
@@ -147,7 +147,7 @@ class MediaController extends AbstractController
 
         $lockLog = $this->transcriptionManager->getLastLockLog($transcription);
         $locked = $lockLog ? $this->transcriptionManager->isLocked($lockLog) : false;
-        $canEdit = (!$locked || $locked && $this->transcriptionManager->userCanEditTranscription($transcription));
+        $canEdit = (!$locked || $locked && $this->transcriptionManager->isLockedByCurrentUser($transcription, $lockLog));
         $lockLog = (!$locked) ? $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_LOCKED, true) : $lockLog;
         $schema = $this->fileManager->getProjectTeiSchema($project);
         $logs = $this->transcriptionManager->getLogs($transcription, $project);
