@@ -22,17 +22,6 @@ class TranscriptionLogRepository extends ServiceEntityRepository
         parent::__construct($registry, TranscriptionLog::class);
     }
 
-    public function getLastLog(Transcription $transcription)
-    {
-        return $this->createQueryBuilder('tl')
-            ->andWhere('tl.transcription = :t')
-            ->setParameter('t', $transcription)
-            ->orderBy('tl.createdAt', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
-
     public function getLastLockLog(Transcription $transcription)
     {
         return $this->createQueryBuilder('tl')
@@ -44,32 +33,6 @@ class TranscriptionLogRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
-    }
-
-    public function getLastLogByName(Transcription $transcription, string $name)
-    {
-        return $this->createQueryBuilder('tl')
-          ->andWhere('tl.transcription = :t')
-          ->andWhere('tl.name = :name')
-          ->setParameter('t', $transcription)
-          ->setParameter('name', $name)
-          ->orderBy('tl.createdAt', 'DESC')
-          ->setMaxResults(1)
-          ->getQuery()
-          ->getOneOrNullResult();
-    }
-
-    public function getLogsByUser(Transcription $transcription, User $user)
-    {
-        return $this->createQueryBuilder('tl')
-          ->andWhere('tl.user = :user')
-          ->andWhere('tl.transcription = :t')
-          ->setParameter('t', $transcription)
-          ->setParameter('user', $user)
-          ->orderBy('t.createdAt', 'ASC')
-          ->setMaxResults(10)
-          ->getQuery()
-          ->getResult();
     }
 
     public function getLogs(Transcription $transcription)
