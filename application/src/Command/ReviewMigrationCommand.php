@@ -77,7 +77,9 @@ class ReviewMigrationCommand extends Command
             $user = $log->getUser();
             $media = $transcription->getMedia();
 
-            $this->reviewRequestManager->create($transcription, $user);
+            if (!$transcription->getReviewRequest()) {
+                $this->reviewRequestManager->create($transcription, $user);
+            }
         }
 
         $output->writeln([
