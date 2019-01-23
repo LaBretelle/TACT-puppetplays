@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Project;
 use App\Entity\Transcription;
 use App\Entity\TranscriptionLog;
 use App\Entity\User;
@@ -79,5 +80,24 @@ class TranscriptionLogRepository extends ServiceEntityRepository
           ->getResult();
 
         return count($results) > 0;
+    }
+
+
+    public function getWaitingForOldValidation(Project $project)
+    {
+        return $this->createQueryBuilder('tl')
+          ->leftJoin('tl.transcription', 't')
+          ->leftJoin('t.media', 'm')
+          ->leftJoin('m.project', 'p')
+          ->leftJoin('t.reviewRequest', 'r')
+          ->andWhere('m.project = :project')
+          ->andWhere('tl.name = :name')
+          ->andWhere('t.isValid != true')
+          ->andWhere('r IS NULL')
+          ->setParameter('project', $project)
+          ->setParameter('name', AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION)
+          ->groupBy('t.id')
+          ->getQuery()
+          ->getResult();
     }
 }

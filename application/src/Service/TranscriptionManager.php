@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Project;
 use App\Entity\Transcription;
 use App\Entity\TranscriptionLog;
+use App\Entity\User;
 use App\Service\AppEnums;
 use App\Service\PermissionManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,11 +31,11 @@ class TranscriptionManager
         $this->permissionManager = $permissionManager;
     }
 
-    public function addLog(Transcription $transcription, string $name, $flush = false)
+    public function addLog(Transcription $transcription, string $name, $flush = false, User $user = null)
     {
-        $currentUser = $this->security->getUser();
+        $user = (!$user) ? $this->security->getUser() : $user;
         $log = new TranscriptionLog();
-        $log->setUser($this->security->getUser());
+        $log->setUser($user);
         $log->setName($name);
         $transcription->addTranscriptionLog($log);
 

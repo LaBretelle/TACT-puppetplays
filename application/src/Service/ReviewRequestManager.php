@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Review;
 use App\Entity\ReviewRequest;
 use App\Entity\Transcription;
+use App\Entity\User;
 use App\Service\FlashManager;
 use App\Service\TranscriptionManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,15 +30,16 @@ class ReviewRequestManager
         $this->security = $security;
     }
 
-    public function create(Transcription $transcription)
+    public function create(Transcription $transcription, User $user = null)
     {
+        $user = (!$user) ? $this->security->getUser() : $user;
         if (!$request = $transcription->getReviewRequest()) {
             $request = new ReviewRequest();
-            $request->setUser($this->security->getUser());
+            $request->setUser($user);
             $request->setTranscription($transcription);
             $this->em->persist($request);
 
-            $log = $this->tm->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION);
+            $log = $this->tm->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION, false, $user);
             $this->em->persist($log);
             $this->em->flush();
 
