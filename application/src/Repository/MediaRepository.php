@@ -26,7 +26,7 @@ class MediaRepository extends ServiceEntityRepository
             ->select('count(m.id)')
             ->leftJoin('m.transcription', 't')
             ->andWhere('m.project = :project')
-            ->andWhere('t.isValid = true')
+            ->andWhere('t.isValid = 1')
             ->setParameter('project', $project)
             ->getQuery()
             ->getSingleScalarResult();
@@ -40,7 +40,7 @@ class MediaRepository extends ServiceEntityRepository
             ->leftJoin('t.reviewRequest', 'r')
             ->andWhere('m.project = :project')
             ->andWhere('r IS NOT NULL')
-            ->andWhere('t.isValid != true')
+            ->andWhere('t.isValid = 0 OR t.isValid IS NULL')
             ->setParameter('project', $project)
             ->getQuery()
             ->getSingleScalarResult();
@@ -54,22 +54,8 @@ class MediaRepository extends ServiceEntityRepository
             ->leftJoin('t.reviewRequest', 'r')
             ->andWhere('m.project = :project')
             ->andWhere('t.content != :empty')
-            ->andWhere('t.isValid != true')
+            ->andWhere('t.isValid = 0 OR t.isValid IS NULL')
             ->andWhere('r IS NULL')
-            ->setParameter('project', $project)
-            ->setParameter('empty', '')
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    public function countNoTranscription(Project $project)
-    {
-        return $this->createQueryBuilder('m')
-            ->select('count(m.id)')
-            ->join('m.transcription', 't')
-            ->andWhere('m.project = :project')
-            ->andWhere('t.content = :empty')
-            ->andWhere('t.isValid != true')
             ->setParameter('project', $project)
             ->setParameter('empty', '')
             ->getQuery()
