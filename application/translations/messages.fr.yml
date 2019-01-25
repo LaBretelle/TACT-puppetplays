@@ -137,6 +137,8 @@ project_user_status:                      Statut des utilisateurs
 project_view_transciptions:               Voir les transcriptions
 public_mail:                              Email visible par tous
 register:                                 S'enregistrer
+registration_validated:                   Votre inscription est validée
+registration_waiting_for_validation:      Votre inscription est en attente de validation
 repeat_password:                          Répéter le mot de passe
 reread_transcription:                     Relire la transcription
 review_request_created:                   Demande de relecture effectuée

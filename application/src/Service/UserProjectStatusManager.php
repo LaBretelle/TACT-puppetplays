@@ -41,6 +41,9 @@ class UserProjectStatusManager
         $this->em->persist($userProjectStatus);
         $this->em->flush();
 
+        $text = $enabled ? "registration_validated" : "registration_waiting_for_validation";
+        $this->fm->add('notice', $text);
+
         return $userProjectStatus;
     }
 
