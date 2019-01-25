@@ -11,6 +11,13 @@
   <span class="navbar-brand text-muted">{% if subtitle is defined %}({{ subtitle|trans }}){% endif %}</span>
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav ml-auto">
+      {% if project | isAuthorizedOnProject('register') %}
+        <a href="{{ path('status_request', {id: project.id})}}" class="nav-link text-dark" data-toggle="tooltip" data-placement="top" title="{{"subscribe_long"|trans}}">
+          <mark class="rounded">
+            <i class="fas fa-hands-helping"></i> {{'project_register' | trans}}
+          </mark>
+        </a>
+      {% endif %}
       {% if project.projectHelpLink %}
         <a href="{{ project.projectHelpLink }}" class="nav-link" target="_blank" data-toggle="tooltip" data-placement="bottom" title="{{"transcript_help_doc"|trans}}">
           {{'help'|trans}}
