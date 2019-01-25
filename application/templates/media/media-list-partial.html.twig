@@ -4,6 +4,7 @@
 
 <div class='row mb-3'>
   <div class="col-12">
+
     <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-outline-secondary active media-filter-clear">
         <input type="radio" name="options" id="option0" checked>
@@ -20,6 +21,9 @@
       </label>
       <label class="btn btn-outline-success media-filter" data-status="validated">
         <input type="radio" name="options" id="option4"> {{'transcription_status_validated'|trans}}
+      </label>
+      <label class="btn btn-outline-secondary media-filter" data-status="mine">
+        <input type="radio" name="options" id="option5"> {{'transcription_mine'|trans}}
       </label>
     </div>
   </div>
@@ -44,11 +48,11 @@
       {% set canTranscribe = project | isAuthorizedOnProject('transcribe') %}
       {% set canValidate = project | isAuthorizedOnProject('validateTranscription') %}
 
-      {% for media in project.medias if media.parent == parent %}
+      {% for media in medias %}
         {% set transcription = media.transcription %}
         {% set transcriptionStatus = transcription|transcriptionStatus %}
         <div class="col-2">
-          <div class="card mb-2 box-shadow status {{ transcriptionStatus }}">
+          <div class="card mb-2 box-shadow status {{ transcriptionStatus }} {{ media in mine ? "mine"}}">
             <img data-toggle="tooltip" title="{{media.name}}" class="card-img-top project-image" src="{{ macros.mediaThumbnailURL(media) }}" alt="" data-full="{{ macros.mediaURL(media) }}" />
             <div class="card-body">
               <div class="d-flex justify-content-center">

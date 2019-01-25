@@ -20,6 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -32,14 +33,16 @@ class ProjectController extends AbstractController
     private $flashManager;
     private $permissionManager;
     private $translator;
+    private $security;
 
-    public function __construct(ProjectManager $projectManager, FileManager $fileManager, FlashManager $flashManager, PermissionManager $permissionManager, TranslatorInterface $translator)
+    public function __construct(ProjectManager $projectManager, FileManager $fileManager, FlashManager $flashManager, PermissionManager $permissionManager, TranslatorInterface $translator, Security $security)
     {
         $this->projectManager = $projectManager;
         $this->fileManager = $fileManager;
         $this->flashManager = $flashManager;
         $this->permissionManager = $permissionManager;
         $this->translator = $translator;
+        $this->security = $security;
     }
 
     /**
@@ -174,15 +177,25 @@ class ProjectController extends AbstractController
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
 
+        $user = $this->security->getUser();
+        $mediaRepo =  $this->getDoctrine()->getRepository(Media::class);
+
+
+        $mine = $mediaRepo->getByProjectAndUserActivity($project, $parent, $user);
+        $medias = $mediaRepo->findby(['project' => $project,'parent' => $parent ]);
+
         return $this->render(
             'transcribe/index.html.twig',
             [
               'project' => $project,
               'parent' => $parent,
+              'medias' => $medias,
+              'mine' => $mine,
               'from' => 'transcript'
             ]
         );
     }
+
 
     /**
      * @Route("/{id}/media-delete", name="media_delete", options={"expose"=true}, methods="POST")
