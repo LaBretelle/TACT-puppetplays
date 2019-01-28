@@ -37,7 +37,7 @@ class MessageManager
             $r->setMessage($message);
             $this->em->persist($r);
         }
-        
+
         if ($flush) {
             $this->em->flush();
         }
@@ -127,7 +127,10 @@ class MessageManager
 
     public function getUserMessages()
     {
-        $messages = $this->em->getRepository("App:Recipient")->findByUser($this->currentUser);
+        $messages = $this->em->getRepository("App:Recipient")->findBy(
+          ['user' => $this->currentUser],
+          ['id' => 'DESC']
+        );
 
         return $messages;
     }
