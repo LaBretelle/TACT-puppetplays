@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+  {% include 'header.html.twig' with {'title': 'message_list'} %}
+  {% set count = messages|length %}
+  <div id="main-container">
+    <div class="text-right">
+      {% if count != 0 %}
+      <a class="btn btn-link" href="{{ path('message_read_all')}}">
+        <i class="fas fa-check"></i>
+        {{"messages_set_as_read"|trans}}
+      </a>
+      <a class="btn btn-link" href="{{ path('message_delete_all')}}">
+        <i class="fas fa-trash-alt"></i>
+        {{"messages_delete"|trans}}
+      </a>
+      <a class="btn btn-link" href="{{ path('message_delete_read')}}">
+        <i class="fas fa-trash-alt"></i>
+        {{"messages_delete_read"|trans}}
+      </a>
+      {% endif %}
+    </div>
+    <ul class="list-group">
+    {% if count == 0 %}
+      <li class="list-group-item text-muted">
+      {{"no_message"|trans}}
+      </li>
+    {% else %}
+      {% for m in messages %}
+        <li class="list-group-item">
+          <div class="text-muted">
+            {% if m.viewed == false %}<i class="fas fa-circle"></i>{% endif %} {{ m.message.createdAt|date}}
+          </div>
+          <div>{{ m.message.content|raw }}</div>
+          <div class="text-right">
+            <a class="btn btn-link" href="{{ path('message_delete_one', {id : m.id })}}">
+              <i class="fas fa-trash-alt"></i>
+            </a>
+            {% if m.viewed == false %}
+            <a class="btn btn-link" href="{{ path('message_read_one', {id : m.id })}}">
+              <i class="fas fa-check"></i>
+            </a>
+            {% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    {% endif %}
+    </ul>
+  </div>
+{% endblock %}

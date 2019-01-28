@@ -46,6 +46,12 @@
         </ul>
         <ul class="navbar-nav float-right">
           {% if app.user %}
+            {% set countUnread = app.user|countUnread %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('message_list')}}">
+                <i class="fas fa-envelope"></i> {{ countUnread }}
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ path('user_profile', {'id': app.user.id}) }}">
                 <i class="fas fa-user fa-fw"></i> {{app.user.fullname}}

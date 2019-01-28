@@ -71,11 +71,21 @@ media_transcribe_button_title:            Transcrire
 media_upload_help:                        Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 media_view_transcription_button_title:    Voir la transcription
 medias:                                   Medias
+message_deleted:                          Le message a été supprimé
+message_list:                             Messages
+message_set_as_read_done:                 Le message a été marqué comme lu
+messages_delete_read_done:                Les messages lus ont été supprimés
+messages_delete_read:                     Supprimer tous les messages lus
+messages_delete:                          Supprimer tous les messages
+messages_deleted:                         Tous les messages ont été supprimés
+messages_set_as_read_done:                Tous les messages ont été marqués comme lus
+messages_set_as_read:                     Tout marquer comme lu
 move_media:                               Déplacer les média sélectionnés
 nb_validation:                            Nombre de relectures nécéssaire par fiche
 need_at_least_one_manager:                Il faut au moins un gestionnaire par projet.
 need_to_be_logged:                        Vous devez être connecté pour participer au projet.
 no_attribute:                             Aucun attribut
+no_message:                               Aucun message
 no_review_asked:                          Pas de relecture demandée
 no_review_yet:                            Aucune relecture effectuée pour le moment
 no:                                       Non

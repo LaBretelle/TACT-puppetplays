@@ -71,11 +71,21 @@ media_transcribe_button_title:            Transcribe
 media_upload_help:                        Choose files or a zip archive to upload. Files will be uploaded / extracted to the current active folder if any.
 media_view_transcription_button_title:    View transcription
 medias:                                   Medias
+message_deleted:                          Le message a été supprimé
+message_list:                             Messages
+message_set_as_read_done:                 Le message a été marqué comme lu
+messages_delete_read_done:                Les messages lus ont été supprimés
+messages_delete_read:                     Supprimer tous les messages lus
+messages_delete:                          Supprimer tous les messages
+messages_deleted:                         Tous les messages ont été supprimés
+messages_set_as_read_done:                Tous les messages ont été marqués comme lus
+messages_set_as_read:                     Tout marquer comme lu
 move_media:                               Move selected media
 nb_validation:                            Number of reread per media
 need_at_least_one_manager:                Need t least one manager.
 need_to_be_logged:                        You have to be logged in to contribute to the project.
 no_attribute:                             No attribute
+no_message:                               Aucun message
 no_review_asked:                          Pas de relecture demandée
 no_review_yet:                            Aucune relecture effectuée pour le moment
 no:                                       No
