@@ -8,9 +8,11 @@ use App\Entity\UserProject;
 use App\Entity\UserProjectStatus;
 use App\Service\AppEnums;
 use App\Service\FlashManager;
+use App\Service\MessageManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class UserProjectStatusManager
 {
@@ -18,13 +20,23 @@ class UserProjectStatusManager
     protected $authChecker;
     protected $user;
     protected $fm;
+    protected $messageManager;
+    protected $router;
 
-    public function __construct(EntityManagerInterface $em, AuthorizationCheckerInterface $authChecker, TokenStorageInterface $tokenStorage, FlashManager $fm)
-    {
+    public function __construct(
+      EntityManagerInterface $em,
+      AuthorizationCheckerInterface $authChecker,
+      TokenStorageInterface $tokenStorage,
+      FlashManager $fm,
+      MessageManager $messageManager,
+      TranslatorInterface $translator
+      ) {
         $this->em = $em;
         $this->authChecker = $authChecker;
         $this->user = $tokenStorage->getToken()->getUser();
         $this->fm = $fm;
+        $this->messageManager = $messageManager;
+        $this->translator = $translator;
     }
 
     public function create(Project $project)
@@ -65,6 +77,12 @@ class UserProjectStatusManager
             $ups->setEnabled(!$enabled);
             $this->em->persist($ups);
             $this->em->flush();
+
+            $message = !$enabled
+             ? "registration_validated_project"
+             : "registration_unvalidated_project";
+
+            $this->messageUser($ups, $message);
         }
 
         return $ups;
@@ -75,9 +93,20 @@ class UserProjectStatusManager
         if ($this->canEdit($ups)) {
             $this->em->remove($ups);
             $this->em->flush();
+
+            $this->messageUser($ups, "registration_deleted_project");
         }
 
         return;
+    }
+
+    public function messageUser(UserProjectStatus $ups, $message)
+    {
+        $projectName = $ups->getProject()->getName();
+        $user = $ups->getUser();
+
+        $message = $this->translator->trans($message, ['%project%' => $projectName]);
+        $this->messageManager->create([$user], $message);
     }
 
     public function canEdit(UserProjectStatus $ups, $oldStatus = null)

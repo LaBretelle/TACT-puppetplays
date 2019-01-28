@@ -84,6 +84,7 @@ move_media:                               Move selected media
 nb_validation:                            Number of reread per media
 need_at_least_one_manager:                Need t least one manager.
 need_to_be_logged:                        You have to be logged in to contribute to the project.
+negative_review:                          Une relecture négative a été faite sur le média <a target="_blank" href="%url%">%media%</a> <br/> %comment%
 no_attribute:                             No attribute
 no_message:                               Aucun message
 no_review_asked:                          Pas de relecture demandée
@@ -97,6 +98,7 @@ platform_home_text:                       Platform home text
 platform_logo:                            Platform logo
 platform_name:                            Platform name
 platform_page_title:                      Platform administration
+positive_review:                          Une relecture positive a été faite sur le média <a target="_blank" href="%url%">%media%</a> <br/> %comment%
 preview:                                  Prévisualiser
 profile:                                  Profile
 project_catchphrase:                      Catchphrase
@@ -147,6 +149,9 @@ project_user_status:                      User statuses
 project_view_transciptions:               View transcriptions
 public_mail:                              Email visible to all
 register:                                 register
+registration_deleted_project:             Votre inscription au projet '%project%' a été supprimée
+registration_unvalidated_project:         Votre inscription au projet '%project%' a été invalidée
+registration_validated_project:           Votre inscription au projet '%project%' a été validée
 registration_validated:                   Votre inscription est invalidée
 registration_waiting_for_validation:      Votre inscription est en attente de validation
 repeat_password:                          Repeat password
@@ -163,6 +168,7 @@ schema_json:                              JSON
 schema_name:                              Nom du schema
 selected_media:                           selected media
 status_edit:                              Edit status
+status_edited_project:                    Votre status pour le projet '%project%' a été modifié
 status_remove:                            Remove
 status_toggle_off:                        Unvalidate
 status_toggle_on:                         Validate
@@ -200,8 +206,10 @@ transcription_status_no_transcription:    None
 transcription_status_none:                No transcript
 transcription_status_validated:           Validated
 transcription_unvalidate:                 Invalider la transcription (et changer les reviews positives en reviews négatives)
+transcription_unvalidated_msg:            La transcription concernant <a target="_blank" href="%url%">%media%</a> pour laquelle vous aviez demandé une relecture a été invalidée.
 transcription_unvalidated:                Transcription unvalidated
 transcription_validate:                   Valider la transcription directement
+transcription_validated_msg:              La transcription concernant <a target="_blank" href="%url%">%media%</a> pour laquelle vous aviez demandé une relecture a été validée.
 transcription_validated:                  Transcription validated
 transcriptions_page_title:                Project transcripts
 tutorial_enable:                          Enable tutorial

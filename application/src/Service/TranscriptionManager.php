@@ -7,10 +7,13 @@ use App\Entity\Transcription;
 use App\Entity\TranscriptionLog;
 use App\Entity\User;
 use App\Service\AppEnums;
+use App\Service\MessageManager;
 use App\Service\PermissionManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class TranscriptionManager
 {
@@ -18,17 +21,26 @@ class TranscriptionManager
     protected $security;
     protected $params;
     protected $permissionManager;
+    protected $mm;
+    protected $translator;
+    protected $router;
 
     public function __construct(
       EntityManagerInterface $em,
       Security $security,
       ParameterBagInterface $params,
-      PermissionManager $permissionManager
+      PermissionManager $permissionManager,
+      MessageManager $mm,
+      TranslatorInterface $translator,
+      UrlGeneratorInterface $router
     ) {
         $this->em = $em;
         $this->security = $security;
         $this->params = $params;
         $this->permissionManager = $permissionManager;
+        $this->mm = $mm;
+        $this->translator = $translator;
+        $this->router = $router;
     }
 
     public function addLog(Transcription $transcription, string $name, $flush = false, User $user = null)
@@ -97,9 +109,19 @@ class TranscriptionManager
         $this->em->persist($transcription);
 
         if ($request = $transcription->getReviewRequest()) {
+            // delete the request
             $this->em->remove($request);
+            // send to the requester a message
+            $media = $transcription->getMedia();
+            $url = $isValid
+              ? $this->router->generate("media_transcription_display", ["id" => $media->getId()])
+              : $this->router->generate("media_transcription_edit", ["id" => $media->getId()]);
+            $message = $isValid ? 'transcription_validated_msg' : 'transcription_unvalidated_msg';
+            $message = $this->translator->trans($message, ['%url%' => $url, '%media%' => $media->getName()]);
+            $this->mm->create([$request->getUser()], $message, false);
         }
 
+        // create log
         $logType = $isValid ? AppEnums::TRANSCRIPTION_LOG_VALIDATED : AppEnums::TRANSCRIPTION_LOG_UNVALIDATED;
         $log = $this->addLog($transcription, $logType);
         $this->em->persist($log);

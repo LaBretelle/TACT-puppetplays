@@ -108,6 +108,7 @@ class UserProjectStatusController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $this->statusManager->canEdit($userProjectStatus, $oldStatus)) {
+            $this->statusManager->messageUser($userProjectStatus, 'status_edited_project');
             $em = $this->getDoctrine()->getManager();
             $em->persist($userProjectStatus);
             $em->flush();

@@ -138,7 +138,6 @@ class MediaController extends AbstractController
             $nbPositiveReview = $this->reviewManager->countReview($transcription, true);
             if ($nbPositiveReview >= $project->getNbValidation()) {
                 $this->transcriptionManager->validate($transcription, true);
-                //$this->mailManager->sendValidationMail($reviewRequest->getUser(), $media, $review->getIsValid(), $review->getComment());
             }
             $parent = $media->getParent();
 

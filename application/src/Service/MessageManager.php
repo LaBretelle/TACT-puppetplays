@@ -24,19 +24,23 @@ class MessageManager
         $this->fm = $fm;
     }
 
-    public function create($recipients, $content)
+    public function create($recipients, $content, $flush = true)
     {
         $message = new Message;
         $message->setContent($content);
-        $this->em->persist($r);
+        $this->em->persist($message);
+
         foreach ($recipients as $recipient) {
             $r = new Recipient;
             $r->setUser($recipient);
             $r->setViewed(false);
+            $r->setMessage($message);
             $this->em->persist($r);
         }
-
-        $this->em->flush();
+        
+        if ($flush) {
+            $this->em->flush();
+        }
 
         return;
     }

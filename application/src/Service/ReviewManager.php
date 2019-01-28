@@ -6,9 +6,12 @@ use App\Entity\Review;
 use App\Entity\ReviewRequest;
 use App\Entity\Transcription;
 use App\Service\FlashManager;
+use App\Service\MessageManager;
 use App\Service\TranscriptionManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ReviewManager
 {
@@ -16,17 +19,26 @@ class ReviewManager
     protected $fm;
     protected $security;
     protected $tm;
+    protected $mm;
+    protected $router;
+    protected $translator;
 
     public function __construct(
       EntityManagerInterface $em,
       FlashManager $fm,
       Security $security,
-      TranscriptionManager $tm
+      TranscriptionManager $tm,
+      MessageManager $mm,
+      UrlGeneratorInterface $router,
+      TranslatorInterface $translator
     ) {
         $this->em = $em;
         $this->fm = $fm;
         $this->security = $security;
         $this->tm = $tm;
+        $this->mm = $mm;
+        $this->router = $router;
+        $this->translator = $translator;
     }
 
     public function create(ReviewRequest $request)
@@ -44,20 +56,29 @@ class ReviewManager
 
     public function save(Review $review)
     {
-        $this->em->persist($review);
+        $request = $review->getRequest();
+        $transcription = $request->getTranscription();
+        $requestUser = $request->getUser();
+        $media = $transcription->getMedia();
 
-        $log = $this->tm->addLog($review->getRequest()->getTranscription(), AppEnums::TRANSCRIPTION_LOG_REREADED);
+        $this->em->persist($review);
+        // add log
+        $log = $this->tm->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_REREADED);
         $this->em->persist($log);
+
+        // add current user notification
+        $text = $review->getIsValid() ? 'transcription_validated' : 'transcription_unvalidated';
+        $this->fm->add('notice', $text);
+        // send to the requester a message
+        $url = $this->router->generate("media_transcription_display", ["id" => $media->getId()]);
+        $message = $review->getIsValid() ? 'positive_review' : 'negative_review';
+        $message = $this->translator->trans($message, ['%url%' => $url, '%media%' => $media->getName(), '%comment%' => $review->getComment()]);
+        $this->mm->create([$requestUser], $message, false);
 
         $this->em->flush();
 
-        $text = $review->getIsValid() ? 'transcription_validated' : 'transcription_unvalidated';
-        $this->fm->add('notice', $text);
-
         return $review;
     }
-
-
 
     public function countReview(Transcription $transcription, $valid = true)
     {
