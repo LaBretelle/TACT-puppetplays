@@ -15,7 +15,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" data-toggle="tooltip" title="{{'home' | trans}}" href="{{ path('home') }}">
+      <a class="navbar-brand" href="{{ path('home') }}">
         {% if platform.logo %}
           <img class="platform-logo" src="{{ asset('platform/'~ platform.logo) }}">
         {% endif %}
@@ -47,7 +47,7 @@
         <ul class="navbar-nav float-right">
           {% if app.user %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ path('user_profile', {'id': app.user.id}) }}" data-placement="bottom" data-toggle="tooltip" title="{{ 'view_profile' | trans}}">
+              <a class="nav-link" href="{{ path('user_profile', {'id': app.user.id}) }}">
                 <i class="fas fa-user fa-fw"></i> {{app.user.fullname}}
               </a>
             </li>
