@@ -206,6 +206,7 @@ transcription_log_validated:              Transcription validée
 transcription_log_waiting_for_validation: Demande de relecture
 transcription_mine:                       Mes contributions
 transcription_report_msg:                 Un problème (%reportType%) a été signalé sur <a target="_blank" href="%url%">%media%</a> par %username%
+transcription_reported:                   La transcription a été signalée
 transcription_saved:                      Transcription sauvegardée
 transcription_send_to_validation:         Demander une relecture
 transcription_status_in_progress:         Transcription en cours
