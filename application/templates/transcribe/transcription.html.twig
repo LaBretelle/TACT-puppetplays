@@ -34,6 +34,9 @@
   {# ask validation modal #}
   {{ include('review/ask.html.twig') }}
 
+  {# report modal #}
+  {{ include('transcribe/report-modal.html.twig') }}
+
   {% if edit %}
     <input type="hidden" id="log-id" name="log_id" value="{{log.id}}">
   {% endif %}

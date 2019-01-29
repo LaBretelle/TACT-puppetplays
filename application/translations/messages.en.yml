@@ -50,6 +50,7 @@ help5:                                    Vous pouvez visualiser le rendu de la 
 help6:                                    À tout moment, vous pouvez sauvegarder votre transcription et une fois qu’elle vous satisfait, en demander une validation.
 help7:                                    En cliquant ici vous pouvez retrouver un document d’aide à la transcription ou bien relancer le tutoriel.
 home:                                     Home
+insults:                                  Propos haineux, violence
 is_public:                                Public project
 lastname:                                 Lastname
 leave_warning:                            Si vous avez fait des modifications à cette transcription, et que vous n'avez pas encore sauvegardé celles-ci, elles ne seront pas prises en compte.
@@ -92,6 +93,7 @@ no_review_yet:                            Aucune relecture effectuée pour le mo
 no:                                       No
 not_enabled_yet:                          (Not enabled yet)
 not_registered:                           Not registered
+other:                                    Autre
 parent_folder_name:                       Parent folder name
 password:                                 Password
 platform_home_text:                       Platform home text
@@ -155,6 +157,8 @@ registration_validated_project:           Votre inscription au projet '%project%
 registration_validated:                   Votre inscription est invalidée
 registration_waiting_for_validation:      Votre inscription est en attente de validation
 repeat_password:                          Repeat password
+report_transcription_text:                Vous allez signaler la transcription. Merci de nous préciser de quoi il s'agit.
+report_transcription:                     Signaler la transcription.
 reread_transcription:                     Reread transcription
 review_request_created:                   Demande de relecture effectuée
 review_transcription:                     Soumettre la relecture
@@ -167,6 +171,7 @@ schema_enabled:                           Schéma activé
 schema_json:                              JSON
 schema_name:                              Nom du schema
 selected_media:                           selected media
+send:                                     Send
 status_edit:                              Edit status
 status_edited_project:                    Votre status pour le projet '%project%' a été modifié
 status_remove:                            Remove
@@ -176,6 +181,7 @@ status:                                   Status
 submit_validation:                        Soumettre
 submit:                                   Submit
 subscribe_long:                           L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
+technical:                                Problème technique
 tei_link_to_official_attr_doc:            See documentation for element related to this attribut
 tei_link_to_official_doc:                 See documentation for %element%
 tei_schema:                               TEI schema for the project
@@ -198,6 +204,7 @@ transcription_log_updated:                Transcription mise à jour
 transcription_log_validated:              Transcription validée
 transcription_log_waiting_for_validation: Demande de validation
 transcription_mine:                       Mes contributions
+transcription_report_msg:                 Un problème (%reportType%) a été signalé sur <a target="_blank" href="%url%">%media%</a> par %username%
 transcription_saved:                      Transcription saved
 transcription_send_to_validation:         Send to validation
 transcription_status_in_progress:         In progress

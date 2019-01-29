@@ -33,6 +33,10 @@ viewer.innerTracker.keyHandler = null
 
 $(document).ready(() => {
 
+  $('.send-report').on('click', (e) => {
+    reportTranscription(e.target.dataset.id)
+  })
+
   if ('edit' === mode) {
     lockTranscription()
     const jsonTeiDef = JSON.parse(document.getElementById('tei-schema').value)
@@ -75,7 +79,6 @@ $(document).ready(() => {
 })
 
 const lockTranscription = () => {
-
   const logIdEl = document.getElementById('log-id')
   if (logIdEl) {
     const logId = logIdEl.value
@@ -107,6 +110,22 @@ const saveTranscription = (id) => {
     }
   }).done(() => {
     Toastr.info(Translator.trans('transcription_saved'))
+  })
+
+  return true
+}
+
+const reportTranscription = (id) => {
+  $('#report-modal').modal('hide')
+  const url = Routing.generate('media_transcription_report', {id: id})
+  $.ajax({
+    method: 'POST',
+    url: url,
+    data: {
+      'reportType': document.getElementById('report').value
+    }
+  }).done(() => {
+    Toastr.info(Translator.trans('transcription_reported'))
   })
 
   return true

@@ -178,6 +178,18 @@ class MediaController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/transcription/report", name="transcription_report",options={"expose"=true}, methods="POST")
+     */
+    public function mediaTranscriptionReport(Media $media, Request $request)
+    {
+        $reportType = $request->get('reportType');
+        $this->transcriptionManager->report($media, $reportType);
+
+        return $this->json([], $status = 200);
+    }
+
+
+    /**
      * @Route("/{id}/transcription/validate/{valid}", name="transcription_validate")
      */
     public function validateTranscription(Media $media, $valid)

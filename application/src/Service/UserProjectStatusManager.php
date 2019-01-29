@@ -33,7 +33,7 @@ class UserProjectStatusManager
       ) {
         $this->em = $em;
         $this->authChecker = $authChecker;
-        $this->user = $tokenStorage->getToken()->getUser();
+        $this->user = ($tokenStorage->getToken()) ? $tokenStorage->getToken()->getUser(): null;
         $this->fm = $fm;
         $this->messageManager = $messageManager;
         $this->translator = $translator;

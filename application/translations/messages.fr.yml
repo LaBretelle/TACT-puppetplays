@@ -1,3 +1,4 @@
+
 accept_terms:                             J'accepte les <a href="%url%" target="_blank">Conditions Générales d'Utilisation</a>
 access_denied:                            Vous n'êtes pas autorisé à accéder à cette page.
 actions:                                  Actions
@@ -50,6 +51,7 @@ help5:                                    Vous pouvez visualiser le rendu de la 
 help6:                                    À tout moment, vous pouvez sauvegarder votre transcription et une fois qu’elle vous satisfait, en demander une relecture.
 help7:                                    En cliquant ici vous pouvez retrouver un document d’aide à la transcription ou bien relancer le tutoriel.
 home:                                     Accueil
+insults:                                  Propos haineux, violence
 is_public:                                Projet public
 lastname:                                 Nom
 leave_warning:                            Si vous avez fait des modifications à cette transcription, et que vous n'avez pas encore sauvegardé celles-ci, elles ne seront pas prises en compte.
@@ -92,6 +94,7 @@ no_review_yet:                            Aucune relecture effectuée pour le mo
 no:                                       Non
 not_enabled_yet:                          (Pas encore activé)
 not_registered:                           Non inscrit
+other:                                    Autre
 parent_folder_name:                       Nom du dossier parent
 password:                                 Mot de passe
 platform_home_text:                       Texte de la page d'accueil
@@ -155,6 +158,8 @@ registration_validated_project:           Votre inscription au projet '%project%
 registration_validated:                   Votre inscription est validée
 registration_waiting_for_validation:      Votre inscription est en attente de validation
 repeat_password:                          Répéter le mot de passe
+report_transcription_text:                Vous allez signaler la transcription. Merci de nous préciser de quoi il s'agit.
+report_transcription:                     Signaler la transcription.
 reread_transcription:                     Relire la transcription
 review_request_created:                   Demande de relecture effectuée
 review_transcription:                     Soumettre la relecture
@@ -167,6 +172,7 @@ schema_enabled:                           Schéma activé
 schema_json:                              JSON
 schema_name:                              Nom du schema
 selected_media:                           média selectionné(s)
+send:                                     Envoyer
 status_edit:                              Editer le statut
 status_edited_project:                    Votre status pour le projet '%project%' a été modifié
 status_remove:                            Supprimer
@@ -176,6 +182,7 @@ status:                                   Statut
 submit_validation:                        Soumettre
 submit:                                   Valider
 subscribe_long:                           L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
+technical:                                Problème technique
 tei_link_to_official_attr_doc:            Voir la documentation pour l'élément relatif à cet attribut
 tei_link_to_official_doc:                 Voir la documentation pour %element%
 tei_schema:                               Schema TEI pour le projet
@@ -198,6 +205,7 @@ transcription_log_updated:                Transcription mise à jour
 transcription_log_validated:              Transcription validée
 transcription_log_waiting_for_validation: Demande de relecture
 transcription_mine:                       Mes contributions
+transcription_report_msg:                 Un problème (%reportType%) a été signalé sur <a target="_blank" href="%url%">%media%</a> par %username%
 transcription_saved:                      Transcription sauvegardée
 transcription_send_to_validation:         Demander une relecture
 transcription_status_in_progress:         Transcription en cours

@@ -28,18 +28,18 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="{{ path('home') }}">
-              <i class="fas fa-home"></i> {{ 'home' | trans}}
+              <i class="fas fa-home"></i> {{'home'|trans}}
             </a>
           </li>
           {% if is_granted('ROLE_ADMIN', app.user) %}
             <li class="nav-item">
               <a class="nav-link" href="{{ path('admin_user_list') }}">
-                <i class="fas fa-users"></i> {{ 'administrate_users_menu' | trans}}
+                <i class="fas fa-users"></i> {{'administrate_users_menu'|trans}}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ path('admin_platform_properties')}}">
-                <i class="fas fa-cogs"></i> {{ 'administrate_platform_menu' | trans}}
+                <i class="fas fa-cogs"></i> {{'administrate_platform_menu'|trans}}
               </a>
             </li>
           {% endif %}
@@ -49,7 +49,7 @@
             {% set countUnread = app.user|countUnread %}
             <li class="nav-item">
               <a class="nav-link" href="{{ path('message_list')}}">
-                <i class="fas fa-envelope"></i> {{ countUnread }}
+                <i class="fas fa-envelope {{ countUnread > 0 ? "fa-spin"}}"></i> {{ countUnread }}
               </a>
             </li>
             <li class="nav-item">
@@ -59,7 +59,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ path('logout') }}">
-                <i class="fas fa-sign-out-alt fa-fw"></i> {{ 'logout' | trans()}}
+                <i class="fas fa-sign-out-alt fa-fw"></i> {{'logout'|trans}}
               </a>
             </li>
           {% else %}

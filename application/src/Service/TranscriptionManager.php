@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Media;
 use App\Entity\Project;
 use App\Entity\Transcription;
 use App\Entity\TranscriptionLog;
@@ -127,6 +128,24 @@ class TranscriptionManager
         $this->em->persist($log);
 
         $this->em->flush();
+
+        return;
+    }
+
+    public function report(Media $media, $reportType)
+    {
+        $url = $this->router->generate("media_transcription_display", ["id" => $media->getId()]);
+        $currentUser = $this->security->getUser() ? $this->security->getUser()->getUserName() : "anonymous";
+
+        $message = $this->translator->trans('transcription_report_msg', [
+            '%url%' => $url,
+            '%media%' => $media->getName(),
+            '%username%' => $currentUser,
+            '%reportType%' => $this->translator->trans($reportType)
+        ]);
+
+        $users = $this->em->getRepository(User::class)->getManagersOrAdminsByProject($media->getProject());
+        $this->mm->create($users, $message, true);
 
         return;
     }

@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\Project;
+use App\Service\AppEnums;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -32,5 +34,21 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function getManagersOrAdminsByProject(Project $project)
+    {
+        return $this->createQueryBuilder('u')
+          ->leftjoin('u.projectStatus', 'ups')
+          ->leftjoin('ups.status', 's')
+          ->andWhere(
+              '(ups.project = :p AND s.name = :name AND ups.enabled = 1)
+              OR (u.roles LIKE :role)'
+          )
+          ->setParameter('p', $project)
+          ->setParameter('name', AppEnums::USER_STATUS_MANAGER_NAME)
+          ->setParameter('role', '%ROLE_ADMIN%')
+          ->getQuery()
+          ->getResult();
     }
 }
