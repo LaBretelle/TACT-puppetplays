@@ -71,18 +71,23 @@ class TeiEditor {
     const root = document.querySelector('.elements')
     const container = document.querySelector('.elements-container')
     root.innerHTML = ''
+    let count = 0
+    let fragment = document.createDocumentFragment()
 
     if (current) {
+      count = current.childrens.length
       current.childrens.forEach(tagName => {
-        this.appendLiToAllowedElements(tei, root, tagName)
+        this.appendLiToAllowedElements(tei, fragment, tagName)
       })
-      this.displayContainer(container, current.childrens.length > 0)
     } else {
+      count = tei.elements.length
       tei.elements.forEach(element => {
-        this.appendLiToAllowedElements(tei, root, element.tag)
-        this.displayContainer(container, true)
+        this.appendLiToAllowedElements(tei, fragment, element.tag)
       })
     }
+    
+    this.displayContainer(container, count > 0)
+    root.appendChild(fragment)
   }
 
   /*
