@@ -4,7 +4,7 @@
 {% set progressPercent = percent[1]|round %}
 {% set inReview =  percent[2]|round %}
 {% set noTranscription =  percent[3]|round %}
-<div class="progress mt-4">
+<div class="progress">
   <div data-toggle="tooltip" title="{{"transcription_status_none"|trans}}" class="progress-bar bg-danger" role="progressbar" style="width: {{ noTranscription }}%;">
   {{ noTranscription }}%
   </div>

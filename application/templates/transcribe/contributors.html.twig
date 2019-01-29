@@ -1,6 +1,5 @@
-<hr class="mt-4" />
 <div>
-  <span class="text-muted">{{"have_contributed"|trans}}:</span>
+  {{"have_contributed"|trans}} ({{contributors|length}}):
   {% for i, contributor in contributors %}
     {{ contributor.username }} <span class="text-muted">-</span>
   {% endfor %}
