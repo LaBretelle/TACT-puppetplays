@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Directory;
 use App\Entity\Media;
 use App\Entity\Project;
+use App\Entity\User;
 use App\Entity\UserProjectStatus;
 use App\Entity\UserStatus;
 use App\Form\ProjectMediaType;
@@ -295,10 +296,15 @@ class ProjectController extends AbstractController
     public function display(Project $project)
     {
         $projectManagerUser = $this->projectManager->getProjectManagerUser($project);
+        $contributors = $this->getDoctrine()->getRepository(User::class)->getByProject($project);
 
         return $this->render(
             'project/display.html.twig',
-            ['project' => $project, 'manager' => $projectManagerUser]
+            [
+              'project' => $project,
+              'manager' => $projectManagerUser,
+              'contributors' => $contributors
+            ]
         );
     }
 

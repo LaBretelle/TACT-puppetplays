@@ -68,4 +68,21 @@ class UserRepository extends ServiceEntityRepository
           ->getQuery()
           ->getResult();
     }
+
+    public function getByProject(Project $project)
+    {
+        $names = ['transcription_log_updated', 'transcription_log_waiting_for_validation', 'transcription_log_rereaded'];
+
+        return $this->createQueryBuilder('u')
+          ->leftjoin('u.transcriptionLogs', 'tl')
+          ->leftjoin('tl.transcription', 't')
+          ->leftjoin('t.media', 'm')
+          ->leftjoin('m.project', 'p')
+          ->andWhere('p = :project')
+          ->andWhere('tl.name IN (:names)')
+          ->setParameter('project', $project)
+          ->setParameter('names', $names)
+          ->getQuery()
+          ->getResult();
+    }
 }

@@ -110,6 +110,7 @@ project_create_edit:                      Créer / Editer un projet
 project_create:                           Création d'un projet
 project_created:                          Projet créé
 project_css:                              Définition de la css inline pour le projet
+project_data:                             Quelques données concernant le projet
 project_delete:                           Supprimer le projet
 project_deleted:                          Le projet a été supprimé.
 project_description:                      Description du projet
@@ -129,6 +130,7 @@ project_manager:                          Manager du projet
 project_media_add_file_placeholder:       Sélectionner un/des fichier(s)
 project_media_add_file_title:             Ajouter des média
 project_media_add_file:                   Uploader un/des fichier(s)
+project_media_count:                      '%count% médias'
 project_media_file_type_images:           Image(s)
 project_media_file_type_zip:              Zip
 project_media_file_type:                  Type de fichier à uploader

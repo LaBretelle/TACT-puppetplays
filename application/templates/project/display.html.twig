@@ -37,7 +37,20 @@
           {% endif %}
         </p>
         {{ project.description | raw }}
-        {% include 'project/progressbar.html.twig' with {'project': project} %}
+
+      </div>
+      <div class="col-3">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-chart-bar"></i> {{'project_data'|trans}}
+          </div>
+          <div class="card-body">
+            {{"project_media_count"|trans({'%count%': project.medias|length})}}
+            <hr/>
+            {% include 'project/progressbar.html.twig' with {'project': project} %}
+            {% include('transcribe/contributors.html.twig') %}
+          </div>
+        </div>
       </div>
     </div>
   </div>
