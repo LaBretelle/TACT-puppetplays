@@ -3,11 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Media;
-use App\Entity\Transcription;
 use App\Form\ReviewType;
 use App\Service\AppEnums;
 use App\Service\FileManager;
-use App\Service\MailManager;
 use App\Service\MediaManager;
 use App\Service\PermissionManager;
 use App\Service\ReviewManager;
@@ -28,7 +26,6 @@ class MediaController extends AbstractController
     private $transcriptionManager;
     private $reviewManager;
     private $reviewRequestManager;
-    private $mailManager;
     private $permissionManager;
     private $translator;
     private $fileManager;
@@ -38,7 +35,6 @@ class MediaController extends AbstractController
       TranscriptionManager $transcriptionManager,
       ReviewManager $reviewManager,
       ReviewRequestManager $reviewRequestManager,
-      MailManager $mailManager,
       PermissionManager $permissionManager,
       TranslatorInterface $translator,
       FileManager $fileManager
@@ -47,7 +43,6 @@ class MediaController extends AbstractController
         $this->transcriptionManager = $transcriptionManager;
         $this->reviewManager = $reviewManager;
         $this->reviewRequestManager = $reviewRequestManager;
-        $this->mailManager = $mailManager;
         $this->permissionManager = $permissionManager;
         $this->translator = $translator;
         $this->fileManager = $fileManager;
