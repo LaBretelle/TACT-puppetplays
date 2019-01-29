@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\Project;
+use App\Entity\Transcription;
 use App\Service\AppEnums;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -48,6 +49,22 @@ class UserRepository extends ServiceEntityRepository
           ->setParameter('p', $project)
           ->setParameter('name', AppEnums::USER_STATUS_MANAGER_NAME)
           ->setParameter('role', '%ROLE_ADMIN%')
+          ->getQuery()
+          ->getResult();
+    }
+
+
+    public function getByTranscription(Transcription $transcription)
+    {
+        $names = ['transcription_log_updated', 'transcription_log_waiting_for_validation', 'transcription_log_rereaded'];
+
+        return $this->createQueryBuilder('u')
+          ->leftjoin('u.transcriptionLogs', 'tl')
+          ->leftjoin('tl.transcription', 't')
+          ->andWhere('t = :transcription')
+          ->andWhere('tl.name IN (:names)')
+          ->setParameter('transcription', $transcription)
+          ->setParameter('names', $names)
           ->getQuery()
           ->getResult();
     }

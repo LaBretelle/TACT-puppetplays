@@ -22,6 +22,7 @@
       {% else %}
         <div id="transcription-container">
           {{ media.transcription.content | raw}}
+          {{ include('transcribe/contributors.html.twig') }}
         </div>
       {% endif %}
       </div>

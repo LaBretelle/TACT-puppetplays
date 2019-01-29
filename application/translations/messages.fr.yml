@@ -42,6 +42,7 @@ folder_name:                              Nom du dossier
 folders_deleted:                          Dossier(s) supprimé(s)
 folders_moved:                            Dossier(s) déplacé(s)
 has_scheme:                               La transcription se fait conformément à un schéma (vs. transcription purement textuelle)
+have_contributed:                         Ont contribué
 help:                                     Aide
 help1:                                    Média à transcrire
 help2:                                    La transcription se passe ici. Saisissez un texte, par exemple la phrase; "Ces ½ mondaines étt d’ailleurs bien svt des superfemmes" et sélectionner un mot, par exemple "étt" que l’on va annoter comme une abréviation ou bien "superfemmes" que l’on va indiquer comme étant en rouge.

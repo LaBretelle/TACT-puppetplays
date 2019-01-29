@@ -82,6 +82,11 @@ class TranscriptionManager
           : null;
     }
 
+    public function getContributors(Transcription $transcription)
+    {
+        return $this->em->getRepository(User::class)->getByTranscription($transcription);
+    }
+
     public function getLastLockLog(Transcription $transcription)
     {
         $repository = $this->em->getRepository(TranscriptionLog::class);

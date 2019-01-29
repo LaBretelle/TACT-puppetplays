@@ -57,6 +57,7 @@ class MediaController extends AbstractController
         if (false === $this->permissionManager->isAuthorizedOnProject($media->getProject(), AppEnums::ACTION_VIEW_TRANSCRIPTIONS)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
+        $contributors = $this->transcriptionManager->getContributors($media->getTranscription());
 
         return $this->render(
             'transcribe/transcription.html.twig',
@@ -65,7 +66,8 @@ class MediaController extends AbstractController
               'edit' => false,
               'locked' => false,
               'log' => false,
-              'review' => false
+              'review' => false,
+              'contributors' => $contributors
             ]
         );
     }
@@ -92,6 +94,7 @@ class MediaController extends AbstractController
         $lockLog = (!$locked) ? $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_LOCKED, true) : $lockLog;
         $schema = $this->fileManager->getProjectTeiSchema($project);
         $logs = $this->transcriptionManager->getLogs($transcription, $project);
+        $contributors = $this->transcriptionManager->getContributors($transcription);
 
         return $this->render(
             'transcribe/transcription.html.twig',
@@ -102,6 +105,7 @@ class MediaController extends AbstractController
               'log' => $lockLog,
               'schema' => $schema,
               'logs' => $logs,
+              'contributors' => $contributors,
               'review' => false
             ]
         );
@@ -146,6 +150,7 @@ class MediaController extends AbstractController
         $schema = $this->fileManager->getProjectTeiSchema($project);
         $logs = $this->transcriptionManager->getLogs($transcription, $project);
         $nbPositiveReview = $this->reviewManager->countReview($transcription, true);
+        $contributors = $this->transcriptionManager->getContributors($transcription);
 
         return $this->render(
           'review/index.html.twig',
@@ -159,6 +164,7 @@ class MediaController extends AbstractController
             'edit' => $canEdit,
             'locked' => $locked,
             'log' => $lockLog,
+            'contributors' => $contributors
           ]
         );
     }
