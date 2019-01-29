@@ -179,10 +179,8 @@ class ProjectController extends AbstractController
 
         $user = $this->security->getUser();
         $mediaRepo =  $this->getDoctrine()->getRepository(Media::class);
-
-
-        $mine = $mediaRepo->getByProjectAndUserActivity($project, $parent, $user);
         $medias = $mediaRepo->findby(['project' => $project,'parent' => $parent ]);
+        $mine = $user ? $mediaRepo->getByProjectAndUserActivity($project, $parent, $user): null;
 
         return $this->render(
             'transcribe/index.html.twig',
