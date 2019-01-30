@@ -4,27 +4,37 @@
 
 <div class='row mb-3'>
   <div class="col-12">
-    <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-outline-secondary active media-filter-clear">
-        <input type="radio" name="options" id="option0" checked>
-        <i class="fas fa-eraser"></i>
-      </label>
-      <label class="btn btn-outline-danger media-filter" data-status="none">
-        <input type="radio" name="options" id="option1"> {{'transcription_status_none'|trans}}
-      </label>
-      <label class="btn btn-outline-warning media-filter" data-status="in-progress">
-        <input type="radio" name="options" id="option2"> {{'transcription_status_in_progress'|trans}}
-      </label>
-      <label class="btn btn-outline-info media-filter" data-status="in-reread">
-        <input type="radio" name="options" id="option3"> {{'transcription_status_in_reread'|trans}}
-      </label>
-      <label class="btn btn-outline-success media-filter" data-status="validated">
-        <input type="radio" name="options" id="option4"> {{'transcription_status_validated'|trans}}
-      </label>
-      <label class="btn btn-outline-secondary media-filter" data-status="mine">
-        <input type="radio" name="options" id="option5"> {{'transcription_mine'|trans}}
-      </label>
-    </div>
+    <form class="form-inline" role="form" onkeypress="return event.keyCode != 13;">
+      <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-outline-secondary active media-filter-clear">
+          <input type="radio" name="options" id="option0" checked>
+          <i class="fas fa-eraser"></i>
+        </label>
+        <label class="btn btn-outline-danger media-filter" data-status="none">
+          <input type="radio" name="options" id="option1"> {{'transcription_status_none'|trans}}
+        </label>
+        <label class="btn btn-outline-warning media-filter" data-status="in-progress">
+          <input type="radio" name="options" id="option2"> {{'transcription_status_in_progress'|trans}}
+        </label>
+        <label class="btn btn-outline-info media-filter" data-status="in-reread">
+          <input type="radio" name="options" id="option3"> {{'transcription_status_in_reread'|trans}}
+        </label>
+        <label class="btn btn-outline-success media-filter" data-status="validated">
+          <input type="radio" name="options" id="option4"> {{'transcription_status_validated'|trans}}
+        </label>
+        <label class="btn btn-outline-secondary media-filter" data-status="mine">
+          <input type="radio" name="options" id="option5"> {{'transcription_mine'|trans}}
+        </label>
+      </div>
+      <div class="ml-4 input-group input-group-sm">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="fas fa-filter"></i>
+          </div>
+        </div>
+        <input id="text-filter-media" class="form-control" type="text" value=""/>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -53,22 +63,28 @@
         {% set transcription = media.transcription %}
         {% set transcriptionStatus = transcription|transcriptionStatus %}
         <div class="col-2">
-          <div class="card mb-2 box-shadow status {{ transcriptionStatus }} {{ media in mine ? "mine"}}">
+          <div class="card mb-2 box-shadow status {{ transcriptionStatus }} {{ media in mine ? "mine"}}" data-name="{{ media.name }}">
             <img data-toggle="tooltip" title="{{media.name}}" class="card-img-top project-image" src="{{ macros.mediaThumbnailURL(media) }}" alt="" data-full="{{ macros.mediaURL(media) }}" />
             <div class="card-body">
               <div class="d-flex justify-content-center">
                 <div class="btn-group">
                   {# display #}
                   {% if transcriptionStatus != "none" %}
-                  <a data-toggle="tooltip" title="{{'media_view_transcription_button_title'| trans}}" href="{{path('media_transcription_display', {'id': media.id})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                  <a data-toggle="tooltip" title="{{'media_view_transcription_button_title'| trans}}" href="{{path('media_transcription_display', {'id': media.id})}}" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-eye"></i>
+                  </a>
                   {% endif %}
                   {# transcribe #}
                   {% if canTranscribe and (transcriptionStatus == "none" or transcriptionStatus == "in-progress") %}
-                  <a data-toggle="tooltip" title="{{'media_transcribe_button_title' | trans}}" href="{{path('media_transcription_edit', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-pencil-alt"></i></a>
+                  <a data-toggle="tooltip" title="{{'media_transcribe_button_title' | trans}}" href="{{path('media_transcription_edit', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-pencil-alt"></i>
+                  </a>
                   {% endif %}
                   {# review #}
                   {% if canValidate and transcriptionStatus == "in-reread" %}
-                    <a data-toggle="tooltip" title="{{'media_reread_button_title' | trans}}" href="{{path('media_transcription_review', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i></a>
+                    <a data-toggle="tooltip" title="{{'media_reread_button_title' | trans}}" href="{{path('media_transcription_review', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary">
+                      <i class="fas fa-edit"></i>
+                    </a>
                   {% endif %}
                 </div>
               </div>

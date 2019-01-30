@@ -18,12 +18,12 @@ $(document).ready(() => {
     $('.move-project-media-modal').modal('show')
   })
 
-  $('.media-filter').on('click', (e) => {
-    filterOnStatus(e.target.dataset.status)
+  $('.media-filter, .media-filter-clear').on('click', () => {
+    filterOnTextAndStatus()
   })
 
-  $('.media-filter-clear').on('click', () => {
-    filterClear()
+  $('#text-filter-media').on('keyup', () => {
+    filterOnTextAndStatus()
   })
 
   // toggle all media selection / unselection
@@ -255,20 +255,23 @@ const handleMediaSelection = (element) => {
   }
 }
 
-const filterOnStatus = (status) => {
-  let medias = Array.from(document.getElementsByClassName('status'))
-  medias.forEach(function (media) {
-    if (media.classList.contains(status)) {
-      media.parentNode.classList.remove('d-none')
-    } else {
-      media.parentNode.classList.add('d-none')
-    }
-  })
-}
+const filterOnTextAndStatus = () => {
+  setTimeout(function () {
+    let status = false
+    let medias = Array.from(document.getElementsByClassName('status'))
+    let statusBtn = document.querySelector('.media-filter.active')
+    let text =  document.querySelector('#text-filter-media').value
 
-const filterClear = () => {
-  let medias = Array.from(document.getElementsByClassName('status'))
-  medias.forEach(function (media) {
-    media.parentNode.classList.remove('d-none')
-  })
+    if (statusBtn) {
+      status = statusBtn.getAttribute('data-status')
+    }
+
+    medias.forEach(function (media) {
+      if (media.getAttribute('data-name').includes(text) && (!status || (status && media.classList.contains(status)))) {
+        media.parentNode.classList.remove('d-none')
+      } else {
+        media.parentNode.classList.add('d-none')
+      }
+    })
+  }, 100)
 }
