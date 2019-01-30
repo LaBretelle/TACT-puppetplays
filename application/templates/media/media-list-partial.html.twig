@@ -45,12 +45,10 @@
         <div class="col-2">
           <div class="card mb-2">
             <div class="card-body text-center">
-              <i class="fa-4x fas fa-folder"></i>
-              <p>
-                <a href="{{ from == 'transcript' ? path('project_transcriptions', {id: project.id, parent: dir.id}) : path('project_media', {id: project.id, parent: dir.id}) }}" class="card-link">
-                  {{ dir.name }}
-                </a>
-              </p>
+              <a href="{{(from == 'transcript') ? path('project_transcriptions', {id: project.id, parent: dir.id}) : path('project_media', {id: project.id, parent: dir.id})}}" class="card-link">
+                <i class="fa-4x fas fa-folder"></i>
+                <p>{{ dir.name }}</p>
+              </a>
             </div>
           </div>
         </div>
