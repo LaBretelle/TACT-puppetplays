@@ -11,6 +11,7 @@ use App\Entity\UserStatus;
 use App\Form\ProjectMediaType;
 use App\Form\ProjectType;
 use App\Service\AppEnums;
+use App\Service\ExportManager;
 use App\Service\FileManager;
 use App\Service\FlashManager;
 use App\Service\PermissionManager;
@@ -35,15 +36,34 @@ class ProjectController extends AbstractController
     private $permissionManager;
     private $translator;
     private $security;
+    private $exportManager;
 
-    public function __construct(ProjectManager $projectManager, FileManager $fileManager, FlashManager $flashManager, PermissionManager $permissionManager, TranslatorInterface $translator, Security $security)
-    {
+    public function __construct(
+      ProjectManager $projectManager,
+      FileManager $fileManager,
+      FlashManager $flashManager,
+      PermissionManager $permissionManager,
+      TranslatorInterface $translator,
+      Security $security,
+      ExportManager $exportManager
+    ) {
         $this->projectManager = $projectManager;
         $this->fileManager = $fileManager;
         $this->flashManager = $flashManager;
         $this->permissionManager = $permissionManager;
         $this->translator = $translator;
         $this->security = $security;
+        $this->exportManager = $exportManager;
+    }
+
+    /**
+     * @Route("/{id}/export", name="export")
+     */
+    public function export(Project $project)
+    {
+        $zipName = $this->exportManager->export($project);
+
+        return $this->file($zipName);
     }
 
     /**
