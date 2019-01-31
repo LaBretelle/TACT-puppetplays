@@ -25,15 +25,14 @@ class ExportManager
         $this->fileManager = $fileManager;
     }
 
-    public function export(Project $project, $withMedia)
+    public function export(Project $project, $params)
     {
-        $withMedia = ($withMedia == 0) ? false : true;
-        $exportDir = '/tmp/'.uniqid();
+        $exportDir = '/tmp/project/'.$project->getId().'-'.date("Ymd").'-'.uniqid();
         $zipName = $exportDir.".zip";
         $fileSystem = new Filesystem();
         $projectPath = $this->fileManager->getProjectPath($project);
 
-        $this->recursiveCreateDirAndFile($project, null, $exportDir, $fileSystem, $projectPath, $withMedia);
+        $this->recursiveCreateDirAndFile($project, null, $exportDir, $fileSystem, $projectPath, $params);
         $this->recursiveZipData($exportDir, $zipName);
 
         $fileSystem->remove($exportDir);
@@ -42,7 +41,7 @@ class ExportManager
         return $zipName;
     }
 
-    private function recursiveCreateDirAndFile($project, $parent, $path, $fileSystem, $projectPath, $withMedia)
+    private function recursiveCreateDirAndFile($project, $parent, $path, $fileSystem, $projectPath, $params)
     {
         $dirs = $this->dirRepo->findBy([
           "project" => $project,
@@ -51,7 +50,7 @@ class ExportManager
 
         foreach ($dirs as $dir) {
             $dirName = $dir->getName();
-            $this->recursiveCreateDirAndFile($project, $dir, $path.'/'.$dirName, $fileSystem, $projectPath, $withMedia);
+            $this->recursiveCreateDirAndFile($project, $dir, $path.'/'.$dirName, $fileSystem, $projectPath, $params);
         }
 
         $medias = $this->mediaRepo->findBy([
@@ -61,9 +60,12 @@ class ExportManager
 
         foreach ($medias as $media) {
             $fullFilePath = $path.DIRECTORY_SEPARATOR.$media->getName();
-            $fileSystem->appendToFile($fullFilePath.'.xml', $media->getTranscription()->getContent());
 
-            if ($withMedia) {
+            if ($params["transcriptions"]) {
+                $fileSystem->appendToFile($fullFilePath.'.xml', $media->getTranscription()->getContent());
+            }
+
+            if ($params["medias"]) {
                 $filePath = $projectPath.DIRECTORY_SEPARATOR.$media->getUrl();
                 $ext = pathinfo($filePath, PATHINFO_EXTENSION);
                 $fileSystem->copy($filePath, $fullFilePath.'.'.$ext);

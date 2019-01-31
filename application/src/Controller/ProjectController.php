@@ -10,6 +10,7 @@ use App\Entity\UserProjectStatus;
 use App\Entity\UserStatus;
 use App\Form\ProjectMediaType;
 use App\Form\ProjectType;
+use App\Form\ExportType;
 use App\Service\AppEnums;
 use App\Service\ExportManager;
 use App\Service\FileManager;
@@ -59,19 +60,29 @@ class ProjectController extends AbstractController
     /**
     * @Route("/{id}/export", name="export")
     */
-    public function export(Project $project)
+    public function export(Project $project, Request $request)
     {
-        return $this->render('project/export.html.twig', ['project' => $project]);
-    }
+        $form = $this->createForm(ExportType::class);
 
-    /**
-     * @Route("/{id}/export/{withMedia}", name="export_launch")
-     */
-    public function exportLaunch(Project $project, $withMedia)
-    {
-        $zipName = $this->exportManager->export($project, $withMedia);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $params = [
+              'medias' => $form->get('medias')->getData(),
+              'transcriptions' => $form->get('transcriptions')->getData(),
+              'transcriptionsList' => $form->get('transcriptions_list')->getData(),
+              'usersList' => $form->get('users_list')->getData(),
+              'infos' => $form->get('project_infos')->getData()
+            ];
 
-        return $this->file($zipName);
+            $zipName = $this->exportManager->export($project, $params);
+
+            return $this->file($zipName);
+        }
+
+        return $this->render('project/export.html.twig', [
+          'project' => $project,
+          'form' => $form->createView()
+        ]);
     }
 
     /**
