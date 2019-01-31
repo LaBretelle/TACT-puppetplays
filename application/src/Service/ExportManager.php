@@ -51,7 +51,7 @@ class ExportManager
 
         // Handle project users
         if ($params["usersList"]) {
-            $fileSystem->mkdir($exportDir.DIRECTORY_SEPARATOR."USERSLIST");
+            $this->exportUsesList($fileSystem, $exportDir, $project);
         }
 
         // Handle project users
@@ -68,7 +68,20 @@ class ExportManager
         return $zipName;
     }
 
-    private function recursiveCreateDirAndFile($project, $parent, $mediaPath, $transcriptionPath, $fileSystem, $projectPath, $params)
+    private function exportUsesList($fileSystem, $exportDir, Project $project)
+    {
+        $file = $exportDir.DIRECTORY_SEPARATOR."users.txt";
+        $statuses = $project->getUserStatuses();
+        foreach ($statuses as $status) {
+            $user = $status->getUser();
+            $fileSystem->appendToFile($file, $user->getUsername());
+        }
+
+
+        //$fileSystem->appendToFile('logs.txt', 'Email sent to user@example.com');
+    }
+
+    private function recursiveCreateDirAndFile(Project $project, $parent, $mediaPath, $transcriptionPath, $fileSystem, $projectPath, $params)
     {
         $dirs = $this->dirRepo->findBy([
           "project" => $project,
