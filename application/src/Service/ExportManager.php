@@ -3,54 +3,45 @@
 namespace App\Service;
 
 use App\Entity\Project;
+use App\Service\FileManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
-use Doctrine\ORM\EntityManagerInterface;
 
 class ExportManager
 {
     protected $em;
     protected $mediaRepo;
     protected $dirRepo;
+    protected $fileManager;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, FileManager $fileManager)
     {
         $this->em = $em;
         $this->mediaRepo = $repository = $this->em->getRepository('App:Media');
         $this->dirRepo = $repository = $this->em->getRepository('App:Directory');
+        $this->fileManager = $fileManager;
     }
 
-    public function export(Project $projet)
+    public function export(Project $project)
     {
         $exportDir = '/tmp/'.uniqid();
         $zipName = $exportDir.".zip";
         $fileSystem = new Filesystem();
-        $fileSystem->appendToFile($exportDir.'/logs.xml', 'Email sent to user@example.com');
-        $fileSystem->appendToFile($exportDir.'/toto.xml', 'Email sent to user@example.com');
+        $projectPath = $this->fileManager->getProjectPath($project);
 
-        $this->recursiveCreateDirAndFile($projet, null, $exportDir);
+        $this->recursiveCreateDirAndFile($project, null, $exportDir, $fileSystem, $projectPath);
+        $this->recursiveZipData($exportDir, $zipName);
 
-        die();
-
-        $zip = new \ZipArchive();
-        $finder = new Finder();
-        $finder->files()->in($exportDir);
-        foreach ($finder as $file) {
-            if ($zip->open($zipName, \ZipArchive::CREATE)) {
-                $zip->addFile($file->getRealpath(), basename($file->getRealpath()));
-                $zip->close();
-            }
-        }
         $fileSystem->remove($exportDir);
         new File($zipName);
 
         return $zipName;
     }
 
-
-    private function recursiveCreateDirAndFile($project, $parent, $path)
+    private function recursiveCreateDirAndFile($project, $parent, $path, $fileSystem, $projectPath)
     {
         $dirs = $this->dirRepo->findBy([
           "project" => $project,
@@ -59,13 +50,48 @@ class ExportManager
 
         foreach ($dirs as $dir) {
             $dirName = $dir->getName();
-            $this->recursiveCreateDirAndFile($project, $dir, $path.'/'.$dirName);
+            $this->recursiveCreateDirAndFile($project, $dir, $path.'/'.$dirName, $fileSystem, $projectPath);
         }
 
         $medias = $this->mediaRepo->findBy([
           "project" => $project,
           "parent" => $parent
         ]);
-        // créer le média au path courant
+
+        foreach ($medias as $media) {
+            $filePath = $projectPath.DIRECTORY_SEPARATOR.$media->getUrl();
+            $fullFilePath = $path.DIRECTORY_SEPARATOR.$media->getName();
+            $ext = pathinfo($filePath, PATHINFO_EXTENSION);
+            $fileSystem->appendToFile($fullFilePath.'.xml', $media->getTranscription()->getContent());
+            $fileSystem->copy($filePath, $fullFilePath.'.'.$ext);
+        }
+    }
+
+
+    private function recursiveZipData($source, $destination)
+    {
+        if (extension_loaded('zip') === true) {
+            if (file_exists($source) === true) {
+                $zip = new \ZipArchive();
+                if ($zip->open($destination, \ZIPARCHIVE::CREATE) === true) {
+                    $source = realpath($source);
+                    if (is_dir($source) === true) {
+                        $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($source), \RecursiveIteratorIterator::SELF_FIRST);
+                        foreach ($files as $file) {
+                            $file = realpath($file);
+                            if (is_dir($file) === true) {
+                                $zip->addEmptyDir(str_replace($source.DIRECTORY_SEPARATOR, '', $file .DIRECTORY_SEPARATOR));
+                            } elseif (is_file($file) === true) {
+                                $zip->addFromString(str_replace($source .DIRECTORY_SEPARATOR, '', $file), file_get_contents($file));
+                            }
+                        }
+                    } elseif (is_file($source) === true) {
+                        $zip->addFromString(basename($source), file_get_contents($source));
+                    }
+                }
+                return $zip->close();
+            }
+        }
+        return false;
     }
 }
