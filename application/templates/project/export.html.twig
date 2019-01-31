@@ -3,6 +3,7 @@
 {% block body %}
   {% include 'project/navigation.html.twig' with {'current': 'project_export'} %}
   <div id="main-container">
+    <h5>{{"export_form_title"|trans}}</h5>
     {{form(form)}}
   </div>
 {% endblock %}

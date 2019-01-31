@@ -270,3 +270,5 @@ export_transcriptions: Les transcriptions
 export_transcriptions_list: La liste des transcriptions
 export_users_list: La liste des utilisateurs
 export_project_infos: Les données du projets (schéma, etc.)
+export_launch: Lancer l'export
+export_form_title: Choisissez les élements que vous voulez exporter.

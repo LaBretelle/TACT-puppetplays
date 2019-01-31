@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Project;
+use App\Entity\Media;
 use App\Service\FileManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
@@ -27,12 +28,38 @@ class ExportManager
 
     public function export(Project $project, $params)
     {
-        $exportDir = '/tmp/project/'.$project->getId().'-'.date("Ymd").'-'.uniqid();
+        // todo > supprimer le dossier tmp dans le zip de sortie.
+        $exportDir = '/tmp/project'.$project->getId().'-'.date("Ymd").'-'.uniqid();
         $zipName = $exportDir.".zip";
         $fileSystem = new Filesystem();
         $projectPath = $this->fileManager->getProjectPath($project);
 
-        $this->recursiveCreateDirAndFile($project, null, $exportDir, $fileSystem, $projectPath, $params);
+        // Create "root" dir
+        $fileSystem->mkdir($exportDir);
+
+        // Handle medias && transcriptions
+        if ($params["medias"] || $params["transcriptions"]) {
+            $mediaPath = $exportDir.DIRECTORY_SEPARATOR."MEDIAS";
+            $transcriptionPath = $exportDir.DIRECTORY_SEPARATOR."TRANSCRIPTIONS";
+            $this->recursiveCreateDirAndFile($project, null, $mediaPath, $transcriptionPath, $fileSystem, $projectPath, $params);
+        }
+
+        // Handle project datas
+        if ($params["infos"]) {
+            $fileSystem->mkdir($exportDir.DIRECTORY_SEPARATOR."INFOS");
+        }
+
+        // Handle project users
+        if ($params["usersList"]) {
+            $fileSystem->mkdir($exportDir.DIRECTORY_SEPARATOR."USERSLIST");
+        }
+
+        // Handle project users
+        if ($params["transcriptionsList"]) {
+            $fileSystem->mkdir($exportDir.DIRECTORY_SEPARATOR."TRANSCRIPTIONSLIST");
+        }
+
+        // Zip everything
         $this->recursiveZipData($exportDir, $zipName);
 
         $fileSystem->remove($exportDir);
@@ -41,7 +68,7 @@ class ExportManager
         return $zipName;
     }
 
-    private function recursiveCreateDirAndFile($project, $parent, $path, $fileSystem, $projectPath, $params)
+    private function recursiveCreateDirAndFile($project, $parent, $mediaPath, $transcriptionPath, $fileSystem, $projectPath, $params)
     {
         $dirs = $this->dirRepo->findBy([
           "project" => $project,
@@ -49,8 +76,8 @@ class ExportManager
         ]);
 
         foreach ($dirs as $dir) {
-            $dirName = $dir->getName();
-            $this->recursiveCreateDirAndFile($project, $dir, $path.'/'.$dirName, $fileSystem, $projectPath, $params);
+            $dirName = DIRECTORY_SEPARATOR.$dir->getName();
+            $this->recursiveCreateDirAndFile($project, $dir, $mediaPath.$dirName, $transcriptionPath.$dirName, $fileSystem, $projectPath, $params);
         }
 
         $medias = $this->mediaRepo->findBy([
@@ -59,16 +86,17 @@ class ExportManager
         ]);
 
         foreach ($medias as $media) {
-            $fullFilePath = $path.DIRECTORY_SEPARATOR.$media->getName();
+            $fullMediaFilePath = $mediaPath.DIRECTORY_SEPARATOR.$media->getName();
+            $fullTranscriptionFilePath = $transcriptionPath.DIRECTORY_SEPARATOR.$media->getName();
 
             if ($params["transcriptions"]) {
-                $fileSystem->appendToFile($fullFilePath.'.xml', $media->getTranscription()->getContent());
+                $fileSystem->appendToFile($fullTranscriptionFilePath.'.xml', $this->generateXML($media));
             }
 
             if ($params["medias"]) {
                 $filePath = $projectPath.DIRECTORY_SEPARATOR.$media->getUrl();
                 $ext = pathinfo($filePath, PATHINFO_EXTENSION);
-                $fileSystem->copy($filePath, $fullFilePath.'.'.$ext);
+                $fileSystem->copy($filePath, $fullMediaFilePath.'.'.$ext);
             }
         }
     }
@@ -99,5 +127,12 @@ class ExportManager
             }
         }
         return false;
+    }
+
+    private function generateXML(Media $media)
+    {
+        $xml = "<xml>".$media->getTranscription()->getContent()."</xml>";
+
+        return $xml;
     }
 }
