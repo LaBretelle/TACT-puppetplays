@@ -25,14 +25,15 @@ class ExportManager
         $this->fileManager = $fileManager;
     }
 
-    public function export(Project $project)
+    public function export(Project $project, $withMedia)
     {
+        $withMedia = ($withMedia == 0) ? false : true;
         $exportDir = '/tmp/'.uniqid();
         $zipName = $exportDir.".zip";
         $fileSystem = new Filesystem();
         $projectPath = $this->fileManager->getProjectPath($project);
 
-        $this->recursiveCreateDirAndFile($project, null, $exportDir, $fileSystem, $projectPath);
+        $this->recursiveCreateDirAndFile($project, null, $exportDir, $fileSystem, $projectPath, $withMedia);
         $this->recursiveZipData($exportDir, $zipName);
 
         $fileSystem->remove($exportDir);
@@ -41,7 +42,7 @@ class ExportManager
         return $zipName;
     }
 
-    private function recursiveCreateDirAndFile($project, $parent, $path, $fileSystem, $projectPath)
+    private function recursiveCreateDirAndFile($project, $parent, $path, $fileSystem, $projectPath, $withMedia)
     {
         $dirs = $this->dirRepo->findBy([
           "project" => $project,
@@ -50,7 +51,7 @@ class ExportManager
 
         foreach ($dirs as $dir) {
             $dirName = $dir->getName();
-            $this->recursiveCreateDirAndFile($project, $dir, $path.'/'.$dirName, $fileSystem, $projectPath);
+            $this->recursiveCreateDirAndFile($project, $dir, $path.'/'.$dirName, $fileSystem, $projectPath, $withMedia);
         }
 
         $medias = $this->mediaRepo->findBy([
@@ -59,11 +60,14 @@ class ExportManager
         ]);
 
         foreach ($medias as $media) {
-            $filePath = $projectPath.DIRECTORY_SEPARATOR.$media->getUrl();
             $fullFilePath = $path.DIRECTORY_SEPARATOR.$media->getName();
-            $ext = pathinfo($filePath, PATHINFO_EXTENSION);
             $fileSystem->appendToFile($fullFilePath.'.xml', $media->getTranscription()->getContent());
-            $fileSystem->copy($filePath, $fullFilePath.'.'.$ext);
+
+            if ($withMedia) {
+                $filePath = $projectPath.DIRECTORY_SEPARATOR.$media->getUrl();
+                $ext = pathinfo($filePath, PATHINFO_EXTENSION);
+                $fileSystem->copy($filePath, $fullFilePath.'.'.$ext);
+            }
         }
     }
 

@@ -35,6 +35,10 @@ element_list:                             Eléments disponibles
 email_or_login_placeholder:               Login / email
 email_or_login:                           Veuillez renseigner votre login ou email
 email:                                    Mail
+export_project_long:                      Permet d'exporter les transcriptions avec ou sans les médias
+export_with_medias:                       Exporter avec les médias
+export_without_medias:                    Exporter sans les médias
+export:                                   Exporter
 filter_users_by:                          Filtrer par nom / prénom / mail / login
 firstname:                                Prénom
 folder_name_changed:                      Nom du dossier modifié

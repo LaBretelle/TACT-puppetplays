@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+  {% include 'project/navigation.html.twig' with {'current': 'project_export'} %}
+  <div id="main-container">
+    <a class="btn btn-link" href="{{ path('project_export_launch', {id: project.id, withMedia: 1}) }}">
+      {{'export_with_medias' | trans}}
+    </a>
+
+    <a class="btn btn-link" href="{{ path('project_export_launch', {id: project.id, withMedia: 0}) }}">
+      {{'export_without_medias' | trans}}
+    </a>
+  </div>
+{% endblock %}

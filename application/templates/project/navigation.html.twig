@@ -47,6 +47,11 @@
           {{'users' | trans}}
         </a>
       {% endif %}
+      {% if project | isAuthorizedOnProject('editProject') %}
+        <a href="{{ path('project_export', {id: project.id}) }}" class="nav-link {{macros.addActiveClass(current, "project_export")}}" data-toggle="tooltip" data-placement="top" title="{{"export_project_long"|trans}}">
+          {{'export' | trans}}
+        </a>
+      {% endif %}
     </ul>
   </div>
 </nav>

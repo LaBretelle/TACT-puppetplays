@@ -57,11 +57,19 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/export", name="export")
-     */
+    * @Route("/{id}/export", name="export")
+    */
     public function export(Project $project)
     {
-        $zipName = $this->exportManager->export($project);
+        return $this->render('project/export.html.twig', ['project' => $project]);
+    }
+
+    /**
+     * @Route("/{id}/export/{withMedia}", name="export_launch")
+     */
+    public function exportLaunch(Project $project, $withMedia)
+    {
+        $zipName = $this->exportManager->export($project, $withMedia);
 
         return $this->file($zipName);
     }
