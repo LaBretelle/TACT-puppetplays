@@ -7,3 +7,8 @@
     {{form(form)}}
   </div>
 {% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('build/js/submit-disable.js') }}"></script>
+{% endblock %}
