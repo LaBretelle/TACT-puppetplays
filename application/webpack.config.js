@@ -19,6 +19,7 @@ Encore
   .addEntry('js/user-list', './assets/js/admin/user-list.js' )
   .addEntry('js/account', './assets/js/account.js' )
   .addEntry('js/project-media', './assets/js/project-media.js' )
+  .addEntry('js/submit-disable', './assets/js/submit-disable.js' )
   .addEntry('js/transcription', './assets/js/transcription.js' )
   .addEntry('js/platform', './assets/js/platform.js' )
   .addEntry('js/openseadragon', './node_modules/openseadragon/build/openseadragon/openseadragon.min.js')
