@@ -35,6 +35,8 @@ element_list:                             Eléments disponibles
 email_or_login_placeholder:               Login / email
 email_or_login:                           Veuillez renseigner votre login ou email
 email:                                    Mail
+export_project_long:                      Permet d'exporter tout ou partie du projet
+export:                                   Exporter
 filter_users_by:                          Filtrer par nom / prénom / mail / login
 firstname:                                Prénom
 folder_name_changed:                      Nom du dossier modifié
@@ -263,3 +265,10 @@ view_profile:                             Voir le profil
 view_project:                             Accéder au projet
 view_transcriptions_long:                 Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
 yes:                                      Oui
+export_medias: Les médias
+export_transcriptions: Les transcriptions
+export_transcriptions_list: La liste des transcriptions
+export_users_list: La liste des utilisateurs
+export_project_infos: Les données du projets (schéma, etc.)
+export_launch: Lancer l'export
+export_form_title: Choisissez les élements que vous voulez exporter.
