@@ -2,14 +2,20 @@
 
 namespace App\Service;
 
-use App\Entity\Project;
 use App\Entity\Media;
+use App\Entity\Project;
 use App\Service\FileManager;
+use App\Service\TranscriptionManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ExportManager
 {
@@ -17,13 +23,19 @@ class ExportManager
     protected $mediaRepo;
     protected $dirRepo;
     protected $fileManager;
+    protected $translator;
+    protected $tm;
+    protected $router;
 
-    public function __construct(EntityManagerInterface $em, FileManager $fileManager)
+    public function __construct(EntityManagerInterface $em, FileManager $fileManager, TranslatorInterface $translator, TranscriptionManager $tm, UrlGeneratorInterface $router)
     {
         $this->em = $em;
+        $this->tm = $tm;
         $this->mediaRepo = $repository = $this->em->getRepository('App:Media');
         $this->dirRepo = $repository = $this->em->getRepository('App:Directory');
         $this->fileManager = $fileManager;
+        $this->translator = $translator;
+        $this->router = $router;
     }
 
     public function export(Project $project, $params)
@@ -51,12 +63,12 @@ class ExportManager
 
         // Handle project users
         if ($params["usersList"]) {
-            $this->exportUsesList($fileSystem, $exportDir, $project);
+            $this->exportUsersList($fileSystem, $exportDir, $project);
         }
 
-        // Handle project users
+        // Handle project transcriptions
         if ($params["transcriptionsList"]) {
-            $fileSystem->mkdir($exportDir.DIRECTORY_SEPARATOR."TRANSCRIPTIONSLIST");
+            $this->exportTranscriptionsList($fileSystem, $exportDir, $project);
         }
 
         // Zip everything
@@ -68,17 +80,63 @@ class ExportManager
         return $zipName;
     }
 
-    private function exportUsesList($fileSystem, $exportDir, Project $project)
+    private function exportTranscriptionsList($fileSystem, $exportDir, Project $project)
     {
-        $file = $exportDir.DIRECTORY_SEPARATOR."users.txt";
-        $statuses = $project->getUserStatuses();
-        foreach ($statuses as $status) {
-            $user = $status->getUser();
-            $fileSystem->appendToFile($file, $user->getUsername());
+        $file = $exportDir.DIRECTORY_SEPARATOR."transcriptions.csv";
+        $medias = $project->getMedias();
+        $dataArray = [];
+
+        $dataArray[] = [
+          "id",
+          "media",
+          "transcription",
+          "status",
+          "url"
+        ];
+
+        foreach ($medias as $media) {
+            $transcription = $media->getTranscription();
+            $fullPath = $this->getFullPath($media);
+            $ext = pathinfo($media->getUrl(), PATHINFO_EXTENSION);
+            $dataArray[] = [
+              $transcription->getId(),
+              $fullPath.".".$ext,
+              $fullPath.".xml",
+              $this->tm->getStatus($transcription),
+              $this->router->generate('media_transcription_display', ['id' => $media->getId()], UrlGeneratorInterface::ABSOLUTE_URL)
+            ];
         }
 
+        $csv = $this->arrayToCsv($dataArray);
+        $fileSystem->appendToFile($file, $csv);
+    }
 
-        //$fileSystem->appendToFile('logs.txt', 'Email sent to user@example.com');
+    private function exportUsersList($fileSystem, $exportDir, Project $project)
+    {
+        $file = $exportDir.DIRECTORY_SEPARATOR."users.csv";
+        $statuses = $project->getUserStatuses();
+        $dataArray = [];
+        $dataArray[] = [
+          "id",
+          "username",
+          "mail",
+          "status",
+          "status_validated"
+        ];
+        foreach ($statuses as $status) {
+            $user = $status->getUser();
+            $userStatus = $status->getStatus();
+            $dataArray[] = [
+                $user->getId(),
+                $user->getUsername(),
+                $user->getEmail(),
+                $this->translator->trans($userStatus->getName()),
+                $status->getEnabled() ? "1" : "0"
+            ];
+        }
+
+        $csv = $this->arrayToCsv($dataArray);
+        $fileSystem->appendToFile($file, $csv);
     }
 
     private function recursiveCreateDirAndFile(Project $project, $parent, $mediaPath, $transcriptionPath, $fileSystem, $projectPath, $params)
@@ -144,8 +202,30 @@ class ExportManager
 
     private function generateXML(Media $media)
     {
+        // todo > beaucoup mieux que ça !
         $xml = "<xml>".$media->getTranscription()->getContent()."</xml>";
 
         return $xml;
+    }
+
+    private function arrayToCsv($array)
+    {
+        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+        $csv = $serializer->encode($array, 'csv');
+
+        return $csv;
+    }
+
+    private function getFullPath(Media $media)
+    {
+        $parent = $media->getParent();
+        $path = $media->getName();
+
+        while ($parent) {
+            $path = $parent->getName().DIRECTORY_SEPARATOR.$path;
+            $parent = $parent->getParent();
+        }
+
+        return $path;
     }
 }
