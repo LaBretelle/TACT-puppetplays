@@ -58,7 +58,7 @@ class ExportManager
 
         // Handle project datas
         if ($params["infos"]) {
-            $fileSystem->mkdir($exportDir.DIRECTORY_SEPARATOR."INFOS");
+            $this->exportProjectInfo($fileSystem, $exportDir, $project, $projectPath);
         }
 
         // Handle project users
@@ -139,6 +139,39 @@ class ExportManager
         $fileSystem->appendToFile($file, $csv);
     }
 
+    private function exportProjectInfo($fileSystem, $exportDir, Project $project, $projectPath)
+    {
+        $rootDir = $exportDir.DIRECTORY_SEPARATOR."INFOS".DIRECTORY_SEPARATOR;
+
+        $fileSystem->appendToFile($rootDir."description.txt", $project->getDescription());
+        $fileSystem->appendToFile($rootDir."catchphrase.txt", $project->getCatchPhrase());
+
+        if ($css = $project->getCss()) {
+            $fileSystem->appendToFile($rootDir."style.css", $css);
+        }
+
+        if ($help = $project->getProjectHelpLink()) {
+            $fileSystem->appendToFile($rootDir."helpLink.txt", $help);
+        }
+
+        $csv = $projectPath.DIRECTORY_SEPARATOR."schema.csv";
+        if ($fileSystem->exists($csv)) {
+            $fileSystem->copy($csv, $rootDir."schema.csv");
+        }
+
+        $json = $projectPath.DIRECTORY_SEPARATOR."tei-schema.json";
+        if ($fileSystem->exists($json)) {
+            $fileSystem->copy($json, $rootDir."tei-schema.json");
+        }
+
+        if ($imageName = $project->getImage()) {
+            $image = $projectPath.DIRECTORY_SEPARATOR.$imageName;
+            if ($fileSystem->exists($image)) {
+                $fileSystem->copy($image, $rootDir.$imageName);
+            }
+        }
+    }
+
     private function recursiveCreateDirAndFile(Project $project, $parent, $mediaPath, $transcriptionPath, $fileSystem, $projectPath, $params)
     {
         $dirs = $this->dirRepo->findBy([
@@ -202,8 +235,7 @@ class ExportManager
 
     private function generateXML(Media $media)
     {
-        // todo > beaucoup mieux que ça !
-        $xml = "<xml>".$media->getTranscription()->getContent()."</xml>";
+        $xml = $media->getTranscription()->getContent();
 
         return $xml;
     }

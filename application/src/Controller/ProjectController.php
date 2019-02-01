@@ -62,8 +62,11 @@ class ProjectController extends AbstractController
     */
     public function export(Project $project, Request $request)
     {
-        $form = $this->createForm(ExportType::class);
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
+        }
 
+        $form = $this->createForm(ExportType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $params = [
@@ -129,7 +132,7 @@ class ProjectController extends AbstractController
     public function edit(Project $project, Request $request)
     {
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
-            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
         }
         $form = $this->createForm(ProjectType::class, $project);
 
@@ -180,7 +183,7 @@ class ProjectController extends AbstractController
     public function manageProjectMedia(Request $request, Project $project, Directory $current = null)
     {
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
-            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
         }
 
         $form = $this->createForm(ProjectMediaType::class, $project);
@@ -214,7 +217,7 @@ class ProjectController extends AbstractController
     public function displayTranscriptions(Project $project, Directory $parent = null)
     {
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VIEW_TRANSCRIPTIONS)) {
-            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
         }
 
         $user = $this->security->getUser();
@@ -272,7 +275,7 @@ class ProjectController extends AbstractController
     public function addFolderToProject(Project $project, Request $request)
     {
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
-            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
         }
 
         $parentId = intval($request->request->get('parent'));
@@ -304,7 +307,7 @@ class ProjectController extends AbstractController
     public function deleteProjectFolders(Project $project, Request $request)
     {
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_MANAGE_MEDIA)) {
-            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
         }
 
         $ids = $request->request->get('ids');
