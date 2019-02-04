@@ -60,9 +60,10 @@
       {% for media in medias %}
         {% set transcription = media.transcription %}
         {% set transcriptionStatus = transcription|transcriptionStatus %}
+        {% set inMine = (media in mine) ? true : false %}
         <div class="col-2">
-          <div class="card mb-2 box-shadow status {{ transcriptionStatus }} {{ media in mine ? "mine"}}" data-name="{{ media.name }}">
-            <img data-toggle="tooltip" title="{{media.name}}" class="card-img-top project-image" src="{{ macros.mediaThumbnailURL(media) }}" alt="" data-full="{{ macros.mediaURL(media) }}" />
+          <div class="card mb-2 box-shadow status {{ transcriptionStatus }} {{ inMine ? "mine"}}" data-name="{{ media.name }}">
+            <img class="card-img-top" src="{{ macros.mediaThumbnailURL(media) }}" data-full="{{ macros.mediaURL(media) }}" />
             <div class="card-body">
               <div class="d-flex justify-content-center">
                 <div class="btn-group">
@@ -86,6 +87,26 @@
                   {% endif %}
                 </div>
               </div>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">
+                <div>{{ media.name }}</div>
+                <div>
+                {% if transcriptionStatus == 'none' %}
+                  <span class="badge badge-danger">{{"transcription_status_none"|trans}}</span>
+                {% elseif transcriptionStatus == 'in-progress' %}
+                  <span class="badge badge-warning">{{"transcription_status_in_progress"|trans}}</span>
+                {% elseif transcriptionStatus == 'in-reread' %}
+                  <span class="badge badge-info">{{"transcription_status_in_reread"|trans}}</span>
+                {% elseif transcriptionStatus == 'validated' %}
+                  <span class="badge badge-success">{{"transcription_status_validated"|trans}}</span>
+                {% endif %}
+
+                {% if inMine %}
+                  <span class="badge badge-secondary">{{"transcription_mine"|trans}}</span>
+                {% endif %}
+              </div>
+              </small>
             </div>
           </div>
         </div>
