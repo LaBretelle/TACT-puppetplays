@@ -260,14 +260,14 @@ const filterOnTextAndStatus = () => {
     let status = false
     let medias = Array.from(document.getElementsByClassName('status'))
     let statusBtn = document.querySelector('.media-filter.active')
-    let text =  document.querySelector('#text-filter-media').value
+    let text =  document.querySelector('#text-filter-media').value.toLowerCase()
 
     if (statusBtn) {
       status = statusBtn.getAttribute('data-status')
     }
 
     medias.forEach(function (media) {
-      if (media.getAttribute('data-name').includes(text) && (!status || (status && media.classList.contains(status)))) {
+      if (media.getAttribute('data-name').toLowerCase().includes(text) && (!status || (status && media.classList.contains(status)))) {
         media.parentNode.classList.remove('d-none')
       } else {
         media.parentNode.classList.add('d-none')
