@@ -103,6 +103,7 @@ platform_home_text:                       Platform home text
 platform_logo:                            Platform logo
 platform_name:                            Platform name
 platform_page_title:                      Platform administration
+please_wait:                              Veuillez patienter...
 positive_review:                          Une relecture positive a été faite sur le média <a target="_blank" href="%url%">%media%</a> <br/> %comment%
 preview:                                  Prévisualiser
 profile:                                  Profile
