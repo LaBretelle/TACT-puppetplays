@@ -284,7 +284,10 @@ class TeiEditor {
   refreshPanels(tei) {
     if (typeof tei.elements !== 'undefined' ) {
       const currentTinyElement = Tiny.activeEditor.selection.getNode()
-      const currentTeiElement = tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
+      const currentTeiElement = (currentTinyElement.id != 'tinymce')
+        ? tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
+        : null
+
       this.displayCurrentAttributes(currentTeiElement, currentTinyElement)
       this.getAllowedElements(tei, currentTeiElement)
       $('[data-toggle="popover"]').popover({
