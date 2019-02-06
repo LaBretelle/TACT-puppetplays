@@ -70,7 +70,8 @@ class TeiEditor {
   getAllowedElements(tei, current) {
     const root = document.querySelector('.elements')
     const container = document.querySelector('.elements-container')
-    root.innerHTML = ''
+
+    this.emptyElement(root)
     let count = 0
     let fragment = document.createDocumentFragment()
 
@@ -85,7 +86,7 @@ class TeiEditor {
         this.appendLiToAllowedElements(tei, fragment, element.tag)
       })
     }
-    
+
     this.displayContainer(container, count > 0)
     root.appendChild(fragment)
   }
@@ -98,8 +99,10 @@ class TeiEditor {
     const container = document.querySelector('.element-attributes-container')
     const elementTitle = document.querySelector('.element-title')
     const elementAttributes = document.querySelector('.element-attributes')
-    elementTitle.innerHTML = ''
-    elementAttributes.innerHTML = ''
+
+    this.emptyElement(elementTitle)
+    this.emptyElement(elementAttributes)
+
     if (currentTeiElement) {
       this.displayContainer(container, true)
       const cardTitle = document.createTextNode('[' + currentTinyElement.nodeName + ']')
@@ -303,6 +306,10 @@ class TeiEditor {
   displayContainer(container, show) {
     const value = show ? 'flex' : 'none'
     container.style.display = value
+  }
+
+  emptyElement(el){
+    while (el.firstChild) el.removeChild(el.firstChild)
   }
 }
 
