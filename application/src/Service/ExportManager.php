@@ -74,6 +74,7 @@ class ExportManager
         // Zip everything
         $this->recursiveZipData($exportDir, $zipName);
 
+        // delete tmp dir.
         $fileSystem->remove($exportDir);
         new File($zipName);
 
@@ -217,7 +218,7 @@ class ExportManager
                         $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($source), \RecursiveIteratorIterator::SELF_FIRST);
                         foreach ($files as $file) {
                             $file = realpath($file);
-                            if (is_dir($file) === true) {
+                            if (is_dir($file) === true && $file !== "/tmp") {
                                 $zip->addEmptyDir(str_replace($source.DIRECTORY_SEPARATOR, '', $file .DIRECTORY_SEPARATOR));
                             } elseif (is_file($file) === true) {
                                 $zip->addFromString(str_replace($source .DIRECTORY_SEPARATOR, '', $file), file_get_contents($file));
