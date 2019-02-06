@@ -18,6 +18,9 @@ backtotop:                                Back to top
 by:                                       by
 cancel:                                   Cancel
 close:                                    Close
+comment_create:                           Ajouter un commentaire
+comment_created:                          Commentaire créé
+comments:                                 Commentaires
 confirm_account_anonymization:            If you continue the account informations will be anonimized. This action is irreversible.
 confirm_delete_project_folders:           Are you sure you want to delete selected folder(s) (Media will also be removed) ?
 confirm_delete_project_media:             Are you sure you want to delete selected media ?

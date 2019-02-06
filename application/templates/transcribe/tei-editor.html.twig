@@ -1,6 +1,7 @@
 {% set canValidate = media.project | isAuthorizedOnProject('validateTranscription') %}
 {% set canViewLogs = media.project | isAuthorizedOnProject('viewLogs') %}
-
+{% set transcription = media.transcription %}
+{% set comments = transcription.comments %}
 <ul class="nav nav-tabs">
   {% if edit %}
   <li class="nav-item">
@@ -10,6 +11,11 @@
   <li class="nav-item" data-intro="{{'help5'|trans}}" data-step="5">
     <a class="nav-link {% if not edit %}active{% endif %}" data-toggle="tab"  href="#preview">{{'preview'|trans}}</a>
   </li>
+
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab"  href="#comments">{{'comments'|trans}} ({{comments|length}})</a>
+  </li>
+
   {% if canValidate %}
   <li class="nav-item">
     <a class="nav-link" data-toggle="tab"  href="#reviews">{{'reviews'|trans}}</a>
@@ -28,7 +34,7 @@
     <div class="row">
       <div class="col">
         <textarea class="tinymce-transcription" id="tiny-content" name="transcription-content" rows="20" cols="60">
-          {{ media.transcription.content | raw }}
+          {{ transcription.content | raw }}
         </textarea>
       </div>
       {% if project.hasScheme %}
@@ -66,9 +72,14 @@
     </div>
   </div>
   {% endif %}
-
   <div id="preview" class="tab-pane fade {% if not edit %}show active{% endif %}" role="tabpanel">
-    {{ media.transcription.content | raw}}
+    {{ transcription.content | raw}}
+  </div>
+  <div id="comments" class="tab-pane fade" role="tabpanel">
+    {% if app.user %}
+    {{ include('comments/create.html.twig') }}
+    {% endif %}
+    {{ include('comments/list.html.twig') }}
   </div>
   {% if canValidate %}
   <div id="reviews" class="tab-pane fade" role="tabpanel">

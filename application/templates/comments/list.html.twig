@@ -1,0 +1,19 @@
+{% if app.user %}
+<a class="btn btn-outline-secondary btn-sm" data-toggle="modal" href="#create-comment" role="button" aria-expanded="false" aria-controls="create-comment">
+  <i class="fas fa-plus"></i>
+  {{"comment_create"|trans}}
+</a>
+{% endif %}
+
+<ul class="list-group pt-3">
+{% for comment in comments %}
+  <li class="list-group-item">
+    {{ comment.content }}
+    <span class="float-right">
+      <small>
+      {{ comment.createdAt|date("d/m/Y H:i") }} - <a target="_blank" href="{{ path('user_profile', {'id': comment.user.id}) }}">{{ comment.user.username }}</a>
+      </small>
+    </span>
+  </li>
+{% endfor %}
+</ul>

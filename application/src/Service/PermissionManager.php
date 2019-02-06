@@ -40,6 +40,12 @@ class PermissionManager
             }
             break;
 
+          case AppEnums::ACTION_DELETE_COMMENT:
+            if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
+                return true;
+            }
+            break;
+
           case AppEnums::ACTION_MANAGE_MEDIA:
             if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
                 return true;
