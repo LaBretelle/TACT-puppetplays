@@ -10,6 +10,7 @@ use App\Service\AppEnums;
 use App\Service\FlashManager;
 use App\Service\MessageManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -29,7 +30,8 @@ class UserProjectStatusManager
       TokenStorageInterface $tokenStorage,
       FlashManager $fm,
       MessageManager $messageManager,
-      TranslatorInterface $translator
+      TranslatorInterface $translator,
+      UrlGeneratorInterface $router
       ) {
         $this->em = $em;
         $this->authChecker = $authChecker;
@@ -37,6 +39,7 @@ class UserProjectStatusManager
         $this->fm = $fm;
         $this->messageManager = $messageManager;
         $this->translator = $translator;
+        $this->router = $router;
     }
 
     public function create(Project $project)
@@ -49,6 +52,13 @@ class UserProjectStatusManager
         $userProjectStatus->setStatus($status);
         $enabled = $project->getPublic() ? true : false;
         $userProjectStatus->setEnabled($enabled);
+
+        if (!$enabled) {
+            $admins = $this->em->getRepository(User::class)->getManagersByProject($project);
+            $url = $this->router->generate("status_project", ["id" => $project->getId()]);
+            $message = $this->translator->trans('user_needs_validation', ['%url%' => $url, '%project%' => $project->getName()]);
+            $this->messageManager->create($admins, $message, false);
+        }
 
         $this->em->persist($userProjectStatus);
         $this->em->flush();

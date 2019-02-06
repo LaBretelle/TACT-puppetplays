@@ -244,6 +244,7 @@ user_export_details:                      Exporte account data
 user_export:                              Export
 user_is_active:                           Account activated
 user_is_anonymized:                       Account anonymized
+user_needs_validation:                    Une inscription à %project% nécessite une validation <a target="_blank" href="%url%">(voir)</a>.
 user_renew_password_error:                An error occured while requesting a new password.
 user_renew_password_mail_sent:            An email has ben sent at the following address %usermail%
 user_renew_password_success:              Your password was updated.

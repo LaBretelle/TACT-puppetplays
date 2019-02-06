@@ -252,6 +252,7 @@ user_export_details:                      Exporte les données relatives au comp
 user_export:                              Exporter
 user_is_active:                           Compte activé
 user_is_anonymized:                       Compte anonymisé
+user_needs_validation:                    Une inscription à %project% nécessite une validation <a target="_blank" href="%url%">(voir)</a>.
 user_renew_password_error:                Une erreur s'est produite lors de la demande de renouvellement de mot de passe.
 user_renew_password_mail_sent:            Un email vous a été envoyé à l'adresse %usermail%
 user_renew_password_success:              Votre mot de passe a été mis à jour.

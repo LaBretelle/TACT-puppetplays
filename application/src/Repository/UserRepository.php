@@ -36,6 +36,18 @@ class UserRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    
+    public function getManagersByProject(Project $project)
+    {
+        return $this->createQueryBuilder('u')
+          ->leftjoin('u.projectStatus', 'ups')
+          ->leftjoin('ups.status', 's')
+          ->andWhere('ups.project = :p AND s.name = :name AND ups.enabled = 1')
+          ->setParameter('p', $project)
+          ->setParameter('name', AppEnums::USER_STATUS_MANAGER_NAME)
+          ->getQuery()
+          ->getResult();
+    }
 
     public function getManagersOrAdminsByProject(Project $project)
     {
