@@ -215,7 +215,9 @@ class MediaController extends AbstractController
     public function validateTranscription(Media $media, $valid)
     {
         $project = $media->getProject();
-        $parent = $media->getParent();
+        $parent = ($media->getParent())
+          ? $media->getParent()->getId()
+          : null;
 
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
