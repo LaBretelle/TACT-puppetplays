@@ -13,7 +13,6 @@ Encore
 
   // define the assets of the project
   .addEntry('js/app', './assets/js/app.js')
-  .addEntry('js/home', './assets/js/home.js')
   .addEntry('js/create-project', './assets/js/create-project.js')
   .addEntry('js/user-status-form', './assets/js/user-status-form.js' )
   .addEntry('js/user-list', './assets/js/admin/user-list.js' )
