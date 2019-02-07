@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Media;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Form\ReviewType;
 use App\Service\AppEnums;
 use App\Service\FileManager;
 use App\Service\MediaManager;
 use App\Service\PermissionManager;
 use App\Service\ReviewManager;
+use App\Service\CommentManager;
 use App\Service\ReviewRequestManager;
 use App\Service\TranscriptionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,6 +32,7 @@ class MediaController extends AbstractController
     private $permissionManager;
     private $translator;
     private $fileManager;
+    private $commentManager;
 
     public function __construct(
       MediaManager $mediaManager,
@@ -37,7 +41,8 @@ class MediaController extends AbstractController
       ReviewRequestManager $reviewRequestManager,
       PermissionManager $permissionManager,
       TranslatorInterface $translator,
-      FileManager $fileManager
+      FileManager $fileManager,
+      CommentManager $commentManager
     ) {
         $this->mediaManager = $mediaManager;
         $this->transcriptionManager = $transcriptionManager;
@@ -46,6 +51,7 @@ class MediaController extends AbstractController
         $this->permissionManager = $permissionManager;
         $this->translator = $translator;
         $this->fileManager = $fileManager;
+        $this->commentManager = $commentManager;
     }
 
     /**
@@ -75,8 +81,9 @@ class MediaController extends AbstractController
     /**
      * @Route("/{id}/transcription/edit", name="transcription_edit")
      */
-    public function editTranscription(Media $media)
+    public function editTranscription(Media $media, Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $project = $media->getProject();
         $transcription = $media->getTranscription();
 
@@ -96,6 +103,8 @@ class MediaController extends AbstractController
         $logs = $this->transcriptionManager->getLogs($transcription, $project);
         $contributors = $this->transcriptionManager->getContributors($transcription);
 
+        $commentForm = $this->createForm(CommentType::class, null, ["transcription" => $transcription->getId()]);
+
         return $this->render(
             'transcribe/transcription.html.twig',
             [
@@ -106,7 +115,8 @@ class MediaController extends AbstractController
               'schema' => $schema,
               'logs' => $logs,
               'contributors' => $contributors,
-              'review' => false
+              'review' => false,
+              'commentForm' => $commentForm->createView()
             ]
         );
     }
@@ -152,6 +162,9 @@ class MediaController extends AbstractController
         $nbPositiveReview = $this->reviewManager->countReview($transcription, true);
         $contributors = $this->transcriptionManager->getContributors($transcription);
 
+
+        $commentForm = $this->createForm(CommentType::class, null, ["transcription" => $transcription->getId()]);
+
         return $this->render(
           'review/index.html.twig',
             [
@@ -164,7 +177,8 @@ class MediaController extends AbstractController
             'edit' => $canEdit,
             'locked' => $locked,
             'log' => $lockLog,
-            'contributors' => $contributors
+            'contributors' => $contributors,
+            'commentForm' => $commentForm->createView()
           ]
         );
     }

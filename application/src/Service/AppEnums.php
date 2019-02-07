@@ -39,6 +39,7 @@ class AppEnums
     public const ACTION_REGISTER = 'register';
     public const ACTION_VALIDATE_TRANSCRIPTION = 'validateTranscription';
     public const ACTION_VIEW_LOGS = 'viewLogs';
+    public const ACTION_DELETE_COMMENT = 'deleteComment';
 
     public const LIST = [
       self::PROJECT_STATUS_FINISHED_DESC,
