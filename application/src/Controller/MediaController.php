@@ -144,10 +144,7 @@ class MediaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->reviewManager->save($review);
-            $nbPositiveReview = $this->reviewManager->countReview($transcription, true);
-            if ($nbPositiveReview >= $project->getNbValidation()) {
-                $this->transcriptionManager->validate($transcription, true);
-            }
+            $this->reviewManager->testForValidation($transcription, $project);
             $parent = $media->getParent();
 
             return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);

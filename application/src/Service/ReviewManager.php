@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Review;
+use App\Entity\Project;
 use App\Entity\ReviewRequest;
 use App\Entity\Transcription;
 use App\Service\FlashManager;
@@ -94,5 +95,19 @@ class ReviewManager
         }
 
         return $count;
+    }
+
+    public function testForValidation(Transcription $transcription, Project $project)
+    {
+      // TODO > en un seul parcours
+      $nbPositiveReviews = $this->countReview($transcription, true);
+      $nbNegativeReviews = $this->countReview($transcription, false);
+      if ($nbPositiveReviews >= $project->getNbValidation()) {
+          $this->tm->validate($transcription, true);
+      } elseif($nbNegativeReviews >= $project->getNbValidation()) {
+        $this->tm->validate($transcription, false);
+      }
+
+      return;
     }
 }
