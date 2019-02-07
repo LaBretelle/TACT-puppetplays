@@ -92,16 +92,7 @@
               <small class="text-muted">
                 <div>{{ media.name }}</div>
                 <div>
-                {% if transcriptionStatus == 'none' %}
-                  <span class="badge badge-danger">{{"transcription_status_none"|trans}}</span>
-                {% elseif transcriptionStatus == 'in-progress' %}
-                  <span class="badge badge-warning">{{"transcription_status_in_progress"|trans}}</span>
-                {% elseif transcriptionStatus == 'in-reread' %}
-                  <span class="badge badge-info">{{"transcription_status_in_reread"|trans}}</span>
-                {% elseif transcriptionStatus == 'validated' %}
-                  <span class="badge badge-success">{{"transcription_status_validated"|trans}}</span>
-                {% endif %}
-
+                {{ include('media/status.html.twig') }}
                 {% if inMine %}
                   <span class="badge badge-secondary">{{"transcription_mine"|trans}}</span>
                 {% endif %}

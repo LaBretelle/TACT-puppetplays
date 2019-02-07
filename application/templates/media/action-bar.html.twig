@@ -1,9 +1,12 @@
 {% import "media/macros.html.twig" as macros %}
 
+{% set transcriptionStatus = media.transcription|transcriptionStatus %}
+
 <div class="row">
   <div class="col">
     {{ macros.backToParentDir(media)}}
     {{ review == true ? 'reread_transcription'|trans:'transcript_media'|trans}} <span class="text-muted">{{media.name}}</span>
+    {{ include('media/status.html.twig') }}
   </div>
 
   <div class="col text-right">
