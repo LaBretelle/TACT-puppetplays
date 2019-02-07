@@ -31,7 +31,7 @@
         "ev": "0.0.7",
         "intro.js": "^2.9.3",
         "openseadragon": "^2.4.0",
-        "tinymce": "^4.9.3",
+        "tinymce": "^5.0.0",
         "toastr": "^2.1.4"
     }
 }

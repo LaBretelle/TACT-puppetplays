@@ -1,6 +1,6 @@
 /* global require module */
 const Tiny = require('tinymce')
-require('tinymce/themes/modern/theme')
+require('tinymce/themes/silver')
 require('tinymce/plugins/code')
 
 class TeiEditor {
@@ -26,11 +26,10 @@ class TeiEditor {
       statusbar: true,
       toolbar1: 'undo redo | remove-current-tag | code',
       setup: (editor) => {
-        editor.addButton('remove-current-tag', {
-          text: '',
-          icon: 'fas fa-delete',
-          tooltip: Translator.trans('delete_current_tag'),
-          onclick: () => {
+        editor.ui.registry.addButton('remove-current-tag', {
+          icon: 'remove',
+          tooltip: Translator.trans("delete_current_tag"),
+          onAction: () => {
             this.deleteCurrentTag(this.tei)
           }
         })

@@ -2,7 +2,7 @@
 const Tiny = require('tinymce')
 
 // A theme is also required
-require('tinymce/themes/modern/theme')
+require('tinymce/themes/silver')
 // Any plugins you want to use has to be imported
 require('tinymce/plugins/link')
 require('tinymce/plugins/paste')
