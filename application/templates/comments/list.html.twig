@@ -6,12 +6,18 @@
 {% endif %}
 
 <ul class="list-group pt-3">
+{% set canDelete =  (project | isAuthorizedOnProject('deleteComment')) ? true : false %}
 {% for comment in comments %}
   <li class="list-group-item">
     {{ comment.content }}
     <span class="float-right">
       <small>
       {{ comment.createdAt|date("d/m/Y H:i") }} - <a target="_blank" href="{{ path('user_profile', {'id': comment.user.id}) }}">{{ comment.user.username }}</a>
+      {% if canDelete %}
+      <a href="{{ path('comment_delete', {'id': comment.id}) }}">
+        <i class="fas fa-trash-alt"></i>
+      </a>
+      {% endif %}
       </small>
     </span>
   </li>

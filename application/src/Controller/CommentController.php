@@ -47,11 +47,10 @@ class CommentController extends AbstractController
         return $this->redirect($request->headers->get('referer'));
     }
 
-
     /**
      * @Route("/delete/{id}", name="delete")
      */
-    public function deleteComment(Comment $comment)
+    public function deleteComment(Comment $comment, Request $request)
     {
         $project = $comment->getTranscription()->getMedia()->getProject();
 

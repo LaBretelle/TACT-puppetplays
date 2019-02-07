@@ -44,4 +44,14 @@ class CommentManager
 
         return;
     }
+
+    public function delete(Comment $comment)
+    {
+        $this->em->remove($comment);
+        $this->em->flush();
+
+        $this->fm->add('notice', 'comment_deleted');
+
+        return;
+    }
 }
