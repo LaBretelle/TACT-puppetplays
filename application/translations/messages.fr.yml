@@ -21,6 +21,7 @@ cancel:                                   Annuler
 close:                                    Fermer
 comment_create:                           Ajouter un commentaire
 comment_created:                          Commentaire créé
+comment_delete:                           Supprimer le commentaire
 comment_deleted:                          Le commentaire a été supprimé
 comments:                                 Commentaires
 confirm_account_anonymization:            Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
