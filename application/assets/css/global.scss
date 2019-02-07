@@ -10,6 +10,10 @@ body > .container-fluid {
   padding: 0 !important;
 }
 
+.nav-tabs a, .nav-tabs a:hover, .nav-tabs a:focus{
+    outline: 0;
+}
+
 .btn-link {
   color: #888;
 
