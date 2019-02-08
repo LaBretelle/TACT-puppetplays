@@ -239,6 +239,7 @@ transcription_validate:                   Valider la transcription directement (
 transcription_validated_msg:              La transcription concernant <a target="_blank" href="%url%">%media%</a> pour laquelle vous aviez demandé une relecture a été validée.
 transcription_validated:                  Transcription terminée
 transcriptions_page_title:                Transcriptions du projet
+transcriptions_status_recalculated:       Le statut des transcriptions a été recalculé
 tutorial_enable:                          Activer le tutoriel
 tutorial:                                 Tutoriel
 unvalidate_transcription:                 Invalider la transcription

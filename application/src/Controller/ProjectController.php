@@ -8,9 +8,9 @@ use App\Entity\Project;
 use App\Entity\User;
 use App\Entity\UserProjectStatus;
 use App\Entity\UserStatus;
+use App\Form\ExportType;
 use App\Form\ProjectMediaType;
 use App\Form\ProjectType;
-use App\Form\ExportType;
 use App\Service\AppEnums;
 use App\Service\ExportManager;
 use App\Service\FileManager;
@@ -134,22 +134,17 @@ class ProjectController extends AbstractController
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
             throw new AccessDeniedException($this->translator->trans('access_denied'));
         }
+
+        $originalReviewLimit = $project->getnbValidation();
         $form = $this->createForm(ProjectType::class, $project);
-
-        $originalStatuses = new ArrayCollection();
-        foreach ($project->getUserStatuses() as $status) {
-            $originalStatuses->add($status);
-        }
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('image')->getData();
             $previous_image = $request->get('previous_image');
-
-            $this->projectManager->editFromForm($project);
+            $this->projectManager->save($project);
             $this->projectManager->handleImage($project, $image, $previous_image);
-
+            $this->projectManager->handleReviewLimit($project, $originalReviewLimit);
             $this->flashManager->add('notice', 'project_edited');
 
             return $this->redirectToRoute('project_display', ['id' => $project->getId()]);

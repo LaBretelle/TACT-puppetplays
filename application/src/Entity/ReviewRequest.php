@@ -37,6 +37,7 @@ class ReviewRequest
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="request", cascade={"persist","remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $reviews;
 
