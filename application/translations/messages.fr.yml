@@ -49,6 +49,7 @@ export_transcriptions_list:               La liste des transcriptions
 export_transcriptions:                    Les transcriptions
 export_users_list:                        La liste des utilisateurs
 export:                                   Exporter
+faq:                                      Foire aux questions
 filter_users_by:                          Filtrer par nom / prénom / mail / login
 firstname:                                Prénom
 folder_name_changed:                      Nom du dossier modifié

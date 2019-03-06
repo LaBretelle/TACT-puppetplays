@@ -41,6 +41,7 @@ email_or_login:                           Please enter your login or email
 email:                                    Mail
 export_project_long:                      Permet d'exporter tout ou partie du projet
 export:                                   Exporter
+faq:                                      Frequently asked questions
 filter_users_by:                          Filter by lastname / firstname / mail / login
 firstname:                                Firstname
 folder_name_changed:                      Folder name edited
