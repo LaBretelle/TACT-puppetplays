@@ -36,6 +36,7 @@ class PlatformController extends AbstractController
 
             return $this->redirectToRoute('home');
         }
+        
         return $this->render(
             'admin/platform/properties.html.twig',
             ['form' => $form->createView(), 'platform' => $platform]
@@ -49,6 +50,7 @@ class PlatformController extends AbstractController
     {
         $platform = $this->getDoctrine()->getRepository(Platform::class)->getPlatformParameters();
         $this->manager->deleteLogo($platform);
+
         return $this->json([], $status = 200);
     }
 }

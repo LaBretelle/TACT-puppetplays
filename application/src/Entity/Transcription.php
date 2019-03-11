@@ -49,11 +49,18 @@ class Transcription
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="subscribedTranscriptions")
+     * @ORM\JoinTable(name="transcriptions_subscribers")
+     */
+    private $subscribersUsers;
+
     public function __construct()
     {
         $this->transcriptionLogs = new ArrayCollection();
         $this->isValid = false;
         $this->comments = new ArrayCollection();
+        $this->subscribersUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -177,6 +184,32 @@ class Transcription
             if ($comment->getTranscription() === $this) {
                 $comment->setTranscription(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getSubscribersUsers(): Collection
+    {
+        return $this->subscribersUsers;
+    }
+
+    public function addSubscribersUser(User $subscribersUser): self
+    {
+        if (!$this->subscribersUsers->contains($subscribersUser)) {
+            $this->subscribersUsers[] = $subscribersUser;
+        }
+
+        return $this;
+    }
+
+    public function removeSubscribersUser(User $subscribersUser): self
+    {
+        if ($this->subscribersUsers->contains($subscribersUser)) {
+            $this->subscribersUsers->removeElement($subscribersUser);
         }
 
         return $this;

@@ -24,15 +24,15 @@ class MessageManager
         $this->fm = $fm;
     }
 
-    public function create($recipients, $content, $flush = true)
+    public function create($users, $content, $flush = true)
     {
         $message = new Message;
         $message->setContent($content);
         $this->em->persist($message);
 
-        foreach ($recipients as $recipient) {
+        foreach ($users as $user) {
             $r = new Recipient;
-            $r->setUser($recipient);
+            $r->setUser($user);
             $r->setViewed(false);
             $r->setMessage($message);
             $this->em->persist($r);
@@ -98,7 +98,7 @@ class MessageManager
     {
         $messages = $this->getUnread();
         $this->setAsRead($messages);
-        $this->fm->add('notice', 'messages_set_as_read_done');
+        $this->fm->add('notice', 'mcreateessages_set_as_read_done');
 
         return;
     }
@@ -128,8 +128,8 @@ class MessageManager
     public function getUserMessages()
     {
         $messages = $this->em->getRepository("App:Recipient")->findBy(
-          ['user' => $this->currentUser],
-          ['id' => 'DESC']
+            ['user' => $this->currentUser],
+            ['id' => 'DESC']
         );
 
         return $messages;

@@ -41,6 +41,7 @@
 
   {% if edit %}
     <input type="hidden" id="log-id" name="log_id" value="{{log.id}}">
+    <input type="hidden" id="firstTranscript" name="firstTranscript" value="{{app.user.firstTranscript ? 1 : 0}}">
   {% endif %}
 {% endblock %}
 

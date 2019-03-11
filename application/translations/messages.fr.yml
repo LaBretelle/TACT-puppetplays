@@ -23,6 +23,8 @@ comment_create:                           Ajouter un commentaire
 comment_created:                          Commentaire créé
 comment_delete:                           Supprimer le commentaire
 comment_deleted:                          Le commentaire a été supprimé
+comment_subscribe:                        S'abonner au fil
+comment_unsubscribe:                      Se désabonner
 comments:                                 Commentaires
 confirm_account_anonymization:            Si vous confirmez les informations du compte seront anonymisées. Cette action est irréversible.
 confirm_delete_project_folders:           Êtes vous sur de vouloir supprimer le(s) dossiers selectionné(s) (les médias seront aussi dupprimés) ?
@@ -49,6 +51,7 @@ export_transcriptions_list:               La liste des transcriptions
 export_transcriptions:                    Les transcriptions
 export_users_list:                        La liste des utilisateurs
 export:                                   Exporter
+faq:                                      Foire aux questions
 filter_users_by:                          Filtrer par nom / prénom / mail / login
 firstname:                                Prénom
 folder_name_changed:                      Nom du dossier modifié
@@ -199,6 +202,7 @@ status_toggle_on:                         Valider
 status:                                   Statut
 submit_validation:                        Soumettre
 submit:                                   Valider
+subscribe_done:                           Abonné aux commentaires
 subscribe_long:                           L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
 technical:                                Problème technique
 tei_link_to_official_attr_doc:            Voir la documentation pour l'élément relatif à cet attribut
@@ -239,8 +243,10 @@ transcription_validate:                   Valider la transcription directement (
 transcription_validated_msg:              La transcription concernant <a target="_blank" href="%url%">%media%</a> pour laquelle vous aviez demandé une relecture a été validée.
 transcription_validated:                  Transcription terminée
 transcriptions_page_title:                Transcriptions du projet
+transcriptions_status_recalculated:       Le statut des transcriptions a été recalculé
 tutorial_enable:                          Activer le tutoriel
 tutorial:                                 Tutoriel
+unsubscribe_done:                         Désinscription effectuée
 unvalidate_transcription:                 Invalider la transcription
 user_account_activated_error:             Un problème est survenu lors de l'activation de votre compte.
 user_account_activated:                   Votre compte est maintenant actif.
@@ -279,3 +285,4 @@ view_profile:                             Voir le profil
 view_project:                             Accéder au projet
 view_transcriptions_long:                 Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
 yes:                                      Oui
+new_comment_transcription: Un nouveau commentaire a été posté sur <a target="_blank" href="%url%">%media%</a>

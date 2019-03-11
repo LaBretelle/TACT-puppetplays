@@ -43,7 +43,7 @@ class CommentController extends AbstractController
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $this->commentManager->save($comment);
         }
-
+        
         return $this->redirect($request->headers->get('referer'));
     }
 
@@ -58,6 +58,22 @@ class CommentController extends AbstractController
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
         $this->commentManager->delete($comment);
+
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * @Route("/subscribe/{id}/{subscribe}", name="subscribe")
+     */
+    public function subscribe(Transcription $transcription, $subscribe, Request $request)
+    {
+        $project = $transcription->getMedia()->getProject();
+
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_TRANSCRIBE)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
+        $this->commentManager->subscribe($transcription, $this->getUser(), $subscribe);
 
         return $this->redirect($request->headers->get('referer'));
     }

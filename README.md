@@ -110,4 +110,7 @@ chown -R www-data:www-data public/user_images public/project_files var/log var/c
 - vX.Y.Z
 X incremented for major changes
 Y incremented for new feature
-Z incremented for bug fix
+Z incremented for bug fix or really minor change
+
+### Thanks
+Myriam EL HELOU & Sami BOUHOUCHE for their [useful work](https://github.com/elheloum/TEI2JSON) not implemented in this app yet.

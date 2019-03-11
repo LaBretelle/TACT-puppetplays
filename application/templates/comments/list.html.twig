@@ -3,6 +3,18 @@
   <i class="fas fa-plus"></i>
   {{"comment_create"|trans}}
 </a>
+  {% if app.user not in transcription.subscribersUsers %}
+  <a class="btn btn-outline-secondary btn-sm" href="{{ path('comment_subscribe', {'id': transcription.id, 'subscribe': 1}) }}" role="button">
+    <i class="fas fa-comments"></i>
+    {{"comment_subscribe"|trans}}
+  </a>
+  {% else %}
+  <a class="btn btn-outline-secondary btn-sm" href="{{ path('comment_subscribe', {'id': transcription.id, 'subscribe': 0}) }}" role="button">
+    <i class="fas fa-times-circle"></i>
+    {{"comment_unsubscribe"|trans}}
+  </a>
+  {% endif %}
+
 {% endif %}
 
 <ul class="list-group pt-3">

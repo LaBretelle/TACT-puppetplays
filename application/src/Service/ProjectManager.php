@@ -11,6 +11,7 @@ use App\Service\DirectoryManager;
 use App\Service\FileManager;
 use App\Service\FlashManager;
 use App\Service\MediaManager;
+use App\Service\ReviewManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -25,6 +26,7 @@ class ProjectManager
     protected $mediaManager;
     protected $fileManager;
     protected $dirManager;
+    protected $reviewManager;
     protected $fm;
 
     public function __construct(
@@ -33,6 +35,7 @@ class ProjectManager
       AuthorizationCheckerInterface $authChecker,
       FileManager $fileManager,
       DirectoryManager $dirManager,
+      ReviewManager $reviewManager,
       FlashManager $fm
     ) {
         $this->em = $em;
@@ -40,6 +43,7 @@ class ProjectManager
         $this->mediaManager = $mediaManager;
         $this->fileManager = $fileManager;
         $this->dirManager = $dirManager;
+        $this->reviewManager = $reviewManager;
         $this->fm = $fm;
     }
 
@@ -55,7 +59,7 @@ class ProjectManager
         return $project;
     }
 
-    public function editFromForm($project)
+    public function save($project)
     {
         $project->setUpdatedAt(new \DateTime);
 
@@ -87,10 +91,24 @@ class ProjectManager
         $this->em->flush();
     }
 
+    public function handleReviewLimit(Project $project, $originalReviewLimit)
+    {
+        $reviewLimit = $project->getnbValidation();
+        if ($reviewLimit < $originalReviewLimit) {
+            $medias = $project->getMedias();
+            foreach ($medias as $media) {
+                $this->reviewManager->testForValidation($media->getTranscription(), $project);
+            }
+
+            $this->fm->add('notice', 'transcriptions_status_recalculated');
+        }
+
+        return;
+    }
+
     public function delete(Project $project)
     {
         $this->removeProjectMedia($project);
-
         $this->em->remove($project);
         $this->em->flush();
 

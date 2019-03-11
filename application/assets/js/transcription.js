@@ -39,6 +39,7 @@ $(document).ready(() => {
 
   if ('edit' === mode) {
     lockTranscription()
+    testFirstTranscript()
     const jsonTeiDef = JSON.parse(document.getElementById('tei-schema').value)
     editor = new TeiEditor(jsonTeiDef)
     editor.init()
@@ -139,4 +140,18 @@ const startTutorial = () => {
     'scrollToElement': false,
     'overlayOpacity': 0.5
   }).start()
+}
+
+const testFirstTranscript = () => {
+  const firstTranscript = document.getElementById('firstTranscript').value
+  if(firstTranscript == 1){
+    startTutorial()
+    const url = Routing.generate('user_tutorial_viewed')
+    $.ajax({
+      method: 'POST',
+      url: url
+    })
+
+    return true
+  }
 }
