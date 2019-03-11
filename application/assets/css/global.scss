@@ -265,21 +265,3 @@ body > .container-fluid {
     }
   }
 }
-/* TINYMCE CUSTOM BUTTON ICONS */
-// It has to be in the main css, not in tiny.scss... because the later is used for content
-// allow the use of {font-family: 'Font Awesome 5 Free'; content: "\f0a9";}
-// if font path is not specified we are not able to import fa-solid icons ...
-$fa-font-path: '~@fortawesome/fontawesome-free-webfonts/webfonts';
-@import '~@fortawesome/fontawesome-free-webfonts/scss/fa-solid';
-
-.mce-ico.mce-i-fas {
-  display: inline-block;
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-  text-rendering: auto;
-  font-size: inherit;
-
-  &.fa-delete::before {
-    content: "\f05e";
-  }
-}

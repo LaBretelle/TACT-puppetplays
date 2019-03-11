@@ -1,4 +1,3 @@
-/* global require module __dirname */
 const Encore = require('@symfony/webpack-encore')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
@@ -14,13 +13,13 @@ Encore
   // define the assets of the project
   .addEntry('js/app', './assets/js/app.js')
   .addEntry('js/create-project', './assets/js/create-project.js')
-  .addEntry('js/user-status-form', './assets/js/user-status-form.js' )
-  .addEntry('js/user-list', './assets/js/admin/user-list.js' )
-  .addEntry('js/account', './assets/js/account.js' )
-  .addEntry('js/project-media', './assets/js/project-media.js' )
-  .addEntry('js/submit-disable', './assets/js/submit-disable.js' )
-  .addEntry('js/transcription', './assets/js/transcription.js' )
-  .addEntry('js/platform', './assets/js/platform.js' )
+  .addEntry('js/user-status-form', './assets/js/user-status-form.js')
+  .addEntry('js/user-list', './assets/js/admin/user-list.js')
+  .addEntry('js/account', './assets/js/account.js')
+  .addEntry('js/project-media', './assets/js/project-media.js')
+  .addEntry('js/submit-disable', './assets/js/submit-disable.js')
+  .addEntry('js/transcription', './assets/js/transcription.js')
+  .addEntry('js/platform', './assets/js/platform.js')
   .addEntry('js/openseadragon', './node_modules/openseadragon/build/openseadragon/openseadragon.min.js')
 
   .addPlugin(new CopyWebpackPlugin([
@@ -39,24 +38,21 @@ Encore
   .addStyleEntry('css/toastr', './node_modules/toastr/build/toastr.min.css')
   .addStyleEntry('css/intro', './node_modules/intro.js/minified/introjs.min.css')
 
-  .enableSassLoader(function () {}, {
+  .enableSassLoader(function() {}, {
     resolveUrlLoader: false
   })
 
   // will prefix css properties according to the supported browser set in postcss.config.js
   .enablePostCssLoader()
 
-  .configureBabel(function (babelConfig) {
+  .configureBabel(function(babelConfig) {
     babelConfig.presets.push('es2017')
   })
 
   .createSharedEntry('vendor', [
     'jquery',
     'bootstrap',
-    '@fortawesome/fontawesome',
-    '@fortawesome/fontawesome-free-solid',
-    '@fortawesome/fontawesome-free-brands',
-    '@fortawesome/fontawesome-free-webfonts'
+    '@fortawesome/fontawesome-free/js/all'
   ])
 
   // for legacy applications that require $/jQuery as a global variable
@@ -65,7 +61,7 @@ Encore
     'Routing': 'router',
     'Toastr': 'Toastr',
     'Translator': 'Translator',
-    'TinyEditor' : 'TinyEditor',
+    'TinyEditor': 'TinyEditor',
     'TeiEditor': 'TeiEditor'
   })
   .enableVersioning()
@@ -77,14 +73,13 @@ config.resolve.alias = {
   'router': path.resolve(__dirname, 'modules/router.js'),
   'Toastr': path.resolve(__dirname, 'modules/toastr.js'),
   'Translator': path.resolve(__dirname, 'modules/translator.js'),
-  'TinyEditor' : path.resolve(__dirname, 'modules/tiny-editor.js'),
-  'TeiEditor' : path.resolve(__dirname, 'modules/tei-editor.js'),
+  'TinyEditor': path.resolve(__dirname, 'modules/tiny-editor.js'),
+  'TeiEditor': path.resolve(__dirname, 'modules/tei-editor.js'),
 }
 
 // https://stackoverflow.com/questions/44439909/confusion-over-various-webpack-shimming-approaches
 config.module = Object.assign(config.module, {
-  loaders: [
-    {
+  loaders: [{
       test: require.resolve('tinymce/tinymce'),
       loaders: [
         'imports?this=>window',
