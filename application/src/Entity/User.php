@@ -139,6 +139,11 @@ class User implements UserInterface, \Serializable
      */
     private $firstTranscript;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Transcription", mappedBy="subscribersUsers")
+     */
+    private $subscribedTranscriptions;
+
     public function __construct()
     {
         $this->active = false;
@@ -152,6 +157,7 @@ class User implements UserInterface, \Serializable
         $this->reviewRequests = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->subscribedTranscriptions = new ArrayCollection();
     }
 
     public function getId() :int
@@ -574,6 +580,34 @@ class User implements UserInterface, \Serializable
     public function setFirstTranscript(bool $firstTranscript): self
     {
         $this->firstTranscript = $firstTranscript;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Transcription[]
+     */
+    public function getSubscribedTranscriptions(): Collection
+    {
+        return $this->subscribedTranscriptions;
+    }
+
+    public function addSubscribedTranscription(Transcription $subscribedTranscription): self
+    {
+        if (!$this->subscribedTranscriptions->contains($subscribedTranscription)) {
+            $this->subscribedTranscriptions[] = $subscribedTranscription;
+            $subscribedTranscription->addSubscribersUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscribedTranscription(Transcription $subscribedTranscription): self
+    {
+        if ($this->subscribedTranscriptions->contains($subscribedTranscription)) {
+            $this->subscribedTranscriptions->removeElement($subscribedTranscription);
+            $subscribedTranscription->removeSubscribersUser($this);
+        }
 
         return $this;
     }
