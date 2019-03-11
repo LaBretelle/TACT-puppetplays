@@ -134,10 +134,16 @@ class User implements UserInterface, \Serializable
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $firstTranscript;
+
     public function __construct()
     {
         $this->active = false;
         $this->publicMail = true;
+        $this->firstTranscript = true;
         $this->anonymous = false;
         $this->projectStatus = new ArrayCollection();
         $this->createdAt = new \DateTime();
@@ -556,6 +562,18 @@ class User implements UserInterface, \Serializable
                 $comment->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFirstTranscript(): ?bool
+    {
+        return $this->firstTranscript;
+    }
+
+    public function setFirstTranscript(bool $firstTranscript): self
+    {
+        $this->firstTranscript = $firstTranscript;
 
         return $this;
     }

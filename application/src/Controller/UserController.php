@@ -30,10 +30,10 @@ class UserController extends AbstractController
     private $flashManager;
 
     public function __construct(
-      UserManager $userManager,
-      MailManager $mailManager,
-      TranslatorInterface $translator,
-      FlashManager $flashManager
+        UserManager $userManager,
+        MailManager $mailManager,
+        TranslatorInterface $translator,
+        FlashManager $flashManager
       ) {
         $this->userManager = $userManager;
         $this->mailManager = $mailManager;
@@ -239,12 +239,29 @@ class UserController extends AbstractController
         $userData = $this->userManager->exportUserData($user);
         $response = new Response(json_encode($userData));
         $disposition = $response->headers->makeDisposition(
-           ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-           'user-'.$user->getFirstName().'-'.$user->getLastName().'-export.json'
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'user-'.$user->getFirstName().'-'.$user->getLastName().'-export.json'
          );
         $response->headers->set('Content-Disposition', $disposition);
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
+    }
+
+    /**
+     *  @Route("/tutorialViewed", name="tutorial_viewed", methods="POST", options={"expose"=true})
+     * @return Response
+     */
+    public function tutorialViewed()
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, $this->translator->trans('access_denied', [], 'messages'));
+
+        $em = $this->getDoctrine()->getManager();
+        $connectedUser = $this->getUser();
+        $connectedUser->setFirstTranscript(false);
+        $em->persist($connectedUser);
+        $em->flush();
+
+        return $this->json([], $status = 200);
     }
 }
