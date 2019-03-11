@@ -35,14 +35,14 @@ class MediaController extends AbstractController
     private $commentManager;
 
     public function __construct(
-      MediaManager $mediaManager,
-      TranscriptionManager $transcriptionManager,
-      ReviewManager $reviewManager,
-      ReviewRequestManager $reviewRequestManager,
-      PermissionManager $permissionManager,
-      TranslatorInterface $translator,
-      FileManager $fileManager,
-      CommentManager $commentManager
+        MediaManager $mediaManager,
+        TranscriptionManager $transcriptionManager,
+        ReviewManager $reviewManager,
+        ReviewRequestManager $reviewRequestManager,
+        PermissionManager $permissionManager,
+        TranslatorInterface $translator,
+        FileManager $fileManager,
+        CommentManager $commentManager
     ) {
         $this->mediaManager = $mediaManager;
         $this->transcriptionManager = $transcriptionManager;
@@ -147,7 +147,7 @@ class MediaController extends AbstractController
             $this->reviewManager->testForValidation($transcription, $project);
             $parent = $media->getParent();
 
-            return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
+            return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent->getId()]);
         }
 
         $lockLog = $this->transcriptionManager->getLastLockLog($transcription);
@@ -163,7 +163,7 @@ class MediaController extends AbstractController
         $commentForm = $this->createForm(CommentType::class, null, ["transcription" => $transcription->getId()]);
 
         return $this->render(
-          'review/index.html.twig',
+            'review/index.html.twig',
             [
             'media' => $media,
             'form' => $form->createView(),
