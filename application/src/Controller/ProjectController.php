@@ -18,6 +18,7 @@ use App\Service\FlashManager;
 use App\Service\PermissionManager;
 use App\Service\ProjectManager;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,13 +41,13 @@ class ProjectController extends AbstractController
     private $exportManager;
 
     public function __construct(
-      ProjectManager $projectManager,
-      FileManager $fileManager,
-      FlashManager $flashManager,
-      PermissionManager $permissionManager,
-      TranslatorInterface $translator,
-      Security $security,
-      ExportManager $exportManager
+        ProjectManager $projectManager,
+        FileManager $fileManager,
+        FlashManager $flashManager,
+        PermissionManager $permissionManager,
+        TranslatorInterface $translator,
+        Security $security,
+        ExportManager $exportManager
     ) {
         $this->projectManager = $projectManager;
         $this->fileManager = $fileManager;
@@ -151,8 +152,8 @@ class ProjectController extends AbstractController
         }
 
         return $this->render(
-          'project/create.html.twig',
-          [
+            'project/create.html.twig',
+            [
             'form' => $form->createView(),
             'project' => $project
           ]
@@ -193,7 +194,7 @@ class ProjectController extends AbstractController
 
         $file_limit = ini_get('max_file_uploads');
         return $this->render(
-          'project/project-media.html.twig',
+            'project/project-media.html.twig',
             [
             'form' => $form->createView(),
             'project' => $project,
@@ -357,5 +358,23 @@ class ProjectController extends AbstractController
         $this->projectManager->deleteImage($project);
 
         return $this->json([], $status = 200);
+    }
+
+    /**
+     * @Route("{id}/toggle-archived", name="archived_toggle")
+     */
+    public function toggleArchived(Project $project, EntityManagerInterface $em)
+    {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_ARCHIVE)) {
+            return $this->json([], $status = 403);
+        }
+
+        $statusArchived = $project->getArchived();
+        $project->setArchived(!$statusArchived);
+        $em->persist($project);
+        $em->flush();
+
+
+        return $this->redirectToRoute('project_display', ['id' => $project->getId()]);
     }
 }

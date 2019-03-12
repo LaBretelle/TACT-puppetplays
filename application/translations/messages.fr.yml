@@ -105,6 +105,7 @@ nb_validation:                            Nombre de relectures nécéssaire par 
 need_at_least_one_manager:                Il faut au moins un gestionnaire par projet.
 need_to_be_logged:                        Vous devez être connecté pour participer au projet.
 negative_review:                          Une relecture négative a été faite sur le média <a target="_blank" href="%url%">%media%</a> <br/> %comment%
+new_comment_transcription:                Un nouveau commentaire a été posté sur <a target="_blank" href="%url%">%media%</a>
 no_attribute:                             Aucun attribut
 no_message:                               Aucun message
 no_review_asked:                          Pas de relecture demandée
@@ -123,6 +124,8 @@ please_wait:                              Veuillez patienter...
 positive_review:                          Une relecture positive a été faite sur le média <a target="_blank" href="%url%">%media%</a> <br/> %comment%
 preview:                                  Prévisualiser
 profile:                                  Profil
+project_archive_long:                     Permet d'archiver le projet
+project_archive:                          Archiver
 project_catchphrase:                      Phrase d'accroche
 project_create_edit:                      Créer / Editer un projet
 project_create:                           Création d'un projet
@@ -169,6 +172,7 @@ project_status_new_name:                  Nouveau
 project_status:                           Statut du projet
 project_transcript:                       Transcrire
 project_transcription:                    Transcription
+project_unarchive:                        Désarchiver
 project_user_status:                      Statut des utilisateurs
 project_view_transciptions:               Voir les transcriptions
 public_mail:                              Email visible par tous
@@ -285,4 +289,3 @@ view_profile:                             Voir le profil
 view_project:                             Accéder au projet
 view_transcriptions_long:                 Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
 yes:                                      Oui
-new_comment_transcription: Un nouveau commentaire a été posté sur <a target="_blank" href="%url%">%media%</a>

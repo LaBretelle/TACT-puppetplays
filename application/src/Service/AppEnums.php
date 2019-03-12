@@ -40,6 +40,7 @@ class AppEnums
     public const ACTION_VALIDATE_TRANSCRIPTION = 'validateTranscription';
     public const ACTION_VIEW_LOGS = 'viewLogs';
     public const ACTION_DELETE_COMMENT = 'deleteComment';
+    public const ACTION_ARCHIVE = 'archive';
 
     public const LIST = [
       self::PROJECT_STATUS_FINISHED_DESC,

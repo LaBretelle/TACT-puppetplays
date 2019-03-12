@@ -1,0 +1,15 @@
+{% macro displayProject(project) %}
+    <div class="card">
+      <img class="card-img-top" src="{{ project.image ? asset('project_files/'~project.id~'/'~project.image) : asset('img/project-placeholder.png') }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ project.name }}</h5>
+            {{ project.description | striptags | truncate(100, true)| raw }}
+            <div class="mt-4">
+            {% include 'project/progressbar.html.twig' with {'project': project} %}
+            </div>
+        </div>
+        <div class="card-footer text-right">
+          <a href="{{ path("project_display", {'id': project.id} )}}">{{'view_project' | trans}}</a>
+        </div>
+    </div>
+{% endmacro %}

@@ -15,11 +15,13 @@ class HomeController extends AbstractController
     public function home()
     {
         $em = $this->getDoctrine()->getManager();
-        $projects = $em->getRepository(Project::class)->findAll();
+        $projectsUnarchived = $em->getRepository(Project::class)->findByArchived(false);
+        $projectsArchived = $em->getRepository(Project::class)->findByArchived(true);
 
         $platformParameters = $em->getRepository(Platform::class)->getPlatformParameters();
         return $this->render('home/home.html.twig', [
-         'projects' => $projects,
+         'projectsUnarchived' => $projectsUnarchived,
+         'projectsArchived' => $projectsArchived,
          'home_text' => $platformParameters->getHomeText(),
         ]);
     }

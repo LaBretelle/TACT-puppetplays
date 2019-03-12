@@ -115,6 +115,8 @@ please_wait:                              Veuillez patienter...
 positive_review:                          Une relecture positive a été faite sur le média <a target="_blank" href="%url%">%media%</a> <br/> %comment%
 preview:                                  Prévisualiser
 profile:                                  Profile
+project_archive_long:                     Allows you to archive project
+project_archive:                          Archive
 project_catchphrase:                      Catchphrase
 project_create_edit:                      Create / Edit a project
 project_create:                           Project creation
@@ -161,6 +163,7 @@ project_status_new_name:                  New
 project_status:                           Project status
 project_transcript:                       Transcribe
 project_transcription:                    Transcription
+project_unarchive:                        Unarchive
 project_user_status:                      User statuses
 project_view_transciptions:               View transcriptions
 public_mail:                              Email visible to all

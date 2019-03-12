@@ -109,6 +109,11 @@ class Project
      */
     private $hasScheme = true;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $archived = false;
+
     public function __construct()
     {
         $this->financers = new ArrayCollection();
@@ -394,6 +399,18 @@ class Project
     public function setHasScheme(bool $hasScheme): self
     {
         $this->hasScheme = $hasScheme;
+
+        return $this;
+    }
+
+    public function getArchived(): ?bool
+    {
+        return $this->archived;
+    }
+
+    public function setArchived(bool $archived): self
+    {
+        $this->archived = $archived;
 
         return $this;
     }

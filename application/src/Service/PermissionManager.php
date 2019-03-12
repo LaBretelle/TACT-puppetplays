@@ -39,6 +39,12 @@ class PermissionManager
                 return true;
             }
             break;
+            
+          case AppEnums::ACTION_ARCHIVE:
+            if ($isAdmin) {
+                return true;
+            }
+            break;
 
           case AppEnums::ACTION_DELETE_COMMENT:
             if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
