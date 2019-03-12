@@ -26,11 +26,13 @@
         {{macros.displayProject(project)}}
       {% endfor %}
     </div>
-    <h4 class="py-5">Projets archivés</h4>
-    <div class="card-columns">
-      {% for project in projectsArchived %}
-        {{macros.displayProject(project)}}
-      {% endfor %}
-    </div>
+    {% if projectsArchived|length > 0 %}
+      <h4 class="py-5">Projets archivés</h4>
+      <div class="card-columns">
+        {% for project in projectsArchived %}
+          {{macros.displayProject(project)}}
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 {% endblock %}
