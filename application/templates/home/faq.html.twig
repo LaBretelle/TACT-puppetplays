@@ -4,5 +4,59 @@
   {% include 'header.html.twig' with {'title' : 'faq'} %}
   <div id="main-container">
 
+    <p>Ces questions concernent <span class="text-warning">l’annotation</span>, du <span class="text-info">schéma de transcription</span> et de <span class="text-success">la plateforme.</span></p>
+
+    <hr/>
+
+    <h3 class="text-warning">C’est quoi une balise?</h3>
+    <p>Les balises sont des éléments qui fonctionnent en paire et qui permettent de délimiter des segments de texte en les encadrant. Dans la transcription, on s’en sert pour deux choses :
+    <ul>
+      <li>structures le texte : délimiter les paragraphes, les titres, les numéros de page</li>
+        <li>repérer des éléments : noms de personnes, lieux,  dates, procédés d’écriture (rature, ré-écriture) et délimiter des segments de textes mis en valeur par l’auteur (en couleur, souligné, surligné)</li>
+    </ul>
+    </p>
+
+    <h3 class="text-warning">Comment enlever une balise?</h3>
+    <p>Pour enlever une balise, il suffit de placer le curseur à l’intérieur de la balise et cliquer sur l’icône poubelle. Si la balise est vide et ne contient pas de texte, essayez de double-cliquer sur une des deux balises.</p>
+
+    <h3 class="text-warning">Est-ce que je corrige les fautes d’orthographe en transcrivant?</h3>
+    <p>Le but de la transcription est de retranscrire le texte qu’il se présente sur l’image. Les seules erreurs à corriger sont les erreurs de transcription, c’est-à-dire les éventuelles différences entre la transcription qui a été faite et le texte de l’image.</p>
+
+    <hr/>
+
+    <h3 class="text-info">Comment annoter une substitution ?</h3>
+    <p>Parfois, l’auteur décide de modifier son texte en raturant quelque chose et en écrivant autre chose à la place, c’est une substitution! Pour annoter une substitution, il faut :
+      <ul>
+        <li>mettre une balise &lt;subst&gt; autour des deux éléments : ce qui est raturé et ce qui remplace</li>
+        <li>mettre une balise &lt;del&gt; autour de ce qui est raturé</li>
+        <li>mettre une balise &lt;add&gt; sur ce que l’auteur a écrit pour remplacer</li>
+      </ul>
+    </p>
+
+    <h3 class="text-info">À quoi sert la balise &lt;hi&gt; ?</h3>
+    <p>
+    Cette balise permet d’annoter les éléments mis en valeurs dans le texte par l’auteur.
+    Ce qu’il est possible d’annoter :
+      <ul>
+        <li>du texte souligné (sans pouvoir en préciser la couleur!)</li>
+        <li>du texte surligné (sans pouvoir en préciser la couleur!)</li>
+        <li>du texte mis en exposant</li>
+        <li>du texte coloré (uniquement la couleur du texte)</li>
+      </ul>
+    </p>
+
+    <h3 class="text-info">Comment indiquer la couleur du soulignement ?</h3>
+    <p>Malheureusement, il n’est pas possible de préciser la couleur du soulignement, si vous rencontrez le cas, indiquez simplement qu’il s’agit de texte souligné.</p>
+
+    <hr/>
+
+    <h3 class="text-success">Comment relire une transcription?</h3>
+    <p>Pour relire une transcription, on peut commencer par… lire la transcription ! À savoir, vérifier que des mots ne sont pas oubliés, qu’ils sont correctement transcrits et que la mise en page (fins de ligne) est respectée.
+    On peut aussi vérifier les éléments balisés : pertinent, correct ? + vérifier les attributs</p>
+
+    <h3 class="text-success">Mode prévisualisation</h3>
+    <p>Ce mode permet d’avoir une idée du rendu grâce à une mise en forme de certains éléments d’annotation. Attention, certaines balises n’ont pas de mise en forme mais ça ne veut pas dire qu’elles ne sont pas prises en compte ;-)</p>
+    <p>Depuis la page de transcription, il est accessible en cliquant sur l’onglet “Prévisualiser”.</p>
+
   </div>
 {% endblock %}
