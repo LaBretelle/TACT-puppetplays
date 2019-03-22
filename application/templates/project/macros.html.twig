@@ -1,15 +1,44 @@
 {% macro displayProject(project) %}
-    <div class="card">
+  {% set userStatus = app.user|status(project) %}
+  <div class="card">
       <img class="card-img-top" src="{{ project.image ? asset('project_files/'~project.id~'/'~project.image) : asset('img/project-placeholder.png') }}">
-        <div class="card-body">
-            <h5 class="card-title">{{ project.name }}</h5>
-            {{ project.description | striptags | truncate(100, true)| raw }}
-            <div class="mt-4">
-            {% include 'project/progressbar.html.twig' with {'project': project} %}
-            </div>
+      <div class="card-body">
+          <h4 class="card-title mb-2">
+            {{ project.name }}
+          </h4>
+          <h5 class="card-subtitle mb-2">
+            <span class="text-muted">{{ project.public ? 'is_public'|trans : 'project_is_not_public'|trans}}</span>
+          </h5>
+          <div class="project-description mb-3">
+          {{ project.description | striptags | truncate(100, true)| raw }}
+          </div>
+          <div>
+          {% include 'project/progressbar.html.twig' with {'project': project} %}
+          </div>
+      </div>
+      <div class="card-footer ">
+        <div class="row">
+          <div class="col">
+            {% if project | isAuthorizedOnProject('register') %}
+            <a class="card-link"  href="{{ path('status_request', {id: project.id})}}">{{'project_register' | trans}}</a>
+            {% elseif  project | isAuthorizedOnProject('transcribe') %}
+            <a class="card-link" href="{{ path('project_transcriptions', {id: project.id})}}">{{'project_transcript'|trans }}</a>
+            {% endif %}
+            <a class="card-link" href="{{ path("project_display", {'id': project.id} )}}">{{'view_project' | trans}}</a>
+          </div>
+          <div class="col text-right">
+            {% if userStatus %}
+            <span class="badge badge-secondary">
+              {{ userStatus.status.name | trans }} {{ not userStatus.enabled ? 'not_enabled_yet' | trans}}
+            </span>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+            <span class="badge badge-secondary">
+              {{"app_admin"|trans}}
+            </span>
+            {% endif %}
+          </div>
         </div>
-        <div class="card-footer text-right">
-          <a href="{{ path("project_display", {'id': project.id} )}}">{{'view_project' | trans}}</a>
-        </div>
-    </div>
+      </div>
+  </div>
 {% endmacro %}

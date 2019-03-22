@@ -2,18 +2,7 @@
 {% import "project/macros.html.twig" as macros %}
 
 {% block body %}
-
-  <div class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-      <div id="home" class="carousel-item active">
-        <div class="container">
-          <div class="carousel-caption text-left">
-              {{home_text | raw}}
-          </div>
-      </div>
-      </div>
-    </div>
-  </div>
+  {% include 'header.html.twig' with {'title' : "PLATEFORME DE TRANSCRIPTION ET D'ANNOTATION DE CORPUS TEXTUELS" } %}
 
   <div id="main-container">
     {% if is_granted('ROLE_ADMIN') %}
@@ -22,7 +11,7 @@
     </div>
     {% endif %}
     <div class="card-columns">
-        {% for project in projectsUnarchived %}
+      {% for project in projectsUnarchived %}
         {{macros.displayProject(project)}}
       {% endfor %}
     </div>

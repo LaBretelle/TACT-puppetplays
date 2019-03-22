@@ -56,10 +56,15 @@ body > .container-fluid {
 .project-image-row {
   margin-bottom: 15px;
 }
+
+.project-description{
+  min-height: 50px;
+}
+
 /* Declare heights because of positioning of img element */
 .carousel-item {
   background-color: #285A78;
-  min-height: 28rem;
+  min-height: 20rem;
   background-image: url("../img/px_by_Gre3g.png");
 }
 
@@ -86,7 +91,7 @@ body > .container-fluid {
 }
 
 #secondary-nav {
-  height: 90px;
+  height: 60px;
   background-color: #285A78;
   box-shadow:  0 4px 10px -8px black;
   z-index: 10;

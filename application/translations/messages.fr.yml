@@ -111,7 +111,7 @@ no_message:                               Aucun message
 no_review_asked:                          Pas de relecture demandée
 no_review_yet:                            Aucune relecture effectuée pour le moment
 no:                                       Non
-not_enabled_yet:                          (Pas encore activé)
+not_enabled_yet:                          (en attente de validation)
 not_registered:                           Non inscrit
 other:                                    Autre
 parent_folder_name:                       Nom du dossier parent
@@ -286,6 +286,6 @@ validation_asked:                         Relecture demandée
 validation_comment:                       Commentaire
 validator:                                Validateur
 view_profile:                             Voir le profil
-view_project:                             Accéder au projet
+view_project:                             Détails du projet
 view_transcriptions_long:                 Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
 yes:                                      Oui
