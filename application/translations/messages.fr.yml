@@ -161,6 +161,7 @@ project_media_title:                      Gérer les media du projet
 project_media_upload:                     Envoyer les media
 project_move_directory_title:             Déplacer le dossier
 project_name:                             Nom du projet
+project_register_short:                   S'inscrire
 project_register:                         S'inscrire au projet
 project_registration:                     Inscription au projet
 project_status_finished_desc:             Le projet est terminé et prêt à être diffusé mondialement.
@@ -254,7 +255,7 @@ unsubscribe_done:                         Désinscription effectuée
 unvalidate_transcription:                 Invalider la transcription
 user_account_activated_error:             Un problème est survenu lors de l'activation de votre compte.
 user_account_activated:                   Votre compte est maintenant actif.
-user_account_created:                     Votre compte et créé mais n'est pas encore activé. Vous devriez recevoir un email qui vous permettra de l'activer.
+user_account_created:                     Votre compte est créé. Vous pouvez désormais vous connecter.
 user_account_updated:                     Votre compte à été mis à jour.
 user_activate_action:                     Activer / désactiver le compte
 user_add:                                 Ajouter un utilisateur
@@ -286,6 +287,7 @@ validation_asked:                         Relecture demandée
 validation_comment:                       Commentaire
 validator:                                Validateur
 view_profile:                             Voir le profil
+view_project_short:                       Détails
 view_project:                             Détails du projet
 view_transcriptions_long:                 Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
 yes:                                      Oui

@@ -26,9 +26,11 @@ class UserChecker implements UserCheckerInterface
             return;
         }
 
+        /*
         // user account is expired, the user may be notified
         if (!$user->isActive()) {
             throw new DisabledException('...');
         }
+        */
     }
 }

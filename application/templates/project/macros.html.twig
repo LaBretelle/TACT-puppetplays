@@ -16,15 +16,15 @@
           {% include 'project/progressbar.html.twig' with {'project': project} %}
           </div>
       </div>
-      <div class="card-footer ">
+      <div class="card-footer">
         <div class="row">
           <div class="col">
             {% if project | isAuthorizedOnProject('register') %}
-            <a class="card-link"  href="{{ path('status_request', {id: project.id})}}">{{'project_register' | trans}}</a>
+            <a class="card-link"  href="{{ path('status_request', {id: project.id})}}">{{'project_register_short' | trans}}</a>
             {% elseif  project | isAuthorizedOnProject('transcribe') %}
             <a class="card-link" href="{{ path('project_transcriptions', {id: project.id})}}">{{'project_transcript'|trans }}</a>
             {% endif %}
-            <a class="card-link" href="{{ path("project_display", {'id': project.id} )}}">{{'view_project' | trans}}</a>
+            <a class="card-link" href="{{ path("project_display", {'id': project.id} )}}">{{'view_project_short' | trans}}</a>
           </div>
           <div class="col text-right">
             {% if userStatus %}
