@@ -147,7 +147,7 @@ class MediaController extends AbstractController
             $this->reviewManager->testForValidation($transcription, $project);
             $parent = $media->getParent();
 
-            return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent->getId()]);
+            return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent ? $parent->getId() : null ]);
         }
 
         $lockLog = $this->transcriptionManager->getLastLockLog($transcription);
