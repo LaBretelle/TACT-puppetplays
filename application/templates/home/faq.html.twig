@@ -4,16 +4,18 @@
   {% include 'header.html.twig' with {'title' : 'faq'} %}
   <div id="main-container">
 
-    <p>Ces questions concernent <span class="text-warning">l’annotation</span>, du <span class="text-info">schéma de transcription</span> et de <span class="text-success">la plateforme.</span></p>
+    <p>Ces questions concernent <span class="text-warning">l’annotation</span>, le <span class="text-info">schéma de transcription</span> et la <span class="text-success">plateforme.</span></p>
+
+    <p>Rappel important : c’est normal de ne pas pouvoir tout transcrire ou retranscrire du document d’origine. Pas de panique, après TACT, les transcriptions seront récupérées par les chercheurs et analysées en détails.</p>
 
     <hr/>
 
     <h3 class="text-warning">C’est quoi une balise?</h3>
     <p>Les balises sont des éléments qui fonctionnent en paire et qui permettent de délimiter des segments de texte en les encadrant. Dans la transcription, on s’en sert pour deux choses :
-    <ul>
-      <li>structures le texte : délimiter les paragraphes, les titres, les numéros de page</li>
+      <ul>
+        <li>structures le texte : délimiter les paragraphes, les titres, les numéros de page</li>
         <li>repérer des éléments : noms de personnes, lieux,  dates, procédés d’écriture (rature, ré-écriture) et délimiter des segments de textes mis en valeur par l’auteur (en couleur, souligné, surligné)</li>
-    </ul>
+      </ul>
     </p>
 
     <h3 class="text-warning">Comment enlever une balise?</h3>
@@ -24,13 +26,26 @@
 
     <hr/>
 
+    <h3 class="text-info">Comment annoter un déplacement ?</h3>
+    <p>Parfois, l’auteur choisit de déplacer un segment de texte. Voici la marche à suivre pour annoter un déplacement :
+      <ol>
+        <li>transcrire le texte initial dans l’éditeur ;</li>
+        <li>mettre une balise &lt;seg&gt; autour du segment de texte qui doit être déplacé ;</li>
+        <li>renseigner un identifiant (“xml:id”) au déplacement dans les attributs de &lt;seg&gt; (par exemple, “1”) ;</li>
+        <li>renseigner le “type” de déplacement avec la valeur “transfer” dans les attributs de &lt;seg&gt; ;</li>
+        <li>placer le curseur là où le texte doit être déplacé et ajouter la balise &lt;ref&gt; (balise vide) ;</li>
+        <li>renseigner l’identifiant du déplacement dans l’attribut “target” de la balise &lt;ref&gt;, il s’agit du <b>même numéro que pour “xml:id”</b>.</li>
+      </ol>
+      Attention, le déplacement ne sera pas visible dans le mode “Prévisualisation” mais si vous avez suivi toute ces étapes, il est bel et bien pris en compte ;-)
+    </p>
+
     <h3 class="text-info">Comment annoter une substitution ?</h3>
     <p>Parfois, l’auteur décide de modifier son texte en raturant quelque chose et en écrivant autre chose à la place, c’est une substitution! Pour annoter une substitution, il faut :
-      <ul>
+      <ol>
         <li>mettre une balise &lt;subst&gt; autour des deux éléments : ce qui est raturé et ce qui remplace</li>
         <li>mettre une balise &lt;del&gt; autour de ce qui est raturé</li>
         <li>mettre une balise &lt;add&gt; sur ce que l’auteur a écrit pour remplacer</li>
-      </ul>
+      </ol>
     </p>
 
     <h3 class="text-info">À quoi sert la balise &lt;hi&gt; ?</h3>
@@ -47,6 +62,28 @@
 
     <h3 class="text-info">Comment indiquer la couleur du soulignement ?</h3>
     <p>Malheureusement, il n’est pas possible de préciser la couleur du soulignement, si vous rencontrez le cas, indiquez simplement qu’il s’agit de texte souligné.</p>
+
+    <h3 class="text-info">Comment puis-je intégrer des caractères spéciaux ?</h3>
+    <p>La plateforme ne propose pas une liste de caractères spéciaux appartenant à d’autres lettres que celles de votre clavier, mais vous pouvez copier-coller des caractères dans l’éditeur sans problème. Utilisez un logiciel de traitement de texte (Word ou LibreOffice par exemple) pour trouver ces caractères.</p>
+
+    <h3 class="text-info">Comment faire quand je n’arrive pas à lire un mot ?</h3>
+    <p>Si vous ne parvenez pas à lire un mot, vous pouvez utiliser la balise &lt;unclear&gt; de cette manière :
+      <ol>
+        <li>si vous pouvez deviner quelques lettres, tapez ce que vous voyez dans l’éditeur. Sinon, vous pouvez noter une suite de points d’interrogation ;</li>
+        <li>ajoutez la balise &lt;unclear&gt; autour des lettres déchiffrées ou des points d’interrogations ;</li>
+        <li>optionnel si aucun attribut n’est proposé, sinon, dans les attributs, sélectionnez la valeur “readable” de l’attribut “cert” si vous êtes parvenus à déchiffrer quelques lettres ou “unreadable” si vous avez opté pour les points d’interrogations. </li>
+      </ol>
+    </p>
+
+    <h3 class="text-align">Comment retranscrire un alinéa ?</h3>
+    <p>Un alinéa est un retrait du paragraphe. Pour cela :
+      <ol>
+        <li>taper tout le texte dans l'éditeur ;</li>
+        <li>ajouter la balise &lt;p&gt; tout autour ;</li>
+        <li>dans les attributs, sélectionnez la valeur “indent” de l’attribut “rend”.</li>
+      </ol>
+      Et voilà, vous avez fait un alinéa !
+      Remarque : si vous essayez de faire une tabulation, ça ne marchera pas.</p>
 
     <hr/>
 
