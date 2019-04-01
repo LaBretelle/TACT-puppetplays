@@ -12,7 +12,7 @@
   <div class="col text-right">
     {% if edit is defined and edit == true and review == false %}
       <span>
-        <button class="btn btn-outline-secondary btn-save-transcription" data-id="{{media.id}}" data-intro="{{'help9'|trans}}" data-step="9">
+        <button id="main-save-btn" class="btn btn-outline-secondary btn-save-transcription" data-id="{{media.id}}" data-intro="{{'help9'|trans}}" data-step="9">
           <i class="fas fa-save"></i> {{'save' | trans}}
         </button>
         <button class="btn btn-outline-secondary btn-validation-modal" data-pid="{{project.id}}" data-id="{{media.id}}" type="button" name="button"  data-intro="{{'help10'|trans}}" data-step="10">
@@ -34,7 +34,7 @@
         {{'transcription_current_nb_validations' | trans({'%1%': nbCurrentValidation, '%2%': project.nbValidation})}}
       </span>
       {% if edit %}
-        <button class="btn btn-outline-secondary btn-save-transcription" data-id="{{media.id}}" data-intro="{{'help9'|trans}}" data-step="9">
+        <button id="main-save-btn" class="btn btn-outline-secondary btn-save-transcription" data-id="{{media.id}}" data-intro="{{'help9'|trans}}" data-step="9">
           <i class="fas fa-save"></i> {{'save' | trans}}
         </button>
       {% endif %}

@@ -38,8 +38,13 @@ class TeiEditor {
         editor.on('click', () => {
           this.refreshPanels(this.tei)
         }),
+        editor.on('input', () => {
+          document.getElementById('preview').innerHTML = Tiny.activeEditor.getContent()
+          this.handleSaveBtn()
+        }),
         editor.on('change', () => {
           document.getElementById('preview').innerHTML = Tiny.activeEditor.getContent()
+          this.handleSaveBtn()
         }),
         document.getElementById('preview').innerHTML = Tiny.activeEditor.getContent()
 
@@ -179,6 +184,12 @@ class TeiEditor {
       this.refreshPanels(this.tei)
 
     })
+  }
+
+  handleSaveBtn(){
+    let btn = document.getElementById('main-save-btn')
+    btn.classList.add('btn-info')
+    btn.classList.remove('btn-outline-secondary')
   }
 
   /*

@@ -48,11 +48,11 @@ $(document).ready(() => {
     })
 
     $('.btn-save-transcription').on('click', (e) => {
-      saveTranscription(e.target.dataset.id)
+      saveTranscription(e.target.dataset.id, e.target)
     })
-  $('#start-tutorial').on('click', () => {
-    startTutorial()
-  })
+    $('#start-tutorial').on('click', () => {
+      startTutorial()
+    })
 
 
   } else if ('validation' === mode) {
@@ -62,7 +62,7 @@ $(document).ready(() => {
     editor.init()
 
     $('.btn-save-transcription').on('click', (e) => {
-      saveTranscription(e.target.dataset.id)
+      saveTranscription(e.target.dataset.id, e.target)
     })
 
   } else {
@@ -103,7 +103,7 @@ const updateLockedLog = (id) => {
   }).done(() => {})
 }
 
-const saveTranscription = (id) => {
+const saveTranscription = (id, btn) => {
   const url = Routing.generate('media_transcription_save', {
     id: id
   })
@@ -115,6 +115,8 @@ const saveTranscription = (id) => {
     }
   }).done(() => {
     Toastr.info(Translator.trans('transcription_saved'))
+    btn.classList.add( 'btn-outline-secondary')
+    btn.classList.remove( 'btn-info')
   })
 
   return true
