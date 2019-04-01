@@ -14,7 +14,7 @@ class TeiEditor {
       plugins: ['code'],
       branding: false,
       content_css: [
-        '/css/tiny-20181217A.css'
+        '/css/tiny-20190401A.css'
       ],
       forced_root_block: false,
       valid_elements: '*[*]',
@@ -28,7 +28,7 @@ class TeiEditor {
       setup: (editor) => {
         editor.ui.registry.addButton('remove-current-tag', {
           icon: 'remove',
-          tooltip: Translator.trans("delete_current_tag"),
+          tooltip: Translator.trans('delete_current_tag'),
           onAction: () => {
             this.deleteCurrentTag(this.tei)
           }
