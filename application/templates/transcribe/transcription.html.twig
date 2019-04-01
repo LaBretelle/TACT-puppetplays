@@ -16,7 +16,7 @@
       <div data-intro="{{'help1'|trans}}" data-step="1" class="col">
         {{ include("media/openseadragon.html.twig") }}
       </div>
-      <div data-intro="{{'help2'|trans}}" data-step="2" class="col-7">
+      <div class="col-7">
       {% if edit %}
         {{ include('transcribe/tei-editor.html.twig', { 'media': media }) }}
       {% else %}

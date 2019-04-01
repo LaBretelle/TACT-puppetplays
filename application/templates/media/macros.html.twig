@@ -3,7 +3,7 @@
 {% endmacro %}
 
 {% macro backToParentDir(media) %}
-<a href="{{ path('project_transcriptions', {id: media.project.id, parent: media.parent ? media.parent.id : null})}}" data-toggle="tooltip" title="{{'back_to_transcripts' | trans}}">
+<a class="btn btn-outline-secondary" href="{{ path('project_transcriptions', {id: media.project.id, parent: media.parent ? media.parent.id : null})}}" data-toggle="tooltip" title="{{'back_to_transcripts' | trans}}">
   <i class="fa fa-arrow-left fa-fw"></i>
 </a>
 {% endmacro %}

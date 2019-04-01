@@ -12,16 +12,11 @@
   <div class="col text-right">
     {% if edit is defined and edit == true and review == false %}
       <span data-intro="{{'help6'|trans}}" data-step="6">
-        <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
-          <i class="fas fa-save"></i>
+        <button class="btn btn-outline-secondary btn-save-transcription" data-id="{{media.id}}">
+          <i class="fas fa-save"></i> {{'save' | trans}}
         </button>
-        <button class="btn btn-link btn-validation-modal" data-pid="{{project.id}}" data-id="{{media.id}}" data-toggle="tooltip" title="{{'transcription_send_to_validation' | trans}}" type="button" name="button">
-          <i class="fas fa-check-circle"></i>
-        </button>
-      </span>
-      <span data-intro="{{'help7'|trans}}" data-step="7" data-toggle="tooltip" title="{{'help'|trans}}">
-        <button class="btn btn-link" data-toggle="modal" data-target="#help-modal" type="button">
-          <i class="fas fa-question-circle"></i>
+        <button class="btn btn-outline-secondary btn-validation-modal" data-pid="{{project.id}}" data-id="{{media.id}}" type="button" name="button">
+          <i class="fas fa-check-circle"></i> {{'transcription_send_to_validation' | trans}}
         </button>
       </span>
     {% elseif locked is defined and locked == true and edit == false %}
@@ -39,31 +34,29 @@
         {{'transcription_current_nb_validations' | trans({'%1%': nbCurrentValidation, '%2%': project.nbValidation})}}
       </span>
       {% if edit %}
-        <button class="btn btn-link btn-save-transcription" data-id="{{media.id}}" data-toggle="tooltip" title="{{'save' | trans}}">
-          <i class="fas fa-save"></i>
+        <button class="btn btn-outline-secondary btn-save-transcription" data-id="{{media.id}}">
+          <i class="fas fa-save"></i> {{'save' | trans}}
         </button>
       {% endif %}
-      <span data-toggle="tooltip" title="{{'review_transcription' | trans}}">
-        <button data-toggle="modal" data-target="#validation-modal" class="btn btn-link" >
-          <i class="fas fa-glasses"></i>
+        <button data-toggle="modal" data-target="#validation-modal" class="btn btn-outline-secondary" >
+          <i class="fas fa-glasses"></i> {{'review_transcription' | trans}}
         </button>
-      </span>
     {% endif %}
 
     {% if project | isAuthorizedOnProject('editProject') %}
       {% if media.transcription.isValid %}
-        <a class="btn btn-link" href="{{ path('media_transcription_validate', {id:  media.id, valid: 0})}}" data-toggle="tooltip" title="{{'transcription_unvalidate' | trans}}">
+        <a class="btn btn-outline-secondary" href="{{ path('media_transcription_validate', {id:  media.id, valid: 0})}}" data-toggle="tooltip" title="{{'transcription_unvalidate' | trans}}" >
           <i class="fas fa-poo" aria-hidden="true"></i>
         </a>
       {% else %}
-      <a class="btn btn-link" href="{{ path('media_transcription_validate', {id:  media.id, valid: 1})}}" data-toggle="tooltip" title="{{'transcription_validate' | trans}}">
+      <a class="btn btn-outline-secondary" href="{{ path('media_transcription_validate', {id:  media.id, valid: 1})}}" data-toggle="tooltip" title="{{'transcription_validate' | trans}}">
         <i class="fas fa-thumbs-up"></i>
       </a>
       {% endif %}
     {% endif %}
 
     <span data-toggle="tooltip" title="{{'report_transcription'|trans}}">
-      <button class="btn btn-link" data-toggle="modal" type="button" data-target="#report-modal">
+      <button class="btn btn-outline-secondary" data-toggle="modal" type="button" data-target="#report-modal">
         <i class="fas fa-exclamation-triangle"></i>
       </button>
     </span>
