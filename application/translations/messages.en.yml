@@ -214,7 +214,7 @@ transcript_help_doc:                      Transcript help document
 transcript_help:                          Transcript help
 transcript_media:                         Transcription of media
 transcription_current_nb_validations:     Currently %1% / %2% validations
-transcription_is_locked:                  Transcription is locked
+transcription_is_locked:                  Someone is currently transcribing/reviewing this, try another one
 transcription_is_valid:                   La transcription est valide ?
 transcription_log_created:                Transcription initialisée
 transcription_log_rereaded:               Relecture soumise
