@@ -223,7 +223,7 @@ transcript_help_doc:                      Accéder au document d'aide à la tran
 transcript_help:                          Aide à la transcription
 transcript_media:                         Transcription du media
 transcription_current_nb_validations:     '%1% / %2% relectures positives'
-transcription_is_locked:                  La fiche est en cours de transcription/relecture, essayez-en une autre 
+transcription_is_locked:                  La fiche est en cours de transcription/relecture, essayez-en une autre
 transcription_is_valid:                   La transcription vous parait-elle valide ?
 transcription_log_created:                Transcription initialisée
 transcription_log_rereaded:               Relecture soumise

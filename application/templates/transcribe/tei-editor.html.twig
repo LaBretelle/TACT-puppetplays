@@ -16,6 +16,10 @@
     <a class="nav-link" data-toggle="tab"  href="#comments">{{'comments'|trans}} ({{comments|length}})</a>
   </li>
 
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#help-full">{{'help'|trans}}</a>
+  </li>
+
   {% if canValidate %}
   <li class="nav-item">
     <a class="nav-link" data-toggle="tab"  href="#reviews">{{'reviews'|trans}}</a>
@@ -28,7 +32,6 @@
   {% endif %}
 </ul>
 <div class="tab-content transcription-panel-content">
-
   {% if edit %}
   <div id="edit-full" class="tab-pane fade show active" role="tabpanel">
     <div class="row">
@@ -80,6 +83,9 @@
     {{ include('comments/create.html.twig') }}
     {% endif %}
     {{ include('comments/list.html.twig') }}
+  </div>
+  <div id="help-full" class="tab-pane fade" role="tabpanel">
+    {{ include ('transcribe/help.html.twig') }}
   </div>
   {% if canValidate %}
   <div id="reviews" class="tab-pane fade" role="tabpanel">
