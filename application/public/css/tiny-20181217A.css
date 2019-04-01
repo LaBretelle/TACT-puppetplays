@@ -196,3 +196,11 @@
 #tinymce subst::after {
   content: "</subst>";
 }
+
+#tinymce fw::before {
+  content: "<fw>";
+}
+
+#tinymce fw::after {
+  content: "</fw>";
+}
