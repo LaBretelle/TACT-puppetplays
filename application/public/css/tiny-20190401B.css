@@ -204,3 +204,19 @@
 #tinymce fw::after {
   content: "</fw>";
 }
+
+#tinymce ref::before {
+  content: "<ref>";
+}
+
+#tinymce ref::after {
+  content: "</ref>";
+}
+
+#tinymce name::before {
+  content: "<name>";
+}
+
+#tinymce name::after {
+  content: "</name>";
+}
