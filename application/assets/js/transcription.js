@@ -18,7 +18,6 @@ let viewer = new OpenSeadragon.Viewer({
   zoomInButton: 'osd-zoom-in',
   zoomOutButton: 'osd-zoom-out',
   homeButton: 'osd-home',
-  fullPageButton: 'osd-full-page',
   nextButton: 'osd-next',
   previousButton: 'osd-previous',
   rotateLeftButton: 'osd-left',
