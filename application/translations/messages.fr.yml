@@ -61,13 +61,17 @@ folders_moved:                            Dossier(s) déplacé(s)
 has_scheme:                               La transcription se fait conformément à un schéma (vs. transcription purement textuelle)
 have_contributed:                         Ont contribué
 help:                                     Aide
-help1:                                    Média à transcrire
-help2:                                    La transcription se passe ici. Saisissez un texte, par exemple la phrase; "Ces ½ mondaines étt d’ailleurs bien svt des superfemmes" et sélectionner un mot, par exemple "étt" que l’on va annoter comme une abréviation ou bien "superfemmes" que l’on va indiquer comme étant en rouge.
-help3:                                    Choisissez maintenant une balise en cliquant sur « + ». "abbr" pour abréviation et "hi" pour mettre en valeur un mot (en couleur par exemple).
-help4:                                    Sélectionnez la valeur souhaitée.
-help5:                                    Vous pouvez visualiser le rendu de la transcription sur cet onglet.
-help6:                                    À tout moment, vous pouvez sauvegarder votre transcription et une fois qu’elle vous satisfait, en demander une relecture.
-help7:                                    En cliquant ici vous pouvez retrouver un document d’aide à la transcription ou bien relancer le tutoriel.
+help1:                                    Bienvenue dans le tutoriel de transcription
+help2:                                    Média à transcrire
+help3:                                    Boutons permettant de (de)zoomer, pivoter le média
+help4:                                    La transcription se passe ici
+help5:                                    Vous pouvez visualiser le rendu de la transcription sur cet onglet
+help6:                                    Vous pouvez explorer/ajouter des commentaires sur le média sur cet onglet
+help7:                                    Vous pouvez consulter ici l'historique des relectures
+help8:                                    Vous pouvez revenir ici à l'aide et au tutoriel
+help9:                                    À tout moment, vous pouvez sauvegarder votre transcription
+help10:                                   Et une fois qu’elle vous satisfait, en demander une relecture. Vous pouvez fermer le tutoriel
+help11:                                   Et une fois qu’elle vous satisfait, valider la relecture. Vous pouvez fermer le tutoriel
 home:                                     Accueil
 insults:                                  Propos haineux, violence
 is_public:                                Projet public
@@ -250,6 +254,9 @@ transcription_validated:                  Transcription terminée
 transcriptions_page_title:                Transcriptions du projet
 transcriptions_status_recalculated:       Le statut des transcriptions a été recalculé
 tutorial_enable:                          Activer le tutoriel
+tutorial_finished:                        Fermer le tutoriel
+tutorial_next:                            Suivant
+tutorial_previous:                        Précédent
 tutorial:                                 Tutoriel
 unsubscribe_done:                         Désinscription effectuée
 unvalidate_transcription:                 Invalider la transcription

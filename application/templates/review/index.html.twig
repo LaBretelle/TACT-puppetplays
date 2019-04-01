@@ -8,12 +8,12 @@
   {{ project.css ?  project.css | raw : ''}}
   </style>
 
-  <div id="main-container">
+  <div id="main-container"  data-intro="{{'help1'|trans}}" data-step="1">
     {{ include('media/action-bar.html.twig') }}
     <hr/>
     {# OSD + EDITOR #}
     <div class="row">
-      <div class="col-6">
+      <div class="col-6" data-intro="{{'help2'|trans}}" data-step="2">
         {{ include('media/openseadragon.html.twig') }}
       </div>
       <div class="col-6">
@@ -30,6 +30,11 @@
   {% if edit %}
     <input type="hidden" id="log-id" name="log_id" value="{{log.id}}">
   {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('build/css/intro.css') }}" />
 {% endblock %}
 
 {% block javascripts %}

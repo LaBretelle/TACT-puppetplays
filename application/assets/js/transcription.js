@@ -50,10 +50,10 @@ $(document).ready(() => {
     $('.btn-save-transcription').on('click', (e) => {
       saveTranscription(e.target.dataset.id)
     })
+  $('#start-tutorial').on('click', () => {
+    startTutorial()
+  })
 
-    $('#start-tutorial').on('click', () => {
-      startTutorial()
-    })
 
   } else if ('validation' === mode) {
     lockTranscription()
@@ -76,6 +76,11 @@ $(document).ready(() => {
       $('.project-media-modal').modal('show')
     })
   }
+
+  $('#start-tutorial').on('click', () => {
+    startTutorial()
+  })
+
 })
 
 const lockTranscription = () => {
@@ -137,7 +142,13 @@ const startTutorial = () => {
     'showBullets': false,
     'showStepNumbers': false,
     'scrollToElement': false,
-    'overlayOpacity': 0.5
+    'overlayOpacity': 0.5,
+    'exitOnOverlayClick' : false,
+    'exitOnEsc' : false,
+    'nextLabel' : Translator.trans('tutorial_next'),
+    'prevLabel' : Translator.trans('tutorial_previous'),
+    'doneLabel' : Translator.trans('tutorial_finished'),
+    'skipLabel' : 'Skip'
   }).start()
 }
 

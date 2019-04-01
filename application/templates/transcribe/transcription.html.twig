@@ -8,12 +8,12 @@
   {{ project.css ?  project.css | raw : ''}}
   </style>
 
-  <div id="main-container">
+  <div id="main-container" data-intro="{{'help1'|trans}}" data-step="1">
     {{ include('media/action-bar.html.twig') }}
     <hr/>
     {# OSD + EDITOR/TRANSCRIPTION #}
     <div class="row">
-      <div data-intro="{{'help1'|trans}}" data-step="1" class="col">
+      <div data-intro="{{'help2'|trans}}" data-step="2" class="col">
         {{ include("media/openseadragon.html.twig") }}
       </div>
       <div class="col-7">
