@@ -74,7 +74,7 @@ help10:                                   Et une fois qu’elle vous satisfait, 
 help11:                                   Et une fois qu’elle vous satisfait, valider la relecture. Vous pouvez fermer le tutoriel
 home:                                     Accueil
 insults:                                  Propos haineux, violence
-is_public:                                Projet public
+is_public:                                Inscription libre
 lastname:                                 Nom
 leave_warning:                            Si vous avez fait des modifications à cette transcription, et que vous n'avez pas encore sauvegardé celles-ci, elles ne seront pas prises en compte.
 login:                                    Connexion
@@ -146,7 +146,7 @@ project_enabled:                          Validé ?
 project_handle_user_statuses:             Gérer les utilisateurs
 project_help_link:                        Lien vers l'aide à la transcription
 project_image:                            Image du projet. Ratio de 4:1 conseillé (l'image sera retaillée automatiquement)
-project_is_not_public:                    Projet privé
+project_is_not_public:                    Inscription modérée
 project_manage_media:                     Gérer les médias
 project_manage_user_statuses:             Gérer les utilisateurs
 project_management_media:                 Gestion des médias
