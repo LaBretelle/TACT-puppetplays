@@ -18,18 +18,22 @@
   <div id="main-container">
     <div class="row">
       <div class="col">
-        <p>
-          {% if userStatus %}
-          <span class="badge badge-secondary">
-            {{ userStatus.status.name | trans }} {{ not userStatus.enabled ? 'not_enabled_yet' | trans}}
-          </span>
+        <div class="alert alert-info" role="alert">
+          {% if not app.user %}
+            {{ "login_or_register_link"|trans({'%login%': path('user_login'), '%register%':path('user_login')  }) | raw }}
+          {% else %}
+              {% if not userStatus %}
+                {{ "project_register_link"| trans({'%register%': path('status_request', {id: project.id}) }) | raw }}
+              {% else %}
+                  {% if not userStatus.enabled %}
+                    {{"registration_waiting_for_validation"|trans}}
+                  {% else %}
+                    {{"transcribe_link"| trans({'%transcribe%': path('project_transcriptions', {id: project.id})}) | raw }}
+                  {% endif %}
+              {% endif %}
           {% endif %}
-          {% if is_granted('ROLE_ADMIN') %}
-          <span class="badge badge-secondary">
-            {{"app_admin"|trans}}
-          </span>
-          {% endif %}
-        </p>
+        </div>
+
         {{ project.description | raw }}
       </div>
       <div class="col-3">

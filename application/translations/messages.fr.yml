@@ -299,3 +299,6 @@ view_project_short:                       Détails
 view_project:                             Détails du projet
 view_transcriptions_long:                 Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
 yes:                                      Oui
+login_or_register_link: <a href="%login%">Connectez-vous</a> ou <a href="%register%">inscrivez-vous</a> à la plateforme pour participer !
+project_register_link:  <a href="%register%">Inscrivez-vous</a> au projet pour participer
+transcribe_link: Vous pouvez commencer à <a href="%transcribe%">transcrire</a> !
