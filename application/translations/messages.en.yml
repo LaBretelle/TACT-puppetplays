@@ -69,6 +69,7 @@ insults:                                  Propos haineux, violence
 is_public:                                Open registration
 lastname:                                 Lastname
 leave_warning:                            Si vous avez fait des modifications à cette transcription, et que vous n'avez pas encore sauvegardé celles-ci, elles ne seront pas prises en compte.
+login_or_register_link:                   <a href="%login%">Connectez-vous</a> ou <a href="%register%">inscrivez-vous</a> à la plateforme pour participer !
 login:                                    login
 logout:                                   logout
 logs:                                     Logs
@@ -156,6 +157,7 @@ project_media_title:                      Manage project media
 project_media_upload:                     Send media
 project_move_directory_title:             Move folder
 project_name:                             Project name
+project_register_link:                    <a href="%register%">Inscrivez-vous</a> au projet pour participer
 project_register_short:                   S'inscrire
 project_register:                         Register to project
 project_registration:                     Project registration
@@ -204,12 +206,15 @@ submit_validation:                        Soumettre
 submit:                                   Submit
 subscribe_done:                           Subscription done
 subscribe_long:                           L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
+tag_down:                                 Descendre la balise
+tag_up:                                   Remonter la balise
 technical:                                Problème technique
 tei_link_to_official_attr_doc:            See documentation for element related to this attribut
 tei_link_to_official_doc:                 See documentation for %element%
 tei_schema:                               TEI schema for the project
 terms:                                    Terms
 toggle_all_media_selection:               Select / Unselect all media
+transcribe_link:                          Vous pouvez commencer à <a href="%transcribe%">transcrire</a> !
 transcribe_long:                          Vous permet d'accéder au média et de proposer des transcriptions.
 transcribe:                               Transcrire
 transcriber:                              Transcriber
