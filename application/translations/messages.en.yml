@@ -54,6 +54,8 @@ has_scheme:                               La transcription se fait conformément
 have_contributed:                         Ont contribué
 help:                                     Help
 help1:                                    Welcome to the transcription tutorial
+help10:                                   And ask for a review. You can now close the tutorial
+help11:                                   And confirm the review. You can now close the tutorial
 help2:                                    Media to transcribe
 help3:                                    Button for zoom in/out and rotate media
 help4:                                    Transcription is happening here
@@ -62,8 +64,6 @@ help6:                                    You can read/leave media comments on t
 help7:                                    You can read reviews historic on this tab
 help8:                                    You can go back to help and tutorial here
 help9:                                    You can save your transcription at any time
-help10:                                   And ask for a review. You can now close the tutorial
-help11:                                   And confirm the review. You can now close the tutorial
 home:                                     Home
 insults:                                  Propos haineux, violence
 is_public:                                Open registration
@@ -220,6 +220,7 @@ transcript_media:                         Transcription of media
 transcription_current_nb_validations:     Currently %1% / %2% validations
 transcription_is_locked:                  Someone is currently transcribing/reviewing this, try another one
 transcription_is_valid:                   La transcription est valide ?
+transcription_locked:                     Transcription locked
 transcription_log_created:                Transcription initialisée
 transcription_log_rereaded:               Relecture soumise
 transcription_log_unvalidated:            Transcription invalidée

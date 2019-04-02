@@ -220,6 +220,7 @@ class ProjectController extends AbstractController
         $mediaRepo =  $this->getDoctrine()->getRepository(Media::class);
         $medias = $mediaRepo->findby(['project' => $project,'parent' => $parent ]);
         $mine = $user ? $mediaRepo->getByProjectAndUserActivity($project, $parent, $user): null;
+        $transcriptionsLocked = $user ? $mediaRepo->getByProjectAndLocked($project, $parent, $user): null;
 
         return $this->render(
             'transcribe/index.html.twig',
@@ -228,6 +229,7 @@ class ProjectController extends AbstractController
               'parent' => $parent,
               'medias' => $medias,
               'mine' => $mine,
+              'transcriptionsLocked' =>  $transcriptionsLocked,
               'from' => 'transcript'
             ]
         );
