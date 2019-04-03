@@ -89,25 +89,15 @@ class TeiEditor {
         })
         childrenObject.push(element)
       })
-
-      childrenObject.sort(function (a,b){
-        if (!a.counter) a.counter = 0
-        if (!b.counter) b.counter = 0
-        return (a.counter < b.counter) ? 1 : -1
-      })
-
-      //let sortedChildren = current.childrens.map(tagName => {this.findElementByTagName(tagName)})
+      this.sortElementsByCounter(childrenObject)
 
       childrenObject.forEach(child => {
         this.appendLiToAllowedElements(tei, fragment, child.tag)
       })
+
     } else {
       count = tei.elements.length
-      tei.elements.sort(function (a,b){
-        if (!a.counter) a.counter = 0
-        if (!b.counter) b.counter = 0
-        return (a.counter < b.counter) ? 1 : -1
-      })
+      this.sortElementsByCounter(tei.elements)
       tei.elements.forEach(element => {
         this.appendLiToAllowedElements(tei, fragment, element.tag)
       })
@@ -118,11 +108,10 @@ class TeiEditor {
   }
 
   findElementByTagName(tagName){
-    var tei = this.tei.elements
-    var element = tei.find(function (el){
+
+    return this.tei.elements.find(function (el){
       return el.tag === tagName
     })
-    return element
   }
 
   /*
@@ -197,7 +186,7 @@ class TeiEditor {
     // keep selected range to reselect after content insert
     const range = editor.selection.getRng()
 
-    teiElement.counter = (teiElement.counter) ? teiElement.counter + 1 : counter = 1
+    this.maximizeCounter(teiElement)
 
     editor.undoManager.transact(() => {
       let elem = null
@@ -212,9 +201,7 @@ class TeiEditor {
       // force selection
       editor.selection.select(elem)
       editor.focus()
-      // show available attributes and children
       this.refreshPanels(this.tei)
-
     })
   }
 
@@ -280,36 +267,34 @@ class TeiEditor {
     const btnGroup = document.createElement('div')
     btnGroup.classList.add('btn-group', 'btn-group-sm', 'btn-tag-tei')
     if(!isAttribute) {
+      /* ADD TAG BUTTON */
       const addBtn = document.createElement('button')
       addBtn.classList.add('btn', 'btn-sm', 'btn-outline-secondary', 'mr-1')
       addBtn.setAttribute('title', Translator.trans('add', {}))
       addBtn.innerHTML = '<i class="fas fa-plus"></i>'
-
       addBtn.addEventListener('click', () => {
         this.addTeiTag(teiElement)
       })
 
-      labelContainer.prepend(addBtn)
-
+      /* UP BUTTON */
       const upBtn = document.createElement('button')
       upBtn.classList.add('btn', 'btn-link')
       upBtn.setAttribute('title', Translator.trans('tag_up', {}))
-      upBtn.innerHTML = '<i class="fas fa-long-arrow-alt-up"></i>'
-
+      upBtn.innerHTML = '<i class="fas fa-arrow-up"></i>'
       upBtn.addEventListener('click', () => {
         this.maximizeCounter(teiElement)
       })
 
+      /* DOWN BUTTON */
       const downBtn = document.createElement('button')
       downBtn.classList.add('btn', 'btn-link')
       downBtn.setAttribute('title', Translator.trans('tag_down', {}))
-      downBtn.innerHTML = '<i class="fas fa-long-arrow-alt-down"></i>'
-
+      downBtn.innerHTML = '<i class="fas fa-arrow-down"></i>'
       downBtn.addEventListener('click', () => {
-        this.resetCounter(teiElement)
+        this.minimizeCounter(teiElement)
       })
 
-
+      labelContainer.prepend(addBtn)
       btnGroup.appendChild(upBtn)
       btnGroup.appendChild(downBtn)
     }
@@ -323,20 +308,37 @@ class TeiEditor {
     return li
   }
 
+  /* HANDLE ELEMENT COUNTER
+  *************************/
   maximizeCounter(teiElement){
     teiElement.counter = this.getMaxCounter() + 1
     this.refreshPanels(this.tei)
   }
 
-  resetCounter(teiElement){
-    teiElement.counter = 0
+  minimizeCounter(teiElement){
+    teiElement.counter = this.getMinCounter() - 1
     this.refreshPanels(this.tei)
   }
 
   getMaxCounter(){
-    let max = (this.tei.elements[0].counter) ? this.tei.elements[0].counter : 0
+    this.sortElementsByCounter(this.tei.elements)
 
-    return max
+    return (this.tei.elements[0].counter) ? this.tei.elements[0].counter : 0
+  }
+
+  getMinCounter(){
+    this.sortElementsByCounter(this.tei.elements)
+    let length = this.tei.elements.length
+
+    return (this.tei.elements[length - 1].counter) ? this.tei.elements[length - 1].counter : 0
+  }
+
+  sortElementsByCounter(array){
+    return array.sort(function (a,b){
+      if (!a.counter) a.counter = 0
+      if (!b.counter) b.counter = 0
+      return (a.counter < b.counter) ? 1 : -1
+    })
   }
 
   /*
