@@ -187,13 +187,13 @@ class TeiEditor {
     const range = editor.selection.getRng()
 
     this.maximizeCounter(teiElement)
-
+    let attributes = {'data-tag': teiElement.tag}
     editor.undoManager.transact(() => {
       let elem = null
       if (teiElement.selfClosed) {
-        elem = editor.dom.create(teiElement.tag, {})
+        elem = editor.dom.create(teiElement.tag, attributes)
       } else {
-        elem = editor.dom.create(teiElement.tag, {}, selectedContent ? selectedContent : '<>')
+        elem = editor.dom.create(teiElement.tag, attributes, selectedContent ? selectedContent : '<>')
         range.deleteContents()
       }
 

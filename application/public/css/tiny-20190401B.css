@@ -1,222 +1,31 @@
-
 #tinymce del {
   text-decoration: none;
 }
 
-/* TINY CONTENT */
-/*.tiny-root *::before{
-  content: attr(data-tag);
-  margin:0 4px 0 0;
-  padding:2px;
-  color:white;
-  background-color:lightgrey;
-  border-bottom-left-radius:3px;
-  border-top-left-radius:3px;
-  text-decoration: none;
-  font-size: smaller;
-}
-
-.tiny-root *::after{
-  content: "/" attr(data-tag);
-  margin:0 0 0 4px;
-  padding:2px;
-  color:white;
-  background-color:lightgrey;
-  border-bottom-right-radius:3px;
-  border-top-right-radius:3px;
-  text-decoration: none;
-  font-size: smaller;
-}*/
-*::before {
+#tinymce *::before {
   margin: 0 4px 0 0;
-  padding: 2px;
-  color: white;
-  background-color: lightgrey;
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px;
-  text-decoration: none;
-  font-size: smaller;
 }
 
-*::after {
+#tinymce *::after {
   margin: 0 0 0 4px;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+#tinymce *::before, *::after {
   padding: 2px;
   color: white;
   background-color: lightgrey;
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px;
   text-decoration: none;
   font-size: smaller;
 }
 
-#tinymce div::before {
-  content: "<div>";
+#tinymce *::before {
+  content: "<" attr(data-tag) ">";
 }
 
-#tinymce div::after {
-  content: "</div>";
-}
-
-#tinymce p::before {
-  content: "<p>";
-}
-
-#tinymce p::after {
-  content: "</p>";
-}
-
-#tinymce num::before {
-  content: "<num>";
-}
-
-#tinymce num::after {
-  content: "</num>";
-}
-
-#tinymce date::before {
-  content: "<date>";
-}
-
-#tinymce date::after {
-  content: "</date>";
-}
-
-#tinymce title {
-  display: block;
-}
-
-#tinymce title::before {
-  content: "<title>";
-}
-
-#tinymce title::after {
-  content: "</title>";
-}
-
-#tinymce hi::before {
-  content: "<hi>";
-}
-
-#tinymce hi::after {
-  content: "</hi>";
-}
-
-#tinymce del::before {
-  content: "<del>";
-}
-
-#tinymce del::after {
-  content: "</del>";
-}
-
-#tinymce add::before {
-  content: "<add>";
-}
-
-#tinymce add::after {
-  content: "</add>";
-}
-
-#tinymce placeName::before {
-  content: "<placeName>";
-}
-
-#tinymce placeName::after {
-  content: "</placeName>";
-}
-
-#tinymce persName::before {
-  content: "<persName>";
-}
-
-#tinymce persName::after {
-  content: "</persName>";
-}
-
-#tinymce metamark::before {
-  content: "<metamark>";
-}
-
-#tinymce metamark::after {
-  content: "</metamark>";
-}
-
-#tinymce abbr::before {
-  content: "<abbr>";
-}
-
-#tinymce abbr::after {
-  content: "</abbr>";
-}
-
-#tinymce choice::before {
-  content: "<choice>";
-}
-
-#tinymce choice::after {
-  content: "</choice>";
-}
-
-#tinymce unclear::before {
-  content: "<unclear>";
-}
-
-#tinymce unclear::after {
-  content: "</unclear>";
-}
-
-#tinymce seg::before {
-  content: "<seg>";
-}
-
-#tinymce seg::after {
-  content: "</seg>";
-}
-
-#tinymce sic::before {
-  content: "<sic>";
-}
-
-#tinymce sic::after {
-  content: "</sic>";
-}
-
-#tinymce corr::before {
-  content: "<corr>";
-}
-
-#tinymce corr::after {
-  content: "</corr>";
-}
-
-#tinymce subst::before {
-  content: "<subst>";
-}
-
-#tinymce subst::after {
-  content: "</subst>";
-}
-
-#tinymce fw::before {
-  content: "<fw>";
-}
-
-#tinymce fw::after {
-  content: "</fw>";
-}
-
-#tinymce ref::before {
-  content: "<ref>";
-}
-
-#tinymce ref::after {
-  content: "</ref>";
-}
-
-#tinymce name::before {
-  content: "<name>";
-}
-
-#tinymce name::after {
-  content: "</name>";
+#tinymce *::after {
+  content: "</" attr(data-tag) ">";
 }
