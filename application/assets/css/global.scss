@@ -259,6 +259,8 @@ body > .container-fluid {
 }
 
 .selected-element {
+  display:none;
+
   .element-attributes-container {
     margin-bottom: 10px;
     display: none;

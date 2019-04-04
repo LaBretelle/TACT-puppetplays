@@ -45,39 +45,7 @@
         </textarea>
       </div>
       {% if project.hasScheme %}
-      <div class="col-3 selected-element">
-        <div class="row">
-          <div class="col">
-            <div class="card element-attributes-container">
-              <div class="card-header">
-                <span class="text-muted">{{'attributes'|trans}}</span>
-                <span class="element-title"></span>
-                <span class="btn btn-sm btn-outline-secondary" data-toggle="collapse" data-target="#element-attributes">
-                  <i class="fas fa-arrows-alt-v"></i> Afficher/masquer
-                </span>
-              </div>
-              <ul id="element-attributes" class="list-group list-group-flush element-attributes collapse show"></ul>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="card elements-container">
-              <div class="card-header">
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="fas fa-search"></i>
-                    </span>
-                  </div>
-                  <input type="text" class="form-control filter-elements" placeholder="{{'element_list'|trans}}" name="" value="" />
-                </div>
-              </div>
-              <ul class="list-group list-group-flush elements"></ul>
-            </div>
-          </div>
-        </div>
-      </div>
+        {{ include('transcribe/elements-attributes.html.twig') }}
       {% endif %}
     </div>
   </div>

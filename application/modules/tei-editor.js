@@ -393,6 +393,8 @@ class TeiEditor {
   displayContainer(container, show) {
     const value = show ? 'flex' : 'none'
     container.style.display = value
+
+    document.getElementById('selected-element').style.display = 'block'
   }
 
   emptyElement(el){
