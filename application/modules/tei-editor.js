@@ -193,13 +193,12 @@ class TeiEditor {
       if (teiElement.selfClosed) {
         elem = editor.dom.create(teiElement.tag, {})
       } else {
-        elem = editor.dom.create(teiElement.tag, {}, selectedContent)
+        elem = editor.dom.create(teiElement.tag, {}, selectedContent ? selectedContent : '<>')
         range.deleteContents()
       }
 
       range.insertNode(elem)
-      // force selection
-      editor.selection.select(elem)
+      editor.selection.select(elem, true)
       editor.focus()
       this.refreshPanels(this.tei)
     })
@@ -230,7 +229,6 @@ class TeiEditor {
    * popovers are initialized in refreshPanels() method
    */
   createHelp(teiElement, isAttribute) {
-
     const help = document.createElement('button')
     help.classList.add('btn', 'btn-link')
     help.innerHTML = '<i class="fas fa-question-circle"></i>'
