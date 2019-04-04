@@ -25,6 +25,9 @@
     <a class="nav-link" data-toggle="tab" href="#help-full">{{'help'|trans}}</a>
   </li>
 
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#contributors">{{'contributors'|trans}}</a>
+  </li>
 
   {% if canViewLogs %}
   <li class="nav-item">
@@ -50,7 +53,7 @@
                 <span class="text-muted">{{'attributes'|trans}}</span>
                 <span class="element-title"></span>
                 <span class="btn btn-sm btn-outline-secondary" data-toggle="collapse" data-target="#element-attributes">
-                  <i class="fas fa-arrows-alt-v"></i> Afficher/masquer 
+                  <i class="fas fa-arrows-alt-v"></i> Afficher/masquer
                 </span>
               </div>
               <ul id="element-attributes" class="list-group list-group-flush element-attributes collapse show"></ul>
@@ -91,6 +94,9 @@
   <div id="help-full" class="tab-pane fade" role="tabpanel">
     {{ include ('transcribe/help.html.twig') }}
   </div>
+  <div id="contributors" class="tab-pane fade" role="tabpanel">
+    {{ include('transcribe/contributors.html.twig') }}
+  </div>
   {% if canValidate %}
   <div id="reviews" class="tab-pane fade" role="tabpanel">
     {{ include('review/list.html.twig') }}
@@ -102,5 +108,7 @@
   </div>
   {% endif %}
 
+  {% if edit %}
   <input type="hidden" id="tei-schema" name="tei_schema" value="{{schema}}">
+  {% endif %}
 </div>

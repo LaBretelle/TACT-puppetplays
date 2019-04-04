@@ -59,11 +59,17 @@ class MediaController extends AbstractController
      */
     public function displayTranscription(Media $media)
     {
+        $transcription = $media->getTranscription();
+        $project = $media->getProject();
+
         // deny access if project is not public and user is not a member
-        if (false === $this->permissionManager->isAuthorizedOnProject($media->getProject(), AppEnums::ACTION_VIEW_TRANSCRIPTIONS)) {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VIEW_TRANSCRIPTIONS)) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
-        $contributors = $this->transcriptionManager->getContributors($media->getTranscription());
+
+        $contributors = $this->transcriptionManager->getContributors($transcription);
+        $commentForm = $this->createForm(CommentType::class, null, ["transcription" => $transcription->getId()]);
+        $logs = $this->transcriptionManager->getLogs($transcription, $project);
 
         return $this->render(
             'transcribe/transcription.html.twig',
@@ -73,7 +79,9 @@ class MediaController extends AbstractController
               'locked' => false,
               'log' => false,
               'review' => false,
-              'contributors' => $contributors
+              'contributors' => $contributors,
+              'commentForm' => $commentForm->createView(),
+              'logs' => $logs,
             ]
         );
     }

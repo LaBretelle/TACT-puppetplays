@@ -13,24 +13,18 @@
     <hr/>
     {# OSD + EDITOR/TRANSCRIPTION #}
     <div class="row">
-      <div data-intro="{{'help2'|trans}}" data-step="2" class="col">
+      <div class="col" data-intro="{{'help2'|trans}}" data-step="2">
         {{ include("media/openseadragon.html.twig") }}
       </div>
       <div class="col-7">
-      {% if edit %}
         {{ include('transcribe/tei-editor.html.twig', { 'media': media }) }}
-      {% else %}
-        <div id="transcription-container">
-          {{ media.transcription.content | raw}}
-          <hr class="mt-4" />
-          {{ include('transcribe/contributors.html.twig') }}
-        </div>
-      {% endif %}
       </div>
     </div>
   </div>
-  {# ask validation modal #}
-  {{ include('review/ask.html.twig') }}
+
+  {% if edit %}
+    {{ include('review/ask.html.twig') }}
+  {% endif %}
 
   {# report modal #}
   {{ include('transcribe/report-modal.html.twig') }}

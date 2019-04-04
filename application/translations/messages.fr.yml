@@ -32,6 +32,7 @@ confirm_delete_project_media:             Êtes vous sur de vouloir supprimer le
 confirm_project_deletion:                 Êtes vous sur de vouloir supprimer ce projet ?
 confirm_title:                            Veuillez confirmer!
 confirm:                                  Je confirme!
+contributors:                             Contributeurs
 delete_current_tag:                       Supprimer le tag courrant
 delete_media:                             Supprimer les média sélectionnés
 description:                              Description
@@ -62,6 +63,8 @@ has_scheme:                               La transcription se fait conformément
 have_contributed:                         Ont contribué
 help:                                     Aide
 help1:                                    Bienvenue dans le tutoriel de transcription
+help10:                                   Et une fois qu’elle vous satisfait, en demander une relecture. Vous pouvez fermer le tutoriel
+help11:                                   Et une fois qu’elle vous satisfait, valider la relecture. Vous pouvez fermer le tutoriel
 help2:                                    Média à transcrire
 help3:                                    Boutons permettant de (de)zoomer, pivoter le média
 help4:                                    La transcription se passe ici
@@ -70,13 +73,12 @@ help6:                                    Vous pouvez explorer/ajouter des comme
 help7:                                    Vous pouvez consulter ici l'historique des relectures
 help8:                                    Vous pouvez revenir ici à l'aide et au tutoriel
 help9:                                    À tout moment, vous pouvez sauvegarder votre transcription
-help10:                                   Et une fois qu’elle vous satisfait, en demander une relecture. Vous pouvez fermer le tutoriel
-help11:                                   Et une fois qu’elle vous satisfait, valider la relecture. Vous pouvez fermer le tutoriel
 home:                                     Accueil
 insults:                                  Propos haineux, violence
 is_public:                                Inscription libre
 lastname:                                 Nom
 leave_warning:                            Si vous avez fait des modifications à cette transcription, et que vous n'avez pas encore sauvegardé celles-ci, elles ne seront pas prises en compte.
+login_or_register_link:                   <a href="%login%">Connectez-vous</a> ou <a href="%register%">inscrivez-vous</a> à la plateforme pour participer !
 login:                                    Connexion
 logout:                                   Déconnexion
 logs:                                     Logs
@@ -165,6 +167,7 @@ project_media_title:                      Gérer les media du projet
 project_media_upload:                     Envoyer les media
 project_move_directory_title:             Déplacer le dossier
 project_name:                             Nom du projet
+project_register_link:                    <a href="%register%">Inscrivez-vous</a> au projet pour participer
 project_register_short:                   S'inscrire
 project_register:                         S'inscrire au projet
 project_registration:                     Inscription au projet
@@ -213,12 +216,15 @@ submit_validation:                        Soumettre
 submit:                                   Valider
 subscribe_done:                           Abonné aux commentaires
 subscribe_long:                           L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
+tag_down:                                 Descendre la balise
+tag_up:                                   Remonter la balise
 technical:                                Problème technique
 tei_link_to_official_attr_doc:            Voir la documentation pour l'élément relatif à cet attribut
 tei_link_to_official_doc:                 Voir la documentation pour %element%
 tei_schema:                               Schema TEI pour le projet
 terms:                                    Conditions Générales d'Utilisation
 toggle_all_media_selection:               Sélectionner / Désélectionner tous les média
+transcribe_link:                          Vous pouvez commencer à <a href="%transcribe%">transcrire</a> !
 transcribe_long:                          Vous permet d'accéder aux médias et de proposer des transcriptions.
 transcribe:                               Transcrire
 transcriber:                              Transcripteur
@@ -227,9 +233,9 @@ transcript_help_doc:                      Accéder au document d'aide à la tran
 transcript_help:                          Aide à la transcription
 transcript_media:                         Transcription du media
 transcription_current_nb_validations:     '%1% / %2% relectures positives'
-transcription_locked:                     Transcription verrouillée
 transcription_is_locked:                  La fiche est en cours de transcription/relecture, essayez-en une autre
 transcription_is_valid:                   La transcription vous parait-elle valide ?
+transcription_locked:                     Transcription verrouillée
 transcription_log_created:                Transcription initialisée
 transcription_log_rereaded:               Relecture soumise
 transcription_log_unvalidated:            Transcription invalidée
@@ -299,8 +305,3 @@ view_project_short:                       Détails
 view_project:                             Détails du projet
 view_transcriptions_long:                 Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
 yes:                                      Oui
-login_or_register_link:                   <a href="%login%">Connectez-vous</a> ou <a href="%register%">inscrivez-vous</a> à la plateforme pour participer !
-project_register_link:                    <a href="%register%">Inscrivez-vous</a> au projet pour participer
-transcribe_link:                          Vous pouvez commencer à <a href="%transcribe%">transcrire</a> !
-tag_up:                                   Remonter la balise
-tag_down:                                 Descendre la balise
