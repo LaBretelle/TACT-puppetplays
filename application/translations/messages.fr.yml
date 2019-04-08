@@ -32,6 +32,7 @@ confirm_delete_project_media:             Êtes vous sur de vouloir supprimer le
 confirm_project_deletion:                 Êtes vous sur de vouloir supprimer ce projet ?
 confirm_title:                            Veuillez confirmer!
 confirm:                                  Je confirme!
+
 contributors:                             Contributeurs
 delete_current_tag:                       Supprimer le tag courrant
 delete_media:                             Supprimer les média sélectionnés
@@ -232,7 +233,7 @@ transcribe_long:                          Vous permet d'accéder aux médias et 
 transcribe:                               Transcrire
 transcriber:                              Transcripteur
 transcript_help_doc_undefined:            Document d'aide non défini
-transcript_help_doc:                      Accéder au document d'aide à la transcription
+transcript_help_doc:                      Accéder au document d'aide
 transcript_help:                          Aide à la transcription
 transcript_media:                         Transcription du media
 transcription_current_nb_validations:     '%1% / %2% relectures positives'
