@@ -1,19 +1,29 @@
 <div class="row">
   <div class="col">
     <h4>
-      <i class="fas fa-book"></i> {{'transcript_help'|trans}}
+      <i class="fas fa-book"></i>
+      {{'transcript_help'|trans}}
     </h4>
     {% if project.projectHelpLink %}
-    <a class="btn btn-outline-secondary" href="{{ project.projectHelpLink }}" target="_blank">
-      {{'transcript_help_doc'|trans}}
-    </a>
+      <a class="btn btn-outline-secondary" href="{{ project.projectHelpLink }}" target="_blank">
+        {{'transcript_help_doc'|trans}}
+      </a>
     {% else %}
       <span class="text-muted">{{'transcript_help_doc_undefined'|trans}}</span>
     {% endif %}
+    <hr/>
+
+    <h4>
+      <i class="fas fa-images"></i>
+      {{"illustration"|trans}}</h4>
+    {{ include("transcribe/modal-examples.html.twig") }}
+
   </div>
   <div class="col">
-    <h4><i class="fas fa-magic"></i> {{"tutorial"|trans}}</h4>
-    <a id="start-tutorial" class="btn btn-outline-secondary" href="#" data-dismiss="modal">
+    <h4>
+      <i class="fas fa-magic"></i>
+      {{"tutorial"|trans}}</h4>
+    <a id="modal-tutorial" class="btn btn-outline-secondary" href="#" data-dismiss="modal">
       {{'tutorial_enable'|trans}}
     </a>
   </div>

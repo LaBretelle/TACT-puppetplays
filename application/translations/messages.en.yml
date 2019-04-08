@@ -36,6 +36,7 @@ delete_current_tag:                       Delete current tag
 delete_media:                             Delete selected media
 description:                              Description
 directory_created:                        Folder created
+display_illustration:                     Display examples
 edit_project_long:                        Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit:                                     Edit
 element_list:                             Eléments disponibles
@@ -66,6 +67,7 @@ help7:                                    You can read reviews historic on this 
 help8:                                    You can go back to help and tutorial here
 help9:                                    You can save your transcription at any time
 home:                                     Home
+illustration:                             Transcription examples
 insults:                                  Propos haineux, violence
 is_public:                                Open registration
 lastname:                                 Lastname
@@ -78,6 +80,7 @@ lost_password_link:                       I forgot my password
 manage_media_long:                        Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
 manage_user_statuses_long:                Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.
 manager:                                  Manager
+markup:                                   TEI markup
 max_file_uploads_message:                 You can simultaneously upload %nb_max% files
 media_added:                              Media added
 media_change_directory_title:             Choose the target folder

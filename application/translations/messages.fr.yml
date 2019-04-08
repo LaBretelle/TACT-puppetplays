@@ -37,6 +37,7 @@ delete_current_tag:                       Supprimer le tag courrant
 delete_media:                             Supprimer les média sélectionnés
 description:                              Description
 directory_created:                        Dossier créé
+display_illustration:                     Afficher les exemples
 edit_project_long:                        Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit:                                     Éditer
 element_list:                             Eléments disponibles
@@ -74,6 +75,7 @@ help7:                                    Vous pouvez consulter ici l'historique
 help8:                                    Vous pouvez revenir ici à l'aide et au tutoriel
 help9:                                    À tout moment, vous pouvez sauvegarder votre transcription
 home:                                     Accueil
+illustration:                             Exemples de transcription
 insults:                                  Propos haineux, violence
 is_public:                                Inscription libre
 lastname:                                 Nom
@@ -86,17 +88,18 @@ lost_password_link:                       J'ai oublié mon mot de passe
 manage_media_long:                        Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
 manage_user_statuses_long:                Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.
 manager:                                  Gestionnaire
+markup:                                   Balisage TEI
 max_file_uploads_message:                 Vous pouvez uploader simultanément %nb_max% fichiers
-media_added:                              Media ajouté(s)
+media_added:                              Média ajouté(s)
 media_change_directory_title:             Choisir le répertoire cible
 media_delete_button_title:                Supprimer le média
-media_deleted:                            Media supprimé(s)
-media_moved:                              Media déplacé(s)
+media_deleted:                            Média supprimé(s)
+media_moved:                              Média déplacé(s)
 media_reread_button_title:                Relire la transcription
 media_transcribe_button_title:            Transcrire
 media_upload_help:                        Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 media_view_transcription_button_title:    Voir la transcription
-medias:                                   Medias
+medias:                                   Médias
 message_deleted:                          Le message a été supprimé
 message_list:                             Messages
 message_set_as_read_done:                 Le message a été marqué comme lu
