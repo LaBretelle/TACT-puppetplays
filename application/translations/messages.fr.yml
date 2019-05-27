@@ -1,4 +1,3 @@
-
 accept_terms:                             J'accepte les <a href="%url%" target="_blank">Conditions Générales d'Utilisation</a>
 access_denied:                            Vous n'êtes pas autorisé à accéder à cette page.
 actions:                                  Actions
@@ -91,6 +90,7 @@ manage_user_statuses_long:                Vous permet de supprimer, valider ou i
 manager:                                  Gestionnaire
 markup:                                   Balisage TEI
 max_file_uploads_message:                 Vous pouvez uploader simultanément %nb_max% fichiers
+media:                                    Média
 media_added:                              Média ajouté(s)
 media_change_directory_title:             Choisir le répertoire cible
 media_delete_button_title:                Supprimer le média
@@ -110,7 +110,7 @@ messages_delete:                          Supprimer tous les messages
 messages_deleted:                         Tous les messages ont été supprimés
 messages_set_as_read_done:                Tous les messages ont été marqués comme lus
 messages_set_as_read:                     Tout marquer comme lu
-move_media:                               Déplacer les média sélectionnés
+move_media:                               Déplacer les médias sélectionnés
 nb_validation:                            Nombre de relectures nécéssaire par fiche
 need_at_least_one_manager:                Il faut au moins un gestionnaire par projet.
 need_to_be_logged:                        Vous devez être connecté pour participer au projet.
@@ -133,6 +133,7 @@ platform_page_title:                      Administration de la plateforme
 please_wait:                              Veuillez patienter...
 positive_review:                          Une relecture positive a été faite sur le média <a target="_blank" href="%url%">%media%</a> <br/> %comment%
 preview:                                  Prévisualiser
+preview_mode:                             Prévisualisation
 profile:                                  Profil
 project_archive_long:                     Permet d'archiver le projet
 project_archive:                          Archiver
@@ -167,8 +168,8 @@ project_media_file_type_zip:              Zip
 project_media_file_type:                  Type de fichier à uploader
 project_media_no_media_in_current_dir:    Aucun média dans le répertoire sélectionné
 project_media_no_media:                   Aucun média associé au projet
-project_media_title:                      Gérer les media du projet
-project_media_upload:                     Envoyer les media
+project_media_title:                      Gérer les médias du projet
+project_media_upload:                     Envoyer les médias
 project_move_directory_title:             Déplacer le dossier
 project_name:                             Nom du projet
 project_register_link:                    <a href="%register%">Inscrivez-vous</a> au projet pour participer
@@ -235,7 +236,8 @@ transcriber:                              Transcripteur
 transcript_help_doc_undefined:            Document d'aide non défini
 transcript_help_doc:                      Accéder au document d'aide
 transcript_help:                          Aide à la transcription
-transcript_media:                         Transcription du media
+transcript_media:                         Transcription du média
+transcript_media_raw:                     Transcription brute
 transcription_current_nb_validations:     '%1% / %2% relectures positives'
 transcription_is_locked:                  La fiche est en cours de transcription/relecture, essayez-en une autre
 transcription_is_valid:                   La transcription vous parait-elle valide ?
@@ -293,7 +295,7 @@ user_renew_password_success:              Votre mot de passe a été mis à jour
 user_self_edit:                           Éditer votre profil
 user_status_manager_desc:                 Le gestionnaire de projet peut transcrire, relire, valider les transriptions et gérer touts les aspects du projet.
 user_status_manager_name:                 Gestionnaire
-user_status_transcriber_desc:             Le transcripteur peut transcrire les media et relire les transcriptions.
+user_status_transcriber_desc:             Le transcripteur peut transcrire les médias et relire les transcriptions.
 user_status_transcriber_name:             Transcripteur
 user_status_validator_desc:               Le validateur peut transcrire, relire et valider les transriptions.
 user_status_validator_name:               Validateur
