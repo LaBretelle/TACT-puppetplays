@@ -6,7 +6,7 @@
 
 <nav id="secondary-nav" class="navbar navbar-expand-sm navbar-light">
   <a class="navbar-brand" href="{{ path("project_display", {'id': project.id}) }}">
-    {{ project.name | truncate(60, false) }}
+    {{ project.name }}
   </a>
   <span class="navbar-brand text-muted">{% if subtitle is defined %}({{ subtitle|trans }}){% endif %}</span>
   <div class="collapse navbar-collapse">
