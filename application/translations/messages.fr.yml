@@ -1,4 +1,4 @@
-accept_terms:                             J'accepte les <a href="%url%" target="_blank">Conditions Générales d'Utilisation</a>
+accept_terms:                             Dans le cadre de votre enregistrement, un traitement de données à caractère personnel est réalisé, pour plus d’informations cliquer <a target="_blank" href='%url%#datas'>ici</a>
 access_denied:                            Vous n'êtes pas autorisé à accéder à cette page.
 actions:                                  Actions
 add_directory_modal_title:                Ajouter un répertoire
@@ -31,7 +31,6 @@ confirm_delete_project_media:             Êtes vous sur de vouloir supprimer le
 confirm_project_deletion:                 Êtes vous sur de vouloir supprimer ce projet ?
 confirm_title:                            Veuillez confirmer!
 confirm:                                  Je confirme!
-
 contributors:                             Contributeurs
 delete_current_tag:                       Supprimer le tag courrant
 delete_media:                             Supprimer les média sélectionnés
@@ -75,6 +74,7 @@ help7:                                    Vous pouvez consulter ici l'historique
 help8:                                    Vous pouvez revenir ici à l'aide et au tutoriel
 help9:                                    À tout moment, vous pouvez sauvegarder votre transcription
 home:                                     Accueil
+iaccept: J'accepte
 illustration:                             Exemples de transcription
 insults:                                  Propos haineux, violence
 is_public:                                Inscription libre
@@ -90,7 +90,6 @@ manage_user_statuses_long:                Vous permet de supprimer, valider ou i
 manager:                                  Gestionnaire
 markup:                                   Balisage TEI
 max_file_uploads_message:                 Vous pouvez uploader simultanément %nb_max% fichiers
-media:                                    Média
 media_added:                              Média ajouté(s)
 media_change_directory_title:             Choisir le répertoire cible
 media_delete_button_title:                Supprimer le média
@@ -100,6 +99,7 @@ media_reread_button_title:                Relire la transcription
 media_transcribe_button_title:            Transcrire
 media_upload_help:                        Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 media_view_transcription_button_title:    Voir la transcription
+media:                                    Média
 medias:                                   Médias
 message_deleted:                          Le message a été supprimé
 message_list:                             Messages
@@ -132,8 +132,8 @@ platform_name:                            Nom de la plateforme
 platform_page_title:                      Administration de la plateforme
 please_wait:                              Veuillez patienter...
 positive_review:                          Une relecture positive a été faite sur le média <a target="_blank" href="%url%">%media%</a> <br/> %comment%
-preview:                                  Prévisualiser
 preview_mode:                             Prévisualisation
+preview:                                  Prévisualiser
 profile:                                  Profil
 project_archive_long:                     Permet d'archiver le projet
 project_archive:                          Archiver
@@ -236,8 +236,8 @@ transcriber:                              Transcripteur
 transcript_help_doc_undefined:            Document d'aide non défini
 transcript_help_doc:                      Accéder au document d'aide
 transcript_help:                          Aide à la transcription
-transcript_media:                         Transcription du média
 transcript_media_raw:                     Transcription brute
+transcript_media:                         Transcription du média
 transcription_current_nb_validations:     '%1% / %2% relectures positives'
 transcription_is_locked:                  La fiche est en cours de transcription/relecture, essayez-en une autre
 transcription_is_valid:                   La transcription vous parait-elle valide ?

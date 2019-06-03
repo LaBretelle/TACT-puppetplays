@@ -1,4 +1,4 @@
-accept_terms:                             I accept <a href="%url%" target="_blank">terms</a>
+accept_terms:                             Dans le cadre de votre enregistrement, un traitement de données à caractère personnel est réalisé, pour plus d’informations cliquer <a target="_blank" href='%url%#datas'>ici</a>
 access_denied:                            You are not allowed to access this page.
 actions:                                  Actions
 add_directory_modal_title:                Add folder
@@ -67,6 +67,7 @@ help7:                                    You can read reviews historic on this 
 help8:                                    You can go back to help and tutorial here
 help9:                                    You can save your transcription at any time
 home:                                     Home
+iaccept: I accept
 illustration:                             Transcription examples
 insults:                                  Propos haineux, violence
 is_public:                                Open registration

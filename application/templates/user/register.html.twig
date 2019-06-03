@@ -13,9 +13,10 @@
         {{ form_row(form.publicMail) }}
         {{ form_row(form.plainPassword.first) }}
         {{ form_row(form.plainPassword.second) }}
+        {{"accept_terms"|trans({'%url%': path('terms')})|raw}}
         <div class="form-group form-check">
           <input required type="checkbox" class="form-check-input" id="accept-terms" />
-          <label class="form-check-label" for="accept-terms">{{"accept_terms"|trans({'%url%': path('terms')})|raw}}</label>
+          <label class="form-check-label" for="accept-terms">{{"iaccept"|trans}}</label>
         </div>
         <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
       {{ form_end(form) }}
