@@ -150,7 +150,7 @@ project_management_media:                 Media management
 project_management_user_statuses:         Users management
 project_manager:                          Project manager
 project_media_add_file_placeholder:       Select file(s)
-project_media_add_file_title:             Add media
+project_media_add_file_title:             Add medias
 project_media_add_file:                   Upload file(s)
 project_media_count:                      '%count% médias'
 project_media_file_type_images:           Image(s)
