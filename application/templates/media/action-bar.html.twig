@@ -46,7 +46,7 @@
     {% if project | isAuthorizedOnProject('editProject') %}
       {% if media.transcription.isValid %}
         <a class="btn btn-outline-secondary" href="{{ path('media_transcription_validate', {id:  media.id, valid: 0})}}" data-toggle="tooltip" title="{{'transcription_unvalidate' | trans}}" >
-          <i class="fas fa-poo" aria-hidden="true"></i>
+          <i class="fas fa-thumbs-down" aria-hidden="true"></i>
         </a>
       {% else %}
       <a class="btn btn-outline-secondary" href="{{ path('media_transcription_validate', {id:  media.id, valid: 1})}}" data-toggle="tooltip" title="{{'transcription_validate' | trans}}">
