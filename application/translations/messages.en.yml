@@ -67,7 +67,7 @@ help7:                                    You can read reviews historic on this 
 help8:                                    You can go back to help and tutorial here
 help9:                                    You can save your transcription at any time
 home:                                     Home
-iaccept: I accept
+iaccept:                                  I accept <a href="%url%">the general terms of use</a>
 illustration:                             Transcription examples
 insults:                                  Propos haineux, violence
 is_public:                                Open registration

@@ -16,7 +16,7 @@
         {{"accept_terms"|trans({'%url%': path('terms')})|raw}}
         <div class="form-group form-check">
           <input required type="checkbox" class="form-check-input" id="accept-terms" />
-          <label class="form-check-label" for="accept-terms">{{"iaccept"|trans}}</label>
+          <label class="form-check-label" for="accept-terms">{{"iaccept"|trans({'%url%': path('terms')})|raw}}</label>
         </div>
         <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
       {{ form_end(form) }}

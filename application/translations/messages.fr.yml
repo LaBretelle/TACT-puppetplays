@@ -74,7 +74,7 @@ help7:                                    Vous pouvez consulter ici l'historique
 help8:                                    Vous pouvez revenir ici à l'aide et au tutoriel
 help9:                                    À tout moment, vous pouvez sauvegarder votre transcription
 home:                                     Accueil
-iaccept: J'accepte
+iaccept:                                  J'accepte les <a href="%url%">Conditions Générales d'Utilisation</a>
 illustration:                             Exemples de transcription
 insults:                                  Propos haineux, violence
 is_public:                                Inscription libre
