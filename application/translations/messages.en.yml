@@ -179,6 +179,7 @@ project_unarchive:                        Unarchive
 project_user_status:                      User statuses
 project_view_transciptions:               View transcriptions
 public_mail:                              Email visible to all
+register_date:                            Registration date
 register:                                 register
 registration_deleted_project:             Votre inscription au projet '%project%' a été supprimée
 registration_unvalidated_project:         Votre inscription au projet '%project%' a été invalidée
