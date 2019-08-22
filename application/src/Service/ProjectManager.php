@@ -142,20 +142,37 @@ class ProjectManager
 
     public function recursiveBrowse(Project $project, string $projectPath, string $uploadPath, Directory $parent = null)
     {
+        $dirRepo = $this->em->getRepository('App:Directory');
+        $mediaRepo = $this->em->getRepository('App:Media');
+
         $cdir = scandir($uploadPath);
 
         foreach ($cdir as $value) {
-            if (!in_array($value, array(".",".."))) {
+            if (!in_array($value, [".",".."])) {
                 $absolutePath = $uploadPath . DIRECTORY_SEPARATOR . $value;
                 if (is_dir($absolutePath)) {
-                    $newDirectory = $this->dirManager->create($project, $value, $parent);
+                    $existingDir = $dirRepo->findOneBy(["name" => $value, "parent" => $parent, "project" => $project]);
+                    if (!$existingDir) {
+                        $newDirectory = $this->dirManager->create($project, $value, $parent);
+                    } else {
+                        $newDirectory = $existingDir;
+                        $this->fm->add('warning', 'directory_already_existing', ["%dir%" => $absolutePath]);
+                    }
+
                     $this->recursiveBrowse($project, $projectPath, $absolutePath, $newDirectory);
                 } else {
-                    $file = new File($absolutePath);
-                    $media = $this->mediaManager->createMediaFromFile($file, $value, $project, $parent);
-                    $file->move($projectPath, $media->getUrl());
+                    $processedName = explode('.', $value)[0];
+                    $existingMedia = $mediaRepo->findOneBy(["name" => $processedName, "parent" => $parent, "project" => $project]);
 
-                    $this->generateThumbnail($projectPath, $media->getUrl(), 512);
+                    if (!$existingMedia) {
+                        $file = new File($absolutePath);
+                        $media = $this->mediaManager->createMediaFromFile($file, $value, $project, $parent);
+                        $file->move($projectPath, $media->getUrl());
+
+                        $this->generateThumbnail($projectPath, $media->getUrl(), 512);
+                    } else {
+                        $this->fm->add('warning', 'media_already_existing', ["%media%" => $absolutePath]);
+                    }
                 }
             }
         }
@@ -177,7 +194,7 @@ class ProjectManager
         }
 
         $uploadPath = $projectMediaPath . DIRECTORY_SEPARATOR . 'tmp';
-        if (!is_dir($basePath)) {
+        if (!is_dir($uploadPath)) {
             mkdir($uploadPath);
         }
 
@@ -294,17 +311,35 @@ class ProjectManager
 
     public function addFolder(Project $project, int $parentId, string $name)
     {
-        $targetDir = $parentId === -1 ? null : $this->em->getRepository(Directory::class)->find($parentId);
-        return $this->dirManager->create($project, $name, $targetDir);
+        $dirRepository = $this->em->getRepository(Directory::class);
+
+        $targetDir = ($parentId === -1) ? null : $dirRepository->find($parentId);
+        $dir = $dirRepository->findOneBy(["name" => $name, "parent" => $targetDir, "project" => $project]);
+
+        if (!$dir) {
+            $dir = $this->dirManager->create($project, $name, $targetDir);
+        } else {
+            $this->fm->add('warning', 'directory_already_existing', ["%dir%" => $name]);
+        }
+
+        return $dir;
     }
 
     public function updateFolderName(int $id, string $name)
     {
-        $folder = $this->em->getRepository(Directory::class)->find($id);
-        $folder->setName($name);
-        $this->dirManager->save($folder);
+        $dirRepository = $this->em->getRepository(Directory::class);
+        $directory = $dirRepository->find($id);
+        $project = $directory->getProject();
+        $parent = $directory->getParent();
 
-        return  $folder;
+        $existingDir = $dirRepository->findOneBy(["name" => $name, "parent" => $parent, "project" => $project]);
+
+        if (!$existingDir) {
+            $directory->setName($name);
+            $this->dirManager->save($directory);
+        }
+
+        return ($existingDir) ? false: true;
     }
 
     public function getProjectManagerUser(Project $project)

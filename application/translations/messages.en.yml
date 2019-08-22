@@ -35,6 +35,7 @@ contributors:                             Contributors
 delete_current_tag:                       Delete current tag
 delete_media:                             Delete selected media
 description:                              Description
+directory_already_existing:               Le répertoire %dir% est déjà présent
 directory_created:                        Folder created
 display_illustration:                     Display examples
 edit_project_long:                        Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
@@ -49,6 +50,7 @@ faq:                                      Frequently asked questions
 filter_users_by:                          Filter by lastname / firstname / mail / login
 firstname:                                Firstname
 folder_name_changed:                      Folder name edited
+folder_name_not_changed:                  Dossier non renommé. Un dossier avec le même nom existe déjà.
 folder_name:                              Folder name
 folders_deleted:                          Folder(s) deleted
 folders_moved:                            Folder(s) moved
@@ -84,6 +86,7 @@ manager:                                  Manager
 markup:                                   TEI markup
 max_file_uploads_message:                 You can simultaneously upload %nb_max% files
 media_added:                              Media added
+media_already_existing:                   Le media %media% est déjà présent
 media_change_directory_title:             Choose the target folder
 media_delete_button_title:                Delete media
 media_deleted:                            Media deleted

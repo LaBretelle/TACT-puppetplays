@@ -60,7 +60,7 @@
           <div class="card mb-2 box-shadow">
             <div class="card-body">
               <a class="text-dark" href="{{ path('project_media', {id: project.id, current: dir.id}) }}">
-                <i class="fas fa-folder fa-fw"></i>{{dir.name}}
+                <i class="fas fa-folder fa-fw"></i> <span data-dir="{{dir.id}}">{{dir.name}}</span>
               </a>
             </div>
           </div>

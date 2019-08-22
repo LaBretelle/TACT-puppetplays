@@ -112,11 +112,6 @@ $(document).ready(() => {
     const pid = e.target.dataset.pid
     const name = $(`#dir-${id}-name-input`).val().trim()
     if(name !== '') {
-      $(`#dir-${id}-name-value`).text(name)
-      $(`#dir-${id}-name`).show()
-      $(`#dir-${id}-edit-actions`).show()
-      $(`#dir-${id}-name-update-btn`).hide()
-      $(`#dir-${id}-name-input`).hide()
       updateFolderName(pid, id, name)
     }
   })
@@ -232,8 +227,19 @@ const updateFolderName = (projectId, id, name) => {
     method: 'POST',
     url: url,
     data: {id: id, name: name}
-  }).done(() => {
-    Toastr.info(Translator.trans('folder_name_changed'))
+  }).done((data) => {
+    if (data.hasBeenUpdated === true) {
+      $(`#dir-${id}-name-value`).text(name)
+      Toastr.info(Translator.trans('folder_name_changed'))
+      $('[data-dir='+id+']').text(name)
+    } else {
+      Toastr.warning(Translator.trans('folder_name_not_changed'))
+    }
+
+    $(`#dir-${id}-name`).show()
+    $(`#dir-${id}-edit-actions`).show()
+    $(`#dir-${id}-name-update-btn`).hide()
+    $(`#dir-${id}-name-input`).hide()
   })
 }
 

@@ -295,9 +295,9 @@ class ProjectController extends AbstractController
 
         $name = $request->request->get('name');
         $folderId = intval($request->request->get('id'));
-        $folder = $this->projectManager->updateFolderName($folderId, $name);
+        $hasBeenUpdated = $this->projectManager->updateFolderName($folderId, $name);
 
-        return $this->json(['name' => $folder->getName(), 'id' => $folder->getId()], $status = 200);
+        return $this->json(['hasBeenUpdated' => $hasBeenUpdated], $status = 200);
     }
 
     /**
