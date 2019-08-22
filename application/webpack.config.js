@@ -38,14 +38,14 @@ Encore
   .addStyleEntry('css/toastr', './node_modules/toastr/build/toastr.min.css')
   .addStyleEntry('css/intro', './node_modules/intro.js/minified/introjs.min.css')
 
-  .enableSassLoader(function() {}, {
+  .enableSassLoader(function () {}, {
     resolveUrlLoader: false
   })
 
   // will prefix css properties according to the supported browser set in postcss.config.js
   .enablePostCssLoader()
 
-  .configureBabel(function(babelConfig) {
+  .configureBabel(function (babelConfig) {
     babelConfig.presets.push('es2017')
   })
 
@@ -80,18 +80,18 @@ config.resolve.alias = {
 // https://stackoverflow.com/questions/44439909/confusion-over-various-webpack-shimming-approaches
 config.module = Object.assign(config.module, {
   loaders: [{
-      test: require.resolve('tinymce/tinymce'),
-      loaders: [
-        'imports?this=>window',
-        'exports?tinymce'
-      ]
-    },
-    {
-      test: /tinymce\/(themes|plugins)\//,
-      loaders: [
-        'imports?this=>window'
-      ]
-    }
+    test: require.resolve('tinymce/tinymce'),
+    loaders: [
+      'imports?this=>window',
+      'exports?tinymce'
+    ]
+  },
+  {
+    test: /tinymce\/(themes|plugins)\//,
+    loaders: [
+      'imports?this=>window'
+    ]
+  }
   ]
 })
 
