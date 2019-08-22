@@ -61,6 +61,7 @@ folder_name_not_changed:                  Dossier non renommé. Un dossier avec 
 folder_name:                              Nom du dossier
 folders_deleted:                          Dossier(s) supprimé(s)
 folders_moved:                            Dossier(s) déplacé(s)
+folders_not_all_moved:                    Certains dossiers n'ont pu être déplacés
 has_scheme:                               La transcription se fait conformément à un schéma (vs. transcription purement textuelle)
 have_contributed:                         Ont contribué
 help:                                     Aide
@@ -98,6 +99,7 @@ media_change_directory_title:             Choisir le répertoire cible
 media_delete_button_title:                Supprimer le média
 media_deleted:                            Média(s) supprimé(s)
 media_moved:                              Média(s) déplacé(s)
+media_not_all_moved:                      Certains fichiers n'ont pas été déplacés car déjà présents dans la cible
 media_reread_button_title:                Relire la transcription
 media_transcribe_button_title:            Transcrire
 media_upload_help:                        Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.

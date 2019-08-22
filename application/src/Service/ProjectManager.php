@@ -283,28 +283,51 @@ class ProjectManager
 
     public function moveProjectMedia(int $target, array $ids)
     {
-        $targetDir = $target === -1 ? null : $this->em->getRepository(Directory::class)->find($target);
         $mediaRepository = $this->em->getRepository(Media::class);
+        $dirRepository = $this->em->getRepository(Directory::class);
+        $movedMedia = [];
+        $targetDir = $target === -1 ? null : $dirRepository->find($target);
         foreach ($ids as $id) {
             $media = $mediaRepository->find($id);
-            $media->setParent($targetDir);
-            $this->mediaManager->save($media);
+            $name = $media->getName();
+            $project = $media->getProject();
+
+            $existingMedia = $mediaRepository->findOneBy(["name" => $name, "parent" => $targetDir, "project" => $project]);
+            if (!$existingMedia) {
+                $media->setParent($targetDir);
+                $this->mediaManager->save($media);
+                $movedMedia[] = $id;
+            }
         }
 
-        return;
+        return $movedMedia;
     }
 
     public function moveProjectFolders(int $target, array $ids)
     {
         $mediaRepository = $this->em->getRepository(Media::class);
         $dirRepository = $this->em->getRepository(Directory::class);
+        $allMoved = true;
         $targetDir = $target === -1 ? null : $dirRepository->find($target);
         foreach ($ids as $id) {
             $dir = $dirRepository->find($id);
-            $dir->setParent($targetDir);
-            $this->em->persist($dir);
+            $name = $dir->getName();
+            $project = $dir->getProject();
+
+            $existingDir = $dirRepository->findOneBy(["name" => $name, "parent" => $targetDir, "project" => $project]);
+            if (!$existingDir) {
+                $dir->setParent($targetDir);
+                $this->em->persist($dir);
+            } else {
+                $allMoved = false;
+            }
         }
-        $this->fm->add('notice', 'folders_moved');
+
+        if ($allMoved) {
+            $this->fm->add('notice', 'folders_moved');
+        } else {
+            $this->fm->add('warning', 'folders_not_all_moved');
+        }
 
         $this->em->flush();
     }

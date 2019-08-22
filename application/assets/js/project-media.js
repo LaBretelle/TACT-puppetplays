@@ -2,6 +2,7 @@ let selectedMedia = []
 let selectedFolder = -1
 
 let checkedFolders = []
+let ignoredFolders = []
 let deleteFoldersForm = null
 let moveFoldersForm = null
 
@@ -80,6 +81,11 @@ $(document).ready(() => {
   })
 
   $('.btn-move-dir').on('click', () => {
+    $('.target-directory').show()
+    ignoredFolders.forEach( (id) => {
+      $('.target-directory[data-dir='+id+']').hide()
+    })
+
     $('.move-project-folder-modal').modal('show')
   })
 
@@ -117,12 +123,31 @@ $(document).ready(() => {
   })
 
   $('.folder-check').on('change', (e) => {
-    const id = e.target.dataset.id
-    if(e.target.checked && checkedFolders.indexOf(id) === -1) {
+    const folderToggled = e.target
+    const id = folderToggled.dataset.id
+
+    if(folderToggled.checked && checkedFolders.indexOf(id) === -1) {
       checkedFolders.push(id)
+      ignoredFolders.push(id)
+      $('[data-dir-parent='+id+']').find('.folder-check').each((index, el) => {
+        ignoredFolders.push($(el).attr('data-id'))
+      })
+
     } else {
-      const index = checkedFolders.indexOf(id)
-      checkedFolders.splice(index, 1)
+      const indexChecked= checkedFolders.indexOf(id)
+      checkedFolders.splice(indexChecked, 1)
+
+      const indexIgnored = ignoredFolders.indexOf(id)
+      ignoredFolders.splice(indexIgnored, 1)
+
+
+      $('[data-dir-parent='+id+']').find('.folder-check').each((index, el) => {
+        let idEl = $(el).attr('data-id')
+        let idx = ignoredFolders.indexOf(idEl)
+        ignoredFolders.splice(idx, 1)
+      })
+
+
     }
 
     if(checkedFolders.length > 0) {
@@ -209,17 +234,23 @@ const moveMedia = (projectId) => {
     method: 'POST',
     url: url,
     data: {'ids' : selectedMedia, 'dirId': selectedFolder}
-  }).done(() => {
-    selectedMedia.forEach((id) => {
+  }).done((data) => {
+    data.movedMedia.forEach((id) => {
       $('#img-col-' + id).remove()
     })
-    selectedMedia = []
-    selectedFolder = -1
     $('.images-actions').find('button').attr('disabled', true)
-    Toastr.info(Translator.trans('media_moved'))
+
+
+    if (selectedMedia.length != data.movedMedia.length) {
+      Toastr.warning(Translator.trans('media_not_all_moved'))
+    }
+    if (data.movedMedia.length > 0 ){
+      Toastr.info(Translator.trans('media_moved'))
+    }
+    selectedFolder = -1
+    selectedMedia = []
   })
 }
-
 
 const updateFolderName = (projectId, id, name) => {
   const url = Routing.generate('project_update_folder_name', {id:projectId})

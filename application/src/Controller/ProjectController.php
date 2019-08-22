@@ -263,9 +263,9 @@ class ProjectController extends AbstractController
 
         $target = intval($request->request->get('dirId'));
         $ids = $request->request->get('ids');
-        $this->projectManager->moveProjectMedia($target, $ids);
+        $movedMedia = $this->projectManager->moveProjectMedia($target, $ids);
 
-        return $this->json(['ids' => $ids, 'target' => $target], $status = 200);
+        return $this->json(['movedMedia' => $movedMedia], $status = 200);
     }
 
     /**

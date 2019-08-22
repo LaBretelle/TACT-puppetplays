@@ -31,7 +31,7 @@
     </li>
     {% if dir.children|length > 0 %}
         {% import _self as treeMacro %}
-        <ul class="list-group list-group-flush tree-inner-list">
+        <ul data-dir-parent="{{dir.id}}" class="list-group list-group-flush tree-inner-list">
           {% for child in dir.children %}
              {{ treeMacro.projectTree(child, project, current) }}
           {% endfor %}

@@ -154,8 +154,8 @@
         <div class="modal-body">
             <select name="folder" class="form-control select-folder">
               <option value="-1">{{'root_directory_option'| trans}}</option>
-              {% for dir in project.dirs if dir != current %}
-                <option value="{{dir.id}}">{{dir.name}}</option>
+              {% for dir in project.dirs %}
+                <option data-dir="{{dir.id}}" value="{{dir.id}}">{{dir.name}}</option>
               {% endfor %}
             </select>
         </div>
@@ -216,8 +216,8 @@
         <div class="modal-body">
             <select name="folder" class="form-control select-folder">
               <option value="-1">{{'root_directory_option'| trans}}</option>
-              {% for dir in project.dirs if dir != current %}
-                <option value="{{dir.id}}">{{dir.name}}</option>
+              {% for dir in project.dirs %}
+                <option class="target-directory" data-dir="{{dir.id}}" value="{{dir.id}}">{{dir.name}}</option>
               {% endfor %}
             </select>
         </div>
