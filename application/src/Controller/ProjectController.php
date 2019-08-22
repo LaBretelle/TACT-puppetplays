@@ -193,14 +193,15 @@ class ProjectController extends AbstractController
         }
 
         $file_limit = ini_get('max_file_uploads');
+
         return $this->render(
             'project/project-media.html.twig',
             [
-            'form' => $form->createView(),
-            'project' => $project,
-            'fileLimit' => ini_get('max_file_uploads'),
-            'current' => $current,
-            'from' => 'media'
+              'form' => $form->createView(),
+              'project' => $project,
+              'fileLimit' => ini_get('max_file_uploads'),
+              'current' => $current,
+              'from' => 'media'
           ]
         );
     }
@@ -218,7 +219,7 @@ class ProjectController extends AbstractController
 
         $user = $this->security->getUser();
         $mediaRepo =  $this->getDoctrine()->getRepository(Media::class);
-        $medias = $mediaRepo->findby(['project' => $project,'parent' => $parent ]);
+        $medias = $mediaRepo->findby(['project' => $project,'parent' => $parent], ["name" => "ASC"]);
         $mine = $user ? $mediaRepo->getByProjectAndUserActivity($project, $parent, $user): null;
         $transcriptionsLocked = $user ? $mediaRepo->getByProjectAndLocked($project, $parent, $user): null;
 

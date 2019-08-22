@@ -37,11 +37,13 @@ class Directory
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Directory", mappedBy="parent", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $children;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="parent", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $medias;
 

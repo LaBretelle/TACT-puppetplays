@@ -76,11 +76,13 @@ class Project
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="project", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $medias;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Directory", mappedBy="project", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $dirs;
 
