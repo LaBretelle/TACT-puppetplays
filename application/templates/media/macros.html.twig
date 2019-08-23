@@ -1,5 +1,17 @@
 {% macro mediaURL(media) %}
+  {% if media.url is not null %}
     {{ asset('project_files/' ~ media.project.id ~ '/' ~ media.url) }}
+  {% else %}
+    {{ asset('img/avatar-placeholder_640.png') }}
+  {% endif %}
+{% endmacro %}
+
+{% macro mediaThumbnailURL(media) %}
+  {% if media.url is not null %}
+    {{ asset('project_files/' ~ media.project.id ~ '/thumbnails/' ~ media.url) }}
+  {% else %}
+    {{ asset('img/avatar-placeholder_640.png') }}
+  {% endif %}
 {% endmacro %}
 
 {% macro backToParentDir(media) %}
@@ -8,9 +20,6 @@
 </a>
 {% endmacro %}
 
-{% macro mediaThumbnailURL(media) %}
-    {{ asset('project_files/' ~ media.project.id ~ '/thumbnails/' ~ media.url) }}
-{% endmacro %}
 
 {% macro projectTree(dir, project, current) %}
     <li class="list-group-item d-flex justify-content-between align-items-center {{current is not null and dir.id == current.id ? 'list-group-item-secondary':''}} tree-entry">

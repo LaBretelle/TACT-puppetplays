@@ -124,8 +124,17 @@ class ProjectManager
         if (!is_dir($thumbnailDir)) {
             mkdir($thumbnailDir);
         }
-        $this->recursiveBrowse($project, $projectPath, $uploadPath, $parent);
+        $this->recursiveBrowse($project, $projectPath, $uploadPath, true, $parent, null, null);
         $this->deleteTempFolders($uploadPath);
+    }
+
+    public function initXmlProcessing(Project $project, string $uploadPath, Directory $parent = null, $createEmptyMedia, $overwrite)
+    {
+        $projectPath = $this->fileManager->getProjectPath($project);
+        $this->recursiveBrowse($project, $projectPath, $uploadPath, false, $parent, $createEmptyMedia, $overwrite);
+        $this->deleteTempFolders($uploadPath);
+
+        $this->em->flush();
     }
 
     public function deleteTempFolders(string $path)
@@ -140,7 +149,7 @@ class ProjectManager
         }
     }
 
-    public function recursiveBrowse(Project $project, string $projectPath, string $uploadPath, Directory $parent = null)
+    public function recursiveBrowse(Project $project, string $projectPath, string $uploadPath, $handleMedia, Directory $parent = null, $createEmptyMedia, $overwrite)
     {
         $dirRepo = $this->em->getRepository('App:Directory');
         $mediaRepo = $this->em->getRepository('App:Media');
@@ -159,19 +168,38 @@ class ProjectManager
                         $this->fm->add('warning', 'directory_already_existing', ["%dir%" => $absolutePath]);
                     }
 
-                    $this->recursiveBrowse($project, $projectPath, $absolutePath, $newDirectory);
+                    $this->recursiveBrowse($project, $projectPath, $absolutePath, $handleMedia, $newDirectory, $createEmptyMedia, $overwrite);
                 } else {
                     $processedName = explode('.', $value)[0];
                     $existingMedia = $mediaRepo->findOneBy(["name" => $processedName, "parent" => $parent, "project" => $project]);
 
-                    if (!$existingMedia) {
-                        $file = new File($absolutePath);
-                        $media = $this->mediaManager->createMediaFromFile($file, $value, $project, $parent);
-                        $file->move($projectPath, $media->getUrl());
 
-                        $this->generateThumbnail($projectPath, $media->getUrl(), 512);
+                    // CAS MEDIA
+                    if ($handleMedia) {
+                        // code...
+                        if (!$existingMedia) {
+                            $file = new File($absolutePath);
+                            $media = $this->mediaManager->createMediaFromFile($file, $value, $project, $parent);
+                            $file->move($projectPath, $media->getUrl());
+
+                            $this->generateThumbnail($projectPath, $media->getUrl(), 512);
+                        } else {
+                            $this->fm->add('warning', 'media_already_existing', ["%media%" => $absolutePath]);
+                        }
                     } else {
-                        $this->fm->add('warning', 'media_already_existing', ["%media%" => $absolutePath]);
+                        // CAS XML
+                        $fileContent = file_get_contents($absolutePath);
+                        if (!$existingMedia) {
+                            if ($createEmptyMedia) {
+                                $media = $this->mediaManager->createMediaFromNothing($value, $project, $fileContent, $parent);
+                            }
+                        } else {
+                            $transcription = $existingMedia->getTranscription();
+                            if ($transcription->getContent() == '' || $overwrite) {
+                                $transcription->setContent($fileContent);
+                                $this->em->persist($transcription);
+                            }
+                        }
                     }
                 }
             }
@@ -219,6 +247,49 @@ class ProjectManager
         rmdir($uploadPath);
 
         $this->fm->add('notice', 'media_added');
+
+        return $project;
+    }
+
+    public function addProjectXml(Project $project, $files, bool $isZip, Directory $parent = null, $createEmptyMedia, $overwrite)
+    {
+        $basePath = $this->fileManager->getBaseProjectPath();
+        $projectMediaPath = $this->fileManager->getProjectPath($project);
+
+        if (!is_dir($basePath)) {
+            mkdir($basePath);
+        }
+
+        if (!is_dir($projectMediaPath)) {
+            mkdir($projectMediaPath);
+        }
+
+        $uploadPath = $projectMediaPath . DIRECTORY_SEPARATOR . 'tmp';
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath);
+        }
+
+        if ($isZip) {
+            $zipName = $files->getClientOriginalName();
+            $files->move($uploadPath, $zipName);
+            $zip = new \ZipArchive;
+            $success = $zip->open($uploadPath . DIRECTORY_SEPARATOR . $zipName);
+            if ($success === true) {
+                $zip->extractTo($uploadPath);
+                $zip->close();
+            }
+
+            unlink($uploadPath . DIRECTORY_SEPARATOR . $zipName);
+        } else {
+            foreach ($files as $file) {
+                $file->move($uploadPath, $file->getClientOriginalName());
+            }
+        }
+
+        $this->initXmlProcessing($project, $uploadPath, $parent, $createEmptyMedia, $overwrite);
+        rmdir($uploadPath);
+
+        $this->fm->add('notice', 'xml_added');
 
         return $project;
     }

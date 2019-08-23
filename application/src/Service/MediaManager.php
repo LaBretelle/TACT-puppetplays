@@ -45,10 +45,30 @@ class MediaManager
         return $media;
     }
 
-    public function initMediaTranscription(Media $media)
+    public function createMediaFromNothing(string $fileClientName, Project $project, string $content, Directory $parent = null)
+    {
+        $name = explode('.', $fileClientName)[0];
+        $media = new Media();
+        $media->setUrl(null);
+        $media->setName($name);
+        $media->setParent($parent);
+        $media->setProject($project);
+        $project->addMedia($media);
+        $media = $this->initMediaTranscription($media, $content);
+
+        $this->em->persist($project);
+        $this->em->persist($media);
+        $this->em->flush();
+
+        return $media;
+    }
+
+
+
+    public function initMediaTranscription(Media $media, $content = '')
     {
         $transcription = new Transcription();
-        $transcription->setContent('');
+        $transcription->setContent($content);
         $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_CREATED);
         $media->setTranscription($transcription);
 
@@ -59,7 +79,7 @@ class MediaManager
     {
         $transcription = $media->getTranscription();
         $oldContent = $transcription->getContent();
-        
+
         if ($oldContent !== $content) {
             $transcription->setContent($content);
             $this->transcriptionManager->addLog($transcription, AppEnums::TRANSCRIPTION_LOG_UPDATED);

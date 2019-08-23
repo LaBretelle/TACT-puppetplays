@@ -185,14 +185,23 @@ $(document).ready(() => {
   // set default to multiple images upload
   $('#project_media_zip').closest('.form-group').hide()
   $('#project_media_zip').attr('required', false)
+  // set default to multiple XMl upload
+  $('#xml_zip').closest('.form-group').hide()
+  $('#xml_zip').attr('required', false)
+
 
   // allow user to choose between a single zip file or multiple images files
   $('.radio-file-type').on('change', (e) => {
-    const toHide = e.target.value === 'images' ? $('#project_media_zip') : $('#project_media_images')
-    const toShow = e.target.value === 'images' ? $('#project_media_images') : $('#project_media_zip')
+    let toHide = e.target.value === 'images' ? $('#project_media_zip') : $('#project_media_images')
+    let toShow = e.target.value === 'images' ? $('#project_media_images') : $('#project_media_zip')
+
+    toHide = e.target.value === 'xmls' ? $('#xml_zip') : $('#xml_xmls')
+    toShow = e.target.value === 'xmls' ? $('#xml_xmls') : $('#xml_zip')
+
+
     toHide.attr('required', false)
     toShow.attr('required', true)
-    if(e.target.value === 'images'){
+    if(e.target.value === 'images' || e.target.value === 'xmls'){
       $('.max-file-upload-msg').show()
     } else {
       $('.max-file-upload-msg').hide()
@@ -202,10 +211,19 @@ $(document).ready(() => {
   })
 
   // handle file selection... if file input exists
-  const imagesFileInput = document.getElementById('project_media_images')
-  if (imagesFileInput) {
-    imagesFileInput.onchange = (e) => {
+  let uploadFiles = document.getElementById('project_media_images')
+  if (uploadFiles) {
+    uploadFiles.onchange = (e) => {
       const span = document.getElementById('nb-media-selected')
+      span.textContent = e.target.files.length
+    }
+  }
+
+  // handle file selection... if file input exists
+  uploadFiles = document.getElementById('xml_xmls')
+  if (uploadFiles) {
+    uploadFiles.onchange = (e) => {
+      const span = document.getElementById('nb-xmls-selected')
       span.textContent = e.target.files.length
     }
   }
