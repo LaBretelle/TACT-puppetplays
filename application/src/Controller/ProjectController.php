@@ -10,6 +10,7 @@ use App\Entity\UserProjectStatus;
 use App\Entity\UserStatus;
 use App\Form\ExportType;
 use App\Form\ProjectMediaType;
+use App\Form\XmlType;
 use App\Form\ProjectType;
 use App\Service\AppEnums;
 use App\Service\ExportManager;
@@ -182,22 +183,60 @@ class ProjectController extends AbstractController
             throw new AccessDeniedException($this->translator->trans('access_denied'));
         }
 
-        $form = $this->createForm(ProjectMediaType::class, $project);
-        $form->handleRequest($request);
+        $formMedia = $this->createForm(ProjectMediaType::class, $project);
+        $formXml = $this->createForm(XmlType::class, $project);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $formMedia->handleRequest($request);
+        $formXml->handleRequest($request);
+
+        $parameters = [];
+        $parameters["createEmptyMedia"] = false;
+        $parameters["overwrite"] = false;
+        $parameters["validTranscript"] = false;
+        $parameters["isZip"] = false;
+        $parameters["updateMedia"] = false;
+        $parameters["rootTag"] = "";
+
+
+        if ($formMedia->isSubmitted() && $formMedia->isValid()) {
             $fileType = $request->get('file-type');
             $isZip = $fileType === 'zip';
-            $media = $isZip ? $form->get('zip')->getData() : $form->get('images')->getData();
-            $this->projectManager->addProjectMedia($project, $media, $isZip, $current);
+            $updateMedia = $formMedia->get('update_media')->getData();
+            $media = $isZip ? $formMedia->get('zip')->getData() : $formMedia->get('images')->getData();
+
+            $parameters ["isZip"] = $isZip;
+            $parameters ["updateMedia"] = $updateMedia;
+
+            $this->projectManager->addProjectMedia($project, $media, $current, $parameters);
         }
+
+        if ($formXml->isSubmitted() && $formXml->isValid()) {
+            $fileType = $request->get('file-type');
+
+            $createEmptyMedia = $formXml->get('create_empty_media')->getData();
+            $overwrite = $formXml->get('overwrite')->getData();
+            $rootTag = $formXml->get('rootTag')->getData();
+            $validTranscript = $formXml->get('auto_valid_transcript')->getData();
+            $isZip = $fileType === 'zip';
+
+            $parameters ["createEmptyMedia"] = $createEmptyMedia;
+            $parameters ["overwrite"] = $overwrite;
+            $parameters ["validTranscript"] = $validTranscript;
+            $parameters ["isZip"] = $isZip;
+            $parameters ["rootTag"] = $rootTag;
+
+            $xmls = $isZip ? $formXml->get('zip')->getData() : $formXml->get('xmls')->getData();
+            $this->projectManager->addProjectXml($project, $xmls, $current, $parameters);
+        }
+
 
         $file_limit = ini_get('max_file_uploads');
 
         return $this->render(
             'project/project-media.html.twig',
             [
-              'form' => $form->createView(),
+              'form' => $formMedia->createView(),
+              'formXml' => $formXml->createView(),
               'project' => $project,
               'fileLimit' => ini_get('max_file_uploads'),
               'current' => $current,

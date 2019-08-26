@@ -13,6 +13,7 @@ app_admin:                                Site administrator
 ask_validation_text:                      Vous êtes sur le point de demander la validation/mise en relecture de cette transcription.
 asked_by:                                 Demande faite par
 attributes:                               Attributs for element
+auto_valid_transcript:                    Valider automatiquement les transcriptions
 back_to_transcripts:                      Back to transcripts
 backtotop:                                Back to top
 by:                                       by
@@ -32,6 +33,7 @@ confirm_project_deletion:                 Are you sure you want to delete this p
 confirm_title:                            Please confirm!
 confirm:                                  I confirm!
 contributors:                             Contributors
+create_empty_media:                       Créer des médias "vide" pour si aucun média n'est associable
 delete_current_tag:                       Delete current tag
 delete_media:                             Delete selected media
 description:                              Description
@@ -120,6 +122,7 @@ no:                                       No
 not_enabled_yet:                          (Not enabled yet)
 not_registered:                           Not registered
 other:                                    Autre
+overwrite:                                Ecraser les transcriptions
 parent_folder_name:                       Parent folder name
 password:                                 Password
 platform_home_text:                       Platform home text
@@ -159,6 +162,7 @@ project_media_add_file_title:             Add medias
 project_media_add_file:                   Upload file(s)
 project_media_count:                      '%count% médias'
 project_media_file_type_images:           Image(s)
+project_media_file_type_xmls:             Fichiers .xml,txt
 project_media_file_type_zip:              Zip
 project_media_file_type:                  Type of file to upload
 project_media_no_media_in_current_dir:    No media in current folder
@@ -183,6 +187,7 @@ project_transcription:                    Transcription
 project_unarchive:                        Unarchive
 project_user_status:                      User statuses
 project_view_transciptions:               View transcriptions
+project_xml_upload:                       Envoyer les fichiers
 public_mail:                              Email visible to all
 register_date:                            Registration date
 register:                                 register
@@ -206,6 +211,7 @@ schema_enabled:                           Schéma activé
 schema_json:                              JSON
 schema_name:                              Nom du schema
 selected_media:                           selected media
+selected_xmls:                            fichier(s) xml sélectionné(s)
 send:                                     Send
 status_edit:                              Edit status
 status_edited_project:                    Votre status pour le projet '%project%' a été modifié
@@ -305,4 +311,7 @@ view_profile:                             View profile
 view_project_short:                       Détails
 view_project:                             Accéder au projet
 view_transcriptions_long:                 Allows you to view the media and associated transcripts. If you wish to participate, you must first register for the project (need to be logged in).
+xml_add_file_placeholder:                 Sélectionner un/des fichier(s)
+xml_add_file_title:                       Ajouter des transcriptions
+xml_file_type:                            Type de fichier
 yes:                                      Yes

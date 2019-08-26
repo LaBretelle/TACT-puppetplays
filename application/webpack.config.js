@@ -21,6 +21,7 @@ Encore
   .addEntry('js/transcription', './assets/js/transcription.js')
   .addEntry('js/platform', './assets/js/platform.js')
   .addEntry('js/openseadragon', './node_modules/openseadragon/build/openseadragon/openseadragon.min.js')
+  .addEntry('js/file-input', './node_modules/bs-custom-file-input/dist/bs-custom-file-input.min.js')
 
   .addPlugin(new CopyWebpackPlugin([
     // Copy the skins from tinymce to the build/js/skins directory

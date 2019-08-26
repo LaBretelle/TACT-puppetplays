@@ -23,7 +23,7 @@ class Media
     private $project;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $url;
 
@@ -84,13 +84,13 @@ class Media
         return $this;
     }
 
-    public function setUrl(string $url) : self
+    public function setUrl(?string $url) : self
     {
         $this->url = $url;
         return $this;
     }
 
-    public function getUrl() : string
+    public function getUrl() : ?string
     {
         return $this->url;
     }

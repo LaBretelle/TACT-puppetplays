@@ -185,27 +185,56 @@ $(document).ready(() => {
   // set default to multiple images upload
   $('#project_media_zip').closest('.form-group').hide()
   $('#project_media_zip').attr('required', false)
+  // set default to multiple XMl upload
+  $('#xml_zip').closest('.form-group').hide()
+  $('#xml_zip').attr('required', false)
+
 
   // allow user to choose between a single zip file or multiple images files
   $('.radio-file-type').on('change', (e) => {
-    const toHide = e.target.value === 'images' ? $('#project_media_zip') : $('#project_media_images')
-    const toShow = e.target.value === 'images' ? $('#project_media_images') : $('#project_media_zip')
-    toHide.attr('required', false)
-    toShow.attr('required', true)
-    if(e.target.value === 'images'){
+    const radiobtn = e.target
+    const what = radiobtn.dataset.what
+
+    if (what == 'images') {
+      const toHide = (radiobtn.value === 'images') ? $('#project_media_zip') : $('#project_media_images')
+      const toShow = (radiobtn.value === 'images') ? $('#project_media_images') : $('#project_media_zip')
+      toHide.attr('required', false)
+      toShow.attr('required', true)
+      toHide.closest('.form-group').hide()
+      toShow.closest('.form-group').show()
+
+    }
+    else {
+      const toHideXML = radiobtn.value === 'xmls' ? $('#xml_zip') : $('#xml_xmls')
+      const toShowXML = radiobtn.value === 'xmls' ? $('#xml_xmls') : $('#xml_zip')
+      toHideXML.attr('required', false)
+      toShowXML.attr('required', true)
+      toHideXML.closest('.form-group').hide()
+      toShowXML.closest('.form-group').show()
+    }
+
+    if(radiobtn.value === 'images' || radiobtn.value === 'xmls'){
       $('.max-file-upload-msg').show()
     } else {
       $('.max-file-upload-msg').hide()
     }
-    toHide.closest('.form-group').hide()
-    toShow.closest('.form-group').show()
+
   })
 
   // handle file selection... if file input exists
-  const imagesFileInput = document.getElementById('project_media_images')
-  if (imagesFileInput) {
-    imagesFileInput.onchange = (e) => {
+  let uploadFiles = document.getElementById('project_media_images')
+  if (uploadFiles) {
+    uploadFiles.onchange = (e) => {
       const span = document.getElementById('nb-media-selected')
+      span.textContent = e.target.files.length
+    }
+  }
+
+  // handle file selection... if file input exists
+  uploadFiles = document.getElementById('xml_xmls')
+  if (uploadFiles) {
+    uploadFiles.onchange = (e) => {
+      const span = document.getElementById('nb-xmls-selected')
       span.textContent = e.target.files.length
     }
   }

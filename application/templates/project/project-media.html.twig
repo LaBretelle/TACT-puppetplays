@@ -10,17 +10,20 @@
 
 <div id="main-container">
   {% if project | isAuthorizedOnProject('manageMedia') %}
-    <div class="card media-upload-card">
-      <div class="card-header">
-        <div class="row">
-          <div class="col" data-toggle="collapse" data-target="#upload-form">
-            <span class="btn btn-secondary">
-              <i class="fas fa-plus"></i>
-              {{'project_media_add_file_title' | trans}}
-            </span>
+
+  <div class="row">
+    <div class="col">
+      <div class="card media-upload-card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col" data-toggle="collapse" data-target="#upload-form">
+              <span class="btn btn-secondary">
+                <i class="fas fa-plus"></i>
+                {{'project_media_add_file_title' | trans}}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
       <div id="upload-form" class="collapse card-body">
           {{ form_start(form) }}
             <div class="alert alert-info">
@@ -29,24 +32,89 @@
             <div class="form-group row col">
               <label class="col-3 col-form-label">{{'project_media_file_type' | trans}}</label>
               <div class="form-check form-check-inline">
-                <input class="form-check-input radio-file-type" name="file-type" type="radio" id="inlineCheckbox1" checked value="images">
+                <input class="form-check-input radio-file-type" data-what="images" name="file-type" type="radio" id="inlineCheckbox1" checked value="images">
                 <label class="form-check-label" for="inlineCheckbox1">{{'project_media_file_type_images' | trans}}</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input radio-file-type" name="file-type" type="radio" id="inlineCheckbox2" value="zip">
+                <input class="form-check-input radio-file-type" data-what="images" name="file-type" type="radio" id="inlineCheckbox2" value="zip">
                 <label class="form-check-label" for="inlineCheckbox2">{{'project_media_file_type_zip' | trans}}</label>
               </div>
             </div>
-            {# file(s) upload form #}
+
             {{ form_row(form.images) }}
-              <div class="max-file-upload-msg">
-                <small class="form-text text-muted max-file-upload-alert"><i class="fas fa-exclamation-triangle fa-fw"></i>{{'max_file_uploads_message' | trans({'%nb_max%': fileLimit})}} - <span id="nb-media-selected">0</span> {{'selected_media' | trans}}</small>
-              </div>
+
+            <div class="max-file-upload-msg">
+              <small class="form-text text-muted max-file-upload-alert"><i class="fas fa-exclamation-triangle fa-fw"></i>{{'max_file_uploads_message' | trans({'%nb_max%': fileLimit})}} - <span id="nb-media-selected">0</span> {{'selected_media' | trans}}</small>
+            </div>
+
             {{ form_row(form.zip) }}
+
+            {{ form_row(form.update_media) }}
+
+            <div class="form-group">
             {{ form_row(form.save) }}
+            </div>
+
           {{ form_end(form) }}
       </div>
     </div>
+  </div>
+  <div class="col">
+
+    <div class="card media-upload-card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col" data-toggle="collapse" data-target="#upload-xml-form">
+            <span class="btn btn-secondary">
+              <i class="fas fa-plus"></i>
+              {{'xml_add_file_title' | trans}}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="upload-xml-form" class="collapse card-body">
+          {{ form_start(formXml) }}
+            <div class="alert alert-info">
+                {{'xml_upload_help' | trans}}
+            </div>
+
+            <div class="form-group row col">
+              <label class="col-3 col-form-label">{{'xml_file_type' | trans}}</label>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input radio-file-type" data-what="xmls" name="file-type" type="radio" id="inlineCheckbox3" checked value="xmls">
+                <label class="form-check-label" for="inlineCheckbox3">{{'project_media_file_type_xmls' | trans}}</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input radio-file-type" data-what="xmls" name="file-type" type="radio" id="inlineCheckbox4" value="zip">
+                <label class="form-check-label" for="inlineCheckbox4">{{'project_media_file_type_zip' | trans}}</label>
+              </div>
+            </div>
+
+            {# file(s) upload form #}
+            {{ form_row(formXml.xmls) }}
+
+            <div class="max-file-upload-msg">
+              <small class="form-text text-muted max-file-upload-alert"><i class="fas fa-exclamation-triangle fa-fw"></i>{{'max_file_uploads_message' | trans({'%nb_max%': fileLimit})}} - <span id="nb-xmls-selected">0</span> {{'selected_xmls' | trans}}</small>
+            </div>
+
+            {{ form_row(formXml.zip) }}
+
+            <div class="form-group">
+              {{ form_row(formXml.create_empty_media) }}
+              {{ form_row(formXml.overwrite) }}
+              {{ form_row(formXml.auto_valid_transcript) }}
+              {{ form_row(formXml.rootTag) }}
+              {{ form_row(formXml.save) }}
+            </div>
+
+          {{ form_end(formXml) }}
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+
   {% endif %}
   {{ include('media/media-list-manage-partial.html.twig', { 'project': project }) }}
 </div>

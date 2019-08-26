@@ -1,3 +1,6 @@
+import bsCustomFileInput from 'bs-custom-file-input'
+
+
 $(document).ready(() => {
   /*******************
     BOOTSTRAP TOOLTIP & POPOVER
@@ -21,4 +24,8 @@ $(document).ready(() => {
         break
     }
   })
+
+
+  bsCustomFileInput.init()
+  
 })
