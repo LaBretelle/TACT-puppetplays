@@ -193,17 +193,28 @@ class ProjectController extends AbstractController
             $fileType = $request->get('file-type');
             $isZip = $fileType === 'zip';
             $media = $isZip ? $formMedia->get('zip')->getData() : $formMedia->get('images')->getData();
-            $this->projectManager->addProjectMedia($project, $media, $isZip, $current);
+
+            $parameters ["createEmptyMedia"] = false;
+            $parameters ["overwrite"] = false;
+            $parameters ["validTranscript"] = false;
+            $parameters ["isZip"] = $isZip;
+            $this->projectManager->addProjectMedia($project, $media, $current, $parameters);
         }
 
         if ($formXml->isSubmitted() && $formXml->isValid()) {
             $fileType = $request->get('file-type');
             $createEmptyMedia = $formXml->get('create_empty_media')->getData();
             $overwrite = $formXml->get('overwrite')->getData();
-
+            $validTranscript = $formXml->get('auto_valid_transcript')->getData();
             $isZip = $fileType === 'zip';
+
+            $parameters ["createEmptyMedia"] = $createEmptyMedia;
+            $parameters ["overwrite"] = $overwrite;
+            $parameters ["validTranscript"] = $validTranscript;
+            $parameters ["isZip"] = $isZip;
+
             $xmls = $isZip ? $formXml->get('zip')->getData() : $formXml->get('xmls')->getData();
-            $this->projectManager->addProjectXml($project, $xmls, $isZip, $current, $createEmptyMedia, $overwrite);
+            $this->projectManager->addProjectXml($project, $xmls, $current, $parameters);
         }
 
 

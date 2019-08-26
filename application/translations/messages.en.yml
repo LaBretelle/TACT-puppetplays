@@ -13,6 +13,7 @@ app_admin:                                Site administrator
 ask_validation_text:                      Vous êtes sur le point de demander la validation/mise en relecture de cette transcription.
 asked_by:                                 Demande faite par
 attributes:                               Attributs for element
+auto_valid_transcript:                    Valider automatiquement les transcriptions
 back_to_transcripts:                      Back to transcripts
 backtotop:                                Back to top
 by:                                       by

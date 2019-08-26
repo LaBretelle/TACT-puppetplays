@@ -58,6 +58,13 @@ class XmlType extends AbstractType
               'mapped' => false
           ])
 
+          ->add('auto_valid_transcript', CheckboxType::class, [
+              'label'    => 'auto_valid_transcript',
+              'required' => false,
+              'data' => false,
+              'mapped' => false
+          ])
+
           ->add('save', SubmitType::class, [
               'attr' => ['class' => 'btn btn-primary'],
               'label' => 'project_xml_upload',
