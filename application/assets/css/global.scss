@@ -28,6 +28,10 @@ button > * {
   }
 }
 
+.custom-file-input, .custom-file-label{
+  overflow: hidden;
+}
+
 #footer {
   margin-top: 100px;
   padding: 1.5rem 0;

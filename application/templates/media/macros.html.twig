@@ -2,7 +2,7 @@
   {% if media.url is not null %}
     {{ asset('project_files/' ~ media.project.id ~ '/' ~ media.url) }}
   {% else %}
-    {{ asset('img/avatar-placeholder_640.png') }}
+    {{ asset('img/media_placeholder.jpg') }}
   {% endif %}
 {% endmacro %}
 
@@ -10,7 +10,7 @@
   {% if media.url is not null %}
     {{ asset('project_files/' ~ media.project.id ~ '/thumbnails/' ~ media.url) }}
   {% else %}
-    {{ asset('img/avatar-placeholder_640.png') }}
+    {{ asset('img/media_placeholder.jpg') }}
   {% endif %}
 {% endmacro %}
 

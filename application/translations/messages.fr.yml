@@ -32,6 +32,7 @@ confirm_project_deletion:                 Êtes-vous sur de vouloir supprimer ce
 confirm_title:                            Veuillez confirmer!
 confirm:                                  Je confirme!
 contributors:                             Contributeurs
+create_empty_media:                       Créer des médias "vides" pour transcription seule
 delete_current_tag:                       Supprimer le tag courrant
 delete_media:                             Supprimer les médias sélectionnés
 description:                              Description
@@ -129,6 +130,7 @@ no:                                       Non
 not_enabled_yet:                          (en attente de validation)
 not_registered:                           Non inscrit
 other:                                    Autre
+overwrite:                                Ecraser les transcriptions
 parent_folder_name:                       Nom du dossier parent
 password:                                 Mot de passe
 platform_home_text:                       Texte de la page d'accueil
@@ -169,6 +171,7 @@ project_media_add_file_title:             Ajouter des médias
 project_media_add_file:                   Uploader un/des fichier(s)
 project_media_count:                      '%count% médias'
 project_media_file_type_images:           Image(s)
+project_media_file_type_xmls:             Fichiers .xml,txt
 project_media_file_type_zip:              Zip
 project_media_file_type:                  Type de fichier à uploader
 project_media_no_media_in_current_dir:    Aucun média dans le répertoire sélectionné
@@ -193,6 +196,7 @@ project_transcription:                    Transcription
 project_unarchive:                        Désarchiver
 project_user_status:                      Statut des utilisateurs
 project_view_transciptions:               Voir les transcriptions
+project_xml_upload:                       Envoyer les fichiers
 public_mail:                              Email visible par tous
 register_date:                            Date d'inscription
 register:                                 S'enregistrer
@@ -216,6 +220,7 @@ schema_enabled:                           Schéma activé
 schema_json:                              JSON
 schema_name:                              Nom du schema
 selected_media:                           média(s) selectionné(s)
+selected_xmls:                            fichier(s) xml sélectionné(s)
 send:                                     Envoyer
 status_edit:                              Editer le statut
 status_edited_project:                    Votre statut pour le projet '%project%' a été modifié
@@ -316,4 +321,8 @@ view_profile:                             Voir le profil
 view_project_short:                       Détails
 view_project:                             Détails du projet
 view_transcriptions_long:                 Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
+xml_add_file_placeholder:                 Sélectionner un/des fichier(s)
+xml_add_file_title:                       Ajouter des transcriptions
+xml_file_type:                            Type de fichier
+xml_upload_help:                          Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 yes:                                      Oui
