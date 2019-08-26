@@ -4,10 +4,11 @@ namespace App\Form;
 
 use App\Entity\Project;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProjectMediaType extends AbstractType
@@ -24,7 +25,6 @@ class ProjectMediaType extends AbstractType
         $builder
           ->add('images', FileType::class, [
               'multiple' => true,
-              //'required' => false,
               'label' => 'project_media_add_file_placeholder',
               'translation_domain' => 'messages',
               'attr' => [
@@ -36,13 +36,19 @@ class ProjectMediaType extends AbstractType
           ])
           ->add('zip', FileType::class, [
               'label' => 'project_media_add_file_placeholder',
-              //'required' => false,
               'translation_domain' => 'messages',
               'attr' => [
                 'accept' => 'application/zip',
                 'id' => 'add_images_input'
               ],
               'mapped' => false
+          ])
+          ->add('update_media', CheckboxType::class, [
+              'label'    => 'update_media',
+              'required' => false,
+              'data' => false,
+              'mapped' => false,
+              'help' => 'update_media_help'
           ])
           ->add('save', SubmitType::class, [
               'attr' => ['class' => 'btn btn-primary'],

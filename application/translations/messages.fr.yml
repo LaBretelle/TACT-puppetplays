@@ -327,3 +327,12 @@ xml_add_file_title:                       Ajouter des transcriptions
 xml_file_type:                            Type de fichier
 xml_upload_help:                          Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 yes:                                      Oui
+
+
+rootTag:                                  Balise dont le contenu sera récupéré
+create_empty_media_help: Crée si nécessaire un media "livre1" si une transcription "livre1.xml" est déposée.
+overwrite_help: Si un transcription existe déjà pour le média "livre1", elle sera remplacé par le contenu de "livre1.xml". Sinon elle sera initialisée avec ce contenu.
+auto_valid_transcript_help: Valide la transcription. S'il y avait une demande de relecture, elle sera acceptée.
+rootTag_help: Balise dont le contenu constituera la transcription. Si elle n'existe pas, on prendra l'intégralité du fichier xml. Si plusieurs éléments correspondent à cette balise, on garde le premier.
+update_media:                             Ecraser médias en cas de conflit de nom
+update_media_help:                        Si media livre1 présent dans le projet et dans les nouveaux fichiers déposés, alors le fichier image correspondant est mis à jour.

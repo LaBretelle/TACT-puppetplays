@@ -189,22 +189,33 @@ class ProjectController extends AbstractController
         $formMedia->handleRequest($request);
         $formXml->handleRequest($request);
 
+        $parameters = [];
+        $parameters["createEmptyMedia"] = false;
+        $parameters["overwrite"] = false;
+        $parameters["validTranscript"] = false;
+        $parameters["isZip"] = false;
+        $parameters["updateMedia"] = false;
+        $parameters["rootTag"] = "";
+
+
         if ($formMedia->isSubmitted() && $formMedia->isValid()) {
             $fileType = $request->get('file-type');
             $isZip = $fileType === 'zip';
+            $updateMedia = $formMedia->get('update_media')->getData();
             $media = $isZip ? $formMedia->get('zip')->getData() : $formMedia->get('images')->getData();
 
-            $parameters ["createEmptyMedia"] = false;
-            $parameters ["overwrite"] = false;
-            $parameters ["validTranscript"] = false;
             $parameters ["isZip"] = $isZip;
+            $parameters ["updateMedia"] = $updateMedia;
+
             $this->projectManager->addProjectMedia($project, $media, $current, $parameters);
         }
 
         if ($formXml->isSubmitted() && $formXml->isValid()) {
             $fileType = $request->get('file-type');
+
             $createEmptyMedia = $formXml->get('create_empty_media')->getData();
             $overwrite = $formXml->get('overwrite')->getData();
+            $rootTag = $formXml->get('rootTag')->getData();
             $validTranscript = $formXml->get('auto_valid_transcript')->getData();
             $isZip = $fileType === 'zip';
 
@@ -212,6 +223,7 @@ class ProjectController extends AbstractController
             $parameters ["overwrite"] = $overwrite;
             $parameters ["validTranscript"] = $validTranscript;
             $parameters ["isZip"] = $isZip;
+            $parameters ["rootTag"] = $rootTag;
 
             $xmls = $isZip ? $formXml->get('zip')->getData() : $formXml->get('xmls')->getData();
             $this->projectManager->addProjectXml($project, $xmls, $current, $parameters);

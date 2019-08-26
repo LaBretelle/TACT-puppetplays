@@ -32,11 +32,11 @@
             <div class="form-group row col">
               <label class="col-3 col-form-label">{{'project_media_file_type' | trans}}</label>
               <div class="form-check form-check-inline">
-                <input class="form-check-input radio-file-type" name="file-type" type="radio" id="inlineCheckbox1" checked value="images">
+                <input class="form-check-input radio-file-type" data-what="images" name="file-type" type="radio" id="inlineCheckbox1" checked value="images">
                 <label class="form-check-label" for="inlineCheckbox1">{{'project_media_file_type_images' | trans}}</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input radio-file-type" name="file-type" type="radio" id="inlineCheckbox2" value="zip">
+                <input class="form-check-input radio-file-type" data-what="images" name="file-type" type="radio" id="inlineCheckbox2" value="zip">
                 <label class="form-check-label" for="inlineCheckbox2">{{'project_media_file_type_zip' | trans}}</label>
               </div>
             </div>
@@ -48,6 +48,8 @@
             </div>
 
             {{ form_row(form.zip) }}
+
+            {{ form_row(form.update_media) }}
 
             <div class="form-group">
             {{ form_row(form.save) }}
@@ -76,16 +78,14 @@
                 {{'xml_upload_help' | trans}}
             </div>
 
-
-
             <div class="form-group row col">
               <label class="col-3 col-form-label">{{'xml_file_type' | trans}}</label>
               <div class="form-check form-check-inline">
-                <input class="form-check-input radio-file-type" name="file-type" type="radio" id="inlineCheckbox3" checked value="xmls">
+                <input class="form-check-input radio-file-type" data-what="xmls" name="file-type" type="radio" id="inlineCheckbox3" checked value="xmls">
                 <label class="form-check-label" for="inlineCheckbox3">{{'project_media_file_type_xmls' | trans}}</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input radio-file-type" name="file-type" type="radio" id="inlineCheckbox4" value="zip">
+                <input class="form-check-input radio-file-type" data-what="xmls" name="file-type" type="radio" id="inlineCheckbox4" value="zip">
                 <label class="form-check-label" for="inlineCheckbox4">{{'project_media_file_type_zip' | trans}}</label>
               </div>
             </div>
@@ -103,6 +103,7 @@
               {{ form_row(formXml.create_empty_media) }}
               {{ form_row(formXml.overwrite) }}
               {{ form_row(formXml.auto_valid_transcript) }}
+              {{ form_row(formXml.rootTag) }}
               {{ form_row(formXml.save) }}
             </div>
 

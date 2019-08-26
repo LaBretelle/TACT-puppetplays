@@ -192,22 +192,33 @@ $(document).ready(() => {
 
   // allow user to choose between a single zip file or multiple images files
   $('.radio-file-type').on('change', (e) => {
-    let toHide = e.target.value === 'images' ? $('#project_media_zip') : $('#project_media_images')
-    let toShow = e.target.value === 'images' ? $('#project_media_images') : $('#project_media_zip')
+    const radiobtn = e.target
+    const what = radiobtn.dataset.what
 
-    toHide = e.target.value === 'xmls' ? $('#xml_zip') : $('#xml_xmls')
-    toShow = e.target.value === 'xmls' ? $('#xml_xmls') : $('#xml_zip')
+    if (what == 'images') {
+      const toHide = (radiobtn.value === 'images') ? $('#project_media_zip') : $('#project_media_images')
+      const toShow = (radiobtn.value === 'images') ? $('#project_media_images') : $('#project_media_zip')
+      toHide.attr('required', false)
+      toShow.attr('required', true)
+      toHide.closest('.form-group').hide()
+      toShow.closest('.form-group').show()
 
+    }
+    else {
+      const toHideXML = radiobtn.value === 'xmls' ? $('#xml_zip') : $('#xml_xmls')
+      const toShowXML = radiobtn.value === 'xmls' ? $('#xml_xmls') : $('#xml_zip')
+      toHideXML.attr('required', false)
+      toShowXML.attr('required', true)
+      toHideXML.closest('.form-group').hide()
+      toShowXML.closest('.form-group').show()
+    }
 
-    toHide.attr('required', false)
-    toShow.attr('required', true)
-    if(e.target.value === 'images' || e.target.value === 'xmls'){
+    if(radiobtn.value === 'images' || radiobtn.value === 'xmls'){
       $('.max-file-upload-msg').show()
     } else {
       $('.max-file-upload-msg').hide()
     }
-    toHide.closest('.form-group').hide()
-    toShow.closest('.form-group').show()
+
   })
 
   // handle file selection... if file input exists

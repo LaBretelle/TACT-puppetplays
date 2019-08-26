@@ -14,6 +14,7 @@ use App\Service\MediaManager;
 use App\Service\ReviewManager;
 use App\Service\TranscriptionManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
@@ -157,6 +158,8 @@ class ProjectManager
         $createEmptyMedia = $parameters["createEmptyMedia"];
         $overwrite = $parameters["overwrite"];
         $validTranscript = $parameters["validTranscript"];
+        $rootTag = $parameters["rootTag"];
+        $updateMedia = $parameters["updateMedia"];
         $dirRepo = $this->em->getRepository('App:Directory');
         $mediaRepo = $this->em->getRepository('App:Media');
 
@@ -181,41 +184,71 @@ class ProjectManager
 
                     // CAS MEDIA
                     if ($handleMedia) {
+                        $file = new File($absolutePath);
                         if (!$existingMedia) {
-                            $file = new File($absolutePath);
                             $media = $this->mediaManager->createMediaFromFile($file, $value, $project, $parent);
                             $file->move($projectPath, $media->getUrl());
 
                             $this->generateThumbnail($projectPath, $media->getUrl(), 512);
                         } else {
-                            $this->fm->add('warning', 'media_already_existing', ["%media%" => $absolutePath]);
+                            if ($updateMedia) {
+                                $url = $existingMedia->getUrl();
+                                $file->move($projectPath, $url);
+                                $this->generateThumbnail($projectPath, $url, 512);
+                            } else {
+                                $this->fm->add('warning', 'media_already_existing', ["%media%" => $absolutePath]);
+                            }
                         }
                     } else {
                         // CAS XML
+                        $extension = pathinfo($absolutePath, PATHINFO_EXTENSION);
                         $fileContent = file_get_contents($absolutePath);
-                        if (!$existingMedia) {
-                            if ($createEmptyMedia) {
-                                $existingMedia = $this->mediaManager->createMediaFromNothing($value, $project, $fileContent, $parent);
-                            } else {
-                                $existingMedia = null;
-                            }
-                        } else {
-                            $transcription = $existingMedia->getTranscription();
-                            if ($transcription->getContent() == '' || $overwrite) {
-                                $transcription->setContent($fileContent);
-                                $this->em->persist($transcription);
-                            }
-                        }
+                        $extensions = ["xml", "txt", "rdf"];
+                        $markupExtensions = ["xml", "rdf"];
 
-                        if ($validTranscript && $existingMedia) {
-                            $transcription = $existingMedia->getTranscription();
-                            $this->tm->validate($transcription, true);
+                        if (in_array($extension, $extensions)) {
+                            // Gestion langages balisés
+                            if (in_array($extension, $markupExtensions)  && $rootTag != "") {
+                                $fileContent = $this->getNodeContent($rootTag, $fileContent);
+                            }
+
+                            // gestion pas de média trouvé
+                            if (!$existingMedia) {
+                                $existingMedia = ($createEmptyMedia)
+                                  ? $this->mediaManager->createMediaFromNothing($value, $project, $fileContent, $parent)
+                                  : null;
+                            }
+                            // gestion média déjà existant
+                            else {
+                                $transcription = $existingMedia->getTranscription();
+                                if (!$transcription || $transcription->getContent() == '' || $overwrite) {
+                                    $transcription->setContent($fileContent);
+                                    $this->em->persist($transcription);
+                                }
+                            }
+
+                            // validation de la transcription
+                            if ($validTranscript && $existingMedia) {
+                                $transcription = $existingMedia->getTranscription();
+                                $this->tm->validate($transcription, true);
+                            }
                         }
                     }
                 }
             }
         }
     }
+
+    private function getNodeContent($rootTag, $fileContent)
+    {
+        $crawler = new Crawler($fileContent);
+        $nodes = $crawler->filter($rootTag);
+
+        return ($nodes->count() > 0)
+           ? $nodes->html()
+           : $fileContent;
+    }
+
 
     public function addProjectMedia(Project $project, $files, Directory $parent = null, $parameters)
     {
