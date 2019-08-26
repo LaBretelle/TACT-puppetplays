@@ -13,6 +13,7 @@ app_admin:                                Administrateur du site
 ask_validation_text:                      Vous êtes sur le point de demander la relecture de cette transcription.
 asked_by:                                 Demande faite par
 attributes:                               Attributs pour l'élément
+auto_valid_transcript_help:               Valide la transcription. S'il y avait une demande de relecture, elle sera acceptée.
 auto_valid_transcript:                    Valider automatiquement les transcriptions
 back_to_transcripts:                      Retour aux transcriptions
 backtotop:                                Haut de page
@@ -33,6 +34,7 @@ confirm_project_deletion:                 Êtes-vous sur de vouloir supprimer ce
 confirm_title:                            Veuillez confirmer!
 confirm:                                  Je confirme!
 contributors:                             Contributeurs
+create_empty_media_help:                  Crée si nécessaire un media "livre1" si une transcription "livre1.xml" est déposée.
 create_empty_media:                       Créer des médias "vides" pour transcription seule
 delete_current_tag:                       Supprimer le tag courrant
 delete_media:                             Supprimer les médias sélectionnés
@@ -40,6 +42,8 @@ description:                              Description
 directory_already_existing:               Le répertoire %dir% est déjà présent
 directory_created:                        Dossier créé
 display_illustration:                     Afficher les exemples
+download_media:                           Télécharger l'image
+download_transcription:                   Télécharger la transcription
 edit_project_long:                        Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit:                                     Éditer
 element_list:                             Eléments disponibles
@@ -131,6 +135,7 @@ no:                                       Non
 not_enabled_yet:                          (en attente de validation)
 not_registered:                           Non inscrit
 other:                                    Autre
+overwrite_help:                           Si un transcription existe déjà pour le média "livre1", elle sera remplacé par le contenu de "livre1.xml". Sinon elle sera initialisée avec ce contenu.
 overwrite:                                Ecraser les transcriptions
 parent_folder_name:                       Nom du dossier parent
 password:                                 Mot de passe
@@ -215,6 +220,8 @@ review_transcription:                     Soumettre la relecture
 reviews_infos:                            Informations sur les relectures
 reviews:                                  Relectures
 root_directory_option:                    Racine
+rootTag_help:                             Balise dont le contenu constituera la transcription. Si elle n'existe pas, on prendra l'intégralité du fichier xml. Si plusieurs éléments correspondent à cette balise, on garde le premier.
+rootTag:                                  Balise dont le contenu sera récupéré
 save:                                     Sauvegarder
 schema_create:                            Créer un schema
 schema_enabled:                           Schéma activé
@@ -285,6 +292,8 @@ tutorial_previous:                        Précédent
 tutorial:                                 Tutoriel
 unsubscribe_done:                         Désinscription effectuée
 unvalidate_transcription:                 Invalider la transcription
+update_media_help:                        Si media livre1 présent dans le projet et dans les nouveaux fichiers déposés, alors le fichier image correspondant est mis à jour.
+update_media:                             Ecraser médias en cas de conflit de nom
 user_account_activated_error:             Un problème est survenu lors de l'activation de votre compte.
 user_account_activated:                   Votre compte est maintenant actif.
 user_account_created:                     Votre compte est créé. Vous pouvez désormais vous connecter.
@@ -327,12 +336,3 @@ xml_add_file_title:                       Ajouter des transcriptions
 xml_file_type:                            Type de fichier
 xml_upload_help:                          Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 yes:                                      Oui
-
-
-rootTag:                                  Balise dont le contenu sera récupéré
-create_empty_media_help: Crée si nécessaire un media "livre1" si une transcription "livre1.xml" est déposée.
-overwrite_help: Si un transcription existe déjà pour le média "livre1", elle sera remplacé par le contenu de "livre1.xml". Sinon elle sera initialisée avec ce contenu.
-auto_valid_transcript_help: Valide la transcription. S'il y avait une demande de relecture, elle sera acceptée.
-rootTag_help: Balise dont le contenu constituera la transcription. Si elle n'existe pas, on prendra l'intégralité du fichier xml. Si plusieurs éléments correspondent à cette balise, on garde le premier.
-update_media:                             Ecraser médias en cas de conflit de nom
-update_media_help:                        Si media livre1 présent dans le projet et dans les nouveaux fichiers déposés, alors le fichier image correspondant est mis à jour.

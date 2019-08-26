@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Project;
+use App\Entity\Media;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
@@ -45,6 +46,16 @@ class FileManager
         return $this->params->get('project_file_dir').DIRECTORY_SEPARATOR.$project->getId();
     }
 
+    public function getMediaPath(Media $media)
+    {
+        $mediaUrl = $media->getUrl();
+        $project = $media->getProject();
+        $mediaExtension = pathinfo($mediaUrl, PATHINFO_EXTENSION);
+        $projectPath = $this->getProjectPath($project);
+
+        return  $projectPath . DIRECTORY_SEPARATOR . $mediaUrl;
+    }
+
     public function getUserPath()
     {
         return $this->params->get('user_files_directory').DIRECTORY_SEPARATOR;
@@ -53,6 +64,26 @@ class FileManager
     public function getUploadPath(Project $project)
     {
         return $this->params->get('upload_dir').DIRECTORY_SEPARATOR.$project->getId();
+    }
+
+    public function createTmpDir()
+    {
+        return '/tmp/project-'.date("Ymd").'-'.uniqid()."/";
+    }
+
+    public function recreateMediaName(Media $media)
+    {
+        $mediaExtension = pathinfo($media->getUrl(), PATHINFO_EXTENSION);
+        $mediaName = $media->getName().".".$mediaExtension;
+
+        return $mediaName;
+    }
+
+    public function recreateXmlName(Media $media)
+    {
+        $mediaName = $media->getName().".xml";
+
+        return $mediaName;
     }
 
     public function moveFiles($files, $path)

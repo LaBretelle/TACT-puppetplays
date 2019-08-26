@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Filesystem\Filesystem;
 use App\Entity\Media;
 use App\Entity\Comment;
 use App\Form\CommentType;
@@ -230,5 +232,39 @@ class MediaController extends AbstractController
         $this->transcriptionManager->validate($media->getTranscription(), $valid);
 
         return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent]);
+    }
+
+    /**
+     * @Route("/{id}/media/download", name="download_media")
+     */
+    public function mediaDownloadMedia(Media $media)
+    {
+        $fileSystem = new Filesystem();
+
+        $mediaName = $this->fileManager->recreateMediaName($media);
+        $mediaPath =  $this->fileManager->getMediaPath($media);
+        $exportDir = $this->fileManager->createTmpDir();
+        $newMediaPath = $exportDir.$mediaName;
+
+        $fileSystem->mkdir($exportDir);
+        $fileSystem->copy($mediaPath, $newMediaPath);
+
+        return $this->file($newMediaPath);
+    }
+
+    /**
+     * @Route("/{id}/transcription/download", name="download_transcription")
+     */
+    public function mediaDownloadTranscription(Media $media)
+    {
+        $fileSystem = new Filesystem();
+
+        $xmlName = $this->fileManager->recreateXmlName($media);
+        $exportDir = $this->fileManager->createTmpDir();
+        $fileSystem->mkdir($exportDir);
+        $fileSystem->appendToFile($exportDir.$xmlName, $media->getTranscription()->getContent());
+
+
+        return $this->file($exportDir.$xmlName);
     }
 }

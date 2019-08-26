@@ -40,7 +40,6 @@ class ExportManager
 
     public function export(Project $project, $params)
     {
-        // todo > supprimer le dossier tmp dans le zip de sortie.
         $exportDir = '/tmp/project'.$project->getId().'-'.date("Ymd").'-'.uniqid();
         $zipName = $exportDir.".zip";
         $fileSystem = new Filesystem();
@@ -198,7 +197,7 @@ class ExportManager
                 $fileSystem->appendToFile($fullTranscriptionFilePath.'.xml', $this->generateXML($media));
             }
 
-            if ($params["medias"]) {
+            if ($params["medias"] && $media->getUrl()) {
                 $filePath = $projectPath.DIRECTORY_SEPARATOR.$media->getUrl();
                 $ext = pathinfo($filePath, PATHINFO_EXTENSION);
                 $fileSystem->copy($filePath, $fullMediaFilePath.'.'.$ext);
