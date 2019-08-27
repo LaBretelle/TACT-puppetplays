@@ -8,7 +8,7 @@ update-prod:
 	npm run build
 	php bin/console doctrine:schema:update --force
 	php bin/console cache:clear --env=prod
-	chown -R www-data:www-data public/user_images
+	chown -R www-data:www-data public
 	chown -R www-data:www-data var/
 
 install:
@@ -20,6 +20,7 @@ install:
 	php bin/console doctrine:schema:update --force
 	php bin/console doctrine:fixtures:load
 	php bin/console bazinga:js-translation:dump
+	chown -R www-data:www-data public
 	chown -R www-data:www-data var/
 
 cache:
@@ -44,4 +45,5 @@ update-dev:
 	npm run dev
 	php bin/console doctrine:schema:update --force
 	php bin/console cache:clear
+	chown -R www-data:www-data public
 	chown -R www-data:www-data var/
