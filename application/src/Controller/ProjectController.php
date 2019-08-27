@@ -103,6 +103,7 @@ class ProjectController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('image')->getData();
+            $xsltExport = $form->get('xslt_export')->getData();
             $previous_image = $request->get('previous_image');
 
             $userStatus = new UserProjectStatus();
@@ -113,6 +114,7 @@ class ProjectController extends AbstractController
 
             $this->projectManager->createFromForm($project);
             $this->projectManager->handleImage($project, $image, $previous_image);
+            $this->projectManager->handleXslExport($project, $xsltExport);
 
             $this->flashManager->add('notice', 'project_created');
 
@@ -144,8 +146,11 @@ class ProjectController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('image')->getData();
             $previous_image = $request->get('previous_image');
+            $xsltExport = $form->get('xslt_export')->getData();
+
             $this->projectManager->save($project);
             $this->projectManager->handleImage($project, $image, $previous_image);
+            $this->projectManager->handleXslExport($project, $xsltExport);
             $this->projectManager->handleReviewLimit($project, $originalReviewLimit);
             $this->flashManager->add('notice', 'project_edited');
 
@@ -155,9 +160,9 @@ class ProjectController extends AbstractController
         return $this->render(
             'project/create.html.twig',
             [
-            'form' => $form->createView(),
-            'project' => $project
-          ]
+              'form' => $form->createView(),
+              'project' => $project
+            ]
       );
     }
 
@@ -274,7 +279,6 @@ class ProjectController extends AbstractController
             ]
         );
     }
-
 
     /**
      * @Route("/{id}/media-delete", name="media_delete", options={"expose"=true}, methods="POST")
@@ -398,6 +402,20 @@ class ProjectController extends AbstractController
         }
 
         $this->projectManager->deleteImage($project);
+
+        return $this->json([], $status = 200);
+    }
+
+    /**
+     * @Route("{id}/xslt/delete", name="xslt_delete", options={"expose"=true}, methods="DELETE")
+     */
+    public function deleteXslt(Project $project, Request $request)
+    {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            return $this->json([], $status = 403);
+        }
+
+        $this->projectManager->deleteXslt($project);
 
         return $this->json([], $status = 200);
     }

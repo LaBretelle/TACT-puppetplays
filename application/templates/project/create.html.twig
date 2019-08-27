@@ -28,6 +28,22 @@
     {{ form_row(form.nbValidation) }}
     {{ form_row(form.hasScheme) }}
     {{ form_row(form.css) }}
+    {{ form_row(form.xslt_export) }}
+
+    {% if project|hasXsl %}
+    <div class="row project-xsl-row">
+      <div class="col">
+        <a download href="{{ asset('project_files/'~ project.id ~ '/export.xsl') }}">export.xsl</a>
+      </div>
+      <div class="col mb-4">
+        <button data-project-id="{{ project.id }}" id="delete-xsl" type="button" role="button" class="btn btn-danger">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+    {% endif %}
+
+
     {{ form_row(form.image) }}
 
     {% if project.image %}

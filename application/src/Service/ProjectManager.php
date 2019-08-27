@@ -73,6 +73,20 @@ class ProjectManager
         return $project;
     }
 
+    public function handleXslExport(Project $project, UploadedFile $file = null)
+    {
+        if ($file) {
+            $fileName = "export.xsl";
+            $filePath = $this->fileManager->getProjectPath($project);
+            $file->move($filePath, $fileName);
+
+            return $filePath;
+        }
+
+        return;
+    }
+
+
     public function handleImage(Project $project, UploadedFile $file = null, string $previous_image = null)
     {
         if ($file) {
@@ -493,6 +507,14 @@ class ProjectManager
                 return $userProjectStatus->getUser();
             }
         }
+    }
+
+    public function deleteXslt(Project $project)
+    {
+        $xslPath = $this->fileManager->getProjectPath($project) . DIRECTORY_SEPARATOR . 'export.xsl';
+        unlink($xslPath);
+        
+        return;
     }
 
     public function deleteImage(Project $project)

@@ -335,4 +335,5 @@ xml_add_file_placeholder:                 Sélectionner un/des fichier(s)
 xml_add_file_title:                       Ajouter des transcriptions
 xml_file_type:                            Type de fichier
 xml_upload_help:                          Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
+xslt_export:                              Fichier XSL appliqué à l'export des transcriptions
 yes:                                      Oui

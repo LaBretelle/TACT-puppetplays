@@ -5,22 +5,33 @@ namespace App\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use App\Entity\Project;
+use App\Service\FileManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProjectExtension extends AbstractExtension
 {
     protected $em;
+    protected $fm;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, FileManager $fm)
     {
         $this->em = $em;
+        $this->fm = $fm;
     }
 
     public function getFilters()
     {
         return array(
             new TwigFilter('percents', array($this, 'getPercents')),
+            new TwigFilter('hasXsl', array($this, 'hasXsl')),
         );
+    }
+
+    public function hasXsl(Project $project)
+    {
+        $xslFile = $this->fm->getProjectPath($project).DIRECTORY_SEPARATOR."export.xsl";
+
+        return file_exists($xslFile);
     }
 
     public function getPercents(Project $project)

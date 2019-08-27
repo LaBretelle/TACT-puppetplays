@@ -10,6 +10,7 @@ use App\Form\CommentType;
 use App\Form\ReviewType;
 use App\Service\AppEnums;
 use App\Service\FileManager;
+use App\Service\ExportManager;
 use App\Service\MediaManager;
 use App\Service\PermissionManager;
 use App\Service\ReviewManager;
@@ -34,6 +35,7 @@ class MediaController extends AbstractController
     private $permissionManager;
     private $translator;
     private $fileManager;
+    private $exportManager;
     private $commentManager;
 
     public function __construct(
@@ -44,6 +46,7 @@ class MediaController extends AbstractController
         PermissionManager $permissionManager,
         TranslatorInterface $translator,
         FileManager $fileManager,
+        ExportManager $exportManager,
         CommentManager $commentManager
     ) {
         $this->mediaManager = $mediaManager;
@@ -53,6 +56,7 @@ class MediaController extends AbstractController
         $this->permissionManager = $permissionManager;
         $this->translator = $translator;
         $this->fileManager = $fileManager;
+        $this->exportManager = $exportManager;
         $this->commentManager = $commentManager;
     }
 
@@ -262,7 +266,7 @@ class MediaController extends AbstractController
         $xmlName = $this->fileManager->recreateXmlName($media);
         $exportDir = $this->fileManager->createTmpDir();
         $fileSystem->mkdir($exportDir);
-        $fileSystem->appendToFile($exportDir.$xmlName, $media->getTranscription()->getContent());
+        $fileSystem->appendToFile($exportDir.$xmlName, $this->exportManager->generateXML($media));
 
 
         return $this->file($exportDir.$xmlName);

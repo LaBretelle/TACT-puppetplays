@@ -233,11 +233,27 @@ class ExportManager
         return false;
     }
 
-    private function generateXML(Media $media)
+    public function generateXML(Media $media)
     {
-        $xml = $media->getTranscription()->getContent();
+        $project = $media->getProject();
+        $transcription = $media->getTranscription()->getContent();
+        $xslFile = $this->fileManager->getProjectPath($project).DIRECTORY_SEPARATOR."export.xsl";
 
-        return $xml;
+        if (file_exists($xslFile)) {
+            $xsl = new \DOMDocument();
+            $xsl->load($xslFile);
+
+            $xslt = new \XSLTProcessor();
+            $xslt->importStylesheet($xsl);
+
+            $xml = new \DOMDocument();
+            $xml->loadXML("<body>".$transcription."</body>");
+            $xml->xinclude(LIBXML_NOWARNING);
+
+            return $xslt->transformToXML($xml);
+        }
+
+        return $transcription;
     }
 
     private function arrayToCsv($array)
