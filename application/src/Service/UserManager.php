@@ -8,6 +8,7 @@ use App\Service\FileManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -21,19 +22,22 @@ class UserManager
     private $repository;
     private $fileManager;
     private $translator;
+    private $security;
 
     public function __construct(
       UserPasswordEncoderInterface $passwordEncoder,
       EntityManagerInterface $em,
       UserRepository $repository,
       FileManager $fileManager,
-      TranslatorInterface $translator
+      TranslatorInterface $translator,
+      Security $security
       ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->em = $em;
         $this->repository = $repository;
         $this->fileManager = $fileManager;
         $this->translator = $translator;
+        $this->security = $security;
     }
 
     public function createUser(string $lastname, string $firstname, string $username, string $email, string $plainPassword, array $roles)
@@ -228,5 +232,28 @@ class UserManager
         }
 
         return $result;
+    }
+
+    public function getCurrentUser()
+    {
+        return $this->security->getUser();
+    }
+
+    public function anonymiseUsers()
+    {
+        $users = $this->repository->getNonAnonymisedYet();
+        foreach ($users as $user) {
+            if ($user->getLastAccess()) {
+                echo "Anonymisation userId: ".$user->getId()."\n";
+                $this->anonymizeUserAccount($user, "full");
+            } else {
+                echo "Initialisation lastAccess: ".$user->getId()."\n";
+                $user->setLastAccess($user->getUpdatedAt());
+                $this->em->persist($user);
+            }
+        }
+        $this->em->flush();
+
+        return;
     }
 }

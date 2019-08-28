@@ -144,6 +144,12 @@ class User implements UserInterface, \Serializable
      */
     private $subscribedTranscriptions;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastAccess = null;
+
+
     public function __construct()
     {
         $this->active = false;
@@ -608,6 +614,18 @@ class User implements UserInterface, \Serializable
             $this->subscribedTranscriptions->removeElement($subscribedTranscription);
             $subscribedTranscription->removeSubscribersUser($this);
         }
+
+        return $this;
+    }
+
+    public function getLastAccess(): ?\DateTimeInterface
+    {
+        return $this->lastAccess;
+    }
+
+    public function setLastAccess(\DateTimeInterface $lastAccess): self
+    {
+        $this->lastAccess = $lastAccess;
 
         return $this;
     }

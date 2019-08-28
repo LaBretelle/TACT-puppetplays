@@ -36,7 +36,7 @@ class UserRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    
+
     public function getManagersByProject(Project $project)
     {
         return $this->createQueryBuilder('u')
@@ -94,6 +94,21 @@ class UserRepository extends ServiceEntityRepository
           ->andWhere('tl.name IN (:names)')
           ->setParameter('project', $project)
           ->setParameter('names', $names)
+          ->getQuery()
+          ->getResult();
+    }
+
+    public function getNonAnonymisedYet()
+    {
+        $now = new \DateTime;
+        $nowMinus3years =  new \DateTime;
+        $nowMinus3years->modify('-3 years');
+
+        return $this->createQueryBuilder('u')
+          ->andWhere('u.firstname <> :anonymous')
+          ->andWhere('u.lastAccess < :nowMinus3years OR u.lastAccess IS NULL')
+          ->setParameter('anonymous', 'anonymized-user')
+          ->setParameter('nowMinus3years', $nowMinus3years)
           ->getQuery()
           ->getResult();
     }
