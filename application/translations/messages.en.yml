@@ -85,6 +85,7 @@ illustration:                             Transcription examples
 insults:                                  Propos haineux, violence
 is_public:                                Open registration
 json_schema:                              Schema TEI au format JSON
+last_access:                              Dernier accès
 lastname:                                 Lastname
 leave_warning:                            Si vous avez fait des modifications à cette transcription, et que vous n'avez pas encore sauvegardé celles-ci, elles ne seront pas prises en compte.
 login_or_register_link:                   <a href="%login%">Connectez-vous</a> ou <a href="%register%">inscrivez-vous</a> à la plateforme pour participer !

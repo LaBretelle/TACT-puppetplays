@@ -4,6 +4,7 @@
     <th data-placement="bottom" scope="row">{{user.id}}</th>
     <td>{{user.fullname}}</td>
     <td>{{user.createdAt|date("d/m/Y")}}</td>
+    <td>{{user.lastAccess ? user.lastAccess|date("d/m/Y") : ""}}</td>
     <td>{{user.username}}</td>
     <td>{{user.email}}</td>
     {% if not user.anonymous %}
@@ -35,7 +36,6 @@
       </div>
     </td>
     {% else %}
-        <td>{{'user_is_anonymized' | trans}}</td>
         <td>{{'user_is_anonymized' | trans}}</td>
     {% endif %}
   </tr>
