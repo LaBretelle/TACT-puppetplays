@@ -33,7 +33,7 @@
         </a>
       {% endif %}
       {% if project | isAuthorizedOnProject('editProject') %}
-        <a href="{{ path('project_edit', {id: project.id}) }}" class="nav-link {{macros.addActiveClass(current, "project_edit")}}" data-toggle="tooltip" data-placement="top" title="{{"edit_project_long"|trans}}">
+        <a href="{{ path('project_edit_choice', {id: project.id}) }}" class="nav-link {{macros.addActiveClass(current, "project_edit")}}" data-toggle="tooltip" data-placement="top" title="{{"edit_project_long"|trans}}">
           {{'edit' | trans}}
         </a>
       {% endif %}

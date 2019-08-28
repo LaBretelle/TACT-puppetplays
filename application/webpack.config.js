@@ -12,7 +12,8 @@ Encore
 
   // define the assets of the project
   .addEntry('js/app', './assets/js/app.js')
-  .addEntry('js/create-project', './assets/js/create-project.js')
+  .addEntry('js/edit-advanced-project', './assets/js/edit-advanced-project.js')
+  .addEntry('js/edit-basic-project', './assets/js/edit-basic-project.js')
   .addEntry('js/user-status-form', './assets/js/user-status-form.js')
   .addEntry('js/user-list', './assets/js/admin/user-list.js')
   .addEntry('js/account', './assets/js/account.js')

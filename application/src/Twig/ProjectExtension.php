@@ -24,6 +24,7 @@ class ProjectExtension extends AbstractExtension
         return array(
             new TwigFilter('percents', array($this, 'getPercents')),
             new TwigFilter('hasXsl', array($this, 'hasXsl')),
+            new TwigFilter('hasScheme', array($this, 'hasScheme')),
         );
     }
 
@@ -33,6 +34,15 @@ class ProjectExtension extends AbstractExtension
 
         return file_exists($xslFile);
     }
+
+    public function hasScheme(Project $project)
+    {
+        $jsonFile = $this->fm->getProjectPath($project).DIRECTORY_SEPARATOR."tei-schema.json";
+
+        return file_exists($jsonFile);
+    }
+
+
 
     public function getPercents(Project $project)
     {

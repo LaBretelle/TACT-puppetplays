@@ -106,10 +106,7 @@ class Project
      */
     private $projectHelpLink;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $hasScheme = true;
+
 
     /**
      * @ORM\Column(type="boolean")
@@ -389,18 +386,6 @@ class Project
     public function setCatchPhrase(?string $catchPhrase): self
     {
         $this->catchPhrase = $catchPhrase;
-
-        return $this;
-    }
-
-    public function getHasScheme(): ?bool
-    {
-        return $this->hasScheme;
-    }
-
-    public function setHasScheme(bool $hasScheme): self
-    {
-        $this->hasScheme = $hasScheme;
 
         return $this;
     }

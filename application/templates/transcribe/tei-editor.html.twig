@@ -44,7 +44,7 @@
           {{ transcription.content | raw }}
         </textarea>
       </div>
-      {% if project.hasScheme %}
+      {% if project|hasScheme %}
         {{ include('transcribe/elements-attributes.html.twig') }}
       {% endif %}
     </div>

@@ -32,14 +32,14 @@ class ProjectManager
     protected $fm;
 
     public function __construct(
-      EntityManagerInterface $em,
-      MediaManager $mediaManager,
-      AuthorizationCheckerInterface $authChecker,
-      FileManager $fileManager,
-      DirectoryManager $dirManager,
-      ReviewManager $reviewManager,
-      TranscriptionManager $tm,
-      FlashManager $fm
+        EntityManagerInterface $em,
+        MediaManager $mediaManager,
+        AuthorizationCheckerInterface $authChecker,
+        FileManager $fileManager,
+        DirectoryManager $dirManager,
+        ReviewManager $reviewManager,
+        TranscriptionManager $tm,
+        FlashManager $fm
     ) {
         $this->em = $em;
         $this->authChecker = $authChecker;
@@ -77,6 +77,19 @@ class ProjectManager
     {
         if ($file) {
             $fileName = "export.xsl";
+            $filePath = $this->fileManager->getProjectPath($project);
+            $file->move($filePath, $fileName);
+
+            return $filePath;
+        }
+
+        return;
+    }
+
+    public function handleJsonSchema(Project $project, UploadedFile $file = null)
+    {
+        if ($file) {
+            $fileName = "tei-schema.json";
             $filePath = $this->fileManager->getProjectPath($project);
             $file->move($filePath, $fileName);
 
@@ -513,7 +526,15 @@ class ProjectManager
     {
         $xslPath = $this->fileManager->getProjectPath($project) . DIRECTORY_SEPARATOR . 'export.xsl';
         unlink($xslPath);
-        
+
+        return;
+    }
+
+    public function deleteJson(Project $project)
+    {
+        $jsonPath = $this->fileManager->getProjectPath($project) . DIRECTORY_SEPARATOR . 'tei-schema.json';
+        unlink($jsonPath);
+
         return;
     }
 

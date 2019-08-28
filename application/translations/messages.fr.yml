@@ -44,6 +44,10 @@ directory_created:                        Dossier créé
 display_illustration:                     Afficher les exemples
 download_media:                           Télécharger l'image
 download_transcription:                   Télécharger la transcription
+edit_advanced_help:                       Vous permet d'associer des fichiers XSL, JSON et de définir une CSS
+edit_advanced:                            Edition des propriétés avancées
+edit_basic_help:                          Vous permet de paramétrer le nom, la description, l'image, etc.
+edit_basic:                               Edition des propriétés de base
 edit_project_long:                        Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit:                                     Éditer
 element_list:                             Eléments disponibles
@@ -87,6 +91,7 @@ iaccept:                                  J'accepte les <a href="%url%">Conditio
 illustration:                             Exemples de transcription
 insults:                                  Propos haineux, violence
 is_public:                                Inscription libre
+json_schema:                              Schema TEI au format JSON
 lastname:                                 Nom
 leave_warning:                            Si vous avez fait des modifications à cette transcription, et que vous n'avez pas encore sauvegardé celles-ci, elles ne seront pas prises en compte.
 login_or_register_link:                   <a href="%login%">Connectez-vous</a> ou <a href="%register%">inscrivez-vous</a> à la plateforme pour participer !

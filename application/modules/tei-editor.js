@@ -80,10 +80,10 @@ class TeiEditor {
     let fragment = document.createDocumentFragment()
 
     if (current) {
-      count = current.childrens.length
+      count = current.children.length
 
       let childrenObject = []
-      current.childrens.forEach(child => {
+      current.children.forEach(child => {
         let element = this.tei.elements.find(function (el){
           return el.tag === child
         })
@@ -235,20 +235,14 @@ class TeiEditor {
     help.setAttribute('data-toggle', 'popover')
 
     const title = isAttribute ? teiElement.key :  teiElement.tag
-    const link = Translator.locale === 'fr' ? teiElement.link_fr: teiElement.link_en
-    const linkText = isAttribute ? Translator.trans('tei_link_to_official_attr_doc', {}) : Translator.trans('tei_link_to_official_doc', {'element': title})
-    const popoverContent = `
-      <div>
-        <h6>${title}</h6>
-        <hr/>
-        <p>${Translator.trans(teiElement.help, {}, 'tei')}</p>
-        <p>
-          <a target="_blank" href="${link}">
-            ${linkText}
-          </a>
-        </p>
-      </div>
-    `
+    const link = "https://www.tei-c.org/release/doc/tei-p5-doc/fr/html/ref-"+title+".html"
+    const linkText = Translator.trans('tei_link_to_official_doc', {'element': title})
+
+    let popoverContent = "<div><h6>"+title+"</h6><hr/><p>"+teiElement.documentation+"</p>";
+    popoverContent += (isAttribute)
+      ? "</div>"
+      :  "<p><a target='_blank' href='"+link+"'>"+linkText+"</a></p></div>"
+
     help.setAttribute('data-content', popoverContent)
     return help
   }

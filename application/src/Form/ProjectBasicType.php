@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class ProjectType extends AbstractType
+class ProjectBasicType extends AbstractType
 {
     protected $authChecker;
 
@@ -57,31 +57,16 @@ class ProjectType extends AbstractType
                 'min' => '1'
               ]
           ])
-          ->add('hasScheme', CheckboxType::class, [
-              'label'    => 'has_scheme',
-              'required' => false
-          ])
           ->add('catchPhrase', TextType::class, [
             'required' => false,
             'label' => 'project_catchphrase',
             'translation_domain' => 'messages'
-          ])
-          ->add('css', TextareaType::class, [
-              'label'    => 'project_css',
-              'required' => false,
           ])
           ->add('image', FileType::class, [
               'label' => 'project_image',
               'translation_domain' => 'messages',
               'required' => false,
               'data_class' => null
-          ])
-          ->add('xslt_export', FileType::class, [
-              'mapped' => false,
-              'label' => 'xslt_export',
-              'translation_domain' => 'messages',
-              'required' => false,
-              'data_class' => null,
           ])
           ->add('projectHelpLink', TextType::class, [
             'label' => 'project_help_link',

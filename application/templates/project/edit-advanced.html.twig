@@ -15,56 +15,42 @@
   {% include 'header.html.twig' with {'title': 'project_create'} %}
 {% endif %}
 
+
+
 <div id="main-container">
   {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.public) }}
-    {{ form_row(form.catchPhrase) }}
-    {% if project.id is null %}
-      {{ form_row(form.manager) }}
-    {% endif %}
-    {{ form_row(form.projectHelpLink) }}
-    {{ form_row(form.nbValidation) }}
-    {{ form_row(form.hasScheme) }}
     {{ form_row(form.css) }}
-    {{ form_row(form.xslt_export) }}
 
-    {% if project|hasXsl %}
-    <div class="row project-xsl-row">
+    <div class="row mb-4">
       <div class="col">
-        <a download href="{{ asset('project_files/'~ project.id ~ '/export.xsl') }}">export.xsl</a>
+        {{ form_row(form.xslt_export) }}
+        {% if project|hasXsl %}
+        <div class="project-xsl-row">
+            <a download href="{{ asset('project_files/'~ project.id ~ '/export.xsl') }}">export.xsl</a>
+            <button data-project-id="{{ project.id }}" id="delete-xsl" type="button" role="button" class="btn btn-sm btn-danger">
+              <i class="fas fa-trash"></i>
+            </button>
+        </div>
+        {% endif %}
       </div>
-      <div class="col mb-4">
-        <button data-project-id="{{ project.id }}" id="delete-xsl" type="button" role="button" class="btn btn-danger">
-          <i class="fas fa-trash"></i>
-        </button>
+      <div class="col">
+        {{ form_row(form.json_schema) }}
+        {% if project|hasScheme %}
+        <div class="project-json-row">
+            <a download href="{{ asset('project_files/'~ project.id ~ '/tei-schema.json') }}">tei-schema.json</a>
+            <button data-project-id="{{ project.id }}" id="delete-json" type="button" role="button" class="btn btn-sm btn-danger">
+              <i class="fas fa-trash"></i>
+            </button>
+        </div>
+        {% endif %}
       </div>
+
     </div>
-    {% endif %}
-
-
-    {{ form_row(form.image) }}
-
-    {% if project.image %}
-    <div class="row project-image-row">
-      <div class="col">
-        <img width=100% class="project-image-md" src="{{ asset('project_files/'~ project.id ~ '/' ~ project.image) }}">
-        <input type="hidden" name="previous_image" value="{{ project.image }}" />
-      </div>
-      <div class="col">
-        <button data-project-id="{{ project.id }}" id="delete-image" type="button" role="button" class="btn btn-danger">
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    </div>
-    {% endif %}
 
     {{ form_widget(form._token) }}
     {{ form_row(form.save) }}
   </form>
 
-  {% if  project.id %}
   <div class="float-right">
     <form name="deleteProject" action="{{ path("project_delete", {'id': project.id} )}}" method="POST">
       <button class="btn btn-sm btn-danger" type="submit">
@@ -72,7 +58,6 @@
       </button>
     </form>
   </div>
-{% endif %}
 </div>
 
 
@@ -101,5 +86,5 @@
 
 {% block javascripts %}
   {{ parent() }}
-  <script src="{{ asset('build/js/create-project.js') }}"></script>
+  <script src="{{ asset('build/js/edit-advanced-project.js') }}"></script>
 {% endblock %}

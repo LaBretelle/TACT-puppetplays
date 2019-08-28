@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% import _self as formMacros %}
+
+{% block stylesheets %}
+{{parent()}}
+<link rel="stylesheet" href="{{ asset('build/css/create-project.css') }}">
+{% endblock %}
+
+{% block body %}
+
+{% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
+
+
+<div id="main-container">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ "edit_basic" | trans }}</h5>
+          <p class="card-text">{{ "edit_basic_help" | trans }}</p>
+          <a class="card-link" href="{{ path("project_edit-basic", {'id': project.id} )}}">{{ "edit" | trans }}</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ "edit_advanced" | trans }}</h5>
+          <p class="card-text">{{ "edit_advanced_help" | trans }}</p>
+          <a class="card-link" href="{{ path("project_edit-advanced", {'id': project.id} )}}">{{ "edit" | trans }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

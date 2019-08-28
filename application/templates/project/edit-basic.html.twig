@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+
+{% import _self as formMacros %}
+
+{% block stylesheets %}
+{{parent()}}
+<link rel="stylesheet" href="{{ asset('build/css/create-project.css') }}">
+{% endblock %}
+
+{% block body %}
+
+{% if project.id %}
+  {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
+{% else %}
+  {% include 'header.html.twig' with {'title': 'project_create'} %}
+{% endif %}
+
+
+
+<div id="main-container">
+  {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.public) }}
+    {{ form_row(form.catchPhrase) }}
+    {% if project.id is null %}
+      {{ form_row(form.manager) }}
+    {% endif %}
+    {{ form_row(form.projectHelpLink) }}
+    {{ form_row(form.nbValidation) }}
+
+    {{ form_row(form.image) }}
+
+    {% if project.image %}
+    <div class="row project-image-row">
+      <div class="col">
+        <img width=100% class="project-image-md" src="{{ asset('project_files/'~ project.id ~ '/' ~ project.image) }}">
+        <input type="hidden" name="previous_image" value="{{ project.image }}" />
+      </div>
+      <div class="col">
+        <button data-project-id="{{ project.id }}" id="delete-image" type="button" role="button" class="btn btn-danger">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+    {% endif %}
+
+    {{ form_widget(form._token) }}
+    {{ form_row(form.save) }}
+  </form>
+
+</div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('build/js/edit-basic-project.js') }}"></script>
+{% endblock %}

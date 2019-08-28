@@ -11,7 +11,8 @@ use App\Entity\UserStatus;
 use App\Form\ExportType;
 use App\Form\ProjectMediaType;
 use App\Form\XmlType;
-use App\Form\ProjectType;
+use App\Form\ProjectAdvancedType;
+use App\Form\ProjectBasicType;
 use App\Service\AppEnums;
 use App\Service\ExportManager;
 use App\Service\FileManager;
@@ -98,12 +99,11 @@ class ProjectController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, '');
         $project = new Project();
 
-        $form = $this->createForm(ProjectType::class, $project);
+        $form = $this->createForm(ProjectBasicType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('image')->getData();
-            $xsltExport = $form->get('xslt_export')->getData();
             $previous_image = $request->get('previous_image');
 
             $userStatus = new UserProjectStatus();
@@ -114,21 +114,80 @@ class ProjectController extends AbstractController
 
             $this->projectManager->createFromForm($project);
             $this->projectManager->handleImage($project, $image, $previous_image);
-            $this->projectManager->handleXslExport($project, $xsltExport);
 
             $this->flashManager->add('notice', 'project_created');
 
-            return $this->redirectToRoute('project_display', ['id' => $project->getId()]);
+            return $this->redirectToRoute('project_edit-advanced', ['id' => $project->getId()]);
         }
 
-        return $this->render(
-            'project/create.html.twig',
-            [
-              'form' => $form->createView(),
-              'project' => $project
-            ]
-        );
+        return $this->render('project/edit-basic.html.twig', [
+          'project' => $project,
+          'form' => $form->createView()
+        ]);
     }
+
+    /**
+     * @Route("{id}/edit/choice", name="edit_choice")
+     */
+    public function editChoice(Project $project)
+    {
+        return $this->render('project/edit-choice.html.twig', [
+          'project' => $project,
+      ]);
+    }
+
+    /**
+     * @Route("/{id}/edit-basic", name="edit-basic")
+     */
+    public function editBasic(Project $project, Request $request)
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, '');
+        $form = $this->createForm(ProjectBasicType::class, $project);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            $previous_image = $request->get('previous_image');
+            $this->projectManager->handleImage($project, $image, $previous_image);
+            $this->flashManager->add('notice', 'project_edited');
+
+            return $this->redirectToRoute('project_edit_choice', ['id' => $project->getId()]);
+        }
+
+        return $this->render('project/edit-basic.html.twig', [
+          'project' => $project,
+          'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit-advanced", name="edit-advanced")
+     */
+    public function editAdvanced(Project $project, Request $request)
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, '');
+
+        $form = $this->createForm(ProjectAdvancedType::class, $project);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $xsltExport = $form->get('xslt_export')->getData();
+            $this->projectManager->handleXslExport($project, $xsltExport);
+            $jsonSchema = $form->get('json_schema')->getData();
+            $this->projectManager->handleJsonSchema($project, $jsonSchema);
+            $this->flashManager->add('notice', 'project_edited');
+
+            return $this->redirectToRoute('project_edit_choice', ['id' => $project->getId()]);
+        }
+
+        return $this->render('project/edit-advanced.html.twig', [
+          'project' => $project,
+          'form' => $form->createView()
+        ]);
+    }
+
+
 
     /**
      * @Route("/{id}/edit", name="edit")
@@ -409,13 +468,27 @@ class ProjectController extends AbstractController
     /**
      * @Route("{id}/xslt/delete", name="xslt_delete", options={"expose"=true}, methods="DELETE")
      */
-    public function deleteXslt(Project $project, Request $request)
+    public function deleteXslt(Project $project)
     {
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
             return $this->json([], $status = 403);
         }
 
         $this->projectManager->deleteXslt($project);
+
+        return $this->json([], $status = 200);
+    }
+
+    /**
+     * @Route("{id}/json/delete", name="json_delete", options={"expose"=true}, methods="DELETE")
+     */
+    public function deleteJson(Project $project)
+    {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            return $this->json([], $status = 403);
+        }
+
+        $this->projectManager->deleteJson($project);
 
         return $this->json([], $status = 200);
     }
