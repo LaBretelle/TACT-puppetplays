@@ -242,6 +242,7 @@ technical:                                Problème technique
 tei_link_to_official_attr_doc:            See documentation for element related to this attribut
 tei_link_to_official_doc:                 See documentation for %element%
 tei_schema:                               TEI schema for the project
+tei2json_help:                            <a target="_blank" href='https://gitlab.com/litt-arts-num/tei2json'>Script</a> utilisé pour formater un rng en json
 terms:                                    Terms
 toggle_all_media_selection:               Select / Unselect all media
 transcribe_link:                          Vous pouvez commencer à <a href="%transcribe%">transcrire</a> !
