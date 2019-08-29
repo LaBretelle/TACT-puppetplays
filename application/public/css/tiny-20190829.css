@@ -1,0 +1,5144 @@
+#tinymce del {
+  text-decoration: none;
+}
+
+#tinymce *::before {
+  margin: 0 4px 0 0;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+#tinymce *::after {
+  margin: 0 0 0 4px;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+#tinymce *::before, *::after {
+  padding: 2px;
+  color: white;
+  background-color: lightgrey;
+  text-decoration: none;
+  font-size: smaller;
+}
+
+#tinymce *::before {
+  content: "<" attr(data-tag) ">";
+}
+
+#tinymce *::after {
+  content: "</" attr(data-tag) ">";
+}
+
+
+
+    #tinymce addSpan::before {
+      content: "<addSpan>";
+    }
+
+    #tinymce addSpan::after {
+      content: "</addSpan>";
+    }
+
+
+    #tinymce msIdentifier::before {
+      content: "<msIdentifier>";
+    }
+
+    #tinymce msIdentifier::after {
+      content: "</msIdentifier>";
+    }
+
+
+    #tinymce zone::before {
+      content: "<zone>";
+    }
+
+    #tinymce zone::after {
+      content: "</zone>";
+    }
+
+
+    #tinymce gram::before {
+      content: "<gram>";
+    }
+
+    #tinymce gram::after {
+      content: "</gram>";
+    }
+
+
+    #tinymce extent::before {
+      content: "<extent>";
+    }
+
+    #tinymce extent::after {
+      content: "</extent>";
+    }
+
+
+    #tinymce phr::before {
+      content: "<phr>";
+    }
+
+    #tinymce phr::after {
+      content: "</phr>";
+    }
+
+
+    #tinymce width::before {
+      content: "<width>";
+    }
+
+    #tinymce width::after {
+      content: "</width>";
+    }
+
+
+    #tinymce then::before {
+      content: "<then>";
+    }
+
+    #tinymce then::after {
+      content: "</then>";
+    }
+
+
+    #tinymce lacunaEnd::before {
+      content: "<lacunaEnd>";
+    }
+
+    #tinymce lacunaEnd::after {
+      content: "</lacunaEnd>";
+    }
+
+
+    #tinymce pRef::before {
+      content: "<pRef>";
+    }
+
+    #tinymce pRef::after {
+      content: "</pRef>";
+    }
+
+
+    #tinymce residence::before {
+      content: "<residence>";
+    }
+
+    #tinymce residence::after {
+      content: "</residence>";
+    }
+
+
+    #tinymce add::before {
+      content: "<add>";
+    }
+
+    #tinymce add::after {
+      content: "</add>";
+    }
+
+
+    #tinymce memberOf::before {
+      content: "<memberOf>";
+    }
+
+    #tinymce memberOf::after {
+      content: "</memberOf>";
+    }
+
+
+    #tinymce figDesc::before {
+      content: "<figDesc>";
+    }
+
+    #tinymce figDesc::after {
+      content: "</figDesc>";
+    }
+
+
+    #tinymce speaker::before {
+      content: "<speaker>";
+    }
+
+    #tinymce speaker::after {
+      content: "</speaker>";
+    }
+
+
+    #tinymce preparedness::before {
+      content: "<preparedness>";
+    }
+
+    #tinymce preparedness::after {
+      content: "</preparedness>";
+    }
+
+
+    #tinymce textDesc::before {
+      content: "<textDesc>";
+    }
+
+    #tinymce textDesc::after {
+      content: "</textDesc>";
+    }
+
+
+    #tinymce glyph::before {
+      content: "<glyph>";
+    }
+
+    #tinymce glyph::after {
+      content: "</glyph>";
+    }
+
+
+    #tinymce provenance::before {
+      content: "<provenance>";
+    }
+
+    #tinymce provenance::after {
+      content: "</provenance>";
+    }
+
+
+    #tinymce catRef::before {
+      content: "<catRef>";
+    }
+
+    #tinymce catRef::after {
+      content: "</catRef>";
+    }
+
+
+    #tinymce div3::before {
+      content: "<div3>";
+    }
+
+    #tinymce div3::after {
+      content: "</div3>";
+    }
+
+
+    #tinymce tagsDecl::before {
+      content: "<tagsDecl>";
+    }
+
+    #tinymce tagsDecl::after {
+      content: "</tagsDecl>";
+    }
+
+
+    #tinymce elementRef::before {
+      content: "<elementRef>";
+    }
+
+    #tinymce elementRef::after {
+      content: "</elementRef>";
+    }
+
+
+    #tinymce custEvent::before {
+      content: "<custEvent>";
+    }
+
+    #tinymce custEvent::after {
+      content: "</custEvent>";
+    }
+
+
+    #tinymce interpGrp::before {
+      content: "<interpGrp>";
+    }
+
+    #tinymce interpGrp::after {
+      content: "</interpGrp>";
+    }
+
+
+    #tinymce content::before {
+      content: "<content>";
+    }
+
+    #tinymce content::after {
+      content: "</content>";
+    }
+
+
+    #tinymce particDesc::before {
+      content: "<particDesc>";
+    }
+
+    #tinymce particDesc::after {
+      content: "</particDesc>";
+    }
+
+
+    #tinymce classes::before {
+      content: "<classes>";
+    }
+
+    #tinymce classes::after {
+      content: "</classes>";
+    }
+
+
+    #tinymce correspContext::before {
+      content: "<correspContext>";
+    }
+
+    #tinymce correspContext::after {
+      content: "</correspContext>";
+    }
+
+
+    #tinymce classSpec::before {
+      content: "<classSpec>";
+    }
+
+    #tinymce classSpec::after {
+      content: "</classSpec>";
+    }
+
+
+    #tinymce author::before {
+      content: "<author>";
+    }
+
+    #tinymce author::after {
+      content: "</author>";
+    }
+
+
+    #tinymce etym::before {
+      content: "<etym>";
+    }
+
+    #tinymce etym::after {
+      content: "</etym>";
+    }
+
+
+    #tinymce dimensions::before {
+      content: "<dimensions>";
+    }
+
+    #tinymce dimensions::after {
+      content: "</dimensions>";
+    }
+
+
+    #tinymce restore::before {
+      content: "<restore>";
+    }
+
+    #tinymce restore::after {
+      content: "</restore>";
+    }
+
+
+    #tinymce scriptDesc::before {
+      content: "<scriptDesc>";
+    }
+
+    #tinymce scriptDesc::after {
+      content: "</scriptDesc>";
+    }
+
+
+    #tinymce musicNotation::before {
+      content: "<musicNotation>";
+    }
+
+    #tinymce musicNotation::after {
+      content: "</musicNotation>";
+    }
+
+
+    #tinymce divGen::before {
+      content: "<divGen>";
+    }
+
+    #tinymce divGen::after {
+      content: "</divGen>";
+    }
+
+
+    #tinymce delSpan::before {
+      content: "<delSpan>";
+    }
+
+    #tinymce delSpan::after {
+      content: "</delSpan>";
+    }
+
+
+    #tinymce fDecl::before {
+      content: "<fDecl>";
+    }
+
+    #tinymce fDecl::after {
+      content: "</fDecl>";
+    }
+
+
+    #tinymce app::before {
+      content: "<app>";
+    }
+
+    #tinymce app::after {
+      content: "</app>";
+    }
+
+
+    #tinymce correction::before {
+      content: "<correction>";
+    }
+
+    #tinymce correction::after {
+      content: "</correction>";
+    }
+
+
+    #tinymce string::before {
+      content: "<string>";
+    }
+
+    #tinymce string::after {
+      content: "</string>";
+    }
+
+
+    #tinymce performance::before {
+      content: "<performance>";
+    }
+
+    #tinymce performance::after {
+      content: "</performance>";
+    }
+
+
+    #tinymce calendar::before {
+      content: "<calendar>";
+    }
+
+    #tinymce calendar::after {
+      content: "</calendar>";
+    }
+
+
+    #tinymce category::before {
+      content: "<category>";
+    }
+
+    #tinymce category::after {
+      content: "</category>";
+    }
+
+
+    #tinymce typeDesc::before {
+      content: "<typeDesc>";
+    }
+
+    #tinymce typeDesc::after {
+      content: "</typeDesc>";
+    }
+
+
+    #tinymce undo::before {
+      content: "<undo>";
+    }
+
+    #tinymce undo::after {
+      content: "</undo>";
+    }
+
+
+    #tinymce opener::before {
+      content: "<opener>";
+    }
+
+    #tinymce opener::after {
+      content: "</opener>";
+    }
+
+
+    #tinymce vNot::before {
+      content: "<vNot>";
+    }
+
+    #tinymce vNot::after {
+      content: "</vNot>";
+    }
+
+
+    #tinymce ptr::before {
+      content: "<ptr>";
+    }
+
+    #tinymce ptr::after {
+      content: "</ptr>";
+    }
+
+
+    #tinymce handShift::before {
+      content: "<handShift>";
+    }
+
+    #tinymce handShift::after {
+      content: "</handShift>";
+    }
+
+
+    #tinymce geoDecl::before {
+      content: "<geoDecl>";
+    }
+
+    #tinymce geoDecl::after {
+      content: "</geoDecl>";
+    }
+
+
+    #tinymce notesStmt::before {
+      content: "<notesStmt>";
+    }
+
+    #tinymce notesStmt::after {
+      content: "</notesStmt>";
+    }
+
+
+    #tinymce said::before {
+      content: "<said>";
+    }
+
+    #tinymce said::after {
+      content: "</said>";
+    }
+
+
+    #tinymce equiv::before {
+      content: "<equiv>";
+    }
+
+    #tinymce equiv::after {
+      content: "</equiv>";
+    }
+
+
+    #tinymce empty::before {
+      content: "<empty>";
+    }
+
+    #tinymce empty::after {
+      content: "</empty>";
+    }
+
+
+    #tinymce factuality::before {
+      content: "<factuality>";
+    }
+
+    #tinymce factuality::after {
+      content: "</factuality>";
+    }
+
+
+    #tinymce recordingStmt::before {
+      content: "<recordingStmt>";
+    }
+
+    #tinymce recordingStmt::after {
+      content: "</recordingStmt>";
+    }
+
+
+    #tinymce witDetail::before {
+      content: "<witDetail>";
+    }
+
+    #tinymce witDetail::after {
+      content: "</witDetail>";
+    }
+
+
+    #tinymce del::before {
+      content: "<del>";
+    }
+
+    #tinymce del::after {
+      content: "</del>";
+    }
+
+
+    #tinymce floatingText::before {
+      content: "<floatingText>";
+    }
+
+    #tinymce floatingText::after {
+      content: "</floatingText>";
+    }
+
+
+    #tinymce fsDescr::before {
+      content: "<fsDescr>";
+    }
+
+    #tinymce fsDescr::after {
+      content: "</fsDescr>";
+    }
+
+
+    #tinymce foreign::before {
+      content: "<foreign>";
+    }
+
+    #tinymce foreign::after {
+      content: "</foreign>";
+    }
+
+
+    #tinymce char::before {
+      content: "<char>";
+    }
+
+    #tinymce char::after {
+      content: "</char>";
+    }
+
+
+    #tinymce paramList::before {
+      content: "<paramList>";
+    }
+
+    #tinymce paramList::after {
+      content: "</paramList>";
+    }
+
+
+    #tinymce resp::before {
+      content: "<resp>";
+    }
+
+    #tinymce resp::after {
+      content: "</resp>";
+    }
+
+
+    #tinymce locusGrp::before {
+      content: "<locusGrp>";
+    }
+
+    #tinymce locusGrp::after {
+      content: "</locusGrp>";
+    }
+
+
+    #tinymce seriesStmt::before {
+      content: "<seriesStmt>";
+    }
+
+    #tinymce seriesStmt::after {
+      content: "</seriesStmt>";
+    }
+
+
+    #tinymce distributor::before {
+      content: "<distributor>";
+    }
+
+    #tinymce distributor::after {
+      content: "</distributor>";
+    }
+
+
+    #tinymce att::before {
+      content: "<att>";
+    }
+
+    #tinymce att::after {
+      content: "</att>";
+    }
+
+
+    #tinymce oRef::before {
+      content: "<oRef>";
+    }
+
+    #tinymce oRef::after {
+      content: "</oRef>";
+    }
+
+
+    #tinymce metDecl::before {
+      content: "<metDecl>";
+    }
+
+    #tinymce metDecl::after {
+      content: "</metDecl>";
+    }
+
+
+    #tinymce state::before {
+      content: "<state>";
+    }
+
+    #tinymce state::after {
+      content: "</state>";
+    }
+
+
+    #tinymce publicationStmt::before {
+      content: "<publicationStmt>";
+    }
+
+    #tinymce publicationStmt::after {
+      content: "</publicationStmt>";
+    }
+
+
+    #tinymce div6::before {
+      content: "<div6>";
+    }
+
+    #tinymce div6::after {
+      content: "</div6>";
+    }
+
+
+    #tinymce time::before {
+      content: "<time>";
+    }
+
+    #tinymce time::after {
+      content: "</time>";
+    }
+
+
+    #tinymce listWit::before {
+      content: "<listWit>";
+    }
+
+    #tinymce listWit::after {
+      content: "</listWit>";
+    }
+
+
+    #tinymce attList::before {
+      content: "<attList>";
+    }
+
+    #tinymce attList::after {
+      content: "</attList>";
+    }
+
+
+    #tinymce constraint::before {
+      content: "<constraint>";
+    }
+
+    #tinymce constraint::after {
+      content: "</constraint>";
+    }
+
+
+    #tinymce address::before {
+      content: "<address>";
+    }
+
+    #tinymce address::after {
+      content: "</address>";
+    }
+
+
+    #tinymce lem::before {
+      content: "<lem>";
+    }
+
+    #tinymce lem::after {
+      content: "</lem>";
+    }
+
+
+    #tinymce epigraph::before {
+      content: "<epigraph>";
+    }
+
+    #tinymce epigraph::after {
+      content: "</epigraph>";
+    }
+
+
+    #tinymce principal::before {
+      content: "<principal>";
+    }
+
+    #tinymce principal::after {
+      content: "</principal>";
+    }
+
+
+    #tinymce additional::before {
+      content: "<additional>";
+    }
+
+    #tinymce additional::after {
+      content: "</additional>";
+    }
+
+
+    #tinymce personGrp::before {
+      content: "<personGrp>";
+    }
+
+    #tinymce personGrp::after {
+      content: "</personGrp>";
+    }
+
+
+    #tinymce value::before {
+      content: "<value>";
+    }
+
+    #tinymce value::after {
+      content: "</value>";
+    }
+
+
+    #tinymce supplied::before {
+      content: "<supplied>";
+    }
+
+    #tinymce supplied::after {
+      content: "</supplied>";
+    }
+
+
+    #tinymce milestone::before {
+      content: "<milestone>";
+    }
+
+    #tinymce milestone::after {
+      content: "</milestone>";
+    }
+
+
+    #tinymce catchwords::before {
+      content: "<catchwords>";
+    }
+
+    #tinymce catchwords::after {
+      content: "</catchwords>";
+    }
+
+
+    #tinymce docTitle::before {
+      content: "<docTitle>";
+    }
+
+    #tinymce docTitle::after {
+      content: "</docTitle>";
+    }
+
+
+    #tinymce eLeaf::before {
+      content: "<eLeaf>";
+    }
+
+    #tinymce eLeaf::after {
+      content: "</eLeaf>";
+    }
+
+
+    #tinymce damageSpan::before {
+      content: "<damageSpan>";
+    }
+
+    #tinymce damageSpan::after {
+      content: "</damageSpan>";
+    }
+
+
+    #tinymce constraintSpec::before {
+      content: "<constraintSpec>";
+    }
+
+    #tinymce constraintSpec::after {
+      content: "</constraintSpec>";
+    }
+
+
+    #tinymce pc::before {
+      content: "<pc>";
+    }
+
+    #tinymce pc::after {
+      content: "</pc>";
+    }
+
+
+    #tinymce set::before {
+      content: "<set>";
+    }
+
+    #tinymce set::after {
+      content: "</set>";
+    }
+
+
+    #tinymce model::before {
+      content: "<model>";
+    }
+
+    #tinymce model::after {
+      content: "</model>";
+    }
+
+
+    #tinymce typeNote::before {
+      content: "<typeNote>";
+    }
+
+    #tinymce typeNote::after {
+      content: "</typeNote>";
+    }
+
+
+    #tinymce caesura::before {
+      content: "<caesura>";
+    }
+
+    #tinymce caesura::after {
+      content: "</caesura>";
+    }
+
+
+    #tinymce sourceDoc::before {
+      content: "<sourceDoc>";
+    }
+
+    #tinymce sourceDoc::after {
+      content: "</sourceDoc>";
+    }
+
+
+    #tinymce imprimatur::before {
+      content: "<imprimatur>";
+    }
+
+    #tinymce imprimatur::after {
+      content: "</imprimatur>";
+    }
+
+
+    #tinymce district::before {
+      content: "<district>";
+    }
+
+    #tinymce district::after {
+      content: "</district>";
+    }
+
+
+    #tinymce taxonomy::before {
+      content: "<taxonomy>";
+    }
+
+    #tinymce taxonomy::after {
+      content: "</taxonomy>";
+    }
+
+
+    #tinymce transpose::before {
+      content: "<transpose>";
+    }
+
+    #tinymce transpose::after {
+      content: "</transpose>";
+    }
+
+
+    #tinymce filiation::before {
+      content: "<filiation>";
+    }
+
+    #tinymce filiation::after {
+      content: "</filiation>";
+    }
+
+
+    #tinymce front::before {
+      content: "<front>";
+    }
+
+    #tinymce front::after {
+      content: "</front>";
+    }
+
+
+    #tinymce pb::before {
+      content: "<pb>";
+    }
+
+    #tinymce pb::after {
+      content: "</pb>";
+    }
+
+
+    #tinymce headItem::before {
+      content: "<headItem>";
+    }
+
+    #tinymce headItem::after {
+      content: "</headItem>";
+    }
+
+
+    #tinymce measureGrp::before {
+      content: "<measureGrp>";
+    }
+
+    #tinymce measureGrp::after {
+      content: "</measureGrp>";
+    }
+
+
+    #tinymce formula::before {
+      content: "<formula>";
+    }
+
+    #tinymce formula::after {
+      content: "</formula>";
+    }
+
+
+    #tinymce valDesc::before {
+      content: "<valDesc>";
+    }
+
+    #tinymce valDesc::after {
+      content: "</valDesc>";
+    }
+
+
+    #tinymce setting::before {
+      content: "<setting>";
+    }
+
+    #tinymce setting::after {
+      content: "</setting>";
+    }
+
+
+    #tinymce w::before {
+      content: "<w>";
+    }
+
+    #tinymce w::after {
+      content: "</w>";
+    }
+
+
+    #tinymce vLabel::before {
+      content: "<vLabel>";
+    }
+
+    #tinymce vLabel::after {
+      content: "</vLabel>";
+    }
+
+
+    #tinymce variantEncoding::before {
+      content: "<variantEncoding>";
+    }
+
+    #tinymce variantEncoding::after {
+      content: "</variantEncoding>";
+    }
+
+
+    #tinymce sex::before {
+      content: "<sex>";
+    }
+
+    #tinymce sex::after {
+      content: "</sex>";
+    }
+
+
+    #tinymce xenoData::before {
+      content: "<xenoData>";
+    }
+
+    #tinymce xenoData::after {
+      content: "</xenoData>";
+    }
+
+
+    #tinymce dictScrap::before {
+      content: "<dictScrap>";
+    }
+
+    #tinymce dictScrap::after {
+      content: "</dictScrap>";
+    }
+
+
+    #tinymce vAlt::before {
+      content: "<vAlt>";
+    }
+
+    #tinymce vAlt::after {
+      content: "</vAlt>";
+    }
+
+
+    #tinymce cRefPattern::before {
+      content: "<cRefPattern>";
+    }
+
+    #tinymce cRefPattern::after {
+      content: "</cRefPattern>";
+    }
+
+
+    #tinymce normalization::before {
+      content: "<normalization>";
+    }
+
+    #tinymce normalization::after {
+      content: "</normalization>";
+    }
+
+
+    #tinymce ab::before {
+      content: "<ab>";
+    }
+
+    #tinymce ab::after {
+      content: "</ab>";
+    }
+
+
+    #tinymce gloss::before {
+      content: "<gloss>";
+    }
+
+    #tinymce gloss::after {
+      content: "</gloss>";
+    }
+
+
+    #tinymce byline::before {
+      content: "<byline>";
+    }
+
+    #tinymce byline::after {
+      content: "</byline>";
+    }
+
+
+    #tinymce persona::before {
+      content: "<persona>";
+    }
+
+    #tinymce persona::after {
+      content: "</persona>";
+    }
+
+
+    #tinymce gramGrp::before {
+      content: "<gramGrp>";
+    }
+
+    #tinymce gramGrp::after {
+      content: "</gramGrp>";
+    }
+
+
+    #tinymce msItem::before {
+      content: "<msItem>";
+    }
+
+    #tinymce msItem::after {
+      content: "</msItem>";
+    }
+
+
+    #tinymce moduleRef::before {
+      content: "<moduleRef>";
+    }
+
+    #tinymce moduleRef::after {
+      content: "</moduleRef>";
+    }
+
+
+    #tinymce foliation::before {
+      content: "<foliation>";
+    }
+
+    #tinymce foliation::after {
+      content: "</foliation>";
+    }
+
+
+    #tinymce docEdition::before {
+      content: "<docEdition>";
+    }
+
+    #tinymce docEdition::after {
+      content: "</docEdition>";
+    }
+
+
+    #tinymce correspDesc::before {
+      content: "<correspDesc>";
+    }
+
+    #tinymce correspDesc::after {
+      content: "</correspDesc>";
+    }
+
+
+    #tinymce bibl::before {
+      content: "<bibl>";
+    }
+
+    #tinymce bibl::after {
+      content: "</bibl>";
+    }
+
+
+    #tinymce specDesc::before {
+      content: "<specDesc>";
+    }
+
+    #tinymce specDesc::after {
+      content: "</specDesc>";
+    }
+
+
+    #tinymce geo::before {
+      content: "<geo>";
+    }
+
+    #tinymce geo::after {
+      content: "</geo>";
+    }
+
+
+    #tinymce actor::before {
+      content: "<actor>";
+    }
+
+    #tinymce actor::after {
+      content: "</actor>";
+    }
+
+
+    #tinymce charProp::before {
+      content: "<charProp>";
+    }
+
+    #tinymce charProp::after {
+      content: "</charProp>";
+    }
+
+
+    #tinymce titlePart::before {
+      content: "<titlePart>";
+    }
+
+    #tinymce titlePart::after {
+      content: "</titlePart>";
+    }
+
+
+    #tinymce elementSpec::before {
+      content: "<elementSpec>";
+    }
+
+    #tinymce elementSpec::after {
+      content: "</elementSpec>";
+    }
+
+
+    #tinymce default::before {
+      content: "<default>";
+    }
+
+    #tinymce default::after {
+      content: "</default>";
+    }
+
+
+    #tinymce body::before {
+      content: "<body>";
+    }
+
+    #tinymce body::after {
+      content: "</body>";
+    }
+
+
+    #tinymce witStart::before {
+      content: "<witStart>";
+    }
+
+    #tinymce witStart::after {
+      content: "</witStart>";
+    }
+
+
+    #tinymce surfaceGrp::before {
+      content: "<surfaceGrp>";
+    }
+
+    #tinymce surfaceGrp::after {
+      content: "</surfaceGrp>";
+    }
+
+
+    #tinymce tree::before {
+      content: "<tree>";
+    }
+
+    #tinymce tree::after {
+      content: "</tree>";
+    }
+
+
+    #tinymce cit::before {
+      content: "<cit>";
+    }
+
+    #tinymce cit::after {
+      content: "</cit>";
+    }
+
+
+    #tinymce nym::before {
+      content: "<nym>";
+    }
+
+    #tinymce nym::after {
+      content: "</nym>";
+    }
+
+
+    #tinymce handDesc::before {
+      content: "<handDesc>";
+    }
+
+    #tinymce handDesc::after {
+      content: "</handDesc>";
+    }
+
+
+    #tinymce forename::before {
+      content: "<forename>";
+    }
+
+    #tinymce forename::after {
+      content: "</forename>";
+    }
+
+
+    #tinymce gb::before {
+      content: "<gb>";
+    }
+
+    #tinymce gb::after {
+      content: "</gb>";
+    }
+
+
+    #tinymce offset::before {
+      content: "<offset>";
+    }
+
+    #tinymce offset::after {
+      content: "</offset>";
+    }
+
+
+    #tinymce role::before {
+      content: "<role>";
+    }
+
+    #tinymce role::after {
+      content: "</role>";
+    }
+
+
+    #tinymce namespace::before {
+      content: "<namespace>";
+    }
+
+    #tinymce namespace::after {
+      content: "</namespace>";
+    }
+
+
+    #tinymce death::before {
+      content: "<death>";
+    }
+
+    #tinymce death::after {
+      content: "</death>";
+    }
+
+
+    #tinymce change::before {
+      content: "<change>";
+    }
+
+    #tinymce change::after {
+      content: "</change>";
+    }
+
+
+    #tinymce colloc::before {
+      content: "<colloc>";
+    }
+
+    #tinymce colloc::after {
+      content: "</colloc>";
+    }
+
+
+    #tinymce bicond::before {
+      content: "<bicond>";
+    }
+
+    #tinymce bicond::after {
+      content: "</bicond>";
+    }
+
+
+    #tinymce if::before {
+      content: "<if>";
+    }
+
+    #tinymce if::after {
+      content: "</if>";
+    }
+
+
+    #tinymce listBibl::before {
+      content: "<listBibl>";
+    }
+
+    #tinymce listBibl::after {
+      content: "</listBibl>";
+    }
+
+
+    #tinymce msPart::before {
+      content: "<msPart>";
+    }
+
+    #tinymce msPart::after {
+      content: "</msPart>";
+    }
+
+
+    #tinymce figure::before {
+      content: "<figure>";
+    }
+
+    #tinymce figure::after {
+      content: "</figure>";
+    }
+
+
+    #tinymce sense::before {
+      content: "<sense>";
+    }
+
+    #tinymce sense::after {
+      content: "</sense>";
+    }
+
+
+    #tinymce subc::before {
+      content: "<subc>";
+    }
+
+    #tinymce subc::after {
+      content: "</subc>";
+    }
+
+
+    #tinymce superEntry::before {
+      content: "<superEntry>";
+    }
+
+    #tinymce superEntry::after {
+      content: "</superEntry>";
+    }
+
+
+    #tinymce trailer::before {
+      content: "<trailer>";
+    }
+
+    #tinymce trailer::after {
+      content: "</trailer>";
+    }
+
+
+    #tinymce samplingDecl::before {
+      content: "<samplingDecl>";
+    }
+
+    #tinymce samplingDecl::after {
+      content: "</samplingDecl>";
+    }
+
+
+    #tinymce ref::before {
+      content: "<ref>";
+    }
+
+    #tinymce ref::after {
+      content: "</ref>";
+    }
+
+
+    #tinymce postscript::before {
+      content: "<postscript>";
+    }
+
+    #tinymce postscript::after {
+      content: "</postscript>";
+    }
+
+
+    #tinymce link::before {
+      content: "<link>";
+    }
+
+    #tinymce link::after {
+      content: "</link>";
+    }
+
+
+    #tinymce anyElement::before {
+      content: "<anyElement>";
+    }
+
+    #tinymce anyElement::after {
+      content: "</anyElement>";
+    }
+
+
+    #tinymce alt::before {
+      content: "<alt>";
+    }
+
+    #tinymce alt::after {
+      content: "</alt>";
+    }
+
+
+    #tinymce prologue::before {
+      content: "<prologue>";
+    }
+
+    #tinymce prologue::after {
+      content: "</prologue>";
+    }
+
+
+    #tinymce nationality::before {
+      content: "<nationality>";
+    }
+
+    #tinymce nationality::after {
+      content: "</nationality>";
+    }
+
+
+    #tinymce domain::before {
+      content: "<domain>";
+    }
+
+    #tinymce domain::after {
+      content: "</domain>";
+    }
+
+
+    #tinymce case::before {
+      content: "<case>";
+    }
+
+    #tinymce case::after {
+      content: "</case>";
+    }
+
+
+    #tinymce sourceDesc::before {
+      content: "<sourceDesc>";
+    }
+
+    #tinymce sourceDesc::after {
+      content: "</sourceDesc>";
+    }
+
+
+    #tinymce surface::before {
+      content: "<surface>";
+    }
+
+    #tinymce surface::after {
+      content: "</surface>";
+    }
+
+
+    #tinymce div2::before {
+      content: "<div2>";
+    }
+
+    #tinymce div2::after {
+      content: "</div2>";
+    }
+
+
+    #tinymce source::before {
+      content: "<source>";
+    }
+
+    #tinymce source::after {
+      content: "</source>";
+    }
+
+
+    #tinymce vMerge::before {
+      content: "<vMerge>";
+    }
+
+    #tinymce vMerge::after {
+      content: "</vMerge>";
+    }
+
+
+    #tinymce div4::before {
+      content: "<div4>";
+    }
+
+    #tinymce div4::after {
+      content: "</div4>";
+    }
+
+
+    #tinymce appInfo::before {
+      content: "<appInfo>";
+    }
+
+    #tinymce appInfo::after {
+      content: "</appInfo>";
+    }
+
+
+    #tinymce attRef::before {
+      content: "<attRef>";
+    }
+
+    #tinymce attRef::after {
+      content: "</attRef>";
+    }
+
+
+    #tinymce docDate::before {
+      content: "<docDate>";
+    }
+
+    #tinymce docDate::after {
+      content: "</docDate>";
+    }
+
+
+    #tinymce listNym::before {
+      content: "<listNym>";
+    }
+
+    #tinymce listNym::after {
+      content: "</listNym>";
+    }
+
+
+    #tinymce biblFull::before {
+      content: "<biblFull>";
+    }
+
+    #tinymce biblFull::after {
+      content: "</biblFull>";
+    }
+
+
+    #tinymce msName::before {
+      content: "<msName>";
+    }
+
+    #tinymce msName::after {
+      content: "</msName>";
+    }
+
+
+    #tinymce geogName::before {
+      content: "<geogName>";
+    }
+
+    #tinymce geogName::after {
+      content: "</geogName>";
+    }
+
+
+    #tinymce sp::before {
+      content: "<sp>";
+    }
+
+    #tinymce sp::after {
+      content: "</sp>";
+    }
+
+
+    #tinymce measure::before {
+      content: "<measure>";
+    }
+
+    #tinymce measure::after {
+      content: "</measure>";
+    }
+
+
+    #tinymce camera::before {
+      content: "<camera>";
+    }
+
+    #tinymce camera::after {
+      content: "</camera>";
+    }
+
+
+    #tinymce cb::before {
+      content: "<cb>";
+    }
+
+    #tinymce cb::after {
+      content: "</cb>";
+    }
+
+
+    #tinymce num::before {
+      content: "<num>";
+    }
+
+    #tinymce num::after {
+      content: "</num>";
+    }
+
+
+    #tinymce pause::before {
+      content: "<pause>";
+    }
+
+    #tinymce pause::after {
+      content: "</pause>";
+    }
+
+
+    #tinymce activity::before {
+      content: "<activity>";
+    }
+
+    #tinymce activity::after {
+      content: "</activity>";
+    }
+
+
+    #tinymce refState::before {
+      content: "<refState>";
+    }
+
+    #tinymce refState::after {
+      content: "</refState>";
+    }
+
+
+    #tinymce desc::before {
+      content: "<desc>";
+    }
+
+    #tinymce desc::after {
+      content: "</desc>";
+    }
+
+
+    #tinymce item::before {
+      content: "<item>";
+    }
+
+    #tinymce item::after {
+      content: "</item>";
+    }
+
+
+    #tinymce adminInfo::before {
+      content: "<adminInfo>";
+    }
+
+    #tinymce adminInfo::after {
+      content: "</adminInfo>";
+    }
+
+
+    #tinymce kinesic::before {
+      content: "<kinesic>";
+    }
+
+    #tinymce kinesic::after {
+      content: "</kinesic>";
+    }
+
+
+    #tinymce channel::before {
+      content: "<channel>";
+    }
+
+    #tinymce channel::after {
+      content: "</channel>";
+    }
+
+
+    #tinymce def::before {
+      content: "<def>";
+    }
+
+    #tinymce def::after {
+      content: "</def>";
+    }
+
+
+    #tinymce moduleSpec::before {
+      content: "<moduleSpec>";
+    }
+
+    #tinymce moduleSpec::after {
+      content: "</moduleSpec>";
+    }
+
+
+    #tinymce pron::before {
+      content: "<pron>";
+    }
+
+    #tinymce pron::after {
+      content: "</pron>";
+    }
+
+
+    #tinymce relatedItem::before {
+      content: "<relatedItem>";
+    }
+
+    #tinymce relatedItem::after {
+      content: "</relatedItem>";
+    }
+
+
+    #tinymce rendition::before {
+      content: "<rendition>";
+    }
+
+    #tinymce rendition::after {
+      content: "</rendition>";
+    }
+
+
+    #tinymce material::before {
+      content: "<material>";
+    }
+
+    #tinymce material::after {
+      content: "</material>";
+    }
+
+
+    #tinymce analytic::before {
+      content: "<analytic>";
+    }
+
+    #tinymce analytic::after {
+      content: "</analytic>";
+    }
+
+
+    #tinymce titlePage::before {
+      content: "<titlePage>";
+    }
+
+    #tinymce titlePage::after {
+      content: "</titlePage>";
+    }
+
+
+    #tinymce s::before {
+      content: "<s>";
+    }
+
+    #tinymce s::after {
+      content: "</s>";
+    }
+
+
+    #tinymce seal::before {
+      content: "<seal>";
+    }
+
+    #tinymce seal::after {
+      content: "</seal>";
+    }
+
+
+    #tinymce teiHeader::before {
+      content: "<teiHeader>";
+    }
+
+    #tinymce teiHeader::after {
+      content: "</teiHeader>";
+    }
+
+
+    #tinymce form::before {
+      content: "<form>";
+    }
+
+    #tinymce form::after {
+      content: "</form>";
+    }
+
+
+    #tinymce langKnown::before {
+      content: "<langKnown>";
+    }
+
+    #tinymce langKnown::after {
+      content: "</langKnown>";
+    }
+
+
+    #tinymce witness::before {
+      content: "<witness>";
+    }
+
+    #tinymce witness::after {
+      content: "</witness>";
+    }
+
+
+    #tinymce annotationBlock::before {
+      content: "<annotationBlock>";
+    }
+
+    #tinymce annotationBlock::after {
+      content: "</annotationBlock>";
+    }
+
+
+    #tinymce postCode::before {
+      content: "<postCode>";
+    }
+
+    #tinymce postCode::after {
+      content: "</postCode>";
+    }
+
+
+    #tinymce acquisition::before {
+      content: "<acquisition>";
+    }
+
+    #tinymce acquisition::after {
+      content: "</acquisition>";
+    }
+
+
+    #tinymce purpose::before {
+      content: "<purpose>";
+    }
+
+    #tinymce purpose::after {
+      content: "</purpose>";
+    }
+
+
+    #tinymce tns::before {
+      content: "<tns>";
+    }
+
+    #tinymce tns::after {
+      content: "</tns>";
+    }
+
+
+    #tinymce head::before {
+      content: "<head>";
+    }
+
+    #tinymce head::after {
+      content: "</head>";
+    }
+
+
+    #tinymce lacunaStart::before {
+      content: "<lacunaStart>";
+    }
+
+    #tinymce lacunaStart::after {
+      content: "</lacunaStart>";
+    }
+
+
+    #tinymce quotation::before {
+      content: "<quotation>";
+    }
+
+    #tinymce quotation::after {
+      content: "</quotation>";
+    }
+
+
+    #tinymce lg::before {
+      content: "<lg>";
+    }
+
+    #tinymce lg::after {
+      content: "</lg>";
+    }
+
+
+    #tinymce placeName::before {
+      content: "<placeName>";
+    }
+
+    #tinymce placeName::after {
+      content: "</placeName>";
+    }
+
+
+    #tinymce supportDesc::before {
+      content: "<supportDesc>";
+    }
+
+    #tinymce supportDesc::after {
+      content: "</supportDesc>";
+    }
+
+
+    #tinymce addName::before {
+      content: "<addName>";
+    }
+
+    #tinymce addName::after {
+      content: "</addName>";
+    }
+
+
+    #tinymce paramSpec::before {
+      content: "<paramSpec>";
+    }
+
+    #tinymce paramSpec::after {
+      content: "</paramSpec>";
+    }
+
+
+    #tinymce castGroup::before {
+      content: "<castGroup>";
+    }
+
+    #tinymce castGroup::after {
+      content: "</castGroup>";
+    }
+
+
+    #tinymce xr::before {
+      content: "<xr>";
+    }
+
+    #tinymce xr::after {
+      content: "</xr>";
+    }
+
+
+    #tinymce mapping::before {
+      content: "<mapping>";
+    }
+
+    #tinymce mapping::after {
+      content: "</mapping>";
+    }
+
+
+    #tinymce textLang::before {
+      content: "<textLang>";
+    }
+
+    #tinymce textLang::after {
+      content: "</textLang>";
+    }
+
+
+    #tinymce hyphenation::before {
+      content: "<hyphenation>";
+    }
+
+    #tinymce hyphenation::after {
+      content: "</hyphenation>";
+    }
+
+
+    #tinymce rdgGrp::before {
+      content: "<rdgGrp>";
+    }
+
+    #tinymce rdgGrp::after {
+      content: "</rdgGrp>";
+    }
+
+
+    #tinymce fsConstraints::before {
+      content: "<fsConstraints>";
+    }
+
+    #tinymce fsConstraints::after {
+      content: "</fsConstraints>";
+    }
+
+
+    #tinymce div5::before {
+      content: "<div5>";
+    }
+
+    #tinymce div5::after {
+      content: "</div5>";
+    }
+
+
+    #tinymce TEI::before {
+      content: "<TEI>";
+    }
+
+    #tinymce TEI::after {
+      content: "</TEI>";
+    }
+
+
+    #tinymce derivation::before {
+      content: "<derivation>";
+    }
+
+    #tinymce derivation::after {
+      content: "</derivation>";
+    }
+
+
+    #tinymce linkGrp::before {
+      content: "<linkGrp>";
+    }
+
+    #tinymce linkGrp::after {
+      content: "</linkGrp>";
+    }
+
+
+    #tinymce dataSpec::before {
+      content: "<dataSpec>";
+    }
+
+    #tinymce dataSpec::after {
+      content: "</dataSpec>";
+    }
+
+
+    #tinymce sic::before {
+      content: "<sic>";
+    }
+
+    #tinymce sic::after {
+      content: "</sic>";
+    }
+
+
+    #tinymce textNode::before {
+      content: "<textNode>";
+    }
+
+    #tinymce textNode::after {
+      content: "</textNode>";
+    }
+
+
+    #tinymce media::before {
+      content: "<media>";
+    }
+
+    #tinymce media::after {
+      content: "</media>";
+    }
+
+
+    #tinymce abbr::before {
+      content: "<abbr>";
+    }
+
+    #tinymce abbr::after {
+      content: "</abbr>";
+    }
+
+
+    #tinymce lb::before {
+      content: "<lb>";
+    }
+
+    #tinymce lb::after {
+      content: "</lb>";
+    }
+
+
+    #tinymce charDecl::before {
+      content: "<charDecl>";
+    }
+
+    #tinymce charDecl::after {
+      content: "</charDecl>";
+    }
+
+
+    #tinymce interaction::before {
+      content: "<interaction>";
+    }
+
+    #tinymce interaction::after {
+      content: "</interaction>";
+    }
+
+
+    #tinymce cell::before {
+      content: "<cell>";
+    }
+
+    #tinymce cell::after {
+      content: "</cell>";
+    }
+
+
+    #tinymce mentioned::before {
+      content: "<mentioned>";
+    }
+
+    #tinymce mentioned::after {
+      content: "</mentioned>";
+    }
+
+
+    #tinymce signatures::before {
+      content: "<signatures>";
+    }
+
+    #tinymce signatures::after {
+      content: "</signatures>";
+    }
+
+
+    #tinymce interpretation::before {
+      content: "<interpretation>";
+    }
+
+    #tinymce interpretation::after {
+      content: "</interpretation>";
+    }
+
+
+    #tinymce m::before {
+      content: "<m>";
+    }
+
+    #tinymce m::after {
+      content: "</m>";
+    }
+
+
+    #tinymce unclear::before {
+      content: "<unclear>";
+    }
+
+    #tinymce unclear::after {
+      content: "</unclear>";
+    }
+
+
+    #tinymce name::before {
+      content: "<name>";
+    }
+
+    #tinymce name::after {
+      content: "</name>";
+    }
+
+
+    #tinymce summary::before {
+      content: "<summary>";
+    }
+
+    #tinymce summary::after {
+      content: "</summary>";
+    }
+
+
+    #tinymce cl::before {
+      content: "<cl>";
+    }
+
+    #tinymce cl::after {
+      content: "</cl>";
+    }
+
+
+    #tinymce metSym::before {
+      content: "<metSym>";
+    }
+
+    #tinymce metSym::after {
+      content: "</metSym>";
+    }
+
+
+    #tinymce u::before {
+      content: "<u>";
+    }
+
+    #tinymce u::after {
+      content: "</u>";
+    }
+
+
+    #tinymce emph::before {
+      content: "<emph>";
+    }
+
+    #tinymce emph::after {
+      content: "</emph>";
+    }
+
+
+    #tinymce repository::before {
+      content: "<repository>";
+    }
+
+    #tinymce repository::after {
+      content: "</repository>";
+    }
+
+
+    #tinymce hi::before {
+      content: "<hi>";
+    }
+
+    #tinymce hi::after {
+      content: "</hi>";
+    }
+
+
+    #tinymce handNote::before {
+      content: "<handNote>";
+    }
+
+    #tinymce handNote::after {
+      content: "</handNote>";
+    }
+
+
+    #tinymce layout::before {
+      content: "<layout>";
+    }
+
+    #tinymce layout::after {
+      content: "</layout>";
+    }
+
+
+    #tinymce reg::before {
+      content: "<reg>";
+    }
+
+    #tinymce reg::after {
+      content: "</reg>";
+    }
+
+
+    #tinymce language::before {
+      content: "<language>";
+    }
+
+    #tinymce language::after {
+      content: "</language>";
+    }
+
+
+    #tinymce headLabel::before {
+      content: "<headLabel>";
+    }
+
+    #tinymce headLabel::after {
+      content: "</headLabel>";
+    }
+
+
+    #tinymce authority::before {
+      content: "<authority>";
+    }
+
+    #tinymce authority::after {
+      content: "</authority>";
+    }
+
+
+    #tinymce layoutDesc::before {
+      content: "<layoutDesc>";
+    }
+
+    #tinymce layoutDesc::after {
+      content: "</layoutDesc>";
+    }
+
+
+    #tinymce pubPlace::before {
+      content: "<pubPlace>";
+    }
+
+    #tinymce pubPlace::after {
+      content: "</pubPlace>";
+    }
+
+
+    #tinymce precision::before {
+      content: "<precision>";
+    }
+
+    #tinymce precision::after {
+      content: "</precision>";
+    }
+
+
+    #tinymce gi::before {
+      content: "<gi>";
+    }
+
+    #tinymce gi::after {
+      content: "</gi>";
+    }
+
+
+    #tinymce titleStmt::before {
+      content: "<titleStmt>";
+    }
+
+    #tinymce titleStmt::after {
+      content: "</titleStmt>";
+    }
+
+
+    #tinymce listRelation::before {
+      content: "<listRelation>";
+    }
+
+    #tinymce listRelation::after {
+      content: "</listRelation>";
+    }
+
+
+    #tinymce dateline::before {
+      content: "<dateline>";
+    }
+
+    #tinymce dateline::after {
+      content: "</dateline>";
+    }
+
+
+    #tinymce classRef::before {
+      content: "<classRef>";
+    }
+
+    #tinymce classRef::after {
+      content: "</classRef>";
+    }
+
+
+    #tinymce vocal::before {
+      content: "<vocal>";
+    }
+
+    #tinymce vocal::after {
+      content: "</vocal>";
+    }
+
+
+    #tinymce datatype::before {
+      content: "<datatype>";
+    }
+
+    #tinymce datatype::after {
+      content: "</datatype>";
+    }
+
+
+    #tinymce corr::before {
+      content: "<corr>";
+    }
+
+    #tinymce corr::after {
+      content: "</corr>";
+    }
+
+
+    #tinymce unit::before {
+      content: "<unit>";
+    }
+
+    #tinymce unit::after {
+      content: "</unit>";
+    }
+
+
+    #tinymce bindingDesc::before {
+      content: "<bindingDesc>";
+    }
+
+    #tinymce bindingDesc::after {
+      content: "</bindingDesc>";
+    }
+
+
+    #tinymce region::before {
+      content: "<region>";
+    }
+
+    #tinymce region::after {
+      content: "</region>";
+    }
+
+
+    #tinymce relation::before {
+      content: "<relation>";
+    }
+
+    #tinymce relation::after {
+      content: "</relation>";
+    }
+
+
+    #tinymce rhyme::before {
+      content: "<rhyme>";
+    }
+
+    #tinymce rhyme::after {
+      content: "</rhyme>";
+    }
+
+
+    #tinymce notatedMusic::before {
+      content: "<notatedMusic>";
+    }
+
+    #tinymce notatedMusic::after {
+      content: "</notatedMusic>";
+    }
+
+
+    #tinymce projectDesc::before {
+      content: "<projectDesc>";
+    }
+
+    #tinymce projectDesc::after {
+      content: "</projectDesc>";
+    }
+
+
+    #tinymce fLib::before {
+      content: "<fLib>";
+    }
+
+    #tinymce fLib::after {
+      content: "</fLib>";
+    }
+
+
+    #tinymce rdg::before {
+      content: "<rdg>";
+    }
+
+    #tinymce rdg::after {
+      content: "</rdg>";
+    }
+
+
+    #tinymce anchor::before {
+      content: "<anchor>";
+    }
+
+    #tinymce anchor::after {
+      content: "</anchor>";
+    }
+
+
+    #tinymce witEnd::before {
+      content: "<witEnd>";
+    }
+
+    #tinymce witEnd::after {
+      content: "</witEnd>";
+    }
+
+
+    #tinymce broadcast::before {
+      content: "<broadcast>";
+    }
+
+    #tinymce broadcast::after {
+      content: "</broadcast>";
+    }
+
+
+    #tinymce writing::before {
+      content: "<writing>";
+    }
+
+    #tinymce writing::after {
+      content: "</writing>";
+    }
+
+
+    #tinymce pos::before {
+      content: "<pos>";
+    }
+
+    #tinymce pos::after {
+      content: "</pos>";
+    }
+
+
+    #tinymce editor::before {
+      content: "<editor>";
+    }
+
+    #tinymce editor::after {
+      content: "</editor>";
+    }
+
+
+    #tinymce root::before {
+      content: "<root>";
+    }
+
+    #tinymce root::after {
+      content: "</root>";
+    }
+
+
+    #tinymce recording::before {
+      content: "<recording>";
+    }
+
+    #tinymce recording::after {
+      content: "</recording>";
+    }
+
+
+    #tinymce schemaSpec::before {
+      content: "<schemaSpec>";
+    }
+
+    #tinymce schemaSpec::after {
+      content: "</schemaSpec>";
+    }
+
+
+    #tinymce altIdent::before {
+      content: "<altIdent>";
+    }
+
+    #tinymce altIdent::after {
+      content: "</altIdent>";
+    }
+
+
+    #tinymce castList::before {
+      content: "<castList>";
+    }
+
+    #tinymce castList::after {
+      content: "</castList>";
+    }
+
+
+    #tinymce label::before {
+      content: "<label>";
+    }
+
+    #tinymce label::after {
+      content: "</label>";
+    }
+
+
+    #tinymce fileDesc::before {
+      content: "<fileDesc>";
+    }
+
+    #tinymce fileDesc::after {
+      content: "</fileDesc>";
+    }
+
+
+    #tinymce surname::before {
+      content: "<surname>";
+    }
+
+    #tinymce surname::after {
+      content: "</surname>";
+    }
+
+
+    #tinymce imprint::before {
+      content: "<imprint>";
+    }
+
+    #tinymce imprint::after {
+      content: "</imprint>";
+    }
+
+
+    #tinymce calendarDesc::before {
+      content: "<calendarDesc>";
+    }
+
+    #tinymce calendarDesc::after {
+      content: "</calendarDesc>";
+    }
+
+
+    #tinymce equipment::before {
+      content: "<equipment>";
+    }
+
+    #tinymce equipment::after {
+      content: "</equipment>";
+    }
+
+
+    #tinymce div1::before {
+      content: "<div1>";
+    }
+
+    #tinymce div1::after {
+      content: "</div1>";
+    }
+
+
+    #tinymce idno::before {
+      content: "<idno>";
+    }
+
+    #tinymce idno::after {
+      content: "</idno>";
+    }
+
+
+    #tinymce defaultVal::before {
+      content: "<defaultVal>";
+    }
+
+    #tinymce defaultVal::after {
+      content: "</defaultVal>";
+    }
+
+
+    #tinymce recordHist::before {
+      content: "<recordHist>";
+    }
+
+    #tinymce recordHist::after {
+      content: "</recordHist>";
+    }
+
+
+    #tinymce respons::before {
+      content: "<respons>";
+    }
+
+    #tinymce respons::after {
+      content: "</respons>";
+    }
+
+
+    #tinymce biblStruct::before {
+      content: "<biblStruct>";
+    }
+
+    #tinymce biblStruct::after {
+      content: "</biblStruct>";
+    }
+
+
+    #tinymce occupation::before {
+      content: "<occupation>";
+    }
+
+    #tinymce occupation::after {
+      content: "</occupation>";
+    }
+
+
+    #tinymce biblScope::before {
+      content: "<biblScope>";
+    }
+
+    #tinymce biblScope::after {
+      content: "</biblScope>";
+    }
+
+
+    #tinymce incipit::before {
+      content: "<incipit>";
+    }
+
+    #tinymce incipit::after {
+      content: "</incipit>";
+    }
+
+
+    #tinymce secl::before {
+      content: "<secl>";
+    }
+
+    #tinymce secl::after {
+      content: "</secl>";
+    }
+
+
+    #tinymce transcriptionDesc::before {
+      content: "<transcriptionDesc>";
+    }
+
+    #tinymce transcriptionDesc::after {
+      content: "</transcriptionDesc>";
+    }
+
+
+    #tinymce orth::before {
+      content: "<orth>";
+    }
+
+    #tinymce orth::after {
+      content: "</orth>";
+    }
+
+
+    #tinymce remarks::before {
+      content: "<remarks>";
+    }
+
+    #tinymce remarks::after {
+      content: "</remarks>";
+    }
+
+
+    #tinymce charName::before {
+      content: "<charName>";
+    }
+
+    #tinymce charName::after {
+      content: "</charName>";
+    }
+
+
+    #tinymce facsimile::before {
+      content: "<facsimile>";
+    }
+
+    #tinymce facsimile::after {
+      content: "</facsimile>";
+    }
+
+
+    #tinymce soCalled::before {
+      content: "<soCalled>";
+    }
+
+    #tinymce soCalled::after {
+      content: "</soCalled>";
+    }
+
+
+    #tinymce prefixDef::before {
+      content: "<prefixDef>";
+    }
+
+    #tinymce prefixDef::after {
+      content: "</prefixDef>";
+    }
+
+
+    #tinymce attDef::before {
+      content: "<attDef>";
+    }
+
+    #tinymce attDef::after {
+      content: "</attDef>";
+    }
+
+
+    #tinymce depth::before {
+      content: "<depth>";
+    }
+
+    #tinymce depth::after {
+      content: "</depth>";
+    }
+
+
+    #tinymce additions::before {
+      content: "<additions>";
+    }
+
+    #tinymce additions::after {
+      content: "</additions>";
+    }
+
+
+    #tinymce listForest::before {
+      content: "<listForest>";
+    }
+
+    #tinymce listForest::after {
+      content: "</listForest>";
+    }
+
+
+    #tinymce trait::before {
+      content: "<trait>";
+    }
+
+    #tinymce trait::after {
+      content: "</trait>";
+    }
+
+
+    #tinymce hom::before {
+      content: "<hom>";
+    }
+
+    #tinymce hom::after {
+      content: "</hom>";
+    }
+
+
+    #tinymce stdVals::before {
+      content: "<stdVals>";
+    }
+
+    #tinymce stdVals::after {
+      content: "</stdVals>";
+    }
+
+
+    #tinymce floruit::before {
+      content: "<floruit>";
+    }
+
+    #tinymce floruit::after {
+      content: "</floruit>";
+    }
+
+
+    #tinymce triangle::before {
+      content: "<triangle>";
+    }
+
+    #tinymce triangle::after {
+      content: "</triangle>";
+    }
+
+
+    #tinymce teiCorpus::before {
+      content: "<teiCorpus>";
+    }
+
+    #tinymce teiCorpus::after {
+      content: "</teiCorpus>";
+    }
+
+
+    #tinymce date::before {
+      content: "<date>";
+    }
+
+    #tinymce date::after {
+      content: "</date>";
+    }
+
+
+    #tinymce p::before {
+      content: "<p>";
+    }
+
+    #tinymce p::after {
+      content: "</p>";
+    }
+
+
+    #tinymce docAuthor::before {
+      content: "<docAuthor>";
+    }
+
+    #tinymce docAuthor::after {
+      content: "</docAuthor>";
+    }
+
+
+    #tinymce refsDecl::before {
+      content: "<refsDecl>";
+    }
+
+    #tinymce refsDecl::after {
+      content: "</refsDecl>";
+    }
+
+
+    #tinymce listChange::before {
+      content: "<listChange>";
+    }
+
+    #tinymce listChange::after {
+      content: "</listChange>";
+    }
+
+
+    #tinymce listPlace::before {
+      content: "<listPlace>";
+    }
+
+    #tinymce listPlace::after {
+      content: "</listPlace>";
+    }
+
+
+    #tinymce quote::before {
+      content: "<quote>";
+    }
+
+    #tinymce quote::after {
+      content: "</quote>";
+    }
+
+
+    #tinymce gen::before {
+      content: "<gen>";
+    }
+
+    #tinymce gen::after {
+      content: "</gen>";
+    }
+
+
+    #tinymce secFol::before {
+      content: "<secFol>";
+    }
+
+    #tinymce secFol::after {
+      content: "</secFol>";
+    }
+
+
+    #tinymce mod::before {
+      content: "<mod>";
+    }
+
+    #tinymce mod::after {
+      content: "</mod>";
+    }
+
+
+    #tinymce encodingDesc::before {
+      content: "<encodingDesc>";
+    }
+
+    #tinymce encodingDesc::after {
+      content: "</encodingDesc>";
+    }
+
+
+    #tinymce roleDesc::before {
+      content: "<roleDesc>";
+    }
+
+    #tinymce roleDesc::after {
+      content: "</roleDesc>";
+    }
+
+
+    #tinymce scriptNote::before {
+      content: "<scriptNote>";
+    }
+
+    #tinymce scriptNote::after {
+      content: "</scriptNote>";
+    }
+
+
+    #tinymce textClass::before {
+      content: "<textClass>";
+    }
+
+    #tinymce textClass::after {
+      content: "</textClass>";
+    }
+
+
+    #tinymce fsDecl::before {
+      content: "<fsDecl>";
+    }
+
+    #tinymce fsDecl::after {
+      content: "</fsDecl>";
+    }
+
+
+    #tinymce publisher::before {
+      content: "<publisher>";
+    }
+
+    #tinymce publisher::after {
+      content: "</publisher>";
+    }
+
+
+    #tinymce finalRubric::before {
+      content: "<finalRubric>";
+    }
+
+    #tinymce finalRubric::after {
+      content: "</finalRubric>";
+    }
+
+
+    #tinymce surplus::before {
+      content: "<surplus>";
+    }
+
+    #tinymce surplus::after {
+      content: "</surplus>";
+    }
+
+
+    #tinymce dim::before {
+      content: "<dim>";
+    }
+
+    #tinymce dim::after {
+      content: "</dim>";
+    }
+
+
+    #tinymce distinct::before {
+      content: "<distinct>";
+    }
+
+    #tinymce distinct::after {
+      content: "</distinct>";
+    }
+
+
+    #tinymce node::before {
+      content: "<node>";
+    }
+
+    #tinymce node::after {
+      content: "</node>";
+    }
+
+
+    #tinymce stamp::before {
+      content: "<stamp>";
+    }
+
+    #tinymce stamp::after {
+      content: "</stamp>";
+    }
+
+
+    #tinymce collection::before {
+      content: "<collection>";
+    }
+
+    #tinymce collection::after {
+      content: "</collection>";
+    }
+
+
+    #tinymce when::before {
+      content: "<when>";
+    }
+
+    #tinymce when::after {
+      content: "</when>";
+    }
+
+
+    #tinymce q::before {
+      content: "<q>";
+    }
+
+    #tinymce q::after {
+      content: "</q>";
+    }
+
+
+    #tinymce heraldry::before {
+      content: "<heraldry>";
+    }
+
+    #tinymce heraldry::after {
+      content: "</heraldry>";
+    }
+
+
+    #tinymce shift::before {
+      content: "<shift>";
+    }
+
+    #tinymce shift::after {
+      content: "</shift>";
+    }
+
+
+    #tinymce lbl::before {
+      content: "<lbl>";
+    }
+
+    #tinymce lbl::after {
+      content: "</lbl>";
+    }
+
+
+    #tinymce graphic::before {
+      content: "<graphic>";
+    }
+
+    #tinymce graphic::after {
+      content: "</graphic>";
+    }
+
+
+    #tinymce lang::before {
+      content: "<lang>";
+    }
+
+    #tinymce lang::after {
+      content: "</lang>";
+    }
+
+
+    #tinymce modelSequence::before {
+      content: "<modelSequence>";
+    }
+
+    #tinymce modelSequence::after {
+      content: "</modelSequence>";
+    }
+
+
+    #tinymce revisionDesc::before {
+      content: "<revisionDesc>";
+    }
+
+    #tinymce revisionDesc::after {
+      content: "</revisionDesc>";
+    }
+
+
+    #tinymce iNode::before {
+      content: "<iNode>";
+    }
+
+    #tinymce iNode::after {
+      content: "</iNode>";
+    }
+
+
+    #tinymce tech::before {
+      content: "<tech>";
+    }
+
+    #tinymce tech::after {
+      content: "</tech>";
+    }
+
+
+    #tinymce sequence::before {
+      content: "<sequence>";
+    }
+
+    #tinymce sequence::after {
+      content: "</sequence>";
+    }
+
+
+    #tinymce vDefault::before {
+      content: "<vDefault>";
+    }
+
+    #tinymce vDefault::after {
+      content: "</vDefault>";
+    }
+
+
+    #tinymce origPlace::before {
+      content: "<origPlace>";
+    }
+
+    #tinymce origPlace::after {
+      content: "</origPlace>";
+    }
+
+
+    #tinymce localName::before {
+      content: "<localName>";
+    }
+
+    #tinymce localName::after {
+      content: "</localName>";
+    }
+
+
+    #tinymce msDesc::before {
+      content: "<msDesc>";
+    }
+
+    #tinymce msDesc::after {
+      content: "</msDesc>";
+    }
+
+
+    #tinymce signed::before {
+      content: "<signed>";
+    }
+
+    #tinymce signed::after {
+      content: "</signed>";
+    }
+
+
+    #tinymce catDesc::before {
+      content: "<catDesc>";
+    }
+
+    #tinymce catDesc::after {
+      content: "</catDesc>";
+    }
+
+
+    #tinymce listPrefixDef::before {
+      content: "<listPrefixDef>";
+    }
+
+    #tinymce listPrefixDef::after {
+      content: "</listPrefixDef>";
+    }
+
+
+    #tinymce terrain::before {
+      content: "<terrain>";
+    }
+
+    #tinymce terrain::after {
+      content: "</terrain>";
+    }
+
+
+    #tinymce postBox::before {
+      content: "<postBox>";
+    }
+
+    #tinymce postBox::after {
+      content: "</postBox>";
+    }
+
+
+    #tinymce div::before {
+      content: "<div>";
+    }
+
+    #tinymce div::after {
+      content: "</div>";
+    }
+
+
+    #tinymce term::before {
+      content: "<term>";
+    }
+
+    #tinymce term::after {
+      content: "</term>";
+    }
+
+
+    #tinymce country::before {
+      content: "<country>";
+    }
+
+    #tinymce country::after {
+      content: "</country>";
+    }
+
+
+    #tinymce am::before {
+      content: "<am>";
+    }
+
+    #tinymce am::after {
+      content: "</am>";
+    }
+
+
+    #tinymce stress::before {
+      content: "<stress>";
+    }
+
+    #tinymce stress::after {
+      content: "</stress>";
+    }
+
+
+    #tinymce settingDesc::before {
+      content: "<settingDesc>";
+    }
+
+    #tinymce settingDesc::after {
+      content: "</settingDesc>";
+    }
+
+
+    #tinymce altIdentifier::before {
+      content: "<altIdentifier>";
+    }
+
+    #tinymce altIdentifier::after {
+      content: "</altIdentifier>";
+    }
+
+
+    #tinymce age::before {
+      content: "<age>";
+    }
+
+    #tinymce age::after {
+      content: "</age>";
+    }
+
+
+    #tinymce ex::before {
+      content: "<ex>";
+    }
+
+    #tinymce ex::after {
+      content: "</ex>";
+    }
+
+
+    #tinymce gap::before {
+      content: "<gap>";
+    }
+
+    #tinymce gap::after {
+      content: "</gap>";
+    }
+
+
+    #tinymce msContents::before {
+      content: "<msContents>";
+    }
+
+    #tinymce msContents::after {
+      content: "</msContents>";
+    }
+
+
+    #tinymce rubric::before {
+      content: "<rubric>";
+    }
+
+    #tinymce rubric::after {
+      content: "</rubric>";
+    }
+
+
+    #tinymce fsdDecl::before {
+      content: "<fsdDecl>";
+    }
+
+    #tinymce fsdDecl::after {
+      content: "</fsdDecl>";
+    }
+
+
+    #tinymce monogr::before {
+      content: "<monogr>";
+    }
+
+    #tinymce monogr::after {
+      content: "</monogr>";
+    }
+
+
+    #tinymce climate::before {
+      content: "<climate>";
+    }
+
+    #tinymce climate::after {
+      content: "</climate>";
+    }
+
+
+    #tinymce height::before {
+      content: "<height>";
+    }
+
+    #tinymce height::after {
+      content: "</height>";
+    }
+
+
+    #tinymce faith::before {
+      content: "<faith>";
+    }
+
+    #tinymce faith::after {
+      content: "</faith>";
+    }
+
+
+    #tinymce place::before {
+      content: "<place>";
+    }
+
+    #tinymce place::after {
+      content: "</place>";
+    }
+
+
+    #tinymce listRef::before {
+      content: "<listRef>";
+    }
+
+    #tinymce listRef::after {
+      content: "</listRef>";
+    }
+
+
+    #tinymce segmentation::before {
+      content: "<segmentation>";
+    }
+
+    #tinymce segmentation::after {
+      content: "</segmentation>";
+    }
+
+
+    #tinymce argument::before {
+      content: "<argument>";
+    }
+
+    #tinymce argument::after {
+      content: "</argument>";
+    }
+
+
+    #tinymce orgName::before {
+      content: "<orgName>";
+    }
+
+    #tinymce orgName::after {
+      content: "</orgName>";
+    }
+
+
+    #tinymce location::before {
+      content: "<location>";
+    }
+
+    #tinymce location::after {
+      content: "</location>";
+    }
+
+
+    #tinymce fw::before {
+      content: "<fw>";
+    }
+
+    #tinymce fw::after {
+      content: "</fw>";
+    }
+
+
+    #tinymce abstract::before {
+      content: "<abstract>";
+    }
+
+    #tinymce abstract::after {
+      content: "</abstract>";
+    }
+
+
+    #tinymce macroSpec::before {
+      content: "<macroSpec>";
+    }
+
+    #tinymce macroSpec::after {
+      content: "</macroSpec>";
+    }
+
+
+    #tinymce custodialHist::before {
+      content: "<custodialHist>";
+    }
+
+    #tinymce custodialHist::after {
+      content: "</custodialHist>";
+    }
+
+
+    #tinymce geogFeat::before {
+      content: "<geogFeat>";
+    }
+
+    #tinymce geogFeat::after {
+      content: "</geogFeat>";
+    }
+
+
+    #tinymce note::before {
+      content: "<note>";
+    }
+
+    #tinymce note::after {
+      content: "</note>";
+    }
+
+
+    #tinymce bloc::before {
+      content: "<bloc>";
+    }
+
+    #tinymce bloc::after {
+      content: "</bloc>";
+    }
+
+
+    #tinymce path::before {
+      content: "<path>";
+    }
+
+    #tinymce path::after {
+      content: "</path>";
+    }
+
+
+    #tinymce altGrp::before {
+      content: "<altGrp>";
+    }
+
+    #tinymce altGrp::after {
+      content: "</altGrp>";
+    }
+
+
+    #tinymce sealDesc::before {
+      content: "<sealDesc>";
+    }
+
+    #tinymce sealDesc::after {
+      content: "</sealDesc>";
+    }
+
+
+    #tinymce caption::before {
+      content: "<caption>";
+    }
+
+    #tinymce caption::after {
+      content: "</caption>";
+    }
+
+
+    #tinymce funder::before {
+      content: "<funder>";
+    }
+
+    #tinymce funder::after {
+      content: "</funder>";
+    }
+
+
+    #tinymce listEvent::before {
+      content: "<listEvent>";
+    }
+
+    #tinymce listEvent::after {
+      content: "</listEvent>";
+    }
+
+
+    #tinymce langUsage::before {
+      content: "<langUsage>";
+    }
+
+    #tinymce langUsage::after {
+      content: "</langUsage>";
+    }
+
+
+    #tinymce redo::before {
+      content: "<redo>";
+    }
+
+    #tinymce redo::after {
+      content: "</redo>";
+    }
+
+
+    #tinymce stage::before {
+      content: "<stage>";
+    }
+
+    #tinymce stage::after {
+      content: "</stage>";
+    }
+
+
+    #tinymce decoNote::before {
+      content: "<decoNote>";
+    }
+
+    #tinymce decoNote::after {
+      content: "</decoNote>";
+    }
+
+
+    #tinymce listTranspose::before {
+      content: "<listTranspose>";
+    }
+
+    #tinymce listTranspose::after {
+      content: "</listTranspose>";
+    }
+
+
+    #tinymce licence::before {
+      content: "<licence>";
+    }
+
+    #tinymce licence::after {
+      content: "</licence>";
+    }
+
+
+    #tinymce education::before {
+      content: "<education>";
+    }
+
+    #tinymce education::after {
+      content: "</education>";
+    }
+
+
+    #tinymce availability::before {
+      content: "<availability>";
+    }
+
+    #tinymce availability::after {
+      content: "</availability>";
+    }
+
+
+    #tinymce incident::before {
+      content: "<incident>";
+    }
+
+    #tinymce incident::after {
+      content: "</incident>";
+    }
+
+
+    #tinymce entryFree::before {
+      content: "<entryFree>";
+    }
+
+    #tinymce entryFree::after {
+      content: "</entryFree>";
+    }
+
+
+    #tinymce birth::before {
+      content: "<birth>";
+    }
+
+    #tinymce birth::after {
+      content: "</birth>";
+    }
+
+
+    #tinymce expan::before {
+      content: "<expan>";
+    }
+
+    #tinymce expan::after {
+      content: "</expan>";
+    }
+
+
+    #tinymce modelGrp::before {
+      content: "<modelGrp>";
+    }
+
+    #tinymce modelGrp::after {
+      content: "</modelGrp>";
+    }
+
+
+    #tinymce accMat::before {
+      content: "<accMat>";
+    }
+
+    #tinymce accMat::after {
+      content: "</accMat>";
+    }
+
+
+    #tinymce joinGrp::before {
+      content: "<joinGrp>";
+    }
+
+    #tinymce joinGrp::after {
+      content: "</joinGrp>";
+    }
+
+
+    #tinymce socecStatus::before {
+      content: "<socecStatus>";
+    }
+
+    #tinymce socecStatus::after {
+      content: "</socecStatus>";
+    }
+
+
+    #tinymce span::before {
+      content: "<span>";
+    }
+
+    #tinymce span::after {
+      content: "</span>";
+    }
+
+
+    #tinymce macroRef::before {
+      content: "<macroRef>";
+    }
+
+    #tinymce macroRef::after {
+      content: "</macroRef>";
+    }
+
+
+    #tinymce alternate::before {
+      content: "<alternate>";
+    }
+
+    #tinymce alternate::after {
+      content: "</alternate>";
+    }
+
+
+    #tinymce outputRendition::before {
+      content: "<outputRendition>";
+    }
+
+    #tinymce outputRendition::after {
+      content: "</outputRendition>";
+    }
+
+
+    #tinymce graph::before {
+      content: "<graph>";
+    }
+
+    #tinymce graph::after {
+      content: "</graph>";
+    }
+
+
+    #tinymce specGrpRef::before {
+      content: "<specGrpRef>";
+    }
+
+    #tinymce specGrpRef::after {
+      content: "</specGrpRef>";
+    }
+
+
+    #tinymce respStmt::before {
+      content: "<respStmt>";
+    }
+
+    #tinymce respStmt::after {
+      content: "</respStmt>";
+    }
+
+
+    #tinymce damage::before {
+      content: "<damage>";
+    }
+
+    #tinymce damage::after {
+      content: "</damage>";
+    }
+
+
+    #tinymce closer::before {
+      content: "<closer>";
+    }
+
+    #tinymce closer::after {
+      content: "</closer>";
+    }
+
+
+    #tinymce affiliation::before {
+      content: "<affiliation>";
+    }
+
+    #tinymce affiliation::after {
+      content: "</affiliation>";
+    }
+
+
+    #tinymce dataRef::before {
+      content: "<dataRef>";
+    }
+
+    #tinymce dataRef::after {
+      content: "</dataRef>";
+    }
+
+
+    #tinymce index::before {
+      content: "<index>";
+    }
+
+    #tinymce index::after {
+      content: "</index>";
+    }
+
+
+    #tinymce roleName::before {
+      content: "<roleName>";
+    }
+
+    #tinymce roleName::after {
+      content: "</roleName>";
+    }
+
+
+    #tinymce addrLine::before {
+      content: "<addrLine>";
+    }
+
+    #tinymce addrLine::after {
+      content: "</addrLine>";
+    }
+
+
+    #tinymce citedRange::before {
+      content: "<citedRange>";
+    }
+
+    #tinymce citedRange::after {
+      content: "</citedRange>";
+    }
+
+
+    #tinymce mood::before {
+      content: "<mood>";
+    }
+
+    #tinymce mood::after {
+      content: "</mood>";
+    }
+
+
+    #tinymce choice::before {
+      content: "<choice>";
+    }
+
+    #tinymce choice::after {
+      content: "</choice>";
+    }
+
+
+    #tinymce specList::before {
+      content: "<specList>";
+    }
+
+    #tinymce specList::after {
+      content: "</specList>";
+    }
+
+
+    #tinymce creation::before {
+      content: "<creation>";
+    }
+
+    #tinymce creation::after {
+      content: "</creation>";
+    }
+
+
+    #tinymce table::before {
+      content: "<table>";
+    }
+
+    #tinymce table::after {
+      content: "</table>";
+    }
+
+
+    #tinymce scriptStmt::before {
+      content: "<scriptStmt>";
+    }
+
+    #tinymce scriptStmt::after {
+      content: "</scriptStmt>";
+    }
+
+
+    #tinymce orig::before {
+      content: "<orig>";
+    }
+
+    #tinymce orig::after {
+      content: "</orig>";
+    }
+
+
+    #tinymce objectType::before {
+      content: "<objectType>";
+    }
+
+    #tinymce objectType::after {
+      content: "</objectType>";
+    }
+
+
+    #tinymce substJoin::before {
+      content: "<substJoin>";
+    }
+
+    #tinymce substJoin::after {
+      content: "</substJoin>";
+    }
+
+
+    #tinymce div7::before {
+      content: "<div7>";
+    }
+
+    #tinymce div7::after {
+      content: "</div7>";
+    }
+
+
+    #tinymce text::before {
+      content: "<text>";
+    }
+
+    #tinymce text::after {
+      content: "</text>";
+    }
+
+
+    #tinymce fvLib::before {
+      content: "<fvLib>";
+    }
+
+    #tinymce fvLib::after {
+      content: "</fvLib>";
+    }
+
+
+    #tinymce l::before {
+      content: "<l>";
+    }
+
+    #tinymce l::after {
+      content: "</l>";
+    }
+
+
+    #tinymce unicodeName::before {
+      content: "<unicodeName>";
+    }
+
+    #tinymce unicodeName::after {
+      content: "</unicodeName>";
+    }
+
+
+    #tinymce colophon::before {
+      content: "<colophon>";
+    }
+
+    #tinymce colophon::after {
+      content: "</colophon>";
+    }
+
+
+    #tinymce spGrp::before {
+      content: "<spGrp>";
+    }
+
+    #tinymce spGrp::after {
+      content: "</spGrp>";
+    }
+
+
+    #tinymce physDesc::before {
+      content: "<physDesc>";
+    }
+
+    #tinymce physDesc::after {
+      content: "</physDesc>";
+    }
+
+
+    #tinymce keywords::before {
+      content: "<keywords>";
+    }
+
+    #tinymce keywords::after {
+      content: "</keywords>";
+    }
+
+
+    #tinymce tag::before {
+      content: "<tag>";
+    }
+
+    #tinymce tag::after {
+      content: "</tag>";
+    }
+
+
+    #tinymce metamark::before {
+      content: "<metamark>";
+    }
+
+    #tinymce metamark::after {
+      content: "</metamark>";
+    }
+
+
+    #tinymce vRange::before {
+      content: "<vRange>";
+    }
+
+    #tinymce vRange::after {
+      content: "</vRange>";
+    }
+
+
+    #tinymce nameLink::before {
+      content: "<nameLink>";
+    }
+
+    #tinymce nameLink::after {
+      content: "</nameLink>";
+    }
+
+
+    #tinymce editionStmt::before {
+      content: "<editionStmt>";
+    }
+
+    #tinymce editionStmt::after {
+      content: "</editionStmt>";
+    }
+
+
+    #tinymce leaf::before {
+      content: "<leaf>";
+    }
+
+    #tinymce leaf::after {
+      content: "</leaf>";
+    }
+
+
+    #tinymce settlement::before {
+      content: "<settlement>";
+    }
+
+    #tinymce settlement::after {
+      content: "</settlement>";
+    }
+
+
+    #tinymce glyphName::before {
+      content: "<glyphName>";
+    }
+
+    #tinymce glyphName::after {
+      content: "</glyphName>";
+    }
+
+
+    #tinymce back::before {
+      content: "<back>";
+    }
+
+    #tinymce back::after {
+      content: "</back>";
+    }
+
+
+    #tinymce explicit::before {
+      content: "<explicit>";
+    }
+
+    #tinymce explicit::after {
+      content: "</explicit>";
+    }
+
+
+    #tinymce locale::before {
+      content: "<locale>";
+    }
+
+    #tinymce locale::after {
+      content: "</locale>";
+    }
+
+
+    #tinymce valList::before {
+      content: "<valList>";
+    }
+
+    #tinymce valList::after {
+      content: "</valList>";
+    }
+
+
+    #tinymce arc::before {
+      content: "<arc>";
+    }
+
+    #tinymce arc::after {
+      content: "</arc>";
+    }
+
+
+    #tinymce eTree::before {
+      content: "<eTree>";
+    }
+
+    #tinymce eTree::after {
+      content: "</eTree>";
+    }
+
+
+    #tinymce hyph::before {
+      content: "<hyph>";
+    }
+
+    #tinymce hyph::after {
+      content: "</hyph>";
+    }
+
+
+    #tinymce row::before {
+      content: "<row>";
+    }
+
+    #tinymce row::after {
+      content: "</row>";
+    }
+
+
+    #tinymce code::before {
+      content: "<code>";
+    }
+
+    #tinymce code::after {
+      content: "</code>";
+    }
+
+
+    #tinymce binaryObject::before {
+      content: "<binaryObject>";
+    }
+
+    #tinymce binaryObject::after {
+      content: "</binaryObject>";
+    }
+
+
+    #tinymce profileDesc::before {
+      content: "<profileDesc>";
+    }
+
+    #tinymce profileDesc::after {
+      content: "</profileDesc>";
+    }
+
+
+    #tinymce history::before {
+      content: "<history>";
+    }
+
+    #tinymce history::after {
+      content: "</history>";
+    }
+
+
+    #tinymce classDecl::before {
+      content: "<classDecl>";
+    }
+
+    #tinymce classDecl::after {
+      content: "</classDecl>";
+    }
+
+
+    #tinymce val::before {
+      content: "<val>";
+    }
+
+    #tinymce val::after {
+      content: "</val>";
+    }
+
+
+    #tinymce numeric::before {
+      content: "<numeric>";
+    }
+
+    #tinymce numeric::after {
+      content: "</numeric>";
+    }
+
+
+    #tinymce langKnowledge::before {
+      content: "<langKnowledge>";
+    }
+
+    #tinymce langKnowledge::after {
+      content: "</langKnowledge>";
+    }
+
+
+    #tinymce listApp::before {
+      content: "<listApp>";
+    }
+
+    #tinymce listApp::after {
+      content: "</listApp>";
+    }
+
+
+    #tinymce eg::before {
+      content: "<eg>";
+    }
+
+    #tinymce eg::after {
+      content: "</eg>";
+    }
+
+
+    #tinymce origin::before {
+      content: "<origin>";
+    }
+
+    #tinymce origin::after {
+      content: "</origin>";
+    }
+
+
+    #tinymce per::before {
+      content: "<per>";
+    }
+
+    #tinymce per::after {
+      content: "</per>";
+    }
+
+
+    #tinymce objectDesc::before {
+      content: "<objectDesc>";
+    }
+
+    #tinymce objectDesc::after {
+      content: "</objectDesc>";
+    }
+
+
+    #tinymce surrogates::before {
+      content: "<surrogates>";
+    }
+
+    #tinymce surrogates::after {
+      content: "</surrogates>";
+    }
+
+
+    #tinymce person::before {
+      content: "<person>";
+    }
+
+    #tinymce person::after {
+      content: "</person>";
+    }
+
+
+    #tinymce fsdLink::before {
+      content: "<fsdLink>";
+    }
+
+    #tinymce fsdLink::after {
+      content: "</fsdLink>";
+    }
+
+
+    #tinymce specGrp::before {
+      content: "<specGrp>";
+    }
+
+    #tinymce specGrp::after {
+      content: "</specGrp>";
+    }
+
+
+    #tinymce series::before {
+      content: "<series>";
+    }
+
+    #tinymce series::after {
+      content: "</series>";
+    }
+
+
+    #tinymce org::before {
+      content: "<org>";
+    }
+
+    #tinymce org::after {
+      content: "</org>";
+    }
+
+
+    #tinymce valItem::before {
+      content: "<valItem>";
+    }
+
+    #tinymce valItem::after {
+      content: "</valItem>";
+    }
+
+
+    #tinymce syll::before {
+      content: "<syll>";
+    }
+
+    #tinymce syll::after {
+      content: "</syll>";
+    }
+
+
+    #tinymce fDescr::before {
+      content: "<fDescr>";
+    }
+
+    #tinymce fDescr::after {
+      content: "</fDescr>";
+    }
+
+
+    #tinymce constitution::before {
+      content: "<constitution>";
+    }
+
+    #tinymce constitution::after {
+      content: "</constitution>";
+    }
+
+
+    #tinymce watermark::before {
+      content: "<watermark>";
+    }
+
+    #tinymce watermark::after {
+      content: "</watermark>";
+    }
+
+
+    #tinymce usg::before {
+      content: "<usg>";
+    }
+
+    #tinymce usg::after {
+      content: "</usg>";
+    }
+
+
+    #tinymce line::before {
+      content: "<line>";
+    }
+
+    #tinymce line::after {
+      content: "</line>";
+    }
+
+
+    #tinymce entry::before {
+      content: "<entry>";
+    }
+
+    #tinymce entry::after {
+      content: "</entry>";
+    }
+
+
+    #tinymce re::before {
+      content: "<re>";
+    }
+
+    #tinymce re::after {
+      content: "</re>";
+    }
+
+
+    #tinymce sponsor::before {
+      content: "<sponsor>";
+    }
+
+    #tinymce sponsor::after {
+      content: "</sponsor>";
+    }
+
+
+    #tinymce list::before {
+      content: "<list>";
+    }
+
+    #tinymce list::after {
+      content: "</list>";
+    }
+
+
+    #tinymce epilogue::before {
+      content: "<epilogue>";
+    }
+
+    #tinymce epilogue::after {
+      content: "</epilogue>";
+    }
+
+
+    #tinymce binary::before {
+      content: "<binary>";
+    }
+
+    #tinymce binary::after {
+      content: "</binary>";
+    }
+
+
+    #tinymce binding::before {
+      content: "<binding>";
+    }
+
+    #tinymce binding::after {
+      content: "</binding>";
+    }
+
+
+    #tinymce forest::before {
+      content: "<forest>";
+    }
+
+    #tinymce forest::after {
+      content: "</forest>";
+    }
+
+
+    #tinymce listOrg::before {
+      content: "<listOrg>";
+    }
+
+    #tinymce listOrg::after {
+      content: "</listOrg>";
+    }
+
+
+    #tinymce collation::before {
+      content: "<collation>";
+    }
+
+    #tinymce collation::after {
+      content: "</collation>";
+    }
+
+
+    #tinymce iff::before {
+      content: "<iff>";
+    }
+
+    #tinymce iff::after {
+      content: "</iff>";
+    }
+
+
+    #tinymce g::before {
+      content: "<g>";
+    }
+
+    #tinymce g::after {
+      content: "</g>";
+    }
+
+
+    #tinymce listPerson::before {
+      content: "<listPerson>";
+    }
+
+    #tinymce listPerson::after {
+      content: "</listPerson>";
+    }
+
+
+    #tinymce punctuation::before {
+      content: "<punctuation>";
+    }
+
+    #tinymce punctuation::after {
+      content: "</punctuation>";
+    }
+
+
+    #tinymce f::before {
+      content: "<f>";
+    }
+
+    #tinymce f::after {
+      content: "</f>";
+    }
+
+
+    #tinymce schemaRef::before {
+      content: "<schemaRef>";
+    }
+
+    #tinymce schemaRef::after {
+      content: "</schemaRef>";
+    }
+
+
+    #tinymce correspAction::before {
+      content: "<correspAction>";
+    }
+
+    #tinymce correspAction::after {
+      content: "</correspAction>";
+    }
+
+
+    #tinymce street::before {
+      content: "<street>";
+    }
+
+    #tinymce street::after {
+      content: "</street>";
+    }
+
+
+    #tinymce fs::before {
+      content: "<fs>";
+    }
+
+    #tinymce fs::after {
+      content: "</fs>";
+    }
+
+
+    #tinymce event::before {
+      content: "<event>";
+    }
+
+    #tinymce event::after {
+      content: "</event>";
+    }
+
+
+    #tinymce msFrag::before {
+      content: "<msFrag>";
+    }
+
+    #tinymce msFrag::after {
+      content: "</msFrag>";
+    }
+
+
+    #tinymce vColl::before {
+      content: "<vColl>";
+    }
+
+    #tinymce vColl::after {
+      content: "</vColl>";
+    }
+
+
+    #tinymce retrace::before {
+      content: "<retrace>";
+    }
+
+    #tinymce retrace::after {
+      content: "</retrace>";
+    }
+
+
+    #tinymce meeting::before {
+      content: "<meeting>";
+    }
+
+    #tinymce meeting::after {
+      content: "</meeting>";
+    }
+
+
+    #tinymce condition::before {
+      content: "<condition>";
+    }
+
+    #tinymce condition::after {
+      content: "</condition>";
+    }
+
+
+    #tinymce param::before {
+      content: "<param>";
+    }
+
+    #tinymce param::after {
+      content: "</param>";
+    }
+
+
+    #tinymce castItem::before {
+      content: "<castItem>";
+    }
+
+    #tinymce castItem::after {
+      content: "</castItem>";
+    }
+
+
+    #tinymce iType::before {
+      content: "<iType>";
+    }
+
+    #tinymce iType::after {
+      content: "</iType>";
+    }
+
+
+    #tinymce handNotes::before {
+      content: "<handNotes>";
+    }
+
+    #tinymce handNotes::after {
+      content: "</handNotes>";
+    }
+
+
+    #tinymce docImprint::before {
+      content: "<docImprint>";
+    }
+
+    #tinymce docImprint::after {
+      content: "</docImprint>";
+    }
+
+
+    #tinymce seg::before {
+      content: "<seg>";
+    }
+
+    #tinymce seg::after {
+      content: "</seg>";
+    }
+
+
+    #tinymce timeline::before {
+      content: "<timeline>";
+    }
+
+    #tinymce timeline::after {
+      content: "</timeline>";
+    }
+
+
+    #tinymce subst::before {
+      content: "<subst>";
+    }
+
+    #tinymce subst::after {
+      content: "</subst>";
+    }
+
+
+    #tinymce title::before {
+      content: "<title>";
+    }
+
+    #tinymce title::after {
+      content: "</title>";
+    }
+
+
+    #tinymce exemplum::before {
+      content: "<exemplum>";
+    }
+
+    #tinymce exemplum::after {
+      content: "</exemplum>";
+    }
+
+
+    #tinymce classCode::before {
+      content: "<classCode>";
+    }
+
+    #tinymce classCode::after {
+      content: "</classCode>";
+    }
+
+
+    #tinymce genName::before {
+      content: "<genName>";
+    }
+
+    #tinymce genName::after {
+      content: "</genName>";
+    }
+
+
+    #tinymce number::before {
+      content: "<number>";
+    }
+
+    #tinymce number::after {
+      content: "</number>";
+    }
+
+
+    #tinymce tagUsage::before {
+      content: "<tagUsage>";
+    }
+
+    #tinymce tagUsage::after {
+      content: "</tagUsage>";
+    }
+
+
+    #tinymce population::before {
+      content: "<population>";
+    }
+
+    #tinymce population::after {
+      content: "</population>";
+    }
+
+
+    #tinymce cond::before {
+      content: "<cond>";
+    }
+
+    #tinymce cond::after {
+      content: "</cond>";
+    }
+
+
+    #tinymce interp::before {
+      content: "<interp>";
+    }
+
+    #tinymce interp::after {
+      content: "</interp>";
+    }
+
+
+    #tinymce application::before {
+      content: "<application>";
+    }
+
+    #tinymce application::after {
+      content: "</application>";
+    }
+
+
+    #tinymce locus::before {
+      content: "<locus>";
+    }
+
+    #tinymce locus::after {
+      content: "</locus>";
+    }
+
+
+    #tinymce spanGrp::before {
+      content: "<spanGrp>";
+    }
+
+    #tinymce spanGrp::after {
+      content: "</spanGrp>";
+    }
+
+
+    #tinymce symbol::before {
+      content: "<symbol>";
+    }
+
+    #tinymce symbol::after {
+      content: "</symbol>";
+    }
+
+
+    #tinymce origDate::before {
+      content: "<origDate>";
+    }
+
+    #tinymce origDate::after {
+      content: "</origDate>";
+    }
+
+
+    #tinymce ident::before {
+      content: "<ident>";
+    }
+
+    #tinymce ident::after {
+      content: "</ident>";
+    }
+
+
+    #tinymce support::before {
+      content: "<support>";
+    }
+
+    #tinymce support::after {
+      content: "</support>";
+    }
+
+
+    #tinymce institution::before {
+      content: "<institution>";
+    }
+
+    #tinymce institution::after {
+      content: "</institution>";
+    }
+
+
+    #tinymce wit::before {
+      content: "<wit>";
+    }
+
+    #tinymce wit::after {
+      content: "</wit>";
+    }
+
+
+    #tinymce sound::before {
+      content: "<sound>";
+    }
+
+    #tinymce sound::after {
+      content: "</sound>";
+    }
+
+
+    #tinymce decoDesc::before {
+      content: "<decoDesc>";
+    }
+
+    #tinymce decoDesc::after {
+      content: "</decoDesc>";
+    }
+
+
+    #tinymce move::before {
+      content: "<move>";
+    }
+
+    #tinymce move::after {
+      content: "</move>";
+    }
+
+
+    #tinymce styleDefDecl::before {
+      content: "<styleDefDecl>";
+    }
+
+    #tinymce styleDefDecl::after {
+      content: "</styleDefDecl>";
+    }
+
+
+    #tinymce salute::before {
+      content: "<salute>";
+    }
+
+    #tinymce salute::after {
+      content: "</salute>";
+    }
+
+
+    #tinymce group::before {
+      content: "<group>";
+    }
+
+    #tinymce group::after {
+      content: "</group>";
+    }
+
+
+    #tinymce join::before {
+      content: "<join>";
+    }
+
+    #tinymce join::after {
+      content: "</join>";
+    }
+
+
+    #tinymce email::before {
+      content: "<email>";
+    }
+
+    #tinymce email::after {
+      content: "</email>";
+    }
+
+
+    #tinymce edition::before {
+      content: "<edition>";
+    }
+
+    #tinymce edition::after {
+      content: "</edition>";
+    }
+
+
+    #tinymce persName::before {
+      content: "<persName>";
+    }
+
+    #tinymce persName::after {
+      content: "</persName>";
+    }
+
+
+    #tinymce msItemStruct::before {
+      content: "<msItemStruct>";
+    }
+
+    #tinymce msItemStruct::after {
+      content: "</msItemStruct>";
+    }
+
+
+    #tinymce certainty::before {
+      content: "<certainty>";
+    }
+
+    #tinymce certainty::after {
+      content: "</certainty>";
+    }
+
+
+    #tinymce c::before {
+      content: "<c>";
+    }
+
+    #tinymce c::after {
+      content: "</c>";
+    }
+
+
+    #tinymce editorialDecl::before {
+      content: "<editorialDecl>";
+    }
+
+    #tinymce editorialDecl::after {
+      content: "</editorialDecl>";
+    }
+
+
+    #tinymce rs::before {
+      content: "<rs>";
+    }
+
+    #tinymce rs::after {
+      content: "</rs>";
+    }
+
+
+    #tinymce dataFacet::before {
+      content: "<dataFacet>";
+    }
+
+    #tinymce dataFacet::after {
+      content: "</dataFacet>";
+    }
+
+
+    #tinymce view::before {
+      content: "<view>";
+    }
+
+    #tinymce view::after {
+      content: "</view>";
+    }
+
+
+    #tinymce space::before {
+      content: "<space>";
+    }
+
+    #tinymce space::after {
+      content: "</space>";
+    }
