@@ -29,6 +29,7 @@ class ProjectManager
     protected $fileManager;
     protected $dirManager;
     protected $reviewManager;
+    protected $tm;
     protected $fm;
 
     public function __construct(
