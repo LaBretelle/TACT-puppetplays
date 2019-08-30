@@ -169,6 +169,7 @@ project_edit:                             Editer le projet
 project_edited:                           Projet édité
 project_edition:                          Edition du projet
 project_enabled:                          Validé ?
+project_faq:                              Foire Aux Questions
 project_handle_user_statuses:             Gérer les utilisateurs
 project_help_link:                        Lien vers l'aide à la transcription
 project_image:                            Image du projet. Ratio de 4:1 conseillé (l'image sera retaillée automatiquement)

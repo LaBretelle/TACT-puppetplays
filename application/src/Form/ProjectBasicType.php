@@ -45,6 +45,14 @@ class ProjectBasicType extends AbstractType
               'class' => 'tinymce-enabled'
             ]
           ])
+          ->add('faq', TextareaType::class, [
+            'label' => 'project_faq',
+            'translation_domain' => 'messages',
+            'required' => false,
+            'attr' => [
+              'class' => 'tinymce-enabled'
+            ]
+          ])
           ->add('public', CheckboxType::class, [
               'label'    => 'is_public',
               'required' => false
