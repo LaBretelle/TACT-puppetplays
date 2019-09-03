@@ -131,6 +131,10 @@ class ProjectController extends AbstractController
      */
     public function editChoice(Project $project)
     {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
+        }
+      
         return $this->render('project/edit-choice.html.twig', [
           'project' => $project,
       ]);
@@ -141,7 +145,10 @@ class ProjectController extends AbstractController
      */
     public function editBasic(Project $project, Request $request)
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, '');
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
+        }
+
         $form = $this->createForm(ProjectBasicType::class, $project);
 
         $form->handleRequest($request);
@@ -166,7 +173,9 @@ class ProjectController extends AbstractController
      */
     public function editAdvanced(Project $project, Request $request)
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, '');
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
+        }
 
         $form = $this->createForm(ProjectAdvancedType::class, $project);
         $form->handleRequest($request);
