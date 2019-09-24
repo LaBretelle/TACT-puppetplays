@@ -4,21 +4,18 @@ TACT - Plateforme de Transcription et d'Annotation de Corpus Scientifiques
 
 ### Install (DEV - localhost)
 
-- clone this repo
-- cd to `clonedfolder`
-- create .env file from .env.dist
-
 ```bash
+git clone [thisrepository]
+cd tact
 cp .env.dist .env
+# définition des comptes/bases mysql pour qu'ils soient générés par docker.
+vi|nano|emacs .env
+cp ./application/.env.dist ./application/.env
+# répercussion pour Symfony des comptes/bases précédemment créés
+vi|nano|emacs ./application/.env
 ```
 
-- edit `.env` file entries.
-- *this `.env` file must be placed in the same folder than the `docker-compose.yml` file!!!*
-
-- do the same with the .env.dist file in  `clonedfolder/application`
-
-### Install (PRODUCTION)
-
+### Install (production env.)
 - copy your ssl certificate(s) and key into `docker-files/certs` folder
 - edit `docker-files/Dockerfile`
 
@@ -32,7 +29,7 @@ ADD ./certs/server.key /etc/ssl/private/server.key
 # ADD ./certs/demarre-shs.fr.key /etc/ssl/private/server.key
 
 ```
-- we use apache and reverseproxy to target multiple applications in various docker containers below is an example
+- we use apache and reverseproxy to target multiple applications in various docker containers. See this apache conf. example.
 
 ```
 <IfModule mod_ssl.c>
@@ -49,41 +46,19 @@ ADD ./certs/server.key /etc/ssl/private/server.key
      SSLCertificateChainFile /etc/ssl/certs/DigiCertCA.crt
  </VirtualHost>
 </IfModule>
-
 ```
 
 ### Run containers and install dependencies
 
-
 ```bash
-# get your containers names
-docker ps
-
-# build / start the containers and detach the process
+# lance les services en mode daemon (et les build si besoin la première fois)
 docker-compose up -d
-
-# execute makefile:install in apache container service
+# lance le make init présent dans ./application/Makefile
 docker-compose exec apache make init
-
-# change directories ownership
-docker-compose exec apache bash
-chown -R www-data:www-data public/user_images public/project_files var/log var/cache
-
 ```
 
 - symfony app should be available @ http://localhost:8082/
 - adminer should be available @ http://localhost:8088/
-
-### Update project TEI Schema
-
-> Each project *must* define a schema.
-
-- Put the CSV file (must be named `schema.csv`) in the `public/project_files/{projectid}/` folder
-- Exec `php bin/console app:create-schema` (*inside the php docker container*)
-- You'll be asked for the id of the project...
-- This will  
-  - Generate the file `tei-schema.json`
-  - Update tranalations files `tei.en.yml` and `tei.fr.yml`
 
 ### Usefull commands
 
