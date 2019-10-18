@@ -134,7 +134,7 @@ class ProjectController extends AbstractController
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
             throw new AccessDeniedException($this->translator->trans('access_denied'));
         }
-      
+
         return $this->render('project/edit-choice.html.twig', [
           'project' => $project,
       ]);
@@ -171,7 +171,7 @@ class ProjectController extends AbstractController
     /**
      * @Route("/{id}/edit-advanced", name="edit-advanced")
      */
-    public function editAdvanced(Project $project, Request $request)
+    public function editAdvanced(Project $project, Request $request, EntityManagerInterface $em)
     {
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
             throw new AccessDeniedException($this->translator->trans('access_denied'));
@@ -185,6 +185,10 @@ class ProjectController extends AbstractController
             $this->projectManager->handleXslExport($project, $xsltExport);
             $jsonSchema = $form->get('json_schema')->getData();
             $this->projectManager->handleJsonSchema($project, $jsonSchema);
+
+            $em->persist($project);
+            $em->flush();
+
             $this->flashManager->add('notice', 'project_edited');
 
             return $this->redirectToRoute('project_edit_choice', ['id' => $project->getId()]);
