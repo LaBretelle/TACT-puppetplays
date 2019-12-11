@@ -14,113 +14,15 @@
     {% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="{{ path('home') }}">
-        {% if platform.logo %}
-          <img class="platform-logo" src="{{ asset('platform/'~ platform.logo) }}">
-        {% endif %}
-        {{ platform.name  }}
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('home') }}">
-              <i class="fas fa-home"></i> {{'home'|trans}}
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('project_list') }}">
-              <i class="fas fa-rocket"></i> {{'project_list'|trans}}
-            </a>
-          </li>
-          {% if is_granted('ROLE_ADMIN', app.user) %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ path('admin_user_list') }}">
-                <i class="fas fa-users"></i> {{'administrate_users_menu'|trans}}
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ path('admin_platform_properties')}}">
-                <i class="fas fa-cogs"></i> {{'administrate_platform_menu'|trans}}
-              </a>
-            </li>
-          {% endif %}
-        </ul>
-        <ul class="navbar-nav float-right">
-          {% if app.user %}
-            {% set countUnread = app.user|countUnread %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ path('message_list')}}">
-                <i class="fas fa-envelope {{ countUnread > 0 ? "fa-spin"}}"></i> {{ countUnread }}
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ path('user_profile', {'id': app.user.id}) }}">
-                <i class="fas fa-user fa-fw"></i> {{app.user.fullname}}
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ path('logout') }}">
-                <i class="fas fa-sign-out-alt fa-fw"></i> {{'logout'|trans}}
-              </a>
-            </li>
-          {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ path('user_login') }}">
-                <i class="fas fa-sign-out-alt fa-fw"></i> {{'login'|trans}}
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ path('user_register') }}">
-                <i class="fas fa-id-card fa-fw"></i> {{'register'|trans}}
-              </a>
-            </li>
-          {% endif %}
-      </ul>
-    </div>
-  </nav>
+
+  {{ include('base-include/navbar.html.twig') }}
+
   <div class="container-fluid">
-    {% for label, messages in app.flashes %}
-      {% for message in messages %}
-        <div class="invisible" id="flashes">
-          <div class="flash" data-label="{{ label }}" data-message="{{ message|e('html_attr') }}"></div>
-        </div>
-      {% endfor %}
-    {% endfor %}
+    {{ include('base-include/flashmessages.html.twig') }}
     {% block body %}{% endblock %}
   </div>
 
-  <footer id="footer" class="text-muted">
-    <div class="container">
-      <p class="float-right">
-        <a href="#">{{"backtotop"|trans}}</a> <br/>
-        <a href="{{ path('terms') }}">{{"terms"|trans}}</a> <br/>
-      </p>
-      <p>
-        <a class="btn" href=" http://univ-grenoble-alpes.fr" target="_blank">
-          <img class="logo-bottom" data-toggle="tooltip" title="Université Grenoble Alpes" src="{{ asset('img/logos/logo_univ_grenoble_alpes.jpg') }}"/>
-        </a>
-        <a class="btn" href="http://www.cnrs.fr" target="_blank">
-          <img class="logo-bottom" data-toggle="tooltip" title="CNRS Centre national de la recherche scientifique" src="{{ asset('img/logos/logo_cnrs.jpg') }}"/>
-        </a>
-        <a class="btn" target="_blank" href="http://litt-arts.univ-grenoble-alpes.fr/litt-arts-arts-et-pratiques-du-texte-de-l-image-de-l-ecran-et-de-la-scene-62796.kjsp">
-          <img class="logo-bottom" data-toggle="tooltip" title="Litt&Arts (UMR 5316) - Arts et pratiques du texte, de l'image, de l'écran et de la scène" src="{{ asset('img/logos/logo_littarts.png') }}"/>
-        </a>
-        <a class="btn" href="https://demarreshs.hypotheses.org/" target="_blank">
-          <img class="logo-bottom" data-toggle="tooltip" title="DémarreSHS!" src="{{ asset('img/logos/logo_demarre_shs.jpg') }}"/>
-        </a>
-        <a class="btn" href="https://www.huma-num.fr/" target="_blank">
-          <img class="logo-bottom" data-toggle="tooltip" title="Huma-Num - Hébergeur" src="{{ asset('img/logos/logo_hn.jpg') }}"/>
-        </a>
-        <a class="btn" href="https://www.elan-numerique.fr/" target="_blank">
-          <img class="logo-bottom" data-toggle="tooltip" title="ELAN - Equipe Littérature et Arts Numériques" src="{{ asset('img/logos/logo_elan.png') }}"/>
-        </a>
-      </p>
-    </div>
-  </footer>
+  {{ include('base-include/footer.html.twig') }}
 
   {% block javascripts %}
   <script src="{{ asset('build/manifest.js') }}"></script>

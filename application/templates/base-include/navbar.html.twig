@@ -1,0 +1,72 @@
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ path('home') }}">
+      {% if platform.logo %}
+        <img class="platform-logo" src="{{ asset('platform/'~ platform.logo) }}">
+      {% endif %}
+      {{ platform.name  }}
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('home') }}">
+            <i class="fas fa-home"></i> {{'home'|trans}}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('project_list') }}">
+            <i class="fas fa-rocket"></i> {{'project_list'|trans}}
+          </a>
+        </li>
+        {% if is_granted('ROLE_ADMIN', app.user) %}
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i> Administration
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a href="{{ path('admin_user_list') }}" class="dropdown-item" href="#">
+                <i class="fas fa-users"></i> {{'administrate_users_menu'|trans}}
+              </a>
+              <a href="{{ path('admin_platform_properties')}}" class="dropdown-item" href="#">
+                <i class="fas fa-cogs"></i> {{'administrate_platform_menu'|trans}}
+              </a>
+            </div>
+          </li>
+        {% endif %}
+      </ul>
+      <ul class="navbar-nav float-right">
+        {% if app.user %}
+          {% set countUnread = app.user|countUnread %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('message_list')}}">
+              <i class="fas fa-envelope {{ countUnread > 0 ? "fa-spin"}}"></i> {{ countUnread }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('user_profile', {'id': app.user.id}) }}">
+              <i class="fas fa-user fa-fw"></i> {{app.user.fullname}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('logout') }}">
+              <i class="fas fa-sign-out-alt fa-fw"></i> {{'logout'|trans}}
+            </a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('user_login') }}">
+              <i class="fas fa-sign-out-alt fa-fw"></i> {{'login'|trans}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('user_register') }}">
+              <i class="fas fa-id-card fa-fw"></i> {{'register'|trans}}
+            </a>
+          </li>
+        {% endif %}
+    </ul>
+  </div>
+</nav>
