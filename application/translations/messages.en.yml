@@ -41,7 +41,6 @@ delete_media:                             Delete selected media
 description:                              Description
 directory_already_existing:               Le répertoire %dir% est déjà présent
 directory_created:                        Folder created
-display_illustration:                     Display examples
 download_media:                           Image
 download_transcription:                   Transcription
 edit_advanced_help:                       Vous permet d'associer des fichiers XSL, JSON et de définir une CSS
@@ -82,7 +81,6 @@ help8:                                    You can go back to help and tutorial h
 help9:                                    You can save your transcription at any time
 home:                                     Home
 iaccept:                                  I accept <a href="%url%">the general terms of use</a>
-illustration:                             Transcription examples
 insults:                                  Propos haineux, violence
 is_public:                                Open registration
 json_schema:                              Schema TEI au format JSON
