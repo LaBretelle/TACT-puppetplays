@@ -5,23 +5,6 @@
   {% include 'header.html.twig' with {'title' : "PLATEFORME DE TRANSCRIPTION ET D'ANNOTATION DE CORPUS TEXTUELS" } %}
 
   <div id="main-container">
-    {% if is_granted('ROLE_ADMIN') %}
-    <div class="card mb-3">
-      <a class="btn btn-link" href="{{ path("project_create") }}"> <i class="fas fa-plus"></i> {{'add_project' | trans}}</a>
-    </div>
-    {% endif %}
-    <div class="card-columns">
-      {% for project in projectsUnarchived %}
-        {{macros.displayProject(project)}}
-      {% endfor %}
-    </div>
-    {% if projectsArchived|length > 0 %}
-      <h4 class="py-5">Projets archivés</h4>
-      <div class="card-columns">
-        {% for project in projectsArchived %}
-          {{macros.displayProject(project)}}
-        {% endfor %}
-      </div>
-    {% endif %}
+    {{ home_text|raw }}
   </div>
 {% endblock %}

@@ -61,6 +61,21 @@ class ProjectController extends AbstractController
     }
 
     /**
+    * @Route("/list", name="list")
+    */
+    public function list()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $projectsUnarchived = $em->getRepository(Project::class)->findBy(["archived" => false], ["id" => "DESC"]);
+        $projectsArchived = $em->getRepository(Project::class)->findBy(["archived" => true], ["id" => "DESC"]);
+
+        return $this->render('project/list.html.twig', [
+         'projectsUnarchived' => $projectsUnarchived,
+         'projectsArchived' => $projectsArchived,
+        ]);
+    }
+
+    /**
     * @Route("/{id}/export", name="export")
     */
     public function export(Project $project, Request $request)

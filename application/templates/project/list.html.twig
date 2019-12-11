@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{% import "project/macros.html.twig" as macros %}
+
+{% block body %}
+  {% include 'header.html.twig' with {'title' : "LES PROJETS" } %}
+
+  <div id="main-container">
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="card mb-3">
+      <a class="btn btn-link" href="{{ path("project_create") }}"> <i class="fas fa-plus"></i> {{'add_project' | trans}}</a>
+    </div>
+    {% endif %}
+    <div class="card-columns">
+      {% for project in projectsUnarchived %}
+        {{macros.displayProject(project)}}
+      {% endfor %}
+    </div>
+    {% if projectsArchived|length > 0 %}
+      <h4 class="py-5">Projets archivés</h4>
+      <div class="card-columns">
+        {% for project in projectsArchived %}
+          {{macros.displayProject(project)}}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

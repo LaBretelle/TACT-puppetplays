@@ -32,8 +32,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('faq') }}">
-              <i class="fas fa-question"></i> {{'faq'|trans}}
+            <a class="nav-link" href="{{ path('project_list') }}">
+              <i class="fas fa-rocket"></i> {{'project_list'|trans}}
             </a>
           </li>
           {% if is_granted('ROLE_ADMIN', app.user) %}

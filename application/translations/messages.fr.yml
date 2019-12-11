@@ -174,6 +174,7 @@ project_handle_user_statuses:             Gérer les utilisateurs
 project_help_link:                        Lien vers l'aide à la transcription
 project_image:                            Image du projet. Ratio de 4:1 conseillé (l'image sera retaillée automatiquement)
 project_is_not_public:                    Inscription modérée
+project_list:                             Les projets
 project_manage_media:                     Gérer les médias
 project_manage_user_statuses:             Gérer les utilisateurs
 project_management_media:                 Gestion des médias

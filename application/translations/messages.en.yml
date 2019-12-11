@@ -164,6 +164,7 @@ project_handle_user_statuses:             Users management
 project_help_link:                        Link to transcription help
 project_image:                            Project image. A 4:1 ratio is advised (The image will automatically be cropped).
 project_is_not_public:                    Registration moderated
+project_list:                             Projects
 project_manage_media:                     Manage media
 project_manage_user_statuses:             Manage users
 project_management_media:                 Media management
