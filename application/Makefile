@@ -7,6 +7,7 @@ update-prod:
 	npm install
 	npm run build
 	php bin/console doctrine:schema:update --force
+	php bin/console app:create-edito
 	php bin/console cache:clear --env=prod
 	chown -R www-data:www-data public
 	chown -R www-data:www-data var/
@@ -18,6 +19,7 @@ update-dev:
 	npm install
 	npm run dev
 	php bin/console doctrine:schema:update --force
+	php bin/console app:create-edito
 	php bin/console cache:clear
 	chown -R www-data:www-data public
 	chown -R www-data:www-data var/
@@ -31,6 +33,7 @@ install:
 	php bin/console doctrine:database:create --if-not-exists
 	php bin/console doctrine:schema:update --force
 	php bin/console doctrine:fixtures:load
+	php bin/console app:create-edito
 	chown -R www-data:www-data public
 	chown -R www-data:www-data var/
 
