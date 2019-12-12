@@ -1,4 +1,3 @@
-
 about:                                    À propos
 accept_terms:                             Dans le cadre de votre enregistrement, un traitement de données à caractère personnel est réalisé, pour plus d’informations cliquer <a target="_blank" href='%url%#datas'>ici</a>
 access_denied:                            Vous n'êtes pas autorisé à accéder à cette page.
@@ -37,6 +36,7 @@ confirm_delete_project_media:             Êtes-vous sur de vouloir supprimer le
 confirm_project_deletion:                 Êtes-vous sur de vouloir supprimer ce projet ?
 confirm_title:                            Veuillez confirmer!
 confirm:                                  Je confirme!
+contributor_guide:                        Guide du contributeur
 contributors:                             Contributeurs
 create_empty_media_help:                  Crée si nécessaire un media "livre1" si une transcription "livre1.xml" est déposée.
 create_empty_media:                       Créer des médias "vides" pour transcription seule
@@ -53,6 +53,7 @@ edit_basic_help:                          Vous permet de paramétrer le nom, la 
 edit_basic:                               Edition des propriétés de base
 edit_project_long:                        Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit:                                     Éditer
+edito_edit:                               Editer la page
 element_list:                             Eléments disponibles
 email_or_login_placeholder:               Login / email
 email_or_login:                           Veuillez renseigner votre login ou email
@@ -82,6 +83,7 @@ help1:                                    Bienvenue dans le tutoriel de transcri
 help10:                                   Et une fois qu’elle vous satisfait, en demander une relecture. Vous pouvez fermer le tutoriel
 help11:                                   Et une fois qu’elle vous satisfait, valider la relecture. Vous pouvez fermer le tutoriel
 help12:                                   Vous pouvez nous signaler un problème technique ou du contenu haineux/violent
+help13:                                   N'oubliez pas de consulter le guide du contributeur.
 help2:                                    Média à transcrire
 help3:                                    Boutons permettant de (de)zoomer, pivoter le média
 help4:                                    La transcription se passe ici
@@ -174,7 +176,7 @@ project_edition:                          Edition du projet
 project_enabled:                          Validé ?
 project_faq:                              Foire Aux Questions
 project_handle_user_statuses:             Gérer les utilisateurs
-project_help_link:                        Lien vers l'aide à la transcription
+project_help_link:                        Document d'aide à la transcription
 project_image:                            Image du projet. Ratio de 4:1 conseillé (l'image sera retaillée automatiquement)
 project_is_not_public:                    Inscription modérée
 project_list:                             Les projets
@@ -349,4 +351,3 @@ xml_file_type:                            Type de fichier
 xml_upload_help:                          Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 xslt_export:                              Fichier XSL appliqué à l'export des transcriptions
 yes:                                      Oui
-edito_edit: Editer la page

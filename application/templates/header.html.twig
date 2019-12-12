@@ -3,4 +3,14 @@
     {{ title|trans|upper|raw }}
   </a>
   <span class="navbar-brand text-muted">{% if subtitle is defined %}({{ subtitle|trans }}){% endif %}</span>
+
+  {% if title == "project_list" %}
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <a download href="{{asset('platform/contributor_guide.pdf')}}" class="nav-link" >
+        <i class="fas fa-book-open"></i> {{"contributor_guide"|trans}}
+      </a>
+    </ul>
+  </div>
+  {% endif %}
 </nav>

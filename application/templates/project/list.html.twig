@@ -2,7 +2,7 @@
 {% import "project/macros.html.twig" as macros %}
 
 {% block body %}
-  {% include 'header.html.twig' with {'title' : "LES PROJETS" } %}
+  {% include 'header.html.twig' with {'title' : "project_list" } %}
 
   <div id="main-container">
     {% if is_granted('ROLE_ADMIN') %}

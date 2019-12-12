@@ -34,9 +34,12 @@ class PlatformController extends AbstractController
             $previous_logo = $request->get('previous_logo');
             $this->manager->handleLogo($platform, $logo, $previous_logo);
 
+            $platformGuide = $form->get('platform_guide')->getData();
+            $this->manager->handleGuide($platform, $platformGuide);
+
             return $this->redirectToRoute('home');
         }
-        
+
         return $this->render(
             'admin/platform/properties.html.twig',
             ['form' => $form->createView(), 'platform' => $platform]

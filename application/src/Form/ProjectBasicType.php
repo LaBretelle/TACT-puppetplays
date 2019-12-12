@@ -45,14 +45,6 @@ class ProjectBasicType extends AbstractType
               'class' => 'tinymce-enabled'
             ]
           ])
-          ->add('faq', TextareaType::class, [
-            'label' => 'project_faq',
-            'translation_domain' => 'messages',
-            'required' => false,
-            'attr' => [
-              'class' => 'tinymce-enabled'
-            ]
-          ])
           ->add('public', CheckboxType::class, [
               'label'    => 'is_public',
               'required' => false
@@ -76,10 +68,11 @@ class ProjectBasicType extends AbstractType
               'required' => false,
               'data_class' => null
           ])
-          ->add('projectHelpLink', TextType::class, [
+          ->add('projectHelpLink', FileType::class, [
             'label' => 'project_help_link',
             'translation_domain' => 'messages',
-            'required' => false
+            'required' => false,
+            'mapped' => false
           ])
           ->add('manager', EntityType::class, [
               'mapped' => false,

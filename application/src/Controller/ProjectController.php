@@ -120,6 +120,7 @@ class ProjectController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('image')->getData();
             $previous_image = $request->get('previous_image');
+            $projectHelpLink = $form->get('projectHelpLink')->getData();
 
             $userStatus = new UserProjectStatus();
             $manager = $form->get('manager')->getData();
@@ -129,6 +130,7 @@ class ProjectController extends AbstractController
 
             $this->projectManager->createFromForm($project);
             $this->projectManager->handleImage($project, $image, $previous_image);
+            $this->projectManager->handleHelpFile($project, $projectHelpLink);
 
             $this->flashManager->add('notice', 'project_created');
 
@@ -172,6 +174,8 @@ class ProjectController extends AbstractController
             $image = $form->get('image')->getData();
             $previous_image = $request->get('previous_image');
             $this->projectManager->handleImage($project, $image, $previous_image);
+            $projectHelpLink = $form->get('projectHelpLink')->getData();
+            $this->projectManager->handleHelpFile($project, $projectHelpLink);
             $this->flashManager->add('notice', 'project_edited');
 
             return $this->redirectToRoute('project_edit_choice', ['id' => $project->getId()]);
@@ -489,6 +493,20 @@ class ProjectController extends AbstractController
         }
 
         $this->projectManager->deleteImage($project);
+
+        return $this->json([], $status = 200);
+    }
+
+    /**
+     * @Route("{id}/helplink/delete", name="helplink_delete", options={"expose"=true}, methods="DELETE")
+     */
+    public function deleteHelpLink(Project $project, Request $request)
+    {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            return $this->json([], $status = 403);
+        }
+
+        $this->projectManager->deleteHelpLink($project);
 
         return $this->json([], $status = 200);
     }

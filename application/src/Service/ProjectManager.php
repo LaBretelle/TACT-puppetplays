@@ -100,6 +100,19 @@ class ProjectManager
         return;
     }
 
+    public function handleHelpFile(Project $project, UploadedFile $file = null)
+    {
+        if ($file) {
+            $fileName = $file->getClientOriginalName();
+            $filePath = $this->fileManager->getProjectPath($project);
+            $file->move($filePath, $fileName);
+            $project->setProjectHelpLink($fileName);
+        }
+
+        $this->em->persist($project);
+        $this->em->flush();
+    }
+
 
     public function handleImage(Project $project, UploadedFile $file = null, string $previous_image = null)
     {
@@ -545,6 +558,18 @@ class ProjectManager
         unlink($imagePath);
 
         $project->setImage(null);
+        $this->em->persist($project);
+        $this->em->flush();
+
+        return;
+    }
+
+    public function deleteHelpLink(Project $project)
+    {
+        $docPath = $this->fileManager->getProjectPath($project) . DIRECTORY_SEPARATOR . $project->getProjectHelpLink();
+        unlink($docPath);
+
+        $project->setProjectHelpLink(null);
         $this->em->persist($project);
         $this->em->flush();
 

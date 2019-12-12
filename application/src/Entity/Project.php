@@ -100,17 +100,11 @@ class Project
      */
     private $projectHelpLink;
 
-
-
     /**
      * @ORM\Column(type="boolean")
      */
     private $archived = false;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $faq;
 
     public function __construct()
     {
@@ -370,18 +364,6 @@ class Project
     public function setArchived(bool $archived): self
     {
         $this->archived = $archived;
-
-        return $this;
-    }
-
-    public function getFaq(): ?string
-    {
-        return $this->faq;
-    }
-
-    public function setFaq(?string $faq): self
-    {
-        $this->faq = $faq;
 
         return $this;
     }

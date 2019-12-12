@@ -15,8 +15,19 @@ class PlatformType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'platform_name', 'translation_domain' => 'messages'])
-            ->add('logo', FileType::class, ['label' => 'platform_logo', 'translation_domain' => 'messages', 'required' => false, 'data_class' => null]);
+            ->add('name', TextType::class, [
+              'label' => 'platform_name',
+              'translation_domain' => 'messages'])
+            ->add('logo', FileType::class, [
+              'label' => 'platform_logo',
+              'translation_domain' => 'messages',
+              'required' => false,
+              'data_class' => null])
+            ->add('platform_guide', FileType::class, [
+              'label' => 'platform_guide',
+              'translation_domain' => 'messages',
+              'required' => false,
+              'mapped' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -37,6 +37,16 @@ class PlatformManager
         return $repository->getPlatformParameters();
     }
 
+    public function handleGuide(Platform $platform, UploadedFile $file = null)
+    {
+        if ($file) {
+            $fileName = 'contributor_guide.pdf';
+            $filePath = $this->params->get('platform_file_dir');
+            $file->move($filePath, $fileName);
+        }
+    }
+
+
     public function handleLogo(Platform $platform, UploadedFile $file = null, string $previous_logo = null)
     {
         if ($file) {
