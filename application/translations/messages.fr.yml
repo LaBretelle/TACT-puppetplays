@@ -7,7 +7,7 @@ add_directory_modal_title:                Ajouter un répertoire
 add_project:                              Créer un nouveau projet
 add_user-status:                          Ajouter un statut pour un utilisateur
 add:                                      Ajouter
-administrate_edito_content:               Edition pages éditoriales
+administrate_edito_content:               Édition pages éditoriales
 administrate_platform_menu:               Administrer la plateforme
 administrate_schemas_menu:                Schémas
 administrate_users_menu:                  Utilisateurs
@@ -48,9 +48,9 @@ directory_created:                        Dossier créé
 download_media:                           Télécharger l'image
 download_transcription:                   Télécharger la transcription
 edit_advanced_help:                       Vous permet d'associer des fichiers XSL, JSON et de définir une CSS
-edit_advanced:                            Edition des propriétés avancées
+edit_advanced:                            Édition des propriétés avancées
 edit_basic_help:                          Vous permet de paramétrer le nom, la description, l'image, etc.
-edit_basic:                               Edition des propriétés de base
+edit_basic:                               Édition des propriétés de base
 edit_project_long:                        Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit:                                     Éditer
 edito_edit:                               Editer la page
@@ -78,6 +78,12 @@ folders_moved:                            Dossier(s) déplacé(s)
 folders_not_all_moved:                    Certains dossiers n'ont pu être déplacés
 has_scheme:                               La transcription se fait conformément à un schéma (vs. transcription purement textuelle)
 have_contributed:                         Ont contribué
+help_project_catchphrase:                 Contenu affiché en dessous de l'image sur la page d'accueil du projet
+help_project_helplink:                    Document d'aide à la transcription propre au projet
+help_project_image:                       Ratio de 4:1 conseillé (l'image sera retaillée automatiquement)
+help_project_manager:                     Personne ayant les droits de gestionnaire du projet
+help_project_nbValidation:                Nombre de relectures positives nécessaires pour la validation d'une transcription
+help_project_public:                      Modération ou non des inscriptions au projet
 help:                                     Aide
 help1:                                    Bienvenue dans le tutoriel de transcription
 help10:                                   Et une fois qu’elle vous satisfait, en demander une relecture. Vous pouvez fermer le tutoriel
@@ -172,12 +178,12 @@ project_deleted:                          Le projet a été supprimé.
 project_description:                      Description du projet
 project_edit:                             Editer le projet
 project_edited:                           Projet édité
-project_edition:                          Edition du projet
+project_edition:                          Édition du projet
 project_enabled:                          Validé ?
 project_faq:                              Foire Aux Questions
 project_handle_user_statuses:             Gérer les utilisateurs
 project_help_link:                        Document d'aide à la transcription
-project_image:                            Image du projet. Ratio de 4:1 conseillé (l'image sera retaillée automatiquement)
+project_image:                            Image du projet
 project_is_not_public:                    Inscription modérée
 project_list:                             Les projets
 project_manage_media:                     Gérer les médias

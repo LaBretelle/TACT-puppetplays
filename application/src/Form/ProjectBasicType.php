@@ -47,12 +47,14 @@ class ProjectBasicType extends AbstractType
           ])
           ->add('public', CheckboxType::class, [
               'label'    => 'is_public',
-              'required' => false
+              'required' => false,
+              'help' => 'help_project_public'
           ])
           ->add('nbValidation', IntegerType::class, [
               'label'    => 'nb_validation',
               'required' => true,
               'empty_data' => 2,
+              'help' => 'help_project_nbValidation',
               'attr' => [
                 'min' => '1'
               ]
@@ -60,19 +62,22 @@ class ProjectBasicType extends AbstractType
           ->add('catchPhrase', TextType::class, [
             'required' => false,
             'label' => 'project_catchphrase',
-            'translation_domain' => 'messages'
+            'translation_domain' => 'messages',
+            'help' => 'help_project_catchphrase'
           ])
           ->add('image', FileType::class, [
               'label' => 'project_image',
               'translation_domain' => 'messages',
               'required' => false,
+              'help' => 'help_project_image',
               'data_class' => null
           ])
           ->add('projectHelpLink', FileType::class, [
             'label' => 'project_help_link',
             'translation_domain' => 'messages',
             'required' => false,
-            'mapped' => false
+            'mapped' => false,
+            'help' => 'help_project_helplink'
           ])
           ->add('manager', EntityType::class, [
               'mapped' => false,
@@ -80,6 +85,7 @@ class ProjectBasicType extends AbstractType
               'label' => 'project_manager',
               'translation_domain' => 'messages',
               'choice_label' => 'username',
+              'help' => 'help_project_manager'
           ])
           ->add('save', SubmitType::class, array(
               'attr' => array('class' => 'save btn btn-primary pull-right'),

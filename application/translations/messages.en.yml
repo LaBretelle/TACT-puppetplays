@@ -71,6 +71,12 @@ folders_moved:                            Folder(s) moved
 folders_not_all_moved:                    Certains dossiers n'ont pu être déplacés
 has_scheme:                               La transcription se fait conformément à un schéma (vs. transcription purement textuelle)
 have_contributed:                         Ont contribué
+help_project_catchphrase:                 Contenu affiché en dessous de l'image sur la page d'accueil du projet
+help_project_helplink:                    Document d'aide à la transcription propre au projet
+help_project_image:                       Ratio de 4:1 conseillé (l'image sera retaillée automatiquement)
+help_project_manager:                     Personne ayant les droits de gestionnaire du projet
+help_project_nbValidation:                Nombre de relectures positives nécessaires pour la validation d'une transcription
+help_project_public:                      Modération ou non des participants au projet
 help:                                     Help
 help1:                                    Welcome to the transcription tutorial
 help10:                                   And ask for a review. You can now close the tutorial
