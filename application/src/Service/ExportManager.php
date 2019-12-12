@@ -150,10 +150,6 @@ class ExportManager
             $fileSystem->appendToFile($rootDir."style.css", $css);
         }
 
-        if ($help = $project->getProjectHelpLink()) {
-            $fileSystem->appendToFile($rootDir."helpLink.txt", $help);
-        }
-
         $csv = $projectPath.DIRECTORY_SEPARATOR."schema.csv";
         if ($fileSystem->exists($csv)) {
             $fileSystem->copy($csv, $rootDir."schema.csv");
@@ -162,6 +158,18 @@ class ExportManager
         $json = $projectPath.DIRECTORY_SEPARATOR."tei-schema.json";
         if ($fileSystem->exists($json)) {
             $fileSystem->copy($json, $rootDir."tei-schema.json");
+        }
+
+        $xsl = $projectPath.DIRECTORY_SEPARATOR."export.xsl";
+        if ($fileSystem->exists($xsl)) {
+            $fileSystem->copy($xsl, $rootDir."export.xsl");
+        }
+
+        if ($projectHelpLink = $project->getProjectHelpLink()) {
+            $doc = $projectPath.DIRECTORY_SEPARATOR.$projectHelpLink;
+            if ($fileSystem->exists($doc)) {
+                $fileSystem->copy($doc, $rootDir.$projectHelpLink);
+            }
         }
 
         if ($imageName = $project->getImage()) {
