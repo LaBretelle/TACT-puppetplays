@@ -16,9 +16,7 @@ class PlatformType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['label' => 'platform_name', 'translation_domain' => 'messages'])
-            ->add('logo', FileType::class, ['label' => 'platform_logo', 'translation_domain' => 'messages', 'required' => false, 'data_class' => null])
-            ->add('homeText', TextareaType::class, ['label' => 'platform_home_text', 'translation_domain' => 'messages', 'required' => false, 'attr' => ['class' => 'tinymce-enabled']])
-        ;
+            ->add('logo', FileType::class, ['label' => 'platform_logo', 'translation_domain' => 'messages', 'required' => false, 'data_class' => null]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+  {% include 'header.html.twig' with {'title' : "actu" } %}
+
+  <div id="main-container">
+    {{actu.value|raw}}
+  </div>
+{% endblock %}

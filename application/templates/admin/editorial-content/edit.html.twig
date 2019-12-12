@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+  {% include 'header.html.twig' with {'title' : 'administrate_edito_content'} %}
+  <div id="main-container">
+    {{form(form)}}
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+{{parent()}}
+<script src="{{asset('build/js/editorial-content.js')}}"></script>
+{% endblock %}

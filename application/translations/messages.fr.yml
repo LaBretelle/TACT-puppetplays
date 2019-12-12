@@ -1,10 +1,14 @@
+
+about:                                    À propos
 accept_terms:                             Dans le cadre de votre enregistrement, un traitement de données à caractère personnel est réalisé, pour plus d’informations cliquer <a target="_blank" href='%url%#datas'>ici</a>
 access_denied:                            Vous n'êtes pas autorisé à accéder à cette page.
 actions:                                  Actions
+actu:                                     Actualités
 add_directory_modal_title:                Ajouter un répertoire
 add_project:                              Créer un nouveau projet
 add_user-status:                          Ajouter un statut pour un utilisateur
 add:                                      Ajouter
+administrate_edito_content:               Edition pages éditoriales
 administrate_platform_menu:               Administrer la plateforme
 administrate_schemas_menu:                Schémas
 administrate_users_menu:                  Utilisateurs
@@ -77,6 +81,7 @@ help:                                     Aide
 help1:                                    Bienvenue dans le tutoriel de transcription
 help10:                                   Et une fois qu’elle vous satisfait, en demander une relecture. Vous pouvez fermer le tutoriel
 help11:                                   Et une fois qu’elle vous satisfait, valider la relecture. Vous pouvez fermer le tutoriel
+help12:                                   Vous pouvez nous signaler un problème technique ou du contenu haineux/violent
 help2:                                    Média à transcrire
 help3:                                    Boutons permettant de (de)zoomer, pivoter le média
 help4:                                    La transcription se passe ici
@@ -85,7 +90,6 @@ help6:                                    Vous pouvez explorer/ajouter des comme
 help7:                                    Vous pouvez consulter ici l'historique des relectures
 help8:                                    Vous pouvez revenir ici à l'aide et au tutoriel
 help9:                                    À tout moment, vous pouvez sauvegarder votre transcription
-help12:                                   Vous pouvez nous signaler un problème technique ou du contenu haineux/violent
 home:                                     Accueil
 iaccept:                                  J'accepte les <a href="%url%">Conditions Générales d'Utilisation</a>
 insults:                                  Propos haineux, violence
@@ -345,3 +349,4 @@ xml_file_type:                            Type de fichier
 xml_upload_help:                          Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 xslt_export:                              Fichier XSL appliqué à l'export des transcriptions
 yes:                                      Oui
+edito_edit: Editer la page

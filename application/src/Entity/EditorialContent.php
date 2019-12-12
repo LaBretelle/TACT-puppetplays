@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PlatformRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\EditorialContentRepository")
  */
-class Platform
+class EditorialContent
 {
     /**
      * @ORM\Id()
@@ -22,11 +22,11 @@ class Platform
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $logo;
+    private $value;
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -43,14 +43,14 @@ class Platform
         return $this;
     }
 
-    public function getLogo(): ?string
+    public function getValue(): ?string
     {
-        return $this->logo;
+        return $this->value;
     }
 
-    public function setLogo(?string $logo): self
+    public function setValue(?string $value): self
     {
-        $this->logo = $logo;
+        $this->value = $value;
 
         return $this;
     }

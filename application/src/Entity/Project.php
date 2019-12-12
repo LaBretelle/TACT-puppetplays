@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Financer;
 use App\Entity\UserProjectStatus;
 use App\Entity\ProjectStatus;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -65,11 +64,6 @@ class Project
     private $status;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Financer", inversedBy="projects")
-     */
-    private $financers;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserProjectStatus", mappedBy="project", cascade={"persist", "remove"})
      */
     private $userStatuses;
@@ -120,7 +114,6 @@ class Project
 
     public function __construct()
     {
-        $this->financers = new ArrayCollection();
         $this->userStatuses = new ArrayCollection();
         $this->medias = new ArrayCollection();
         $this->dirs = new ArrayCollection();
@@ -187,32 +180,6 @@ class Project
     public function setStatus(?ProjectStatus $status): self
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Financer[]
-     */
-    public function getFinancers(): Collection
-    {
-        return $this->financers;
-    }
-
-    public function addFinancer(Financer $financer): self
-    {
-        if (!$this->financers->contains($financer)) {
-            $this->financers[] = $financer;
-        }
-
-        return $this;
-    }
-
-    public function removeFinancer(Financer $financer): self
-    {
-        if ($this->financers->contains($financer)) {
-            $this->financers->removeElement($financer);
-        }
 
         return $this;
     }

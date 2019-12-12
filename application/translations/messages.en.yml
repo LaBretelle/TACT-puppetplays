@@ -1,10 +1,13 @@
+about:                                    À propos
 accept_terms:                             Dans le cadre de votre enregistrement, un traitement de données à caractère personnel est réalisé, pour plus d’informations cliquer <a target="_blank" href='%url%#datas'>ici</a>
 access_denied:                            You are not allowed to access this page.
 actions:                                  Actions
+actu:                                     Actualités
 add_directory_modal_title:                Add folder
 add_project:                              Create new project
 add_user-status:                          Add status for an user
 add:                                      Add
+administrate_edito_content:               Edition pages éditoriales
 administrate_platform_menu:               Administrate platform
 administrate_schemas_menu:                Schémas
 administrate_users_menu:                  Users

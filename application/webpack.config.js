@@ -21,6 +21,7 @@ Encore
   .addEntry('js/submit-disable', './assets/js/submit-disable.js')
   .addEntry('js/transcription', './assets/js/transcription.js')
   .addEntry('js/platform', './assets/js/platform.js')
+  .addEntry('js/editorial-content', './assets/js/editorial-content.js')
   .addEntry('js/openseadragon', './node_modules/openseadragon/build/openseadragon/openseadragon.min.js')
   .addEntry('js/file-input', './node_modules/bs-custom-file-input/dist/bs-custom-file-input.min.js')
 

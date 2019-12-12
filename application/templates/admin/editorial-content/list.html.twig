@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+  {% include 'header.html.twig' with {'title' : 'administrate_edito_content'} %}
+  <div id="main-container">
+    <ul class="list-group">
+    {% for edito in editos %}
+      <li class="list-group-item">
+        <a href="{{ path('admin_edito_edit', {'id': edito.id}) }}">
+          <i class="fas fa-edit"></i> {{"edito_edit"|trans}}
+        </a>
+        {{edito.name|upper}}
+      </li>
+    {% endfor %}
+  </ul>
+  </div>
+{% endblock %}
