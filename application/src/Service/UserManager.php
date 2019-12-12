@@ -176,6 +176,14 @@ class UserManager
         $this->em->flush();
     }
 
+    public function setRole(User $user, $role)
+    {
+        $user->setRoles($role);
+        $this->saveUser($user);
+
+        return;
+    }
+
     public function exportUserData(User $user)
     {
         $result = [

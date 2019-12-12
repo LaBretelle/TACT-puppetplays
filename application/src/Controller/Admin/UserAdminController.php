@@ -89,4 +89,14 @@ class UserAdminController extends AbstractController
 
         return $this->redirectToRoute('admin_user_list');
     }
+
+    /**
+     * @Route("/user/role/{id}/{role}", name="set_role")
+     */
+    public function setRole(User $user, $role)
+    {
+        $this->userManager->setRole($user, [$role]);
+
+        return $this->redirectToRoute('admin_user_list');
+    }
 }

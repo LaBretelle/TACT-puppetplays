@@ -1,6 +1,6 @@
 {% for user in users %}
-  {% set admin =  'ROLE_ADMIN' in user.roles %}
-  <tr {% if user.anonymous %} class="table-danger" {% endif %}>
+  {% set admin = 'ROLE_ADMIN' in user.roles %}
+  <tr class="{% if user.anonymous %} table-warning {% elseif admin %} table-success {% endif %}">
     <th data-placement="bottom" scope="row">{{user.id}}</th>
     <td>{{user.fullname}}</td>
     <td>{{user.createdAt|date("d/m/Y")}}</td>
@@ -13,7 +13,9 @@
     </td>-->
     <td>
       <div class="btn-group">
-        <a href="{{path('user_edit', {'id': user.id})}}" data-toggle="tooltip" title="{{'user_edit' | trans}}" class="btn btn-link"><i class="fas fa-user-edit"></i></a>
+        <a href="{{path('user_edit', {'id': user.id})}}" data-toggle="tooltip" title="{{'user_edit' | trans}}" class="btn btn-link">
+          <i class="fas fa-user-edit"></i>
+        </a>
         {% if not admin %}
         <form id="partially-anonymize-user-form" action="{{path('admin_user_anonymize_account', {'id':user.id})}}" method="post">
           <input type="hidden" name="type" value="partial">
@@ -33,6 +35,13 @@
           </button>
         </form>
         {% endif %}
+        <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-crown"></i>
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{path("admin_user_set_role", {'id': user.id, 'role': "ROLE_USER"})}}">Utilisateur</a>
+          <a class="dropdown-item" href="{{path("admin_user_set_role", {'id': user.id, 'role': "ROLE_ADMIN"})}}">Administrateur</a>
+        </div>
       </div>
     </td>
     {% else %}
