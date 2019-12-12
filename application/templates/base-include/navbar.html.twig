@@ -36,10 +36,13 @@
                 <i class="fas fa-cog"></i> Administration
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a href="{{ path('admin_user_list') }}" class="dropdown-item" href="#">
+              <a class="dropdown-item" href="{{ path("project_create") }}">
+                <i class="fas fa-plus"></i> {{'add_project' | trans}}
+              </a>
+              <a href="{{ path('admin_user_list') }}" class="dropdown-item">
                 <i class="fas fa-users"></i> {{'administrate_users_menu'|trans}}
               </a>
-              <a href="{{ path('admin_platform_properties')}}" class="dropdown-item" href="#">
+              <a href="{{ path('admin_platform_properties')}}" class="dropdown-item">
                 <i class="fas fa-cogs"></i> {{'administrate_platform_menu'|trans}}
               </a>
               <a class="dropdown-item" href="{{ path('admin_edito_list')}}">
