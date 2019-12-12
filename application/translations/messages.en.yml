@@ -8,6 +8,7 @@ add_project:                              Create new project
 add_user-status:                          Add status for an user
 add:                                      Add
 administrate_edito_content:               Edition pages éditoriales
+administrate_log_display:                 Afficher les logs
 administrate_platform_menu:               Administrate platform
 administrate_schemas_menu:                Schémas
 administrate_users_menu:                  Users
@@ -102,6 +103,8 @@ leave_warning:                            Si vous avez fait des modifications à
 login_or_register_link:                   <a href="%login%">Connectez-vous</a> ou <a href="%register%">inscrivez-vous</a> à la plateforme pour participer !
 login:                                    login
 logout:                                   logout
+logs_action:                              Action
+logs_date:                                Date
 logs:                                     Logs
 lost_password_link:                       I forgot my password
 manage_media_long:                        Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
@@ -149,6 +152,7 @@ parent_folder_name:                       Parent folder name
 password:                                 Password
 platform_home_text:                       Platform home text
 platform_logo:                            Platform logo
+platform_logs:                            Logs de la plateforme
 platform_name:                            Platform name
 platform_page_title:                      Platform administration
 please_wait:                              Veuillez patienter...
@@ -176,6 +180,7 @@ project_help_link:                        Link to transcription help
 project_image:                            Project image. A 4:1 ratio is advised (The image will automatically be cropped).
 project_is_not_public:                    Registration moderated
 project_list:                             Projects
+project_logs:                             Logs
 project_manage_media:                     Manage media
 project_manage_user_statuses:             Manage users
 project_management_media:                 Media management
@@ -212,6 +217,7 @@ project_unarchive:                        Unarchive
 project_user_status:                      User statuses
 project_view_transciptions:               View transcriptions
 project_xml_upload:                       Envoyer les fichiers
+project:                                  Projet
 public_mail:                              Email visible to all
 register_date:                            Registration date
 register:                                 register
@@ -271,6 +277,7 @@ transcription_is_locked:                  Someone is currently transcribing/revi
 transcription_is_valid:                   La transcription est valide ?
 transcription_locked:                     Transcription locked
 transcription_log_created:                Transcription initialisée
+transcription_log_locked:                 Transcription verrouillée
 transcription_log_rereaded:               Relecture soumise
 transcription_log_unvalidated:            Transcription invalidée
 transcription_log_updated:                Transcription mise à jour

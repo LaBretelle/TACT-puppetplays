@@ -8,6 +8,7 @@ add_project:                              Créer un nouveau projet
 add_user-status:                          Ajouter un statut pour un utilisateur
 add:                                      Ajouter
 administrate_edito_content:               Édition pages éditoriales
+administrate_log_display:                 Afficher les logs
 administrate_platform_menu:               Administrer la plateforme
 administrate_schemas_menu:                Schémas
 administrate_users_menu:                  Utilisateurs
@@ -92,7 +93,7 @@ help12:                                   Vous pouvez nous signaler un problème
 help13:                                   N'oubliez pas de consulter le guide du contributeur.
 help2:                                    Média à transcrire
 help3:                                    Boutons permettant de (de)zoomer, pivoter le média
-help4:                                    La transcription se passe ici. Commencez par transcrire le texte PUIS ajouter balises & attributs 
+help4:                                    La transcription se passe ici. Commencez par transcrire le texte PUIS ajouter balises & attributs
 help5:                                    Vous pouvez visualiser le rendu de la transcription sur cet onglet
 help6:                                    Vous pouvez explorer/ajouter des commentaires sur le média sur cet onglet
 help7:                                    Vous pouvez consulter ici l'historique des relectures
@@ -109,6 +110,8 @@ leave_warning:                            Si vous avez fait des modifications à
 login_or_register_link:                   <a href="%login%">Connectez-vous</a> ou <a href="%register%">inscrivez-vous</a> à la plateforme pour participer !
 login:                                    Se connecter
 logout:                                   Se déconnecter
+logs_action:                              Action
+logs_date:                                Date
 logs:                                     Logs
 lost_password_link:                       J'ai oublié mon mot de passe
 manage_media_long:                        Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
@@ -158,6 +161,7 @@ parent_folder_name:                       Nom du dossier parent
 password:                                 Mot de passe
 platform_home_text:                       Texte de la page d'accueil
 platform_logo:                            Logo de la plateforme
+platform_logs:                            Logs de la plateforme
 platform_name:                            Nom de la plateforme
 platform_page_title:                      Administration de la plateforme
 please_wait:                              Veuillez patienter...
@@ -186,6 +190,7 @@ project_help_link:                        Document d'aide à la transcription
 project_image:                            Image du projet
 project_is_not_public:                    Inscription modérée
 project_list:                             Les projets
+project_logs:                             Logs
 project_manage_media:                     Gérer les médias
 project_manage_user_statuses:             Gérer les utilisateurs
 project_management_media:                 Gestion des médias
@@ -222,6 +227,7 @@ project_unarchive:                        Désarchiver
 project_user_status:                      Statut des utilisateurs
 project_view_transciptions:               Voir les transcriptions
 project_xml_upload:                       Envoyer les fichiers
+project:                                  Projet
 public_mail:                              Email visible par tous
 register_date:                            Date d'inscription
 register:                                 Créer un compte
@@ -282,6 +288,7 @@ transcription_is_locked:                  La fiche est en cours de transcription
 transcription_is_valid:                   La transcription vous parait-elle valide ?
 transcription_locked:                     Transcription verrouillée
 transcription_log_created:                Transcription initialisée
+transcription_log_locked:                 Transcription verrouillée
 transcription_log_rereaded:               Relecture soumise
 transcription_log_unvalidated:            Transcription invalidée
 transcription_log_updated:                Transcription mise à jour

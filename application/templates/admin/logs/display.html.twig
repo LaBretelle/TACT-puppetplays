@@ -1,0 +1,8 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+  {% include 'header.html.twig' with {'title': 'platform_logs'} %}
+  <div id="main-container">
+    {% include 'log/listing.html.twig' with {'global': true} %}
+  </div>
+{% endblock %}

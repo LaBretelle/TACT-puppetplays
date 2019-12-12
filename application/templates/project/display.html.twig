@@ -53,6 +53,7 @@
             </li>
             <li class="list-group-item">
               {% include('transcribe/contributors.html.twig') %}
+              <a href="{{ path('project_display_logs', {id: project.id}) }}">logs</a>
             </li>
           </ul>
         </div>

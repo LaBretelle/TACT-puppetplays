@@ -1,0 +1,44 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      {% if global %}
+          <th>{{"project"|trans}}</th>
+      {% endif %}
+      <th>{{"media"|trans}}</th>
+      <th>{{"user"|trans}}</th>
+      <th>{{"logs_date"|trans}}</th>
+      <th>{{"logs_action"|trans}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set lastUser = null %}
+    {% set lastTranscription = null %}
+    {% set lastName = null %}
+    {% for log in logs %}
+      {% set currentUser =  log.user %}
+      {% set currentTranscription = log.transcription %}
+      {% set currentName = log.name %}
+      {% if (currentUser != lastUser) or (lastTranscription != currentTranscription) or (lastName != currentName) %}
+        {% set lastUser = currentUser %}
+        {% set lastTranscription = currentTranscription %}
+        {% set lastName = currentName %}
+        {% set project = log.transcription.media.project %}
+        <tr>
+          {% if global == true %}
+          <td>
+            <a href="{{ path("project_display", {'id': project.id}) }}">{{ project.name}}</a>
+          </td>
+          {% endif %}
+          <td>
+            <a href="{{ path("media_transcription_display", {"id": log.transcription.media.id} ) }}">{{ log.transcription.media.name }}</a>
+          </td>
+          <td>
+            <a href="{{ path("user_profile", {'id': log.user.id}) }}">{{ log.user.username }}</a>
+          </td>
+          <td>{{ log.createdAt|date("d/m/Y H:i") }}</td>
+          <td>{{ log.name | trans }}</td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>

@@ -8,6 +8,7 @@ use App\Entity\Project;
 use App\Entity\User;
 use App\Entity\UserProjectStatus;
 use App\Entity\UserStatus;
+use App\Entity\TranscriptionLog;
 use App\Form\ExportType;
 use App\Form\ProjectMediaType;
 use App\Form\XmlType;
@@ -142,6 +143,25 @@ class ProjectController extends AbstractController
           'form' => $form->createView()
         ]);
     }
+
+
+    /**
+     * @Route("/{id}/logs", name="display_logs")
+     */
+    public function displayLogs(Project $project, EntityManagerInterface $em)
+    {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
+        }
+
+        $logs = $em->getRepository(TranscriptionLog::class)->getProjectLogs($project);
+
+        return $this->render('project/display-logs.html.twig', [
+          'project' => $project,
+          'logs' => $logs
+      ]);
+    }
+
 
     /**
      * @Route("{id}/edit/choice", name="edit_choice")

@@ -56,7 +56,7 @@ class TranscriptionLogRepository extends ServiceEntityRepository
           ->andWhere('tl.name IN(:names)')
           ->setParameter('t', $transcription)
           ->setParameter('user', $user)
-          ->setParameter('names', 'transcription_log_locked, transcription_log_created, transcription_log_waiting_for_validation, transcription_log_rereaded')
+          ->setParameter('names', ['transcription_log_locked', 'transcription_log_created', 'transcription_log_waiting_for_validation',' transcription_log_rereaded'])
           ->orderBy('tl.createdAt', 'ASC')
           ->setMaxResults(10)
           ->getQuery()
@@ -93,6 +93,32 @@ class TranscriptionLogRepository extends ServiceEntityRepository
           ->setParameter('project', $project)
           ->setParameter('name', AppEnums::TRANSCRIPTION_LOG_WAITING_FOR_VALIDATION)
           ->groupBy('t.id')
+          ->getQuery()
+          ->getResult();
+    }
+
+    public function getProjectLogs(Project $project)
+    {
+        return $this->createQueryBuilder('tl')
+          ->leftJoin('tl.transcription', 't')
+          ->leftJoin('t.media', 'm')
+          ->andWhere('m.project = :project')
+          ->andWhere('tl.name NOT IN(:exceptions)')
+          ->setParameter('project', $project)
+          ->setParameter('exceptions', ['transcription_log_created', 'transcription_log_locked'])
+          ->orderBy('tl.createdAt', 'DESC')
+          ->setMaxResults(200)
+          ->getQuery()
+          ->getResult();
+    }
+
+    public function findAlmostAll()
+    {
+        return $this->createQueryBuilder('tl')
+          ->andWhere('tl.name NOT IN(:exceptions)')
+          ->setParameter('exceptions', ['transcription_log_locked', 'transcription_log_created'])
+          ->orderBy('tl.createdAt', 'DESC')
+          ->setMaxResults(300)
           ->getQuery()
           ->getResult();
     }
