@@ -101,8 +101,8 @@ last_access:                              Dernier accès
 lastname:                                 Nom
 leave_warning:                            Si vous avez fait des modifications à cette transcription, et que vous n'avez pas encore sauvegardé celles-ci, elles ne seront pas prises en compte.
 login_or_register_link:                   <a href="%login%">Connectez-vous</a> ou <a href="%register%">inscrivez-vous</a> à la plateforme pour participer !
-login:                                    Connexion
-logout:                                   Déconnexion
+login:                                    Se connecter
+logout:                                   Se déconnecter
 logs:                                     Logs
 lost_password_link:                       J'ai oublié mon mot de passe
 manage_media_long:                        Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
@@ -218,7 +218,7 @@ project_view_transciptions:               Voir les transcriptions
 project_xml_upload:                       Envoyer les fichiers
 public_mail:                              Email visible par tous
 register_date:                            Date d'inscription
-register:                                 S'enregistrer
+register:                                 Créer un compte
 registration_deleted_project:             Votre inscription au projet '%project%' a été supprimée
 registration_unvalidated_project:         Votre inscription au projet '%project%' a été invalidée
 registration_validated_project:           Votre inscription au projet '%project%' a été validée
