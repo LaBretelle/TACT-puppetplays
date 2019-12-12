@@ -7,14 +7,18 @@
   <div id="main-container">
     <div class="row">
       {% for project in projectsUnarchived %}
-        {{macros.displayProject(project)}}
+        {{ macros.displayProject(project) }}
       {% endfor %}
     </div>
     {% if projectsArchived|length > 0 %}
-      <h4 class="py-5">Projets archivés</h4>
+      <div class="row">
+        <div class="col">
+          <h4 class="mt-5 ml-2 text-muted">Projets archivés</h4>
+        </div>
+      </div>
       <div class="row">
         {% for project in projectsArchived %}
-          {{macros.displayProject(project)}}
+          {{ macros.displayProject(project) }}
         {% endfor %}
       </div>
     {% endif %}

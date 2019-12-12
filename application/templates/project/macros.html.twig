@@ -1,7 +1,7 @@
 {% macro displayProject(project) %}
   {% set userStatus = app.user|status(project) %}
 <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
-  <div class="card mb-4">
+  <div class="card mb-3 my-2">
       <a href="{{ path("project_display", {'id': project.id} )}}">
         <img class="card-img-top" src="{{ project.image ? asset('project_files/'~project.id~'/'~project.image) : asset('img/project-placeholder.png') }}">
       </a>

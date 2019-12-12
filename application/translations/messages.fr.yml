@@ -159,6 +159,7 @@ overwrite_help:                           Si un transcription existe déjà pour
 overwrite:                                Ecraser les transcriptions
 parent_folder_name:                       Nom du dossier parent
 password:                                 Mot de passe
+platform_guide:                           Guide du contributeur
 platform_home_text:                       Texte de la page d'accueil
 platform_logo:                            Logo de la plateforme
 platform_logs:                            Logs de la plateforme
