@@ -17,10 +17,12 @@
       <div class="card-footer">
         <div class="row">
           <div class="col font-weight-light">
-            {% if project | isAuthorizedOnProject('register') %}
-            <a class="card-link"  href="{{ path('status_request', {id: project.id})}}">{{'project_register_short' | trans}}</a>
-            {% elseif  project | isAuthorizedOnProject('transcribe') %}
-            <a class="card-link" href="{{ path('project_transcriptions', {id: project.id})}}">{{'project_transcript'| trans }}</a>
+            {% if project.archived == false %}
+              {% if project | isAuthorizedOnProject('register') %}
+              <a class="card-link"  href="{{ path('status_request', {id: project.id})}}">{{'project_register_short' | trans}}</a>
+              {% elseif  project | isAuthorizedOnProject('transcribe') %}
+              <a class="card-link" href="{{ path('project_transcriptions', {id: project.id})}}">{{'project_transcript'| trans }}</a>
+              {% endif %}
             {% endif %}
             <a class="card-link" href="{{ path("project_display", {'id': project.id} )}}">{{'view_project_short' | trans}}</a>
           </div>

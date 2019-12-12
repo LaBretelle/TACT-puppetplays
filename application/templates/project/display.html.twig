@@ -18,6 +18,7 @@
   <div id="main-container">
     <div class="row">
       <div class="col">
+        {% if not project.archived %}
         <div class="alert alert-info" role="alert">
           {% if not app.user %}
             {{ "login_or_register_link"|trans({'%login%': path('user_login'), '%register%':path('user_login')  }) | raw }}
@@ -33,6 +34,7 @@
               {% endif %}
           {% endif %}
         </div>
+        {% endif %}
 
         {{ project.description | raw }}
       </div>

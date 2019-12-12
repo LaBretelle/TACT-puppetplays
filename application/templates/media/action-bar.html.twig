@@ -54,7 +54,7 @@
         </button>
     {% endif %}
 
-    {% if project | isAuthorizedOnProject('editProject') %}
+    {% if project | isAuthorizedOnProject('validateTranscription') %}
       {% if media.transcription.isValid %}
         <a class="btn btn-outline-secondary" href="{{ path('media_transcription_validate', {id:  media.id, valid: 0})}}" data-toggle="tooltip" title="{{'transcription_unvalidate' | trans}}" >
           <i class="fas fa-thumbs-down" aria-hidden="true"></i>

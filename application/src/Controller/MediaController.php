@@ -230,7 +230,7 @@ class MediaController extends AbstractController
           ? $media->getParent()->getId()
           : null;
 
-        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, "validateTranscription")) {
             throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
         }
         $this->transcriptionManager->validate($media->getTranscription(), $valid);
