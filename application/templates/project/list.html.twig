@@ -10,14 +10,14 @@
       <a class="btn btn-link" href="{{ path("project_create") }}"> <i class="fas fa-plus"></i> {{'add_project' | trans}}</a>
     </div>
     {% endif %}
-    <div class="card-columns">
+    <div class="row">
       {% for project in projectsUnarchived %}
         {{macros.displayProject(project)}}
       {% endfor %}
     </div>
     {% if projectsArchived|length > 0 %}
       <h4 class="py-5">Projets archivés</h4>
-      <div class="card-columns">
+      <div class="row">
         {% for project in projectsArchived %}
           {{macros.displayProject(project)}}
         {% endfor %}

@@ -1,16 +1,17 @@
 {% macro displayProject(project) %}
   {% set userStatus = app.user|status(project) %}
-  <div class="card">
+<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+  <div class="card mb-3">
       <a href="{{ path("project_display", {'id': project.id} )}}">
         <img class="card-img-top" src="{{ project.image ? asset('project_files/'~project.id~'/'~project.image) : asset('img/project-placeholder.png') }}">
       </a>
       <div class="card-body">
-          <h4 class="card-title mb-2">{{ project.name }}</h4>
-          <h5 class="card-subtitle mb-2">
+          <h4 class="card-title mb-2 font-weight-light">{{ project.name | truncate(30, true)}}</h4>
+          <h5 class="card-subtitle mb-2 font-weight-light">
             <span class="text-muted">{{ project.public ? 'is_public'|trans : 'project_is_not_public'|trans}}</span>
           </h5>
-          <div class="project-description mb-3">
-          {{ project.description | striptags | truncate(100, true)| raw }}
+          <div class="project-description font-weight-light mb-3">
+          {{ project.description | striptags | truncate(80, true)| raw }}
           </div>
           <div>
             {% include 'project/progressbar.html.twig' with {'project': project} %}
@@ -18,7 +19,7 @@
       </div>
       <div class="card-footer">
         <div class="row">
-          <div class="col">
+          <div class="col font-weight-light">
             {% if project | isAuthorizedOnProject('register') %}
             <a class="card-link"  href="{{ path('status_request', {id: project.id})}}">{{'project_register_short' | trans}}</a>
             {% elseif  project | isAuthorizedOnProject('transcribe') %}
@@ -28,7 +29,7 @@
           </div>
           <div class="col text-right">
             {% if userStatus %}
-            <span class="badge badge-secondary">
+            <span class="badge badge-secondary font-weight-light">
               {{ userStatus.status.name | trans }} {{ not userStatus.enabled ? 'not_enabled_yet' | trans}}
             </span>
             {% endif %}
@@ -36,4 +37,5 @@
         </div>
       </div>
   </div>
+</div>
 {% endmacro %}
