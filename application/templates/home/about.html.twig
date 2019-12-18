@@ -1,8 +1,52 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-  {% include 'header.html.twig' with {'title' : "about" } %}
-  <div id="main-container">
-    À venir.
+{% include 'header.html.twig' with {'title' : "about" } %}
+<div id="main-container">
+  <div class="col col-8 offset-1 text-justify">
+    <h3>Le projet TACT</h3>
+    <p>La plateforme TACT a été officiellement lancée le 4 juin 2019 lors de la Global Challenges Science Week.</p>
+    
+    <p>TACT offre la possibilité de déléguer la transcription et l’annotation (tâches souvent coûteuses en temps et en ressources) de sources numérisées à des non-spécialistes, tout en contrôlant la qualité de l’éxécution, et ce via une interface simple d’utilisation. TACT permet de produire des données structurées, exportables, qui peuvent être ainsi exploitées et mises à disposition de la communauté scientifique et du public.</p>
+
+    <h5>Création de la plateforme</h5>
+    <p>La conception de la plateforme s'est largement appuyé sur les résultats du travail fait par Anne Vikhrova pendant sa thèse. Elle a développé la <a href="http://www.annevikhrova.com/projects/phun">plateforme PHuN 2.0</a>, Patrimoine et Humanités Numériques dans le cadre de sa <a href="http://www.theses.fr/2017GREAL023">thèse « L'évaluation de la méthode du crowdsourcing pour la transcription de manuscrits. » soutenue en décembre 2017</a>.</p>
+    <p>Deux projets ont été, tant sur PHuN 2.0 que sur TACT, des projets pilotes : testeurs d'une infinie patience, mais aussi sources d'inspiration et d'idées de fonctionnalités, nous tenons à remercier les projets Benoîte Groult, porté par Cécile Meynard (Université d'Angers, laboratoire CIRPaLL), et La réticence, porté par Brigitte Combe (Université Grenoble-Alpes, UMR Litt&ampsArts).
+    <p>Avec la création d'ELAN en décembre 2017 (et l'arrivée de deux nouveaux ingénieur·e·s pour compléter le travail de l'ingénieure déjà présente à Litt&amp;Arts) et l'obtention du projet IDEX Data Institute (et en particulier le WP Démarre SHS ! qui a permis de recruter deux ingénieur·e·s en développement web et traitement de données), nous avions les compétences pour repartir de zéro : nouveau cahier des charges s'appuyant sur l'expérience passée, nouvelles technologies de développement web et nouvelle gestion du projet.</p>
+
+    <h5>Le logiciel TACT</h5>
+    <p>TACT est aussi un logiciel. Disponible sur Gitlab (https://gitlab.com/litt-arts-num/tact) sous licence Creative Commons Attribution 4.0 International (CC-BY 4.0 International), vous êtes libre de le télécharger et d'installer votre propre instance.</p>
+
+    <h5>En savoir plus...</h5>
+    <p>Voir la vidéo de présentation de TACT lors des journées Digit_Hum du 17 octobre 2019 : <a href="https://digithum.huma-num.fr/atelier/2019/8_marion_greslou_garciafernandez.php">vidéo</a></p>
+    <hr/>
+    <h3>L'équipe</h3>
+    <p><a href="https://demarreshs.hypotheses.org/">Démarre SHS !</a> a collaboré avec <a href="http://carres.elan-numerique.fr/">ELAN</a>, Équipe Littératures et Arts Numériques (<a href="http://litt-arts.univ-grenoble-alpes.fr/">Litt&Arts - UMR5316</a>), pour développer une plateforme collaborative de transcription et d’annotation de corpus textuels. Ainsi, ce sont Arnaud Bey, Anne Garcia-Fernandez, Elisabeth Greslou (ELAN), Patrick Guillou, Sylvain Hatier, Célia Marion (Démarre SHS !) et Thomas Lebarbé (Litt&Arts, Démarre SHS !) qui ont pris part à la conception et au développement de la plateforme.</p>
+    <hr/>
+    
+    <h3>Les financeurs</h3>
+    <style>.logo { height: 100px; }</style>
+    <p class="text-center">
+      <a class="btn btn" href=" http://univ-grenoble-alpes.fr" target="_blank">
+        <img class="logo" data-toggle="tooltip" title="" src="/img/logos/logo_univ_grenoble_alpes.jpg" data-original-title="Université Grenoble Alpes">
+      </a>
+      <a class="btn" href="http://www.cnrs.fr" target="_blank">
+        <img class="logo" data-toggle="tooltip" title="" src="/img/logos/logo_cnrs.jpg" data-original-title="CNRS Centre national de la recherche scientifique">
+      </a>
+      <a class="btn" target="_blank" href="http://litt-arts.univ-grenoble-alpes.fr/litt-arts-arts-et-pratiques-du-texte-de-l-image-de-l-ecran-et-de-la-scene-62796.kjsp">
+        <img class="logo" data-toggle="tooltip" title="" src="/img/logos/logo_littarts.png" data-original-title="Litt&amp;Arts (UMR 5316) - Arts et pratiques du texte, de l'image, de l'écran et de la scène">
+      </a>
+      <a class="btn" href="https://demarreshs.hypotheses.org/" target="_blank">
+        <img class="logo" data-toggle="tooltip" title="" src="/img/logos/logo_demarre_shs.jpg" data-original-title="Démarre SHS !">
+      </a>
+      <a class="btn" href="https://www.huma-num.fr/" target="_blank">
+        <img class="logo" data-toggle="tooltip" title="" src="/img/logos/logo_hn.jpg" data-original-title="Huma-Num - Hébergeur">
+      </a>
+      <a class="btn" href="https://www.elan-numerique.fr/" target="_blank">
+        <img class="logo" data-toggle="tooltip" title="" src="/img/logos/logo_elan.png" data-original-title="ELAN - Equipe Littérature et Arts Numériques">
+      </a>
+    </p>
+    <hr/>
   </div>
+</div>
 {% endblock %}
