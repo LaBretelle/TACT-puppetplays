@@ -110,6 +110,7 @@ logs:                                     Logs
 lost_password_link:                       I forgot my password
 manage_media_long:                        Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
 manage_user_statuses_long:                Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.
+manager_guide:                            Guide du gestionnaire
 manager:                                  Manager
 markup:                                   TEI markup
 max_file_uploads_message:                 You can simultaneously upload %nb_max% files
@@ -249,7 +250,7 @@ selected_media:                           selected media
 selected_xmls:                            fichier(s) xml sélectionné(s)
 send:                                     Send
 status_edit:                              Edit status
-status_edited_project:                    Votre status pour le projet '%project%' a été modifié
+status_edited_project:                    Votre statut pour le projet '%project%' a été modifié
 status_remove:                            Remove
 status_toggle_off:                        Unvalidate
 status_toggle_on:                         Validate

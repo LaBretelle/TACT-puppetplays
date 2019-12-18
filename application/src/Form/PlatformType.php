@@ -27,6 +27,11 @@ class PlatformType extends AbstractType
               'label' => 'platform_guide',
               'translation_domain' => 'messages',
               'required' => false,
+              'mapped' => false])
+            ->add('manager_guide', FileType::class, [
+              'label' => 'manager_guide',
+              'translation_domain' => 'messages',
+              'required' => false,
               'mapped' => false]);
     }
 

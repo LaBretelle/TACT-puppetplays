@@ -117,6 +117,7 @@ logs:                                     Logs
 lost_password_link:                       J'ai oublié mon mot de passe
 manage_media_long:                        Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
 manage_user_statuses_long:                Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.
+manager_guide:                             Guide du gestionnaire
 manager:                                  Gestionnaire
 markup:                                   Balisage TEI
 max_file_uploads_message:                 Vous pouvez uploader simultanément %nb_max% fichiers
@@ -268,6 +269,8 @@ submit_validation:                        Soumettre
 submit:                                   Valider
 subscribe_done:                           Abonné aux commentaires
 subscribe_long:                           L'inscription au projet vous permet de participer, en transcrivant par exemple. Si le projet est privé, l'inscription est soumise à la validation d'un gestionnaire.
+subscribe:                                (S'abonner)
+subscribed:                               Vous êtes abonné. Vous recevrez un email quand une nouvelle demande de relecture sera déposée. Vous pouvez vous désabonner pour ne recevoir qu'un message interne à la plateforme.
 tag_down:                                 Descendre la balise
 tag_up:                                   Remonter la balise
 technical:                                Problème technique
@@ -321,6 +324,8 @@ tutorial_next:                            Suivant
 tutorial_previous:                        Précédent
 tutorial:                                 Tutoriel
 unsubscribe_done:                         Désinscription effectuée
+unsubscribe:                              (Se désabonner)
+unsubscribed:                             Vous n'êtes pas abonné. Vous ne recevrez qu'un message interne de la plateforme en cas de nouvelle demande de relecture. Vous pouvez vous abonner pour recevoir la notification aussi par email.
 unvalidate_transcription:                 Invalider la transcription
 update_media_help:                        Si media livre1 présent dans le projet et dans les nouveaux fichiers déposés, alors le fichier image correspondant est mis à jour.
 update_media:                             Ecraser médias en cas de conflit de nom
@@ -367,7 +372,3 @@ xml_file_type:                            Type de fichier
 xml_upload_help:                          Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 xslt_export:                              Fichier XSL appliqué à l'export des transcriptions
 yes:                                      Oui
-subscribed:                               Vous êtes abonné. Vous recevrez un email quand une nouvelle demande de relecture sera déposée. Vous pouvez vous désabonner pour ne recevoir qu'un message interne à la plateforme.
-unsubscribed:                             Vous n'êtes pas abonné. Vous ne recevrez qu'un message interne de la plateforme en cas de nouvelle demande de relecture. Vous pouvez vous abonner pour recevoir la notification aussi par email.
-unsubscribe:                              (Se désabonner)
-subscribe:                                (S'abonner)

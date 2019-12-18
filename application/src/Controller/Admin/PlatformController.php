@@ -35,7 +35,8 @@ class PlatformController extends AbstractController
             $this->manager->handleLogo($platform, $logo, $previous_logo);
 
             $platformGuide = $form->get('platform_guide')->getData();
-            $this->manager->handleGuide($platform, $platformGuide);
+            $managerGuide = $form->get('manager_guide')->getData();
+            $this->manager->handleGuide($platform, $platformGuide, $managerGuide);
 
             return $this->redirectToRoute('home');
         }

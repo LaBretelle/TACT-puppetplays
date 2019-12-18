@@ -37,12 +37,18 @@ class PlatformManager
         return $repository->getPlatformParameters();
     }
 
-    public function handleGuide(Platform $platform, UploadedFile $file = null)
+    public function handleGuide(Platform $platform, UploadedFile $contributorGuide = null, UploadedFile $managerGuide = null)
     {
-        if ($file) {
-            $fileName = 'contributor_guide.pdf';
+        if ($contributorGuide) {
+            $fileName = 'guide_contributeur.pdf';
             $filePath = $this->params->get('platform_file_dir');
-            $file->move($filePath, $fileName);
+            $contributorGuide->move($filePath, $fileName);
+        }
+
+        if ($managerGuide) {
+            $fileName = 'guide_gestionnaire.pdf';
+            $filePath = $this->params->get('platform_file_dir');
+            $managerGuide->move($filePath, $fileName);
         }
     }
 

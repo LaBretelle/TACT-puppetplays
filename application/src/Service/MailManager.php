@@ -48,9 +48,9 @@ class MailManager
             $url = $this->router->generate('media_transcription_review', ['id' => $media->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $body = $this->templating->render(
-            'emails/new-reviewrequest.html.twig',
-            ['projectName' => $projectName, 'mediaName' => $mediaName, 'url' => $url]
-          );
+              'emails/new-reviewrequest.html.twig',
+              ['projectName' => $projectName, 'mediaName' => $mediaName, 'url' => $url]
+            );
 
             $this->send($mails, $subject, $body, true);
         }
