@@ -59,6 +59,7 @@ element_list:                             Eléments disponibles
 email_or_login_placeholder:               Login / email
 email_or_login:                           Veuillez renseigner votre login ou email
 email:                                    Mail
+events:                                   Evénements
 export_form_title:                        Choisissez les élements que vous voulez exporter.
 export_launch:                            Lancer l'export
 export_medias:                            Les médias
@@ -147,6 +148,7 @@ need_at_least_one_manager:                Il faut au moins un gestionnaire par p
 need_to_be_logged:                        Vous devez être connecté pour participer au projet.
 negative_review:                          Une relecture négative a été faite sur le média <a target="_blank" href="%url%">%media%</a> <br/> %comment%
 new_comment_transcription:                Un nouveau commentaire a été posté sur <a target="_blank" href="%url%">%media%</a>
+new_review_request:                       Une nouvelle demande de relecture pour le projet %projectName% a été déposée
 no_attribute:                             Aucun attribut
 no_message:                               Aucun message
 no_review_asked:                          Pas de relecture demandée
@@ -365,3 +367,7 @@ xml_file_type:                            Type de fichier
 xml_upload_help:                          Choisissez les fichiers ou l'archive à uploader. Les fichiers seront uploadés / extraits dans le répertoire actuellement sélectionné si il y en a un.
 xslt_export:                              Fichier XSL appliqué à l'export des transcriptions
 yes:                                      Oui
+subscribed:                               Vous êtes abonné. Vous recevrez un email quand une nouvelle demande de relecture sera déposée. Vous pouvez vous désabonner pour ne recevoir qu'un message interne à la plateforme.
+unsubscribed:                             Vous n'êtes pas abonné. Vous ne recevrez qu'un message interne de la plateforme en cas de nouvelle demande de relecture. Vous pouvez vous abonner pour recevoir la notification aussi par email.
+unsubscribe:                              (Se désabonner)
+subscribe:                                (S'abonner)

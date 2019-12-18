@@ -144,7 +144,6 @@ class ProjectController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/{id}/logs", name="display_logs")
      */

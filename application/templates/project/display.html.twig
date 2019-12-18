@@ -35,7 +35,6 @@
           {% endif %}
         </div>
         {% endif %}
-
         {{ project.description | raw }}
       </div>
       <div class="col-3">
@@ -55,10 +54,29 @@
             </li>
             <li class="list-group-item">
               {% include('transcribe/contributors.html.twig') %}
-              <a href="{{ path('project_display_logs', {id: project.id}) }}">logs</a>
             </li>
           </ul>
         </div>
+
+        {% if project | isAuthorizedOnProject('validateTranscription') %}
+        <div class="card mt-3">
+          <ul class="list-group list-group-flush">
+            {% if project | isAuthorizedOnProject('editProject') %}
+              <li class="list-group-item">
+                <a href="{{ path('project_display_logs', {'id': project.id}) }}">{{"events"|trans}}</a>
+              </li>
+            {% endif %}
+            <li class="list-group-item text-justify">
+            {% if userStatus.subscribe == true %}
+              {{"subscribed"|trans}} <a href='{{ path('status_subscribe_toggle', {'id': project.id}) }}'>{{"unsubscribe"|trans}}</a>
+            {% else %}
+              {{"unsubscribed"|trans}} <a href='{{ path('status_subscribe_toggle', {'id': project.id}) }}'>{{"subscribe"|trans}}</a>
+            {% endif %}
+            </li>
+          </ul>
+        </div>
+        {% endif %}
+
       </div>
     </div>
   </div>

@@ -59,6 +59,7 @@ element_list:                             Eléments disponibles
 email_or_login_placeholder:               Login / email
 email_or_login:                           Please enter your login or email
 email:                                    Mail
+events:                                   Evénements
 export_project_long:                      Permet d'exporter tout ou partie du projet
 export:                                   Exporter
 faq:                                      Frequently asked questions
@@ -138,6 +139,7 @@ nb_validation:                            Number of reread per media
 need_at_least_one_manager:                Need t least one manager.
 need_to_be_logged:                        You have to be logged in to contribute to the project.
 negative_review:                          Une relecture négative a été faite sur le média <a target="_blank" href="%url%">%media%</a> <br/> %comment%
+new_review_request:                       Une nouvelle demande de relecture pour le projet %projectName% a été déposée
 no_attribute:                             No attribute
 no_message:                               Aucun message
 no_review_asked:                          Pas de relecture demandée

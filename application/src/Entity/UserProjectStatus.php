@@ -43,6 +43,11 @@ class UserProjectStatus
      */
     private $enabled = 1;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $subscribe;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +97,18 @@ class UserProjectStatus
     public function setEnabled(bool $enabled): self
     {
         $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    public function getSubscribe(): ?bool
+    {
+        return $this->subscribe;
+    }
+
+    public function setSubscribe(?bool $subscribe): self
+    {
+        $this->subscribe = $subscribe;
 
         return $this;
     }

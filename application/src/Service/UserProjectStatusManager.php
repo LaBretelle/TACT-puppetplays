@@ -98,6 +98,17 @@ class UserProjectStatusManager
         return $ups;
     }
 
+    public function subscribeToggle(Project $project, User $user)
+    {
+        $ups = $this->em->getRepository("App:UserProjectStatus")->findOneBy(["project" => $project, "user" => $user]);
+        $ups->setSubscribe(!$ups->getSubscribe());
+        $this->em->persist($ups);
+        $this->em->flush();
+
+        return;
+    }
+
+
     public function remove(UserProjectStatus $ups)
     {
         if ($this->canEdit($ups)) {

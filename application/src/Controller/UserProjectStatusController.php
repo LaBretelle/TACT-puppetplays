@@ -32,6 +32,21 @@ class UserProjectStatusController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/subscribe-toggle", name="subscribe_toggle")
+     */
+    public function subscribeToggle(Project $project)
+    {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
+        }
+        $user = $this->getUser();
+        $this->statusManager->subscribeToggle($project, $user);
+
+        return $this->redirectToRoute('project_display', ['id' => $project->getId()]);
+    }
+
+
+    /**
      * @Route("/{id}/toggle", name="toggle")
      */
     public function toggle(UserProjectStatus $status)

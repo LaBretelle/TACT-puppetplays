@@ -7,6 +7,7 @@ use App\Entity\ReviewRequest;
 use App\Entity\Transcription;
 use App\Entity\User;
 use App\Service\FlashManager;
+use App\Service\MailManager;
 use App\Service\TranscriptionManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -17,14 +18,17 @@ class ReviewRequestManager
     protected $fm;
     protected $security;
     protected $tm;
+    protected $mm;
 
     public function __construct(
       EntityManagerInterface $em,
       FlashManager $fm,
+      MailManager $mm,
       Security $security,
       TranscriptionManager $tm
     ) {
         $this->em = $em;
+        $this->mm = $mm;
         $this->fm = $fm;
         $this->tm = $tm;
         $this->security = $security;
@@ -34,6 +38,7 @@ class ReviewRequestManager
     {
         $user = (!$user) ? $this->security->getUser() : $user;
         if (!$request = $transcription->getReviewRequest()) {
+            $project = $transcription->getMedia()->getProject();
             $request = new ReviewRequest();
             $request->setUser($user);
             $request->setTranscription($transcription);
@@ -44,6 +49,8 @@ class ReviewRequestManager
             $this->em->flush();
 
             $this->fm->add('notice', 'review_request_created');
+
+            $this->mm->sendReviewRequest($project, $transcription);
         } else {
             $this->fm->add('notice', 'already_pending_review');
         }

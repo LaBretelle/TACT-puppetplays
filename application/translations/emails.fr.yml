@@ -1,19 +1,19 @@
-
-email_registration_confirm_subject: TACT - Confirmation d'inscription.
-email_welcome_user: Bienvenue sur la plateforme TACT %1% %2% !
-email_registration_you_just_subscribed: Vous venez de vous inscrire à la plateforme TACT.
-email_registration_activate: Pour activer votre compte merci de cliquer sur le lien ci-dessous.
-email_registration_activate_link: Activer
-email_renew_password_subject: TACT - Demande de renouvellement de mot de passe.
+email_hello_user:                                 Bonjour %1% %2%.
+email_new_password_activate_link:                 Renouveler le mot de passe
+email_new_password_request_1:                     Vous avez demandé un nouvau mote de passe pour la plateforme TACT.
+email_new_password_request_2:                     Cliquez sur le lien ci-dessous par changer de mot de passe.
+email_new_password_request_3:                     Veuillez noter qu'il vous sera impossible de demander à nouveau un mot de passe avant 2h00.
+email_new_review_request_body:                    Bonjour, une demande de relecture a été déposée pour le média <a href="%url%">%mediaName%</a> du projet %projectName%
+email_registration_activate_link:                 Activer
+email_registration_activate:                      Pour activer votre compte merci de cliquer sur le lien ci-dessous.
+email_registration_confirm_subject:               TACT - Confirmation d'inscription.
+email_registration_you_just_subscribed:           Vous venez de vous inscrire à la plateforme TACT.
+email_renew_password_subject:                     TACT - Demande de renouvellement de mot de passe.
+email_team_footer:                                // L'équipe TACT //
+email_transcription_1:                            Vous avez demandé une validation de votre transcription.
+email_transcription_2:                            Votre transcription a été validée.
+email_transcription_3:                            Malheureusement votre transcription a été rejetée.
+email_transcription_4:                            Vous pouvez accéder à cette transcription via le lien ci-dessous.
+email_transcription_link:                         Accéder à la transcription.
 email_transcription_validted_unvalidated_subject: TACT - Validation de votre transcription.
-email_team_footer: // L'équipe TACT //
-email_hello_user: Bonjour %1% %2%.
-email_new_password_request_1: Vous avez demandé un nouvau mote de passe pour la plateforme TACT.
-email_new_password_request_2: Cliquez sur le lien ci-dessous par changer de mot de passe.
-email_new_password_request_3: Veuillez noter qu'il vous sera impossible de demander à nouveau un mot de passe avant 2h00.
-email_new_password_activate_link: Renouveler le mot de passe
-email_transcription_1: Vous avez demandé une validation de votre transcription.
-email_transcription_2: Votre transcription a été validée.
-email_transcription_3: Malheureusement votre transcription a été rejetée.
-email_transcription_4: Vous pouvez accéder à cette transcription via le lien ci-dessous.
-email_transcription_link: Accéder à la transcription.
+email_welcome_user:                               Bienvenue sur la plateforme TACT %1% %2% !
