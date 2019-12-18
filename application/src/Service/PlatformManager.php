@@ -40,13 +40,13 @@ class PlatformManager
     public function handleGuide(Platform $platform, UploadedFile $contributorGuide = null, UploadedFile $managerGuide = null)
     {
         if ($contributorGuide) {
-            $fileName = 'guide_contributeur.pdf';
+            $fileName = 'manuel_contributeur.pdf';
             $filePath = $this->params->get('platform_file_dir');
             $contributorGuide->move($filePath, $fileName);
         }
 
         if ($managerGuide) {
-            $fileName = 'guide_gestionnaire.pdf';
+            $fileName = 'manuel_gestionnaire.pdf';
             $filePath = $this->params->get('platform_file_dir');
             $managerGuide->move($filePath, $fileName);
         }

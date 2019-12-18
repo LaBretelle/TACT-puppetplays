@@ -9,9 +9,9 @@
       <div class="col-9 text-justify" style="font-size:140%">
         <h1 class="mb-4">Bienvenue sur TACT !</h1>
         <p>TACT est une plateforme de transcription et d'annotation collaborative qui accueille des projets de recherche et permet à chacun d'apporter sa contribution ou de solliciter la communauté de la plateforme.</p>
-        <p><strong>Vous voulez participer à un projet ?</strong> Vous pouvez transcrire et annoter des textes originaux, relire et vérifier des transcriptions faites par d'autres internautes, consultez ce <a download href="{{asset('platform/guide_contributeur.pdf')}}"> manuel du contributeur </a> et allez <a href="{{ path('project_list') }}"> explorer les projets</a> !
+        <p><strong>Vous voulez participer à un projet ?</strong> Vous pouvez transcrire et annoter des textes originaux, relire et vérifier des transcriptions faites par d'autres internautes, consultez ce <a download href="{{asset('platform/manuel_contributeur.pdf')}}"> manuel du contributeur </a> et allez <a href="{{ path('project_list') }}"> explorer les projets</a> !
         </p>
-        <p><strong>Vous souhaitez déposer un projet sur TACT ?</strong> Vous deviendrez gestionnaire de votre projet TACT, vous pourrez en définir les modalités et gérer les contributions. Nous vous invitons à lire ce <a download href="{{asset('platform/guide_gestionnaire.pdf')}}">manuel du gestionnaire</a> qui vous donnera toutes les informations nécessaires ainsi que la marche à suivre. Bonne lecture !</p>
+        <p><strong>Vous souhaitez déposer un projet sur TACT ?</strong> Vous deviendrez gestionnaire de votre projet TACT, vous pourrez en définir les modalités et gérer les contributions. Nous vous invitons à lire ce <a download href="{{ asset('platform/manuel_gestionnaire.pdf') }}">manuel du gestionnaire</a> qui vous donnera toutes les informations nécessaires ainsi que la marche à suivre. Bonne lecture !</p>
       </div>
       <div class="col text-center p-4">
         <div class="mb-3">
@@ -20,13 +20,8 @@
           </a>
         </div>
         <div class="mb-3">
-          <a download href="{{asset('platform/guide_contributeur.pdf')}}" class="btn btn-primary btn-lg">
+          <a download href="{{asset('platform/manuel_contributeur.pdf')}}" class="btn btn-primary btn-lg">
             <i class="fas fa-book-open"></i> {{"contributor_guide"|trans}}
-          </a>
-        </div>
-        <div class="mb-3">
-          <a download href="{{asset('platform/guide_gestionnaire.pdf')}}" class="btn btn-primary btn-lg">
-            <i class="fas fa-book-open"></i> {{"manager_guide"|trans}}
           </a>
         </div>
       </div>

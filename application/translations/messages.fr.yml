@@ -37,7 +37,7 @@ confirm_delete_project_media:             Êtes-vous sur de vouloir supprimer le
 confirm_project_deletion:                 Êtes-vous sur de vouloir supprimer ce projet ?
 confirm_title:                            Veuillez confirmer!
 confirm:                                  Je confirme!
-contributor_guide:                        Guide du contributeur
+contributor_guide:                        Manuel du contributeur
 contributors:                             Contributeurs
 create_empty_media_help:                  Crée si nécessaire un media "livre1" si une transcription "livre1.xml" est déposée.
 create_empty_media:                       Créer des médias "vides" pour transcription seule
