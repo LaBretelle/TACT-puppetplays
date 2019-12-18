@@ -44,7 +44,6 @@ class AppFixtures extends Fixture
         // platform properties
         $platform = new Platform();
         $platform->setName('Please change me');
-        $platform->setHomeText('This is the default home text...');
         $om->persist($platform);
         $om->flush();
     }
