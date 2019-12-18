@@ -258,7 +258,7 @@ schema_name:                              Nom du schema
 selected_media:                           média(s) selectionné(s)
 selected_xmls:                            fichier(s) xml sélectionné(s)
 send:                                     Envoyer
-status_edit:                              Editer le statut
+status_edit:                              Éditer le statut
 status_edited_project:                    Votre statut pour le projet '%project%' a été modifié
 status_remove:                            Supprimer
 status_toggle_off:                        Invalider
