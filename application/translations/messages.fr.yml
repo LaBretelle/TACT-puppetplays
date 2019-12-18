@@ -81,7 +81,7 @@ folders_not_all_moved:                    Certains dossiers n'ont pu être dépl
 has_scheme:                               La transcription se fait conformément à un schéma (vs. transcription purement textuelle)
 have_contributed:                         Ont contribué
 help_project_catchphrase:                 Contenu affiché en dessous de l'image sur la page d'accueil du projet
-help_project_helplink:                    Document d'aide à la transcription propre au projet
+help_project_helplink:                    Instructions de transcription propres au projet
 help_project_image:                       Ratio de 4:1 conseillé (l'image sera retaillée automatiquement)
 help_project_manager:                     Personne ayant les droits de gestionnaire du projet
 help_project_nbValidation:                Nombre de relectures positives nécessaires pour la validation d'une transcription
@@ -190,7 +190,7 @@ project_edition:                          Édition du projet
 project_enabled:                          Validé ?
 project_faq:                              Foire Aux Questions
 project_handle_user_statuses:             Gérer les utilisateurs
-project_help_link:                        Document d'aide à la transcription
+project_help_link:                        Instructions de transcription
 project_image:                            Image du projet
 project_is_not_public:                    Inscription modérée
 project_list:                             Les projets
