@@ -6,19 +6,15 @@ require('tinymce/themes/silver')
 // Any plugins you want to use has to be imported
 require('tinymce/plugins/link')
 require('tinymce/plugins/paste')
+require('tinymce/plugins/code')
+require('tinymce/plugins/image')
 
 class TinyEditor {
-  constructor(){
-    //console.log('yope')
-  }
-
   init() {
     Tiny.init({
       selector: 'textarea.tinymce-enabled',
-      plugins: ['link', 'paste'],
-      //paste_word_valid_elements: 'b,strong,i,em,h1,h2',
-      //paste_retain_style_properties: 'color',
-      //paste_enable_default_filters: false,
+      plugins: ['link', 'paste', 'code', 'image'],
+      toolbar1: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | code',
       paste_as_text: true,
       menubar: false,
       statusbar: false,
