@@ -34,25 +34,26 @@ class MailManager
     public function sendReviewRequest(Project $project, Transcription $transcription)
     {
         $users = $this->em->getRepository(User::class)->getSubscribedReviewersByProject($project);
-        $media = $transcription->getMedia();
-        $projectName = $project->getName();
-        $mediaName = $media->getName();
+        if ($users) {
+            $media = $transcription->getMedia();
+            $projectName = $project->getName();
+            $mediaName = $media->getName();
 
-        $mails = [];
-        foreach ($users as $user) {
-            $mails[] = $user->getEmail();
-        }
+            $mails = [];
+            foreach ($users as $user) {
+                $mails[] = $user->getEmail();
+            }
 
-        $subject = $this->translator->trans('new_review_request', ["%projectName%" => $project->getName()]);
-        $url = $this->router->generate('media_transcription_review', ['id' => $media->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+            $subject = $this->translator->trans('new_review_request', ["%projectName%" => $project->getName()]);
+            $url = $this->router->generate('media_transcription_review', ['id' => $media->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 
-        $body = $this->templating->render(
+            $body = $this->templating->render(
             'emails/new-reviewrequest.html.twig',
             ['projectName' => $projectName, 'mediaName' => $mediaName, 'url' => $url]
           );
 
-        $this->send($mails, $subject, $body, true);
-
+            $this->send($mails, $subject, $body, true);
+        }
         return;
     }
 
