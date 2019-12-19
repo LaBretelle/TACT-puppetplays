@@ -117,7 +117,7 @@ logs:                                     Logs
 lost_password_link:                       J'ai oublié mon mot de passe
 manage_media_long:                        Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
 manage_user_statuses_long:                Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.
-manager_guide:                             Guide du gestionnaire
+manager_guide:                            Manuel du gestionnaire
 manager:                                  Gestionnaire
 markup:                                   Balisage TEI
 max_file_uploads_message:                 Vous pouvez uploader simultanément %nb_max% fichiers
@@ -162,7 +162,7 @@ overwrite_help:                           Si un transcription existe déjà pour
 overwrite:                                Ecraser les transcriptions
 parent_folder_name:                       Nom du dossier parent
 password:                                 Mot de passe
-platform_guide:                           Guide du contributeur
+platform_guide:                           Manuel du contributeur
 platform_home_text:                       Texte de la page d'accueil
 platform_logo:                            Logo de la plateforme
 platform_logs:                            Logs de la plateforme
@@ -285,7 +285,7 @@ transcribe_long:                          Vous permet d'accéder aux médias et 
 transcribe:                               Transcrire
 transcriber:                              Transcripteur
 transcript_help_doc_undefined:            Document d'aide non défini
-transcript_help_doc:                      Accéder au document d'aide
+transcript_help_doc:                      Accéder aux instructions de transcription
 transcript_help:                          Aide à la transcription
 transcript_media_raw:                     Transcription brute
 transcript_media:                         Transcription du média
