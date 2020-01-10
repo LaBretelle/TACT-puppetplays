@@ -66,13 +66,15 @@
                 <a href="{{ path('project_display_logs', {'id': project.id}) }}">{{"events"|trans}}</a>
               </li>
             {% endif %}
+            {% if userStatus %}
             <li class="list-group-item text-justify">
-            {% if userStatus.subscribe == true %}
-              {{"subscribed"|trans}} <a href='{{ path('status_subscribe_toggle', {'id': project.id}) }}'>{{"unsubscribe"|trans}}</a>
-            {% else %}
-              {{"unsubscribed"|trans}} <a href='{{ path('status_subscribe_toggle', {'id': project.id}) }}'>{{"subscribe"|trans}}</a>
-            {% endif %}
+              {% if userStatus.subscribe == true %}
+                {{"subscribed"|trans}} <a href='{{ path('status_subscribe_toggle', {'id': project.id}) }}'>{{"unsubscribe"|trans}}</a>
+              {% else %}
+                {{"unsubscribed"|trans}} <a href='{{ path('status_subscribe_toggle', {'id': project.id}) }}'>{{"subscribe"|trans}}</a>
+              {% endif %}
             </li>
+            {% endif %}
           </ul>
         </div>
         {% endif %}
