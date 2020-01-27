@@ -1,12 +1,12 @@
 {% macro displayProject(project) %}
   {% set userStatus = app.user|status(project) %}
-<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
   <div class="card mb-3 my-2">
       <a href="{{ path("project_display", {'id': project.id} )}}">
         <img class="card-img-top" src="{{ project.image ? asset('project_files/'~project.id~'/'~project.image) : asset('img/project-placeholder.png') }}">
       </a>
       <div class="card-body">
-          <h4 class="card-title mb-1 font-weight-light">{{ project.name | truncate(30, true)}}</h4>
+          <h4 class="card-title mb-1 font-weight-light">{{ project.name | truncate(30, false)}}</h4>
           {% if project.archived == false %}
           <h5 class="card-subtitle mb-1 font-weight-light">
             <span class="text-muted">{{ project.public ? 'is_public'|trans : 'project_is_not_public'|trans}}</span>
