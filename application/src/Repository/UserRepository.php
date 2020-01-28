@@ -2,12 +2,12 @@
 
 namespace App\Repository;
 
-use App\Entity\User;
 use App\Entity\Project;
 use App\Entity\Transcription;
+use App\Entity\User;
 use App\Service\AppEnums;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class UserRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
     }

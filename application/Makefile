@@ -3,7 +3,6 @@ init: install cache
 update-prod:
 	composer install --prefer-source
 	php bin/console fos:js-routing:dump --format=json --target=public/routes/fos_js_routes.json
-	php bin/console bazinga:js-translation:dump
 	npm install
 	npm run build
 	php bin/console doctrine:schema:update --force
@@ -15,7 +14,6 @@ update-prod:
 update-dev:
 	composer install --prefer-source
 	php bin/console fos:js-routing:dump --format=json --target=public/routes/fos_js_routes.json
-	php bin/console bazinga:js-translation:dump
 	npm install
 	npm run dev
 	php bin/console doctrine:schema:update --force
@@ -27,7 +25,6 @@ update-dev:
 install:
 	composer install --prefer-source
 	php bin/console fos:js-routing:dump --format=json --target=public/routes/fos_js_routes.json
-	php bin/console bazinga:js-translation:dump
 	npm install
 	npm run dev
 	php bin/console doctrine:database:create --if-not-exists

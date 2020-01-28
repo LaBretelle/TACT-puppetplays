@@ -98,7 +98,7 @@ class MessageManager
     {
         $messages = $this->getUnread();
         $this->setAsRead($messages);
-        $this->fm->add('notice', 'mcreateessages_set_as_read_done');
+        $this->fm->add('notice', 'messages_set_as_read_done');
 
         return;
     }
