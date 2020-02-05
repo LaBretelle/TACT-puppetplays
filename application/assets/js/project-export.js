@@ -2,18 +2,18 @@ let transcrCheckbox = document.querySelector('#export_transcriptions')
 let xslCheckbox = document.querySelector('#export_transcriptions_apply_xsl')
 let metadatasCheckbox = document.querySelector('#export_transcriptions_metadatas')
 
-transcrCheckbox.addEventListener('change', () => {
+transcrCheckbox.addEventListener('change', function () {
   if (!this.checked) {
     xslCheckbox.checked = false
     metadatasCheckbox.checked = false
   }
 })
 
-xslCheckbox.addEventListener('change', () => {
+xslCheckbox.addEventListener('change', function () {
   uncheckSub(this)
 })
 
-metadatasCheckbox.addEventListener('change', () => {
+metadatasCheckbox.addEventListener('change', function () {
   uncheckSub(this)
 })
 
