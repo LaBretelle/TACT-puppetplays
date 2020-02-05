@@ -19,6 +19,7 @@ Encore
   .addEntry('js/account', './assets/js/account.js')
   .addEntry('js/project-media', './assets/js/project-media.js')
   .addEntry('js/submit-disable', './assets/js/submit-disable.js')
+  .addEntry('js/project-export', './assets/js/project-export.js')
   .addEntry('js/transcription', './assets/js/transcription.js')
   .addEntry('js/platform', './assets/js/platform.js')
   .addEntry('js/editorial-content', './assets/js/editorial-content.js')

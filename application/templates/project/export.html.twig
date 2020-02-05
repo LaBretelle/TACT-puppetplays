@@ -18,5 +18,6 @@
 
 {% block javascripts %}
   {{ parent() }}
+  <script src="{{ asset('build/js/project-export.js') }}"></script>
   <script src="{{ asset('build/js/submit-disable.js') }}"></script>
 {% endblock %}
