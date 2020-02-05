@@ -15,8 +15,6 @@
   {% include 'header.html.twig' with {'title': 'project_create'} %}
 {% endif %}
 
-
-
 <div id="main-container">
   {{ form_start(form) }}
     {{ form_row(form.css) }}
@@ -32,6 +30,7 @@
             </button>
         </div>
         {% endif %}
+        <span class="text-muted small">Vous trouverez <a download href="{{ asset("xslt/xsl-exemple.xsl") }}">ici</a> un exemple de xsl</span>
       </div>
       <div class="col">
         {{ form_label(form.json_schema) }}
@@ -41,7 +40,6 @@
         <div class="text-right">
           <span class="text-muted small">{{"tei2json_help"|trans|raw}}</span>
         </div>
-
 
         {% if project|hasScheme %}
         <div class="project-json-row">

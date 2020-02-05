@@ -91,6 +91,8 @@ class ProjectController extends AbstractController
             $params = [
               'medias' => $form->get('medias')->getData(),
               'transcriptions' => $form->get('transcriptions')->getData(),
+              'metadatas' => $form->get('transcriptions_metadatas')->getData(),
+              'xsl' => $form->get('transcriptions_apply_xsl')->getData(),
               'transcriptionsList' => $form->get('transcriptions_list')->getData(),
               'usersList' => $form->get('users_list')->getData(),
               'infos' => $form->get('project_infos')->getData()

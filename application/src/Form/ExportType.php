@@ -20,6 +20,16 @@ class ExportType extends AbstractType
                 'label' => 'export_transcriptions',
                 'required' => false
             ])
+            ->add('transcriptions_metadatas', CheckboxType::class, [
+                'label' => 'export_transcriptions_metadatas',
+                'required' => false,
+                'help' => "export_transcriptions_metadatas_help"
+            ])
+            ->add('transcriptions_apply_xsl', CheckboxType::class, [
+                'label' => 'export_transcriptions_apply_xsl',
+                'required' => false,
+                'help' => "export_transcriptions_apply_xsl_help"
+            ])
             ->add('transcriptions_list', CheckboxType::class, [
                 'label' => 'export_transcriptions_list',
                 'required' => false

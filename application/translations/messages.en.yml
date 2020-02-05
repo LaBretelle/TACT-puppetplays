@@ -61,6 +61,10 @@ email_or_login:                           Please enter your login or email
 email:                                    Mail
 events:                                   Evénements
 export_project_long:                      Permet d'exporter tout ou partie du projet
+export_transcriptions_apply_xsl_help:     Si une XSL est définie pour le projet, elle sera appliquée.
+export_transcriptions_apply_xsl:          Appliquer la XSL
+export_transcriptions_metadatas_help:     Des métadonnées concernant la transcription et le projet seront injectées dans le XML.
+export_transcriptions_metadatas:          Les métadonnées dans les transcriptions
 export:                                   Exporter
 faq:                                      Frequently asked questions
 filter_users_by:                          Filter by lastname / firstname / mail / login
@@ -294,6 +298,7 @@ transcription_saved:                      Transcription saved
 transcription_send_to_validation:         Send to validation
 transcription_status_in_progress:         In progress
 transcription_status_in_reread:           Reread
+transcription_status_in-reread:           Transcription en relecture
 transcription_status_no_transcription:    None
 transcription_status_none:                No transcript
 transcription_status_validated:           Finished

@@ -65,7 +65,11 @@ export_launch:                            Lancer l'export
 export_medias:                            Les médias
 export_project_infos:                     Les données du projets (schéma, etc.)
 export_project_long:                      Permet d'exporter tout ou partie du projet
+export_transcriptions_apply_xsl_help:     Si une XSL est définie pour le projet, elle sera appliquée.
+export_transcriptions_apply_xsl:          Appliquer la XSL
 export_transcriptions_list:               La liste des transcriptions
+export_transcriptions_metadatas_help:     Des métadonnées concernant la transcription et le projet seront injectées dans le XML.
+export_transcriptions_metadatas:          Les métadonnées dans les transcriptions
 export_transcriptions:                    Les transcriptions
 export_users_list:                        La liste des utilisateurs
 export:                                   Exporter
@@ -308,6 +312,7 @@ transcription_saved:                      Transcription sauvegardée
 transcription_send_to_validation:         Demander une relecture
 transcription_status_in_progress:         Transcription en cours
 transcription_status_in_reread:           Transcription en relecture
+transcription_status_in-reread:           Transcription en relecture
 transcription_status_no_transcription:    Aucune transcription
 transcription_status_none:                Aucune transcription
 transcription_status_validated:           Transcription terminée

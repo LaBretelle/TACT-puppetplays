@@ -11,11 +11,11 @@ use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ExportManager
 {
@@ -26,6 +26,7 @@ class ExportManager
     protected $translator;
     protected $tm;
     protected $router;
+    protected $userRepo;
 
     public function __construct(EntityManagerInterface $em, FileManager $fileManager, TranslatorInterface $translator, TranscriptionManager $tm, UrlGeneratorInterface $router)
     {
@@ -33,6 +34,7 @@ class ExportManager
         $this->tm = $tm;
         $this->mediaRepo = $repository = $this->em->getRepository('App:Media');
         $this->dirRepo = $repository = $this->em->getRepository('App:Directory');
+        $this->userRepo = $repository = $this->em->getRepository('App:User');
         $this->fileManager = $fileManager;
         $this->translator = $translator;
         $this->router = $router;
@@ -202,7 +204,9 @@ class ExportManager
             $fullTranscriptionFilePath = $transcriptionPath.DIRECTORY_SEPARATOR.$media->getName();
 
             if ($params["transcriptions"]) {
-                $fileSystem->appendToFile($fullTranscriptionFilePath.'.xml', $this->generateXML($media));
+                $withMetadatas = $params["metadatas"];
+                $withXsl = $params["xsl"];
+                $fileSystem->appendToFile($fullTranscriptionFilePath.'.xml', $this->generateXML($media, $withMetadatas, $withXsl));
             }
 
             if ($params["medias"] && $media->getUrl()) {
@@ -241,13 +245,15 @@ class ExportManager
         return false;
     }
 
-    public function generateXML(Media $media)
+    public function generateXML(Media $media, $withMetadatas = true, $withXsl = true)
     {
         $project = $media->getProject();
         $transcription = $media->getTranscription()->getContent();
         $xslFile = $this->fileManager->getProjectPath($project).DIRECTORY_SEPARATOR."export.xsl";
+        $header = $withMetadatas ? $this->generateHeader($media) : "";
+        $header = preg_replace("/<\?xml[^<>]+>\s/", "", $header);
 
-        if (file_exists($xslFile)) {
+        if (file_exists($xslFile) && $withXsl) {
             $xsl = new \DOMDocument();
             $xsl->load($xslFile);
 
@@ -255,13 +261,95 @@ class ExportManager
             $xslt->importStylesheet($xsl);
 
             $xml = new \DOMDocument();
-            $xml->loadXML("<body>".$transcription."</body>");
+
+            $xml->loadXML("<xml>".$header."<body>".$transcription."</body></xml>");
             $xml->xinclude(LIBXML_NOWARNING);
 
-            return $xslt->transformToXML($xml);
+            $output = $xslt->transformToXML($xml);
+
+            return $output;
         }
 
-        return $transcription;
+        $output = $header."\n".$transcription;
+
+        return $output;
+    }
+
+    private function generateHeader(Media $media)
+    {
+        $transcription  = $media->getTranscription();
+        $contributors   = $this->tm->getContributors($transcription);
+        $status         = $this->translator->trans("transcription_status_".$this->tm->getStatus($transcription));
+        $project        = $media->getProject();
+        $mediaParts     = pathinfo($media->getUrl());
+        $mediaRealName  = $media->getName() . "." . $mediaParts["extension"];
+        $platformUrl    = $this->router->generate('home', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $projectUrl     = $this->router->generate('project_display', ["id" => $project->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+        $platformContributors = ["ELAN","Démarre SHS !"];
+
+        $xml = new \DOMDocument(LIBXML_NOXMLDECL);
+        $xmlMetadatas = $xml->createElement("tact_metadatas");
+
+        // PLATFORM
+        $xmlPlatform = $xml->createElement("tact_platform");
+        $xmlPlatformUrl = $xml->createElement("tact_platform_url", $platformUrl);
+        $xmlPlatformContributors = $xml->createElement("tact_platform_contributors");
+        foreach ($platformContributors as $platformContributor) {
+            $xmlPlatformContributor = $xml->createElement("tact_platform_contributor", $platformContributor);
+            $xmlPlatformContributors->appendChild($xmlPlatformContributor);
+        }
+        $xmlPlatform->appendChild($xmlPlatformUrl);
+        $xmlPlatform->appendChild($xmlPlatformContributors);
+        $xmlMetadatas->appendChild($xmlPlatform);
+
+        // PROJECT
+        $xmlProject = $xml->createElement("tact_project");
+        $xmlProjectName = $xml->createElement("tact_project_name", $media->getProject()->getName());
+        $xmlProjectUrl = $xml->createElement("tact_project_url", $projectUrl);
+
+        $xmlProjectManagers = $xml->createElement("tact_project_managers");
+        $xmlProject->appendChild($xmlProjectName);
+        $xmlProject->appendChild($xmlProjectUrl);
+        $projectManagers = $this->userRepo->getManagersByProject($project);
+        foreach ($projectManagers as $projectManager) {
+            $xmlProjectManager = $xml->createElement("tact_project_manager", $projectManager->getUsername());
+            $xmlProjectManagers->appendChild($xmlProjectManager);
+        }
+        $xmlProject->appendChild($xmlProjectManagers);
+        $xmlMetadatas->appendChild($xmlProject);
+
+        // MEDIA
+        $xmlMedia = $xml->createElement("tact_media");
+        $xmlMediaName = $xml->createElement("tact_media_name", $media->getName());
+        $xmlMediaUrl = $xml->createElement("tact_media_url", $mediaRealName);
+        $xmlMediaStatus = $xml->createElement("tact_media_status", $status);
+        $xmlMediaExportDate = $xml->createElement("tact_media_export_date", date('Y-m-d\TH:i:s'));
+        $xmlMediaContributors = $xml->createElement("tact_media_contributors");
+        foreach ($contributors as $contributor) {
+            $userProjectStatus = $this->em->getRepository("App:UserProjectStatus")->findOneBy(["user"=> $contributor, "project" => $project]);
+            $status            = ($userProjectStatus && $userProjectStatus->getEnabled()) ? $userProjectStatus : null;
+            $statusName        = ($status) ? $status->getStatus()->getName() : "user_status_transcriber_name";
+
+            $xmlMediaContributor = $xml->createElement("tact_media_contributor");
+            $xmlMediaContributorName = $xml->createElement("name", $contributor->getUsername());
+            $xmlMediaContributorRole = $xml->createElement("role", $this->translator->trans($statusName));
+            $xmlMediaContributor->appendChild($xmlMediaContributorName);
+            $xmlMediaContributor->appendChild($xmlMediaContributorRole);
+            $xmlMediaContributors->appendChild($xmlMediaContributor);
+        }
+        $xmlMedia->appendChild($xmlMediaContributors);
+        $xmlMedia->appendChild($xmlMediaName);
+        $xmlMedia->appendChild($xmlMediaExportDate);
+        $xmlMedia->appendChild($xmlMediaStatus);
+        $xmlMedia->appendChild($xmlMediaUrl);
+
+        $xmlMetadatas->appendChild($xmlMedia);
+        $xml->appendChild($xmlMetadatas);
+
+        $xml->preserveWhiteSpace = false;
+        $xml->formatOutput = true;
+
+        return html_entity_decode($xml->saveXml(null, LIBXML_NOXMLDECL));
     }
 
     private function arrayToCsv($array)
