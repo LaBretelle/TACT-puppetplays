@@ -19,6 +19,7 @@ asked_by:                                 Demande faite par
 attributes:                               Attributs pour l'élément
 auto_valid_transcript_help:               Valide la transcription. S'il y avait une demande de relecture, elle sera acceptée.
 auto_valid_transcript:                    Valider automatiquement les transcriptions
+back_to_root:                             Revenir à la racine
 back_to_transcripts:                      Retour aux transcriptions
 backtotop:                                Haut de page
 by:                                       par
@@ -42,6 +43,7 @@ contributors:                             Contributeurs
 create_empty_media_help:                  Crée si nécessaire un media "livre1" si une transcription "livre1.xml" est déposée.
 create_empty_media:                       Créer des médias "vides" pour transcription seule
 delete_current_tag:                       Supprimer le tag courrant
+delete_folder:                            Supprimer les dossiers sélectionnés
 delete_media:                             Supprimer les médias sélectionnés
 description:                              Description
 directory_already_existing:               Le répertoire %dir% est déjà présent

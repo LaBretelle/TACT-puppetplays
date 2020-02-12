@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="text-dark" href="{{ path('project_media', {id: project.id}) }}">
+              <a data-toggle="tooltip" title="{{'back_to_root' | trans}}" class="text-dark" href="{{ path('project_media', {id: project.id}) }}">
                 <i class="fas fa-home fa-fw"></i>
               </a>
             </li>
@@ -15,11 +15,11 @@
           <ul class="navbar-nav">
             <li class="nav-item float-right">
               <div class="btn-group">
-                <button class="btn btn-link btn-add-dir" type="button" role="button"><i class="fas fas fa-plus"></i></button>
-                <form id="move-folder-form" name="move-folder-form" action="{{path('project_move_folders', {'id': project.id})}}" method="post">
+                <button data-toggle="tooltip" title="{{'add_directory_modal_title' | trans}}" class="btn btn-link btn-add-dir" type="button" role="button"><i class="fas fas fa-plus"></i></button>
+                <form data-toggle="tooltip" title="{{'project_move_directory_title' | trans}}" id="move-folder-form" name="move-folder-form" action="{{path('project_move_folders', {'id': project.id})}}" method="post">
                   <button class="btn btn-link btn-move-dir" disabled type="button" role="button"><i class="fas fa-arrows-alt-v"></i></button>
                 </form>
-                <form id="delete-folder-form" name="delete-folder-form" action="{{path('project_delete_folders', {'id': project.id})}}" method="post">
+                <form data-toggle="tooltip" title="{{'delete_folder' | trans}}" id="delete-folder-form" name="delete-folder-form" action="{{path('project_delete_folders', {'id': project.id})}}" method="post">
                   <button class="btn btn-link btn-del-dir" disabled type="button" role="button"><i class="fas fa-trash"></i></button>
                 </form>
               </div>
