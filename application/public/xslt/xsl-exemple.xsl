@@ -57,8 +57,8 @@
 
   <xsl:template match="tact_media_contributor">
     <respStmt>
-      <resp><xsl:value-of select="//role"/></resp>
-      <name type="username"><xsl:value-of select="//name"/></name>
+      <resp><xsl:value-of select="role"/></resp>
+      <name type="username"><xsl:value-of select="name"/></name>
     </respStmt>
   </xsl:template>
 
