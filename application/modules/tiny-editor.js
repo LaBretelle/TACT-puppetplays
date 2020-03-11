@@ -12,6 +12,7 @@ require('tinymce/plugins/image')
 class TinyEditor {
   init() {
     Tiny.init({
+      height: '400',
       selector: 'textarea.tinymce-enabled',
       plugins: ['link', 'paste', 'code', 'image'],
       toolbar1: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | code',
