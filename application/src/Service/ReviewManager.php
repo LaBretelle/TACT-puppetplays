@@ -68,11 +68,11 @@ class ReviewManager
         $this->em->persist($log);
 
         // add current user notification
-        $text = $review->getIsValid() ? 'transcription_validated' : 'transcription_unvalidated';
-        $this->fm->add('notice', $text);
+        $this->fm->add('notice', 'review_submitted');
+
         // send to the requester a message
-        $url = $this->router->generate("media_transcription_display", ["id" => $media->getId()]);
         $message = $review->getIsValid() ? 'positive_review' : 'negative_review';
+        $url = $this->router->generate("media_transcription_display", ["id" => $media->getId()]);
         $message = $this->translator->trans($message, ['%url%' => $url, '%media%' => $media->getName(), '%comment%' => $review->getComment()]);
         $this->mm->create([$requestUser], $message, false);
 

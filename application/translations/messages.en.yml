@@ -241,6 +241,7 @@ report_transcription_text:                Vous allez signaler la transcription. 
 report_transcription:                     Signaler la transcription.
 reread_transcription:                     Reread transcription
 review_request_created:                   Demande de relecture effectuée
+review_submitted:                         Votre relecture a été soumise.
 review_transcription:                     Soumettre la relecture
 reviews_infos:                            Informations sur les relectures
 reviews:                                  Relectures
