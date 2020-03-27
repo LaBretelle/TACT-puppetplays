@@ -29,7 +29,8 @@ class MediaManager
     public function createMediaFromFile(File $file, string $fileClientName, Project $project, Directory $parent = null)
     {
         $name = explode('.', $fileClientName)[0];
-        $extension = $file->guessExtension();
+        // $extension = $file->guessExtension();
+        $extension = pathinfo($fileClientName, PATHINFO_EXTENSION);
         $media = new Media();
         $media->setUrl(md5(uniqid()).'.'.$extension);
         $media->setName($name);
