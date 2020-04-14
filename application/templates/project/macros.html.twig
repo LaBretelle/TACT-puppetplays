@@ -3,7 +3,7 @@
 <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
   <div class="card mb-3 my-2">
       <a href="{{ path("project_display", {'id': project.id} )}}">
-        <img class="card-img-top" src="{{ project.image ? asset('project_files/'~project.id~'/'~project.image) : asset('img/project-placeholder.png') }}">
+        <img loading="lazy" class="card-img-top" src="{{ project.image ? asset('project_files/'~project.id~'/'~project.image) : asset('img/project-placeholder.png') }}">
       </a>
       <div class="card-body">
           <h4 class="card-title mb-1 font-weight-light">{{ project.name | truncate(30, false)}}</h4>
