@@ -5,6 +5,7 @@
 
 ###> docker mysql folder ###
 /.db/
+/.logs/
 
 npm-debug.log
 

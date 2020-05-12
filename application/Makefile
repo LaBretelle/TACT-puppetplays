@@ -27,7 +27,6 @@ install:
 	php bin/console fos:js-routing:dump --format=json --target=public/routes/fos_js_routes.json
 	npm install
 	npm run dev
-	php bin/console doctrine:database:create --if-not-exists
 	php bin/console doctrine:schema:update --force
 	php bin/console doctrine:fixtures:load
 	php bin/console app:create-edito

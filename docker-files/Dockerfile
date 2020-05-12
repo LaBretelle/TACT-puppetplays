@@ -1,6 +1,6 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
-MAINTAINER Patrick Guillou
+MAINTAINER Arnaud Bey & Sylvain Hatier
 
 RUN apt-get -qqq update && DEBIAN_FRONTEND=noninteractive apt-get install -qqq -y \
         apt-utils \
@@ -12,25 +12,23 @@ RUN apt-get -qqq update && DEBIAN_FRONTEND=noninteractive apt-get install -qqq -
         gdebi \
         apache2 \
         openssl \
-        python2.7 \
-        python-pip \
-        php7.2 \
-        libapache2-mod-php7.2 \
-        php7.2-bcmath \
-        php7.2-cli \
-        php7.2-common \
-        php7.2-curl \
-        php7.2-dev \
-        php7.2-fpm \
-        php7.2-intl \
-        php7.2-json \
-        php7.2-mbstring \
-        php7.2-mysql \
-        php7.2-opcache \
-        php7.2-readline \
-        php7.2-xml \
-        php7.2-zip \
-        php7.2-gd \
+        php7.4 \
+        libapache2-mod-php7.4 \
+        php7.4-bcmath \
+        php7.4-cli \
+        php7.4-common \
+        php7.4-curl \
+        php7.4-dev \
+        php7.4-fpm \
+        php7.4-intl \
+        php7.4-json \
+        php7.4-mbstring \
+        php7.4-mysql \
+        php7.4-opcache \
+        php7.4-readline \
+        php7.4-xml \
+        php7.4-zip \
+        php7.4-gd \
         php-common \
         php-imagick
 
