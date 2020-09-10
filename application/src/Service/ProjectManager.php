@@ -162,6 +162,13 @@ class ProjectManager
         return;
     }
 
+    public function initIIIFProcessing(Project $project, string $uploadPath, Directory $parent = null, $parameters)
+    {
+        $projectPath = $this->fileManager->getProjectPath($project);
+        $this->recursiveBrowse($project, $projectPath, $uploadPath, "iiif", $parent, $parameters);
+        $this->deleteTempFolders($uploadPath);
+    }
+
     public function initMediaProcessing(Project $project, string $uploadPath, Directory $parent = null, $parameters)
     {
         $projectPath = $this->fileManager->getProjectPath($project);
@@ -169,14 +176,14 @@ class ProjectManager
         if (!is_dir($thumbnailDir)) {
             mkdir($thumbnailDir);
         }
-        $this->recursiveBrowse($project, $projectPath, $uploadPath, true, $parent, $parameters);
+        $this->recursiveBrowse($project, $projectPath, $uploadPath, "media", $parent, $parameters);
         $this->deleteTempFolders($uploadPath);
     }
 
     public function initXmlProcessing(Project $project, string $uploadPath, Directory $parent = null, $parameters)
     {
         $projectPath = $this->fileManager->getProjectPath($project);
-        $this->recursiveBrowse($project, $projectPath, $uploadPath, false, $parent, $parameters);
+        $this->recursiveBrowse($project, $projectPath, $uploadPath, "xml", $parent, $parameters);
         $this->deleteTempFolders($uploadPath);
 
         $this->em->flush();
@@ -194,7 +201,7 @@ class ProjectManager
         }
     }
 
-    public function recursiveBrowse(Project $project, string $projectPath, string $uploadPath, $handleMedia, Directory $parent = null, $parameters)
+    public function recursiveBrowse(Project $project, string $projectPath, string $uploadPath, $uploadType, Directory $parent = null, $parameters)
     {
         $createEmptyMedia = $parameters["createEmptyMedia"];
         $overwrite = $parameters["overwrite"];
@@ -203,6 +210,7 @@ class ProjectManager
         $updateMedia = $parameters["updateMedia"];
         $dirRepo = $this->em->getRepository('App:Directory');
         $mediaRepo = $this->em->getRepository('App:Media');
+        $server = $parameters["server"];
 
         $cdir = scandir($uploadPath);
 
@@ -218,13 +226,29 @@ class ProjectManager
                         $this->fm->add('warning', 'directory_already_existing', ["%dir%" => $absolutePath]);
                     }
 
-                    $this->recursiveBrowse($project, $projectPath, $absolutePath, $handleMedia, $newDirectory, $parameters);
+                    $this->recursiveBrowse($project, $projectPath, $absolutePath, $uploadType, $newDirectory, $parameters);
                 } else {
                     $processedName = explode('.', $value)[0];
                     $existingMedia = $mediaRepo->findOneBy(["name" => $processedName, "parent" => $parent, "project" => $project]);
 
+                    // CAS IIIF
+                    if ($uploadType == "iiif") {
+                        $server = $parameters["server"];
+                        $identifier = $this->mediaManager->getIIIFInfos($absolutePath);
+                        if (!$existingMedia) {
+                            $media = $this->mediaManager->createMediaFromIIIF($identifier, $value, $project, $parent, $server);
+                        } else {
+                            if ($updateMedia) {
+                                $existingMedia->setUrl($identifier);
+                                $this->em->persist($existingMedia);
+                                $this->em->flush();
+                            } else {
+                                $this->fm->add('warning', 'media_already_existing', ["%media%" => $absolutePath]);
+                            }
+                        }
+                    }
                     // CAS MEDIA
-                    if ($handleMedia) {
+                    elseif ($uploadType == "media") {
                         $file = new File($absolutePath);
                         if (!$existingMedia) {
                             $media = $this->mediaManager->createMediaFromFile($file, $value, $project, $parent);
@@ -240,7 +264,7 @@ class ProjectManager
                                 $this->fm->add('warning', 'media_already_existing', ["%media%" => $absolutePath]);
                             }
                         }
-                    } else {
+                    } elseif ($uploadType == "xml") {
                         // CAS XML
                         $extension = pathinfo($absolutePath, PATHINFO_EXTENSION);
                         $fileContent = file_get_contents($absolutePath);
@@ -288,6 +312,36 @@ class ProjectManager
         return ($nodes->count() > 0)
            ? $nodes->html()
            : $fileContent;
+    }
+
+
+    public function addProjectIIIF(Project $project, $files, Directory $parent = null, $parameters)
+    {
+        $basePath = $this->fileManager->getBaseProjectPath();
+        $projectMediaPath = $this->fileManager->getProjectPath($project);
+
+        $uploadPath = $projectMediaPath . DIRECTORY_SEPARATOR . 'tmp';
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath);
+        }
+
+        $zipName = $files->getClientOriginalName();
+        $files->move($uploadPath, $zipName);
+        $zip = new \ZipArchive;
+        $success = $zip->open($uploadPath . DIRECTORY_SEPARATOR . $zipName);
+        if ($success === true) {
+            $zip->extractTo($uploadPath);
+            $zip->close();
+        }
+
+        unlink($uploadPath . DIRECTORY_SEPARATOR . $zipName);
+
+        $this->initIIIFProcessing($project, $uploadPath, $parent, $parameters);
+        rmdir($uploadPath);
+
+        $this->fm->add('notice', 'iiif_added');
+
+        return $project;
     }
 
 

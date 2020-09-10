@@ -1,14 +1,18 @@
 {% macro mediaURL(media) %}
-  {% if media.url is not null %}
+  {% if media.url is not null and media.iiifServer is null %}
     {{ asset('project_files/' ~ media.project.id ~ '/' ~ media.url) }}
+  {% elseif media.iiifServer is not null %}
+    {{ media.iiifServer.url ~ media.url }}
   {% else %}
     {{ asset('img/media_placeholder.jpg') }}
   {% endif %}
 {% endmacro %}
 
 {% macro mediaThumbnailURL(media) %}
-  {% if media.url is not null %}
+  {% if media.url is not null and media.iiifServer is null %}
     {{ asset('project_files/' ~ media.project.id ~ '/thumbnails/' ~ media.url) }}
+  {% elseif media.iiifServer is not null %}
+    {{ media.iiifServer.url ~ media.url }}
   {% else %}
     {{ asset('img/media_placeholder.jpg') }}
   {% endif %}

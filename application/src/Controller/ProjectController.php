@@ -12,6 +12,7 @@ use App\Entity\TranscriptionLog;
 use App\Form\ExportType;
 use App\Form\ProjectMediaType;
 use App\Form\XmlType;
+use App\Form\IIIFImportType;
 use App\Form\ProjectAdvancedType;
 use App\Form\ProjectBasicType;
 use App\Service\AppEnums;
@@ -302,9 +303,11 @@ class ProjectController extends AbstractController
 
         $formMedia = $this->createForm(ProjectMediaType::class, $project);
         $formXml = $this->createForm(XmlType::class, $project);
+        $formIIIF = $this->createForm(IIIFImportType::class, $project, ["project" => $project]);
 
         $formMedia->handleRequest($request);
         $formXml->handleRequest($request);
+        $formIIIF->handleRequest($request);
 
         $parameters = [];
         $parameters["createEmptyMedia"] = false;
@@ -313,7 +316,15 @@ class ProjectController extends AbstractController
         $parameters["isZip"] = false;
         $parameters["updateMedia"] = false;
         $parameters["rootTag"] = "";
+        $parameters["server"] = null;
 
+        if ($formIIIF->isSubmitted() && $formIIIF->isValid()) {
+            $media = $formIIIF->get('zip_iiif')->getData();
+            $overwrite = $formIIIF->get('overwrite')->getData();
+            $parameters["overwrite"] = $overwrite;
+            $parameters["server"] = $formIIIF->get('iiifServer')->getData();
+            $this->projectManager->addProjectIIIF($project, $media, $current, $parameters);
+        }
 
         if ($formMedia->isSubmitted() && $formMedia->isValid()) {
             $fileType = $request->get('file-type');
@@ -346,7 +357,6 @@ class ProjectController extends AbstractController
             $this->projectManager->addProjectXml($project, $xmls, $current, $parameters);
         }
 
-
         $file_limit = ini_get('max_file_uploads');
 
         return $this->render(
@@ -354,6 +364,7 @@ class ProjectController extends AbstractController
             [
               'form' => $formMedia->createView(),
               'formXml' => $formXml->createView(),
+              'formIIIF' => $formIIIF->createView(),
               'project' => $project,
               'fileLimit' => ini_get('max_file_uploads'),
               'current' => $current,

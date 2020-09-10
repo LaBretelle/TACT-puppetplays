@@ -12,6 +12,34 @@
   {% if project | isAuthorizedOnProject('manageMedia') %}
 
   <div class="row">
+
+    <div class="col">
+      <div class="card iiif-upload-card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col" data-toggle="collapse" data-target="#iiif-upload-form">
+              <span class="btn btn-secondary">
+                <i class="fas fa-plus"></i>
+                {{'project_media_add_iiif' | trans}}
+              </span>
+            </div>
+          </div>
+        </div>
+      <div id="iiif-upload-form" class="collapse card-body">
+            {% if project.iiifServers|length > 0 %}
+            <div class="alert alert-info">
+                {{'media_upload_iiif_help' | trans}}
+            </div>
+
+            {{ form(formIIIF) }}
+            {% else %}
+              {{'add_server_iiif_help' | trans}}
+            {% endif %}
+
+      </div>
+    </div>
+  </div>
+
     <div class="col">
       <div class="card media-upload-card">
         <div class="card-header">
