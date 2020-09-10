@@ -242,6 +242,20 @@ class ProjectController extends AbstractController
     }
 
 
+    /**
+     * @Route("/{id}/edit-iiif", name="edit-iiif")
+     */
+    public function editIIIF(Project $project)
+    {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
+        }
+
+        return $this->render('project/edit-iiif.html.twig', [
+          'project' => $project,
+        ]);
+    }
+
 
     /**
      * @Route("/{id}/edit", name="edit")

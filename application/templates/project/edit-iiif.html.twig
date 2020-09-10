@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+{% import "project/macros.html.twig" as macros %}
+
+{% block body %}
+  {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
+
+  <div id="main-container">
+    <div class="row">
+      <div class="col">
+
+        <a class="mb-2 btn btn-sm btn-primary" href="{{path("iiif_edit", { projectId: project.id})}}">
+          <i class="fas fa-plus"></i> Ajouter un nouveau serveur
+        </a>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">URL</th>
+              <th scope="col">Nombre de médias</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          {% for server in project.iiifServers %}
+          <tr>
+            <td>{{server.name}}</td>
+            <td>{{server.url}}</td>
+            <td>{{server.medias|length}}</td>
+            <td>
+              <a class="btn btn-sm btn-secondary" href="{{path("iiif_edit", { projectId: project.id, serverId: server.id})}}">
+                <i class="fas fa-edit"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
