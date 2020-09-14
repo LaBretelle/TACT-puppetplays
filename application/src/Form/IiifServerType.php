@@ -15,12 +15,20 @@ class IiifServerType extends AbstractType
     {
         $builder
           ->add('name', TextType::class, [
-            'label' => false,
+            'label' => 'Nom du serveur',
             'required' => true,
           ])
           ->add('url', TextType::class, [
-            'label' => false,
+            'label' => 'URL du serveur',
             'required' => true,
+          ])
+          ->add('suffixLarge', TextType::class, [
+            'label' => 'suffixe large',
+            'required' => false,
+          ])
+          ->add('suffixThumbnail', TextType::class, [
+            'label' => 'suffixe miniature',
+            'required' => false,
           ])
           ->add('save', SubmitType::class, array(
               'label' => 'send',

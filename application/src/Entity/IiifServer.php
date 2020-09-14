@@ -39,6 +39,16 @@ class IiifServer
      */
     private $project;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $suffixLarge;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $suffixThumbnail;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -112,6 +122,30 @@ class IiifServer
     public function setProject(?Project $project): self
     {
         $this->project = $project;
+
+        return $this;
+    }
+
+    public function getSuffixLarge(): ?string
+    {
+        return $this->suffixLarge;
+    }
+
+    public function setSuffixLarge(?string $suffixLarge): self
+    {
+        $this->suffixLarge = $suffixLarge;
+
+        return $this;
+    }
+
+    public function getSuffixThumbnail(): ?string
+    {
+        return $this->suffixThumbnail;
+    }
+
+    public function setSuffixThumbnail(?string $suffixThumbnail): self
+    {
+        $this->suffixThumbnail = $suffixThumbnail;
 
         return $this;
     }

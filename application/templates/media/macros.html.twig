@@ -2,7 +2,7 @@
   {% if media.url is not null and media.iiifServer is null %}
     {{ asset('project_files/' ~ media.project.id ~ '/' ~ media.url) }}
   {% elseif media.iiifServer is not null %}
-    {{ media.iiifServer.url ~ media.url }}
+    {{ media.iiifServer.url ~ media.url ~ media.iiifServer.suffixLarge }}
   {% else %}
     {{ asset('img/media_placeholder.jpg') }}
   {% endif %}
@@ -12,7 +12,7 @@
   {% if media.url is not null and media.iiifServer is null %}
     {{ asset('project_files/' ~ media.project.id ~ '/thumbnails/' ~ media.url) }}
   {% elseif media.iiifServer is not null %}
-    {{ media.iiifServer.url ~ media.url }}
+    {{ media.iiifServer.url ~ media.url ~ media.iiifServer.suffixThumbnail}}
   {% else %}
     {{ asset('img/media_placeholder.jpg') }}
   {% endif %}
