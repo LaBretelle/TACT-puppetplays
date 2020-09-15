@@ -115,6 +115,7 @@ help8:                                    Vous pouvez revenir ici à l'aide et a
 help9:                                    À tout moment, vous pouvez sauvegarder votre transcription
 home:                                     Accueil
 iaccept:                                  J'accepte les <a href="%url%">Conditions Générales d'Utilisation</a>
+iiif_identifier_error:                    Problème de récupération de l'identifiant (%media%)
 iiif_server_actions:                      Actions
 iiif_server_mediacount:                   Nombre de médias
 iiif_server_name:                         Nom du serveur

@@ -235,16 +235,20 @@ class ProjectManager
                     if ($uploadType == "iiif") {
                         $server = $parameters["server"];
                         $identifier = $this->mediaManager->getIIIFInfos($absolutePath);
-                        if (!$existingMedia) {
-                            $media = $this->mediaManager->createMediaFromIIIF($identifier, $value, $project, $parent, $server);
-                        } else {
-                            if ($updateMedia) {
-                                $existingMedia->setUrl($identifier);
-                                $this->em->persist($existingMedia);
-                                $this->em->flush();
+                        if ($identifier) {
+                            if (!$existingMedia) {
+                                $media = $this->mediaManager->createMediaFromIIIF($identifier, $value, $project, $parent, $server);
                             } else {
-                                $this->fm->add('warning', 'media_already_existing', ["%media%" => $absolutePath]);
+                                if ($updateMedia) {
+                                    $existingMedia->setUrl($identifier);
+                                    $this->em->persist($existingMedia);
+                                    $this->em->flush();
+                                } else {
+                                    $this->fm->add('warning', 'media_already_existing', ["%media%" => $absolutePath]);
+                                }
                             }
+                        } else {
+                            $this->fm->add('warning', 'iiif_identifier_error', ["%media%" => $absolutePath]);
                         }
                     }
                     // CAS MEDIA

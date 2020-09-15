@@ -107,6 +107,7 @@ help8:                                    You can go back to help and tutorial h
 help9:                                    You can save your transcription at any time
 home:                                     Home
 iaccept:                                  I accept <a href="%url%">the general terms of use</a>
+iiif_identifier_error:                    Problème de récupération de l'identifiant (%media%)
 iiif_server_actions:                      Actions
 iiif_server_mediacount:                   Nombre de médias
 iiif_server_name:                         Nom du serveur

@@ -123,8 +123,10 @@ class MediaManager
     {
         $xml = file_get_contents($absolutePath);
         preg_match('/<([^<:]+:)?identifier>([^<]+)<\/([^<:]+:)?identifier>/', $xml, $matches);
-        $id = $matches[2];
+        if (array_key_exists(2, $matches)) {
+            return $matches[2];
+        }
 
-        return $id;
+        return null;
     }
 }
