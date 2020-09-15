@@ -2,7 +2,7 @@
 
 <div class="row">
   {# project tree col #}
-  <div class="col-3 project-tree-col">
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 project-tree-col">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="action-bar">
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
@@ -34,7 +34,7 @@
     </ul>
   </div>
   {# selected tree media col #}
-  <div class="col-9">
+  <div class="col-12 col-md-6 col-lg-8 col-xl-9">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="action-bar">
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
@@ -56,7 +56,7 @@
     <div class="row media-list-row">
         {# display directories for current dir #}
         {% for dir in project.dirs if dir.parent == current %}
-        <div class="col-2">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-2">
           <div class="card mb-2 box-shadow">
             <div class="card-body">
               <a class="text-dark" href="{{ path('project_media', {id: project.id, current: dir.id}) }}">
@@ -70,7 +70,7 @@
       {# display medias for current dir #}
       {% set nbMediasForCurrentDir = -1 %}
       {% for media in project.medias if media.parent == current %}
-        <div id="img-col-{{media.id}}" class="col-2">
+        <div id="img-col-{{media.id}}" class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-2">
           <div class="card mb-2 box-shadow">
             <img loading="lazy" data-toggle="tooltip" title="{{media.name}}" class="card-img-top project-image" src="{{ macros.mediaThumbnailURL(media) }}" alt="" data-full="{{ macros.mediaURL(media) }}"></img>
             <div class="card-footer text-center">
