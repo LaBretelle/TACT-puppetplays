@@ -4,7 +4,9 @@ access_denied:                            You are not allowed to access this pag
 actions:                                  Actions
 actu:                                     Actualités
 add_directory_modal_title:                Add folder
+add_iiif_server:                          Ajouter un nouveau serveur IIIF
 add_project:                              Create new project
+add_server_iiif_help:                     Il vous faut d'abord définir un serveur IIIF via "Editer > Edition des serveurs IIIF"
 add_user-status:                          Add status for an user
 add:                                      Add
 administrate_edito_content:               Edition pages éditoriales
@@ -33,6 +35,7 @@ comment_subscribe:                        Follow the thread
 comment_unsubscribe:                      Unsubscribe
 comments:                                 Commentaires
 confirm_account_anonymization:            If you continue the account informations will be anonimized. This action is irreversible.
+confirm_delete_iiif_server:               Êtes-vous sûr de vouloir supprimer le serveur
 confirm_delete_project_folders:           Are you sure you want to delete selected folder(s) (Media will also be removed) ?
 confirm_delete_project_media:             Are you sure you want to delete selected media ?
 confirm_project_deletion:                 Are you sure you want to delete this project ?
@@ -44,6 +47,7 @@ create_empty_media_help:                  Crée si nécessaire un media "livre1"
 create_empty_media:                       Créer des médias "vide" pour si aucun média n'est associable
 delete_current_tag:                       Delete current tag
 delete_folder:                            Delete selected folders
+delete_iiif_server:                       Supprimer le serveur
 delete_media:                             Delete selected media
 description:                              Description
 directory_already_existing:               Le répertoire %dir% est déjà présent
@@ -54,6 +58,8 @@ edit_advanced_help:                       Vous permet d'associer des fichiers XS
 edit_advanced:                            Edition des propriétés avancées
 edit_basic_help:                          Vous permet de paramétrer le nom, la description, l'image, etc.
 edit_basic:                               Edition des propriétés de base
+edit_iiif_help:                           Vous permet d'ajouter et d'éditer des sources IIIF.
+edit_iiif:                                Edition des serveurs IIIF
 edit_project_long:                        Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit:                                     Edit
 edito_edit:                               Editer la page
@@ -101,6 +107,10 @@ help8:                                    You can go back to help and tutorial h
 help9:                                    You can save your transcription at any time
 home:                                     Home
 iaccept:                                  I accept <a href="%url%">the general terms of use</a>
+iiif_server_actions:                      Actions
+iiif_server_mediacount:                   Nombre de médias
+iiif_server_name:                         Nom du serveur
+iiif_server_url:                          URL du serveur
 insults:                                  Propos haineux, violence
 is_public:                                Open registration
 json_schema:                              Schema TEI au format JSON
@@ -130,6 +140,7 @@ media_not_all_moved:                      Certains fichiers n'ont pas été dép
 media_reread_button_title:                Reread transcription
 media_transcribe_button_title:            Transcribe
 media_upload_help:                        Choose files or a zip archive to upload. Files will be uploaded / extracted to the current active folder if any.
+media_upload_iiif_help:                   Choisissez l'archive à uploader. Les médias seront associés au répertoire actuellement sélectionné. L'arborescence sera conservée. Chaque média doit disposer de son fichier XML. L'identifiant du média est récupéré dans la balise <identifier>
 media_view_transcription_button_title:    View transcription
 medias:                                   Medias
 message_deleted:                          Le message a été supprimé
@@ -199,6 +210,7 @@ project_manager:                          Project manager
 project_media_add_file_placeholder:       Select file(s)
 project_media_add_file_title:             Add medias
 project_media_add_file:                   Upload file(s)
+project_media_add_iiif:                   Ajout de média externe (IIF)
 project_media_count:                      '%count% médias'
 project_media_file_type_images:           Image(s)
 project_media_file_type_xmls:             Fichiers .xml,txt
@@ -226,6 +238,7 @@ project_transcription:                    Transcription
 project_unarchive:                        Unarchive
 project_user_status:                      User statuses
 project_view_transciptions:               View transcriptions
+project_xml_upload_iiif:                  Envoyer
 project_xml_upload:                       Envoyer les fichiers
 project:                                  Projet
 public_mail:                              Email visible to all
@@ -256,6 +269,8 @@ schema_name:                              Nom du schema
 selected_media:                           selected media
 selected_xmls:                            fichier(s) xml sélectionné(s)
 send:                                     Send
+server_iiif_help:                         L'ajout de nouveau serveur se fait dans "Editer > Edition des serveurs IIIF"
+server_iiif:                              Serveur
 status_edit:                              Edit status
 status_edited_project:                    Votre statut pour le projet '%project%' a été modifié
 status_remove:                            Remove
@@ -361,6 +376,8 @@ view_project:                             Accéder au projet
 view_transcriptions_long:                 Allows you to view the media and associated transcripts. If you wish to participate, you must first register for the project (need to be logged in).
 xml_add_file_placeholder:                 Sélectionner un/des fichier(s)
 xml_add_file_title:                       Ajouter des transcriptions
+xml_add_iiif_file_placeholder:            Sélectionner un .zip
 xml_file_type:                            Type de fichier
 xslt_export:                              Fichier XSL appliqué à l'export des transcriptions
+yes_delete:                               Oui, supprimer
 yes:                                      Yes

@@ -37,15 +37,6 @@ class IIIFImportType extends AbstractType
               ],
               'mapped' => false
           ])
-
-          ->add('overwrite', CheckboxType::class, [
-              'label'    => 'overwrite_iiif',
-              'required' => false,
-              'data' => false,
-              'mapped' => false,
-              'help' => 'overwrite_iiif_help'
-          ])
-
           ->add('iiifServer', EntityType::class, [
               'mapped' => false,
               'class' => IiifServer::class,
@@ -53,11 +44,10 @@ class IIIFImportType extends AbstractType
               'label' => 'server_iiif',
               'translation_domain' => 'messages',
               'choice_label' => 'name',
-              'help' => 'server_iiif'
+              'help' => 'server_iiif_help'
           ])
-
           ->add('save', SubmitType::class, [
-              'attr' => ['class' => 'btn btn-primary', 'id' => "jdlzqdlzq"],
+              'attr' => ['class' => 'btn btn-primary'],
               'label' => 'project_xml_upload_iiif',
           ]);
     }

@@ -334,8 +334,6 @@ class ProjectController extends AbstractController
 
         if ($formIIIF->isSubmitted() && $formIIIF->isValid()) {
             $media = $formIIIF->get('zip_iiif')->getData();
-            $overwrite = $formIIIF->get('overwrite')->getData();
-            $parameters["overwrite"] = $overwrite;
             $parameters["server"] = $formIIIF->get('iiifServer')->getData();
             $this->projectManager->addProjectIIIF($project, $media, $current, $parameters);
         }
