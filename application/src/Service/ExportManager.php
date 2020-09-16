@@ -210,13 +210,17 @@ class ExportManager
             }
 
             if ($params["medias"] && $media->getUrl()) {
-                $filePath = $projectPath.DIRECTORY_SEPARATOR.$media->getUrl();
-                $ext = pathinfo($filePath, PATHINFO_EXTENSION);
-                $fileSystem->copy($filePath, $fullMediaFilePath.'.'.$ext);
+                if ($media->getIiifServer()) {
+                    $iiifPath = $fullMediaFilePath .".xml";
+                    $fileSystem->appendToFile($iiifPath, "<data><identifier>".$media->getUrl()."</identifier><data/>");
+                } else {
+                    $filePath = $projectPath.DIRECTORY_SEPARATOR.$media->getUrl();
+                    $ext = pathinfo($filePath, PATHINFO_EXTENSION);
+                    $fileSystem->copy($filePath, $fullMediaFilePath.'.'.$ext);
+                }
             }
         }
     }
-
 
     private function recursiveZipData($source, $destination)
     {
@@ -281,8 +285,12 @@ class ExportManager
         $contributors   = $this->tm->getContributors($transcription);
         $status         = $this->translator->trans("transcription_status_".$this->tm->getStatus($transcription));
         $project        = $media->getProject();
-        $mediaParts     = pathinfo($media->getUrl());
-        $mediaRealName  = $media->getName() . "." . $mediaParts["extension"];
+        if (!$media->getIiifServer()) {
+            $mediaParts     = pathinfo($media->getUrl());
+            $mediaRealName  = $media->getName() . "." . $mediaParts["extension"];
+        } else {
+            $mediaRealName  = $media->getName();
+        }
         $platformUrl    = $this->router->generate('home', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $projectUrl     = $this->router->generate('project_display', ["id" => $project->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
         $platformContributors = ["ELAN","Démarre SHS !"];
