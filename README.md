@@ -7,6 +7,7 @@
 * docker
 * docker-compose
 * openssl
+* make
 
 ### Install
 ```bash
