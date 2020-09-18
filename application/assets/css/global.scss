@@ -4,6 +4,10 @@
 @import '~bootstrap/scss/bootstrap';
 /* BOOTSTRAP OVERRIDE
 --------------------------- */
+html{
+  font-size: 0.90rem;
+}
+
 body > .container-fluid {
   padding-top: 40px;
   margin: 0 !important;
