@@ -64,5 +64,8 @@ By default, `make init` cmd (see `Makefile`) generates a self-signed certificate
 
 ```
 
+### Code contributors
+[Gitlab graph](https://gitlab.com/litt-arts-num/tact/-/graphs/master)
+
 ### Thanks
 Myriam EL HELOU & Sami BOUHOUCHE for their [useful work](https://github.com/elheloum/TEI2JSON) not implemented in this app yet. A maintained version is available [here](https://gitlab.com/litt-arts-num/tei2json).
