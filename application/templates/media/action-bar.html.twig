@@ -12,7 +12,8 @@
       <div class="dropdown-menu">
         <a class="dropdown-item" download href="{{path('media_download_transcription',{'id':media.id})}}">{{'download_transcription' | trans}}</a>
         {% if media.url is not null %}
-        <a class="dropdown-item" download href="{{path('media_download_media',{'id':media.id})}}">{{'download_media' | trans}}</a>
+          {% set url = (media.IiifServer is null) ? path('media_download_media',{'id':media.id}) : macros.mediaURL(media) %}
+          <a target="_blank" class="dropdown-item" download href="{{url}}">{{'download_media'|trans}}</a>
         {% endif %}
       </div>
     </div>

@@ -105,12 +105,18 @@ class Project
      */
     private $archived = false;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\IiifServer", mappedBy="project", orphanRemoval=true)
+     */
+    private $iiifServers;
+
 
     public function __construct()
     {
         $this->userStatuses = new ArrayCollection();
         $this->medias = new ArrayCollection();
         $this->dirs = new ArrayCollection();
+        $this->iiifServers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -364,6 +370,37 @@ class Project
     public function setArchived(bool $archived): self
     {
         $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|IiifServer[]
+     */
+    public function getIiifServers(): Collection
+    {
+        return $this->iiifServers;
+    }
+
+    public function addIiifServer(IiifServer $iiifServer): self
+    {
+        if (!$this->iiifServers->contains($iiifServer)) {
+            $this->iiifServers[] = $iiifServer;
+            $iiifServer->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIiifServer(IiifServer $iiifServer): self
+    {
+        if ($this->iiifServers->contains($iiifServer)) {
+            $this->iiifServers->removeElement($iiifServer);
+            // set the owning side to null (unless already changed)
+            if ($iiifServer->getProject() === $this) {
+                $iiifServer->setProject(null);
+            }
+        }
 
         return $this;
     }

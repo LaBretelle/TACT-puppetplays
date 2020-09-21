@@ -34,7 +34,7 @@ $(document).ready(() => {
       element.checked = checked
       handleMediaSelection(element)
     })
-    e.target.dataset.state  = checked ? 'uncheck' : 'check'
+    e.target.dataset.state = checked ? 'uncheck' : 'check'
   })
 
   $('.move-media-confirm-button').on('click', (e) => {
@@ -82,8 +82,8 @@ $(document).ready(() => {
 
   $('.btn-move-dir').on('click', () => {
     $('.target-directory').show()
-    ignoredFolders.forEach( (id) => {
-      $('.target-directory[data-dir='+id+']').hide()
+    ignoredFolders.forEach((id) => {
+      $('.target-directory[data-dir=' + id + ']').hide()
     })
 
     $('.move-project-folder-modal').modal('show')
@@ -92,7 +92,7 @@ $(document).ready(() => {
   $('.move-dir-confirm-button').on('click', () => {
     // clean inputs
     $('form#move-folder-form').find('input').each((index, el) => {
-      if($(el).hasClass('move-folder')) {
+      if ($(el).hasClass('move-folder')) {
         $(el).remove()
       }
     })
@@ -117,7 +117,7 @@ $(document).ready(() => {
     const id = e.target.dataset.id
     const pid = e.target.dataset.pid
     const name = $(`#dir-${id}-name-input`).val().trim()
-    if(name !== '') {
+    if (name !== '') {
       updateFolderName(pid, id, name)
     }
   })
@@ -126,22 +126,22 @@ $(document).ready(() => {
     const folderToggled = e.target
     const id = folderToggled.dataset.id
 
-    if(folderToggled.checked && checkedFolders.indexOf(id) === -1) {
+    if (folderToggled.checked && checkedFolders.indexOf(id) === -1) {
       checkedFolders.push(id)
       ignoredFolders.push(id)
-      $('[data-dir-parent='+id+']').find('.folder-check').each((index, el) => {
+      $('[data-dir-parent=' + id + ']').find('.folder-check').each((index, el) => {
         ignoredFolders.push($(el).attr('data-id'))
       })
 
     } else {
-      const indexChecked= checkedFolders.indexOf(id)
+      const indexChecked = checkedFolders.indexOf(id)
       checkedFolders.splice(indexChecked, 1)
 
       const indexIgnored = ignoredFolders.indexOf(id)
       ignoredFolders.splice(indexIgnored, 1)
 
 
-      $('[data-dir-parent='+id+']').find('.folder-check').each((index, el) => {
+      $('[data-dir-parent=' + id + ']').find('.folder-check').each((index, el) => {
         let idEl = $(el).attr('data-id')
         let idx = ignoredFolders.indexOf(idEl)
         ignoredFolders.splice(idx, 1)
@@ -150,7 +150,7 @@ $(document).ready(() => {
 
     }
 
-    if(checkedFolders.length > 0) {
+    if (checkedFolders.length > 0) {
       $('.btn-del-dir').attr('disabled', false)
       $('.btn-move-dir').attr('disabled', false)
       // clean inputs
@@ -160,7 +160,7 @@ $(document).ready(() => {
       $('form#move-folder-form').find('input').each((index, el) => {
         $(el).remove()
       })
-      checkedFolders.forEach( (id) => {
+      checkedFolders.forEach((id) => {
         $('form#delete-folder-form').append(`<input type="hidden" name="ids[]" value="${id}"></input>`)
         $('form#move-folder-form').append(`<input type="hidden" name="ids[]" value="${id}"></input>`)
       })
@@ -203,8 +203,7 @@ $(document).ready(() => {
       toHide.closest('.form-group').hide()
       toShow.closest('.form-group').show()
 
-    }
-    else {
+    } else {
       const toHideXML = radiobtn.value === 'xmls' ? $('#xml_zip') : $('#xml_xmls')
       const toShowXML = radiobtn.value === 'xmls' ? $('#xml_xmls') : $('#xml_zip')
       toHideXML.attr('required', false)
@@ -213,7 +212,7 @@ $(document).ready(() => {
       toShowXML.closest('.form-group').show()
     }
 
-    if(radiobtn.value === 'images' || radiobtn.value === 'xmls'){
+    if (radiobtn.value === 'images' || radiobtn.value === 'xmls') {
       $('.max-file-upload-msg').show()
     } else {
       $('.max-file-upload-msg').hide()
@@ -241,11 +240,15 @@ $(document).ready(() => {
 })
 
 const deleteMedia = (projectId) => {
-  const url = Routing.generate('project_media_delete', {id:projectId})
+  const url = Routing.generate('project_media_delete', {
+    id: projectId
+  })
   $.ajax({
     method: 'POST',
     url: url,
-    data: {'ids' : selectedMedia}
+    data: {
+      'ids': selectedMedia
+    }
   }).done(() => {
     selectedMedia.forEach((id) => {
       $('#img-col-' + id).remove()
@@ -258,11 +261,16 @@ const deleteMedia = (projectId) => {
 }
 
 const moveMedia = (projectId) => {
-  const url = Routing.generate('project_move_media', {id:projectId})
+  const url = Routing.generate('project_move_media', {
+    id: projectId
+  })
   $.ajax({
     method: 'POST',
     url: url,
-    data: {'ids' : selectedMedia, 'dirId': selectedFolder}
+    data: {
+      'ids': selectedMedia,
+      'dirId': selectedFolder
+    }
   }).done((data) => {
     data.movedMedia.forEach((id) => {
       $('#img-col-' + id).remove()
@@ -273,7 +281,7 @@ const moveMedia = (projectId) => {
     if (selectedMedia.length != data.movedMedia.length) {
       Toastr.warning(Translator.trans('media_not_all_moved'))
     }
-    if (data.movedMedia.length > 0 ){
+    if (data.movedMedia.length > 0) {
       Toastr.info(Translator.trans('media_moved'))
     }
     selectedFolder = -1
@@ -282,16 +290,21 @@ const moveMedia = (projectId) => {
 }
 
 const updateFolderName = (projectId, id, name) => {
-  const url = Routing.generate('project_update_folder_name', {id:projectId})
+  const url = Routing.generate('project_update_folder_name', {
+    id: projectId
+  })
   $.ajax({
     method: 'POST',
     url: url,
-    data: {id: id, name: name}
+    data: {
+      id: id,
+      name: name
+    }
   }).done((data) => {
     if (data.hasBeenUpdated === true) {
       $(`#dir-${id}-name-value`).text(name)
       Toastr.info(Translator.trans('folder_name_changed'))
-      $('[data-dir='+id+']').text(name)
+      $('[data-dir=' + id + ']').text(name)
     } else {
       Toastr.warning(Translator.trans('folder_name_not_changed'))
     }
@@ -305,14 +318,14 @@ const updateFolderName = (projectId, id, name) => {
 
 const handleMediaSelection = (element) => {
   const id = element.dataset.id
-  if(element.checked && selectedMedia.indexOf(id) === -1) {
+  if (element.checked && selectedMedia.indexOf(id) === -1) {
     selectedMedia.push(id)
   } else {
     const index = selectedMedia.indexOf(id)
     selectedMedia.splice(index, 1)
   }
 
-  if(selectedMedia.length > 0) {
+  if (selectedMedia.length > 0) {
     $('.delete-media').attr('disabled', false)
     $('.move-media').attr('disabled', false)
   } else {
@@ -326,7 +339,7 @@ const filterOnTextAndStatus = () => {
     let status = false
     let medias = Array.from(document.getElementsByClassName('status'))
     let statusBtn = document.querySelector('.media-filter.active')
-    let text =  document.querySelector('#text-filter-media').value.toLowerCase()
+    let text = document.querySelector('#text-filter-media').value.toLowerCase()
 
     if (statusBtn) {
       status = statusBtn.getAttribute('data-status')

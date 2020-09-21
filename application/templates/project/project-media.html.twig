@@ -12,6 +12,8 @@
   {% if project | isAuthorizedOnProject('manageMedia') %}
 
   <div class="row">
+
+    {# AJOUT DES MEDIA #}
     <div class="col">
       <div class="card media-upload-card">
         <div class="card-header">
@@ -59,8 +61,9 @@
       </div>
     </div>
   </div>
-  <div class="col">
 
+  {# AJOUT TRANSCRIPTION #}
+  <div class="col">
     <div class="card media-upload-card">
       <div class="card-header">
         <div class="row">
@@ -108,14 +111,40 @@
             </div>
 
           {{ form_end(formXml) }}
+        </div>
       </div>
     </div>
+
+    {# AJOUT IIIF #}
+    <div class="col">
+      <div class="card iiif-upload-card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col" data-toggle="collapse" data-target="#iiif-upload-form">
+              <span class="btn btn-secondary">
+                <i class="fas fa-plus"></i>
+                {{'project_media_add_iiif' | trans}}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div id="iiif-upload-form" class="collapse card-body">
+          {% if project.iiifServers|length > 0 %}
+          <div class="alert alert-info">
+              {{'media_upload_iiif_help' | trans}}
+          </div>
+          {{ form(formIIIF) }}
+          {% else %}
+          <div class="alert alert-warning">
+            {{'add_server_iiif_help' | trans}}
+          </div>
+          {% endif %}
+        </div>
+      </div>
     </div>
   </div>
-
-
-
   {% endif %}
+  
   {{ include('media/media-list-manage-partial.html.twig', { 'project': project }) }}
 </div>
 {% endblock %}

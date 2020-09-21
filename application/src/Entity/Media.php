@@ -43,6 +43,11 @@ class Media
      */
     private $parent;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\IiifServer", inversedBy="medias")
+     */
+    private $iiifServer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Media
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getIiifServer(): ?IiifServer
+    {
+        return $this->iiifServer;
+    }
+
+    public function setIiifServer(?IiifServer $iiifServer): self
+    {
+        $this->iiifServer = $iiifServer;
 
         return $this;
     }
