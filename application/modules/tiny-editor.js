@@ -12,13 +12,14 @@ require('tinymce/plugins/image')
 class TinyEditor {
   init() {
     Tiny.init({
-      height: '400',
+      height: '50vh',
       selector: 'textarea.tinymce-enabled',
       plugins: ['link', 'paste', 'code', 'image'],
       toolbar1: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | code',
       paste_as_text: true,
       menubar: false,
-      statusbar: false,
+      statusbar: true,
+      resize: true,
       setup: (editor) => {
         editor.on('change', () => {
           editor.save()
