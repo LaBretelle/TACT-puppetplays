@@ -141,6 +141,13 @@ button > * {
 #main-container {
   padding: 1rem;
 }
+
+.project-title{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media (min-width: 40em) {
