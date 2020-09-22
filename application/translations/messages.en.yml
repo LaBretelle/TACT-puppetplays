@@ -166,6 +166,7 @@ no_review_yet:                            Aucune relecture effectuée pour le mo
 no:                                       No
 not_enabled_yet:                          (Not enabled yet)
 not_registered:                           Not registered
+other_operations:                         Autres opérations
 other:                                    Autre
 overwrite_help:                           Si un transcription existe déjà pour le média "livre1", elle sera remplacé par le contenu de "livre1.xml". Sinon elle sera initialisée avec ce contenu.
 overwrite:                                Ecraser les transcriptions

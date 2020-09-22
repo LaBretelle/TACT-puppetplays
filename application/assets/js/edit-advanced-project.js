@@ -1,8 +1,6 @@
 const editor = new TinyEditor()
 editor.init()
 
-const deleteProjectForm = document.forms.deleteProject
-
 $(document).ready(function () {
 
   $(document).on('click', '#delete-xsl', function () {
@@ -13,24 +11,10 @@ $(document).ready(function () {
     formHandler.deleteJson($(this).data('project-id'))
   })
 
-
-  if (deleteProjectForm) {
-    deleteProjectForm.onsubmit = (e) => {
-      e.preventDefault()
-      $('.delete-project-confirm-modal').modal('show')
-      return false
-    }
-  }
-
-  $('.delete-project-confirm-button').on('click', (e) => {
-    if (e.target.dataset.action === 'confirm') {
-      deleteProjectForm.submit()
-    }
-  })
 })
 
 const formHandler = {
-  deleteXsl: function (projectId){
+  deleteXsl: function (projectId) {
     var url = Routing.generate('project_xslt_delete', {
       id: projectId
     })
@@ -45,7 +29,7 @@ const formHandler = {
 
     return false
   },
-  deleteJson: function (projectId){
+  deleteJson: function (projectId) {
     var url = Routing.generate('project_json_delete', {
       id: projectId
     })

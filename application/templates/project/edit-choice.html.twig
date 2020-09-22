@@ -11,10 +11,9 @@
 
 {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
 
-
 <div id="main-container">
   <div class="row">
-    <div class="col">
+    <div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ "edit_basic" | trans }}</h5>
@@ -24,7 +23,7 @@
       </div>
     </div>
 
-    <div class="col">
+    <div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ "edit_advanced" | trans }}</h5>
@@ -34,7 +33,7 @@
       </div>
     </div>
 
-    <div class="col">
+    <div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ "edit_iiif" | trans }}</h5>
@@ -44,8 +43,44 @@
       </div>
     </div>
 
-  </div>
+    <div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ "other_operations" | trans }}</h5>
+          <a class="card-link" href="{{ path('project_archived_toggle', {id: project.id}) }}">
+            {{ project.archived ? 'project_unarchive'|trans : 'project_archive'|trans}}
+          </a>
+          <a class="card-link" href="{{ path('project_export', {id: project.id}) }}">
+            {{'export' | trans}}
+          </a>
+          <a class="card-link" href="#" data-toggle="modal" data-target="#deleteProjectConfirmModal">
+            {{'project_delete' | trans}}
+          </a>
+        </div>
+      </div>
+    </div>
 
+  </div>
+</div>
+
+<div class="modal fade" id="deleteProjectConfirmModal" tabindex="-1" role="dialog" aria-labelledby="deleteProjectConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteProjectConfirmModalLabel">{{'confirm_title'| trans}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6>{{'confirm_project_deletion' | trans}}</h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-action="cancel" data-dismiss="modal">{{'cancel' | trans}}</button>
+        <a href="{{ path("project_delete", {'id': project.id} )}}" type="button" class="btn btn-danger delete-project-confirm-button">{{'confirm' | trans}}</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}

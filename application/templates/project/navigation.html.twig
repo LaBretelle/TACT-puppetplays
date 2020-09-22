@@ -47,16 +47,6 @@
           {{'users' | trans}}
         </a>
       {% endif %}
-      {% if project | isAuthorizedOnProject('editProject') %}
-        <a href="{{ path('project_export', {id: project.id}) }}" class="nav-link {{macros.addActiveClass(current, "project_export")}}" data-toggle="tooltip" data-placement="top" title="{{"export_project_long"|trans}}">
-          {{'export' | trans}}
-        </a>
-      {% endif %}
-      {% if is_granted('ROLE_ADMIN', app.user) %}
-        <a href="{{ path('project_archived_toggle', {id: project.id}) }}" class="nav-link" data-toggle="tooltip" data-placement="top" title="{{"project_archive_long"|trans}}">
-          {{ project.archived ? 'project_unarchive'|trans : 'project_archive'|trans}}
-        </a>
-      {% endif %}
     </ul>
   </div>
 </nav>
