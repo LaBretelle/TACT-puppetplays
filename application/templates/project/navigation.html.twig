@@ -8,8 +8,14 @@
   <a class="navbar-brand" href="{{ path("project_display", {'id': project.id}) }}">
     {{ project.name }}
   </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#secondNavbarNavDropdown" aria-controls="secondNavbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
   <span class="navbar-brand text-muted">{% if subtitle is defined %}({{ subtitle|trans }}){% endif %}</span>
-  <div class="collapse navbar-collapse">
+  
+  <div class="collapse navbar-collapse" id="secondNavbarNavDropdown">
     <ul class="navbar-nav ml-auto">
       {% if project | isAuthorizedOnProject('register') %}
         <a href="{{ path('status_request', {id: project.id})}}" class="nav-link text-dark" data-toggle="tooltip" data-placement="top" title="{{"subscribe_long"|trans}}">
@@ -20,7 +26,7 @@
       {% endif %}
 
       <a data-intro="{{'help13'|trans}}" data-step="13" download href="{{asset('platform/manuel_contributeur.pdf')}}" class="nav-link" >
-        <i class="fas fa-book-open"></i> {{"contributor_guide"|trans}}
+        <i class="fas fa-book-open"></i> <span class="d-none d-lg-inline">{{"contributor_guide"|trans}}<span>
       </a>
 
       {% if project | isAuthorizedOnProject('transcribe') %}
