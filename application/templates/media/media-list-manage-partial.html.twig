@@ -4,28 +4,26 @@
   {# project tree col #}
   <div class="col-12 col-md-6 col-lg-4 col-xl-3 project-tree-col">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="action-bar">
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a data-toggle="tooltip" title="{{'back_to_root' | trans}}" class="text-dark" href="{{ path('project_media', {id: project.id}) }}">
-                <i class="fas fa-home fa-fw"></i>
-              </a>
-            </li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item float-right">
-              <div class="btn-group">
-                <button data-toggle="tooltip" title="{{'add_directory_modal_title' | trans}}" class="btn btn-link btn-add-dir" type="button" role="button"><i class="fas fas fa-plus"></i></button>
-                <form data-toggle="tooltip" title="{{'project_move_directory_title' | trans}}" id="move-folder-form" name="move-folder-form" action="{{path('project_move_folders', {'id': project.id})}}" method="post">
-                  <button class="btn btn-link btn-move-dir" disabled type="button" role="button"><i class="fas fa-arrows-alt-v"></i></button>
-                </form>
-                <form data-toggle="tooltip" title="{{'delete_folder' | trans}}" id="delete-folder-form" name="delete-folder-form" action="{{path('project_delete_folders', {'id': project.id})}}" method="post">
-                  <button class="btn btn-link btn-del-dir" disabled type="button" role="button"><i class="fas fa-trash"></i></button>
-                </form>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a data-toggle="tooltip" title="{{'back_to_root' | trans}}" class="text-dark" href="{{ path('project_media', {id: project.id}) }}">
+              <i class="fas fa-home fa-fw"></i>
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item float-right">
+            <div class="btn-group">
+              <button data-toggle="tooltip" title="{{'add_directory_modal_title' | trans}}" class="btn btn-link btn-add-dir" type="button" role="button"><i class="fas fas fa-plus"></i></button>
+              <form data-toggle="tooltip" title="{{'project_move_directory_title' | trans}}" id="move-folder-form" name="move-folder-form" action="{{path('project_move_folders', {'id': project.id})}}" method="post">
+                <button class="btn btn-link btn-move-dir" disabled type="button" role="button"><i class="fas fa-arrows-alt-v"></i></button>
+              </form>
+              <form data-toggle="tooltip" title="{{'delete_folder' | trans}}" id="delete-folder-form" name="delete-folder-form" action="{{path('project_delete_folders', {'id': project.id})}}" method="post">
+                <button class="btn btn-link btn-del-dir" disabled type="button" role="button"><i class="fas fa-trash"></i></button>
+              </form>
+            </div>
+          </li>
+        </ul>
     </nav>
     <ul class="list-group list-group-flush">
       {% for dir in project.dirs if dir.parent is null %}
@@ -36,27 +34,25 @@
   {# selected tree media col #}
   <div class="col-12 col-md-6 col-lg-8 col-xl-9">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="action-bar">
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-            </li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item float-right">
-              <div class="btn-group images-actions">
-                <button data-state="check" data-toggle="tooltip" title="{{'toggle_all_media_selection' | trans}}" class="btn btn-link toggle-select-all-media" type="button" role="button"><i class="fas fa-check-square"></i></button>
-                <button data-toggle="tooltip" title="{{'move_media' | trans}}" class="btn btn-link move-media" disabled type="button" role="button"><i class="fas fas fa-arrows-alt-v"></i></button>
-                <button data-toggle="tooltip" title="{{'delete_media' | trans}}" class="btn btn-link delete-media" disabled type="button" role="button"><i class="fas fa-trash"></i></button>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item float-right">
+            <div class="btn-group images-actions">
+              <button data-state="check" data-toggle="tooltip" title="{{'toggle_all_media_selection' | trans}}" class="btn btn-link toggle-select-all-media" type="button" role="button"><i class="fas fa-check-square"></i></button>
+              <button data-toggle="tooltip" title="{{'move_media' | trans}}" class="btn btn-link move-media" disabled type="button" role="button"><i class="fas fas fa-arrows-alt-v"></i></button>
+              <button data-toggle="tooltip" title="{{'delete_media' | trans}}" class="btn btn-link delete-media" disabled type="button" role="button"><i class="fas fa-trash"></i></button>
+            </div>
+          </li>
+        </ul>
     </nav>
 
     <div class="row media-list-row">
         {# display directories for current dir #}
         {% for dir in project.dirs if dir.parent == current %}
-        <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-2">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-2">
           <div class="card mb-2">
             <div class="card-body text-center">
               <a class="text-dark" href="{{ path('project_media', {id: project.id, current: dir.id}) }}">
@@ -73,7 +69,7 @@
       {# display medias for current dir #}
       {% set nbMediasForCurrentDir = -1 %}
       {% for media in project.medias if media.parent == current %}
-        <div id="img-col-{{media.id}}" class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-2">
+        <div id="img-col-{{media.id}}" class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-2">
           <div class="card mb-2">
             <img loading="lazy" class="card-img-top project-image" src="{{ macros.mediaThumbnailURL(media) }}" alt="" data-full="{{ macros.mediaURL(media) }}"></img>
             <div class="card-body p-1 text-center">
