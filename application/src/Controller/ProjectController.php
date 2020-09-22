@@ -584,7 +584,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("{id}/toggle-archived", name="archived_toggle")
+     * @Route("/{id}/toggle-archived", name="archived_toggle")
      */
     public function toggleArchived(Project $project, EntityManagerInterface $em)
     {
