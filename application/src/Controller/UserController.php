@@ -81,7 +81,6 @@ class UserController extends AbstractController
         $form = $this->createForm(UserTypeFull::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $image = $form->get('image')->getData();
             $previous_image = $request->get('previous_image');
 
@@ -93,7 +92,7 @@ class UserController extends AbstractController
 
         return $this->render(
             'user/account.html.twig',
-            array('form' => $form->createView())
+            ['form' => $form->createView(), 'user' => $user]
         );
     }
 
