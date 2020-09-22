@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\IiifServer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method IiifServer|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,33 +18,4 @@ class IiifServerRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, IiifServer::class);
     }
-
-    // /**
-    //  * @return IiifServer[] Returns an array of IiifServer objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?IiifServer
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

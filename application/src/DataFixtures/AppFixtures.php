@@ -7,7 +7,7 @@ use App\Entity\Platform;
 use App\Entity\TeiSchema;
 use App\Service\AppEnums;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {

@@ -20,12 +20,10 @@ class EverythingListener
         $this->em = $em;
     }
 
-
     public function onKernelRequest(RequestEvent $event)
     {
         if ($event->isMasterRequest()) {
             $user =  $this->um->getCurrentUser();
-
             if ($user) {
                 $currentDate = new \DateTime();
                 $previousDate = $user->getLastAccess();
@@ -36,7 +34,6 @@ class EverythingListener
                     $this->em->flush();
                 }
             }
-
 
             return;
         }
