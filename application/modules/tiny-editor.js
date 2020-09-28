@@ -8,6 +8,7 @@ require('tinymce/plugins/link')
 require('tinymce/plugins/paste')
 require('tinymce/plugins/code')
 require('tinymce/plugins/image')
+require('tinymce/icons/default')
 
 class TinyEditor {
   init() {

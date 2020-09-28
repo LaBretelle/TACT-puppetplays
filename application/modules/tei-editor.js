@@ -2,6 +2,7 @@
 const Tiny = require('tinymce')
 require('tinymce/themes/silver')
 require('tinymce/plugins/code')
+require('tinymce/icons/default')
 
 class TeiEditor {
   constructor(tei) {
@@ -84,7 +85,7 @@ class TeiEditor {
 
       let childrenObject = []
       current.children.forEach(child => {
-        let element = this.tei.elements.find(function (el){
+        let element = this.tei.elements.find(function (el) {
           return el.tag === child
         })
         childrenObject.push(element)
@@ -107,9 +108,9 @@ class TeiEditor {
     root.appendChild(fragment)
   }
 
-  findElementByTagName(tagName){
+  findElementByTagName(tagName) {
 
-    return this.tei.elements.find(function (el){
+    return this.tei.elements.find(function (el) {
       return el.tag === tagName
     })
   }
@@ -118,7 +119,7 @@ class TeiEditor {
    * Display available attributes for the selected element
    * If no current element, hide the panel
    */
-  displayCurrentAttributes(currentTeiElement, currentTinyElement){
+  displayCurrentAttributes(currentTeiElement, currentTinyElement) {
     const container = document.querySelector('.element-attributes-container')
     const elementTitle = document.querySelector('.element-title')
     const elementAttributes = document.querySelector('.element-attributes')
@@ -142,7 +143,7 @@ class TeiEditor {
               break
             case 'enumerated':
               control = document.createElement('select')
-              if(!teiAttribute.required) {
+              if (!teiAttribute.required) {
                 this.appendOptionToSelect(control, 'none', tinyAttr ? 'none' === tinyAttr.value : false)
               }
               teiAttribute.values.forEach(value => {
@@ -187,7 +188,9 @@ class TeiEditor {
     const range = editor.selection.getRng()
 
     this.maximizeCounter(teiElement)
-    let attributes = {'data-tag': teiElement.tag}
+    let attributes = {
+      'data-tag': teiElement.tag
+    }
     editor.undoManager.transact(() => {
       let elem = null
       if (teiElement.selfClosed) {
@@ -204,7 +207,7 @@ class TeiEditor {
     })
   }
 
-  handleSaveBtn(){
+  handleSaveBtn() {
     let btn = document.getElementById('main-save-btn')
     btn.classList.add('btn-info')
     btn.classList.remove('btn-outline-secondary')
@@ -234,14 +237,16 @@ class TeiEditor {
     help.innerHTML = '<i class="fas fa-question-circle"></i>'
     help.setAttribute('data-toggle', 'popover')
 
-    const title = isAttribute ? teiElement.key :  teiElement.tag
-    const link = "https://www.tei-c.org/release/doc/tei-p5-doc/fr/html/ref-"+title+".html"
-    const linkText = Translator.trans('tei_link_to_official_doc', {'element': title})
+    const title = isAttribute ? teiElement.key : teiElement.tag
+    const link = 'https://www.tei-c.org/release/doc/tei-p5-doc/fr/html/ref-' + title + '.html'
+    const linkText = Translator.trans('tei_link_to_official_doc', {
+      'element': title
+    })
 
-    let popoverContent = "<div><h6>"+title+"</h6><hr/><p>"+teiElement.documentation+"</p>";
-    popoverContent += (isAttribute)
-      ? "</div>"
-      :  "<p><a target='_blank' href='"+link+"'>"+linkText+"</a></p></div>"
+    let popoverContent = '<div><h6>' + title + '</h6><hr/><p>' + teiElement.documentation + '</p>'
+    popoverContent += (isAttribute) ?
+      '</div>' :
+      '<p><a target=\'_blank\' href=\'' + link + '\'>' + linkText + '</a></p></div>'
 
     help.setAttribute('data-content', popoverContent)
     return help
@@ -258,7 +263,7 @@ class TeiEditor {
     const help = this.createHelp(teiElement, isAttribute)
     const btnGroup = document.createElement('div')
     btnGroup.classList.add('btn-group', 'btn-group-sm', 'btn-tag-tei')
-    if(!isAttribute) {
+    if (!isAttribute) {
       /* ADD TAG BUTTON */
       const addBtn = document.createElement('button')
       addBtn.classList.add('btn', 'btn-sm', 'btn-outline-secondary', 'mr-1')
@@ -301,32 +306,32 @@ class TeiEditor {
   }
 
   /* HANDLE ELEMENT COUNTER
-  *************************/
-  maximizeCounter(teiElement){
+   *************************/
+  maximizeCounter(teiElement) {
     teiElement.counter = this.getMaxCounter() + 1
     this.refreshPanels(this.tei)
   }
 
-  minimizeCounter(teiElement){
+  minimizeCounter(teiElement) {
     teiElement.counter = this.getMinCounter() - 1
     this.refreshPanels(this.tei)
   }
 
-  getMaxCounter(){
+  getMaxCounter() {
     this.sortElementsByCounter(this.tei.elements)
 
     return (this.tei.elements[0].counter) ? this.tei.elements[0].counter : 0
   }
 
-  getMinCounter(){
+  getMinCounter() {
     this.sortElementsByCounter(this.tei.elements)
     let length = this.tei.elements.length
 
     return (this.tei.elements[length - 1].counter) ? this.tei.elements[length - 1].counter : 0
   }
 
-  sortElementsByCounter(array){
-    return array.sort(function (a,b){
+  sortElementsByCounter(array) {
+    return array.sort(function (a, b) {
       if (!a.counter) a.counter = 0
       if (!b.counter) b.counter = 0
       return (a.counter < b.counter) ? 1 : -1
@@ -358,16 +363,16 @@ class TeiEditor {
    * Display attributes & allowed children.
    */
   refreshPanels(tei) {
-    if (typeof tei.elements !== 'undefined' ) {
+    if (typeof tei.elements !== 'undefined') {
       const currentTinyElement = Tiny.activeEditor.selection.getNode()
-      const currentTeiElement = (currentTinyElement.id != 'tinymce')
-        ? tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase())
-        : null
+      const currentTeiElement = (currentTinyElement.id != 'tinymce') ?
+        tei.elements.find(element => element.tag.toUpperCase() === currentTinyElement.nodeName.toUpperCase()) :
+        null
 
       this.displayCurrentAttributes(currentTeiElement, currentTinyElement)
       this.getAllowedElements(tei, currentTeiElement)
       $('[data-toggle="popover"]').popover({
-        html : true,
+        html: true,
         placement: 'top',
         trigger: 'focus'
       })
@@ -389,7 +394,7 @@ class TeiEditor {
     document.getElementById('selected-element').style.display = 'block'
   }
 
-  emptyElement(el){
+  emptyElement(el) {
     while (el.firstChild) el.removeChild(el.firstChild)
   }
 }
