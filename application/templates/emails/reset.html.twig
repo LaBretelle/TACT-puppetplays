@@ -1,7 +1,7 @@
 {% extends "emails/master.html.twig" %}
 {% trans_default_domain 'emails' %}
 {% block body %}
-  <p>{{'email_hello_user' | trans({'%1%': user.lastname, '%2%': user.firstname}) }}</p>
+  <p>{{'email_hello_user' | trans({'%1%': user.lastname, '%2%': user.firstname, '%3%': user.username}) }}</p>
   <p>{{'email_new_password_request_1' | trans }}</p>
   <p>
   {{'email_new_password_request_2' | trans }}
