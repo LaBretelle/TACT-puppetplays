@@ -4,7 +4,7 @@
 @import '~bootstrap/scss/bootstrap';
 /* BOOTSTRAP OVERRIDE
 --------------------------- */
-html{
+html {
   font-size: 0.90rem;
 }
 
@@ -15,8 +15,8 @@ body > .container-fluid {
 }
 
 label.required:after {
-    color:red;
-    content: " *";
+  color: red;
+  content: " *";
 }
 
 button > * {
@@ -37,7 +37,8 @@ button > * {
   }
 }
 
-.custom-file-input, .custom-file-label{
+.custom-file-input,
+.custom-file-label {
   overflow: hidden;
 }
 
@@ -49,7 +50,6 @@ button > * {
   background-color: #f9f9f9;
   border-top: 0.05rem solid #e5e5e5;
 }
-
 /* OPENSEADRAGON
 ******************/
 .openseadragon-buttons {
@@ -66,7 +66,6 @@ button > * {
   margin: 10px;
   height: 32px;
 }
-
 /* CUSTOMIZE INTROJS
 --------------------------------------------------
 */
@@ -78,7 +77,6 @@ button > * {
   // font-weight: bold !important;
   color: black !important;
 }
-
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 .carousel-custom {
@@ -142,12 +140,11 @@ button > * {
   padding: 1rem;
 }
 
-.project-title{
+.project-title {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
-
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media (min-width: 40em) {
@@ -284,7 +281,7 @@ button > * {
 }
 
 .selected-element {
-  display:none;
+  display: none;
 
   .element-attributes-container {
     margin-bottom: 10px;
@@ -297,7 +294,7 @@ button > * {
 
   .card-header,
   .list-group-item {
-    padding: 0.30rem 0.30rem;
+    padding: 0.30rem;
   }
 
   .tei-element-li {
@@ -309,5 +306,56 @@ button > * {
     .btn-group {
       float: right;
     }
+  }
+}
+
+/* medias & directories manage & transcribe */
+.project-image-card .card-body, .project-directory-card .card-body {
+  min-height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-wrap: anywhere;
+}
+
+.project-directory.card-img-top,
+.project-image.card-img-top {
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 0) {
+  .project-directory.card-img-top,
+  .project-image.card-img-top {
+    height: 40vh;
+  }
+}
+
+@media (min-width: 576px) {
+  .project-directory.card-img-top,
+  .project-image.card-img-top {
+    height: 30vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .project-directory.card-img-top,
+  .project-image.card-img-top {
+    height: 25vh;
+  }
+}
+
+@media (min-width: 992px) {
+  .project-directory.card-img-top,
+  .project-image.card-img-top {
+    height: 25vh;
+  }
+}
+
+@media (min-width: 1200px) {
+  .project-image.card-img-top {
+    height: 25vh;
   }
 }
