@@ -1,4 +1,4 @@
-email_hello_user:                                 Hi %1% %2% (your TACT login : %3%)
+email_hello_user:                                 "Hi %1% %2% (your TACT login : %3%)"
 email_new_password_activate_link:                 Reset password
 email_new_password_request_1:                     You requested a new password for the TACT platform.
 email_new_password_request_2:                     In order to set your new password please click on the link below.

@@ -1,4 +1,4 @@
-email_hello_user:                                 Bonjour %1% %2% (votre identifiant TACT : %3%)
+email_hello_user:                                 "Bonjour %1% %2% (votre identifiant TACT %3% )"
 email_new_password_activate_link:                 Renouveler le mot de passe
 email_new_password_request_1:                     Vous avez demandé un nouvau mote de passe pour la plateforme TACT.
 email_new_password_request_2:                     Cliquez sur le lien ci-dessous par changer de mot de passe.
