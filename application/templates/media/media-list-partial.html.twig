@@ -28,7 +28,7 @@
           <input type="radio" name="options" id="option5"> {{'transcription_mine'|trans}}
         </label>
       </div>
-      <div class="ml-4 input-group input-group-sm">
+      <div class="mx-3 input-group input-group-sm">
         <div class="input-group-prepend">
           <div class="input-group-text">
             <i class="fas fa-filter"></i>
@@ -36,7 +36,11 @@
         </div>
         <input id="text-filter-media" class="form-control" type="text" value=""/>
       </div>
-      <a class="btn btn-sm btn-secondary ml-4" href="{{ path('project_transcriptions', {'id': project.id, 'all': not displayAll }) }}">{{ displayAll ? "toggle_tree"|trans : "toggle_untree"|trans}}</a>
+      <div class="input-group input-group-sm">
+        <a class="btn btn-sm btn-secondary" href="{{ path('project_transcriptions', {'id': project.id, 'all': not displayAll }) }}">
+          {{ displayAll ? "toggle_tree"|trans : "toggle_untree"|trans}}
+        </a>
+      </div>
     </form>
   </div>
 </div>
@@ -98,11 +102,9 @@
               <div class="d-flex justify-content-center">
                 <div class="btn-group">
                   {# display #}
-                  {% if transcriptionStatus != "none" %}
                   <a data-toggle="tooltip" title="{{'media_view_transcription_button_title'| trans}}" href="{{path('media_transcription_display', {'id': media.id})}}" class="btn btn-sm btn-outline-secondary">
                     <i class="fas fa-eye"></i>
                   </a>
-                  {% endif %}
                   {# transcribe #}
                   {% if not isLocked and canTranscribe and (transcriptionStatus == "none" or transcriptionStatus == "in-progress") %}
                   <a data-toggle="tooltip" title="{{'media_transcribe_button_title' | trans}}" href="{{path('media_transcription_edit', {'id': media.id,})}}" class="btn btn-sm btn-outline-secondary">
