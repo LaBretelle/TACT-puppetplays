@@ -65,7 +65,7 @@ class MediaRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getByProjectAndUserActivity(Project $project, Directory $parent = null, User $user)
+    public function getByProjectAndUserActivity(Project $project, Directory $parent = null, User $user, $allMedia)
     {
         $names = ['transcription_log_updated', 'transcription_log_waiting_for_validation', 'transcription_log_rereaded'];
 
@@ -81,17 +81,19 @@ class MediaRepository extends ServiceEntityRepository
           ->setParameter('names', $names)
           ->orderBy('tl.createdAt', 'DESC');
 
-        if (!$parent) {
-            $qb->andWhere('m.parent IS NULL');
-        } else {
-            $qb->andWhere('m.parent = :parent')->setParameter('parent', $parent);
+        if (!$allMedia) {
+          if (!$parent) {
+              $qb->andWhere('m.parent IS NULL');
+          } else {
+              $qb->andWhere('m.parent = :parent')->setParameter('parent', $parent);
+          }
         }
 
         return $qb->getQuery()->getResult();
     }
 
 
-    public function getByProjectAndLocked(Project $project, Directory $parent = null, User $user)
+    public function getByProjectAndLocked(Project $project, Directory $parent = null, User $user, $allMedia)
     {
         $now = new \DateTime;
         $nowMinus2 =  new \DateTime;
@@ -110,10 +112,12 @@ class MediaRepository extends ServiceEntityRepository
         ->setParameter('dateMinus2', $nowMinus2)
         ->setParameter('name', AppEnums::TRANSCRIPTION_LOG_LOCKED);
 
-        if (!$parent) {
+        if (!$allMedia) {
+          if (!$parent) {
             $qb->andWhere('m.parent IS NULL');
-        } else {
+          } else {
             $qb->andWhere('m.parent = :parent')->setParameter('parent', $parent);
+          }
         }
 
         return $qb->getQuery()->getResult();

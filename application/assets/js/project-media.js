@@ -336,6 +336,7 @@ const handleMediaSelection = (element) => {
 
 const filterOnTextAndStatus = () => {
   setTimeout(function () {
+
     let status = false
     let medias = Array.from(document.getElementsByClassName('status'))
     let statusBtn = document.querySelector('.media-filter.active')
@@ -346,6 +347,7 @@ const filterOnTextAndStatus = () => {
     }
 
     medias.forEach(function (media) {
+
       if (media.getAttribute('data-name').toLowerCase().includes(text) && (!status || (status && media.classList.contains(status)))) {
         media.parentNode.classList.remove('d-none')
       } else {

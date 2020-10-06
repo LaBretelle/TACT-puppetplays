@@ -1,6 +1,8 @@
 {% import "media/macros.html.twig" as macros %}
 
-{{ include('media/media-breadcrumb.html.twig', { 'project': project, 'parent': parent, 'from': from }) }}
+{% if not displayAll %}
+  {{ include('media/media-breadcrumb.html.twig', { 'project': project, 'parent': parent, 'from': from }) }}
+{% endif %}
 
 <div class='row mb-3'>
   <div class="col-12">
@@ -34,6 +36,7 @@
         </div>
         <input id="text-filter-media" class="form-control" type="text" value=""/>
       </div>
+      <a class="btn btn-sm btn-secondary ml-4" href="{{ path('project_transcriptions', {'id': project.id, 'all': not displayAll }) }}">{{ displayAll ? "toggle_tree"|trans : "toggle_untree"|trans}}</a>
     </form>
   </div>
 </div>
@@ -41,31 +44,47 @@
 <div class="album py-5 bg-light">
   <div class="container-fluid">
     <div class="row">
-      {% for dir in project.dirs if dir.parent == parent %}
-        <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-2">
-          <a href="{{(from == 'transcript') ? path('project_transcriptions', {id: project.id, parent: dir.id}) : path('project_media', {id: project.id, parent: dir.id})}}" class="card-link text-dark">
-            <div class="card project-directory-card mb-2">
-              <div class="project-directory card-img-top">
-                <i class="far fa-folder-open fa-4x "></i>
+      {% if not displayAll %}
+        {% for dir in project.dirs if dir.parent == parent %}
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-2">
+            <a href="{{(from == 'transcript') ? path('project_transcriptions', {id: project.id, parent: dir.id}) : path('project_media', {id: project.id, parent: dir.id})}}" class="card-link text-dark">
+              <div class="card project-directory-card mb-2">
+                <div class="project-directory card-img-top">
+                  <i class="far fa-folder-open fa-4x "></i>
+                </div>
+                <div class="card-body text-center">
+                    {{ dir.name }}
+                </div>
               </div>
-              <div class="card-body text-center">
-                  {{ dir.name }}
-              </div>
-            </div>
-          </a>
-        </div>
-      {% endfor %}
+            </a>
+          </div>
+        {% endfor %}
+      {% endif %}
 
       {% set canTranscribe = project | isAuthorizedOnProject('transcribe') %}
       {% set canValidate = project | isAuthorizedOnProject('validateTranscription') %}
-
+      {% set lastParent = null %}
+      {% set lastPathMedia = null %}
       {% for media in medias %}
         {% set transcription = media.transcription %}
         {% set transcriptionStatus = transcription|transcriptionStatus %}
         {% set inMine = (media in mine) ? true : false %}
         {% set isLocked = (media in transcriptionsLocked) ? true : false %}
+        {% set pathMedia = "" %}
+        {% if displayAll %}
+          {% if lastParent ==  media.parent %}
+            {% set pathMedia = lastPathMedia %}
+          {% else %}
+            {% set ancestors =  media.parent | mediaBreadcrumb %}
+            {% for ancestor in ancestors %}
+              {% set pathMedia = pathMedia ~ ancestor.name ~ "/" %}
+            {% endfor %}
+          {% endif %}
+          {% set lastParent = media.parent %}
+          {% set lastPathMedia = pathMedia %}
+        {% endif %}
         <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-2">
-          <div class="card project-directory-card mb-2 status {{ transcriptionStatus }} {{ inMine ? "mine"}}" data-name="{{ media.name }}">
+          <div class="card project-directory-card mb-2 status {{ transcriptionStatus }} {{ inMine ? "mine"}}" data-name="{{ pathMedia ~ media.name }}">
             <img loading="lazy" class="project-image card-img-top" src="{{ macros.mediaThumbnailURL(media) }}" data-full="{{ macros.mediaURL(media) }}" />
             <div class="card-body p-2 border-top">
               <div class="d-flex justify-content-center">
@@ -93,7 +112,7 @@
             </div>
             <div class="card-footer">
               <small class="text-muted">
-                <div>{{ media.name }}</div>
+                <div>{{ pathMedia ~ media.name }}</div>
                 <div>
                 {{ include('media/status.html.twig') }}
                 {% if isLocked %}
@@ -113,27 +132,6 @@
         <h5>{{'project_media_no_media' | trans}}</h5>
       </div>
       {% endif %}
-    </div>
-  </div>
-</div>
-
-{# delete project media confirm modal #}
-<div class="modal fade delete-project-media-confirm-modal" id="delete-project-media-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{'confirm_title'| trans}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h6>{{'confirm_delete_project_media' | trans}}</h6>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-action="cancel" data-dismiss="modal">{{'cancel' | trans}}</button>
-        <button type="button" data-action="confirm" data-dismiss="modal" class="btn btn-danger delete-media-confirm-button">{{'confirm' | trans}}</button>
-      </div>
     </div>
   </div>
 </div>

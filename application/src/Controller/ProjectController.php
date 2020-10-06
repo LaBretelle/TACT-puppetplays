@@ -390,17 +390,27 @@ class ProjectController extends AbstractController
      * @ParamConverter("project", class="App:Project", options={"id" = "id"})
      * @ParamConverter("parent", class="App:Directory", options={"id" = "parent"})
      */
-    public function displayTranscriptions(Project $project, Directory $parent = null)
+    public function displayTranscriptions(Project $project, Directory $parent = null, Request $request)
     {
         if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_VIEW_TRANSCRIPTIONS)) {
             throw new AccessDeniedException($this->translator->trans('access_denied'));
         }
-
         $user = $this->security->getUser();
+        $displayAll = $request->get('all') ?  $request->get('all'): false;
         $mediaRepo =  $this->getDoctrine()->getRepository(Media::class);
-        $medias = $mediaRepo->findby(['project' => $project,'parent' => $parent], ["name" => "ASC"]);
-        $mine = $user ? $mediaRepo->getByProjectAndUserActivity($project, $parent, $user): null;
-        $transcriptionsLocked = $user ? $mediaRepo->getByProjectAndLocked($project, $parent, $user): null;
+
+        $medias = (!$displayAll)
+          ? $mediaRepo->findby(['project' => $project,'parent' => $parent], ["name" => "ASC"])
+          : $mediaRepo->findby(['project' => $project], ["parent" => "ASC", "name" => "ASC"]);
+
+        $mine = ($user)
+          ? $mediaRepo->getByProjectAndUserActivity($project, $parent, $user, $displayAll)
+          : null;
+
+        $transcriptionsLocked = ($user)
+          ? $mediaRepo->getByProjectAndLocked($project, $parent, $user, $displayAll)
+          : null;
+
 
         return $this->render(
             'transcribe/index.html.twig',
@@ -410,10 +420,12 @@ class ProjectController extends AbstractController
               'medias' => $medias,
               'mine' => $mine,
               'transcriptionsLocked' =>  $transcriptionsLocked,
-              'from' => 'transcript'
+              'from' => 'transcript',
+              'displayAll' => $displayAll
             ]
         );
     }
+
 
     /**
      * @Route("/{id}/media-delete", name="media_delete", options={"expose"=true}, methods="POST")

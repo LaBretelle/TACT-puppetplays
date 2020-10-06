@@ -306,6 +306,8 @@ tei_schema:                               Schéma TEI pour le projet
 tei2json_help:                            <a target="_blank" href='https://gitlab.com/litt-arts-num/tei2json'>Script</a> utilisé pour formater un rng en json
 terms:                                    Conditions Générales d'Utilisation
 toggle_all_media_selection:               Sélectionner / Désélectionner tous les médias
+toggle_tree:                              Vue par répertoire
+toggle_untree:                            Tous les médias
 transcribe_link:                          Vous pouvez commencer à <a href="%transcribe%">transcrire</a> !
 transcribe_long:                          Vous permet d'accéder aux médias et de proposer des transcriptions.
 transcribe:                               Transcrire
