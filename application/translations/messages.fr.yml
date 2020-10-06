@@ -333,12 +333,12 @@ transcription_report_msg:                 Un problème (%reportType%) a été si
 transcription_reported:                   La transcription a été signalée
 transcription_saved:                      Transcription sauvegardée
 transcription_send_to_validation:         Demander une relecture
-transcription_status_in_progress:         Transcription en cours
-transcription_status_in_reread:           Transcription en relecture
+transcription_status_in_progress:         En cours
+transcription_status_in_reread:           En relecture
 transcription_status_in-reread:           Transcription en relecture
 transcription_status_no_transcription:    Aucune transcription
 transcription_status_none:                Aucune transcription
-transcription_status_validated:           Transcription terminée
+transcription_status_validated:           Terminée
 transcription_unvalidate:                 Invalider la transcription (et supprimer les reviews)
 transcription_unvalidated_msg:            La transcription concernant <a target="_blank" href="%url%">%media%</a> pour laquelle vous aviez demandé une relecture a été invalidée.
 transcription_unvalidated:                Transcription invalidée
