@@ -48,6 +48,9 @@ RUN rm -rf /etc/apache2/sites-available/* && rm -rf /etc/apache2/sites-enabled/*
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 ADD ./app.conf /etc/apache2/sites-available/app.conf
 ADD ./app-ssl.conf /etc/apache2/sites-available/app-ssl.conf
+ADD certs/server.crt /etc/ssl/certs/server.crt
+ADD certs/server-chain-file.crt /etc/ssl/certs/server-chain-file.crt
+ADD certs/server.key /etc/ssl/private/server.key
 
 RUN a2ensite app.conf
 RUN a2ensite app-ssl.conf
@@ -55,6 +58,7 @@ RUN a2enmod headers
 RUN a2enmod deflate
 RUN a2enmod rewrite
 RUN a2enmod ssl
+
 RUN service apache2 restart
 
 WORKDIR /var/www/
