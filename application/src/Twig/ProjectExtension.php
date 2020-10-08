@@ -43,7 +43,6 @@ class ProjectExtension extends AbstractExtension
     }
 
 
-
     public function getPercents(Project $project)
     {
         $total = $this->em->getRepository("App:Media")->countByProject($project);

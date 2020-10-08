@@ -1,4 +1,5 @@
 {% macro displayProject(project) %}
+  {% import _self as macros %}
   {% set userStatus = app.user|status(project) %}
 <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
   <div class="card mb-3 my-2">
@@ -12,7 +13,8 @@
             <span class="text-muted">{{ project.public ? 'is_public'|trans : 'project_is_not_public'|trans}}</span>
           </h5>
           <div>
-            {% include 'project/progressbar.html.twig' with {'project': project} %}
+            {% set percents = project|percents %}
+            {{ macros.displayPercents(percents) }}
           </div>
           {% endif %}
       </div>
@@ -39,4 +41,33 @@
       </div>
   </div>
 </div>
+{% endmacro %}
+
+{% macro displayPercents(percents) %}
+  {% set validated = percents[0]|round %}
+  {% set progressPercent = percents[1]|round %}
+  {% set inReview =  percents[2]|round %}
+  {% set noTranscription =  percents[3]|round %}
+  <div class="progress">
+    {% if noTranscription > 0 %}
+    <div data-toggle="tooltip" title="{{"transcription_status_none"|trans}}" class="progress-bar bg-danger" role="progressbar" style="width: {{ noTranscription }}%;">
+      {{ noTranscription }}%
+    </div>
+    {% endif %}
+    {% if progressPercent > 0 %}
+    <div data-toggle="tooltip" title="{{"transcription_status_in_progress"|trans}}" class="progress-bar bg-warning" role="progressbar" style="width: {{ progressPercent }}%;">
+      {{ progressPercent }}%
+    </div>
+    {% endif %}
+    {% if inReview > 0 %}
+    <div data-toggle="tooltip" title="{{"transcription_status_in_reread"|trans}}" class="progress-bar bg-info" role="progressbar" style="width: {{ inReview }}%;">
+      {{ inReview }}%
+    </div>
+    {% endif %}
+    {% if validated > 0 %}
+    <div data-toggle="tooltip" title="{{"transcription_status_validated"|trans}}" class="progress-bar bg-success" role="progressbar" style="width: {{ validated }}%;">
+      {{ validated }}%
+    </div>
+    {% endif %}
+  </div>
 {% endmacro %}

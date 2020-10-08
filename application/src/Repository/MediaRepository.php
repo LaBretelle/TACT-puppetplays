@@ -23,35 +23,60 @@ class MediaRepository extends ServiceEntityRepository
         parent::__construct($registry, Media::class);
     }
 
-    public function countValidated(Project $project)
+    public function countByAncestors($ancestors)
     {
         return $this->createQueryBuilder('m')
+          ->select('count(m.id)')
+          ->andWhere('m.parent IN (:ancestors)')
+          ->setParameter('ancestors', $ancestors)
+          ->getQuery()
+          ->getSingleScalarResult();
+    }
+
+    public function countValidated(Project $project, $ancestors = null)
+    {
+        $qb = $this->createQueryBuilder('m')
             ->select('count(m.id)')
             ->leftJoin('m.transcription', 't')
             ->andWhere('m.project = :project')
             ->andWhere('t.isValid = 1')
-            ->setParameter('project', $project)
+            ->setParameter('project', $project);
+
+        if ($ancestors) {
+            $qb->andWhere('m.parent IN (:ancestors)')
+               ->setParameter('ancestors', $ancestors);
+        }
+
+        return $qb
             ->getQuery()
             ->getSingleScalarResult();
     }
 
-    public function countInReview(Project $project)
+
+    public function countInReview(Project $project, $ancestors = null)
     {
-        return $this->createQueryBuilder('m')
+        $qb = $this->createQueryBuilder('m')
             ->select('count(m.id)')
             ->leftJoin('m.transcription', 't')
             ->leftJoin('t.reviewRequest', 'r')
             ->andWhere('m.project = :project')
             ->andWhere('r IS NOT NULL')
             ->andWhere('t.isValid = 0 OR t.isValid IS NULL')
-            ->setParameter('project', $project)
+            ->setParameter('project', $project);
+
+        if ($ancestors) {
+            $qb->andWhere('m.parent IN (:ancestors)')
+               ->setParameter('ancestors', $ancestors);
+        }
+
+        return $qb
             ->getQuery()
             ->getSingleScalarResult();
     }
 
-    public function countInProgress(Project $project)
+    public function countInProgress(Project $project, $ancestors = null)
     {
-        return $this->createQueryBuilder('m')
+        $qb = $this->createQueryBuilder('m')
             ->select('count(m.id)')
             ->join('m.transcription', 't')
             ->leftJoin('t.reviewRequest', 'r')
@@ -60,9 +85,16 @@ class MediaRepository extends ServiceEntityRepository
             ->andWhere('t.isValid = 0 OR t.isValid IS NULL')
             ->andWhere('r IS NULL')
             ->setParameter('project', $project)
-            ->setParameter('empty', '')
-            ->getQuery()
-            ->getSingleScalarResult();
+            ->setParameter('empty', '');
+
+        if ($ancestors) {
+            $qb->andWhere('m.parent IN (:ancestors)')
+               ->setParameter('ancestors', $ancestors);
+        }
+
+        return $qb
+                ->getQuery()
+                ->getSingleScalarResult();
     }
 
     public function getByProjectAndUserActivity(Project $project, Directory $parent = null, User $user, $allMedia)
@@ -82,11 +114,11 @@ class MediaRepository extends ServiceEntityRepository
           ->orderBy('tl.createdAt', 'DESC');
 
         if (!$allMedia) {
-          if (!$parent) {
-              $qb->andWhere('m.parent IS NULL');
-          } else {
-              $qb->andWhere('m.parent = :parent')->setParameter('parent', $parent);
-          }
+            if (!$parent) {
+                $qb->andWhere('m.parent IS NULL');
+            } else {
+                $qb->andWhere('m.parent = :parent')->setParameter('parent', $parent);
+            }
         }
 
         return $qb->getQuery()->getResult();
@@ -113,11 +145,11 @@ class MediaRepository extends ServiceEntityRepository
         ->setParameter('name', AppEnums::TRANSCRIPTION_LOG_LOCKED);
 
         if (!$allMedia) {
-          if (!$parent) {
-            $qb->andWhere('m.parent IS NULL');
-          } else {
-            $qb->andWhere('m.parent = :parent')->setParameter('parent', $parent);
-          }
+            if (!$parent) {
+                $qb->andWhere('m.parent IS NULL');
+            } else {
+                $qb->andWhere('m.parent = :parent')->setParameter('parent', $parent);
+            }
         }
 
         return $qb->getQuery()->getResult();
