@@ -1,3 +1,30 @@
+# Principaux changements
+
+> 10/2020
+
+* possiblité de s'affranchir de l'arborescence d'un projet et d'afficher tous les médias.
+* interface plus responsive
+
+> 09/2020
+
+* possibilité de faire référence à des médias hébergés sur des serveurs type IIIF
+* installation plus facile de TACT
+
+> 02/2020
+
+* application possible d'une XSLT à l'export d'un projet
+* export de métadonnées liées à la plateforme/projet
+
+> 12/2019
+
+* possibilité de notification par mail des événements pour les gestionnaires de projet (en plus des notifications en interne)
+* suivi de l'activité via une page de logs, par projet ou plus globalement sur la plateforme.
+
+> 08/2019
+
+* possibilité d'importer des transcriptions pré-existantes
+
+
 # v1.11.0
 
 > 08/02/2019
