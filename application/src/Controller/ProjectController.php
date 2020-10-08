@@ -68,12 +68,12 @@ class ProjectController extends AbstractController
     public function list()
     {
         $em = $this->getDoctrine()->getManager();
-        $projectsUnarchived = $em->getRepository(Project::class)->findBy(["archived" => false], ["id" => "DESC"]);
+        $projectsUnarchived = $em->getRepository(Project::class)->findUnarchivedSortedByLog();
         $projectsArchived = $em->getRepository(Project::class)->findBy(["archived" => true], ["id" => "DESC"]);
 
         return $this->render('project/list.html.twig', [
-         'projectsUnarchived' => $projectsUnarchived,
-         'projectsArchived' => $projectsArchived,
+          'projectsUnarchived' => $projectsUnarchived,
+          'projectsArchived' => $projectsArchived,
         ]);
     }
 
@@ -290,7 +290,7 @@ class ProjectController extends AbstractController
               'form' => $form->createView(),
               'project' => $project
             ]
-      );
+        );
     }
 
     /**
