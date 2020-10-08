@@ -4,6 +4,7 @@
 
 * possiblité de s'affranchir de l'arborescence d'un projet et d'afficher tous les médias.
 * interface plus responsive
+* les projets sont maintenant triés par dernière activité.
 
 > 09/2020
 
