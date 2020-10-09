@@ -1,4 +1,5 @@
 {% import "media/macros.html.twig" as macros %}
+{% import "project/macros.html.twig" as pmacros %}
 
 {% if not displayAll %}
   {{ include('media/media-breadcrumb.html.twig', { 'project': project, 'parent': parent, 'from': from }) }}
@@ -48,21 +49,24 @@
 <div class="album py-5 bg-light">
   <div class="container-fluid">
     <div class="row">
-
       {# AFFICHAGE DES DOSSIERS #}
       {% if not displayAll %}
         {% for dir in project.dirs if dir.parent == parent %}
           {% set childrenCount = dir.children|length %}
           {% set mediaCount = dir.medias|length %}
           {% if childrenCount > 0 or mediaCount > 0 %}
+          {% set percents = dir|directoryPercents %}
           <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-2">
-            <a href="{{(from == 'transcript') ? path('project_transcriptions', {id: project.id, parent: dir.id}) : path('project_media', {id: project.id, parent: dir.id})}}" class="card-link text-dark">
+            <a class="card-link text-dark status {{percents[0] > 0 ? "validated"}} {{percents[1] > 0 ? "in-progress"}} {{percents[2] > 0 ? "in-reread"}} {{percents[3] > 0 ? "none"}}" data-name="{{ dir.name }}" href="{{(from == 'transcript') ? path('project_transcriptions', {id: project.id, parent: dir.id}) : path('project_media', {id: project.id, parent: dir.id})}}" >
               <div class="card project-directory-card mb-2">
                 <div class="project-directory card-img-top">
                   <i class="far fa-folder-open fa-4x "></i>
                 </div>
                 <div class="card-body text-center">
-                    {{ dir.name }}
+                  {{ dir.name }}
+                </div>
+                <div class="card-footer">
+                  {{ pmacros.displayPercents(percents) }}
                 </div>
               </div>
             </a>

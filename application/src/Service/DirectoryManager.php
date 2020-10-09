@@ -38,4 +38,23 @@ class DirectoryManager
         $this->em->persist($dir);
         $this->em->flush();
     }
+
+    public function getSubordinates(Directory $dir)
+    {
+        $surbodinates = [];
+        
+        return $this->findRecursiveChildren($surbodinates, $dir);
+    }
+
+    private function findRecursiveChildren(&$surbodinates, $dir)
+    {
+        $surbodinates[] = $dir;
+        if ($dir->getChildren()) {
+            foreach ($dir->getChildren() as $children) {
+                $this->findRecursiveChildren($surbodinates, $children);
+            }
+        }
+
+        return $surbodinates;
+    }
 }

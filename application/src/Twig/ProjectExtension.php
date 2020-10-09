@@ -2,30 +2,33 @@
 
 namespace App\Twig;
 
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
 use App\Entity\Project;
 use App\Service\FileManager;
+use App\Service\MathManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 class ProjectExtension extends AbstractExtension
 {
     protected $em;
     protected $fm;
+    protected $mm;
 
-    public function __construct(EntityManagerInterface $em, FileManager $fm)
+    public function __construct(EntityManagerInterface $em, FileManager $fm, MathManager $mm)
     {
         $this->em = $em;
         $this->fm = $fm;
+        $this->mm = $mm;
     }
 
     public function getFilters()
     {
-        return array(
-            new TwigFilter('percents', array($this, 'getPercents')),
-            new TwigFilter('hasXsl', array($this, 'hasXsl')),
-            new TwigFilter('hasScheme', array($this, 'hasScheme')),
-        );
+        return [
+            new TwigFilter('percents', [$this, 'getPercents']),
+            new TwigFilter('hasXsl', [$this, 'hasXsl']),
+            new TwigFilter('hasScheme', [$this, 'hasScheme']),
+        ];
     }
 
     public function hasXsl(Project $project)
@@ -43,7 +46,6 @@ class ProjectExtension extends AbstractExtension
     }
 
 
-
     public function getPercents(Project $project)
     {
         $total = $this->em->getRepository("App:Media")->countByProject($project);
@@ -53,27 +55,6 @@ class ProjectExtension extends AbstractExtension
         $review = (int)$this->em->getRepository("App:Media")->countInReview($project);
         $none = $total - ($validated + $review + $progress);
 
-        $validatedPercent = ($validated != 0)
-          ? $validated/$total*100
-          : 0;
-
-        $progressPercent = ($progress != 0)
-          ? $progress/$total*100
-          : 0;
-
-        $reviewPercent = ($review != 0)
-          ? $review/$total*100
-          : 0;
-
-        $nonePercent = ($none != 0)
-          ? $none/$total*100
-          : 0;
-
-        return [
-          $validatedPercent,
-          $progressPercent,
-          $reviewPercent,
-          $nonePercent
-        ];
+        return $this->mm->getPercents($total, $validated, $progress, $review, $none);
     }
 }
