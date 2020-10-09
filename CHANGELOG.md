@@ -2,9 +2,10 @@
 
 > 10/2020
 
-* possiblité de s'affranchir de l'arborescence d'un projet et d'afficher tous les médias.
+* possibilité de s'affranchir de l'arborescence d'un projet et d'afficher tous les médias.
 * interface plus responsive
 * les projets sont maintenant triés par dernière activité.
+* affichage de l'avancement des transcriptions par dossier
 
 > 09/2020
 
