@@ -2,27 +2,30 @@
 
 namespace App\Twig;
 
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
 use App\Entity\Directory;
 use App\Service\DirectoryManager;
+use App\Service\MathManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 class DirectoryExtension extends AbstractExtension
 {
     protected $em;
     protected $dm;
+    protected $mm;
 
-    public function __construct(EntityManagerInterface $em, DirectoryManager $dm)
+    public function __construct(EntityManagerInterface $em, DirectoryManager $dm, MathManager $mm)
     {
         $this->em = $em;
         $this->dm = $dm;
+        $this->mm = $mm;
     }
 
     public function getFilters()
     {
         return [
-            new TwigFilter('directoryPercents', array($this, 'getPercents'))
+            new TwigFilter('directoryPercents', [$this, 'getPercents'])
         ];
     }
 
@@ -37,27 +40,6 @@ class DirectoryExtension extends AbstractExtension
         $review = (int)$this->em->getRepository("App:Media")->countInReview($project, $ancestors);
         $none = $total - ($validated + $review + $progress);
 
-        $validatedPercent = ($validated != 0)
-          ? $validated/$total*100
-          : 0;
-
-        $progressPercent = ($progress != 0)
-          ? $progress/$total*100
-          : 0;
-
-        $reviewPercent = ($review != 0)
-          ? $review/$total*100
-          : 0;
-
-        $nonePercent = ($none != 0)
-          ? $none/$total*100
-          : 0;
-
-        return [
-          $validatedPercent,
-          $progressPercent,
-          $reviewPercent,
-          $nonePercent
-        ];
+        return $this->mm->getPercents($total, $validated, $progress, $review, $none);
     }
 }
