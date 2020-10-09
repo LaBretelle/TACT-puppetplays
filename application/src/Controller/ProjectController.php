@@ -68,7 +68,7 @@ class ProjectController extends AbstractController
     public function list()
     {
         $em = $this->getDoctrine()->getManager();
-        $projectsUnarchived = $em->getRepository(Project::class)->findUnarchivedSortedByLog();
+        $projectsUnarchived = $em->getRepository(Project::class)->findBy(["archived" => false], ["id" => "DESC"]);
         $projectsArchived = $em->getRepository(Project::class)->findBy(["archived" => true], ["id" => "DESC"]);
 
         return $this->render('project/list.html.twig', [
