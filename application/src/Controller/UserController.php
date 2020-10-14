@@ -8,8 +8,8 @@ use App\Form\UserType;
 use App\Form\UserTypeFull;
 use App\Service\FlashManager;
 use App\Service\MailManager;
-use App\Service\UserManager;
 use App\Service\PermissionManager;
+use App\Service\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +34,7 @@ class UserController extends AbstractController
         MailManager $mailManager,
         TranslatorInterface $translator,
         FlashManager $flashManager
-      ) {
+    ) {
         $this->userManager = $userManager;
         $this->mailManager = $mailManager;
         $this->translator = $translator;
@@ -240,7 +240,7 @@ class UserController extends AbstractController
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             'user-'.$user->getFirstName().'-'.$user->getLastName().'-export.json'
-         );
+        );
         $response->headers->set('Content-Disposition', $disposition);
         $response->headers->set('Content-Type', 'application/json');
 

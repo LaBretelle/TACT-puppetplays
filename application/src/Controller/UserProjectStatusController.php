@@ -99,12 +99,12 @@ class UserProjectStatusController extends AbstractController
         $form = $this->createForm(UserStatusType::class, $status);
 
         return $this->render(
-          'project/user-status-form.html.twig',
-          [
+            'project/user-status-form.html.twig',
+            [
             'form' => $form->createView(),
             'status' => $status,
           ]
-      );
+        );
     }
 
     /**
@@ -142,8 +142,8 @@ class UserProjectStatusController extends AbstractController
         }
 
         return $this->render(
-          'project/user-statuses.html.twig',
-          ['project' => $project]
-      );
+            'project/user-statuses.html.twig',
+            ['project' => $project]
+        );
     }
 }

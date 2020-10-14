@@ -43,7 +43,7 @@ class CommentController extends AbstractController
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $this->commentManager->save($comment);
         }
-        
+
         return $this->redirect($request->headers->get('referer'));
     }
 

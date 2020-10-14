@@ -2,13 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\EditorialContent;
 use App\Entity\IiifServer;
-use App\Entity\Platform;
 use App\Entity\Project;
 use App\Form\IiifServerType;
 use App\Service\AppEnums;
-use App\Service\FlashManager;
+use App\Service\IiifManager;
 use App\Service\PermissionManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,19 +19,20 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class IIIFServerController extends AbstractController
 {
-    private $flashManager;
+    private $iiifManager;
     private $permissionManager;
     private $translator;
 
     public function __construct(
-      FlashManager $flashManager,
-      PermissionManager $permissionManager,
-      TranslatorInterface $translator
+        IiifManager $iiifManager,
+        PermissionManager $permissionManager,
+        TranslatorInterface $translator
     ) {
-        $this->flashManager = $flashManager;
+        $this->iiifManager = $iiifManager;
         $this->permissionManager = $permissionManager;
         $this->translator = $translator;
     }
+
     /**
      * @Route("/{projectId}/edit/{serverId}", name="edit", defaults={"serverId"=null} )
      * @ParamConverter("project", class="App:Project", options={"id" = "projectId"})
@@ -46,36 +45,29 @@ class IIIFServerController extends AbstractController
         }
 
         if (!$server) {
-            $server = new IiifServer;
-            $server->setProject($project);
+            $server = $this->iiifManager->create($project);
         }
 
         $form = $this->createForm(IiifServerType::class, $server);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($server);
-            $em->flush();
-            $this->flashManager->add('notice', 'Serveur créé');
+            $this->iiifManager->save($server);
 
             return $this->redirectToRoute('project_edit-iiif', ['id' => $project->getId()]);
         }
 
         return $this->render(
-          'iiif-server/edit.html.twig',
-          [
+            'iiif-server/edit.html.twig',
+            [
             'form' => $form->createView(),
             'project' => $project,
             'server' => $server
           ]
-    );
+        );
     }
-
 
     /**
      * @Route("/delete/{id}", name="delete")
-
      */
     public function delete(IiifServer $server)
     {
@@ -84,12 +76,7 @@ class IIIFServerController extends AbstractController
             throw new AccessDeniedException($this->translator->trans('access_denied'));
         }
 
-        if (count($server->getMedias()) == 0) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($server);
-            $em->flush();
-            $this->flashManager->add('notice', 'Serveur supprimé');
-        }
+        $this->iiifManager->delete($server);
 
         return $this->redirectToRoute('project_edit-iiif', ['id' => $project->getId()]);
     }

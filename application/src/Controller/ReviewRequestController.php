@@ -22,8 +22,8 @@ class ReviewRequestController extends AbstractController
     private $permissionManager;
 
     public function __construct(
-      ReviewRequestManager $reviewRequestManager,
-      PermissionManager $permissionManager
+        ReviewRequestManager $reviewRequestManager,
+        PermissionManager $permissionManager
     ) {
         $this->reviewRequestManager = $reviewRequestManager;
         $this->permissionManager = $permissionManager;
