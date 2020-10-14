@@ -1,6 +1,11 @@
 <div>
-  {{"have_contributed"|trans}} ({{contributors|length}}):
+  {{"have_contributed"|trans}} ({{contributors|length}}): <br/>
   {% for i, contributor in contributors %}
-    {{ contributor.username }} <span class="text-muted">-</span>
+    <a target="_blank" href="{{path('user_profile', {id: contributor.id})}}">
+      {% set imgUrl = contributor.image ? 'user_images/' ~ contributor.image : 'img/avatar-placeholder_640.png'  %}
+      <img class="border border-dark rounded-circle" src="{{asset(imgUrl)}}" height="20px" width="20px">
+      {{ contributor.username }}
+    </a>
+    <span class="text-muted">-</span>
   {% endfor %}
 </div>
