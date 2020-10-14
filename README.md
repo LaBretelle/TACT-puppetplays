@@ -1,4 +1,4 @@
-## TACT - plateforme de Transcription et d'Annotation de Corpus Textuels
+## TACT - plateforme de Transcription et d'Annotation de Corpus Textuels
 ---------------------
 
 ### Requirements
