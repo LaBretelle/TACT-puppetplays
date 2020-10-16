@@ -6,7 +6,7 @@
       <a href="{{ path("project_display", {'id': project.id} )}}">
         <img loading="lazy" class="card-img-top" src="{{ project.image ? asset('project_files/'~project.id~'/'~project.image) : asset('img/project-placeholder.png') }}">
       </a>
-      <div class="card-body">
+      <div class="card-body border-top">
           <h4 class="card-title mb-1 font-weight-light project-title">{{ project.name }}</h4>
           {% if project.archived == false %}
           <h5 class="card-subtitle mb-1 font-weight-light">
