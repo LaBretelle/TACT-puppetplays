@@ -6,6 +6,8 @@
 * interface plus responsive
 * les projets sont maintenant triés par dernière activité.
 * affichage de l'avancement des transcriptions par dossier
+* possibilité de s'envoyer des messages entre utilisateurs
+* possibilité pour un gestionnaire de projet d'envoyer un message à tous les inscrits d'un projet
 
 > 09/2020
 

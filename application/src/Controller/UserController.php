@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserResetPasswordType;
 use App\Form\UserType;
+use App\Form\MessageType;
 use App\Form\UserTypeFull;
 use App\Service\FlashManager;
 use App\Service\MailManager;
+use App\Service\MessageManager;
 use App\Service\PermissionManager;
 use App\Service\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,17 +28,20 @@ class UserController extends AbstractController
 {
     private $userManager;
     private $mailManager;
+    private $messageManager;
     private $translator;
     private $flashManager;
 
     public function __construct(
         UserManager $userManager,
         MailManager $mailManager,
+        MessageManager $messageManager,
         TranslatorInterface $translator,
         FlashManager $flashManager
     ) {
         $this->userManager = $userManager;
         $this->mailManager = $mailManager;
+        $this->messageManager = $messageManager;
         $this->translator = $translator;
         $this->flashManager = $flashManager;
     }
@@ -62,6 +67,38 @@ class UserController extends AbstractController
             array('form' => $form->createView())
         );
     }
+
+
+    /**
+     * Send a message to a user
+     *
+     * @Route("/message/{id}", name="message")
+     */
+    public function message(User $user, Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, $this->translator->trans('access_denied', [], 'messages'));
+
+        $connectedUser = $this->getUser();
+        if ($connectedUser->getId() == $user->getId()) {
+            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
+        }
+
+        $form = $this->createForm(MessageType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $content = $form->get('content')->getData();
+            $this->messageManager->create([$user], $content, $connectedUser, true);
+            $this->flashManager->add('notice', 'message_sent');
+
+            return $this->redirectToRoute('user_profile', ['id' => $user->getId()]);
+        }
+
+        return $this->render(
+            'user/message.html.twig',
+            ['form' => $form->createView(), 'user' => $user]
+        );
+    }
+
 
     /**
      * Edit a user account. Should be reachable by admin or owner of the account.

@@ -153,9 +153,18 @@ media_upload_iiif_help:                   Choisissez l'archive à uploader. Les 
 media_view_transcription_button_title:    Voir la transcription
 media:                                    Média
 medias:                                   Médias
+message_content:                          Contenu du message
+message_delete:                           Supprimer
 message_deleted:                          Le message a été supprimé
+message_from_user:                        Message de %username% :
 message_list:                             Messages
+message_project:                          Envoi d'un message aux membres
+message_reply:                            Répondre
+message_send:                             Envoyer le message
+message_sent:                             Le message a été envoyé
 message_set_as_read_done:                 Le message a été marqué comme lu
+message_set_as_read:                      Marquer comme lu
+message_user:                             Envoyer un message
 messages_delete_read_done:                Les messages lus ont été supprimés
 messages_delete_read:                     Supprimer tous les messages lus
 messages_delete:                          Supprimer tous les messages
