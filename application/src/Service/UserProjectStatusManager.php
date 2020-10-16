@@ -25,14 +25,14 @@ class UserProjectStatusManager
     protected $router;
 
     public function __construct(
-      EntityManagerInterface $em,
-      AuthorizationCheckerInterface $authChecker,
-      TokenStorageInterface $tokenStorage,
-      FlashManager $fm,
-      MessageManager $messageManager,
-      TranslatorInterface $translator,
-      UrlGeneratorInterface $router
-      ) {
+        EntityManagerInterface $em,
+        AuthorizationCheckerInterface $authChecker,
+        TokenStorageInterface $tokenStorage,
+        FlashManager $fm,
+        MessageManager $messageManager,
+        TranslatorInterface $translator,
+        UrlGeneratorInterface $router
+    ) {
         $this->em = $em;
         $this->authChecker = $authChecker;
         $this->user = ($tokenStorage->getToken()) ? $tokenStorage->getToken()->getUser(): null;
@@ -57,7 +57,7 @@ class UserProjectStatusManager
             $admins = $this->em->getRepository(User::class)->getManagersByProject($project);
             $url = $this->router->generate("status_project", ["id" => $project->getId()]);
             $message = $this->translator->trans('user_needs_validation', ['%url%' => $url, '%project%' => $project->getName()]);
-            $this->messageManager->create($admins, $message, false);
+            $this->messageManager->create($admins, $message, null, false);
         }
 
         $this->em->persist($userProjectStatus);
@@ -127,7 +127,7 @@ class UserProjectStatusManager
         $user = $ups->getUser();
 
         $message = $this->translator->trans($message, ['%project%' => $projectName]);
-        $this->messageManager->create([$user], $message);
+        $this->messageManager->create([$user], $message, null);
     }
 
     public function canEdit(UserProjectStatus $ups, $oldStatus = null)

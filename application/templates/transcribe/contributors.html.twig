@@ -1,13 +1,33 @@
 <div>
   {{"have_contributed"|trans}} ({{contributors|length}}): <br/>
   {% for i, contributor in contributors %}
-    <a target="_blank" href="{{path('user_profile', {id: contributor.id})}}">
     {% if contributor.image %}
       {% set imgUrl = 'user_images/' ~ contributor.image  %}
       <img class="border border-dark rounded-circle" src="{{asset(imgUrl)}}" height="20px" width="20px">
+    {% else %}
+      {% set imgUrl = 'img/avatar-placeholder_640.png' %}
     {% endif %}
+    <a href="#"
+      data-trigger="focus"
+      data-toggle="popover"
+      data-html="true"
+      data-placement="bottom"
+      data-content="
+        <div>
+          <a target='_blank' href='{{path('user_profile', {id: contributor.id})}}'>
+            Profil
+          </a>
+          {% if app.user != contributor %}
+          -
+          <a target='_blank' href='{{path('user_message', {id: contributor.id})}}'>
+            Message
+          </a>
+          {% endif %}
+        </div>
+        <img height=150 src='{{asset(imgUrl)}}' />
+      ">
       {{ contributor.username }}
     </a>
-    <span class="text-muted">-</span>
+  <span class="text-muted">-</span>
   {% endfor %}
 </div>

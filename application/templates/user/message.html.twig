@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+  {% include 'header.html.twig' with {'title' : 'message_user'} %}
+
+  <div id="main-container">
+    <h3>
+      Message à <span class="text-muted">{{ user.username }}</span>
+    </h3>
+    {{ form(form) }}
+  </div>
+{% endblock %}

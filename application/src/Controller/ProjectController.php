@@ -5,20 +5,22 @@ namespace App\Controller;
 use App\Entity\Directory;
 use App\Entity\Media;
 use App\Entity\Project;
+use App\Entity\TranscriptionLog;
 use App\Entity\User;
 use App\Entity\UserProjectStatus;
 use App\Entity\UserStatus;
-use App\Entity\TranscriptionLog;
 use App\Form\ExportType;
-use App\Form\ProjectMediaType;
-use App\Form\XmlType;
 use App\Form\IIIFImportType;
+use App\Form\MessageProjectType;
 use App\Form\ProjectAdvancedType;
 use App\Form\ProjectBasicType;
+use App\Form\ProjectMediaType;
+use App\Form\XmlType;
 use App\Service\AppEnums;
 use App\Service\ExportManager;
 use App\Service\FileManager;
 use App\Service\FlashManager;
+use App\Service\MessageManager;
 use App\Service\PermissionManager;
 use App\Service\ProjectManager;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -43,6 +45,7 @@ class ProjectController extends AbstractController
     private $translator;
     private $security;
     private $exportManager;
+    private $messageManager;
 
     public function __construct(
         ProjectManager $projectManager,
@@ -51,7 +54,8 @@ class ProjectController extends AbstractController
         PermissionManager $permissionManager,
         TranslatorInterface $translator,
         Security $security,
-        ExportManager $exportManager
+        ExportManager $exportManager,
+        MessageManager $messageManager
     ) {
         $this->projectManager = $projectManager;
         $this->fileManager = $fileManager;
@@ -60,6 +64,36 @@ class ProjectController extends AbstractController
         $this->translator = $translator;
         $this->security = $security;
         $this->exportManager = $exportManager;
+        $this->messageManager = $messageManager;
+    }
+
+    /**
+    * @Route("/{id}/message", name="message")
+    */
+    public function message(Project $project, Request $request)
+    {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
+        }
+
+        $form = $this->createForm(MessageProjectType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $connectedUser = $this->getUser();
+            $em = $this->getDoctrine()->getManager();
+            $users = $em->getRepository(User::class)->getEveryoneByProject($project);
+            $content = $form->get('content')->getData();
+            $this->messageManager->create($users, $content, $connectedUser, true);
+
+            $this->flashManager->add('notice', 'message_sent');
+
+            return $this->redirectToRoute('project_display', ['id' => $project->getId()]);
+        }
+
+        return $this->render('project/message.html.twig', [
+          'form' => $form->createView(),
+          'project' => $project
+        ]);
     }
 
     /**

@@ -9,6 +9,11 @@
   <div class="row user-profile-action">
     <div class="col text-right">
       <div class="btn-group">
+        {% if app.user and app.user != user %}
+        <a class="btn btn-link" href="{{ path("user_message", {id: user.id})}}">
+          <i class="far fa-comment-dots"></i> {{ 'message_user' | trans}}
+        </a>
+        {% endif %}
         {% if app.user == user or is_granted('ROLE_ADMIN') %}
           <a class="btn btn-link" href="{{ path("user_edit", {id: user.id})}}">
             <i class="fas fa-edit"></i> {{ 'user_edit' | trans}}
@@ -19,6 +24,7 @@
             </button>
           </form>
         {% endif %}
+
       </div>
     </div>
   </div>

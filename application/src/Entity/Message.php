@@ -33,6 +33,11 @@ class Message
      */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    private $sender;
+
     public function __construct()
     {
         $this->recipients = new ArrayCollection();
@@ -95,6 +100,18 @@ class Message
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getSender(): ?User
+    {
+        return $this->sender;
+    }
+
+    public function setSender(?User $sender): self
+    {
+        $this->sender = $sender;
 
         return $this;
     }

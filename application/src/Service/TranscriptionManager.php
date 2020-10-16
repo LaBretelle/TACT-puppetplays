@@ -27,13 +27,13 @@ class TranscriptionManager
     protected $router;
 
     public function __construct(
-      EntityManagerInterface $em,
-      Security $security,
-      ParameterBagInterface $params,
-      PermissionManager $permissionManager,
-      MessageManager $mm,
-      TranslatorInterface $translator,
-      UrlGeneratorInterface $router
+        EntityManagerInterface $em,
+        Security $security,
+        ParameterBagInterface $params,
+        PermissionManager $permissionManager,
+        MessageManager $mm,
+        TranslatorInterface $translator,
+        UrlGeneratorInterface $router
     ) {
         $this->em = $em;
         $this->security = $security;
@@ -124,7 +124,7 @@ class TranscriptionManager
               : $this->router->generate("media_transcription_edit", ["id" => $media->getId()]);
             $message = $isValid ? 'transcription_validated_msg' : 'transcription_unvalidated_msg';
             $message = $this->translator->trans($message, ['%url%' => $url, '%media%' => $media->getName()]);
-            $this->mm->create([$request->getUser()], $message, false);
+            $this->mm->create([$request->getUser()], $message, null, false);
         }
 
         // create log
@@ -150,7 +150,7 @@ class TranscriptionManager
         ]);
 
         $users = $this->em->getRepository(User::class)->getManagersOrAdminsByProject($media->getProject());
-        $this->mm->create($users, $message, true);
+        $this->mm->create($users, $message, null, true);
 
         return;
     }

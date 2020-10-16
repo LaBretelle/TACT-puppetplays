@@ -25,13 +25,13 @@ class ReviewManager
     protected $translator;
 
     public function __construct(
-      EntityManagerInterface $em,
-      FlashManager $fm,
-      Security $security,
-      TranscriptionManager $tm,
-      MessageManager $mm,
-      UrlGeneratorInterface $router,
-      TranslatorInterface $translator
+        EntityManagerInterface $em,
+        FlashManager $fm,
+        Security $security,
+        TranscriptionManager $tm,
+        MessageManager $mm,
+        UrlGeneratorInterface $router,
+        TranslatorInterface $translator
     ) {
         $this->em = $em;
         $this->fm = $fm;
@@ -74,7 +74,7 @@ class ReviewManager
         $message = $review->getIsValid() ? 'positive_review' : 'negative_review';
         $url = $this->router->generate("media_transcription_display", ["id" => $media->getId()]);
         $message = $this->translator->trans($message, ['%url%' => $url, '%media%' => $media->getName(), '%comment%' => $review->getComment()]);
-        $this->mm->create([$requestUser], $message, false);
+        $this->mm->create([$requestUser], $message, null, false);
 
         $this->em->flush();
 
@@ -99,15 +99,15 @@ class ReviewManager
 
     public function testForValidation(Transcription $transcription, Project $project)
     {
-      // TODO > en un seul parcours
-      $nbPositiveReviews = $this->countReview($transcription, true);
-      $nbNegativeReviews = $this->countReview($transcription, false);
-      if ($nbPositiveReviews >= $project->getNbValidation()) {
-          $this->tm->validate($transcription, true);
-      } elseif($nbNegativeReviews >= $project->getNbValidation()) {
-        $this->tm->validate($transcription, false);
-      }
+        // TODO > en un seul parcours
+        $nbPositiveReviews = $this->countReview($transcription, true);
+        $nbNegativeReviews = $this->countReview($transcription, false);
+        if ($nbPositiveReviews >= $project->getNbValidation()) {
+            $this->tm->validate($transcription, true);
+        } elseif ($nbNegativeReviews >= $project->getNbValidation()) {
+            $this->tm->validate($transcription, false);
+        }
 
-      return;
+        return;
     }
 }

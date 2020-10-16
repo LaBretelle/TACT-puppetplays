@@ -62,7 +62,7 @@ class CommentManager
             }
         }
 
-        $this->mm->create($recipients, $msg, false);
+        $this->mm->create($recipients, $msg, null, false);
 
         $this->em->persist($comment);
         $this->em->flush();
