@@ -7,10 +7,12 @@
     {% else %}
       {% set imgUrl = 'img/avatar-placeholder_640.png' %}
     {% endif %}
-    <a href="#"
+    <span
+      role="button"
       data-trigger="focus"
       data-toggle="popover"
       data-html="true"
+      tabindex="-1"
       data-placement="bottom"
       data-content="
         <div>
@@ -27,7 +29,7 @@
         <img height=150 src='{{asset(imgUrl)}}' />
       ">
       {{ contributor.username }}
-    </a>
+    </span>
   <span class="text-muted">-</span>
   {% endfor %}
 </div>
