@@ -271,4 +271,20 @@ class MediaController extends AbstractController
 
         return $this->file($exportDir.$xmlName);
     }
+
+    /**
+     * @Route("/{id}/infos", name="infos", options={"expose"=true})
+     */
+    public function infos(Media $media)
+    {
+        $project = $media->getProject();
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
+        }
+
+        $data = [];
+        $data["template"] = $this->renderView('media/infos.html.twig', ['media' => $media]);
+
+        return $this->json($data);
+    }
 }

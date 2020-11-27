@@ -110,6 +110,11 @@ class Project
      */
     private $iiifServers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Metadata::class, mappedBy="project", orphanRemoval=true)
+     */
+    private $metadatas;
+
 
     public function __construct()
     {
@@ -117,6 +122,7 @@ class Project
         $this->medias = new ArrayCollection();
         $this->dirs = new ArrayCollection();
         $this->iiifServers = new ArrayCollection();
+        $this->metadatas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -399,6 +405,37 @@ class Project
             // set the owning side to null (unless already changed)
             if ($iiifServer->getProject() === $this) {
                 $iiifServer->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Metadata[]
+     */
+    public function getMetadatas(): Collection
+    {
+        return $this->metadatas;
+    }
+
+    public function addMetadata(Metadata $metadata): self
+    {
+        if (!$this->metadatas->contains($metadata)) {
+            $this->metadatas[] = $metadata;
+            $metadata->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMetadata(Metadata $metadata): self
+    {
+        if ($this->metadatas->contains($metadata)) {
+            $this->metadatas->removeElement($metadata);
+            // set the owning side to null (unless already changed)
+            if ($metadata->getProject() === $this) {
+                $metadata->setProject(null);
             }
         }
 

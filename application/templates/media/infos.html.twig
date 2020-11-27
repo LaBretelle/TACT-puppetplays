@@ -1,0 +1,73 @@
+{% import "media/macros.html.twig" as macros %}
+
+{% set mediaURL = macros.mediaURL(media) %}
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#media-image" role="tab" aria-controls="home" aria-selected="true">
+    Image
+    </a>
+  </li>
+  {% if media.metadatas|length > 0 %}
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#media-metadatas" role="tab" aria-controls="profile" aria-selected="false">Metadonnées</a>
+    </li>
+  {% endif %}
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#media-informations" role="tab" aria-controls="contact" aria-selected="false">Informations</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane fade show active mt-4" id="media-image" role="tabpanel">
+    <img style="width:100%;" src="{{ mediaURL }}" />
+  </div>
+  {% if media.metadatas|length > 0 %}
+    <div class="tab-pane fade mt-4" id="media-metadatas" role="tabpanel">
+      <div class="row">
+        <div class="col-6 metadata-container border-right">
+          <span class="btn btn-sm btn-secondary mb-2" data-media="{{media.id}}" id="edit-metadatas">
+            {{"metadata_edit"|trans}}
+          </span>
+          <ul class="list-group">
+          {% for metadata in media.metadatas %}
+            <li class="list-group-item">
+              <span class="text-muted">{{metadata.metadata.name}}</span> : {{ metadata.value }}
+            </li>
+          {% endfor %}
+          </ul>
+        </div>
+        <div class="col">
+          <img style="width:100%;" src="{{ mediaURL }}" />
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <div class="tab-pane fade mt-4" id="media-informations" role="tabpanel">
+    <div class="row">
+      <div class="col-6 border-right">
+        <ul class="list-group">
+          {% if media.IiifServer %}
+          <li class="list-group-item">
+            <span class="text-muted">serveur IIIF</span> :
+            {{media.iiifServer.name}} - {{media.iiifServer.url}}
+          </li>
+          {% endif %}
+          <li class="list-group-item">
+            <span class="text-muted">URL</span> :
+            <a target="_blank" href="{{ mediaURL }}">
+              lien
+            </a>
+          </li>
+          <li class="list-group-item">
+            <span class="text-muted">Transcription</span> :
+            <a target="_blank" href="{{path('media_transcription_display', {'id': media.id})}}">
+              lien
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col">
+        <img style="width:100%;" src="{{ mediaURL }}" />
+      </div>
+  </div>
+</div>

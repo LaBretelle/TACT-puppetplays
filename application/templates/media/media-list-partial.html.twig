@@ -5,48 +5,9 @@
   {{ include('media/media-breadcrumb.html.twig', { 'project': project, 'parent': parent, 'from': from }) }}
 {% endif %}
 
-<div class='row mb-3'>
-  <div class="col-12">
-    <form class="form-inline" role="form" onkeypress="return event.keyCode != 13;">
-      <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-outline-secondary active media-filter-clear">
-          <input type="radio" name="options" id="option0" checked>
-          <i class="fas fa-eraser"></i>
-        </label>
-        <label class="btn btn-outline-danger media-filter" data-status="none">
-          <input type="radio" name="options" id="option1"> {{'transcription_status_none'|trans}}
-        </label>
-        <label class="btn btn-outline-warning media-filter" data-status="in-progress">
-          <input type="radio" name="options" id="option2"> {{'transcription_status_in_progress'|trans}}
-        </label>
-        <label class="btn btn-outline-info media-filter" data-status="in-reread">
-          <input type="radio" name="options" id="option3"> {{'transcription_status_in_reread'|trans}}
-        </label>
-        <label class="btn btn-outline-success media-filter" data-status="validated">
-          <input type="radio" name="options" id="option4"> {{'transcription_status_validated'|trans}}
-        </label>
-        <label class="btn btn-outline-secondary media-filter" data-status="mine">
-          <input type="radio" name="options" id="option5"> {{'transcription_mine'|trans}}
-        </label>
-      </div>
-      <div class="mx-3 input-group input-group-sm">
-        <div class="input-group-prepend">
-          <div class="input-group-text">
-            <i class="fas fa-filter"></i>
-          </div>
-        </div>
-        <input id="text-filter-media" class="form-control" type="text" value=""/>
-      </div>
-      <div class="input-group input-group-sm">
-        <a class="btn btn-sm btn-secondary" href="{{ path('project_transcriptions', {'id': project.id, 'all': not displayAll }) }}">
-          {{ displayAll ? "toggle_tree"|trans : "toggle_untree"|trans}}
-        </a>
-      </div>
-    </form>
-  </div>
-</div>
+{{ include('media/filters.html.twig') }}
 
-<div class="album py-5 bg-light">
+<div class="py-3 bg-light">
   <div class="container-fluid">
     <div class="row">
       {# AFFICHAGE DES DOSSIERS #}
@@ -150,11 +111,4 @@
   </div>
 </div>
 
-{# media modal #}
-<div class="modal fade project-media-modal" id="project-media-modal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-body"></div>
-    </div>
-  </div>
-</div>
+{{ include('media/modal.html.twig') }}

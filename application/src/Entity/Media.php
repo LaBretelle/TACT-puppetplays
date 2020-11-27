@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,6 +49,16 @@ class Media
      * @ORM\ManyToOne(targetEntity="App\Entity\IiifServer", inversedBy="medias")
      */
     private $iiifServer;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MetadataMedia::class, mappedBy="media", orphanRemoval=true)
+     */
+    private $metadatas;
+
+    public function __construct()
+    {
+        $this->metadatas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +132,37 @@ class Media
     public function setIiifServer(?IiifServer $iiifServer): self
     {
         $this->iiifServer = $iiifServer;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MetadataMedia[]
+     */
+    public function getMetadatas(): Collection
+    {
+        return $this->metadatas;
+    }
+
+    public function addMetadata(MetadataMedia $metadata): self
+    {
+        if (!$this->metadatas->contains($metadata)) {
+            $this->metadatas[] = $metadata;
+            $metadata->setMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMetadata(MetadataMedia $metadata): self
+    {
+        if ($this->metadatas->contains($metadata)) {
+            $this->metadatas->removeElement($metadata);
+            // set the owning side to null (unless already changed)
+            if ($metadata->getMedia() === $this) {
+                $metadata->setMedia(null);
+            }
+        }
 
         return $this;
     }

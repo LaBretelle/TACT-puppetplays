@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<tact_project_metadatas>
+  <!-- Titre du document : il s'agit a priori du titre principal du document. -->
+  <tact_project_metadata name="title" defaultvalue=""/>
+  <!-- Créateur du document : nom de la personne, de l'organisation ou du service à l'origine de la rédaction du document. -->
+  <tact_project_metadata name="creator" defaultvalue=""/>
+  <!-- Sujet et mots-clefs : mots-clefs, phrases de résumé, ou codes de classement. Il est préférable d'utiliser des mots-clefs choisis dans le cadre d'une politique de classement. Par exemple, on peut utiliser les codages de la bibliothèque du congrès
+  (LCSH et LCC), le vocabulaire médical (MESH), ou les notations décimales des bibliothécaires (DDC et UDC). -->
+  <tact_project_metadata name="subject" defaultvalue=""/>
+  <!-- Description du document : résumé, table des matières, ou texte libre. -->
+  <tact_project_metadata name="description" defaultvalue=""/>
+  <!-- Publicateur du document : nom de la personne, de l'organisation ou du service à l'origine de la publication du document. -->
+  <tact_project_metadata name="publisher" defaultvalue=""/>
+  <!-- Contributeur au document : nom d'une personne, d'une organisation ou d'un service qui contribue ou a contribué à l'élaboration du document. -->
+  <tact_project_metadata name="contributor" defaultvalue=""/>
+  <!-- Date d'un événement dans le cycle de vie du document : il peut s'agir par exemple de la date de création ou de la date de mise à disposition. Il est recommandé de spécifier la date au format W3CDTF (AAAA-MM-JJ). -->
+  <tact_project_metadata name="date" defaultvalue=""/>
+  <!-- Nature ou genre du contenu : grandes catégories de document. Il est recommandé d'utiliser des termes clairement définis au sein de son organisation. Par exemple, le Dublin Core définit quelques types dans le vocabulaire DCMITypes. -->
+  <tact_project_metadata name="type" defaultvalue=""/>
+  <!-- Format du document : format physique ou électronique du document. Par exemple, type de média ou dimensions (taille, durée). On peut spécifier le matériel et le logiciel nécessaires pour accéder au document. Il est recommandé d'utiliser des
+  termes clairement définis, par exemple les types MIME. -->
+  <tact_project_metadata name="format" defaultvalue=""/>
+  <!-- Identificateur non ambigu : il est recommandé d'utiliser un système de référencement précis, par exemple les URI ou les numéros ISBN. -->
+  <tact_project_metadata name="identifier" defaultvalue=""/>
+  <!-- Ressource dont dérive le document : le document peut découler en totalité ou en partie de la ressource en question. Il est recommandé d'utiliser une dénomination formelle des ressources, par exemple leur URI. -->
+  <tact_project_metadata name="source" defaultvalue=""/>
+  <!-- Langue du document : il est recommandé d'utiliser un code de langue conforme au format RFC4646. -->
+  <tact_project_metadata name="language" defaultvalue=""/>
+  <!-- Lien vers une ressource liée : il est recommandé d'utiliser une dénomination formelle des ressources, par exemple leur URI. -->
+  <tact_project_metadata name="relation" defaultvalue=""/>
+  <!-- Portée du document : la portée inclut un domaine géographique, un laps de temps, ou une juridiction (nom d'une entité administrative). Il est recommandé d'utiliser des représentations normalisées de ces types de données, par exemple TGN
+  (Thesaurus of Geographic Names, un dictionnaire de noms de lieux), ISO3166, Point ou Box pour la portée spatiale, Period ou W3CDTF pour la portée temporelle. -->
+  <tact_project_metadata name="coverage" defaultvalue=""/>
+  <!-- Droits relatifs à la ressource : permet de donner des informations sur le statut des droits du document, par exemple la présence d'un copyright, ou un lien vers le détenteur des droits. L'absence de cette propriété ne présume pas que le document
+  est libre de droits. -->
+  <tact_project_metadata name="rights" defaultvalue=""/>
+</tact_project_metadatas>
