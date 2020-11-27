@@ -112,6 +112,20 @@ class ProjectController extends AbstractController
     }
 
     /**
+    * @Route("/{id}/metadatas", name="metadatas")
+    */
+    public function metadatas(Project $project)
+    {
+        if (false === $this->permissionManager->isAuthorizedOnProject($project, AppEnums::ACTION_EDIT_PROJECT)) {
+            throw new AccessDeniedException($this->translator->trans('access_denied'));
+        }
+
+        return $this->render('project/metadatas.html.twig', [
+          'project' => $project,
+        ]);
+    }
+
+    /**
     * @Route("/{id}/export", name="export")
     */
     public function export(Project $project, Request $request)

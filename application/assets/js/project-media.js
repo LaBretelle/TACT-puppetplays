@@ -50,15 +50,41 @@ $(document).ready(() => {
   })
 
   $('.project-image').on('click', (e) => {
-    const image = e.target.cloneNode()
-    const url = e.target.dataset.full
-    image.classList.remove('project-image')
-    image.setAttribute('src', url)
-    image.setAttribute('style', 'width:100%;')
-    const modalBody = $('.project-media-modal').find('.modal-body')
-    modalBody.empty()
-    modalBody.append(image)
-    $('.project-media-modal').modal('show')
+    let imgUrl = e.target.dataset.full
+    let mediaId = e.target.dataset.media
+    let modalbody = $('.project-media-modal').find('#project-media-modal-body')
+
+    if (mediaId) {
+      const urlMetadatas = Routing.generate('media_infos', {
+        id: mediaId
+      })
+      $.ajax({
+        method: 'GET',
+        url: urlMetadatas
+      }).done((data) => {
+        modalbody.html(data.template)
+        let metadataContainer = $('.project-media-modal').find('.metadata-container')
+        $('#edit-metadatas').on('click', () => {
+          const urlMetadatas = Routing.generate('metadata_edit_media', {
+            id: mediaId
+          })
+          $.ajax({
+            method: 'GET',
+            url: urlMetadatas
+          }).done((data) => {
+            metadataContainer.html(data.template)
+          })
+        })
+        $('.project-media-modal').modal('show')
+      })
+    } else if (imgUrl) {
+      modalbody.html('')
+      let img = document.createElement('img')
+      img.setAttribute('src', imgUrl)
+      img.style.width = '100%'
+      modalbody.append(img)
+      $('.project-media-modal').modal('show')
+    }
   })
 
   /* folder(s)

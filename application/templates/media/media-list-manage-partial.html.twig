@@ -50,28 +50,28 @@
     </nav>
 
     <div class="row media-list-row">
-        {# display directories for current dir #}
-        {% for dir in project.dirs if dir.parent == current %}
-        <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-2 mb-2">
-          <a class="text-dark" href="{{ path('project_media', {id: project.id, current: dir.id}) }}">
-            <div class="card project-directory-card">
-              <div class="project-directory card-img-top">
-                <i class="far fa-folder-open fa-4x "></i>
-              </div>
-              <div class="card-body">
-                <span data-dir="{{dir.id}}">{{dir.name}}</span>
-              </div>
+      {# display directories for current dir #}
+      {% for dir in project.dirs if dir.parent == current %}
+      <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-2 mb-2">
+        <a class="text-dark" href="{{ path('project_media', {id: project.id, current: dir.id}) }}">
+          <div class="card project-directory-card">
+            <div class="project-directory card-img-top">
+              <i class="far fa-folder-open fa-4x "></i>
             </div>
-          </a>
-        </div>
-        {% endfor %}
+            <div class="card-body">
+              <span data-dir="{{dir.id}}">{{dir.name}}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
 
       {# display medias for current dir #}
       {% set nbMediasForCurrentDir = -1 %}
       {% for media in project.medias if media.parent == current %}
         <div id="img-col-{{media.id}}" class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-2 mb-2">
           <div class="card project-image-card">
-            <img loading="lazy" class="card-img-top project-image" src="{{ macros.mediaThumbnailURL(media) }}" alt="" data-full="{{ macros.mediaURL(media) }}"></img>
+            <img loading="lazy" class="card-img-top project-image" src="{{ macros.mediaThumbnailURL(media) }}" data-media="{{media.id}}"></img>
             <div class="card-body p-1 text-center border-top">
               <small class="text-muted">
                 {{ media.name }} {% if media.iiifServer %}[{{ media.iiifServer.name }}]{% endif %}
@@ -89,9 +89,9 @@
       {% endfor %}
 
       {% if project.medias is empty and project.dirs is empty %}
-        <div class="col-12 text-center">
-          <h5>{{'project_media_no_media' | trans}}</h5>
-        </div>
+      <div class="col-12 text-center">
+        <h5>{{'project_media_no_media' | trans}}</h5>
+      </div>
       {% endif %}
 
       {% if current != null and current.children is empty and nbMediasForCurrentDir == -1  %}
@@ -233,11 +233,4 @@
   </div>
 </div>
 
-{# show media full size modal #}
-<div class="modal fade project-media-modal" id="project-media-modal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-body"></div>
-    </div>
-  </div>
-</div>
+{{ include('media/modal.html.twig') }}

@@ -10,6 +10,7 @@ use App\Entity\Transcription;
 use App\Entity\TranscriptionLog;
 use App\Service\AppEnums;
 use App\Service\TranscriptionManager;
+use App\Service\MetadataManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\File\File;
@@ -20,12 +21,14 @@ class MediaManager
     protected $em;
     protected $security;
     protected $transcriptionManager;
+    protected $metadataManager;
 
-    public function __construct(EntityManagerInterface $em, Security $security, TranscriptionManager $transcriptionManager)
+    public function __construct(EntityManagerInterface $em, Security $security, TranscriptionManager $transcriptionManager, MetadataManager $metadataManager)
     {
         $this->em = $em;
         $this->security = $security;
         $this->transcriptionManager = $transcriptionManager;
+        $this->metadataManager = $metadataManager;
     }
 
 
@@ -40,6 +43,9 @@ class MediaManager
         $media->setIiifServer($server);
         $project->addMedia($media);
         $media = $this->initMediaTranscription($media);
+
+        //En attente de la gestion des métadonnées interrogeables sur un serveur IiifServer
+        $this->metadataManager->applyToMedia($media);
 
         $this->em->persist($project);
         $this->em->persist($media);
@@ -60,6 +66,7 @@ class MediaManager
         $media->setProject($project);
         $project->addMedia($media);
         $media = $this->initMediaTranscription($media);
+        $this->metadataManager->applyToMedia($media);
 
         $this->em->persist($project);
         $this->em->persist($media);
@@ -78,6 +85,7 @@ class MediaManager
         $media->setProject($project);
         $project->addMedia($media);
         $media = $this->initMediaTranscription($media, $content);
+        $this->metadataManager->applyToMedia($media);
 
         $this->em->persist($project);
         $this->em->persist($media);

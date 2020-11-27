@@ -1,0 +1,14 @@
+<div class="card vh-100">
+  <div class="card-header">
+    {{"metadatas"|trans}} <span class="float-right btn btn-sm btn-secondary" data-media="{{media.id}}" id="edit-metadatas">{{"metadata_edit"|trans}}</span>
+  </div>
+  <div class="card-body">
+    <ul class="list-group">
+    {% for metadata in media.metadatas %}
+      <li class="list-group-item">
+        <span class="text-muted">{{metadata.metadata.name}}</span> : {{ metadata.value }}
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>

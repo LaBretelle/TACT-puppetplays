@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Media;
 use App\Entity\Project;
 use App\Service\FileManager;
+use App\Service\MetadataManager;
 use App\Service\TranscriptionManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
@@ -27,8 +28,9 @@ class ExportManager
     protected $tm;
     protected $router;
     protected $userRepo;
+    protected $metadataManager;
 
-    public function __construct(EntityManagerInterface $em, FileManager $fileManager, TranslatorInterface $translator, TranscriptionManager $tm, UrlGeneratorInterface $router)
+    public function __construct(EntityManagerInterface $em, FileManager $fileManager, TranslatorInterface $translator, TranscriptionManager $tm, UrlGeneratorInterface $router, MetadataManager $metadataManager)
     {
         $this->em = $em;
         $this->tm = $tm;
@@ -38,6 +40,7 @@ class ExportManager
         $this->fileManager = $fileManager;
         $this->translator = $translator;
         $this->router = $router;
+        $this->metadataManager = $metadataManager;
     }
 
     public function export(Project $project, $params)
@@ -147,6 +150,11 @@ class ExportManager
 
         $fileSystem->appendToFile($rootDir."description.txt", $project->getDescription());
         $fileSystem->appendToFile($rootDir."catchphrase.txt", $project->getCatchPhrase());
+
+        if ($project->getMetadatas()) {
+            $xmlMetadatas = $this->metadataManager->exportProjectMetadatas($project);
+            $fileSystem->appendToFile($rootDir."metadatas.xml", $xmlMetadatas);
+        }
 
         if ($css = $project->getCss()) {
             $fileSystem->appendToFile($rootDir."style.css", $css);
@@ -345,6 +353,19 @@ class ExportManager
             $xmlMediaContributor->appendChild($xmlMediaContributorRole);
             $xmlMediaContributors->appendChild($xmlMediaContributor);
         }
+        // MEDIA METADATAS
+        $xmlMediaMetadatas = $xml->createElement("tact_media_metadatas");
+        $currentMetadatas = $media->getMetadatas();
+        foreach ($currentMetadatas as $currentMetadata) {
+            $metadataValue = $currentMetadata->getValue();
+            $metadataName = $currentMetadata->getMetadata()->getName();
+            $xmlMediaMetadata = $xml->createElement("tact_media_metadata");
+            $xmlMediaMetadata->setAttribute("name", addslashes($metadataName));
+            $xmlMediaMetadata->setAttribute("value", addslashes($metadataValue));
+            $xmlMediaMetadatas->appendChild($xmlMediaMetadata);
+        }
+        $xmlMedia->appendChild($xmlMediaMetadatas);
+        // FIN METADATAS
         $xmlMedia->appendChild($xmlMediaContributors);
         $xmlMedia->appendChild($xmlMediaName);
         $xmlMedia->appendChild($xmlMediaExportDate);

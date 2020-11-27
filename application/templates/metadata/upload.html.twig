@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+{% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
+<div id="main-container">
+  <div class="row">
+    <div class="col">
+      <div class="alert alert-primary" role="alert">
+        {{"metadata_upload_help"|trans}}
+        <a download href="{{ asset('data/metadatas-exemple.xml') }}">
+          {{"metadatas_exemple"|trans}}
+        </a>
+      </div>
+      {{form(form)}}
+    </div>
+  </div>
+</div>
+{% endblock %}
