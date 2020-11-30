@@ -33,10 +33,10 @@ class MetadataController extends AbstractController
     private $metadataManager;
 
     public function __construct(
-      FlashManager $flashManager,
-      PermissionManager $permissionManager,
-      TranslatorInterface $translator,
-      MetadataManager $metadataManager
+        FlashManager $flashManager,
+        PermissionManager $permissionManager,
+        TranslatorInterface $translator,
+        MetadataManager $metadataManager
     ) {
         $this->flashManager = $flashManager;
         $this->permissionManager = $permissionManager;
@@ -61,15 +61,15 @@ class MetadataController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-          $fileContent = file_get_contents($form->get('metadatasFile')->getData());
-          $this->metadataManager->import($project, $fileContent);
+            $fileContent = file_get_contents($form->get('metadatasFile')->getData());
+            $this->metadataManager->import($project, $fileContent);
 
-          return $this->redirectToRoute('project_metadatas', ['id' => $project->getId()]);
+            return $this->redirectToRoute('project_metadatas', ['id' => $project->getId()]);
         }
 
         return $this->render(
-          'metadata/upload.html.twig',
-          [
+            'metadata/upload.html.twig',
+            [
             'form' => $form->createView(),
             'project' => $project
           ]
@@ -118,8 +118,8 @@ class MetadataController extends AbstractController
         }
 
         return $this->render(
-          'metadata/edit.html.twig',
-          [
+            'metadata/edit.html.twig',
+            [
             'form' => $form->createView(),
             'project' => $project,
             'metadata' => $metadata

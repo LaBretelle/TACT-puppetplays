@@ -21,11 +21,11 @@ class ReviewRequestManager
     protected $mm;
 
     public function __construct(
-      EntityManagerInterface $em,
-      FlashManager $fm,
-      MailManager $mm,
-      Security $security,
-      TranscriptionManager $tm
+        EntityManagerInterface $em,
+        FlashManager $fm,
+        MailManager $mm,
+        Security $security,
+        TranscriptionManager $tm
     ) {
         $this->em = $em;
         $this->mm = $mm;

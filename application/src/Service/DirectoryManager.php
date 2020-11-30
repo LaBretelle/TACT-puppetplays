@@ -42,7 +42,7 @@ class DirectoryManager
     public function getSubordinates(Directory $dir)
     {
         $surbodinates = [];
-        
+
         return $this->findRecursiveChildren($surbodinates, $dir);
     }
 

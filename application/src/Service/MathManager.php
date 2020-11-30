@@ -30,7 +30,8 @@ class MathManager
         ];
     }
 
-    private function roundToOne($number){
+    private function roundToOne($number)
+    {
         return ($number > 0 && $number < 1)
           ? 1
           : $number;

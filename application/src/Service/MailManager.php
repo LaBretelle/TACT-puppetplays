@@ -48,8 +48,8 @@ class MailManager
             $url = $this->router->generate('media_transcription_review', ['id' => $media->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $body = $this->templating->render(
-              'emails/new-reviewrequest.html.twig',
-              ['projectName' => $projectName, 'mediaName' => $mediaName, 'url' => $url]
+                'emails/new-reviewrequest.html.twig',
+                ['projectName' => $projectName, 'mediaName' => $mediaName, 'url' => $url]
             );
 
             $this->send($mails, $subject, $body, true);
@@ -60,9 +60,9 @@ class MailManager
     public function sendConfirmationMail(User $user)
     {
         $confirmationUrl = $this->router->generate(
-          'user_activate_account',
-          ['token' => $user->getConfirmationToken()],
-          UrlGeneratorInterface::ABSOLUTE_URL
+            'user_activate_account',
+            ['token' => $user->getConfirmationToken()],
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $subject = $this->translator->trans('email_registration_confirm_subject', [], 'emails');
@@ -70,7 +70,7 @@ class MailManager
         $body = $this->templating->render(
             'emails/registration.html.twig',
             ['user' => $user, 'url' => $confirmationUrl]
-          );
+        );
 
         $this->send($user->getEmail(), $subject, $body);
 
@@ -80,9 +80,9 @@ class MailManager
     public function sendRecoverPasswordMail(User $user)
     {
         $url = $this->router->generate(
-          'user_reset_password',
-          ['token' => $user->getConfirmationToken()],
-          UrlGeneratorInterface::ABSOLUTE_URL
+            'user_reset_password',
+            ['token' => $user->getConfirmationToken()],
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $subject = $this->translator->trans('email_renew_password_subject', [], 'emails');
@@ -102,9 +102,9 @@ class MailManager
         $subject = $this->translator->trans('email_transcription_validted_unvalidated_subject', [], 'emails');
 
         $url = $this->router->generate(
-          'media_transcription_edit',
-          ['id' => $media->getId()],
-          UrlGeneratorInterface::ABSOLUTE_URL
+            'media_transcription_edit',
+            ['id' => $media->getId()],
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $body = $this->templating->render(

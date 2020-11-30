@@ -8,6 +8,7 @@
 /.logs/
 
 npm-debug.log
+.php_cs.cache
 
 ###> symfony/framework-bundle ###
 /application/.bash_history

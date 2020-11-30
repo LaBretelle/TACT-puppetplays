@@ -25,13 +25,13 @@ class UserManager
     private $security;
 
     public function __construct(
-      UserPasswordEncoderInterface $passwordEncoder,
-      EntityManagerInterface $em,
-      UserRepository $repository,
-      FileManager $fileManager,
-      TranslatorInterface $translator,
-      Security $security
-      ) {
+        UserPasswordEncoderInterface $passwordEncoder,
+        EntityManagerInterface $em,
+        UserRepository $repository,
+        FileManager $fileManager,
+        TranslatorInterface $translator,
+        Security $security
+    ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->em = $em;
         $this->repository = $repository;

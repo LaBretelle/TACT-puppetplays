@@ -129,9 +129,10 @@ class FileManager
         return;
     }
 
-    public function getFileNameWitoutExt($fileName){
-      $pathParts = pathinfo($fileName);
+    public function getFileNameWitoutExt($fileName)
+    {
+        $pathParts = pathinfo($fileName);
 
-      return $pathParts['filename'];
+        return $pathParts['filename'];
     }
 }

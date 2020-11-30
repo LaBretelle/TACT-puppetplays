@@ -26,30 +26,28 @@ class MetadataManager
         });
 
         foreach ($metadatas as $metadata) {
-          $name = $metadata["name"];
-          $default = $metadata["default"];
+            $name = $metadata["name"];
+            $default = $metadata["default"];
 
-          if($existing = $this->em->getRepository(Metadata::class)->findOneBy(["project" => $project, "name" => $name])){
-            $previousDefault = $existing->getDefaultValue();
-            if ($previousDefault != $default) {
-              $mediaMetadatas = $this->em->getRepository(MetadataMedia::class)->findBy(["metadata" => $existing, "value" => $previousDefault]);
-              $existing->setDefaultValue($default);
-              foreach ($mediaMetadatas as $mediaMetadata) {
-                $mediaMetadata->setValue($default);
-                $this->em->persist($mediaMetadata);
-              }
+            if ($existing = $this->em->getRepository(Metadata::class)->findOneBy(["project" => $project, "name" => $name])) {
+                $previousDefault = $existing->getDefaultValue();
+                if ($previousDefault != $default) {
+                    $mediaMetadatas = $this->em->getRepository(MetadataMedia::class)->findBy(["metadata" => $existing, "value" => $previousDefault]);
+                    $existing->setDefaultValue($default);
+                    foreach ($mediaMetadatas as $mediaMetadata) {
+                        $mediaMetadata->setValue($default);
+                        $this->em->persist($mediaMetadata);
+                    }
+                }
+            } else {
+                $metadataProject = new Metadata;
+                $metadataProject->setName($name);
+                $metadataProject->setDefaultValue($default);
+                $metadataProject->setProject($project);
+                $this->em->persist($metadataProject);
+
+                $this->apply($metadataProject, $project, null, "all");
             }
-          }
-          else{
-            $metadataProject = new Metadata;
-            $metadataProject->setName($name);
-            $metadataProject->setDefaultValue($default);
-            $metadataProject->setProject($project);
-            $this->em->persist($metadataProject);
-
-            $this->apply($metadataProject, $project, null, "all");
-
-          }
         }
 
         $this->em->flush();

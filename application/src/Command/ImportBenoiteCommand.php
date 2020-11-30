@@ -89,9 +89,9 @@ class ImportBenoiteCommand extends Command
         }
 
         $question = new ChoiceQuestion(
-          'Last question... What status do you want for the newly imported transcription ? (defaults to created)',
-          array('created', 'validated'),
-          0
+            'Last question... What status do you want for the newly imported transcription ? (defaults to created)',
+            array('created', 'validated'),
+            0
         );
         $question->setErrorMessage('Status %s is invalid.');
         $satus = $helper->ask($input, $output, $question);
