@@ -128,4 +128,10 @@ class FileManager
 
         return;
     }
+
+    public function getFileNameWitoutExt($fileName){
+      $pathParts = pathinfo($fileName);
+
+      return $pathParts['filename'];
+    }
 }

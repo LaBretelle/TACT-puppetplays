@@ -228,7 +228,7 @@ class ProjectManager
 
                     $this->recursiveBrowse($project, $projectPath, $absolutePath, $uploadType, $newDirectory, $parameters);
                 } else {
-                    $processedName = explode('.', $value)[0];
+                    $processedName = $this->fileManager->getFileNameWitoutExt($value);
                     $existingMedia = $mediaRepo->findOneBy(["name" => $processedName, "parent" => $parent, "project" => $project]);
 
                     // CAS IIIF

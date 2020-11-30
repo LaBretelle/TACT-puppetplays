@@ -9,8 +9,9 @@ use App\Entity\Project;
 use App\Entity\Transcription;
 use App\Entity\TranscriptionLog;
 use App\Service\AppEnums;
-use App\Service\TranscriptionManager;
+use App\Service\FileManager;
 use App\Service\MetadataManager;
+use App\Service\TranscriptionManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\File\File;
@@ -22,19 +23,21 @@ class MediaManager
     protected $security;
     protected $transcriptionManager;
     protected $metadataManager;
+    protected $fileManager;
 
-    public function __construct(EntityManagerInterface $em, Security $security, TranscriptionManager $transcriptionManager, MetadataManager $metadataManager)
+    public function __construct(EntityManagerInterface $em, Security $security, TranscriptionManager $transcriptionManager, MetadataManager $metadataManager, FileManager $fileManager)
     {
         $this->em = $em;
         $this->security = $security;
         $this->transcriptionManager = $transcriptionManager;
         $this->metadataManager = $metadataManager;
+        $this->fileManager = $fileManager;
     }
 
 
     public function createMediaFromIIIF(string $identifier, string $fileClientName, Project $project, Directory $parent = null, IiifServer $server)
     {
-        $name = explode('.', $fileClientName)[0];
+        $name = $this->fileManager->getFileNameWitoutExt($fileClientName);
         $media = new Media();
         $media->setUrl($identifier);
         $media->setName($name);
@@ -56,7 +59,8 @@ class MediaManager
 
     public function createMediaFromFile(File $file, string $fileClientName, Project $project, Directory $parent = null)
     {
-        $name = explode('.', $fileClientName)[0];
+
+        $name = $this->fileManager->getFileNameWitoutExt($fileClientName);
         // $extension = $file->guessExtension();
         $extension = pathinfo($fileClientName, PATHINFO_EXTENSION);
         $media = new Media();
@@ -77,7 +81,7 @@ class MediaManager
 
     public function createMediaFromNothing(string $fileClientName, Project $project, string $content, Directory $parent = null)
     {
-        $name = explode('.', $fileClientName)[0];
+        $name = $this->fileManager->getFileNameWitoutExt($fileClientName);
         $media = new Media();
         $media->setUrl(null);
         $media->setName($name);
