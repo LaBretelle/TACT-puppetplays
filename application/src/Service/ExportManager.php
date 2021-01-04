@@ -293,11 +293,10 @@ class ExportManager
         $contributors   = $this->tm->getContributors($transcription);
         $status         = $this->translator->trans("transcription_status_".$this->tm->getStatus($transcription));
         $project        = $media->getProject();
-        if (!$media->getIiifServer()) {
+        $mediaRealName  = $media->getName();
+        if (!$media->getIiifServer() && $media->getUrl()) {
             $mediaParts     = pathinfo($media->getUrl());
             $mediaRealName  = $media->getName() . "." . $mediaParts["extension"];
-        } else {
-            $mediaRealName  = $media->getName();
         }
         $platformUrl    = $this->router->generate('home', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $projectUrl     = $this->router->generate('project_display', ["id" => $project->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
