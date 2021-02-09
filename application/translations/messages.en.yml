@@ -227,7 +227,7 @@ project_manager:                          Project manager
 project_media_add_file_placeholder:       Select file(s)
 project_media_add_file_title:             Add medias
 project_media_add_file:                   Upload file(s)
-project_media_add_iiif:                   Ajout de média externe (IIF)
+project_media_add_iiif:                   Ajout de médias externes (IIF)
 project_media_count:                      '%count% médias'
 project_media_file_type_images:           Image(s)
 project_media_file_type_xmls:             Fichiers .xml,txt
