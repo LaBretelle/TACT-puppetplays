@@ -414,15 +414,15 @@ user_status_manager_desc:                 Le gestionnaire de projet peut transcr
 user_status_manager_name:                 Gestionnaire
 user_status_transcriber_desc:             Le transcripteur peut transcrire les médias et relire les transcriptions.
 user_status_transcriber_name:             Transcripteur
-user_status_validator_desc:               Le validateur peut transcrire, relire et valider les transriptions.
-user_status_validator_name:               Validateur
+user_status_validator_desc:               Le relecteur peut transcrire, relire et valider les transriptions.
+user_status_validator_name:               Relecteur
 user:                                     Utilisateur
 userfullname:                             Nom - Prénom
 username:                                 Nom d'utilisateur
 users:                                    Utilisateurs
 validation_asked:                         Relecture demandée
 validation_comment:                       Commentaire
-validator:                                Validateur
+validator:                                Relecteur
 view_profile:                             Voir le profil
 view_project_short:                       Détails
 view_project:                             Détails du projet
