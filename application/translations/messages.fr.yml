@@ -5,11 +5,11 @@ access_denied:                            Vous n'êtes pas autorisé à accéder
 actions:                                  Actions
 actu:                                     Actualités
 add_directory_modal_title:                Ajouter un répertoire
-add_iiif_server:                          Ajouter un nouveau serveur IIIF
+add_iiif_server:                          Ajouter un nouveau serveur d'images
 add_metadata:                             Ajouter une métadonnée
 add_metadatas:                            Uploader un ensemble de métadonnées
 add_project:                              Créer un nouveau projet
-add_server_iiif_help:                     Il vous faut d'abord définir un serveur IIIF via "Editer > Edition des serveurs IIIF"
+add_server_iiif_help:                     Il vous faut d'abord définir un serveur IIIF via "Editer > Edition des serveurs d'image"
 add_user-status:                          Ajouter un statut pour un utilisateur
 add:                                      Ajouter
 administrate_edito_content:               Édition pages éditoriales
@@ -62,15 +62,15 @@ directory_already_existing:               Le répertoire %dir% est déjà prése
 directory_created:                        Dossier créé
 download_media:                           Télécharger l'image
 download_transcription:                   Télécharger la transcription
-edit_advanced_help:                       Vous permet d'associer des fichiers XSL, JSON et de définir une CSS
-edit_advanced:                            Édition des propriétés avancées
+edit_advanced_help:                       Vous permet d'uploader un fichier XSL pour l'export, un fichier JSON pour le schéma et de définir une CSS pour la prévisualisation des transcriptions
+edit_advanced:                            Gestion des propriétés avancées
 edit_basic_help:                          Vous permet de paramétrer le nom, la description, l'image, etc.
-edit_basic:                               Édition des propriétés de base
-edit_iiif_help:                           Vous permet d'ajouter et d'éditer des sources IIIF.
-edit_iiif:                                Édition des serveurs IIIF
+edit_basic:                               Gestion des propriétés de base
+edit_iiif_help:                           Vous permet de configurer des serveurs d'images (IIIF par exemple) afin d'externaliser le stockage de vos médias
+edit_iiif:                                Gestion des serveurs d'images
 edit_metadata:                            Edition d'une métadonnée
 edit_metadatas_help:                      Vous permet d'ajouter et d'éditer de nouvelles métadonnées, changer leur valeur valeur par défaut, les associer aux médias.
-edit_metadatas:                           Édition des métadonnées
+edit_metadatas:                           Gestion des métadonnées
 edit_project_long:                        Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit:                                     Éditer
 edito_edit:                               Editer la page
@@ -79,8 +79,10 @@ email_or_login_placeholder:               Login / email
 email_or_login:                           Veuillez renseigner votre login ou email
 email:                                    Mail
 events:                                   Evénements
+events_long:                              Vous permet d'accéder à une liste d'évènements concernant les médias de votre projet. Vous pourrez ainsi voir qui a transcrit / relu / etc. et quand.
 export_form_title:                        Choisissez les élements que vous voulez exporter.
 export_launch:                            Lancer l'export
+export_long:                              Exporter tout ou partie du projet pour récupérer les transcriptions mais aussi les médias, la liste des utilisateurs ayant participé et toutes les données du projet.
 export_medias:                            Les médias
 export_project_infos:                     Les données du projets (schéma, métadonnées, etc.)
 export_project_long:                      Permet d'exporter tout ou partie du projet
@@ -143,7 +145,7 @@ logs_action:                              Action
 logs_date:                                Date
 logs:                                     Logs
 lost_password_link:                       J'ai oublié mon mot de passe
-manage_media_long:                        Vous permet d'uploader et de supprimer les médias destinés à être transcrits.
+manage_media_long:                        Vous permet d'ajouter et d'organiser les médias destinés à être transcrits.
 manage_user_statuses_long:                Vous permet de supprimer, valider ou invalider des inscriptions au projet et de changer les rôles des personnes inscrites.
 manager_guide:                            Manuel du gestionnaire
 manager:                                  Gestionnaire
@@ -169,7 +171,7 @@ message_delete:                           Supprimer
 message_deleted:                          Le message a été supprimé
 message_from_user:                        Message de %username% :
 message_list:                             Messages
-message_project:                          Envoi d'un message aux membres
+message_project:                          Envoyer un message
 message_reply:                            Répondre
 message_send:                             Envoyer le message
 message_sent:                             Le message a été envoyé
@@ -226,7 +228,7 @@ positive_review:                          Une relecture positive a été faite s
 preview_mode:                             Prévisualisation
 preview:                                  Prévisualiser
 profile:                                  Profil
-project_archive_long:                     Permet d'archiver le projet
+project_archive_long:                     La fonction d'archivage vous permet de passer le projet dans un état (archivé) où l'inscription n'est plus possible, la transcription non plus mais les transcriptions restent accessibles en lecture. Vous pouvez désarchiver à tout moment le projet.
 project_archive:                          Archiver
 project_catchphrase:                      Phrase d'accroche
 project_create_edit:                      Créer / Editer un projet
@@ -234,6 +236,7 @@ project_create:                           Création d'un projet
 project_created:                          Projet créé
 project_css:                              Définition de la css inline pour le projet
 project_data:                             Quelques données concernant le projet
+project_delete_long:                      Il ne sera plus possible d’accéder au projet, à ses médias, transcriptions ou utilisateurs (même pour les administrateurs de la plateforme). Assurez-vous d’exporter les données que vous souhaitez conserver avant de supprimer votre projet. Cette opération est irréversible.
 project_delete:                           Supprimer le projet
 project_deleted:                          Le projet a été supprimé.
 project_description:                      Description du projet
@@ -248,8 +251,10 @@ project_image:                            Image du projet
 project_is_not_public:                    Inscription modérée
 project_list:                             Les projets
 project_logs:                             Logs
+project_manage_long:                      Vous permet d'administrer votre projet (médias, utilisateurs, métadonnées, etc.)
 project_manage_media:                     Gérer les médias
 project_manage_user_statuses:             Gérer les utilisateurs
+project_manage:                           Administrer
 project_management_media:                 Gestion des médias
 project_management_user_statuses:         Gestion des utilisateurs
 project_manager:                          Manager du projet
@@ -315,7 +320,7 @@ schema_name:                              Nom du schema
 selected_media:                           média(s) selectionné(s)
 selected_xmls:                            fichier(s) xml sélectionné(s)
 send:                                     Envoyer
-server_iiif_help:                         L'ajout de nouveau serveur se fait dans "Editer > Edition des serveurs IIIF"
+server_iiif_help:                         L'ajout de nouveau serveur se fait dans "Editer > Edition des serveurs d'images"
 server_iiif:                              Serveur
 status_edit:                              Éditer le statut
 status_edited_project:                    Votre statut pour le projet '%project%' a été modifié

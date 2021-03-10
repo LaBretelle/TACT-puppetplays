@@ -10,60 +10,121 @@
 {% block body %}
 
 {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
+{% set divClass = "mb-4 col-12 col-md-6 col-lg-4 col-xl-3 d-flex align-items-stretch" %}
 
 <div id="main-container">
   <div class="row">
-    <div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ "edit_basic" | trans }}</h5>
-          <p class="card-text">{{ "edit_basic_help" | trans }}</p>
-          <a class="card-link" href="{{ path("project_edit-basic", {'id': project.id} )}}">{{ "edit" | trans }}</a>
+    <div class="{{divClass}}">
+      <div class="card flex-fill">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><i class="fas fa-cog"></i> {{ "edit_basic" | trans }}</h5>
+          <p class="card-text text-justify">{{ "edit_basic_help" | trans }}</p>
+          <a class="mt-auto card-link " href="{{ path("project_edit-basic", {'id': project.id} )}}">{{ "edit" | trans }}</a>
         </div>
       </div>
     </div>
 
-    <div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ "edit_advanced" | trans }}</h5>
-          <p class="card-text">{{ "edit_advanced_help" | trans }}</p>
-          <a class="card-link" href="{{ path("project_edit-advanced", {'id': project.id} )}}">{{ "edit" | trans }}</a>
+    <div class="{{divClass}}">
+      <div class="card flex-fill">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><i class="fas fa-cogs"></i> {{ "edit_advanced" | trans }}</h5>
+          <p class="card-text text-justify">{{ "edit_advanced_help" | trans }}</p>
+          <a class="mt-auto  card-link" href="{{ path("project_edit-advanced", {'id': project.id} )}}">{{ "edit" | trans }}</a>
         </div>
       </div>
     </div>
 
-    <div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ "edit_iiif" | trans }}</h5>
-          <p class="card-text">{{ "edit_iiif_help" | trans }}</p>
-          <a class="card-link" href="{{ path("project_edit-iiif", {'id': project.id} )}}">{{ "edit" | trans }}</a>
+    <div class="{{divClass}}">
+      <div class="card flex-fill">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><i class="fas fa-server"></i> {{ "edit_iiif" | trans }}</h5>
+          <p class="card-text text-justify">{{ "edit_iiif_help" | trans }}</p>
+          <a class="mt-auto card-link" href="{{ path("project_edit-iiif", {'id': project.id} )}}">{{ "edit" | trans }}</a>
         </div>
       </div>
     </div>
 
-    <div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ "edit_metadatas" | trans }}</h5>
-          <p class="card-text">{{ "edit_metadatas_help" | trans }}</p>
-          <a class="card-link" href="{{ path("project_metadatas", {'id': project.id} )}}">{{ "edit" | trans }}</a>
+    <div class="{{divClass}}">
+      <div class="card flex-fill">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><i class="fas fa-clipboard-list"></i> {{ "edit_metadatas" | trans }}</h5>
+          <p class="card-text text-justify">{{ "edit_metadatas_help" | trans }}</p>
+          <a class="mt-auto card-link" href="{{ path("project_metadatas", {'id': project.id} )}}">{{ "edit" | trans }}</a>
         </div>
       </div>
     </div>
 
-    <div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ "other_operations" | trans }}</h5>
-          <a class="card-link" href="{{ path('project_archived_toggle', {id: project.id}) }}">
+    <div class="{{divClass}}">
+      <div class="card flex-fill">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><i class="fas fa-users"></i> {{'users' | trans}}</h5>
+          <p class="card-text text-justify">{{'manage_user_statuses_long' | trans}}</p>
+          <div class="mt-auto">
+            <a class="card-link" href="{{ path('status_project', {id: project.id}) }}">
+              {{'users' | trans}}
+            </a>
+            <a class="card-link" href="{{ path('project_message', {'id': project.id}) }}">
+              {{"message_project"|trans}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="{{divClass}}">
+      <div class="card flex-fill">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><i class="far fa-images"></i> {{'medias' | trans}}</h5>
+          <p class="card-text text-justify">{{'manage_media_long' | trans}}</p>
+          <a class="mt-auto card-link" href="{{ path('project_media', {id: project.id}) }}">
+            {{'medias' | trans}}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="{{divClass}}">
+      <div class="card flex-fill">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><i class="fas fa-chart-line"></i> {{"events"|trans}}</h5>
+          <p class="card-text text-justify">{{'events_long' | trans}}</p>
+          <a class="mt-auto card-link" href="{{ path('project_display_logs', {'id': project.id}) }}">
+            {{"events"|trans}}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="{{divClass}}">
+      <div class="card flex-fill">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><i class="fas fa-archive"></i> {{ project.archived ? 'project_unarchive'|trans : 'project_archive'|trans}}</h5>
+          <p class="card-text text-justify">{{ "project_archive_long" | trans }}</p>
+          <a class="mt-auto card-link" href="{{ path('project_archived_toggle', {id: project.id}) }}">
             {{ project.archived ? 'project_unarchive'|trans : 'project_archive'|trans}}
           </a>
-          <a class="card-link" href="{{ path('project_export', {id: project.id}) }}">
+        </div>
+      </div>
+    </div>
+
+    <div class="{{divClass}}">
+      <div class="card flex-fill">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><i class="fas fa-file-download"></i> {{'export' | trans}}</h5>
+          <p class="card-text text-justify">{{'export_long' | trans}}</p>
+          <a class="mt-auto card-link" href="{{ path('project_export', {id: project.id}) }}">
             {{'export' | trans}}
           </a>
-          <a class="card-link" href="#" data-toggle="modal" data-target="#deleteProjectConfirmModal">
+        </div>
+      </div>
+    </div>
+
+    <div class="{{divClass}}">
+      <div class="card flex-fill">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><i class="far fa-trash-alt"></i> {{'project_delete' | trans}}</h5>
+          <p class="card-text text-justify">{{'project_delete_long' | trans}}</p>
+          <a class="card-link mt-auto" href="#" data-toggle="modal" data-target="#deleteProjectConfirmModal">
             {{'project_delete' | trans}}
           </a>
         </div>

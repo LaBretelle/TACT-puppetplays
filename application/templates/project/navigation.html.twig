@@ -39,18 +39,8 @@
         </a>
       {% endif %}
       {% if project | isAuthorizedOnProject('editProject') %}
-        <a href="{{ path('project_edit_choice', {id: project.id}) }}" class="nav-link {{macros.addActiveClass(current, "project_edit")}}" data-toggle="tooltip" data-placement="top" title="{{"edit_project_long"|trans}}">
-          {{'edit' | trans}}
-        </a>
-      {% endif %}
-      {% if project | isAuthorizedOnProject('manageMedia') %}
-        <a href="{{ path('project_media', {id: project.id}) }}" class="nav-link {{macros.addActiveClass(current, "project_media")}}" data-toggle="tooltip" data-placement="top" title="{{"manage_media_long"|trans}}">
-          {{'medias' | trans}}
-        </a>
-      {% endif %}
-      {% if project | isAuthorizedOnProject('manageUser') %}
-        <a href="{{ path('status_project', {id: project.id}) }}" class="nav-link {{macros.addActiveClass(current, "status_project")}}" data-toggle="tooltip" data-placement="top" title="{{"manage_user_statuses_long"|trans}}">
-          {{'users' | trans}}
+        <a href="{{ path('project_edit_choice', {id: project.id}) }}" class="nav-link {{macros.addActiveClass(current, "project_edit")}}" data-toggle="tooltip" data-placement="top" title="{{"project_manage_long"|trans}}">
+          {{'project_manage' | trans}}
         </a>
       {% endif %}
     </ul>

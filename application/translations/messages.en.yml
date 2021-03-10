@@ -75,6 +75,7 @@ export_transcriptions_apply_xsl:          Appliquer la XSL
 export_transcriptions_metadatas_help:     Des métadonnées concernant la transcription et le projet seront injectées dans le XML.
 export_transcriptions_metadatas:          Les métadonnées dans les transcriptions
 export:                                   Exporter
+export_long:                              Exporter tout ou partie du projet pour récupérer les transcriptions mais aussi les médias, la liste des utilisateurs ayant participé et toutes les données du projet.
 faq:                                      Frequently asked questions
 filter_users_by:                          Filter by lastname / firstname / mail / login
 firstname:                                Firstname
@@ -206,6 +207,7 @@ project_created:                          Project created
 project_css:                              Project inline css definition
 project_data:                             Quelques données concernant le projet
 project_delete:                           Delete project
+project_delete_long:                      Il ne sera plus possible d’accéder au projet, à ses médias, transcriptions ou utilisateurs (même pour les administrateurs de la plateforme). Assurez-vous d’exporter les données que vous souhaitez conserver avant de supprimer votre projet. Cette opération est irréversible.
 project_deleted:                          Project was deleted.
 project_description:                      project description
 project_edit:                             Edit project

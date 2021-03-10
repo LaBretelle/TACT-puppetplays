@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-  {% include 'project/navigation.html.twig' with {'current': 'project_logs'} %}
+  {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
   <div id="main-container">
     {% include 'log/listing.html.twig' with {'global': false} %}
   </div>

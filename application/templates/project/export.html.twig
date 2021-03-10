@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-  {% include 'project/navigation.html.twig' with {'current': 'project_export'} %}
+  {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
   <div id="main-container">
     <h5>{{"export_form_title"|trans}}</h5>
       {{ form_start(form) }}

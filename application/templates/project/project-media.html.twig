@@ -6,7 +6,7 @@
 
 {% block body %}
 
-{% include 'project/navigation.html.twig' with {'current': 'project_media'} %}
+{% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
 
 <div id="main-container">
   {% if project | isAuthorizedOnProject('manageMedia') %}
@@ -144,7 +144,7 @@
     </div>
   </div>
   {% endif %}
-  
+
   {{ include('media/media-list-manage-partial.html.twig', { 'project': project }) }}
 </div>
 {% endblock %}
