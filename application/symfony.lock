@@ -86,6 +86,12 @@
             "ref": "370bcf99b04c0dfd0b545745aad622d757af5e1b"
         }
     },
+    "laminas/laminas-code": {
+        "version": "3.4.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.3.0"
+    },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
     },
