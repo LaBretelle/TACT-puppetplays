@@ -321,12 +321,11 @@ class ProjectManager
 
     public function addProjectIIIF(Project $project, $files, Directory $parent = null, $parameters)
     {
-        $basePath = $this->fileManager->getBaseProjectPath();
         $projectMediaPath = $this->fileManager->getProjectPath($project);
-
         $uploadPath = $projectMediaPath . DIRECTORY_SEPARATOR . 'tmp';
+
         if (!is_dir($uploadPath)) {
-            mkdir($uploadPath);
+            mkdir($uploadPath, 0777, true);
         }
 
         $zipName = $files->getClientOriginalName();
@@ -353,22 +352,10 @@ class ProjectManager
     {
         $isZip = $parameters["isZip"];
 
-        // base path for all projects media
-        $basePath = $this->fileManager->getBaseProjectPath();
-        // project path for media
         $projectMediaPath = $this->fileManager->getProjectPath($project);
-
-        if (!is_dir($basePath)) {
-            mkdir($basePath);
-        }
-
-        if (!is_dir($projectMediaPath)) {
-            mkdir($projectMediaPath);
-        }
-
         $uploadPath = $projectMediaPath . DIRECTORY_SEPARATOR . 'tmp';
         if (!is_dir($uploadPath)) {
-            mkdir($uploadPath);
+            mkdir($uploadPath, 0777, true);
         }
 
         if ($isZip) {
@@ -400,20 +387,11 @@ class ProjectManager
     {
         $isZip = $parameters["isZip"];
 
-        $basePath = $this->fileManager->getBaseProjectPath();
         $projectMediaPath = $this->fileManager->getProjectPath($project);
-
-        if (!is_dir($basePath)) {
-            mkdir($basePath);
-        }
-
-        if (!is_dir($projectMediaPath)) {
-            mkdir($projectMediaPath);
-        }
-
         $uploadPath = $projectMediaPath . DIRECTORY_SEPARATOR . 'tmp';
+
         if (!is_dir($uploadPath)) {
-            mkdir($uploadPath);
+            mkdir($uploadPath, 0777, true);
         }
 
         if ($isZip) {
