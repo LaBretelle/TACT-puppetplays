@@ -253,6 +253,7 @@ class ProjectManager
                     }
                     // CAS MEDIA
                     elseif ($uploadType == "media") {
+                        $extension = pathinfo($absolutePath, PATHINFO_EXTENSION);
                         $file = new File($absolutePath);
                         if (!$existingMedia) {
                             $media = $this->mediaManager->createMediaFromFile($file, $value, $project, $parent);
@@ -261,7 +262,10 @@ class ProjectManager
                             $this->generateThumbnail($projectPath, $media->getUrl(), 512);
                         } else {
                             if ($updateMedia) {
-                                $url = $existingMedia->getUrl();
+                                $url = md5(uniqid()).'.'.$extension;
+                                $existingMedia->setUrl($url);
+                                $this->em->persist($existingMedia);
+                                $this->em->flush();
                                 $file->move($projectPath, $url);
                                 $this->generateThumbnail($projectPath, $url, 512);
                             } else {
