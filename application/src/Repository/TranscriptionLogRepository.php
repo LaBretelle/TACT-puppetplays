@@ -127,8 +127,8 @@ class TranscriptionLogRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('tl')
           // le leftJoin et andwhere null permet de ne récup que le dernier pour une même transcription
-          ->leftJoin('App:TranscriptionLog', 't2', 'WITH', 't2.transcription = tl.transcription AND tl.createdAt < t2.createdAt')
-          ->andWhere('t2.id IS NULL')
+          ->leftJoin('App:TranscriptionLog', 'tl2', 'WITH', 'tl2.transcription = tl.transcription AND tl2.user = tl.user AND tl.createdAt < tl2.createdAt')
+          ->andWhere('tl2.id IS NULL')
           ->andWhere('tl.user = :user')
           ->andWhere('tl.name NOT IN(:exceptions)')
           ->setParameter('exceptions', ['transcription_log_locked', 'transcription_log_created'])
