@@ -25,10 +25,6 @@
     <a class="nav-link" data-toggle="tab" href="#help-full">{{'help'|trans}}</a>
   </li>
 
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#contributors">{{'contributors'|trans}}</a>
-  </li>
-
   {% if canViewLogs %}
   <li class="nav-item">
     <a class="nav-link" data-toggle="tab"  href="#logs">{{'logs'|trans}}</a>
@@ -36,6 +32,8 @@
   {% endif %}
 </ul>
 <div class="tab-content transcription-panel-content">
+
+  {# TINY MCE #}
   {% if edit %}
   <div id="edit-full" class="tab-pane fade show active" role="tabpanel">
     <div class="row">
@@ -49,34 +47,42 @@
       {% endif %}
     </div>
   </div>
+  <input type="hidden" id="tei-schema" name="tei_schema" value="{{schema}}">
   {% endif %}
+
+  {# PREVISUALISATION #}
   <div id="preview" class="tab-pane fade {% if not edit %}show active{% endif %}" role="tabpanel">
     {{ transcription.content | raw}}
   </div>
+
+  {# COMMENTAIRES #}
   <div id="comments" class="tab-pane fade" role="tabpanel">
     {% if app.user %}
-    {{ include('comments/create.html.twig') }}
+      {{ include('comments/create.html.twig') }}
     {% endif %}
     {{ include('comments/list.html.twig') }}
   </div>
+
+  {# AIDE #}
   <div id="help-full" class="tab-pane fade" role="tabpanel">
     {{ include ('transcribe/help.html.twig') }}
   </div>
-  <div id="contributors" class="tab-pane fade" role="tabpanel">
-    {{ include('transcribe/contributors.html.twig') }}
-  </div>
+
+  {# REVIEWS #}
   {% if canValidate %}
   <div id="reviews" class="tab-pane fade" role="tabpanel">
     {{ include('review/list.html.twig') }}
   </div>
   {% endif %}
+
+  {# LOGS #}
   {% if canViewLogs %}
   <div id="logs" class="tab-pane fade" role="tabpanel">
     {{ include('log/list.html.twig') }}
   </div>
   {% endif %}
+</div>
 
-  {% if edit %}
-  <input type="hidden" id="tei-schema" name="tei_schema" value="{{schema}}">
-  {% endif %}
+<div class="mt-5">
+  {{ include('transcribe/contributors.html.twig') }}
 </div>

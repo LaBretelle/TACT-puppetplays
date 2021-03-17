@@ -275,9 +275,15 @@ button > * {
 .user-profile-action {
   margin-bottom: 80px;
 }
+
 /* TRANSCRIPTION */
+
 .transcription-panel-content {
   padding-top: 15px;
+
+  #preview, #edit-full, #comments, #help-full, #reviews, #logs {
+      min-height: 440px;
+  }
 }
 
 .selected-element {

@@ -18,6 +18,7 @@
   </div>
   <div id="main-container">
     <div class="row">
+
       <div class="col-12 col-sm-6 col-md-8 col-lg-8 col-xl-8">
         {% if not project.archived %}
         <div class="alert alert-info" role="alert">
@@ -38,43 +39,44 @@
         {% endif %}
         {{ project.description | raw }}
       </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-        <div class="card">
-          <div class="card-header">
-            <i class="fas fa-chart-bar"></i> {{'project_data'|trans}}
-          </div>
-          <ul class="list-group list-group-flush">
-             <li class="list-group-item">
-               {{ project.public ? 'is_public'|trans : 'project_is_not_public'|trans}}
-             </li>
-             <li class="list-group-item">
-               {{"project_media_count"|trans({'%count%': project.medias|length})}}
-             </li>
-             <li class="list-group-item">
-               {% set percents = project|percents %}
-               {{ pmacros.displayPercents(percents) }}
-            </li>
-            <li class="list-group-item">
-              {% include('transcribe/contributors.html.twig') %}
-            </li>
-          </ul>
-        </div>
 
-        {% if project | isAuthorizedOnProject('validateTranscription') %}
-        <div class="card mt-3">
-          <ul class="list-group list-group-flush">
-            {% if userStatus %}
-            <li class="list-group-item text-justify">
-              {% if userStatus.subscribe == true %}
-                {{"subscribed"|trans}} <a href='{{ path('status_subscribe_toggle', {'id': project.id}) }}'>{{"unsubscribe"|trans}}</a>
-              {% else %}
-                {{"unsubscribed"|trans}} <a href='{{ path('status_subscribe_toggle', {'id': project.id}) }}'>{{"subscribe"|trans}}</a>
-              {% endif %}
-            </li>
-            {% endif %}
-          </ul>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+
+          <div class="card">
+            <div class="card-header">
+              <i class="fas fa-chart-bar"></i> {{'project_data'|trans}}
+            </div>
+            <ul class="list-group list-group-flush">
+               <li class="list-group-item">
+                 {{ project.public ? 'is_public'|trans : 'project_is_not_public'|trans}}
+               </li>
+               <li class="list-group-item">
+                 {{"project_media_count"|trans({'%count%': project.medias|length})}}
+               </li>
+               <li class="list-group-item">
+                 {% set percents = project|percents %}
+                 {{ pmacros.displayPercents(percents) }}
+              </li>
+            </ul>
+          </div>
+
+          {% if userStatus and project | isAuthorizedOnProject('validateTranscription') %}
+          <div class="card mt-3">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-justify">
+                {% if userStatus.subscribe == true %}
+                  {{"subscribed"|trans}} <a href='{{ path('status_subscribe_toggle', {'id': project.id}) }}'>{{"unsubscribe"|trans}}</a>
+                {% else %}
+                  {{"unsubscribed"|trans}} <a href='{{ path('status_subscribe_toggle', {'id': project.id}) }}'>{{"subscribe"|trans}}</a>
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+          {% endif %}
+
+        <div class="mt-3">
+          {% include('transcribe/contributors.html.twig') %}
         </div>
-        {% endif %}
 
       </div>
     </div>
