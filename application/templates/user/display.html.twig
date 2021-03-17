@@ -6,6 +6,7 @@
 {% include 'header.html.twig' with {'title' : 'profile'} %}
 
 <div id="main-container">
+
   <div class="row user-profile-action">
     <div class="col text-right">
       <div class="btn-group">
@@ -28,6 +29,13 @@
       </div>
     </div>
   </div>
+
   {{ macros.userSummary(user, true) }}
+
+  <div class="mt-3">
+    <h3>Dernières contributions</h3>
+    {% include 'log/listing.html.twig' with {'global': false, 'personal': true, 'thumbnail': true} %}
+  </div>
+
 </div>
 {% endblock %}

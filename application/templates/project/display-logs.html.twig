@@ -3,6 +3,6 @@
 {% block body %}
   {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
   <div id="main-container">
-    {% include 'log/listing.html.twig' with {'global': false} %}
+    {% include 'log/listing.html.twig' with {'global': false, 'personal': false} %}
   </div>
 {% endblock %}

@@ -3,6 +3,6 @@
 {% block body %}
   {% include 'header.html.twig' with {'title': 'platform_logs'} %}
   <div id="main-container">
-    {% include 'log/listing.html.twig' with {'global': true} %}
+    {% include 'log/listing.html.twig' with {'global': true, 'personal': false} %}
   </div>
 {% endblock %}

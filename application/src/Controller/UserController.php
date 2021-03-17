@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\TranscriptionLog;
 use App\Form\UserResetPasswordType;
 use App\Form\UserType;
 use App\Form\MessageType;
@@ -152,10 +153,14 @@ class UserController extends AbstractController
     /**
      * @Route("/profile/{id}", name="profile")
      */
-    public function display(User $user, AuthorizationCheckerInterface $authChecker)
+    public function display(User $user)
     {
+        $em = $this->getDoctrine()->getManager();
+        $logs = $em->getRepository(TranscriptionLog::class)->findAlmostAllByUser($user);
+
         return $this->render('user/display.html.twig', [
          'user' => $user,
+         'logs' => $logs
         ]);
     }
 

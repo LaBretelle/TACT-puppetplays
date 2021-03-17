@@ -122,4 +122,21 @@ class TranscriptionLogRepository extends ServiceEntityRepository
           ->getQuery()
           ->getResult();
     }
+
+    public function findAlmostAllByUser(User $user)
+    {
+        return $this->createQueryBuilder('tl')
+          // le leftJoin et andwhere null permet de ne récup que le dernier pour une même transcription
+          ->leftJoin('App:TranscriptionLog', 't2', 'WITH', 't2.transcription = tl.transcription AND tl.createdAt < t2.createdAt')
+          ->andWhere('t2.id IS NULL')
+          ->andWhere('tl.user = :user')
+          ->andWhere('tl.name NOT IN(:exceptions)')
+          ->setParameter('exceptions', ['transcription_log_locked', 'transcription_log_created'])
+          ->setParameter('user', $user->getId())
+          ->orderBy('tl.createdAt', 'DESC')
+          ->groupBy('tl.transcription')
+          ->setMaxResults(300)
+          ->getQuery()
+          ->getResult();
+    }
 }
