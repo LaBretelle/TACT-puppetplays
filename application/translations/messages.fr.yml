@@ -69,7 +69,7 @@ edit_basic:                               Gestion des propriétés de base
 edit_iiif_help:                           Vous permet de configurer des serveurs d'images (IIIF par exemple) afin d'externaliser le stockage de vos médias
 edit_iiif:                                Gestion des serveurs d'images
 edit_metadata:                            Edition d'une métadonnée
-edit_metadatas_help:                      Vous permet d'ajouter et d'éditer de nouvelles métadonnées, changer leur valeur valeur par défaut, les associer aux médias.
+edit_metadatas_help:                      Vous permet d'ajouter et d'éditer de nouvelles métadonnées, changer leur valeur par défaut, les associer aux médias.
 edit_metadatas:                           Gestion des métadonnées
 edit_project_long:                        Vous permet d'éditer les informations sur le projet comme le nom, la description, l'image, ainsi que la visibilité.
 edit:                                     Éditer
