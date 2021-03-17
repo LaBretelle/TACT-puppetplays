@@ -42,7 +42,7 @@
 
           {% if thumbnail is defined and thumbnail %}
           <td>
-            <img style="max-width: 200px;max-height: 50px" src="{{ macros.mediaThumbnailURL(log.transcription.media) }}"/>
+            <img loading="lazy" style="max-width: 200px;max-height: 50px" src="{{ macros.mediaThumbnailURL(log.transcription.media) }}"/>
           </td>
           {% endif %}
 
