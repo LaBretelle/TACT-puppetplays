@@ -154,13 +154,6 @@ class UserController extends AbstractController
      */
     public function display(User $user, AuthorizationCheckerInterface $authChecker)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, $this->translator->trans('access_denied', [], 'messages'));
-
-        $connectedUser = $this->getUser();
-        if ($connectedUser->getId() !== $user->getId() && false === $authChecker->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException($this->translator->trans('access_denied', [], 'messages'));
-        }
-
         return $this->render('user/display.html.twig', [
          'user' => $user,
         ]);
