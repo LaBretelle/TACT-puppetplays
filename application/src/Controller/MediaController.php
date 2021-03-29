@@ -2,23 +2,26 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Filesystem\Filesystem;
-use App\Entity\Media;
 use App\Entity\Comment;
+use App\Entity\Media;
 use App\Form\CommentType;
 use App\Form\ReviewType;
 use App\Service\AppEnums;
-use App\Service\FileManager;
+use App\Service\CommentManager;
 use App\Service\ExportManager;
+use App\Service\FileManager;
 use App\Service\MediaManager;
 use App\Service\PermissionManager;
 use App\Service\ReviewManager;
-use App\Service\CommentManager;
 use App\Service\ReviewRequestManager;
 use App\Service\TranscriptionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -243,17 +246,15 @@ class MediaController extends AbstractController
      */
     public function mediaDownloadMedia(Media $media)
     {
-        $fileSystem = new Filesystem();
-
         $mediaName = $this->fileManager->recreateMediaName($media);
         $mediaPath =  $this->fileManager->getMediaPath($media);
-        $exportDir = $this->fileManager->createTmpDir();
-        $newMediaPath = $exportDir.$mediaName;
+        $response = new BinaryFileResponse($mediaPath);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $mediaName
+        );
 
-        $fileSystem->mkdir($exportDir);
-        $fileSystem->copy($mediaPath, $newMediaPath);
-
-        return $this->file($newMediaPath);
+        return $response;
     }
 
     /**
@@ -261,15 +262,15 @@ class MediaController extends AbstractController
      */
     public function mediaDownloadTranscription(Media $media)
     {
-        $fileSystem = new Filesystem();
-
         $xmlName = $this->fileManager->recreateXmlName($media);
-        $exportDir = $this->fileManager->createTmpDir();
-        $fileSystem->mkdir($exportDir);
-        $fileSystem->appendToFile($exportDir.$xmlName, $this->exportManager->generateXML($media));
+        $response = new Response($this->exportManager->generateXML($media));
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $xmlName
+        );
+        $response->headers->set('Content-Disposition', $disposition);
 
-
-        return $this->file($exportDir.$xmlName);
+        return $response;
     }
 
     /**
