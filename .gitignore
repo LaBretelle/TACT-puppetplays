@@ -3,9 +3,10 @@
 /docker-files/certs/*
 !/docker-files/certs/.gitkeep
 
-###> docker mysql folder ###
+###> docker shared folders ###
 /.db/
 /.logs/
+/.tmp/
 
 npm-debug.log
 .php_cs.cache

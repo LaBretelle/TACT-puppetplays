@@ -21,6 +21,8 @@ update-dev:
 	php bin/console cache:clear
 	chown -R www-data:www-data public
 	chown -R www-data:www-data var/
+	chmod -R www-data:www-data /tmp
+	chmod 1777 /tmp
 
 install:
 	composer install --prefer-source
@@ -32,6 +34,8 @@ install:
 	php bin/console app:create-edito
 	chown -R www-data:www-data public
 	chown -R www-data:www-data var/
+	chmod -R www-data:www-data /tmp
+	chmod 1777 /tmp
 
 cache:
 	php bin/console cache:clear
