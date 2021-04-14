@@ -357,7 +357,6 @@ button > * {
     height: 25vh;
   }
 }
-
 /* TEST PROJECT LIST */
 .project-grid {
   display: grid;
@@ -384,6 +383,7 @@ button > * {
   object-fit: cover;
   width: 100%;
   display: block;
+  border-bottom: 1px solid lightgrey;
 }
 
 .project-thumbnail-wrap::after {
@@ -408,7 +408,6 @@ button > * {
 .project-tags {
   font-family: Gotham Narrow SSm A,Gotham Narrow SSm B,Rubik,Lato,Lucida Grande,Lucida Sans Unicode,Tahoma,Sans-Serif;
   font-style: normal;
-  font-weight: 600;
   text-transform: uppercase;
   color: #ff7a18;
   font-size: 0.66rem;
@@ -422,7 +421,6 @@ a.project-title {
   font-family: Gotham Narrow SSm A,Gotham Narrow SSm B,Rubik,Lato,Lucida Grande,Lucida Sans Unicode,Tahoma,Sans-Serif;
   font-size: clamp(1.8rem,calc(1.8rem + .2vw),3rem);
   font-style: normal;
-  font-weight: 600;
   letter-spacing: -.05rem;
   overflow: hidden;
   text-overflow: ellipsis;
