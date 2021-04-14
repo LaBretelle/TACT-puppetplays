@@ -419,7 +419,7 @@ a.project-title {
   text-decoration: none;
   color: #111;
   font-family: Gotham Narrow SSm A,Gotham Narrow SSm B,Rubik,Lato,Lucida Grande,Lucida Sans Unicode,Tahoma,Sans-Serif;
-  font-size: clamp(1.8rem,calc(1.8rem + .2vw),3rem);
+  font-size: clamp(1.4rem,calc(1.4rem + .2vw),2.5rem);
   font-style: normal;
   letter-spacing: -.05rem;
   overflow: hidden;
@@ -442,6 +442,6 @@ a.project-title {
 }
 
 .project-grid.archived {
-  grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+  grid-template-columns: repeat(auto-fill,minmax(350px,1fr));
   filter: grayscale(80%);
 }
