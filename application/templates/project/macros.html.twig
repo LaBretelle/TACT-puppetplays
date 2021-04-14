@@ -1,46 +1,31 @@
 {% macro displayProject(project) %}
   {% import _self as macros %}
   {% set userStatus = app.user|status(project) %}
-<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-  <div class="card mb-3 my-2">
-      <a href="{{ path("project_display", {'id': project.id} )}}">
-        <img loading="lazy" class="card-img-top" src="{{ project.image ? asset('project_files/'~project.id~'/'~project.image) : asset('img/project-placeholder.png') }}">
-      </a>
-      <div class="card-body border-top">
-          <h4 class="card-title mb-1 font-weight-light project-title">{{ project.name }}</h4>
-          {% if project.archived == false %}
-          <h5 class="card-subtitle mb-1 font-weight-light">
-            <span class="text-muted">{{ project.public ? 'is_public'|trans : 'project_is_not_public'|trans}}</span>
-          </h5>
-          <div>
-            {% set percents = project|percents %}
-            {{ macros.displayPercents(percents) }}
-          </div>
-          {% endif %}
+  <article class="project-card">
+      <div class="project-thumbnail-wrap">
+        <a href="{{ path("project_display", {'id': project.id} )}}">
+          <img width="100%" src="{{ project.image ? asset('project_files/'~project.id~'/'~project.image) : asset('img/project-placeholder.png') }}" class="article-thumbnail wp-post-image"  loading="lazy"/>
+        </a>
       </div>
-      <div class="card-footer">
-        <div class="row">
-          <div class="col font-weight-light">
-            {% if project.archived == false %}
-              {% if project | isAuthorizedOnProject('register') %}
-              <a class="card-link"  href="{{ path('status_request', {id: project.id})}}">{{'project_register_short' | trans}}</a>
-              {% elseif  project | isAuthorizedOnProject('transcribe') %}
-              <a class="card-link" href="{{ path('project_transcriptions', {id: project.id})}}">{{'project_transcript'| trans }}</a>
-              {% endif %}
-            {% endif %}
-            <a class="card-link" href="{{ path("project_display", {'id': project.id} )}}">{{'view_project_short' | trans}}</a>
+      <div class="project-content">
+        {% if project.archived == false %}
+        <header class="project-meta">
+          <div class="project-tags">
+            {{ project.public ? 'is_public'|trans : 'project_is_not_public'|trans}}
           </div>
-          <div class="col text-right">
-            {% if userStatus %}
-            <span class="badge badge-secondary font-weight-light">
-              {{ userStatus.status.name | trans }} {{ not userStatus.enabled ? 'not_enabled_yet' | trans}}
-            </span>
-            {% endif %}
-          </div>
+        </header>
+        {% endif %}
+        <a class="project-title" href="{{ path("project_display", {'id': project.id} )}}">
+          {{ project.name }}
+        </a>
+        {% if project.archived == false %}
+        {% set percents = project|percents %}
+        <div class="project-stats">
+          {{ macros.displayPercents(percents) }}
         </div>
+        {% endif %}
       </div>
-  </div>
-</div>
+  </article>
 {% endmacro %}
 
 {% macro displayPercents(percents) %}

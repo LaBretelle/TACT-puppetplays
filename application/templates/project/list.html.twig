@@ -5,10 +5,10 @@
   {% include 'header.html.twig' with {'title' : "project_list" } %}
 
   <div id="main-container">
-    <div class="row">
-      {% for project in projectsUnarchived %}
-        {{ macros.displayProject(project) }}
-      {% endfor %}
+    <div class="project-grid">
+    {% for project in projectsUnarchived %}
+      {{ macros.displayProject(project) }}
+    {% endfor %}
     </div>
     {% if projectsArchived|length > 0 %}
       <div class="row">
@@ -16,7 +16,7 @@
           <h4 class="mt-5 ml-2 text-muted">Projets archivés</h4>
         </div>
       </div>
-      <div class="row">
+      <div class="project-grid archived">
         {% for project in projectsArchived %}
           {{ macros.displayProject(project) }}
         {% endfor %}
