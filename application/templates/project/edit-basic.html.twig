@@ -11,54 +11,63 @@
 
 {% if project.id %}
   {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
-{% else %}
-  {% include 'header.html.twig' with {'title': 'project_create'} %}
 {% endif %}
 
-
-
 <div id="main-container">
-  {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.public) }}
-    {{ form_row(form.catchPhrase) }}
-    {% if project.id is null %}
-      {{ form_row(form.manager) }}
-    {% endif %}
-    {{ form_row(form.projectHelpLink) }}
-    {% if project.projectHelpLink %}
-    <div class="row project-helplink-row text-right">
-      <div class="col">
-        <a download class="project-helplink" href="{{ asset('project_files/'~ project.id ~ '/' ~ project.projectHelpLink) }}">{{ project.projectHelpLink }}</a>
-        <button data-project-id="{{ project.id }}" id="delete-helplink"k type="button" role="button" class="btn btn-sm btn-danger">
-          <i class="fas fa-trash"></i>
-        </button>
+  <h1 class="page-title">
+  {% if not project.id %}
+    {{'project_create'|trans}}</h1>
+  {% else %}
+    {{'edit_basic'|trans}}
+  {% endif %}
+  </h1>
+  
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body">
+          {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.public) }}
+            {{ form_row(form.catchPhrase) }}
+            {% if project.id is null %}
+              {{ form_row(form.manager) }}
+            {% endif %}
+            {{ form_row(form.projectHelpLink) }}
+            {% if project.projectHelpLink %}
+            <div class="row project-helplink-row text-right">
+              <div class="col">
+                <a download class="project-helplink" href="{{ asset('project_files/'~ project.id ~ '/' ~ project.projectHelpLink) }}">{{ project.projectHelpLink }}</a>
+                <button data-project-id="{{ project.id }}" id="delete-helplink"k type="button" role="button" class="btn btn-sm btn-danger">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+            {% endif %}
+
+            {{ form_row(form.nbValidation) }}
+            {{ form_row(form.image) }}
+            {% if project.image %}
+            <div class="row project-image-row text-right">
+              <div class="col">
+                <img width="200px" class="project-image-md" src="{{ asset('project_files/'~ project.id ~ '/' ~ project.image) }}">
+                <input type="hidden" name="previous_image" value="{{ project.image }}" />
+                <button data-project-id="{{ project.id }}" id="delete-image" type="button" role="button" class="btn btn-sm btn-danger">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+            {% endif %}
+
+            {{ form_widget(form._token) }}
+            {{ form_row(form.save) }}
+          </form>
+        </div>
       </div>
     </div>
-    {% endif %}
-
-
-    {{ form_row(form.nbValidation) }}
-    {{ form_row(form.image) }}
-    {% if project.image %}
-    <div class="row project-image-row text-right">
-      <div class="col">
-        <img width="200px" class="project-image-md" src="{{ asset('project_files/'~ project.id ~ '/' ~ project.image) }}">
-        <input type="hidden" name="previous_image" value="{{ project.image }}" />
-        <button data-project-id="{{ project.id }}" id="delete-image" type="button" role="button" class="btn btn-sm btn-danger">
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    </div>
-    {% endif %}
-
-    {{ form_widget(form._token) }}
-    {{ form_row(form.save) }}
-  </form>
-
+  </div>
 </div>
-
 {% endblock %}
 
 

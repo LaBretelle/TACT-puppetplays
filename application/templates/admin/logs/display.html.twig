@@ -1,8 +1,12 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-  {% include 'header.html.twig' with {'title': 'platform_logs'} %}
   <div id="main-container">
-    {% include 'log/listing.html.twig' with {'global': true, 'personal': false} %}
+    <h1 class="page-title">{{'platform_logs'|trans}}</h1>
+    <div class="card">
+      <div class="card-body">
+        {% include 'log/listing.html.twig' with {'global': true, 'personal': false} %}
+      </div>
+    </div>
   </div>
 {% endblock %}

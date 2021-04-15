@@ -3,39 +3,41 @@
 {% import "user/macros.html.twig" as macros %}
 
 {% block body %}
-{% include 'header.html.twig' with {'title' : 'profile'} %}
-
 <div id="main-container">
+  <div class="card">
+    <div class="card-body">
 
-  <div class="row user-profile-action">
-    <div class="col text-right">
-      <div class="btn-group">
-        {% if app.user and app.user != user %}
-        <a class="btn btn-link" href="{{ path("user_message", {id: user.id})}}">
-          <i class="far fa-comment-dots"></i> {{ 'message_user' | trans}}
-        </a>
-        {% endif %}
-        {% if app.user == user or is_granted('ROLE_ADMIN') %}
-          <a class="btn btn-link" href="{{ path("user_edit", {id: user.id})}}">
-            <i class="fas fa-edit"></i> {{ 'user_edit' | trans}}
-          </a>
-          <form action="{{path("user_export", {id: user.id})}}" method="post">
-            <button data-toggle="tooltip" title="{{ 'user_export_details' | trans}}" class="btn btn-link" type="submit">
-              <i class="fas fa-external-link-alt"></i> {{ 'user_export' | trans}}
-            </button>
-          </form>
-        {% endif %}
+      <div class="row user-profile-action">
+        <div class="col text-right">
+          <div class="btn-group">
+            {% if app.user and app.user != user %}
+            <a class="btn btn-link" href="{{ path("user_message", {id: user.id})}}">
+              <i class="far fa-comment-dots"></i> {{ 'message_user' | trans}}
+            </a>
+            {% endif %}
+            {% if app.user == user or is_granted('ROLE_ADMIN') %}
+              <a class="btn btn-link" href="{{ path("user_edit", {id: user.id})}}">
+                <i class="fas fa-edit"></i> {{ 'user_edit' | trans}}
+              </a>
+              <form action="{{path("user_export", {id: user.id})}}" method="post">
+                <button data-toggle="tooltip" title="{{ 'user_export_details' | trans}}" class="btn btn-link" type="submit">
+                  <i class="fas fa-external-link-alt"></i> {{ 'user_export' | trans}}
+                </button>
+              </form>
+            {% endif %}
 
+          </div>
+        </div>
       </div>
+
+      {{ macros.userSummary(user, true) }}
+
+      <div class="mt-2">
+        <h3>Dernières contributions</h3>
+        {% include 'log/listing.html.twig' with {'global': false, 'personal': true, 'thumbnail': true} %}
+      </div>
+
     </div>
   </div>
-
-  {{ macros.userSummary(user, true) }}
-
-  <div class="mt-3">
-    <h3>Dernières contributions</h3>
-    {% include 'log/listing.html.twig' with {'global': false, 'personal': true, 'thumbnail': true} %}
-  </div>
-
 </div>
 {% endblock %}

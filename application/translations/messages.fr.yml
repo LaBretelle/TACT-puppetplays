@@ -222,7 +222,7 @@ platform_logo:                            Logo de la plateforme
 platform_logs:                            Logs de la plateforme
 platform_name:                            Nom de la plateforme
 platform_page_title:                      Administration de la plateforme
-platform_title:                           PLATEFORME DE TRANSCRIPTION ET D'ANNOTATION DE CORPUS TEXTUELS
+platform_title:                           TACT, plateforme de Transcription et d'Annotation de Corpus Textuels
 please_wait:                              Veuillez patienter...
 positive_review:                          Une relecture positive a été faite sur le média <a target="_blank" href="%url%">%media%</a> <br/> %comment%
 preview_mode:                             Prévisualisation

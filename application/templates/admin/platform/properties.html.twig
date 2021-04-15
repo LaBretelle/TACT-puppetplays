@@ -6,30 +6,38 @@
 
 {% block body %}
 
-{% include 'header.html.twig' with {'title' : 'platform_page_title'} %}
-
 <div id="main-container">
-  {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.platform_guide) }}
-    {{ form_row(form.manager_guide) }}
-    {{ form_row(form.logo) }}
+  <h1 class="page-title">{{'platform_page_title'|trans}}</h1>
 
-    {% if platform.logo %}
-    <div class="row platform-logo-row">
-      <div class="col">
-        <img width=100% class="platform-logo" src="{{ asset('platform/'~ platform.logo) }}">
-        <input type="hidden" name="previous_logo" value="{{ platform.logo }}" />
-      </div>
-      <div class="col">
-        <button type="button" data-toggle="tooltip" data-placement="right" role="button" class="btn btn-danger btn-logo-delete" title="{{'platform_delete_logo' | trans}}">
-          <i class="fas fa-trash"></i>
-        </button>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body">
+        {{ form_start(form) }}
+          {{ form_row(form.name) }}
+          {{ form_row(form.platform_guide) }}
+          {{ form_row(form.manager_guide) }}
+          {{ form_row(form.logo) }}
+
+          {% if platform.logo %}
+          <div class="row platform-logo-row">
+            <div class="col">
+              <img width=100% class="platform-logo" src="{{ asset('platform/'~ platform.logo) }}">
+              <input type="hidden" name="previous_logo" value="{{ platform.logo }}" />
+            </div>
+            <div class="col">
+              <button type="button" data-toggle="tooltip" data-placement="right" role="button" class="btn btn-danger btn-logo-delete" title="{{'platform_delete_logo' | trans}}">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          {% endif %}
+          <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
+        {{ form_end(form) }}
+        </div>
       </div>
     </div>
-    {% endif %}
-    <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
-  {{ form_end(form) }}
+  </div>
 </div>
 
 {% endblock %}

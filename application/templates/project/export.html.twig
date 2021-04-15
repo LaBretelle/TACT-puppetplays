@@ -3,16 +3,25 @@
 {% block body %}
   {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
   <div id="main-container">
-    <h5>{{"export_form_title"|trans}}</h5>
-      {{ form_start(form) }}
-      {{ form_widget(form._token) }}
-      {{ form_row(form.transcriptions) }}
-      <div class="ml-4">
-        {{ form_row(form.transcriptions_apply_xsl) }}
-        {{ form_row(form.transcriptions_metadatas) }}
+    <h1 class="page-title">{{"export"|trans}}</h1>
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <div class="card">
+          <div class="card-body">
+            <h5>{{"export_form_title"|trans}}</h5>
+              {{ form_start(form) }}
+              {{ form_widget(form._token) }}
+              {{ form_row(form.transcriptions) }}
+              <div class="ml-4">
+                {{ form_row(form.transcriptions_apply_xsl) }}
+                {{ form_row(form.transcriptions_metadatas) }}
+              </div>
+              {{ form_end(form) }}
+              {{ form_row(form.save) }}
+            </div>
+          </div>
+        </div>
       </div>
-      {{ form_end(form) }}
-      {{ form_row(form.save) }}
   </div>
 {% endblock %}
 

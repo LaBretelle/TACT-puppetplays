@@ -1,9 +1,13 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-  {% include 'header.html.twig' with {'title' : 'administrate_edito_content'} %}
   <div id="main-container">
-    {{form(form)}}
+    <h1 class="page-title">{{'administrate_edito_content'|trans}}</h1>
+    <div class="card">
+      <div class="card-body">
+        {{form(form)}}
+      </div>
+    </div>
   </div>
 {% endblock %}
 

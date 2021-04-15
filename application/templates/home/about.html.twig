@@ -1,12 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-{% include 'header.html.twig' with {'title' : "about" } %}
-<div id="main-container">
-  <div class="col col-8 offset-1 text-justify">
+<div  id="main-container">
+  <h1 class="page-title">{{'about'|trans}}</h1>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body">
+
     <h3>Le projet TACT</h3>
     <p>La plateforme TACT a été officiellement lancée le 4 juin 2019 lors de la Global Challenges Science Week.</p>
-    
+
     <p>TACT offre la possibilité de déléguer la transcription et l’annotation (tâches souvent coûteuses en temps et en ressources) de sources numérisées à des non-spécialistes, tout en contrôlant la qualité de l’éxécution, et ce via une interface simple d’utilisation. TACT permet de produire des données structurées, exportables, qui peuvent être ainsi exploitées et mises à disposition de la communauté scientifique et du public.</p>
 
     <h5>Création de la plateforme</h5>
@@ -23,7 +27,7 @@
     <h3>L'équipe</h3>
     <p><a href="https://demarreshs.hypotheses.org/">Démarre SHS !</a> a collaboré avec <a href="http://carres.elan-numerique.fr/">ELAN</a>, Équipe Littératures et Arts Numériques (<a href="http://litt-arts.univ-grenoble-alpes.fr/">Litt&Arts - UMR5316</a>), pour développer une plateforme collaborative de transcription et d’annotation de corpus textuels. Ainsi, ce sont Arnaud Bey, Anne Garcia-Fernandez, Elisabeth Greslou (ELAN), Patrick Guillou, Sylvain Hatier, Célia Marion (Démarre SHS !) et Thomas Lebarbé (Litt&Arts, Démarre SHS !) qui ont pris part à la conception et au développement de la plateforme.</p>
     <hr/>
-    
+
     <h3>Les financeurs</h3>
     <style>.logo { height: 100px; }</style>
     <p class="text-center">
@@ -43,7 +47,10 @@
         <img class="logo" data-toggle="tooltip" title="" src="/img/logos/logo_hn.jpg" data-original-title="Huma-Num - Hébergeur">
       </a>
     </p>
-    <hr/>
+
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

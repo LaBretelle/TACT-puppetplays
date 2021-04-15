@@ -8,6 +8,12 @@ html {
   font-size: 0.90rem;
 }
 
+body,
+html {
+  background-color: #285A78;
+  color: white;
+}
+
 body > .container-fluid {
   padding-top: 40px;
   margin: 0 !important;
@@ -43,8 +49,7 @@ button > * {
 }
 
 #footer {
-  margin-top: 100px;
-  padding: 1.5rem 0;
+  padding: 0.2rem 0;
   color: #999;
   text-align: center;
   background-color: #f9f9f9;
@@ -223,7 +228,7 @@ button > * {
 }
 /* USER PROFILE  */
 .avatar-container {
-  background-color: #fff;
+  background-color: #285A78;
   padding: 10px;
   border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -232,7 +237,7 @@ button > * {
   -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.075);
   -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.075);
   text-align: center;
-  color: black;
+  color: white;
 }
 
 .avatar-flip {
@@ -264,10 +269,6 @@ button > * {
 .avatar-email {
   color: #00baff;
   letter-spacing: 1px;
-}
-
-.user-profile-action {
-  margin-bottom: 80px;
 }
 /* TRANSCRIPTION */
 .transcription-panel-content {
@@ -361,8 +362,8 @@ button > * {
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(500px,1fr));
-  gap: 8px;
-  margin: 0 0 8px;
+  gap: 24px;
+  margin: 0 0 24px;
 }
 
 .project-card {
@@ -428,20 +429,48 @@ a.project-title {
 }
 
 .project-stats {
-  margin: 0 0 1.5rem;
-}
-
-.project-footer {
-  margin-block-start: auto;
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  gap: 2rem;
-  align-items: center;
-  color: #565656;
-  line-height: 1.3;
+  margin: 0 0 0.5rem;
 }
 
 .project-grid.archived {
   grid-template-columns: repeat(auto-fill,minmax(350px,1fr));
   filter: grayscale(80%);
+}
+
+h1.page-title {
+  text-shadow: 0 2px 2px rgba(0,0,0,.5);
+  font-family: Gotham Narrow SSm A,Gotham Narrow SSm B,Rubik,Lato,Lucida Grande,Lucida Sans Unicode,Tahoma,Sans-Serif;
+  font-style: normal;
+  font-size: clamp(2rem,calc(2rem + 1.2vw),3rem);
+  font-variant: small-caps;
+  margin: 0 0 1.5rem;
+  line-height: 1.1;
+  color: white;
+  text-align: center;
+}
+
+.card {
+  color: black;
+  background-color: white;
+}
+
+.introjs-tooltiptext,
+.list-group-item,
+.modal {
+  color: black;
+}
+
+.tact-link,
+.tact-link:hover {
+  color: white;
+  text-decoration: underline dotted;
+}
+
+.bg-white {
+  background-color: white;
+  color: black;
+}
+
+#main-container {
+  min-height: calc(100vh - 115px);
 }

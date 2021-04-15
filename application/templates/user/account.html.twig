@@ -6,35 +6,41 @@
 {% endblock %}
 
 {% block body %}
-{% include 'header.html.twig' with {'title' : 'user_edit'} %}
-
 <div id="main-container">
-  {{ form_start(form) }}
+  <h1 class="page-title">{{'user_edit'|trans}}</h1>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body">
+          {{ form_start(form) }}
+            {% if is_granted('ROLE_ADMIN', app.user) %}
+              {{ form_row(form.active) }}
+            {% endif %}
+            {{ form_row(form.lastname) }}
+            {{ form_row(form.firstname) }}
+            {{ form_row(form.username) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.publicMail) }}
+            {{ form_row(form.image) }}
+            {% if user.image %}
+            <div class="row user-account-image-row">
+              <div class="col-8">
+                <img class="user-account-image-md" src="{{asset('user_images/' ~ user.image)}}" alt="{{user.lastname}} {{user.firstname}}">
+                <input type="hidden" name="previous_image" value="{{user.image}}" />
+              </div>
+              <div class="col-4">
+                <button type="button" data-id="{{ form.vars.data.id }}" data-toggle="tooltip" data-placement="right" role="button" class="btn btn-danger btn-delete-account-image" title="{{'user_delete_account_image' | trans}}"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+            {% endif %}
+            {{ form_row(form.description) }}
 
-    {% if is_granted('ROLE_ADMIN', app.user) %}
-      {{ form_row(form.active) }}
-    {% endif %}
-    {{ form_row(form.lastname) }}
-    {{ form_row(form.firstname) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.publicMail) }}
-    {{ form_row(form.image) }}
-    {% if user.image %}
-    <div class="row user-account-image-row">
-      <div class="col-8">
-        <img class="user-account-image-md" src="{{asset('user_images/' ~ user.image)}}" alt="{{user.lastname}} {{user.firstname}}">
-        <input type="hidden" name="previous_image" value="{{user.image}}" />
-      </div>
-      <div class="col-4">
-        <button type="button" data-id="{{ form.vars.data.id }}" data-toggle="tooltip" data-placement="right" role="button" class="btn btn-danger btn-delete-account-image" title="{{'user_delete_account_image' | trans}}"><i class="fas fa-trash"></i></button>
+            <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
+          {{ form_end(form) }}
+        </div>
       </div>
     </div>
-    {% endif %}
-    {{ form_row(form.description) }}
-
-    <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
-  {{ form_end(form) }}
+  </div>
 </div>
 {% endblock %}
 

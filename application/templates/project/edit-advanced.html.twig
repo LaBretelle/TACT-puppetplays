@@ -9,54 +9,63 @@
 
 {% block body %}
 
-{% if project.id %}
-  {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
-{% else %}
-  {% include 'header.html.twig' with {'title': 'project_create'} %}
-{% endif %}
-
 <div id="main-container">
-  {{ form_start(form) }}
-    {{ form_row(form.css) }}
+  <h1 class="page-title">
+  {% if not project.id %}
+    {{'project_create'|trans}}</h1>
+  {% else %}
+    {{'project_edit'|trans}}
+  {% endif %}
+  </h1>
 
-    <div class="row mt-3 mb-4">
-      <div class="col">
-        {{ form_row(form.xslt_export) }}
-        {% if project|hasXsl %}
-        <div class="project-xsl-row">
-            <a download href="{{ asset('project_files/'~ project.id ~ '/export.xsl') }}">export.xsl</a>
-            <button data-project-id="{{ project.id }}" id="delete-xsl" type="button" role="button" class="btn btn-sm btn-danger">
-              <i class="fas fa-trash"></i>
-            </button>
+
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body">
+            {{ form_start(form) }}
+            {{ form_row(form.css) }}
+              <div class="row mt-3 mb-4">
+                <div class="col">
+                  {{ form_row(form.xslt_export) }}
+                  {% if project|hasXsl %}
+                  <div class="project-xsl-row">
+                      <a download href="{{ asset('project_files/'~ project.id ~ '/export.xsl') }}">export.xsl</a>
+                      <button data-project-id="{{ project.id }}" id="delete-xsl" type="button" role="button" class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                  </div>
+                  {% endif %}
+                  <span class="text-muted small">Vous trouverez <a download href="{{ asset("data/xsl-exemple.xsl") }}">ici</a> un exemple de xsl</span>
+                </div>
+                <div class="col">
+                  {{ form_label(form.json_schema) }}
+                  {{ form_errors(form.json_schema) }}
+
+                  {{ form_widget(form.json_schema) }}
+                  <div class="text-right">
+                    <span class="text-muted small">{{"tei2json_help"|trans|raw}}</span>
+                  </div>
+
+                  {% if project|hasScheme %}
+                  <div class="project-json-row">
+                      <a download href="{{ asset('project_files/'~ project.id ~ '/tei-schema.json') }}">tei-schema.json</a>
+                      <button data-project-id="{{ project.id }}" id="delete-json" type="button" role="button" class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                  </div>
+                  {% endif %}
+                </div>
+
+              </div>
+
+              {{ form_widget(form._token) }}
+              {{ form_row(form.save) }}
+            </form>
+          </div>
         </div>
-        {% endif %}
-        <span class="text-muted small">Vous trouverez <a download href="{{ asset("data/xsl-exemple.xsl") }}">ici</a> un exemple de xsl</span>
       </div>
-      <div class="col">
-        {{ form_label(form.json_schema) }}
-        {{ form_errors(form.json_schema) }}
-
-        {{ form_widget(form.json_schema) }}
-        <div class="text-right">
-          <span class="text-muted small">{{"tei2json_help"|trans|raw}}</span>
-        </div>
-
-        {% if project|hasScheme %}
-        <div class="project-json-row">
-            <a download href="{{ asset('project_files/'~ project.id ~ '/tei-schema.json') }}">tei-schema.json</a>
-            <button data-project-id="{{ project.id }}" id="delete-json" type="button" role="button" class="btn btn-sm btn-danger">
-              <i class="fas fa-trash"></i>
-            </button>
-        </div>
-        {% endif %}
-      </div>
-
     </div>
-
-    {{ form_widget(form._token) }}
-    {{ form_row(form.save) }}
-  </form>
-
 </div>
 {% endblock %}
 

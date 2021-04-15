@@ -6,91 +6,94 @@
 {% endblock %}
 
 {% block body %}
-{% include 'header.html.twig' with {'title' : 'administrate_users_title'} %}
-
   <div id="main-container">
-    <div class="text-right">
-      <button type="button" name="button" class="btn btn-link add-user"><i class="fas fa-user-plus"></i></button>
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="search-icon-addon">
-          <i class="fa fa-search"></i>
-        </span>
+    <h1 class="page-title">{{'administrate_users_title'|trans}}</h1>
+    <div class="card">
+      <div class="card-body">
+        <div class="text-right">
+          <button type="button" name="button" class="btn btn-link add-user"><i class="fas fa-user-plus"></i></button>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="search-icon-addon">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+          <input type="text" class="form-control search-input" placeholder="{{'filter_users_by' | trans}}" aria-label="Search user" aria-describedby="search-icon-addon"></input>
+        </div>
+        <hr/>
+        <table class="table table-striped user-table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">{{'userfullname' | trans}}</th>
+              <th scope="col">{{'register_date' | trans}}</th>
+              <th scope="col">{{'last_access' | trans}}</th>
+              <th scope="col">{{'username' | trans}}</th>
+              <th scope="col">{{'email' | trans}}</th>
+              <!--<th scope="col">{{'user_is_active' | trans}}</th>-->
+              <th scope="col">{{'actions' | trans}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="ajax-row">
+              <td colspan="6">
+                <i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+              </td>
+            </tr>
+            {# partial with data will be append dynamicaly #}
+          </tbody>
+        </table>
       </div>
-      <input type="text" class="form-control search-input" placeholder="{{'filter_users_by' | trans}}" aria-label="Search user" aria-describedby="search-icon-addon"></input>
-    </div>
-    <hr/>
-    <table class="table table-striped user-table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">{{'userfullname' | trans}}</th>
-          <th scope="col">{{'register_date' | trans}}</th>
-          <th scope="col">{{'last_access' | trans}}</th>
-          <th scope="col">{{'username' | trans}}</th>
-          <th scope="col">{{'email' | trans}}</th>
-          <!--<th scope="col">{{'user_is_active' | trans}}</th>-->
-          <th scope="col">{{'actions' | trans}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="ajax-row">
-          <td colspan="6">
-            <i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i>
-            <span class="sr-only">Loading...</span>
-          </td>
-        </tr>
-        {# partial with data will be append dynamicaly #}
-      </tbody>
-    </table>
-  </div>
 
-  {# anonymize user confirm modal #}
-  <div class="modal fade anonymize-user-confirm-modal" id="anonymiseUserModal" tabindex="-1" role="dialog" aria-labelledby="anonymizeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="anonymizeModalLabel">{{'confirm_title'| trans}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h6>{{'confirm_account_anonymization' | trans}}</h6>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-action="cancel" data-dismiss="modal">{{'cancel' | trans}}</button>
-          <button type="button" data-action="confirm" data-dismiss="modal" class="btn btn-danger anonymize-user-confirm-button">{{'confirm' | trans}}</button>
+      {# anonymize user confirm modal #}
+      <div class="modal fade anonymize-user-confirm-modal" id="anonymiseUserModal" tabindex="-1" role="dialog" aria-labelledby="anonymizeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="anonymizeModalLabel">{{'confirm_title'| trans}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h6>{{'confirm_account_anonymization' | trans}}</h6>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-action="cancel" data-dismiss="modal">{{'cancel' | trans}}</button>
+              <button type="button" data-action="confirm" data-dismiss="modal" class="btn btn-danger anonymize-user-confirm-button">{{'confirm' | trans}}</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  {# create user modal #}
-  <div class="modal fade add-user-modal" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="createUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="createUserModalLabel">{{'user_add'| trans}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          {{ form_start(form, {'action': path('admin_user_create'), 'method': 'POST'}) }}
-            {{ form_row(form.lastname) }}
-            {{ form_row(form.firstname) }}
-            {{ form_row(form.username) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.publicMail) }}
-            {{ form_row(form.isAdmin) }}
-            {{ form_row(form.active) }}
-            {{ form_row(form.plainPassword.first) }}
-            {{ form_row(form.plainPassword.second) }}
-            <hr/>
-            <button type="button" class="btn btn-secondary" data-action="cancel" data-dismiss="modal">{{'cancel' | trans}}</button>
-            <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
-          {{ form_end(form) }}
+      {# create user modal #}
+      <div class="modal fade add-user-modal" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="createUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="createUserModalLabel">{{'user_add'| trans}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              {{ form_start(form, {'action': path('admin_user_create'), 'method': 'POST'}) }}
+                {{ form_row(form.lastname) }}
+                {{ form_row(form.firstname) }}
+                {{ form_row(form.username) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.publicMail) }}
+                {{ form_row(form.isAdmin) }}
+                {{ form_row(form.active) }}
+                {{ form_row(form.plainPassword.first) }}
+                {{ form_row(form.plainPassword.second) }}
+                <hr/>
+                <button type="button" class="btn btn-secondary" data-action="cancel" data-dismiss="modal">{{'cancel' | trans}}</button>
+                <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
+              {{ form_end(form) }}
+            </div>
+          </div>
         </div>
       </div>
     </div>

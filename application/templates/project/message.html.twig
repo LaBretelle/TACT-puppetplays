@@ -4,9 +4,16 @@
   {% include 'project/navigation.html.twig' with {'current': null} %}
 
   <div id="main-container">
-    <h3>
-      Message au membre du projet <span class="text-muted">{{ project.name }}</span>
-    </h3>
-    {{form(form) }}
+
+    <h1 class="page-title">Message aux membres du projet</h1>
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <div class="card">
+          <div class="card-body">
+              {{form(form) }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock %}

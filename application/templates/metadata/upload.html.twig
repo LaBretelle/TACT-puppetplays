@@ -3,15 +3,20 @@
 {% block body %}
 {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
 <div id="main-container">
-  <div class="row">
-    <div class="col">
-      <div class="alert alert-primary" role="alert">
-        {{"metadata_upload_help"|trans}}
-        <a download href="{{ asset('data/metadatas-exemple.xml') }}">
-          {{"metadatas_exemple"|trans}}
-        </a>
+  <h1 class="page-title">{{"add_metadatas"|trans}}</h1>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body">
+          <div class="alert alert-primary" role="alert">
+            {{"metadata_upload_help"|trans}}
+            <a download href="{{ asset('data/metadatas-exemple.xml') }}">
+              {{"metadatas_exemple"|trans}}
+            </a>
+          </div>
+          {{form(form)}}
+        </div>
       </div>
-      {{form(form)}}
     </div>
   </div>
 </div>
