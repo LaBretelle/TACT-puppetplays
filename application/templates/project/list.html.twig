@@ -2,20 +2,15 @@
 {% import "project/macros.html.twig" as macros %}
 
 {% block body %}
-  {% include 'header.html.twig' with {'title' : "project_list" } %}
-
-  <div id="main-container">
+  <div class="bluebg" id="main-container">
+    <h1 class="page-title">{{'project_list'|trans}}</h1>
     <div class="project-grid">
     {% for project in projectsUnarchived %}
       {{ macros.displayProject(project) }}
     {% endfor %}
     </div>
     {% if projectsArchived|length > 0 %}
-      <div class="row">
-        <div class="col">
-          <h4 class="mt-5 ml-2 text-muted">Projets archivés</h4>
-        </div>
-      </div>
+      <h1 class="page-title">Projets archivés</h1>
       <div class="project-grid archived">
         {% for project in projectsArchived %}
           {{ macros.displayProject(project) }}

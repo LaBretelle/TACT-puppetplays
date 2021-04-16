@@ -4,53 +4,63 @@
 {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
 
 <div id="main-container">
-    <table class="table  table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">{{ "username"| trans }}</th>
-          <th scope="col">{{ "status"| trans }}</th>
-          <th scope="col">{{ "project_enabled"| trans }}</th>
-          <th scope="col">{{ "actions"| trans }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for userStatus in project.userStatuses %}
-        <tr>
-          <td>{{ userStatus.user.username }}</td>
-          <td>{{ userStatus.status.name | trans }}</td>
-          <td>{{ userStatus.enabled ? "yes"|trans : "no"|trans }}</td>
-          <td>
-            <a href="#" type="button" class="btn btn-link edit-status" data-status-id="{{ userStatus.id}}">
-              <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-              {{ "status_edit" | trans}}
-            </a>
-            <a href="{{ path("status_remove", {id: userStatus.id})}}" type="button" class="btn btn-link">
-              <i class="fas fa-times" aria-hidden="true"></i>
-              {{ "status_remove" | trans}}
-            </a>
-            <a href="{{ path("status_toggle", {id: userStatus.id})}}" type="button" class="btn btn-link">
-              {% if userStatus.enabled %}
-              <i class="fa fa-toggle-on" aria-hidden="true"></i> {{ "status_toggle_off" | trans}}
-              {% else %}
-              <i class="fa fa-toggle-off" aria-hidden="true"></i> {{ "status_toggle_on" | trans}}
-              {% endif %}
-            </a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  <div id="status-modal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">{{ "status_edit" | trans}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div id="status-modal-body" class="modal-body">
+  <h1 class="page-title">{{"users"|trans}}</h1>
+
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+            <table class="table  table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">{{ "username"| trans }}</th>
+                  <th scope="col">{{ "status"| trans }}</th>
+                  <th scope="col">{{ "project_enabled"| trans }}</th>
+                  <th scope="col">{{ "actions"| trans }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for userStatus in project.userStatuses %}
+                <tr>
+                  <td>{{ userStatus.user.username }}</td>
+                  <td>{{ userStatus.status.name | trans }}</td>
+                  <td>{{ userStatus.enabled ? "yes"|trans : "no"|trans }}</td>
+                  <td>
+                    <a href="#" type="button" class="btn btn-link edit-status" data-status-id="{{ userStatus.id}}">
+                      <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                      {{ "status_edit" | trans}}
+                    </a>
+                    <a href="{{ path("status_remove", {id: userStatus.id})}}" type="button" class="btn btn-link">
+                      <i class="fas fa-times" aria-hidden="true"></i>
+                      {{ "status_remove" | trans}}
+                    </a>
+                    <a href="{{ path("status_toggle", {id: userStatus.id})}}" type="button" class="btn btn-link">
+                      {% if userStatus.enabled %}
+                      <i class="fa fa-toggle-on" aria-hidden="true"></i> {{ "status_toggle_off" | trans}}
+                      {% else %}
+                      <i class="fa fa-toggle-off" aria-hidden="true"></i> {{ "status_toggle_on" | trans}}
+                      {% endif %}
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div id="status-modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">{{ "status_edit" | trans}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div id="status-modal-body" class="modal-body">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,18 +1,22 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-{% include 'header.html.twig' with {'title' : 'lost_password_link'} %}
 
 <div id="main-container">
+  <h1 class="page-title">{{'lost_password_link'|trans}}</h1>
   <div class="row justify-content-center">
-    <div class="col-6">
-      <form action="{{ path('user_lost_password_form') }}" method="post">
-        <div class="form-group">
-          <label class="form-control-label required" for="user-data">{{ 'email_or_login' | trans({}, 'messages')}}</label>
-          <input class="form-control" placeholder="{{ 'email_or_login_placeholder' | trans({}, 'messages')}}" required="required" type="text" id="user-data" name="user_data" value=""/>
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body">
+          <form action="{{ path('user_lost_password_form') }}" method="post">
+            <div class="form-group">
+              <label class="form-control-label required" for="user-data">{{ 'email_or_login' | trans({}, 'messages')}}</label>
+              <input class="form-control" placeholder="{{ 'email_or_login_placeholder' | trans({}, 'messages')}}" required="required" type="text" id="user-data" name="user_data" value=""/>
+            </div>
+            <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
+          </form>
         </div>
-        <button class="btn btn-primary" type="submit">{{ 'submit' | trans({}, 'messages')}}</button>
-      </form>
+      </div>
     </div>
   </div>
 </div>

@@ -1,17 +1,17 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-{% include 'header.html.twig' with {'title' : 'login'} %}
 
 <div id="main-container">
+  <h1 class="page-title">{{'login'|trans}}</h1>
   <div class="row justify-content-center">
-    <div class="col-6">
-
+    <div class="col-8">
       {% if auth_error %}
         <div class="alert alert-danger">{{ auth_error.messageKey|trans(auth_error.messageData, 'security') }}</div>
       {% endif %}
-
-      <form action="{{ path('user_login') }}" method="post">
+      <div class="card">
+        <div class="card-body">
+            <form action="{{ path('user_login') }}" method="post">
         <input type="hidden" name="_target_path" value="/" />
         <div class="form-group">
           <label class="form-control-label required" for="username">{{ 'username' | trans({}, 'messages')}}</label>
@@ -30,6 +30,8 @@
           </div>
         </div>
       </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

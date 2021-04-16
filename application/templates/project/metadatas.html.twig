@@ -5,37 +5,41 @@
   {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
 
   <div id="main-container">
+    <h1 class="page-title">{{"edit_metadatas"|trans}}</h1>
+
     <div class="row">
       <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <a class="mb-2 btn btn-sm btn-primary" href="{{path("metadata_edit", { projectId: project.id})}}">
+              <i class="fas fa-plus"></i> {{"add_metadata"|trans}}
+            </a>
 
-        <h3>{{"edit_metadatas"|trans}}</h3>
-        <a class="mb-2 btn btn-sm btn-primary" href="{{path("metadata_edit", { projectId: project.id})}}">
-          <i class="fas fa-plus"></i> {{"add_metadata"|trans}}
-        </a>
+            <a class="mb-2 btn btn-sm btn-primary" href="{{path("metadata_upload", { projectId: project.id})}}">
+              <i class="fas fa-file-code"></i> {{"add_metadatas"|trans}}
+            </a>
 
-        <a class="mb-2 btn btn-sm btn-primary" href="{{path("metadata_upload", { projectId: project.id})}}">
-          <i class="fas fa-file-code"></i> {{"add_metadatas"|trans}}
-        </a>
-
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">{{"metadata_name"|trans}}</th>
-              <th scope="col">{{"metadata_default"|trans}}</th>
-            </tr>
-          </thead>
-          {% for metadata in project.metadatas %}
-          <tr>
-            <td>{{metadata.name}}</td>
-            <td>{{metadata.defaultValue}}</td>
-            <td>
-              <a class="btn btn-sm btn-secondary" href="{{path("metadata_edit", { projectId: project.id, metadataId: metadata.id})}}">
-                <i class="fas fa-edit"></i>
-              </a>
-            </td>
-          </tr>
-          {% endfor %}
-        </table>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">{{"metadata_name"|trans}}</th>
+                  <th scope="col">{{"metadata_default"|trans}}</th>
+                </tr>
+              </thead>
+              {% for metadata in project.metadatas %}
+              <tr>
+                <td>{{metadata.name}}</td>
+                <td>{{metadata.defaultValue}}</td>
+                <td>
+                  <a class="btn btn-sm btn-secondary" href="{{path("metadata_edit", { projectId: project.id, metadataId: metadata.id})}}">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>

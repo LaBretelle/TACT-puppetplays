@@ -2,13 +2,16 @@
 {% import "project/macros.html.twig" as macros %}
 
 {% block body %}
-  {% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
+{% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
 
-  <div id="main-container">
-    <div class="row">
-      <div class="col">
+<div id="main-container">
+  <h1 class="page-title">{{"edit_iiif"|trans}}</h1>
 
-        <h3>{{"edit_iiif"|trans}}</h3>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+
         <a class="mb-2 btn btn-sm btn-primary" href="{{path("iiif_edit", { projectId: project.id})}}">
           <i class="fas fa-plus"></i> {{"add_iiif_server"|trans}}
         </a>
@@ -34,8 +37,10 @@
             </td>
           </tr>
           {% endfor %}
-        </table>
+          </table>
+        </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock %}

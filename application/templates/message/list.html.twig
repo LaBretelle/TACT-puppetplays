@@ -1,61 +1,65 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-  {% include 'header.html.twig' with {'title': 'message_list'} %}
   {% set count = messages|length %}
   <div id="main-container">
-    <div class="text-right">
-      {% if count != 0 %}
-      <a class="btn btn-link" href="{{ path('message_read_all')}}">
-        <i class="fas fa-check"></i>
-        {{"messages_set_as_read"|trans}}
-      </a>
-      <a class="btn btn-link" href="{{ path('message_delete_all')}}">
-        <i class="fas fa-trash-alt"></i>
-        {{"messages_delete"|trans}}
-      </a>
-      <a class="btn btn-link" href="{{ path('message_delete_read')}}">
-        <i class="fas fa-trash-alt"></i>
-        {{"messages_delete_read"|trans}}
-      </a>
-      {% endif %}
+    <h1 class="page-title">{{'message_list'|trans}}</h1>
+    <div class="card">
+      <div class="card-body">
+        <div class="text-right">
+          {% if count != 0 %}
+          <a class="btn btn-link" href="{{ path('message_read_all')}}">
+            <i class="fas fa-check"></i>
+            {{"messages_set_as_read"|trans}}
+          </a>
+          <a class="btn btn-link" href="{{ path('message_delete_all')}}">
+            <i class="fas fa-trash-alt"></i>
+            {{"messages_delete"|trans}}
+          </a>
+          <a class="btn btn-link" href="{{ path('message_delete_read')}}">
+            <i class="fas fa-trash-alt"></i>
+            {{"messages_delete_read"|trans}}
+          </a>
+          {% endif %}
+        </div>
+        <ul class="list-group">
+        {% if count == 0 %}
+          <li class="list-group-item text-muted">
+          {{"no_message"|trans}}
+          </li>
+        {% else %}
+          {% for m in messages %}
+            <li class="list-group-item">
+              <div class="text-muted">
+                {% if m.viewed == false %}<i class="fas fa-circle"></i>{% endif %}
+                {{ m.message.createdAt|date}}
+                {% if m.message.sender %}
+                  <i class="fas fa-user"></i> {{ "message_from_user" | trans({'%username%' : m.message.sender.username}) }}
+                {% else %}
+                    <i class="fas fa-bell"></i>
+                {% endif %}
+              </div>
+              <div>{{ m.message.content|raw }}</div>
+              <div class="text-right">
+                <a class="btn btn-link" href="{{ path('message_delete_one', {id : m.id })}}">
+                  <i class="fas fa-trash-alt"></i> {{"message_delete"|trans}}
+                </a>
+                {% if m.viewed == false %}
+                <a class="btn btn-link" href="{{ path('message_read_one', {id : m.id })}}">
+                  <i class="fas fa-check"></i> {{"message_set_as_read"|trans}}
+                </a>
+                {% endif %}
+                {% if m.message.sender %}
+                <a class="btn btn-link" href="{{ path('user_message', {id : m.message.sender.id })}}">
+                  <i class="fas fa-reply"></i> {{"message_reply"|trans}}
+                </a>
+                {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        {% endif %}
+        </ul>
+      </div>
     </div>
-    <ul class="list-group">
-    {% if count == 0 %}
-      <li class="list-group-item text-muted">
-      {{"no_message"|trans}}
-      </li>
-    {% else %}
-      {% for m in messages %}
-        <li class="list-group-item">
-          <div class="text-muted">
-            {% if m.viewed == false %}<i class="fas fa-circle"></i>{% endif %}
-            {{ m.message.createdAt|date}}
-            {% if m.message.sender %}
-              <i class="fas fa-user"></i> {{ "message_from_user" | trans({'%username%' : m.message.sender.username}) }}
-            {% else %}
-                <i class="fas fa-bell"></i>
-            {% endif %}
-          </div>
-          <div>{{ m.message.content|raw }}</div>
-          <div class="text-right">
-            <a class="btn btn-link" href="{{ path('message_delete_one', {id : m.id })}}">
-              <i class="fas fa-trash-alt"></i> {{"message_delete"|trans}}
-            </a>
-            {% if m.viewed == false %}
-            <a class="btn btn-link" href="{{ path('message_read_one', {id : m.id })}}">
-              <i class="fas fa-check"></i> {{"message_set_as_read"|trans}}
-            </a>
-            {% endif %}
-            {% if m.message.sender %}
-            <a class="btn btn-link" href="{{ path('user_message', {id : m.message.sender.id })}}">
-              <i class="fas fa-reply"></i> {{"message_reply"|trans}}
-            </a>
-            {% endif %}
-          </div>
-        </li>
-      {% endfor %}
-    {% endif %}
-    </ul>
   </div>
 {% endblock %}
