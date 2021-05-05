@@ -41,7 +41,9 @@ class ReviewRequestController extends AbstractController
         }
 
         $this->reviewRequestManager->create($transcription);
+        $parent = $transcription->getMedia()->getParent();
 
-        return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId()]);
+        return $this->redirectToRoute('project_transcriptions', ['id' => $project->getId(), 'parent' => $parent ? $parent->getId() : null ]);
+
     }
 }
