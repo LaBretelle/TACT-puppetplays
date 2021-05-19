@@ -3,9 +3,9 @@
     <div class="modal-content">
       <div class="modal-body">
         {% if edit %}
-        <div class="alert alert-primary" role="alert">
+        <div class="alert alert-danger" role="alert">
           {{ "leave_warning" |trans}}
-          <button class="btn btn-sm btn-outline-primary btn-save-transcription" data-id="{{media.id}}">
+          <button class="btn btn-sm btn-outline-danger btn-save-transcription" data-id="{{media.id}}">
             <i class="fas fa-save"></i> {{'save' | trans}}
           </button>
         </div>
