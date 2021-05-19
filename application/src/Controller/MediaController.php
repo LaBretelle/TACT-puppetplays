@@ -266,7 +266,8 @@ class MediaController extends AbstractController
         $response = new Response($this->exportManager->generateXML($media));
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $xmlName
+            $xmlName,
+            "fallback-name.xml"
         );
         $response->headers->set('Content-Disposition', $disposition);
 
