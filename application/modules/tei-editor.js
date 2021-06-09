@@ -384,6 +384,10 @@ class TeiEditor {
     return Tiny.get('tiny-content').getContent()
   }
 
+  setContent(str) {
+    return Tiny.activeEditor.setContent(str)
+  }
+
   /*
    * Toggle container display
    */

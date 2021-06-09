@@ -440,3 +440,8 @@ xml_upload_help:                          Choisissez les fichiers ou l'archive �
 xslt_export:                              Fichier XSL appliqué à l'export des transcriptions
 yes_delete:                               Oui, supprimer
 yes:                                      Oui
+tesseract_btn:                            Tesseract OCR
+tesseract_title:                          Tesseract OCR
+tesseract_text:                           En attente de Tesseract.
+tesseract_help:                           Permet de lancer tesseract sur le facsimile. Attention, cela remplacera la transcription existante !
+tesseract_form_help:                      Codes des langues qui seront utilisées pour tesseract. Voir liste des "Lang Code" sur https://tesseract-ocr.github.io/tessdoc/Data-Files.html . A écrire dans ce format > "fra eng", sans les guillemets.

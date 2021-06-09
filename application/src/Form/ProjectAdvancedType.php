@@ -3,16 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Project;
-use App\Entity\ProjectStatus;
-use App\Entity\TeiSchema;
-use App\Entity\User;
-use App\Form\UserProjectStatusType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -35,6 +28,12 @@ class ProjectAdvancedType extends AbstractType
           ->add('css', TextareaType::class, [
               'label'    => 'project_css',
               'required' => false,
+          ])
+
+          ->add('tesseractLanguage', TextType::class, [
+              'label'    => 'tesseractLanguage',
+              'required' => false,
+              'help' => 'tesseract_form_help'
           ])
 
           ->add('xslt_export', FileType::class, [

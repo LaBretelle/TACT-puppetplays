@@ -30,6 +30,30 @@
         <button class="btn btn-outline-secondary btn-validation-modal" data-pid="{{project.id}}" data-id="{{media.id}}" type="button" name="button"  data-intro="{{'help10'|trans}}" data-step="10">
           <i class="fas fa-check-circle"></i> {{'transcription_send_to_validation' | trans}}
         </button>
+        {% if media.transcription.content == "" %}
+        <button class="btn btn-outline-secondary btn-tesseract" data-url="{{ macros.mediaURL(media) }}" data-id="{{media.id}}" type="button" name="button" data-toggle="tooltip" title="{{'tesseract_help' | trans}}">
+          <i class="fas fa-snowplow"></i> {{'tesseract_btn' | trans}}
+        </button>
+
+        {# tesseract modal #}
+        <div class="modal fade" id="tesseract-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">{{'tesseract_title'| trans}}</h5>
+                </div>
+                <div class="modal-body text-center">
+                  <div class="fa-3x">
+                    <i class="fas fa-spinner fa-spin"></i>
+                  </div>
+                  {{'tesseract_text'| trans}}
+                </div>
+            </div>
+          </div>
+        </div>
+
+
+        {% endif %}
       </span>
     {% elseif locked is defined and locked == true and edit == false %}
         <span class="badge badge-danger">{{'transcription_is_locked' | trans}}</span>
