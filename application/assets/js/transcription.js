@@ -47,9 +47,14 @@ $(document).ready(() => {
       $('#validation-modal').modal('show')
     })
 
+    $('.btn-tesseract').on('click', (e) => {
+      tesseract(e.target.dataset.id, e.target.dataset.url, e.target)
+    })
+
     $('.btn-save-transcription').on('click', (e) => {
       saveTranscription(e.target.dataset.id, e.target)
     })
+
     $('#start-tutorial').on('click', () => {
       startTutorial()
     })
@@ -103,6 +108,28 @@ const updateLockedLog = (id) => {
   }).done(() => {})
 }
 
+const tesseract = (id, imgURL, btn) => {
+  $('#tesseract-modal').modal('show')
+
+  const url = Routing.generate('media_tesseract', {
+    id: id
+  })
+
+  $.ajax({
+    method: 'POST',
+    url: url,
+    data: {
+      'imgURL': imgURL
+    }
+  }).done((data) => {
+    data = data.replace(/(?:\r\n|\r|\n)/g, '<br>')
+    editor.setContent(data)
+    $('#tesseract-modal').modal('hide')
+  })
+
+  return true
+}
+
 const saveTranscription = (id, btn) => {
   const url = Routing.generate('media_transcription_save', {
     id: id
@@ -115,8 +142,8 @@ const saveTranscription = (id, btn) => {
     }
   }).done(() => {
     Toastr.info(Translator.trans('transcription_saved'))
-    btn.classList.add( 'btn-outline-secondary')
-    btn.classList.remove( 'btn-info')
+    btn.classList.add('btn-outline-secondary')
+    btn.classList.remove('btn-info')
   })
 
   return true
@@ -124,7 +151,9 @@ const saveTranscription = (id, btn) => {
 
 const reportTranscription = (id) => {
   $('#report-modal').modal('hide')
-  const url = Routing.generate('media_transcription_report', {id: id})
+  const url = Routing.generate('media_transcription_report', {
+    id: id
+  })
   $.ajax({
     method: 'POST',
     url: url,
@@ -145,18 +174,18 @@ const startTutorial = () => {
     'showStepNumbers': false,
     'scrollToElement': false,
     'overlayOpacity': 0.5,
-    'exitOnOverlayClick' : false,
-    'exitOnEsc' : false,
-    'nextLabel' : Translator.trans('tutorial_next'),
-    'prevLabel' : Translator.trans('tutorial_previous'),
-    'doneLabel' : Translator.trans('tutorial_finished'),
-    'skipLabel' : 'Skip'
+    'exitOnOverlayClick': false,
+    'exitOnEsc': false,
+    'nextLabel': Translator.trans('tutorial_next'),
+    'prevLabel': Translator.trans('tutorial_previous'),
+    'doneLabel': Translator.trans('tutorial_finished'),
+    'skipLabel': 'Skip'
   }).start()
 }
 
 const testFirstTranscript = () => {
   const firstTranscript = document.getElementById('firstTranscript').value
-  if(firstTranscript == 1){
+  if (firstTranscript == 1) {
     startTutorial()
     const url = Routing.generate('user_tutorial_viewed')
     $.ajax({

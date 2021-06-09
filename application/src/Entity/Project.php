@@ -101,6 +101,11 @@ class Project
     private $projectHelpLink;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $tesseractLanguage;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $archived = false;
@@ -352,6 +357,18 @@ class Project
     public function setProjectHelpLink(?string $projectHelpLink): self
     {
         $this->projectHelpLink = $projectHelpLink;
+
+        return $this;
+    }
+
+    public function getTesseractLanguage(): ?string
+    {
+        return $this->tesseractLanguage;
+    }
+
+    public function setTesseractLanguage(?string $tesseractLanguage): self
+    {
+        $this->tesseractLanguage = $tesseractLanguage;
 
         return $this;
     }
