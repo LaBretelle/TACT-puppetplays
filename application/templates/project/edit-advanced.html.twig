@@ -9,15 +9,13 @@
 
 {% block body %}
 
-<div id="main-container">
-  <h1 class="page-title">
-  {% if not project.id %}
-    {{'project_create'|trans}}</h1>
-  {% else %}
-    {{'project_edit'|trans}}
-  {% endif %}
-  </h1>
+{% include 'project/navigation.html.twig' with {'current': 'project_edit'} %}
 
+<div id="main-container">
+
+  <h1 class="page-title">
+    {{'edit_advanced'|trans}}
+  </h1>
 
   <div class="row justify-content-center">
     <div class="col-8">
