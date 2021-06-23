@@ -78,8 +78,8 @@ element_list:                             Eléments disponibles
 email_or_login_placeholder:               Login / email
 email_or_login:                           Veuillez renseigner votre login ou email
 email:                                    Mail
-events:                                   Evénements
 events_long:                              Vous permet d'accéder à une liste d'évènements concernant les médias de votre projet. Vous pourrez ainsi voir qui a transcrit / relu / etc. et quand.
+events:                                   Evénements
 export_form_title:                        Choisissez les élements que vous voulez exporter.
 export_launch:                            Lancer l'export
 export_long:                              Exporter tout ou partie du projet pour récupérer les transcriptions mais aussi les médias, la liste des utilisateurs ayant participé et toutes les données du projet.
@@ -342,6 +342,12 @@ tei_link_to_official_doc:                 Voir la documentation pour %element%
 tei_schema:                               Schéma TEI pour le projet
 tei2json_help:                            <a target="_blank" href='https://gitlab.com/litt-arts-num/tei2json'>Script</a> utilisé pour formater un rng en json
 terms:                                    Conditions Générales d'Utilisation
+tesseract_btn:                            Tesseract OCR
+tesseract_form_help:                      Codes des langues qui seront utilisées pour tesseract. Voir liste des "Lang Code" sur https://tesseract-ocr.github.io/tessdoc/Data-Files.html . A écrire dans ce format > "fra eng", sans les guillemets.
+tesseract_help:                           Permet de lancer tesseract sur le facsimile. Attention, cela remplacera la transcription existante !
+tesseract_text:                           En attente de Tesseract.
+tesseract_title:                          Tesseract OCR
+tesseractLanguage:                        Langues pour Tesseract
 toggle_all_media_selection:               Sélectionner / Désélectionner tous les médias
 toggle_tree:                              Vue par répertoire
 toggle_untree:                            Tous les médias
@@ -440,8 +446,3 @@ xml_upload_help:                          Choisissez les fichiers ou l'archive �
 xslt_export:                              Fichier XSL appliqué à l'export des transcriptions
 yes_delete:                               Oui, supprimer
 yes:                                      Oui
-tesseract_btn:                            Tesseract OCR
-tesseract_title:                          Tesseract OCR
-tesseract_text:                           En attente de Tesseract.
-tesseract_help:                           Permet de lancer tesseract sur le facsimile. Attention, cela remplacera la transcription existante !
-tesseract_form_help:                      Codes des langues qui seront utilisées pour tesseract. Voir liste des "Lang Code" sur https://tesseract-ocr.github.io/tessdoc/Data-Files.html . A écrire dans ce format > "fra eng", sans les guillemets.
