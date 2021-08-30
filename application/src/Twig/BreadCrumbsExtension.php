@@ -29,15 +29,17 @@ class BreadCrumbsExtension extends AbstractExtension
             array_unshift($ancestors, $current);
             $ancestors = $this->getParent($current, $ancestors);
         }
+
         return $ancestors;
     }
 
-    private function getParent($current, $ancestors)
+    private function getParent($current, &$ancestors)
     {
         if ($current->getParent()) {
             array_unshift($ancestors, $current->getParent());
             $this->getParent($current->getParent(), $ancestors);
         }
+        
         return $ancestors;
     }
 }
