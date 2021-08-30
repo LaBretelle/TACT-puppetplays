@@ -5,10 +5,15 @@
     <h1 class="page-title">{{'actu'|trans}}</h1>
     <div class="row justify-content-center">
       <div class="col-8">
-        <div class="card">
-          <div class="card-body">
-            {{actu.value|raw}}
-          </div>
+        <div class="card mb-2">
+            {% for post in rss.channel.item %}
+            <div class="card-body">
+              <h3>{{post.title}}</h3>
+              <h4 class="text-muted">{{post.pubDate|date("d/m/Y")}}</h4>
+              <a target="_blank" href="{{post.link}}">voir l'actualité</a>
+            </div>
+            <!-- {{dump(post)}} -->
+            {% endfor %}
         </div>
       </div>
     </div>

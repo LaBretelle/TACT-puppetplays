@@ -23,12 +23,9 @@ class HomeController extends AbstractController
      */
     public function actu()
     {
-        $em = $this->getDoctrine()->getManager();
-        $actu = $em->getRepository(EditorialContent::class)->findOneByName("actualités");
+        $rss = simplexml_load_file('https://elan.hypotheses.org/category/tact/feed');
 
-        return $this->render('home/actu.html.twig', [
-         'actu' => $actu
-        ]);
+        return $this->render('home/actu.html.twig', ['rss' => $rss]);
     }
 
     /**
