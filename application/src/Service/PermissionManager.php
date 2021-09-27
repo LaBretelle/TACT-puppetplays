@@ -53,7 +53,7 @@ class PermissionManager
             break;
 
           case AppEnums::ACTION_MANAGE_MEDIA:
-            if (!$isArchived && ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME)) {
+            if ($isAdmin || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
                 return true;
             }
             break;
@@ -71,7 +71,7 @@ class PermissionManager
             break;
 
           case AppEnums::ACTION_VALIDATE_TRANSCRIPTION:
-            if (!$isArchived && ($isAdmin || $statusName === AppEnums::USER_STATUS_VALIDATOR_NAME || $statusName === AppEnums::USER_STATUS_MANAGER_NAME)) {
+            if ($isAdmin || $statusName === AppEnums::USER_STATUS_VALIDATOR_NAME || $statusName === AppEnums::USER_STATUS_MANAGER_NAME) {
                 return true;
             }
             break;
