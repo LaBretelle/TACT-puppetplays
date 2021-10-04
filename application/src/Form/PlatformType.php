@@ -23,6 +23,10 @@ class PlatformType extends AbstractType
               'translation_domain' => 'messages',
               'required' => false,
               'data_class' => null])
+            ->add('tesseractUrl', TextType::class, [
+              'label' => 'URL Tesseract',
+              'required' => false,
+              'translation_domain' => 'messages'])
             ->add('platform_guide', FileType::class, [
               'label' => 'platform_guide',
               'translation_domain' => 'messages',

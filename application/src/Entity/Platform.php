@@ -26,6 +26,11 @@ class Platform
      */
     private $logo;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $tesseractUrl;
+
     public function getId()
     {
         return $this->id;
@@ -51,6 +56,18 @@ class Platform
     public function setLogo(?string $logo): self
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function getTesseractUrl(): ?string
+    {
+        return $this->tesseractUrl;
+    }
+
+    public function setTesseractUrl(?string $tesseractUrl): self
+    {
+        $this->tesseractUrl = $tesseractUrl;
 
         return $this;
     }

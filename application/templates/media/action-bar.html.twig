@@ -30,7 +30,7 @@
         <button class="btn btn-outline-secondary btn-validation-modal" data-pid="{{project.id}}" data-id="{{media.id}}" type="button" name="button"  data-intro="{{'help10'|trans}}" data-step="10">
           <i class="fas fa-check-circle"></i> {{'transcription_send_to_validation' | trans}}
         </button>
-        {% if media.transcription.content == "" %}
+        {% if media.transcription.content == "" and platform.tesseractUrl %}
         <button class="btn btn-outline-secondary btn-tesseract" data-url="{{ macros.mediaURL(media) }}" data-id="{{media.id}}" type="button" name="button" data-toggle="tooltip" title="{{'tesseract_help' | trans}}">
           <i class="fas fa-snowplow"></i> {{'tesseract_btn' | trans}}
         </button>
@@ -51,8 +51,6 @@
             </div>
           </div>
         </div>
-
-
         {% endif %}
       </span>
     {% elseif locked is defined and locked == true and edit == false %}

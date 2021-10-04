@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Media;
+use App\Entity\Platform;
 use App\Form\CommentType;
 use App\Form\ReviewType;
 use App\Service\AppEnums;
@@ -64,32 +65,35 @@ class MediaController extends AbstractController
         $this->commentManager = $commentManager;
     }
 
-
     /**
      * @Route("/{id}/tesseract", name="tesseract", options={"expose"=true}, methods="POST")
      */
     public function tesseract(Media $media, Request $request)
     {
-        $project = $media->getProject();
-        $mediaPath = $request->request->get('imgURL');
-        $tesseractLanguage = $project->getTesseractLanguage();
-        $languagesSuffix = "";
-        if ($tesseractLanguage) {
-            $languages = explode(" ", $tesseractLanguage);
-            foreach ($languages as $language) {
-                $languagesSuffix .= "&lang=".$language;
+        $platform = $this->getDoctrine()->getRepository(Platform::class)->getPlatformParameters();
+        $baseUrl = $platform->getTesseractUrl();
+        $data = "";
+        if ($baseUrl) {
+            $project = $media->getProject();
+            $mediaPath = $request->request->get('imgURL');
+            $tesseractLanguage = $project->getTesseractLanguage();
+            $languagesSuffix = "";
+            if ($tesseractLanguage) {
+                $languages = explode(" ", $tesseractLanguage);
+                foreach ($languages as $language) {
+                    $languagesSuffix .= "&lang=".$language;
+                }
             }
+            $imgUrl = $request->getSchemeAndHttpHost().trim($mediaPath);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $baseUrl.'?img='.$imgUrl.$languagesSuffix);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+            $response = curl_exec($ch);
+            $data = json_decode($response);
         }
-        $imgUrl = $request->getSchemeAndHttpHost().trim($mediaPath);
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://tesseract.elan-numerique.fr?img='.$imgUrl.$languagesSuffix);
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        $response = curl_exec($ch);
-        $data = json_decode($response);
 
         return $this->json($data, $status = 200);
     }

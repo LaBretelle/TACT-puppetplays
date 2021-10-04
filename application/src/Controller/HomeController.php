@@ -2,9 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Platform;
-use App\Entity\EditorialContent;
-use App\Entity\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 

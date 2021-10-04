@@ -36,7 +36,7 @@
         "symfony/css-selector": "4.4.*",
         "symfony/debug-pack": "*",
         "symfony/dotenv": "4.4.*",
-        "symfony/maker-bundle": "^1.4",
+        "symfony/maker-bundle": "^1.34",
         "symfony/orm-pack": "*",
         "symfony/phpunit-bridge": "4.4.*",
         "symfony/profiler-pack": "*",
