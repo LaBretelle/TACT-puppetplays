@@ -70,7 +70,8 @@ class TeiEditor {
 
   /*
    * Get element(s) allowed as children of the current element if any
-   * If no current element, display all TEI elements
+   * If no current element, display ones with rootDisplayed prop to true.
+   * If no candidates with rootDisplayed as true, display all
    */
   getAllowedElements(tei, current) {
     const root = document.querySelector('.elements')
@@ -79,31 +80,29 @@ class TeiEditor {
     this.emptyElement(root)
     let count = 0
     let fragment = document.createDocumentFragment()
-
+    let childrenObject = []
     if (current) {
-      count = current.children.length
-
-      let childrenObject = []
       current.children.forEach(child => {
         let element = this.tei.elements.find(function (el) {
           return el.tag === child
         })
         childrenObject.push(element)
       })
-      this.sortElementsByCounter(childrenObject)
-
-      childrenObject.forEach(child => {
-        this.appendLiToAllowedElements(tei, fragment, child.tag)
-      })
-
     } else {
-      count = tei.elements.length
-      this.sortElementsByCounter(tei.elements)
-      tei.elements.forEach(element => {
-        this.appendLiToAllowedElements(tei, fragment, element.tag)
+      childrenObject = tei.elements.filter(function (element) {
+        return element.rootDisplayed
       })
+
+      if (childrenObject.length == 0) {
+        childrenObject = tei.elements
+      }
     }
 
+    count = childrenObject.length
+    this.sortElementsByCounter(childrenObject)
+    childrenObject.forEach(child => {
+      this.appendLiToAllowedElements(tei, fragment, child.tag)
+    })
     this.displayContainer(container, count > 0)
     root.appendChild(fragment)
   }
