@@ -82,12 +82,14 @@ class TeiEditor {
     let fragment = document.createDocumentFragment()
     let childrenObject = []
     if (current) {
-      current.children.forEach(child => {
-        let element = this.tei.elements.find(function (el) {
-          return el.tag === child
+      if (current.children && current.children.length > 0) {
+        current.children.forEach(child => {
+          let element = this.tei.elements.find(function (el) {
+            return el.tag === child
+          })
+          childrenObject.push(element)
         })
-        childrenObject.push(element)
-      })
+      }
     } else {
       childrenObject = tei.elements.filter(function (element) {
         return element.rootDisplayed
