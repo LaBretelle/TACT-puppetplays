@@ -154,6 +154,7 @@ max_file_uploads_message:                 Vous pouvez uploader simultanément %n
 media_added:                              Média(s) ajouté(s)
 media_already_existing:                   Le media %media% est déjà présent
 media_change_directory_title:             Choisir le répertoire cible
+media_change:                             Changement de média
 media_delete_button_title:                Supprimer le média
 media_deleted:                            Média(s) supprimé(s)
 media_information:                        Informations sur le média
@@ -204,6 +205,7 @@ negative_review:                          Une relecture négative a été faite 
 new_comment_transcription:                Un nouveau commentaire a été posté sur <a target="_blank" href="%url%">%media%</a>
 new_review_request:                       Une nouvelle demande de relecture pour le projet %projectName% a été déposée
 no_attribute:                             Aucun attribut
+no_media_available:                       Pas de média disponible
 no_message:                               Aucun message
 no_review_asked:                          Pas de relecture demandée
 no_review_yet:                            Aucune relecture effectuée pour le moment
@@ -438,6 +440,7 @@ view_profile:                             Voir le profil
 view_project_short:                       Détails
 view_project:                             Détails du projet
 view_transcriptions_long:                 Vous permet de voir les médias et transcriptions associées. Si vous souhaitez participer, vous devez préalablement vous inscrire au projet (nécessite d'être connecté).
+warning_media_changed:                    Vous visualisez actuellement un média autre que celui transcrit/à transcrire.
 xml_add_file_placeholder:                 Sélectionner un/des fichier(s)
 xml_add_file_title:                       Ajouter des transcriptions
 xml_add_iiif_file_placeholder:            Sélectionner un .zip

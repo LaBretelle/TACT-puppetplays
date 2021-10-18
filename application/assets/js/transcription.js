@@ -4,16 +4,30 @@ import introJs from 'intro.js'
 
 // normally every 2 minutes but to avoid any time problem let's put a bit less
 const updateLogTimeout = 100000
-
 const id = 'seadragon-viewer'
 const el = document.getElementById(id)
-const url = el.getAttribute('data-url')
+const url = el.getAttribute('data-url').trim()
+let nextBtn = document.querySelector('#test-osd-next')
+let previousBtn = document.querySelector('#test-osd-previous')
+let warningDiv = document.querySelector('#warning-media-changed')
+let homeBtn = document.querySelector('#test-osd-home')
+
+
 let editor
+
+let item = {
+  type: 'image',
+  url: url
+}
 
 let viewer = new OpenSeadragon.Viewer({
   id: id,
   showNavigator: false,
+  collectionMode: false,
   showRotationControl: true,
+  sequenceMode: true,
+  showReferenceStrip: true,
+  referenceStripScroll: 'vertical',
   prefixUrl: '',
   zoomInButton: 'osd-zoom-in',
   zoomOutButton: 'osd-zoom-out',
@@ -22,15 +36,27 @@ let viewer = new OpenSeadragon.Viewer({
   previousButton: 'osd-previous',
   rotateLeftButton: 'osd-left',
   rotateRightButton: 'osd-right',
-  tileSources: {
-    type: 'image',
-    url: url
-  }
+  tileSources: item
 })
 // disable keyboard shortcuts
 viewer.innerTracker.keyHandler = null
 
 $(document).ready(() => {
+  $('#test-osd-next').on('click', (e) => {
+    let btn = e.target
+    btn.disabled = true
+    displayOtherFacsimile(btn, true)
+  })
+
+  $('#test-osd-previous').on('click', (e) => {
+    let btn = e.target
+    btn.disabled = true
+    displayOtherFacsimile(btn, false)
+  })
+
+  $('#test-osd-home').on('click', (e) => {
+    displayOriginalFacsimile(e.target)
+  })
 
   $('.send-report').on('click', (e) => {
     reportTranscription(e.target.dataset.id)
@@ -85,7 +111,6 @@ $(document).ready(() => {
   $('#start-tutorial').on('click', () => {
     startTutorial()
   })
-
 })
 
 const lockTranscription = () => {
@@ -195,4 +220,55 @@ const testFirstTranscript = () => {
 
     return true
   }
+}
+
+const displayOtherFacsimile = (btn, next) => {
+  let id = btn.dataset.id
+
+  nextBtn.disabled = true
+  previousBtn.disabled = true
+
+  const url = Routing.generate('media_transcription_next', {
+    id: id,
+    next: next ? 1 : 0
+  })
+
+  $.ajax({
+    method: 'POST',
+    url: url,
+    data: {}
+  }).done((data) => {
+    if (data.id) {
+      nextBtn.dataset.id = data.id
+      previousBtn.dataset.id = data.id
+      viewer.open({
+        type: 'image',
+        url: data.url
+      })
+      Toastr.info(Translator.trans('media_change'))
+      nextBtn.disabled = false
+      previousBtn.disabled = false
+    } else {
+      if (next) {
+        previousBtn.disabled = false
+      } else {
+        nextBtn.disabled = false
+      }
+      Toastr.warning(Translator.trans('no_media_available'))
+    }
+    if (previousBtn.dataset.id != homeBtn.dataset.id) {
+      warningDiv.classList.remove('d-none')
+    } else {
+      warningDiv.classList.add('d-none')
+    }
+  })
+}
+
+const displayOriginalFacsimile = (btn) => {
+  viewer.open(item)
+  warningDiv.classList.add('d-none')
+  nextBtn.dataset.id = btn.dataset.id
+  previousBtn.dataset.id = btn.dataset.id
+  nextBtn.disabled = false
+  previousBtn.disabled = false
 }
