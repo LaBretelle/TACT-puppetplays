@@ -130,6 +130,19 @@ class MediaManager
         return $media;
     }
 
+    public function generateURL($media)
+    {
+        if ($media->getUrl() && $media->getIiifServer() == null) {
+            $url = '/project_files/'. $media->getProject()->getId()."/".$media->getUrl();
+        } elseif ($media->getIiifServer()) {
+            $url = $media->getIiifServer()->getUrl().$media->getUrl().$media->getIiifServer()->getSuffixLarge();
+        } else {
+            $url = '/img/media_placeholder.jpg';
+        }
+
+        return $url;
+    }
+
     public function getIIIFInfos($absolutePath)
     {
         $xml = file_get_contents($absolutePath);

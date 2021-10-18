@@ -258,6 +258,29 @@ class MediaController extends AbstractController
         return $this->json([], $status = 200);
     }
 
+    /**
+     * @Route("/{id}/transcription/{next}", name="transcription_next",options={"expose"=true}, methods="POST")
+     */
+    public function mediaTranscriptionNext(Media $media, $next)
+    {
+        $project = $media->getProject();
+        $parent = $media->getParent();
+        $next = ($next == 1) ? true : false;
+        $medias = $this->getDoctrine()->getRepository(Media::class)->findBy(['project' => $project, 'parent' => $parent], ['name' => 'ASC']);
+
+        $index = array_search($media, $medias);
+
+        $newIndex = ($next) ? $index+1 : $index - 1;
+        if (array_key_exists($newIndex, $medias)) {
+            $nextMedia = $medias[$newIndex];
+            $id = $nextMedia->getId();
+            $url = $this->mediaManager->generateURL($nextMedia);
+            return $this->json(['id' => $id, 'url' => $url], $status = 200);
+        }
+
+        return $this->json(['id' => null], $status = 200);
+    }
+
 
     /**
      * @Route("/{id}/transcription/validate/{valid}", name="transcription_validate")
