@@ -30,7 +30,8 @@ RUN apt-get -qqq update && DEBIAN_FRONTEND=noninteractive apt-get install -qqq -
         php7.4-zip \
         php7.4-gd \
         php-common \
-        php-imagick
+        php-imagick \
+        python2
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && chmod +x /usr/local/bin/composer

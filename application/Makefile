@@ -27,6 +27,8 @@ update-dev:
 	chmod -R 1777 /tmp
 
 install:
+	chown -R www-data:www-data /tmp
+	chmod -R 1777 /tmp
 	composer install --prefer-source
 	php bin/console fos:js-routing:dump --format=json --target=public/routes/fos_js_routes.json
 	npm install
@@ -36,8 +38,6 @@ install:
 	php bin/console app:create-edito
 	chown -R www-data:www-data public
 	chown -R www-data:www-data var/
-	chown -R www-data:www-data /tmp
-	chmod -R 1777 /tmp
 
 cache:
 	php bin/console cache:clear

@@ -7,7 +7,6 @@
         "file-loader": "^1.1.11",
         "jquery": "^3.4.1",
         "lodash": "^4.17.15",
-        "node-sass": "^4.13.1",
         "popper.js": "^1.16.1",
         "postcss-loader": "^2.1.6",
         "sass-loader": "^6.0.7"
@@ -27,6 +26,7 @@
         "copy-webpack-plugin": "^4.6.0",
         "ev": "0.0.7",
         "intro.js": "^2.9.3",
+        "node-sass": "^6.0.1",
         "openseadragon": "^2.4.1",
         "tinymce": "^5.4.2",
         "toastr": "^2.1.4"

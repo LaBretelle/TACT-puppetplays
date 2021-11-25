@@ -8,7 +8,6 @@
 /.logs/
 /.tmp/
 
-npm-debug.log
 .php_cs.cache
 
 ###> symfony/framework-bundle ###
