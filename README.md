@@ -70,11 +70,11 @@ By default, `make init` cmd (see `Makefile`) generates a self-signed certificate
 ### Thanks
 Myriam EL HELOU & Sami BOUHOUCHE for their [useful work](https://github.com/elheloum/TEI2JSON) not implemented in this app yet. A maintained version is available [here](https://gitlab.com/litt-arts-num/tei2json).
 
-#Changer les variables#
+# Changer les variables #
 
 Petit mémo sur l'ordre des fichiers afin de personnaliser TACT.
 
-##Changer le nom du site##
+## Changer le nom du site ##
 
 La variable du nom du site se trouve dans tact/application/src/DataFixtures/AppFixtures.php
 
@@ -92,50 +92,50 @@ Puis quittez la console (commande "exit"). Rechargez votre page et le nouveau no
 
 La correspondance entre les variables et le texte affiché se trouve dans tact/application/translations/messages.fr.yaml pour le français.
 
-#Changer l'aspect graphique du site#
+# Changer l'aspect graphique du site #
 
-##CSS##
+## CSS ##
 
 Il faut aller dans /tact/application/assets/css/global.scss et modifier les valeurs correspondantes. Il peut être nécessaire de relancer l'installation pour que les modifications prennent effet (make init dans /tact/).
 
 N. B. : Il peut être nécessaire également de répercuter les modifications dans tact/application/public/build/css/app[...].css .
 
-##La page d'accueil##
+## La page d'accueil ##
 
 Le template de la page d'accueil se trouve dans /tact/application/templates/home/home.html.twig
 
-###Ajouter les manuels du contributeur et du gestionnaire###
+### Ajouter les manuels du contributeur et du gestionnaire ###
 
 Il faut créer un fichier "platform" dans /tact/application/public et y insérer les fichiers manuel\_contributeur.pdf et manuel\_gestionnaire.pdf .
 
 
-##Le footer##
+## Le footer ##
 
 Le footer se trouve dans /tact/application/templates/base-include/footer.html.twig
 
-##Le menu##
+## Le menu ##
 
 La navbar a son template dans /tact/application/templates/base-include/navbar.html.twig
 
-##Changer la police##
+## Changer la police ##
 
 Le changement des fonts se fait dans le fichier /tact/application/public/build/css/app.0406dcc00f5977e0d3a3ba9abe6b2604.css .
 
-##A propos##
+## A propos ##
 
 Pour changer la page à propos, il au faut aller dans /tact/application/templates/home/about.thml.twig et modifier directement le contenu.
 
-#Changer les images#
+# Changer les images #
 
-##Les logos du footer##
+## Les logos du footer ##
 
 Ils se trouvent dans /tact/application/public/img/logos . Il est également possible de trouver les placeholders des projets et des avatars des contributeurs dans /tact/application/public/img/  .
 
-#Actualités du projet#
+# Actualités du projet #
 
 Tout semble géré à partir d'un flux rss dans le fichier /tact/application/src/Controller/HomeController.php avec la fonction "actu". Le fichier rss est récupéré depuis un blog hypothèse : https://elan/hypotheses.org/category/tact/feed .
 
-#Utilitaire#
+# Utilitaire #
 
 Pour chercher dans tact l'occurence d'un terme :  grep -r '/platform/' 
 
