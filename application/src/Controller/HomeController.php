@@ -20,8 +20,8 @@ class HomeController extends AbstractController
      */
     public function actu()
     {
-        $rss = simplexml_load_file('https://elan.hypotheses.org/category/tact/feed');
-
+        $rss = simplexml_load_file('https://icima.hypotheses.org/feed');
+/* mettre le feed rss du site PuppetPlays quand ça sera rempli : https://www.google.com/alerts/feeds/11038047740276319145/12529615087899373986   */
         return $this->render('home/actu.html.twig', ['rss' => $rss]);
     }
 

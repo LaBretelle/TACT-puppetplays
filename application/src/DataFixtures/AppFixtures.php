@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
 
         // platform properties
         $platform = new Platform();
-        $platform->setName('Please change me');
+        $platform->setName('PuppetPlays');
         $om->persist($platform);
         $om->flush();
     }

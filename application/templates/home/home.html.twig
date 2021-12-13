@@ -6,11 +6,15 @@
     <div class="row justify-content-center">
       <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-6">
         <h1 class="page-title">{{'platform_title'|trans}}</h1>
-        <div class="text-justify">
-          <p>TACT est une plateforme de transcription et d'annotation collaborative qui accueille des projets de recherche et permet à chacun d'apporter sa contribution ou de solliciter la communauté de la plateforme.</p>
-          <p><strong>Vous voulez participer à un projet ?</strong> Vous pouvez transcrire et annoter des textes originaux, relire et vérifier des transcriptions faites par d'autres internautes, consultez ce <a download class="tact-link" href="{{asset('platform/manuel_contributeur.pdf')}}"> manuel du contributeur </a> et allez <a class="tact-link" href="{{ path('project_list') }}"> explorer les projets</a> !
+        <h2 class="page-title">Répertoires pour les théâtres de marionnettes en Europe de l’Ouest de 1600 à nos jours</h2>
+        </br>
+        <div class="row justify-content-center">
+        <div class="col-7"><!-- <div class="text-justify"> --> 
+          <p><strong>PuppetPlays - Reappraising Western European Repertoires for Puppet and Marionette Theatres</strong> est un ambitieux projet de recherche financé par l'Union Européenne dans le cadre du programme Horizon 2020 (European Research Council, Grant Agreement 835193, 2019-2024). Lauréat de l'appel à projets “Advanced Grant” 2018, il est dirigé par Didier Plassard, professeur en études théâtrales, et porté par l'Université Paul-Valéry Montpellier 3.</p>
+          <p>L'objectif de PuppetPlays est de réunir, d'étudier et de rendre accessible à un large public, grâce à une plateforme numérique dédiée, une large sélection de pièces pour marionnettes écrites en Europe de l'Ouest, du 17e au 21e siècle. Cette plateforme rassemblera une base de données de 2000 références, une anthologie de 300 textes numérisés, des publications scientifiques (une monographie, deux thèses de doctorat, les actes de deux colloques internationaux, des articles), ainsi que des dossiers thématiques et des outils pédagogiques (dictionnaire des auteurs, glossaire).</p>
+          <p>Afin de réunir cette anthologie de pièces pour marionnettes, le projet PuppetPlays s'appuiera sur des contributeurs et des contributrices pour transcrire ces oeuvres numérisées.</p>
+          <p><strong>Vous voulez participer à la transcription d'une oeuvre ?</strong> Vous pouvez transcrire et annoter des textes originaux, relire et vérifier des transcriptions faites par d'autres internautes, consultez ce <a download class="tact-link" href="{{asset('platform/manuel_contributeur.pdf')}}"> manuel du contributeur </a> et allez <a class="tact-link" href="{{ path('project_list') }}"> explorer les transcriptions en cours</a> !
           </p>
-          <p><strong>Vous souhaitez déposer un projet sur TACT ?</strong> N'hésitez pas à nous en faire la demande via <a target="_blank" class="tact-link" href="http://enquete.elan-numerique.fr/index.php/854998?lang=fr">ce formulaire</a>. Vous deviendrez gestionnaire de votre projet TACT, vous pourrez en définir les modalités et gérer les contributions. Nous vous invitons à lire ce <a download class="tact-link" href="{{ asset('platform/manuel_gestionnaire.pdf') }}">manuel du gestionnaire</a> qui vous donnera toutes les informations nécessaires ainsi que la marche à suivre. Bonne lecture !</p>
           <p class="pt-2">
             <a href="{{ path('project_list') }}" class="btn btn-block btn-light btn-lg">
               <i class="fas fa-rocket"></i> {{"project_list"|trans}}
@@ -19,6 +23,12 @@
               <i class="fas fa-book-open"></i> {{"contributor_guide"|trans}}
             </a>
           </p>
+        </div>
+        <div class="col-5">
+        <a class="btn" href="https://puppetplays.eu/" target="_blank">
+        <img class="img-fluid" data-toggle="tooltip" title="Projet PuppetPlays - site principal" src="{{ asset('img/home-intro-illustration.png') }}"/>
+      </a>
+      </div>
         </div>
       </div>
     </div>
